@@ -7,9 +7,7 @@ use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Modules\Content\ApiGateways\SanityGateway;
-use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
-use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
@@ -60,10 +58,8 @@ class HomePageController extends BaseController
         private readonly PackService $packService,
         private readonly DatabaseManager $databaseManager,
         private readonly UserContentProgressService $userContentProgressService,
-        private readonly CarouselService $carouselService,
         private readonly CohortService $cohortService,
         private readonly OnboardingService $onboardingService,
-        private readonly LearningPathsService $learningPathsService,
         private readonly UserAccessPermissionsService $userAccessPermissionsService,
         private readonly SanityGateway $sanityGateway,
         private readonly ExploreTasksService $exploreTasksService
@@ -223,9 +219,6 @@ class HomePageController extends BaseController
             }
         }
 
-        $carousel = $this->carouselService->getCarouselSlides();
-
-
         $brand = brand();
 
         $cohortBanner = [];
@@ -270,29 +263,16 @@ class HomePageController extends BaseController
             }
         }
 
-        $showOldTrialSection = $this->learningPathsService->showLearningPaths($brand);
-        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths();
-        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
-        if ($showNewTrialSection) {
-            $trialSection = $this->learningPathsService->getNewLearningPaths($homepageV2);
-        } else if ($showOldTrialSection) {
-            $trialSection = $this->learningPathsService->getLearningPaths();
-        } else {
-            $trialSection = [];
-        }
-
         $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
 
         return view('home.index', [
             "brand" => $brand,
             "calendarId" => $currentEventCalendarId ?? null,
-            "carousel" => $carousel,
             "coachEvent" => content_to_json([$currentEvent]),
             "cohortBanner" => json_encode($cohortBanner),
             "completedLevelsUrl" => $methodContent['url'] ?? '',
             "currentDate" => $currentDate,
             "currentEvent" => $currentEvent,
-            'displayTrialSection' => $showOldTrialSection,
             "eventCoachProfileUrl" => $eventCoachUrl ?? '',
             "existsCohortBanner" => !empty($cohortBanner),
             "hasExperience" => $hasExperience,
@@ -307,12 +287,10 @@ class HomePageController extends BaseController
             "recommendedContentJson" => $recommendedContent->toResponseRawJson(),
             "themeColor" => $themeColor,
             "timeCutoffMinutes" => LiveStreamEventService::NOT_LIVE_PAGE_SWITCH_MINUTES,
-            "trialSection" => $trialSection,
             "userMetrics" => $userMetrics,
             "usersList" => $usersList,
-            "trialSectionRedesign" => $showNewTrialSection,
             "isFirstAccess" => user()->isFirstAccess(),
-            "homepageV2" => $homepageV2,
+            "homepageV2" => boolval(FeatureFlagging::branch('homepage-v2', user())),
             "exploreTasks" => $userTasks,
         ]);
     }

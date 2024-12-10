@@ -4,12 +4,6 @@
             <!-- Onboarding banner -->
             <TriggerBanner v-if="showTriggerBanner" />
 
-            <!-- Learning Paths -->
-<!--            <LearningPathContainer :isV2User v-if="learningPaths.length && !trialSectionRedesign" :learning-paths="learningPaths"-->
-<!--                trackingSection="banner" />-->
-<!--            <NewLearningPathContainer :isV2User v-if="learningPaths.length && trialSectionRedesign" :learning-paths="learningPaths"-->
-<!--                trackingSection="banner" />-->
-
             <!-- Join Header: Pack Only -->
             <StaticHeader
                 v-if="isPackOrChallengeOnlyBoolean"
@@ -28,9 +22,6 @@
                 page-type="home"
                 :preLoadedContent="data?.carousels"
             />
-
-            <!-- Header carousel -->
-            <HeaderCarousel v-if="!isV2User" :preloadedCarousel="carousel" trackingSection="banner" />
 
             <!-- Cohort banner -->
             <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
@@ -176,7 +167,6 @@
 
     import CohortBanner from '@collections/CohortBanner/CohortBanner.vue';
     import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
-    import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel.vue';
     import HomepageCatalog from '@collections/HomepageCatalog/HomepageCatalog.vue';
     import LearningPathContainer from '@collections/LearningPaths/LearningPathContainer.vue';
     import NewLearningPathContainer from '@collections/NewLearningPaths/NewLearningPathContainer.vue';
@@ -186,7 +176,6 @@
     import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
     import HomePageSkeleton from "./HomePageSkeleton";
     import ExploreSection from '@collections/ExploreSection/ExploreSection.vue';
-    import WelcomeMessage from '@collections/WelcomeMessage/WelcomeMessage.vue';
     import DashboardSection from '@collections/DashboardCard/DashboardSection.vue';
     import StatsSection from '@collections/StatsSection/StatsSection.vue';
     import ListSection from '@collections/ListSection/ListSection.vue';
@@ -214,7 +203,6 @@
         existsCohortBanner: { type: Boolean, default: false },
         isChallengeOnly: { type: [Number, Boolean], default: 0 },
         isPackOnly: { type: [Number, Boolean], default: 0 },
-        trialSectionRedesign: { type: Boolean, default: false },
         isV2User: { type: Boolean, default: false },
 
         // Number props
@@ -222,10 +210,8 @@
         nextLearningPathProgressPercent: { type: Number, default: 0 },
 
         // Array props
-        carousel: { type: Array, default: () => ([]) },
         cohortBanner: { type: Array, default: () => ([]) },
         conversationData: { type: Array, default: () => ([]) },
-        learningPaths: { type: Array, default: () => ([]) },
         packData: { type: Array, default: () => ([]) },
         exploreTasks: { type: Array, default: () => ([]) },
 

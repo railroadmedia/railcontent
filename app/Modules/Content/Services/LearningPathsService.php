@@ -4,19 +4,19 @@ namespace App\Modules\Content\Services;
 
 use App\Models\Brand;
 use App\Models\TrialSection;
-use App\Modules\Brand\Enums\Brand as BrandEnum;
 use App\Modules\Content\ApiGateways\SanityGateway;
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Railroad\Railcontent\Services\ContentService;
 
 class LearningPathsService
 {
-
     public function __construct(
         private ContentService $contentService,
         private SanityGateway $sanityGateway,
-    ) {;
+    ) {
+        ;
     }
 
     public function getLearningPaths()
@@ -41,7 +41,7 @@ class LearningPathsService
             if ($content['type'] == "learning-path") {
                 $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
                     $content['id'],
-                    auth()->id()
+                    Auth::id()
                 );
                 $section->ctaUrl = $nextContentForUser['url'];
             }
@@ -71,23 +71,13 @@ class LearningPathsService
     public function showNewLearningPaths(): bool
     {
         $user = user();
-        $homepageRedesign = FeatureFlagging::branch('homepage-learning-path-redesign', $user) === 'experiment';
-        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', $user));
-
-        //  NOTE: Homepage V2 Pilot
-        if ($homepageV2) {
-            return true;
-        }
-
-        return $user->is_trial
-            && $user->created_at->diffInDays(now()) <= 30
-            && ($homepageV2 || $homepageRedesign);
+        return $user->is_trial && Carbon::parse($user->created_at)->greaterThanOrEqualTo(Carbon::now()->subDays(30));
     }
 
-    public function getNewLearningPaths(bool $homepageV2): array
+    public function getNewLearningPaths(): array
     {
         $brand = brand();
-        if (!$homepageV2 || (!$homepageV2 && in_array($brand, [BrandEnum::Guitareo->value, BrandEnum::Singeo->value]))) {
+        if (!$this->showNewLearningPaths()) {
             return [];
         }
 
