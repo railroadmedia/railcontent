@@ -166,7 +166,7 @@ abstract class ParentTemplate extends BaseSanityModel
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
-            new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::Number, 'popularity', 'Popularity', group: $detailsGroup),
         ]);
         if ($this->parentType) {
             $fields = array_merge($fields, [new ParentTypeField($this->parentType, $detailsGroup)]);
