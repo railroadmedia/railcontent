@@ -1,6 +1,6 @@
 @extends('pianote.sales.affiliates.affiliate-layout', [
      'video' => '914452772',
-     'headline' => 'Learn with Pianote, Free for 30-Days ',
+     'headline' => 'Learn with Pianote, Free for 30 Days ',
      'background' => "#e0ebf5",
      'lightBackground' => true,
 ])

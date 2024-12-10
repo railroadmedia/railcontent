@@ -25,6 +25,7 @@ Route::domain('{guitareoDomain}')
                     ->whereIn('page', [
                         'asobergirlsguide',
                         'andrew-clarke',
+                        'cole-rolland',
                         'guitar-tuner',
                         'guitarworld',
                         'musician-wave',

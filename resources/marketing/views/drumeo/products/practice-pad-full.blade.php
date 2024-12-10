@@ -1987,7 +1987,7 @@
 
 @section('content')
 
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "The P4 Practice Pad",
         "fullPrice" => floatval($productPrices['practicepad']->price),
         "price" => floatval($productPrices['practicepad']->discounted_price),
@@ -2006,7 +2006,8 @@
                         <br><br>
                         That means this is your <strong>last chance ever</strong> to grab the most popular practice pad in Drumeo history.
                         <br><br>
-                        You can grab it on its own and SAVE 25% or get yours FREE with 1 year of unlimited drum lessons.
+                        You can grab it on its own and SAVE 25%.
+{{--                        or get yours FREE with 1 year of unlimited drum lessons--}}
                         <br><br>
                         Scroll down to nab one of the last P4 Practice Pads.</p>
                     <a class="join smaller musora anchor-slide" href="#final">Click Here To Order &raquo;</a>
@@ -2259,15 +2260,15 @@
             </h6>
 
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
-                <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto lg:w-3/4 xl:w-7/12">
-                    <a href="/ecommerce/add-to-cart?products[practicepad]=1&products[drumeo_access_30-days]=1&locked=true" class="text-black hover:text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
-                        <h3><strong>Just The Pad</strong></h3>
+                <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-lg mx-auto lg:w-3/4 xl:w-6/12">
+                    <a href="/ecommerce/add-to-cart?products[practicepad]=1&products[drumeo_access_30-days]=1" class="text-black hover:text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full" style="background-color:#d4eaff;">
+                        <h3><strong>P4 Practice Pad</strong></h3>
                         <p class="text-sm mt-2 mb-5">Last Chance Ever (SAVE 25%)</p>
                         <h2 class="inline-block"><s class="opacity-60">$79</s> <strong class="text-4xl">${{ floatval($productPrices['practicepad']->discounted_price) }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
                         <div class="join blue smaller my-4">ORDER NOW</div>
-                        <ul class="list-disc ml-10">
+                        {{-- <ul class="list-disc ml-10">
                             <li class="text-sm relaxed"><span class="text-drumeo">Free</span> 1-month Drumeo Access</li>
-                        </ul>
+                        </ul> --}}
                         <hr class="w-full my-5" style="border-color:#b2cae1">
 
                         <p class="leading-loose text-sm"><strong>Key Features</strong><br>
@@ -2275,7 +2276,7 @@
                             <i class="fas fa-check text-drumeo mr-1"></i> 3 levels for movement<br>
                             <i class="fas fa-check text-drumeo mr-1"></i> 90-day guarantee</p>
                     </a>
-                    <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[30-day-chops]=1&products[GHFAL-DIGI]=1&promo-code=p4-last-chance&locked=true" class="text-black hover:text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
+                    {{-- <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[30-day-chops]=1&products[GHFAL-DIGI]=1&promo-code=p4-last-chance&locked=true" class="text-black hover:text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
                         <img class="h-20 absolute top-0 right-0 z-10 -mt-4 -mx-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/160x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">
                         <h3><strong>Unlimited Lessons</strong></h3>
                         <p class="text-sm mt-2 mb-5">1 Year of Drumeo + P4 Practice Pad.</p>
@@ -2294,7 +2295,7 @@
                             <i class="fas fa-check text-drumeo mr-1"></i> Play Along To {{ Prices::$drumeoSongs }}+ Popular Songs.<br>
                             <i class="fas fa-check text-drumeo mr-1"></i> Study With 300+ World-Class Drummers.<br>
                             <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>
-                    </a>
+                    </a> --}}
                 </div>
                 <div class="flex w-full justify-center lg:justify-start lg:order-1 lg:w-1/4 xl:w-5/12 lg:pl-4  mt-10 lg:mt-0">
                     <img class="max-w-lg sm:max-w-lg xl:max-w-xl transition-opacity opacity-0"
@@ -2321,5 +2322,5 @@
             </div>
         </div>
     </section>
-    @include("drumeo.sales.partials._footer")
+    {{-- @include("drumeo.sales.partials._footer") --}}
 @stop

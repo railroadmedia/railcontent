@@ -44,6 +44,8 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/rock-drumming-masterclass/testimonials', [LeadGenController::class, 'rockDrumming']);
     Route::get('/subdivision-challenge', [LeadGenController::class, 'subdivision']);
     Route::get('/sucherman-sound', [LeadGenController::class, 'sucherman']);
+    Route::get('/groove-coordination', [LeadGenController::class, 'grooveCoordination']);
+
     Route::group(['prefix' => '/ultimate-toolbox'], function () {
         Route::get('/{page?}', LeadGenController::class . '@toolbox')->whereIn('page', [
             null, 'catalogue'

@@ -60,7 +60,7 @@
             @else
                 <p><strong>ONLY ${{ floatval($productPrices['the-drummers-toolbox-book']->discounted_price) }}</strong></p>
             @endif
-            <a class="join rounded" href="/ecommerce/add-to-cart?products[the-drummers-toolbox-book]=1">GET STARTED &raquo;</a>
+            <a class="join rounded" href="/ecommerce/add-to-cart?products[the-drummers-toolbox-book]=1">ORDER NOW &raquo;</a>
 
             {{--<a class="join blue outline rounded" href="/">GET FREE WITH <img src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"> &raquo;</a>--}}
                 <p>OR BUY FROM YOUR FAVORITE ONLINE STORES:<br class="hide-for-medium"> <a class="text-blue" target="_blank" href="https://www.amazon.com/dp/1999151933">AMAZON</a> &nbsp;|&nbsp; <a class="text-blue" target="_blank" href="https://www.amazon.com/dp/B07ZTTHK82/">KINDLE</a> &nbsp;|&nbsp; <a class="text-blue" target="_blank" href="https://books.apple.com/ca/book/id1487097588">APPLE</a></p>

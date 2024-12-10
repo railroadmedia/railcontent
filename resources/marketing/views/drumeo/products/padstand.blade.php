@@ -381,7 +381,7 @@
                             @endif
                             <a href="/ecommerce/add-to-cart?products[padstand]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                                 <div class="bg-white px-3 py-5 md:py-7">
-                                    <h4 class="mb-2 sm:mb-3"><strong>PadStand Only</strong></h4>
+                                    <h4 class="mb-2 sm:mb-3"><strong>PadStand</strong></h4>
                                     <img class="h-24 transition-opacity opacity-0"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"

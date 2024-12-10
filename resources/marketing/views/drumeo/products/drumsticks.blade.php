@@ -32,8 +32,8 @@
 
     @include('_partials.components.shop.promo-banner-2', [
         "name" => "Drumeo Drumsticks",
-        "fullPrice" => floatval($productPrices['Drumeo-VaterSticks']->price),
-        "price" => floatval($productPrices['Drumeo-VaterSticks']->discounted_price),
+        "fullPrice" => 12.95,
+        "price" => 9.95,
         "noBreadcrumb" => true
     ])
     <header class="header text-center">
@@ -252,7 +252,7 @@
                         @endif
                         <a href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                             <div class="bg-white px-3 py-5 md:py-7">
-                                <h4 class="mb-2 sm:mb-3"><strong>Drumsticks Only</strong></h4>
+                                <h4 class="mb-2 sm:mb-3"><strong>Drumsticks</strong></h4>
                                 <img class="h-32 transition-opacity opacity-0"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"

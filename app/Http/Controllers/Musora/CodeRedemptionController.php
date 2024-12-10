@@ -177,6 +177,42 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
+    public function headrushRedeemNewGuitareo(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page-headrush', [
+            'newAccount' => true,
+            'theme' => 'guitareo',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function headrushRedeemExistingGuitareo(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page-headrush', [
+            'newAccount' => false,
+            'theme' => 'guitareo',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function spotifyRedeemNewMusora(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'theme' => 'musora',
+            'spotify' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function spotifyRedeemExistingMusora(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => false,
+            'theme' => 'musora',
+            'spotify' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
     public function sweetwaterRedeemNewDrumeo()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'drumeo']);
@@ -204,15 +240,6 @@ class CodeRedemptionController extends BaseController
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'guitareo']);
     }
 
-    public function headrushRedeemNewGuitareo()
-    {
-        return view('musora.pages.redeem.redeem-page-headrush', ['newAccount' => true, 'theme' => 'guitareo']);
-    }
-    public function headrushRedeemExistingGuitareo()
-    {
-        return view('musora.pages.redeem.redeem-page-headrush', ['newAccount' => false, 'theme' => 'guitareo']);
-    }
-
     public function sweetwaterRedeemNewSingeo()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'singeo']);
@@ -229,25 +256,6 @@ class CodeRedemptionController extends BaseController
     public function sweetwaterRedeemExistingMusora()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'musora']);
-    }
-
-    public function spotifyRedeemNewMusora(Request $request)
-    {
-        return view('musora.pages.redeem.redeem-page', [
-            'newAccount' => true,
-            'theme' => 'musora',
-            'spotify' => true,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
-    }
-    public function spotifyRedeemExistingMusora(Request $request)
-    {
-        return view('musora.pages.redeem.redeem-page', [
-            'newAccount' => false,
-            'theme' => 'musora',
-            'spotify' => true,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
     }
 
     public function roland()

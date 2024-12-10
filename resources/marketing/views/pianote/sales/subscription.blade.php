@@ -1,5 +1,6 @@
 @php
     require_once(resource_path('marketing/views/pianote/_partials/homepage-data.php'));
+    require_once(resource_path('marketing/views/pianote/_partials/bonus-data.php'));
 @endphp
 
 @extends('pianote._partials.global-layout')
@@ -15,7 +16,8 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/share-image-pianote2.webp ">
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/share-image-home.jpg">
+{{--        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/share-image-pianote2.webp ">--}}
     @endif
 
     @include('_partials.layout._fonts')
@@ -120,17 +122,205 @@
             color:#fff!important;
         }
     </style>
+    <style>
+
+        [placeholder]:focus::-webkit-input-placeholder {
+            color:transparent
+        }
+
+        .ajax-form ::-webkit-input-placeholder, .ajax-form ::-moz-placeholder, .ajax-form :-ms-input-placeholder, .ajax-form :-moz-placeholder {
+            color:#777
+        }
+
+        .ajax-form {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        /*@media (min-width: 768px) {*/
+        /*    .ajax-form {*/
+        /*        margin: 0 auto 10px;*/
+        /*    }*/
+        /*}*/
+
+        .ajax-form input, .ajax-form button {
+            font: 400 18px/40px 'Open Sans', sans-serif;
+            height: 40px;
+            color: #999;
+            border-radius: 100px;
+            text-align: left;
+            padding: 2px 20px;
+            margin: 0 auto 5px;
+        }
+        /*.ajax-form input, .ajax-form button {*/
+        /*    font: 400 18px/50px 'Open Sans', sans-serif;*/
+        /*    height: 50px;*/
+        /*    color: #999;*/
+        /*    border-radius: 100px;*/
+        /*    text-align: left;*/
+        /*    padding: 7px 20px;*/
+        /*    margin: 0 auto 15px;*/
+        /*}*/
+        /*@media (min-width: 768px) {*/
+        /*    .ajax-form input, .ajax-form button {*/
+        /*        font-size: 22px;*/
+        /*        height: 65px;*/
+        /*        line-height: 65px;*/
+        /*    }*/
+        /*}*/
+        .ajax-form input[type="submit"],
+        .ajax-form button[type="submit"],
+        .ajax-form input button,
+        .ajax-form button button {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #fff;
+            background: #0b76db;
+            text-transform: uppercase;
+            /*margin: 0 auto 15px;*/
+            display: block;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+            padding: 0;
+        }
+        .ajax-form input[type="submit"]:hover, .ajax-form button[type="submit"]:hover, .ajax-form input button:hover, .ajax-form button button:hover {
+            background: #258ff4;
+        }
+        .disclaimer {
+            display: none;
+            margin: 0 auto;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .thank-you-box {
+            width:100%;
+            max-width:960px;
+            border-radius:5px;
+            height:auto;
+            max-height:0;
+            visibility:hidden;
+            opacity:0;
+            transition:all .4s ease-in;
+            display:block;
+            margin:0 auto;
+            background:#FFF;
+            text-align:center;
+            overflow:hidden;
+            color:#000
+        }
+
+        .thank-you-box.active {
+            max-height:1000px;
+            visibility:visible;
+            opacity:1;
+            padding:15px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box.active {
+                padding:20px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box.active {
+                padding:30px
+            }
+        }
+
+        .thank-you-box p {
+            font:400 15px/1.4em "Open Sans", sans-serif;
+            margin:0 auto
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p {
+                font-size:19px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box p {
+                font-size:23px
+            }
+        }
+
+        .thank-you-box p em {
+            line-height:1.4em;
+            max-width:550px;
+            display:inline-block;
+            font-size:12px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p em {
+                font-size:14px
+            }
+        }
+
+        .thank-you-box h2 {
+            font:700 30px/1em "Bebas Neue", sans-serif;
+            margin:15px auto;
+            text-transform:uppercase;
+            color:#0b76db
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box h2 {
+                font-size:37px;
+                margin:20px auto
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box h2 {
+                font-size:44px
+            }
+        }
+
+        .thank-you-box .social-media a {
+            background:#000;
+            color:#fff;
+            border-radius:50%;
+            display:inline-block;
+            text-align:center;
+            margin:20px 3px 0;
+            width:50px;
+            height:50px;
+            line-height:50px;
+            font-size:26px
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box .social-media a {
+                width:70px;
+                height:70px;
+                line-height:70px;
+                font-size:35px;
+                margin:25px 10px 0
+            }
+        }
+    </style>
 @stop
 
 @section('body-data')
     x-data ='{
         soundslice : false,
+        BFwaitlist : false,
         workoutVid : false,
         trailer : false,
         unbox : false,
         rolandTrailer : false,
         lazyLoad: false,
         videoLoaded: false,
+        @foreach($bonuses as $bonus)
+            @if(!empty($bonus['vimeoId']))
+                modal{{ $bonus['vimeoId'] }}: false,
+            @endif
+        @endforeach
     }'
 @endsection
 
@@ -144,9 +334,14 @@
     @elseif(!empty($promoVersion))
         @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
-            "hideMenu" => true,
         ])
+{{--        @include("pianote.sales.partials._nav", [--}}
+{{--            "subscriptionVersion" => true,--}}
+{{--            "scrollToJoin" => true,--}}
+{{--            "hideMenu" => true,--}}
+{{--        ])--}}
     @elseif(!empty($month))
         @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -161,20 +356,27 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
+    @endif
 
-{{--        <section class="text-center px-5 sm:px-6 py-6 sm:py-8 lg:py-10 text-black relative" style="background-color:#f3efee;">--}}
-{{--            <div class="container max-w-5xl mx-auto relative z-20">--}}
-{{--                <img class="h-16 sm:h-20 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp">--}}
-{{--                <h6 class="leading-tight mt-3 mb-1"><strong>Learn the language of music <br class="sm:hidden"> with daily guided workouts.</strong></h6>--}}
-{{--                <p class="leading-tight mb-4">Save your seat in the first-ever<br class="sm:hidden"> class starting on July 1st!</p>--}}
-{{--                <a href="/shop/read-music" class="join smaller">Learn More</a>--}}
-{{--            </div>--}}
-{{--            <picture>--}}
-{{--                <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp" type="image/webp">--}}
-{{--                <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp" type="image/webp">--}}
-{{--                <img class="absolute inset-0 w-full h-full object-cover z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp">--}}
-{{--            </picture>--}}
-{{--        </section>--}}
+    @if(!empty($bfVersion))
+        @include('_partials.layout.holiday.homepage-top-banner',[
+            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/xm-banner.webp')",
+            'text' => 'Save up to 69% on <br class="sm:hidden">piano lessons, gear & more!',
+            'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
+            'vimeo' => '885338636',
+            'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024,pdbonus&locked=true',
+        ])
+
+        <div class="sticky-trigger block"></div>
+        <div href="#customize-anchor"
+            class="promo-banner anchor-slide text-white flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] -mt-20 transition-none"
+            style="background:linear-gradient(to bottom, #020306, #4d050d);">
+            @include($theme.'._partials.holiday-logo', [
+                'styles' => 'w-auto h-10 sm:h-14',
+                'isProductPage' => true,
+                'productPageStyles' => 'w-auto h-10 sm:h-14 p-1'
+            ])
+        </div>
     @endif
 
     @hasSection('top-bar')
@@ -263,6 +465,8 @@
             ])
         @else
             @include('musora.sales.components.header-section', [
+            'promoHeader' => true,
+            'BFheader' => 'Join today and get a free metronome, <br class="inline sm:hidden">books, and 3 digital courses.',
                 'header' => 'Piano lessons for<br> <span class="relative inline-block">all skill levels<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/header-thumb2.webp',
@@ -275,7 +479,6 @@
             ])
         @endif
     @endif
-
 
     @hasSection('promo-banner')
         @yield('promo-banner')
@@ -357,30 +560,38 @@
         ])
 
     @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/95dc0c77-a0a5-4f01-b743-cb01d4912042-easy-chords-cart.jpg',
-                    'title' => 'Easy Chords',
-                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
-                    'price' => floatval($productPrices['easy-chords']->price),
-                ],
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
-                    'title' => '30-Day Blues',
-                    'description' => 'Learn the Blues in just 30 days',
-                    'price' => floatval($productPrices['30-day-blues-piano']->price),
-                ],
-            ]
+         @php
+            $targetSkus = ['metronome', 'read-music-in-30-days-workbook', 'piano-chords-and-scales-guide', 'new-piano-players-start-here', 'read-music-in-30-days', 'easy-chords'];
         @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'marketing/pianote/membership/homepage/webp-format/pianote-annual-2w-card.webp',
-        'header' => 'Online piano lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&redirect=/order&locked=true&promo-code=special',
-        ])
+            <div id="customize-anchor"></div>
+            @include('drumeo._partials.bf-order-section-bonuses-modal', [
+            'maxWidth' => 'max-w-3xl',
+            'bgColor' => 'background-image: url(\'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp\'); background-repeat: no-repeat; background-size: cover;',
+            'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-bundle-logo.svg',
+            'logoHeight' => 'h-16 sm:h-20',
+            'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
+            'bonusWidth' => 'w-1/2 md:w-1/3',
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Get a Pianote Membership with $538 in free bonuses.</h2>',
+            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-holiday-bundle-pianote]=1&promo-code=holiday-bundle-pianote,holiday-bundle-shipping&locked=true',
+            'bundle'=> "holiday-pianote",
+            ])
+
+        @php
+            $videoBonuses = [];
+            foreach ($bonuses as $bonus) {
+                if (!empty($bonus['vimeoId']) && in_array($bonus['sku'], $targetSkus)) {
+                    $videoBonuses[] = ['name' => 'modal' . $bonus['vimeoId'], 'video' => $bonus['vimeoId']];
+                }
+            }
+        @endphp
+
+        @foreach ($videoBonuses as $modal)
+            @include('_partials.components.video-modal', [
+                'name' => $modal['name'],
+                'video' => $modal['video'],
+                'vimeo' => true,
+            ])
+        @endforeach
     @else
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,
@@ -436,4 +647,24 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var stickyBar = document.querySelector('.promo-banner');
+            if (!stickyBar) return;
+
+            window.addEventListener('scroll', function () {
+                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+                if (window.scrollY > (unstickTrigger - 115)) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < stickTrigger - 115) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+                    stickyBar.classList.add('fixed', 'mt-0');
+                }
+            });
+        });
+    </script>
 @stop

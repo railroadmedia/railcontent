@@ -33,7 +33,7 @@
 <!-- Main -->
 @section('layout-body')
 
-    <header class="header-image px-5 sm:px-6 py-8 sm:py-16 lg:py-24 bg-no-repeat text-white" style="background-color:#faf8f5;">
+    <header class="header-image px-5 sm:px-6 py-12 sm:py-16 lg:py-24 bg-no-repeat text-white" style="background-color:#faf8f5; min-height: calc(100vh - 284px);">
         <div class="container mx-auto max-w-4xl">
             <div class="w-full px-10">
                 <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/musora/lead-gen/playlist/header-history.webp" alt="Playlist Image">

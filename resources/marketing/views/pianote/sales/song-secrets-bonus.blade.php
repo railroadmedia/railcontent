@@ -147,10 +147,10 @@
         ])
     @endif
 
-    @php
-        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[digital-chords-scales-guide]=1&products[piano-chords-and-scales-guide]=1&products[easy-chords]=1&products[new-piano-players-start-here]=1&products[piano-riffs-and-fills]=1&products[song-secrets-webinar]=1&redirect=/order&locked=true&promo-code=special-discount';
-        $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[digital-chords-scales-guide]=1&products[easy-chords]=1&products[new-piano-players-start-here]=1&products[piano-riffs-and-fills]=1&products[song-secrets-webinar]=1&redirect=/order&locked=true&promo-code=song-secrets'
-    @endphp
+{{--    @php--}}
+{{--        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[digital-chords-scales-guide]=1&products[piano-chords-and-scales-guide]=1&products[easy-chords]=1&products[new-piano-players-start-here]=1&products[piano-riffs-and-fills]=1&products[song-secrets-webinar]=1&redirect=/order&locked=true&promo-code=special-discount';--}}
+{{--        $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[digital-chords-scales-guide]=1&products[easy-chords]=1&products[new-piano-players-start-here]=1&products[piano-riffs-and-fills]=1&products[song-secrets-webinar]=1&redirect=/order&locked=true&promo-code=song-secrets'--}}
+{{--    @endphp--}}
 
     <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: #f6f8fc;">
         <div class="container mx-auto max-w-4xl">
@@ -184,9 +184,9 @@
                     <div class="w-72 lg:w-96 mx-auto sm:mx-0">
                         <h2><s class="opacity-50">$611</s> <strong>$177</strong> <span class="text-sm">For your first year</span></h2>
 
-                        <a class=" w-full sm:w-82 join smaller mt-4 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
-                                href="{{ $buttonLink }}"
-                        >CLAIM YOUR OFFER</a>
+{{--                        <a class=" w-full sm:w-82 join smaller mt-4 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"--}}
+{{--                                href="{{ $buttonLink }}"--}}
+{{--                        >CLAIM YOUR OFFER</a>--}}
                         <p class="text-sm mt-2"><em>Money-back 90-day guarantee.</em></p>
                     </div>
                 </div>
@@ -497,9 +497,9 @@ That’s the Play Better Guarantee™.',
                         </div>
                     </div>
                     <br>
-                    <h4 class="leading-tight mt-4 sm:mt-5 mb-2"><strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 3 COURSES, 6 POSTERS &amp; THE CHORDS AND SCALES BOOK.</h4> <a class="join  white  my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
-                        CLAIM YOUR OFFER
-                    </a>
+{{--                    <h4 class="leading-tight mt-4 sm:mt-5 mb-2"><strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 3 COURSES, 6 POSTERS &amp; THE CHORDS AND SCALES BOOK.</h4> <a class="join  white  my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">--}}
+{{--                        CLAIM YOUR OFFER--}}
+{{--                    </a>--}}
                     <p class="leading-tight text-sm mb-6"><em>First year discount: <s class="opacity-40">$240</s>
                             <strong> $177 </strong>.
                             <br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
@@ -979,14 +979,14 @@ That’s the Play Better Guarantee™.',
                     <strong>$177</strong> <span class="text-musora">(Save 26%)</span>
                 </h3>
                 <p class="text-sm mb-4 sm:mb-6">For your first year, then $240/yr.</p>
-                <a class="join  white  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
-                    CLAIM YOUR OFFER
-                </a>
+{{--                <a class="join  white  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">--}}
+{{--                    CLAIM YOUR OFFER--}}
+{{--                </a>--}}
 
 
                 <br>
                 <p class="text-sm">If Shipping or Tax is an issue, choose the DIGITAL-ONLY version and pay just $150 for your first year (no physical bonuses).</p>
-                <a class="underline cursor-pointer text-sm" href="{{ $buttonLink2 }}">Click here to claim your offer.</a>
+{{--                <a class="underline cursor-pointer text-sm" href="{{ $buttonLink2 }}">Click here to claim your offer.</a>--}}
             </div>
         </section>
     </div>

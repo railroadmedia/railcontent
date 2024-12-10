@@ -8,7 +8,7 @@
 @endsection
 
 @section('layout-body')
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
                 "name" => $product->name,
                 "fullPrice" => $product->price,
                 "price" => $product->discounted_price,

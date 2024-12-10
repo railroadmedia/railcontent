@@ -462,6 +462,23 @@ return [
         [
             'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
+            'form_name' => 'Yamaha Giveaway nov24',
+            'brand' => 'drumeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
             'form_name' => 'Drumeo Giveaway Rafflepress',
             'brand' => 'drumeo',
 
@@ -565,6 +582,40 @@ return [
             'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'EarDrums Waitlist',
+            'brand' => 'drumeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'Groove Coordination',
+            'brand' => 'drumeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'BF24 Waitlist',
             'brand' => 'drumeo',
 
             'input_data_map' => [
@@ -1195,6 +1246,23 @@ return [
         [
             'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
+            'form_name' => 'Prima Giveaway',
+            'brand' => 'pianote',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
             'form_name' => '7 Days To Sight Reading',
             'brand' => 'pianote',
 
@@ -1383,6 +1451,40 @@ return [
             'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'Pianote Webinar Finished',
+            'brand' => 'pianote',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'BF24 Waitlist',
+            'brand' => 'pianote',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'Digital Christmas Songbook',
             'brand' => 'pianote',
 
             'input_data_map' => [
@@ -1653,6 +1755,23 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'BF24 Waitlist',
+            'brand' => 'guitareo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
         //--------------------------------------------------
         // singeo
         [
@@ -1876,8 +1995,94 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'Everyday Improv Waitlist',
+            'brand' => 'singeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'BF24 Waitlist',
+            'brand' => 'singeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
         //--------------------------------------------------
         // musora
+
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'Cymbal Giveaway',
+            'brand' => 'drumeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'Phobia Giveaway',
+            'brand' => 'drumeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'WVH gear Giveaway',
+            'brand' => 'drumeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
         [
             'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
@@ -1933,6 +2138,23 @@ return [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
             'form_name' => 'Musora Referral',
+            'brand' => 'musora',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'BF24 Waitlist',
             'brand' => 'musora',
 
             'input_data_map' => [

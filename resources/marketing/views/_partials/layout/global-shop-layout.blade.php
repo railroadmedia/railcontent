@@ -39,7 +39,19 @@
 
 
 @section('layout-scripts')
-
+    @if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        {{--    end of BF weekend--}}
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2024-12-02 00:00:00',
+            'promoVersion' => true
+        ])
+    @else
+        {{--    end of cyber monday--}}
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2024-12-03 00:00:00',
+            'promoVersion' => true
+        ])
+    @endif
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/misc.js') }}"></script>

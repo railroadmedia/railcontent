@@ -21,13 +21,13 @@
 
     @if(!empty($checkoutVersion))
         <div class="button-wrap">
-            <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button" role="button" aria-label="Shop at Drumeo shop">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button" style="background: linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);color:#000;" role="button" aria-label="Shop at Drumeo shop">Shop Deals</a>
         </div>
     @endif
 
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="{{ get_legacy_brand_base_url('drumeo').'/drumshop' }}" class="join outline-button" role="button" aria-label="Shop at Drumeo shop">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('drumeo').'/drumshop' }}" class="join outline-button" style="background: linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);color:#000;" role="button" aria-label="Shop at Drumeo shop">Shop Deals</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
@@ -53,7 +53,7 @@
                     <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Features Menu"  aria-controls="features-dd">Features <i class="fa-solid fa-caret-down"></i></span>
                     <span class="cursor-pointer instruments" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Instruments Menu" aria-controls="instruments-dd" title="View Instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" aria-label="Pricing" title="View Pricing">Pricing</a>
-                    <a class="@if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" aria-label="Shop" title="Visit Shop">Shop</a>
+                    <a style="color: #F61A30;" class="@if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" aria-label="Shop" title="Visit Shop">Holiday Deals</a>
                     <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" title="Read our Blog">Blog</a>
                 </div>
                 <div id="features-dd" class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44 z-[70]" tabindex="0">
@@ -69,6 +69,7 @@
                 </div>
             </div>
         @endif
+
 
         <div class="button-wrap @if(!empty($hideJoin)) hidden @endif">
             <a @if(!empty($scrollToJoin))
@@ -165,7 +166,7 @@
 {{--            "linkUrl" => "/choose-plan",--}}
 {{--        ])--}}
          @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "Shop",
+                "linkName" => "Holiday Deals",
                 "linkIcon" => "fas fa-tag",
                 "linkUrl" => "/drumshop",
             ])

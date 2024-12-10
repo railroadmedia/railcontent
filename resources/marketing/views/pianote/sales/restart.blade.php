@@ -148,7 +148,7 @@
                                 <br><strong class="text-musora"><em>Only available until September 30th.<br>
                                         <span x-cloak x-data="timer()" x-init="countdown()">
                                              <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                             <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                                              <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
                                              <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
                                              <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
@@ -158,7 +158,7 @@
                                 <br><strong class="text-musora"><em>Only available until October 4th.<br>
                                         <span x-cloak x-data="timer()" x-init="countdown()">
                                              <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                             <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                                              <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
                                              <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
                                              <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
@@ -170,13 +170,13 @@
                         </h6>
                         <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 mx-auto sm:max-w-xs">
 
-                            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 12, 0, 0, 0, 'America/Vancouver'))
-                                <span class="w-full join smaller sold-out mb-2">Opens September 12th</span>
-                            @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 8, 0, 0, 'America/Vancouver'))
-                                <a class="w-full join green smaller mb-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&locked=true&promo-code=restart">SEE YOUR DEAL &raquo;</a>
-                            @else
-                                <span class="w-full join smaller sold-out mb-2">this offer has now ended</span>
-                            @endif
+{{--                            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 12, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                                <span class="w-full join smaller sold-out mb-2">Opens September 12th</span>--}}
+{{--                            @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 8, 0, 0, 'America/Vancouver'))--}}
+{{--                                <a class="w-full join green smaller mb-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&locked=true&promo-code=restart">SEE YOUR DEAL &raquo;</a>--}}
+{{--                            @else--}}
+{{--                                <span class="w-full join smaller sold-out mb-2">this offer has now ended</span>--}}
+{{--                            @endif--}}
 
                             <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                                 <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
@@ -316,7 +316,7 @@
                         <strong><em>Only available until September 30th.<br>
                                 <span x-cloak x-data="timer()" x-init="countdown()">
                                              <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                             <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                                              <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
                                              <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
                                              <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
@@ -326,7 +326,7 @@
                         <strong><em>Only available until October 4th.<br>
                                 <span x-cloak x-data="timer()" x-init="countdown()">
                                              <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                             <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                                              <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
                                              <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
                                              <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
@@ -340,13 +340,13 @@
                 <h3 class="leading-tight mb-1"><strong>Only</strong> <s class="opacity-50">$240</s> <strong>$120</strong></h3>
                 <p class="leading-tight text-sm mb-5"><em>Renews at $240 after your first year.</em></p>
             </div>
-            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 12, 0, 0, 0, 'America/Vancouver'))
-                <span class="join sold-out">Opens September 12th</span>
-            @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 8, 0, 0, 'America/Vancouver'))
-                <a class="join green" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&locked=true&promo-code=restart">GET Started »</a>
-            @else
-                <span class="join sold-out">this offer has now ended</span>
-            @endif
+{{--            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 12, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                <span class="join sold-out">Opens September 12th</span>--}}
+{{--            @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 8, 0, 0, 'America/Vancouver'))--}}
+{{--                <a class="join green" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&locked=true&promo-code=restart">GET Started »</a>--}}
+{{--            @else--}}
+{{--                <span class="join sold-out">this offer has now ended</span>--}}
+{{--            @endif--}}
         </div>
     </section>
 

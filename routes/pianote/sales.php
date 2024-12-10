@@ -64,7 +64,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/coaches', [SalesController::class, 'coaches']);
         Route::get('/cookie', [SalesController::class, 'cookie']);
         Route::get('/lifetime', [SalesController::class, 'lifetime']);
-        //        Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
+                Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
         Route::get('/lisa-recommends', [SalesController::class, 'lisarecommends']);
         Route::get('/method', [SalesController::class, 'method']);
         Route::get('/privacy', [SalesController::class, 'privacy']);
