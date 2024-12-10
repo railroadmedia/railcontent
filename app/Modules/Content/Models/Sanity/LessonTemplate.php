@@ -32,7 +32,7 @@ abstract class LessonTemplate extends BaseSanityModel
     public function __construct(
         public string $name,
         public string $title,
-        public bool $withResources = false,
+        public bool $withResources = true,
         public bool $withLiveEvent = false,
         public ?string $parentType = null,
         public bool $isChallengeChild = false,
