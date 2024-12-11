@@ -32,9 +32,7 @@ class CarouselServiceV1
         // TODO Adrian this needs to be updated
         //$promotionalCards = $this->getSortedPromotionalCards($brand, $isAdmin);
 
-        $onboardingCardData = $this->learningPathsService->getNewLearningPaths(
-            boolval(FeatureFlagging::branch('homepage-v2', user()))
-        );
+        $onboardingCardData = $this->learningPathsService->getNewLearningPaths();
         $unfinishedOnboardingCards = [];
         foreach ($onboardingCardData as $index => $onboardingCardDatum) {
             $onboardingCardData[$index]['show_everywhere'] = false;

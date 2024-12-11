@@ -71,7 +71,7 @@ class LearningPathsService
     public function showNewLearningPaths(): bool
     {
         $user = user();
-        return $user->is_trial && Carbon::parse($user->created_at)->greaterThanOrEqualTo(Carbon::now()->subDays(30));
+        return Carbon::parse($user->created_at)->greaterThanOrEqualTo(Carbon::now()->subDays(30));
     }
 
     public function getNewLearningPaths(): array
