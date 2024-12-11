@@ -122,7 +122,7 @@ const buttonConditionalClasses = computed(() => {
             if (!props.inDropdown) {
                 classes.push('tw-px-6 tw-py-1')
             }
-            classes.push('tw-w-auto tw-h-auto md:tw-h-[40px]');
+            classes.push('tw-w-auto tw-h-[35px] md:tw-h-[40px]');
 
         }
     }

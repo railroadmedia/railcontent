@@ -2,10 +2,10 @@
     <div class="tw-items-center tw-flex-grow tw-justify-end"
         :class="primaryCta || (displayMobileDropdown && ctas?.length > 0) ? 'tw-hidden sm:tw-flex' : ''">
         <div class="ctas-container tw-flex-shrink-0 tw-flex">
-            <CtaResolver :ctas="ctas" />
+            <CtaResolver v-bind="props" />
         </div>
     </div>
-    <PageHeaderDropdown v-if="displayDropdown" class="tw-hidden sm:tw-block" faIconClass="fa fa-ellipsis-h sm:tw-mt-1">
+    <PageHeaderDropdown v-if="displayDropdown" class="tw-hidden sm:tw-block" faIconClass="fa fa-ellipsis-h">
         <template v-slot:content>
             <div class="dropdown-content tw-min-w-[210px]">
                 <CtaResolver v-bind="props" :ctas="dropdowns"  inDropdown />
