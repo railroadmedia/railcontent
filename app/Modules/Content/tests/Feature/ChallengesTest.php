@@ -146,7 +146,7 @@ class ChallengesTest extends TestCase
             'is_active' => true,
                 'start_date' => Carbon::now()->addDays(2)->toISOString()]
         );
-        $active = ChallengeUserProgress::query()->active()->get();
+        $active = ChallengeUserProgress::query()->currentlyActive()->get();
         $this->assertCount(2, $active);
     }
 

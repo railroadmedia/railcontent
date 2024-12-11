@@ -33,10 +33,13 @@ class Challenge extends ParentTemplate
         $childReference = new Reference([['type' => "challenge-part"]]);
 
         $contentCardFields = [
-            new Field( FieldType::Boolean, 'is', 'Is Product', group: $enrollmentGroup),
-            new Field(FieldType::Image, 'bgImg', 'Background Image', group: $contentCardGroup, options: ['accept' => '.png']),
+            new Field( FieldType::Boolean, 'is_banner', 'Show as Banner (not just for enrollment)', group: $contentCardGroup),
+            new Field( FieldType::Boolean, 'is_draft', 'Is Draft', group: $contentCardGroup),
+            new Field(FieldType::Datetime, 'start_time', 'Start Time (Defaults to Enrollment Start', group: $contentCardGroup),
+            new Field(FieldType::Datetime, 'end_time', 'End Time (Defaults to Enrollment End', group: $contentCardGroup),
+            new Field(FieldType::Image, 'bgImg', 'Portrait Image', group: $contentCardGroup, options: ['accept' => '.png']),
             new Field(FieldType::Image, 'squareImg', 'Square Image', validation: [new Required()], group: $contentCardGroup, options: ['accept' => '.png']),
-            new Field(FieldType::Image, 'wideImg', 'Wide Image', group: $contentCardGroup, options: ['accept' => '.png']),
+            new Field(FieldType::Image, 'wideImg', '16x9 Image', group: $contentCardGroup, options: ['accept' => '.png']),
         ];
 
         $dropdownFields = new ListObject( fields:[

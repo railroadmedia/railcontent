@@ -79,6 +79,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Content\Models\Sanity\BannerCard;
 use Modules\Content\Models\Sanity\OnboardingContentCard;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Services\ConfigService;
@@ -163,6 +164,7 @@ class SanityStudioCMSController extends BaseController
             (new License())->toArray(),
             (new Publisher())->toArray(),
             (new OnboardingContentCard())->toArray(),
+            (new BannerCard())->toArray(),
         ];
 
         $publishing = [

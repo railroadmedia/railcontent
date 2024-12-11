@@ -27,6 +27,9 @@ class CarouselServiceV1
     public function getCarouselCards(string $brand): array
     {
         $user = user();
+        $isAdmin = $user->isAdmin();
+        // TODO Adrian this needs to be updated
+        //$promotionalCards = $this->getSortedPromotionalCards($brand, $isAdmin);
 
         $onboardingCardData = $this->learningPathsService->getNewLearningPaths(boolval(FeatureFlagging::branch('homepage-v2', user())));
         $unfinishedOnboardingCards = [];
@@ -52,7 +55,7 @@ class CarouselServiceV1
         $communityProgresses = $user->challengeProgress()
             ->brand($brand)
             ->community()
-            ->active()
+            ->currentlyActive()
             ->locked()
             ->where('updated_at', '>', Carbon::now()->subDays(30))
             ->orderBy('updated_at', 'desc')
@@ -62,7 +65,7 @@ class CarouselServiceV1
         // active solo challenges (max 3)
         $soloProgresses = user()->challengeProgress()
             ->brand($brand)
-            ->active()
+            ->currentlyActive()
             ->solo()
             ->locked()
             ->where('updated_at', '>', Carbon::now()->subDays(30))
@@ -70,10 +73,13 @@ class CarouselServiceV1
             ->take(3)
             ->get();
 
+
+
+
         // Challenge with open enrollment (that the user is not a part of)
         $allProgress = $user->challengeProgress()->brand($brand)->active()->get();
         $railcontentIds = $allProgress->pluck('content_id');
-        $challengeRecommendation = collect($this->sanity->getChallengesWithOpenEnrollment($brand))
+        $challengeRecommendation = collect($this->sanity->getChallengeOpenEnrollmentCards($brand, $isAdmin))
             ->filter(fn ($challenge) => !$railcontentIds->contains($challenge['id']))
             ->take(1);
         $allChallengeIds = [
@@ -82,6 +88,8 @@ class CarouselServiceV1
             ...$soloProgresses->pluck('content_id'),
             ...$challengeRecommendation->pluck('id'),
         ];
+
+
 
 
         $allChallengeMetaData = $this->challengesService->getChallengeMetaDataForUserProgress($allChallengeIds, $allProgress, returnChallengeData: true, brand: $brand);
@@ -104,6 +112,17 @@ class CarouselServiceV1
         }
 
         return $compiledCardData;
+    }
+
+    private function getSortedPromotionalCards(string $brand, bool $showDrafts)
+    {
+        // Custom Cards
+        $promotionalCards = $this->sanity->getActiveBannerCards($brand, $showDrafts);
+        // challenge banner cards
+
+        // sort based on type, then display order
+        // format for presentation
+        return $promotionalCards;
     }
 
     private function formatChallengeData(mixed $userProgresses, Collection $challengeMetaData, string $type) : array
