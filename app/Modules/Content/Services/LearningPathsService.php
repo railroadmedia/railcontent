@@ -91,6 +91,11 @@ class LearningPathsService
         );
         $difficultyString = OnboardingSkillLevelEnum::tryFrom($experienceLevel)->name;
         $document = $this->sanityGateway->getOnboardingCard($brand, $user->membership_level, $difficultyString) ?? [];
+
+        if (empty($document)) {
+            return [];
+        }
+
         return [
             $document['first_content'],
             $document['second_content'],
