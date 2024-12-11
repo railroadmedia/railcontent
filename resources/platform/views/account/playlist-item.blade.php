@@ -58,14 +58,14 @@
             $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
         }
         else if($lessonContent['type'] === 'coach-stream') {
-            $instructor = $lessonContent->fetch('*fields.instructor')[0] ?? null;
+            $instructor = $lessonContent['instructors_details'][0] ?? null;
             $contentBreadCrumb->firstLevelUrl = url()->route("platform.coaches");
             $contentBreadCrumb->firstLevelTitle = 'Coaches';
             if($instructor) {
-                $contentBreadCrumb->secondLevelUrl = url()->route("platform.content.coach.show",['firstContentSlug' => $instructor->fetch('slug'), 'firstContentId' => $instructor->fetch('id')]);
-                $contentBreadCrumb->secondLevelTitle = $instructor->fetch('fields.name');
+                $contentBreadCrumb->secondLevelUrl = $instructor['web_url_path'];
+                $contentBreadCrumb->secondLevelTitle = $instructor['name'];
             }
-            $contentBreadCrumb->lastLevelTitle = $lessonContent->fetch('title');
+            $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
         } else {
             $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent['type']]?? $lessonContent['type']]);
             $contentBreadCrumb->firstLevelTitle = parse_lesson_type_readable($lessonContent['type'], true);
