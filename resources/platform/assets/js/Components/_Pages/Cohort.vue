@@ -33,7 +33,7 @@
                             :src="`https://www.musora.com/cdn-cgi/image/width=850,quality=95/${cohort['header_image_url']}`"
                             alt="header thumb"
                         />
-                        <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" @click="openTrailer = true">
+                        <div v-if="cohort['cohort_trailer']" class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" @click="openTrailer = true">
                             <i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
 
     <section class="tw-bg-[#F1F7FE] tw-py-7 " v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10">
-            <div class="tw-relative tw-cursor-pointer tw-mb-10" @click="openTrailer = true">
+            <div class="tw-relative tw-cursor-pointer tw-mb-10" @click="playTrailer">
                 <!--  Body Image  -->
                 <img
                     class="tw-rounded-xl tw-transition-opacity tw-opacity-0"
@@ -498,6 +498,10 @@ const closeGetNotifiedModal = () => {
     isGetNotifiedModalOpen.value = false;
 }
 
+const playTrailer = () => {
+    if(props.cohort['cohort_trailer']) openTrailer.value = true;
+}
+
 const countdown = () => {
     const start = new Date(props.cohort['enrollment_end_date']);
     const now = Date.now();
@@ -534,7 +538,6 @@ const watchEnrollmentOpen = () => {
 }
 
 onBeforeMount(() => {
-    console.log('cohort', props.cohort)
     const openDate = new Date(props.cohort['enrollment_start_date']);
     const closeDate = new Date(props.cohort['enrollment_end_date']);
     const now = new Date();
