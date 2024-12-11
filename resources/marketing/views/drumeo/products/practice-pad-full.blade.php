@@ -2037,21 +2037,21 @@
             <h2>DESIGNED BY PAT PETRILLO</h2>
         </div>
         <div class="medium-4 columns  text-center medium-text-left">
-            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/details-photo1.jpg" alt="Detail 1">
+            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/details-photo1.jpg" alt="Detail 1">
             <p>
                 <strong>PRACTICE WITHOUT LIMITS</strong><br>
                 Expand your practice beyond a single surface. With a snare-like pad, harder neoprene for high-tom, strength-building rubber for floor tom, and a ride cymbal-like surface, you're ready for anything.
             </p>
         </div>
         <div class="medium-4 columns  text-center medium-text-left">
-            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/details-photo2.jpg" alt="Detail 2">
+            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/details-photo2.jpg" alt="Detail 2">
             <p>
                 <strong>BOOST SPEED, POWER & CONTROL</strong><br>
                 Refine your rebound and kit movement on multiple surfaces. Build speed, accuracy, and power for a smoother transition to the drum set.
             </p>
         </div>
         <div class="medium-4 columns  text-center medium-text-left">
-            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/details-photo3.jpg" alt="Detail 3">
+            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/details-photo3.jpg" alt="Detail 3">
             <p>
                 <strong>IGNITE YOUR CREATIVITY</strong><br>
                 Designed by groove expert Pat Petrillo, the P4 Practice Pad helps you develop key skills for the kit, rooted in his expertise from "Hands, Grooves, & Fills."
@@ -2061,7 +2061,7 @@
     <div class="bg-gray">
         <div class="row pat-quote">
             <div class="large-2 medium-3 columns  text-center medium-text-left">
-                <img src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/floating-head.png" alt="Pat Petrillo" /></div>
+                <img src="https://www.musora.com/cdn-cgi/image/width=300,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/floating-head.png" alt="Pat Petrillo" /></div>
             <div class="large-10 medium-9 columns">
                 <p>“I’ve used this practice pad while teaching privately in New York. It has helped my students really replicate the feel of moving around the drum set and work on independence techniques - and I know it will do the same for you.”<br>
                     <strong>- PAT PETRILLO</strong></p></div>
@@ -2084,7 +2084,7 @@
                 <strong>The hardest surface</strong> that delivers a unique sound and emulates the ride cymbal.</p>
         </div>
         <div class="columns close-up show-for-medium">
-            <img src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/close-up-arrows.png" usemap="#Map" alt="Close up pad" />
+            <img src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/close-up-arrows.png" usemap="#Map" alt="Close up pad" />
             <map name="Map" id="Map">
                 <area class="pad-click" title="Standard gum-rubber" shape="poly"
                         coords="406,68,305,81,158,119,67,160,8,226,15,287,91,333,206,373,316,389,430,397,531,397,608,390,606,373,538,333,467,281,409,214,393,151,396,95"/>
@@ -2104,26 +2104,26 @@
                 <div class="centering-wrap">
                     <div class="large-4 medium-6 columns">
                         <a target="_blank" href="https://www.instagram.com/p/BlNaPIrAKBu/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/sanghyunsimonlee.png" alt="Testimonial 1">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/sanghyunsimonlee.png" alt="Testimonial 1">
                         </a>
                         <a target="_blank" href="https://www.instagram.com/p/Bm8nxCInKoT/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/stephanemoureu.png" alt="Testimonial 2">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/stephanemoureu.png" alt="Testimonial 2">
                         </a>
                     </div>
                     <div class="large-4 medium-6 columns">
                         <a target="_blank" href="https://www.instagram.com/p/BmDunJEHkQf/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/livethedrumlifestyle.png" alt="Testimonial 3">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/livethedrumlifestyle.png" alt="Testimonial 3">
                         </a>
                         <a target="_blank" href="https://www.instagram.com/p/Bm1_5dtAjqE/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/wareke.png" alt="Testimonial 4">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/wareke.png" alt="Testimonial 4">
                         </a>
                     </div>
                     <div class="large-4 medium-6 columns show-for-large">
                         <a target="_blank" href="https://www.instagram.com/p/BpcWwh2lqZl/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/gowrivation.png" alt="Testimonial 4">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/gowrivation.png" alt="Testimonial 4">
                         </a>
                         <a target="_blank" href="https://www.instagram.com/p/BiSPK2HAGCJ/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/jorddrummer.png" alt="Testimonial 5">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/jorddrummer.png" alt="Testimonial 5">
                         </a>
                     </div>
                 </div>
@@ -2135,26 +2135,26 @@
                 <div class="centering-wrap">
                     <div class="large-4 medium-6 columns">
                         <a target="_blank" href="https://www.instagram.com/p/Bj8GZoSnz42/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/qvantdrums.png" alt="Testimonial 6">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/qvantdrums.png" alt="Testimonial 6">
                         </a>
                         <a target="_blank" href="https://www.instagram.com/p/BiyLLEohs0F/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/markefeetus.png" alt="Testimonial 7">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/markefeetus.png" alt="Testimonial 7">
                         </a>
                     </div>
                     <div class="large-4 medium-6 columns">
                         <a target="_blank" href="https://www.instagram.com/p/BjqVOYdhWw_/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/diegotcprodesign.png" alt="Testimonial 8">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/diegotcprodesign.png" alt="Testimonial 8">
                         </a>
                         <a target="_blank" href="https://www.instagram.com/p/BikJm19H-hL/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/rhodzadrumma.png" alt="Testimonial 9">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/rhodzadrumma.png" alt="Testimonial 9">
                         </a>
                     </div>
                     <div class="large-4 medium-6 columns show-for-large">
                         <a target="_blank" href="https://www.instagram.com/p/Bi_5VeqH6ef/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/phoenix1974.png" alt="Testimonial 10">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/phoenix1974.png" alt="Testimonial 10">
                         </a>
                         <a target="_blank" href="https://www.instagram.com/p/BizJ2--jRYX/">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/hyunook.png" alt="Testimonial 11">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/testimonials/2018/hyunook.png" alt="Testimonial 11">
                         </a>
                     </div>
                 </div>
@@ -2170,9 +2170,9 @@
             <tr>
                 <td></td>
                 <td>
-                    <img src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/pad-spread.png" alt="Drumeo practice pad"><br>DRUMEO P4<br> PRACTICE PAD
+                    <img src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/pad-spread.png" alt="Drumeo practice pad"><br>DRUMEO P4<br> PRACTICE PAD
                 </td>
-                <td><img src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/other-pad.png" alt="Other brand practice pad"><br>OTHER<br> PRACTICE PADS
+                <td><img src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/other-pad.png" alt="Other brand practice pad"><br>OTHER<br> PRACTICE PADS
                 </td>
             </tr>
             <tr>
@@ -2240,7 +2240,7 @@
     </div>
     <div class="bg-gray guarantee-wrap">
         <div class="row guarantee">
-            <div class="medium-2 columns"><img src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/guarantee.png" alt="Guarantee Badge" />
+            <div class="medium-2 columns"><img src="https://www.musora.com/cdn-cgi/image/width=300,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/guarantee.png" alt="Guarantee Badge" />
             </div>
             <div class="medium-10 columns text-left show-for-medium">
                 <p>We’re so confident that you’ll LOVE the Drumeo P4 Practice Pad that you’ll get a full 90 day 100% money-back guarantee, so you can try it risk-free for three full months. If it’s not for you, simply send it back to us for a full refund. </p>

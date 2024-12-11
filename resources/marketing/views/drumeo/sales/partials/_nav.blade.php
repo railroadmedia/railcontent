@@ -9,7 +9,7 @@
                 title="Go to the home page"
             @endif
         >
-            <img src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Logo of Drumeo">
+            <img src="https://www.musora.com/cdn-cgi/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Logo of Drumeo">
         </a>
     </div>
 

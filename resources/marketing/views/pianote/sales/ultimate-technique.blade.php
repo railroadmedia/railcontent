@@ -522,7 +522,7 @@
                                 <div class="  front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700"
                                     style="backface-visibility: hidden;">
                                     <div class="h-full w-full bg-top bg-cover"
-                                        style="background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png');">
+                                        style="background-image:url('https://www.musora.com/cdn-cgi/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png');">
                                     </div>
                                 </div>
                             </div>

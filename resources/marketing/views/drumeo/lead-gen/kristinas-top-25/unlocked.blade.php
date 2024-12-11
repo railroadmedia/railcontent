@@ -28,7 +28,7 @@
     <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap z-10 py-2 sm:py-1 fixed mx-auto bg-black text-white">
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
-                <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
+                <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/cdn-cgi/image/width=1500,q_60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
                 <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$drumeoSongs }}+ more songs + world-class drum lessons <br>
                     inside Drumeo. Click for a FREE trial.</p>
             </div>
@@ -50,7 +50,7 @@
 
         </div>
     </section>
-    <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-center bg-cover lazyload" style="background-color:#010f5a;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/bottom-bg.jpg">
+    <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-center bg-cover lazyload" style="background-color:#010f5a;" data-bg="https://www.musora.com/cdn-cgi/image/width=1500,q_60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/bottom-bg.jpg">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <h1><strong>Keep the party going.</strong></h1>

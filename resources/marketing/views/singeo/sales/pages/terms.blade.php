@@ -19,7 +19,7 @@
     ])
 
     @include('musora._partials._terms', [
-        'headerBg' => 'background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/background-order.jpg);'
+        'headerBg' => 'background-image:url(https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/background-order.jpg);'
     ])
 
     @include("singeo.sales.partials._footer")

@@ -224,7 +224,7 @@
                     @foreach ($features as $key => $feature)
                         <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 my-2 sm:mb-0">
                             <img
-                                src="https://www.musora.com/musora-cdn/image/{{ $feature['image'] }}"
+                                src="https://www.musora.com/cdn-cgi/image/{{ $feature['image'] }}"
                                 class="h-5 sm:h-7 mb-2 mr-4 sm:mr-0 transition-opacity opacity-0"
                                 alt="feature image{{$key+1}}"
                                 loading="lazy"
@@ -304,7 +304,7 @@
                     <div class=" inline-block relative w-full group" style="padding-bottom: 62%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class="  front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/membership-badge.png);"></div>
+                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/membership-badge.png);"></div>
                             </div>
                         </div>
                     </div>

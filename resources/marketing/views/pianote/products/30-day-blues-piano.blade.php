@@ -436,7 +436,7 @@ $items = [
                 <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
                     <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/coach-profile-m.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/coach-profile.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-opacity opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-opacity opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 
                 <div class="text-white text-left z-10 sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 sm:max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
@@ -454,7 +454,7 @@ $items = [
                         <br><br>
                         The Blues changed his life, and he knows it will do the same for you.
                     </p>
-                    <img class="float-right h-12 sm:h-24 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/kevin-signature.png" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="float-right h-12 sm:h-24 transition-opacity opacity-0" src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/kevin-signature.png" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
             </div>
         </div>
@@ -495,7 +495,7 @@ $items = [
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2A2F34 calc(50% + 1px));"></div>
     <section class="text-center text-white px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2A2F34; border: 1px solid #2A2F34">
         <div class="container max-w-3xl mx-auto">
-            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="guarantee badge" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-all opacity-0" src="https://www.musora.com/cdn-cgi/image/width=410,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="guarantee badge" loading="lazy" onload="this.classList.remove('opacity-0')">
             <h3 class="my-4 sm:my-6 lg:my-8"><strong>But what if it doesn’t<br class="inline sm:hidden"> work for you?</strong></h3>
             <p class="leading-normal">You’ll be playing the Blues in just 30 days. That’s our promise.
                 <br><br>

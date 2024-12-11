@@ -111,7 +111,7 @@
                         ]
                     ];
                 @endphp
-    
+
                 @foreach($lessons as $key => $lesson)
                     <div class="relative hidden sm:block w-full sm:w-1/2 lg:w-1/3 px-2 mb-6 sm:mb-8">
                         <img src="{{ $lesson['thumb'] }}" alt="video thumbnail" loading="lazy"
@@ -130,22 +130,22 @@
                 @endforeach
             </div>
             <div class="block sm:hidden"
-                x-data="{ 
-                    initCarousel() { 
-                        new Splide(this.$refs.carousel, { 
-                            type: 'loop', 
-                            perPage: 1.5, 
-                            pagination: false, 
-                            arrows: false, 
-                            autoplay: false, 
-                            gap: '1rem', 
-                            drag: true, 
+                x-data="{
+                    initCarousel() {
+                        new Splide(this.$refs.carousel, {
+                            type: 'loop',
+                            perPage: 1.5,
+                            pagination: false,
+                            arrows: false,
+                            autoplay: false,
+                            gap: '1rem',
+                            drag: true,
                             easing: 'ease',
-                            speed: 600, 
-                            flickPower: 500, 
-                        }).mount(); 
-                    } 
-                }" 
+                            speed: 600,
+                            flickPower: 500,
+                        }).mount();
+                    }
+                }"
                 x-init="initCarousel">
                 <div class="splide" x-ref="carousel">
                     <div class="splide__track">
@@ -218,7 +218,7 @@
                         </div>
                     </div>
                      <div class="flex items-center">
-                        <img class="h-5 sm:h-7 transition-all opacity-0 mr-4" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <img class="h-5 sm:h-7 transition-all opacity-0 mr-4" src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy" onload="this.classList.remove('opacity-0')">
                         <div>
                             <p><strong>+6M views</strong><span class="opacity-70"> on viral jazz videos</span></p>
                         </div>

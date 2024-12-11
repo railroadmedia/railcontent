@@ -368,7 +368,7 @@
 
     <section class="text-center text-white pt-6 sm:pt-10 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/august/tablet-demo-bg.webp');">
         <div class="mb-3">
-            <img class="h-6 sm:h-7  mr-2 " src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png " alt="pianote logo" fetchpriority="high">
+            <img class="h-6 sm:h-7  mr-2 " src="https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png " alt="pianote logo" fetchpriority="high">
 
             <div class="inline-block align-middle h-4 sm:h-5" alt="songs logo" fetchpriority="high">
                 <style>.fill-logo {fill:#f61a30}</style>
@@ -530,7 +530,7 @@
                         <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/music-theory-posters-m.webp">
                     </div>
                     <div class="sm:pl-5 lg:pl-10">
-                        <img class="h-14 sm:h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-logo.png">
+                        <img class="h-14 sm:h-16 lg:h-20" src="https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-logo.png">
                         <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[3]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
                         <p class="leading-normal">Upgrade your practice space and master your music theory with this gorgeous poster bundle. Shipped flat so there are no creases and printed in full color on beautiful paper stock, these posters will help you connect the notes on the page to the keys on your piano.</p>
                     </div>
@@ -561,7 +561,7 @@
                         <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/NPPSH-bg-m.webp">
                     </div>
                     <div class="sm:pr-5 lg:pr-10">
-                        <img class="h-14 sm:h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh-logo.png">
+                        <img class="h-14 sm:h-16 lg:h-20" src="https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh-logo.png">
                         <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[6]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
                         <p class="leading-normal">Your first 30 days on the piano. This 30-day challenge will help you come back to the keys with confidence and feel excited to play your piano every day. Simply follow along with Lisa for 10 minutes a day. You’ll have lifetime access to this course.</p>
                     </div>

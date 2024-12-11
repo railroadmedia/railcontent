@@ -234,7 +234,7 @@
             </div>
         </div>
         <picture x-show="brand === 'drumeo'" x-cloak>
-            <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/drumeo-thumb.jpg">
+            <source media="(min-width: 500px)" srcset="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/drumeo-thumb.jpg">
             <img
                 class="rounded-t-xl md:h-72 lg:h-80 cursor-pointer"
                 src="https://dmmior4id2ysr.cloudfront.net/songs/drumeo-thumb.jpg"
@@ -245,7 +245,7 @@
             />
         </picture>
         <picture x-show="brand === 'pianote'" x-cloak>
-            <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/pianote-thumb.jpg">
+            <source media="(min-width: 500px)" srcset="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/pianote-thumb.jpg">
             <img
                 class="rounded-t-xl md:h-72 lg:h-80 cursor-pointer"
                 src="https://dmmior4id2ysr.cloudfront.net/songs/pianote-thumb.jpg"
@@ -256,7 +256,7 @@
             />
         </picture>
         <picture x-show="brand === 'guitareo'" x-cloak>
-            <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/guitareo-thumb.jpg">
+            <source media="(min-width: 500px)" srcset="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/guitareo-thumb.jpg">
             <img
                 class="rounded-t-xl md:h-72 lg:h-80 cursor-pointer"
                 src="https://dmmior4id2ysr.cloudfront.net/songs/guitareo-thumb.jpg"
@@ -267,7 +267,7 @@
             />
         </picture>
         <picture x-show="brand === 'singeo'" x-cloak>
-            <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/singeo-thumb.jpg">
+            <source media="(min-width: 500px)" srcset="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/singeo-thumb.jpg">
             <img
                 class="rounded-t-xl md:h-72 lg:h-80 cursor-pointer"
                 src="https://dmmior4id2ysr.cloudfront.net/songs/singeo-thumb.jpg"
@@ -285,7 +285,7 @@
         <img
             x-cloak
             class="md:hidden mb-2"
-            src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/drumeo-thumb.jpg"
+            src="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/drumeo-thumb.jpg"
             alt="drumeo thumb"
             fetchpriority="high"
             @click="drumeoSoundslice = true"
@@ -295,7 +295,7 @@
         <img
             x-cloak
             class="md:hidden mb-2"
-            src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/pianote-thumb.jpg"
+            src="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/pianote-thumb.jpg"
             alt="pianote thumb"
             fetchpriority="high"
             @click="pianoteSoundslice = true"
@@ -306,7 +306,7 @@
             x-cloak
             x-show="brand === 'guitareo'"
             class="md:hidden mb-2"
-            src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/guitareo-thumb.jpg"
+            src="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/guitareo-thumb.jpg"
             alt="guitareo thumb"
             fetchpriority="high"
             @click="guitareoSoundslice = true"
@@ -317,7 +317,7 @@
             x-cloak
             x-show="brand === 'singeo'"
             class="md:hidden mb-2"
-            src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/singeo-thumb.jpg"
+            src="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/songs/singeo-thumb.jpg"
             alt="singeo thumb"
             fetchpriority="high"
             @click="singeoSoundslice = true"
@@ -430,7 +430,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/cdn-cgi/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -481,7 +481,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/cdn-cgi/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -531,7 +531,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/cdn-cgi/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -581,7 +581,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/cdn-cgi/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -631,7 +631,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/cdn-cgi/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -681,7 +681,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/cdn-cgi/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -731,7 +731,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/cdn-cgi/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >
@@ -779,7 +779,7 @@
 {{--                                <div>--}}
 {{--                                    <img--}}
 {{--                                        class="rounded-xl mb-1"--}}
-{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"--}}
+{{--                                        src="https://www.musora.com/cdn-cgi/image/width=250,quality=95/{{$slide['img']}}"--}}
 {{--                                        alt="{{$slide['title']}} img"--}}
 {{--                                        fetchpriority="high"--}}
 {{--                                    >--}}
@@ -827,7 +827,7 @@
 {{--                                <div>--}}
 {{--                                    <img--}}
 {{--                                        class="rounded-xl mb-1"--}}
-{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"--}}
+{{--                                        src="https://www.musora.com/cdn-cgi/image/width=250,quality=95/{{$slide['img']}}"--}}
 {{--                                        alt="{{$slide['title']}} img"--}}
 {{--                                        fetchpriority="high"--}}
 {{--                                    >--}}
@@ -877,7 +877,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=340,quality=95/{{$slide['img']}}"
+                                        src="https://www.musora.com/cdn-cgi/image/width=340,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         fetchpriority="high"
                                     >

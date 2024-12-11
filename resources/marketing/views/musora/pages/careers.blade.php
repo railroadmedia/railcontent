@@ -163,28 +163,28 @@
         <div class="container mx-auto">
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
+                src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo blue"
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png"
+                src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo red"
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png"
+                src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo green"
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png"
+                src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="singeo logo"
@@ -255,7 +255,7 @@
             <img
                 class="mt-12 mb-24 inline-block sm:hidden transition-opacity opacity-0"
                 style="filter: saturate(0) brightness(10);"
-                src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/quote-m.png"
+                src="https://www.musora.com/cdn-cgi/image/width=750,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/quote-m.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="quote"
@@ -263,7 +263,7 @@
             <img
                 class="my-24 hidden sm:inline-block transition-opacity opacity-0"
                 style="filter: saturate(0) brightness(10);"
-                src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/quote.png"
+                src="https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/quote.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="quote"

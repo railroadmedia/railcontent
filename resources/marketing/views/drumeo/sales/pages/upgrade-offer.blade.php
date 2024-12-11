@@ -30,7 +30,7 @@
         ])
     <section class="content-section text-center" style="padding-bottom: 0;">
         <div class="container mx-auto">
-            <img class="h-7 md:h-10 lg:h-12 mb-2 md:mb-4" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
+            <img class="h-7 md:h-10 lg:h-12 mb-2 md:mb-4" src="https://www.musora.com/cdn-cgi/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
             <h1><strong>Keep Your Membership +  <br class="inline lg:hidden">Get 9 Free Bonuses.</strong></h1>
             <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative">
@@ -46,7 +46,7 @@
 
         <section class="content-section text-center px-6" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
             <div class="container mx-auto max-w-4xl">
-                <img class="h-28 md:h-32" src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png">
+                <img class="h-28 md:h-32" src="https://www.musora.com/cdn-cgi/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png">
 
                 <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Test-drive your lessons for 90 days.</strong><br>
                     Zero risk.</h3>

@@ -1,4 +1,4 @@
-<section class="py-10 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp') no-repeat center center; background-size: cover;" 
+<section class="py-10 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp') no-repeat center center; background-size: cover;"
 x-data="{lazyLoad:false}">
     <div class="container mx-auto max-w-6xl mb-5 sm:mb-10">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
@@ -25,7 +25,7 @@ x-data="{lazyLoad:false}">
                 @endif
                 <br>
                 @if($bfVersion)
-                    <img class="h-7 mb-2 opacity-0 transition-opacity duration-500" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/december/christmas-deal.svg" alt="Christmas Deal Text" loading="lazy" onload="this.classList.remove('opacity-0');">                   
+                    <img class="h-7 mb-2 opacity-0 transition-opacity duration-500" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/december/christmas-deal.svg" alt="Christmas Deal Text" loading="lazy" onload="this.classList.remove('opacity-0');">
                      <p class="text-[#F61A30] uppercase font-black"><strong>7 DAYS FREE THEN SAVE 20% ON YOUR FIRST YEAR</strong></p>
                 @endif
                 <h3 class="leading-normal py-2 md:py-4"> @if(!empty($headerLight)) {!! $header !!} @else <strong>{!! $header !!}</strong> @endif </h3>
@@ -100,10 +100,10 @@ x-data="{lazyLoad:false}">
                         </a>
                         @if($bfVersion)
                         <div class="flex justify-center w-full sm:max-w-[370px]">
-                            <img class="h-4 sm:h-5 inline-block mr-1 sm:mr-3 pb-0.5 opacity-0 transition-opacity duration-500" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0');">
+                            <img class="h-4 sm:h-5 inline-block mr-1 sm:mr-3 pb-0.5 opacity-0 transition-opacity duration-500" src="https://www.musora.com/cdn-cgi/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0');">
                             <img class="h-4 sm:h-5 inline-block mr-1 sm:mr-3 pt-0.5 opacity-0 transition-opacity duration-500" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0');">
-                            <img class="h-4 sm:h-5 inline-block mr-1 sm:mr-3 pt-0.5 opacity-0 transition-opacity duration-500" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0');">
-                            <img class="h-4 sm:h-5 inline-block pt-0.5 opacity-0 transition-opacity duration-500" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0');">
+                            <img class="h-4 sm:h-5 inline-block mr-1 sm:mr-3 pt-0.5 opacity-0 transition-opacity duration-500" src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0');">
+                            <img class="h-4 sm:h-5 inline-block pt-0.5 opacity-0 transition-opacity duration-500" src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0');">
                         </div>
                         @endif
                         {{-- <p class="text-xs italic text-center"><em> New students only. Renews at $240/year. <br class="block sm:hidden">Cancel anytime.</em></p>
@@ -113,10 +113,10 @@ x-data="{lazyLoad:false}">
                        {{-- <p class="text-xs"><em> Pay nothing for @if(!empty($month)) 30 @else 7 @endif days, <br class="lg:hidden">then $20/month billed annually.</em></p> --}}
                         {{-- @if(!empty($theme) && $theme == 'musora')
                             <div class="flex justify-center sm:justify-start">
-                                <img style="padding-bottom:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="logo">
+                                <img style="padding-bottom:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/cdn-cgi/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="logo">
                                 <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png" alt="logo">
-                                <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="logo">
-                                <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo">
+                                <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="logo">
+                                <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block" src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo">
                             </div>
                         @endif --}}
                     </div>

@@ -88,7 +88,7 @@
                                         <div>
                                             <div style="display: inline-block; width: 100%;">
                                                 <img class="w-full"
-                                                    src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/206571a2-a8dd-432f-8f81-6b0c76ae97bc-2023-10-19-Pianote-Christmas-Merch-106.jpg"
+                                                    src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/206571a2-a8dd-432f-8f81-6b0c76ae97bc-2023-10-19-Pianote-Christmas-Merch-106.jpg"
                                                     alt="slide image 1">
                                             </div>
                                         </div>
@@ -99,7 +99,7 @@
                                         <div>
                                             <div style="display: inline-block; width: 100%;">
                                                 <img class="w-full"
-                                                    src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/206571a2-a8dd-432f-8f81-6b0c76ae97bc-2023-10-19-Pianote-Christmas-Merch-112.jpg"
+                                                    src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/206571a2-a8dd-432f-8f81-6b0c76ae97bc-2023-10-19-Pianote-Christmas-Merch-112.jpg"
                                                     alt="slide image 2">
                                             </div>
                                         </div>
@@ -108,7 +108,7 @@
                             </div>
                         </div>
                     </div>
-                    <img src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/658c8f1b-5bd9-44c7-9108-8342ad9a092b-2023-10-19-Pianote-Christmas-Merch-110.jpg">
+                    <img src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/658c8f1b-5bd9-44c7-9108-8342ad9a092b-2023-10-19-Pianote-Christmas-Merch-110.jpg">
                 </div>
             </div>
             <div class="lg:px-4 lg:w-1/3 px-3 md:px-4 mb-4 lg:mb-0">

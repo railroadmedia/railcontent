@@ -20,14 +20,14 @@
         "cartVersion" => true
     ])
 
-    <main class="text-white py-8 sm:py-24 lg:py-36 px-4 bg-cover bg-top min-h-screen" 
+    <main class="text-white py-8 sm:py-24 lg:py-36 px-4 bg-cover bg-top min-h-screen"
         style="background-color: #000; background-image: url(https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/marketing/drumeo/promos/november/countdown-bg.webp); min-height: calc(100vh - 214px);">
-        <div class="container mx-auto max-w-4xl rounded-xl px-6 py-16" 
+        <div class="container mx-auto max-w-4xl rounded-xl px-6 py-16"
             style="background: linear-gradient(180deg, #102B46 0%, #0D182A 100%); border: 2px solid #37597F; box-shadow: 0 0 60px 0px #26344B;">
             <div class="flex flex-col items-center">
                 <div class="text-white rounded-lg shadow-lg text-center">
                     <div class="mb-6">
-                        <img src="https://www.musora.com/musora-cdn/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png" 
+                        <img src="https://www.musora.com/cdn-cgi/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png"
                             alt="Drumeo Awards" class="mx-auto h-24 md:h-28">
                     </div>
 
@@ -63,7 +63,7 @@
                             Voting is now open!
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
