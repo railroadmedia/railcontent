@@ -159,6 +159,10 @@ export default {
             type: [Number, String],
             default: () => '',
         },
+        contentType: {
+            type: String,
+            default: () => '',
+        },
         collapsable: {
             type: Boolean,
             default: true,
@@ -287,6 +291,10 @@ export default {
     },
 
     mounted() {
+        if(this.contentType === "song") {
+            this.getComments(this.requestParams);
+        }
+
         // Check the URI Params if 'goToComment' exists
         const uriParams = QueryString.parse(window.location.search);
         // Run the goToComment method if it does
@@ -349,6 +357,8 @@ export default {
                             this.comments = this.comments.filter(comment => comment.id !== this.pinnedComment.id);
                         }
                     }
+                }).catch( error => { 
+                    console.log( 'error fetching comments: ', error)
                 });
         },
 

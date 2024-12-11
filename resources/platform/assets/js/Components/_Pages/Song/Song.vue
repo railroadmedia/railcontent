@@ -43,16 +43,19 @@
 
                 <!-- Comments Section -->
                 <div v-if="!noAccess" class="tw-col-span-3 2xl:tw-col-span-2 2xl:tw-row-span-2">
-                    <Comments
-                        :brand="brand"
-                        :theme-color="brand"
-                        :content-id="contentId"
+                    <VideoComments 
+                        :is-loading="isLoading" 
+                        :theme-color="brand" 
+                        :brand="brand" 
                         :user-id="userId"
+                        :is-admin="isAdmin" 
+                        :content-id="contentId"
+                        contentType="song" 
                         :user-name="userDisplayName"
-                        :user-avatar="userProfilePictureUrl"
-                        :user-xp="userXP"
+                        :user-avatar="userProfilePictureUrl" 
+                        :user-xp="userXP" 
                         :user-access-level="userAccessLevel"
-                        :is-admin="isAdmin"
+                        :profile-base-route="`/${brand}/profile/${userId}/dashboard`" 
                     />
                 </div>
 
@@ -69,10 +72,10 @@
     import { usePlatformStore } from '@stores/platform';
     import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
     import SongPlayerSection from '@collections/SongPlayerSection/SongPlayerSection.vue';
-    import Comments from '@vuesora/views/comments/Comments.vue'
     import CatalogueListElement from '@collections/Catalogue/CatalogueListElement';
     import SongSkeleton from '@pages/Song/SongSkeleton';
     import { useSongPageData } from '@hooks/pages/useSongPageData';
+    import VideoComments from "@vuesora/views/comments/Comments.vue";
 
     // Pinia Data
     const userStore = useUserStore();
