@@ -55,7 +55,7 @@ export async function useOverviewPageData(contentType, parentType) {
             if (result) {
                 data.value = {
                     children: result.lessons,
-                    header: buildHeader('challenge', result.lesson, progressPercent),
+                    header: buildHeader('challenge', result.lesson, result.user_data.is_active ? result.user_data.completion_percent : progressPercent),
                     is_unlocked: result.user_data.is_unlocked,
                     lesson: result.lesson,
                     user_data: result.user_data,
