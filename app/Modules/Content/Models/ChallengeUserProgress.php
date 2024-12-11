@@ -84,15 +84,15 @@ class ChallengeUserProgress extends Model
     public function scopeActive(Builder $query): Builder
     {
         return $query
-            ->where('is_active', true)
-            ->where('start_date', '<=',  Carbon::now()->addHours(24));
+            ->where('is_active', true);
+            //->where('start_date', '<=',  Carbon::now()->addHours(24));
     }
 
     public function scopeCurrentlyActive(Builder $query): Builder
     {
         return $query
-            ->where('is_active', true)
-            ->where('start_date', '<=',  Carbon::now()->addHours(24));
+            ->where('is_active', true);
+            //->where('start_date', '<=',  Carbon::now()->addHours(24));
     }
 
     public function scopeSolo(Builder $query): Builder
