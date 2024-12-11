@@ -42,10 +42,7 @@ class Challenge extends ParentTemplate
             new Field(FieldType::Image, 'wideImg', '16x9 Image', group: $contentCardGroup, options: ['accept' => '.png']),
         ];
 
-        $dropdownFields = new ListObject( fields:[
-            new Field(FieldType::String, 'title', "Title", validation: [new Required()]),
-            new Field(FieldType::String, 'description', "Description", validation: [new Required()]),
-        ],);
+        $dropdownFields = [['type'=> 'challengeDropDownItem' ]];
 
         $enrollmentFields = [
             new Field( FieldType::String, 'headline', 'Headline', group: $enrollmentGroup),

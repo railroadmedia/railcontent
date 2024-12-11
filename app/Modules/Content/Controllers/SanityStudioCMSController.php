@@ -9,6 +9,7 @@ use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\Sanity\Artist;
 use App\Modules\Content\Models\Sanity\CatalogMetadata;
 use App\Modules\Content\Models\Sanity\Challenge;
+use App\Modules\Content\Models\Sanity\ChallengeDropDownItem;
 use App\Modules\Content\Models\Sanity\ChallengePart;
 use App\Modules\Content\Models\Sanity\CoachStream;
 use App\Modules\Content\Models\Sanity\Course;
@@ -98,6 +99,7 @@ class SanityStudioCMSController extends BaseController
         $token = env('SANITY_API_TOKEN_RW');
         // publishing workspace
         $types = [
+            (new ChallengeDropDownItem())->toArray(),
             (new Challenge())->toArray(),
             (new ChallengePart())->toArray(),
             (new Workout())->toArray(),
