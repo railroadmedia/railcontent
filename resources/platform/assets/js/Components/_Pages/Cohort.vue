@@ -168,6 +168,7 @@
             </div>
             <!--  Body logo  -->
             <img
+                v-if="cohort['body_logo']"
                 class="tw-h-10 sm:tw-h-16 tw-mb-8 tw-mx-auto tw-transition-opacity tw-opacity-0"
                 alt="just play logo"
                 :src="`https://www.musora.com/cdn-cgi/image/width=1220,quality=95/${cohort['body_logo']}`"
