@@ -15,7 +15,7 @@
                    class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
 
                     <!-- Coach Image -->
-                    <img :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${cardImage(coach)}`"
+                    <img :src="`${cardImage(coach)}`"
                          class="tw-w-full tw-flex tw-object-top tw-object-cover tw-transition-opacity tw-opacity-0"
                          :alt="`${fullName(coach)} Card`"
                          loading="lazy"
