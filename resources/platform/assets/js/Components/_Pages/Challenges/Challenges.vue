@@ -10,6 +10,7 @@
         <div className="tw-mt-[30px]">
             <!-- Challenge Carousel -->
             <MiniCatalogueSection
+                v-if="carousels.length > 0"
                 title="Featured Challenges"
                 :see-all-url="`/${brand}/challenge`"
                 seeAllAriaLabel="See All Challenges"
