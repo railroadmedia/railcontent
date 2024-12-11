@@ -78,14 +78,13 @@ class CarouselServiceV1
         // Challenge with open enrollment (that the user is not a part of)
         $allProgress = ChallengeUserProgress::whereUserIdAndActive($user->id);
         $railcontentIds = $allProgress->pluck('content_id');
-        $challengeRecommendation = collect($this->sanity->getChallengeOpenEnrollmentCards($brand, $isAdmin))
-            ->filter(fn($challenge) => !$railcontentIds->contains($challenge['id']))
-            ->take(1);
+        $challengeRecommendations = collect($this->sanity->getChallengeOpenEnrollmentCards($brand, $isAdmin))
+            ->filter(fn($challenge) => !$railcontentIds->contains($challenge['id']));
         $allChallengeIds = [
             ...$badges->pluck('content_id'),
             ...$communityProgresses->pluck('content_id'),
             ...$soloProgresses->pluck('content_id'),
-            ...$challengeRecommendation->pluck('id'),
+            ...$challengeRecommendations->pluck('id'),
         ];
 
 
@@ -96,24 +95,25 @@ class CarouselServiceV1
             brand: $brand
         );
         $allChallengeMetaData = collect($allChallengeMetaData)->keyby('content_id');
-        $challengeRecommendationCard = $challengeRecommendation->isEmpty() ? [] :
-            [
-                ...$allChallengeMetaData[$challengeRecommendation[0]['id']],
-                'type' => 'challenge-recommendation', // this is set after metadatum to override the existing type field
-                'show_everywhere' => true,
-                'enrolled_users' => $this->challengesService->getEnrolledUsersMetadata(
-                    $challengeRecommendation[0]['id']
-                )
-            ];
+        $challengeRecommendationCards = [];
+        $challengeRecommendations->map(function($recommendation) use ($allChallengeMetaData, &$challengeRecommendationCards) {
+           $challengeRecommendationCards[] = [
+               ...$allChallengeMetaData[$recommendation['id']],
+               'type' => 'challenge-recommendation', // this is set after metadatum to override the existing type field
+               'show_everywhere' => true,
+               'enrolled_users' => $this->challengesService->getEnrolledUsersMetadata(
+                   $recommendation['id'],
+               ),
+               'is_draft' => $recommendation['is_banner_draft'] ?? false,
+           ];
+        });
         $compiledCardData = [
             ... $this->formatChallengeAwardData($badges, $allChallengeMetaData),
             ... $this->formatChallengeData($communityProgresses, $allChallengeMetaData, 'active-community-challenge'),
             ... $this->formatChallengeData($soloProgresses, $allChallengeMetaData, 'active-solo-challenge'),
             ... $unfinishedOnboardingCards,
+            ... $challengeRecommendationCards,
         ];
-        if ($challengeRecommendationCard) {
-            $compiledCardData[] = $challengeRecommendationCard;
-        }
 
         return $compiledCardData;
     }

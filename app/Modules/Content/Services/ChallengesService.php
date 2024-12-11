@@ -283,6 +283,9 @@ class ChallengesService
     ): array {
         $curriculumDay = 0;
         $previousCurriculumLesson = null;
+
+        $challengeUserProgress = ChallengeUserProgress::shiftUnlockDaysIfRestDayUsed($challengeUserProgress);
+
         foreach ($lessons as $index => $lesson) {
             $lessons[$index]['is_first_lesson'] = $index == 0;
             $isCurriculumLesson = ChallengeUserProgress::isCurriculumSanityLesson($lesson);
