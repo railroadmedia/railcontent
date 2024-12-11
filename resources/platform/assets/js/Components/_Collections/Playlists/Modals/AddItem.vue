@@ -112,7 +112,7 @@ const handleActionClick = (payload) => {
     const duplicateIndex = duplicatedIDs.value.indexOf(String(payload));
     const selectedIndex = selectedPlaylists.value.indexOf(String(payload));
     if (duplicateIndex !== -1 && selectedIndex === -1) {
-        duplicateProps.value = { id: payload, show: true, title: props.content.title };
+        duplicateProps.value = { id: payload, show: true, title: props.content.name };
     } else {
         addRemovePlaylistSelection(payload);
     }
