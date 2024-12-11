@@ -228,7 +228,7 @@ const isChallengeSolo = computed(() => {
 const generateChallengeCtas = (data) => {
     if(isChallengeEnrolled.value){
         //when next lesson is the first lesson
-        if(data.next_lesson.id === data.children[0].id){
+        if(data.next_lesson.id === data.children[0].id || !data.previous_lesson){
             let type;
 
             if(data.next_lesson.locked){
