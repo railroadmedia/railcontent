@@ -13,7 +13,7 @@
                     <img :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challengeBadge}`" alt="Challenge Badge" />
                 </div>
                 <p class="tw-mb-6 tw-text-center tw-text-sm">
-                    You practiced for a total of <span class="tw-font-bold">{{ minutesPracticed }} minutes</span> and achieved a <span class="tw-font-bold">{{ streak }}-day streak</span> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
+                    You practiced for a total of <span class="tw-font-bold">{{ minutesPracticed }} minutes</span> and achieved a <span class="tw-font-bold">{{ streak }}-day streak</span> during {{ challengeTitle }}, which earned you {{ aGrammar }} {{ tier }} certificate.
                 </p>
 
                 <div v-if="openFromAwards" class="tw-text-center tw-text-[#888888] tw-mb-6">
@@ -103,6 +103,14 @@ const earnedDate = computed(() => {
 
 const isSharable = computed(() => {
     return navigator.share;
+})
+
+const aGrammar = computed(() => {
+    if(streak.value === 8){
+        return 'an';
+    }
+
+    return 'a';
 })
 
 const openCertificate = () => {
