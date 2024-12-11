@@ -3,7 +3,7 @@ import ContentHelpers from "@vuesora/assets/js/helper-functions/content.js";
 import ContentModel from '@vuesora/assets/js/models/_model.js';
 import {useUserStore} from "@stores/user.js";
 import {getProgressPercentage} from 'musora-content-services';
-import {getDate, getDateFromIso} from "../utils";
+import { getDate, getDateFromIso } from "../utils";
 
 export default function useCatalogueItem(props) {
     const userStore = useUserStore();
@@ -49,7 +49,7 @@ export default function useCatalogueItem(props) {
     });
 
     const releaseDate = computed(() => {
-        if(props.item.is_locked || props.item.type === 'challenge-part'){
+        if(props.item.type === 'challenge-part'){
             // challenges dates are returned in ISO format with offset for the users current timezone
             return getDateFromIso(props.item.unlock_date);
         } else if (props.item.quarter_published) {

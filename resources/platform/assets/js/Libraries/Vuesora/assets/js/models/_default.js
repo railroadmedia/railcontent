@@ -120,7 +120,7 @@ export default class ContentModel {
     }
 
     get postPublisedOn() {
-        if(this.post.is_locked && this.post.type == 'challenge-part'){
+        if(this.post.type == 'challenge-part'){
             return getDate(this.post.unlock_date.slice(0, 19));
         } else if (this.post.quarter_published) {
             return getDate(this.post.quarter_published);
