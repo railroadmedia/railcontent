@@ -431,7 +431,7 @@ const enroll = async() => {
         const enrollUser = await postChallengesEnroll(props.cohort.id);
         isEnrolled.value = true;
         openChallengeNotificationModal.value = true;
-        // sendPostMessage('enroll');
+        sendPostMessage('enroll');
     } catch (e){
         window.shownotification({
             icon: 'error',
