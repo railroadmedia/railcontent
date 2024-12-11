@@ -215,7 +215,7 @@ const thumbnail = computed(() => {
     } else {
         if(props.challenge.squareImg){
             if(bigDesktop.value){
-                return props.challenge.thumbnail;
+                return props.challenge.wideImg;
             } else {
                 return props.challenge.squareImg;
             }
@@ -231,7 +231,7 @@ const desktopBGImage = computed(() => {
             return 'https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-light-desktop-bg.png';
         }
     } else {
-            return props.challenge.bgImg;
+            return props.challenge.wideImg;
     }
 })
 
