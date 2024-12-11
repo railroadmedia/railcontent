@@ -161,7 +161,12 @@ class PlaylistsService
                     case 'learning-path':
                         return 'Method';
                     case 'learning-path-level':
-                        return 'L' . collect($sanityInfo['parent_content_data'])->keyBy('id')[$parent['id']]['position'];
+                        $level = '';
+                        if($sanityInfo['parent_content_data']){
+                            $parentContentData = json_decode($sanityInfo['parent_content_data']);
+                            $level = collect($parentContentData)->keyBy('id')[$parent['id']]->position;
+                        }
+                        return 'L' . $level;
                     case 'foundation':
                         return 'Method';
                     default:
