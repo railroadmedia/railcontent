@@ -35,9 +35,9 @@
             <div class="tw-relative">
                 <div class="tw-rounded-[10px] tw-overflow-hidden tw-mb-5 tw-relative tw-aspect-video tw-max-w-[270px] 3xl:tw-max-w-none 3xl:tw-w-[255px] 4xl:tw-w-[320px] tw-mx-5">
                     <!-- Thumbnail (Video ratio) -->
-                    <img :class="showSquareThumbnail ? 'tw-w-full tw-hidden 3xl:tw-block' : ''" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challengeThumbnail}`" />
+                    <img class="tw-object-cover tw-object-top" :class="showSquareThumbnail ? 'tw-w-full tw-hidden 3xl:tw-block' : ''" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challengeThumbnail}`" />
                     <!-- Thumbnail (Square ratio) -->
-                    <img :class="showSquareThumbnail ? 'tw-w-full 3xl:tw-hidden' : 'tw-hidden'" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challenge.next_lesson.thumbnail}`" />
+                    <img class="tw-object-cover tw-object-top" :class="showSquareThumbnail ? 'tw-w-full 3xl:tw-hidden' : 'tw-hidden'" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challenge.squareImg}`" />
                     <!-- Lock Overlay -->
                     <div v-if="hasChallengeStarted && isNextLessonLocked" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
                         <i class="fa-solid fa-lock tw-mb-2 tw-text-3xl tw-text-white"></i>
@@ -158,7 +158,7 @@
     <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" @close-modal="updateInfoModalType('')" />
 </template>
 <script setup>
-import {ref, computed, onMounted, onUnmounted, watch} from "vue";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 import { Vue3Lottie } from 'vue3-lottie';
@@ -231,7 +231,7 @@ const showSquareThumbnail = computed(() => {
 
 const challengeThumbnail = computed(() => {
     if(!hasChallengeStarted.value && isNextLessonLocked.value){
-        return props.challenge.thumbnail
+        return props.challenge.wideImg;
     } else {
         return props.challenge.next_lesson.thumbnail;
     }
