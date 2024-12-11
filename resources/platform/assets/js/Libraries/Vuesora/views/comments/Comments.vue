@@ -267,9 +267,9 @@ export default {
             };
         },
 
-        showUserExp() {
-            return this.userExpValue != null && (['team', 'pack'].indexOf(this.currentUser.access_level) === -1);
-        },
+        // showUserExp() {
+        //     return this.userExpValue != null && (['team', 'pack'].indexOf(this.currentUser.access_level) === -1);
+        // },
 
         sortIcon() {
             return this.sortOptions.find(option => option.value === this.sortOption).icon;

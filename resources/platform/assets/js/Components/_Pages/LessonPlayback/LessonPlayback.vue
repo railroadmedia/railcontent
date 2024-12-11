@@ -211,6 +211,7 @@ import {
     isContentLiked,
     fetchChallengeLessonData,
     postChallengesCompleteLesson,
+    getProgressState,
     // this is not getting percentage, this is getting lats watched position in seconds, possibly rename this function
     getProgressPercentage,
 } from 'musora-content-services';
@@ -458,8 +459,6 @@ const fetchLessonData = async () => {
 
         const [dataResult, likeResult, likedResult] = results;
 
-        console.log('challenge', dataResult)
-
         videoData.value = dataResult.status === 'fulfilled' ? { ...dataResult.value.lesson, instructor: dataResult?.value?.lesson?.challenge_instructor } : null;
         likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;
         isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
@@ -478,10 +477,10 @@ const fetchLessonData = async () => {
             fetchLessonContent(contentId.value),
             axios.get(`/content/${contentId.value}/user_data/${userId.value}`),
             isContentLiked(contentId.value),
-            axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId.value}`),
             fetchNextPreviousLesson(contentId.value),
             fetchRelatedLessons(contentId.value, brand.value),
-            getProgressPercentage(contentId.value)
+            getProgressPercentage(contentId.value),
+            getProgressState(contentId.value)
         ]);
 
         // Process results
@@ -489,22 +488,24 @@ const fetchLessonData = async () => {
             dataResult,
             likeResult,
             likedResult,
-            completedResult,
             nextPrevResult,
             relatedLessonsResult,
-            progressResult
+            progressResult,
+            progressStateResult
         ] = results;
 
         // needs refactoring
         videoData.value = dataResult.status === 'fulfilled' ? dataResult.value : null;
         likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;
         isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
-        isCompleted.value = completedResult.status === 'fulfilled' && completedResult.value.data[contentId.value]?.state === 'completed';
         nextPreviousLessons.value = nextPrevResult.status === 'fulfilled' ? nextPrevResult.value : null;
         relatedLessons.value = relatedLessonsResult.status === 'fulfilled' ? relatedLessonsResult.value.related_lessons : [];
-        progress_percent.value = completedResult.status === 'fulfilled' ? completedResult.value.data[contentId.value].percent : 0;
-        progress_state.value = completedResult.status === 'fulfilled' ? completedResult.value.data[contentId.value]?.state : 'unstarted';
-        lastWatchedPositionInSeconds.value = progressResult.status === 'fulfilled' ? progressResult.value : 0;
+        progress_state.value = progressStateResult.status === 'fulfilled' ? progressStateResult.value : 'unstarted';
+        if(progressResult.status === 'fulfilled') {
+            progress_percent.value = progressResult.value;
+            lastWatchedPositionInSeconds.value = progressResult.value;
+            isCompleted.value = progressResult.value === 100;
+        }
 
         // Optional: log errors for any rejected promises
         results.forEach((result, index) => {

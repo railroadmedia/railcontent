@@ -108,9 +108,9 @@
                         @click="handleCompleteLesson"
                     >
                         <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
-                            <musora-icon :icon-name="isCompleted ? 'circle-check-filled' : 'circle-check'" class="tw-w-6 tw-h-6 tw-mr-1 tw-transition-all" :class="isCompleted ? 'tw-text-[#16A34A]' : ''" />
+                            <musora-icon :icon-name="completed ? 'circle-check-filled' : 'circle-check'" class="tw-w-6 tw-h-6 tw-mr-1 tw-transition-all" :class="completed ? 'tw-text-[#16A34A]' : ''" />
                             <span>
-                                {{ isCompleted ? "Completed" : "Complete" }}
+                                {{ completed ? "Completed" : "Complete" }}
                             </span>
                         </div>
                     </button>
@@ -284,7 +284,7 @@ import DifficultyLabel from "@units/DifficultyLabel/DifficultyLabel.vue";
 import DotSeparator from "./DotSeparator.vue";
 import { contentTypes } from '../../../../utils';
 import SkeletonVideoResources from '@collections/SkeletonLoader/SkeletonVideoResources';
-import { likeContent, unlikeContent, postChallengesCompleteLesson } from 'musora-content-services';
+import { likeContent, unlikeContent, contentStatusReset, contentStatusCompleted, postChallengesCompleteLesson } from 'musora-content-services';
 
 export default {
     name: "VideoResources",
@@ -436,6 +436,7 @@ export default {
             showMore: false,
             showLeftArrow: false,
             showRightArrow: false,
+            completed: false,
         };
     },
 
@@ -463,6 +464,10 @@ export default {
 
             return isLoading.value;
         }
+    },
+    beforeMount() {
+        //set reactive value to prop
+        this.completed = this.isCompleted;
     },
     mounted() {
         document.addEventListener("click", (event) => {
@@ -531,30 +536,32 @@ export default {
                 this.$emit('onChallengeLessonComplete');
             } else {
                 //Send Request
-                if (this.isCompleted) {
-                    ContentService.resetContentProgress(this.contentId)
-                        .then((resolved) => {
-                            if (resolved) {
-                                window.shownotification({
-                                    icon: 'check',
-                                    text: `Your progress has been reset.`
-                                })
-                            }
+                if (this.completed) {
+                    this.completed = false;
+                    contentStatusReset(this.contentId)
+                        .then(() => {
+                            window.shownotification({
+                                icon: 'check',
+                                text: `Your progress has been reset.`
+                            })
                         }).catch(() => {
-                        window.shownotification({
-                            icon: 'error',
-                            text: 'Woops! Something wrong happened, please try again later.'
-                        })
+                            this.completed = true;
+                            window.shownotification({
+                                icon: 'error',
+                                text: 'Woops! Something wrong happened, please try again later.'
+                            })
                     });
                 } else {
-                    ContentService.markContentAsComplete(this.contentId).then(() => {
-                        if (this.isCompleted) {
+                    this.completed = true;
+                    contentStatusCompleted(this.contentId).then(() => {
+                        if (this.completed) {
                             window.shownotification({
                                 icon: 'check',
                                 text: `You've completed this lesson!`
                             })
                         }
                     }).catch(() => {
+                        this.completed = false;
                         window.shownotification({
                             icon: 'error',
                             text: 'Woops! Something wrong happened, please try again later.'
@@ -562,7 +569,6 @@ export default {
                     })
 
                 }
-
                 this.$emit('onCompleteContent');
             }
 
@@ -678,6 +684,13 @@ export default {
             }
         }
     },
+    watch: {
+        isCompleted( newValue, oldValue) {
+            if(this.completed !== newValue ) {
+                this.completed = newValue;
+            }
+        }
+    }
 };
 </script>
 
