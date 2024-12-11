@@ -601,10 +601,10 @@
     @if(empty($platformVersion))
         <section class="px-3 sm:px-0 text-center customize relative z-50 overflow-hidden" style="background: #eff7ff;">
             <div class="container max-w-6xl mx-auto relative z-50" style="background: #eff7ff;">
-                <div class="flex flex-wrap items-center justify-center px-4 sm:px-6 pt-10 md:py-10 lg:py-20">
+                <div class="flex flex-wrap items-center justify-center px-4 sm:px-6 py-10 md:py-10 lg:py-20">
                     <div class="text-center w-full sm:w-1/2 lg:w-5/12 sm:pl-5" style="background: #eff7ff;">
                         <img class="h-20 sm:h-24 lg:h-26 -mb-3 sm:mb-0 lg:mb-3 transition duration-300 ease-in-out" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="30 day double bass logo">
-                        <h1 class="py-6 sm:py-4"><strong>Boost your speed, <br class="md:hidden"> control, and creativity.</strong></h1>
+                        <h1 class="py-6 sm:py-4"><strong>Boost your speed, control, and creativity.</strong></h1>
                         <div class="text-center sm:pb-5">
                             <ul>
                                 <li>
@@ -636,7 +636,7 @@
                                     @if(floatval($productPrices['30-day-double-bass']->price) > floatval($productPrices['30-day-double-bass']->discounted_price))
                                         <s class="opacity-50 font-extralight">${{ floatval($productPrices['30-day-double-bass']->price) }}</s>
                                         <strong>${{ floatval($productPrices['30-day-double-bass']->discounted_price) }}</strong>
-                                         <em class="text-musora text-sm">(Save {{ round(100 - (100 * (floatval($productPrices['30-day-double-bass']->discounted_price) / floatval($productPrices['30-day-double-bass']->price)))) }}%)</em>
+                                         <em class="text-drumeo text-sm">(Save {{ round(100 - (100 * (floatval($productPrices['30-day-double-bass']->discounted_price) / floatval($productPrices['30-day-double-bass']->price)))) }}%)</em>
                                     @else
                                         <strong>${{ floatval($productPrices['30-day-double-bass']->discounted_price) }}</strong>
                                     @endif
