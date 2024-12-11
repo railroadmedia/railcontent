@@ -336,7 +336,7 @@ class ChallengeUserProgress extends Model
         $startEndDate = $this->getStartAndEndDate();
         $data = [
             'is_active' => $this->is_active,
-            'rest_days' => $this->current_rest_days,
+            'rest_days' => $streakData['remaining_rest_days'],
             'is_unlocked' => !$this->is_locked,
             'best_completed_streak' => $this->completed_best_streak,
             'best_completed_time_practiced' => $this->completed_time_practiced,
