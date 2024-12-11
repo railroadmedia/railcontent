@@ -26,7 +26,7 @@ export function useBuildHeader(progressPercent) {
 
         // Add additional custom fields based on contentType if
         if (contentType === 'pack' || contentType === 'pack-bundle' || contentType === 'challenge') {
-            header.thumbnail = result.thumbnail;
+            header.thumbnail = 'https://www.musora.com/cdn-cgi/image/width=500,height=500/' + result.thumbnail;
             header.image = result.image;
             header.darkModeLogo = result.dark_logo;
             header.lightModeLogo = result.light_logo;

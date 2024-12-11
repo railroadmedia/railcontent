@@ -57,7 +57,7 @@
                 title="Challenges"
                 :see-all-url="`/${brand}/challenges`"
                 seeAllAriaLabel="See All Challenges"
-                catalogue-type="challenge"
+                catalogue-type="challenge-carousel"
                 page-type="dashboard"
                 :pre-loaded-content="challenges"
             />
