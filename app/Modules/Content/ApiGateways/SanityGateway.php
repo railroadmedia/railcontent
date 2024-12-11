@@ -101,6 +101,7 @@ class SanityGateway
                 parent_content_data
             }',
             'product_id',
+            'is_banner_draft',
         ],
         'playlist-item' => [
             "'type': _type",
@@ -358,8 +359,7 @@ class SanityGateway
 
     public function getChallengeOpenEnrollmentCards(string $brand, bool $isAdmin): array
     {
-        $contentStatusQuery = $isAdmin ? '' : "&& status == 'published'";
-        $cardStatusQuery = $isAdmin ? '' : '&& is_draft != true';
+        $cardStatusQuery = $isAdmin ? '' : '&& is_banner_draft != true';
         $challengeFields = $this->getFieldsString('challenge');
         $publishedOnString = $this->getPublishedFilter(false);
         $query = "*[_type == 'challenge'
@@ -367,8 +367,7 @@ class SanityGateway
             && enrollment_end_time >= now()
             && brand == '$brand'
             $publishedOnString
-            $cardStatusQuery
-            $contentStatusQuery]{
+            $cardStatusQuery]{
             $challengeFields,
         }";
         $results = $this->sanity->fetch($query);
