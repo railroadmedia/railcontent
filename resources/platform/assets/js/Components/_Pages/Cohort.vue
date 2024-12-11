@@ -431,7 +431,7 @@ const enroll = async() => {
         const enrollUser = await postChallengesEnroll(props.cohort.id);
         isEnrolled.value = true;
         openChallengeNotificationModal.value = true;
-        sendPostMessage('enroll');
+        // sendPostMessage('enroll');
     } catch (e){
         window.shownotification({
             icon: 'error',
@@ -479,10 +479,12 @@ const handleGoBack = () => {
 }
 
 const sendPostMessage = (type) => {
-    window.ReactNativeWebView.postMessage(JSON.stringify({
-        type,
-        data:props.cohort
-    }));
+    if(isFromApp.value){
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+            type,
+            data:props.cohort
+        }));
+    }
 }
 
 const handleGetNotified = async () => {
