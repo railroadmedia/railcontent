@@ -72,11 +72,11 @@
                              :class="currentUser.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
                              @load="currentUser.imageLoaded = true">
                     </div>
-                    <p v-if="showUserExp" class="tw-text-sm dense tw-uppercase tw-text-center mt-1">
+                    <p class="tw-text-sm dense tw-uppercase tw-text-center mt-1">
                         {{ userExpRank }}
                     </p>
-                    <p v-if="showUserExp" class="tw-text-sm dense tw-text-center font-compressed">
-                        {{ userExpValue }} XP
+                    <p class="tw-text-sm dense tw-text-center font-compressed">
+                        {{ currentUser.xp }} XP
                     </p>
                 </div>
 
@@ -221,7 +221,8 @@ export default {
         },
 
         userExpValue() {
-            return Utils.parseXpValue(this.currentUser.xp);
+            // return Utils.parseXpValue(this.currentUser.xp);
+            return this.currentUser.xp;
         },
 
         userExpRank() {
@@ -291,6 +292,8 @@ export default {
     },
 
     mounted() {
+        console.log('this.currentUser', this.currentUser)
+
         if(this.contentType === "song") {
             this.getComments(this.requestParams);
         }
