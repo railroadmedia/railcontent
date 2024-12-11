@@ -312,6 +312,4 @@
             openPlaylistModal();
         }
     });
-
-    console.log(props.isPackOnly)
 </script>
