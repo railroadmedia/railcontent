@@ -33,11 +33,10 @@
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
             <div class="tw-relative">
-                <div class="tw-rounded-[10px] tw-overflow-hidden tw-mb-5 tw-relative tw-max-w-[270px] 3xl:tw-max-w-none 3xl:tw-w-[255px] 4xl:tw-w-[320px] tw-mx-5" :class="showSquareThumbnail ? 'tw-aspect-square 3xl:tw-aspect-video' : 'tw-aspect-video'">
+                <div class="tw-rounded-[10px] tw-overflow-hidden tw-mb-5 tw-relative tw-max-w-[270px] 3xl:tw-max-w-none 3xl:tw-w-[255px] 4xl:tw-w-[320px] tw-mx-5 tw-aspect-video">
                     <!-- Thumbnail (Video ratio) -->
-                    <img class="tw-object-cover tw-object-top" :class="showSquareThumbnail ? 'tw-w-full tw-hidden 3xl:tw-block' : ''" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challengeThumbnail}`" />
+                    <img class="tw-object-cover tw-object-top" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challengeThumbnail}`" />
                     <!-- Thumbnail (Square ratio) -->
-                    <img class="tw-object-cover tw-object-top" :class="showSquareThumbnail ? 'tw-w-full 3xl:tw-hidden' : 'tw-hidden'" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challenge.squareImg}`" />
                     <!-- Lock Overlay -->
                     <div v-if="hasChallengeStarted && isNextLessonLocked" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
                         <i class="fa-solid fa-lock tw-mb-2 tw-text-3xl tw-text-white"></i>
@@ -111,7 +110,7 @@
                     <!-- Challenge Logos -->
                     <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" />
                     <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" />
-                    <div class="tw-text-[11px] lg:tw-text-[13px] tw-font-bold tw-max-w-[160px]" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
+                    <div class="tw-text-[11px] lg:tw-text-[13px] tw-font-bold tw-max-w-[160px] tw-mt-2" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
                 </div>
             </div>
         </div>
@@ -164,6 +163,7 @@ import { storeToRefs } from "pinia/dist/pinia";
 import { Vue3Lottie } from 'vue3-lottie';
 import { countdown } from "@collections/ChallengeCarousel/countdown";
 import { fetchCarouselCardData, fetchChallengeUserActiveChallenges } from 'musora-content-services';
+import { getDateFromIso } from '../../../utils';
 
 import MuButton from '@units/Button/MuButton';
 import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
@@ -202,7 +202,8 @@ const isSoloChallenge = computed(() => {
 })
 
 const hasChallengeStarted = computed(() => {
-    return props.challenge.progress_percent > 0;
+    const now = new Date();
+    return new Date(props.challenge.start_date) <= now;
 })
 
 const challengeTitle = computed(() => {
@@ -210,9 +211,8 @@ const challengeTitle = computed(() => {
 })
 
 const startDate = computed(() => {
-    const utc = new Date(props.challenge.start_date);
-    const local = utc.toLocaleString('en-US', { month: 'long', day: 'numeric' });
-    return local;
+    const utc = getDateFromIso(props.challenge.start_date);
+    return utc;
 })
 
 const actionText = computed(() => {
@@ -222,6 +222,8 @@ const actionText = computed(() => {
         return `You're enrolled! Lessons begin ${startDate.value}`;
     } else if(isNextLessonLocked.value){
         return `${nextLessonShortName.value} unlocks in ${countdownString.value}`;
+    } else {
+        return `${nextLessonShortName.value} Unlocked!`;
     }
 })
 
