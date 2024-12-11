@@ -94,7 +94,7 @@ const tabData = computed(() => {
 
 onBeforeMount(() => {
     const fetchData = async () => {
-        const challengeCarousels = await fetchCarouselCardData({ brand: brand.value });
+        const challengeCarousels = await fetchCarouselCardData(brand.value);
 
         if (challengeCarousels) {
             carousels.value = challengeCarousels.filter((carousel) => {
