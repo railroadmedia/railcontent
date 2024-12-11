@@ -4,6 +4,7 @@ namespace App\Modules\Content\Services\V1;
 
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Enums\ProgressState;
+use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Services\ContentProgressService;
 use App\Modules\Content\Services\LearningPathsService;
@@ -31,7 +32,9 @@ class CarouselServiceV1
         // TODO Adrian this needs to be updated
         //$promotionalCards = $this->getSortedPromotionalCards($brand, $isAdmin);
 
-        $onboardingCardData = $this->learningPathsService->getNewLearningPaths(boolval(FeatureFlagging::branch('homepage-v2', user())));
+        $onboardingCardData = $this->learningPathsService->getNewLearningPaths(
+            boolval(FeatureFlagging::branch('homepage-v2', user()))
+        );
         $unfinishedOnboardingCards = [];
         foreach ($onboardingCardData as $index => $onboardingCardDatum) {
             $onboardingCardData[$index]['show_everywhere'] = false;
@@ -74,13 +77,11 @@ class CarouselServiceV1
             ->get();
 
 
-
-
         // Challenge with open enrollment (that the user is not a part of)
-        $allProgress = $user->challengeProgress()->brand($brand)->active()->get();
+        $allProgress = ChallengeUserProgress::whereUserIdAndActive($user->id);
         $railcontentIds = $allProgress->pluck('content_id');
         $challengeRecommendation = collect($this->sanity->getChallengeOpenEnrollmentCards($brand, $isAdmin))
-            ->filter(fn ($challenge) => !$railcontentIds->contains($challenge['id']))
+            ->filter(fn($challenge) => !$railcontentIds->contains($challenge['id']))
             ->take(1);
         $allChallengeIds = [
             ...$badges->pluck('content_id'),
@@ -90,16 +91,21 @@ class CarouselServiceV1
         ];
 
 
-
-
-        $allChallengeMetaData = $this->challengesService->getChallengeMetaDataForUserProgress($allChallengeIds, $allProgress, returnChallengeData: true, brand: $brand);
+        $allChallengeMetaData = $this->challengesService->getChallengeMetaDataForUserProgress(
+            $allChallengeIds,
+            $allProgress,
+            returnChallengeData: true,
+            brand: $brand
+        );
         $allChallengeMetaData = collect($allChallengeMetaData)->keyby('content_id');
         $challengeRecommendationCard = $challengeRecommendation->isEmpty() ? [] :
             [
                 ...$allChallengeMetaData[$challengeRecommendation[0]['id']],
                 'type' => 'challenge-recommendation', // this is set after metadatum to override the existing type field
                 'show_everywhere' => true,
-                'enrolled_users' => $this->challengesService->getEnrolledUsersMetadata($challengeRecommendation[0]['id'])
+                'enrolled_users' => $this->challengesService->getEnrolledUsersMetadata(
+                    $challengeRecommendation[0]['id']
+                )
             ];
         $compiledCardData = [
             ... $this->formatChallengeAwardData($badges, $allChallengeMetaData),
@@ -125,10 +131,10 @@ class CarouselServiceV1
         return $promotionalCards;
     }
 
-    private function formatChallengeData(mixed $userProgresses, Collection $challengeMetaData, string $type) : array
+    private function formatChallengeData(mixed $userProgresses, Collection $challengeMetaData, string $type): array
     {
         $compiledCardData = [];
-        foreach($userProgresses as $userProgress) {
+        foreach ($userProgresses as $userProgress) {
             $challengeMetaDatum = $challengeMetaData[$userProgress->content_id];
             if ($challengeMetaDatum) {
                 $compiledCardData[] = [
@@ -141,10 +147,10 @@ class CarouselServiceV1
         return $compiledCardData;
     }
 
-    private function formatChallengeAwardData(Collection $userProgresses, Collection $challengeMetaData) : array
+    private function formatChallengeAwardData(Collection $userProgresses, Collection $challengeMetaData): array
     {
         $compiledCardData = [];
-        foreach($userProgresses as $userProgress) {
+        foreach ($userProgresses as $userProgress) {
             $challengeMetaDatum = $challengeMetaData[$userProgress->content_id];
             if ($challengeMetaDatum) {
                 $awardData = $this->challengesAwardService->getUserAwardData(
