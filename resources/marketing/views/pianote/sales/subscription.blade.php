@@ -362,9 +362,7 @@
         @include('_partials.layout.holiday.homepage-top-banner',[
             'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/xm-banner.webp')",
             'text' => 'Save up to 69% on <br class="sm:hidden">piano lessons, gear & more!',
-            'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
             'vimeo' => '885338636',
-            'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024,pdbonus&locked=true',
         ])
 
         <div class="sticky-trigger block"></div>
