@@ -120,8 +120,8 @@ export default class ContentModel {
     }
 
     get postPublisedOn() {
-        if(this.post.is_locked){
-            return getDate(this.post.unlock_date);
+        if(this.post.is_locked || this.post.type == 'challenge-part'){
+            return getDate(this.post.unlock_date.slice(0, 19));
         } else if (this.post.quarter_published) {
             return getDate(this.post.quarter_published);
         }
@@ -168,7 +168,7 @@ export default class ContentModel {
         if (this.post.image) {
             thumb = this.post.image;
         }
-        
+
         if (this.post.thumbnail_url) {
             thumb = this.post.thumbnail_url;
         }

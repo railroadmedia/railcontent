@@ -49,7 +49,7 @@ export default function useCatalogueItem(props) {
     });
 
     const releaseDate = computed(() => {
-        if(props.item.is_locked){
+        if(props.item.is_locked || props.item.type === 'challenge-part'){
             // challenges dates are returned in ISO format with offset for the users current timezone
             return getDateFromIso(props.item.unlock_date);
         } else if (props.item.quarter_published) {
