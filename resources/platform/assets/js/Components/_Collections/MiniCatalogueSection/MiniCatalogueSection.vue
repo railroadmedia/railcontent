@@ -2,7 +2,7 @@
     <section v-if="isLoading || (!isLoading && data.length > 0)" class="tw-flex tw-flex-row tw-mb-[30px]">
         <div class="tw-flex tw-flex-col tw-w-full">
             <!-- Section Title -->
-            <div :id="secetionId" class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+            <div :id="sectionId" class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 <div class="tw-flex tw-items-center">
                     <component :is="seeAllUrl ? 'a' : 'div'" @click="handleSeeAllClick" :href="seeAllUrl"
                        class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all " :class="seeAllUrl ? 'hover:tw-border-current' : ''">
@@ -20,8 +20,10 @@
             </div>
             <div>
                 <transition appear name="fade">
-                    <ChallengeCarousel v-if="isChallenge" :pre-loaded-content="data" :page-type="pageType" @remove-challenge="removeItem" @re-fetch-carousel="reFetchData" />
+                    <ChallengeCarousel v-if="isChallengeCarousel" :pre-loaded-content="data" :page-type="pageType" @remove-challenge="removeItem" @re-fetch-carousel="reFetchData" />
+                    <ChallengeCardContainer v-else-if="isChallenge" :content="data" />
                     <ChallengeAwardContainer v-else-if="isChallengeAward" :pre-loaded-content="data" />
+                    <PackCatalogue v-else-if="isPack" :content="data" />
                     <CatalogueCardContainer
                         v-else
                         :force-no-links="forceNoLinks"
@@ -42,16 +44,19 @@
 
 <script setup>
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer';
-import ChallengeCarousel from '@collections/ChallengeCarousel/ChallengeCarousel';
+import { storeToRefs } from "pinia/dist/pinia";
+import { usePlatformStore } from "@stores/platform";
 import { useUserStore } from '@stores/user';
 import userJourney from '@services/userJourney';
-import useCarouselEvents from "@hooks/useCarouselEvents";
 import { getCardNum } from '@collections/MiniCatalogueSection/getCardNum';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
+import useCarouselEvents from "@hooks/useCarouselEvents";
+
+import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer';
+import ChallengeCarousel from '@collections/ChallengeCarousel/ChallengeCarousel';
 import ChallengeAwardContainer from '@collections/ChallengeAwardContainer/ChallengeAwardContainer';
-import {usePlatformStore} from "@stores/platform";
-import {storeToRefs} from "pinia/dist/pinia";
+import ChallengeCardContainer from '@collections/Catalogue/ChallengeCardContainer';
+import PackCatalogue from "@collections/Packs/PackCatalogue";
 
 const props = defineProps({
   seeAllUrl: {
@@ -106,7 +111,7 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  secetionId: {
+  sectionId: {
     type: String,
     default: ''
   },
@@ -121,8 +126,16 @@ const page = ref(1);
 const cardNum = ref(5);
 const showSeeAllCard = ref(false);
 
+const isChallengeCarousel = computed(() => {
+    return props.catalogueType === 'challenge-carousel';
+})
+
 const isChallenge = computed(() => {
     return props.catalogueType === 'challenge';
+})
+
+const isPack = computed(() => {
+    return props.catalogueType === 'pack';
 })
 
 const isChallengeAward = computed(() => {

@@ -293,10 +293,10 @@ const ctaObj = computed(() => {
 const reFetchData = async () => {
     let data;
 
-    if(props.pageType === 'home' || props.pageType === 'challenge'){
+    if(props.pageType === 'home' || props.pageType === 'challenge-carousel'){
         data = await fetchCarouselCardData(brand.value);
 
-        if(props.pageType === 'challenge') {
+        if(props.pageType === 'challenge-carousel') {
             data = data.filter(challenge => !challenge.show_everywhere);
         }
     } else if(props.pageType === 'dashboard') {

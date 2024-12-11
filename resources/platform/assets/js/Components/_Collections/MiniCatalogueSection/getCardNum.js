@@ -1,11 +1,17 @@
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
-const breakpoints = useBreakpoints(breakpointsTailwind);
+const breakpoints = useBreakpoints({
+    ...breakpointsTailwind,
+    '3xl': 1815,
+});
+const xxxlDesktop = breakpoints.greaterOrEqual('3xl');
 const xxlDesktop = breakpoints.greaterOrEqual('2xl');
 const xlDesktop = breakpoints.greaterOrEqual('xl');
 const lgDesktop = breakpoints.greaterOrEqual('lg');
 
 export const getCardNum = (props, cardNum, toggleSeeAllCard) => {
-    if(props.catalogueType === 'challenge'){
+
+    //Challenge Carousel
+    if(props.catalogueType === 'challenge-carousel'){
         if(xlDesktop.value){
             cardNum.value = 2;
         } else if(lgDesktop.value){
@@ -13,7 +19,27 @@ export const getCardNum = (props, cardNum, toggleSeeAllCard) => {
         } else {
             cardNum.value = 20;
         }
-    } else {
+    }
+
+    //Challenge
+    else if(props.catalogueType === 'challenge'){
+        if(xxxlDesktop.value){
+            cardNum.value = 6;
+        } else if(xlDesktop.value){
+            cardNum.value = 5;
+        } else if(lgDesktop.value){
+            cardNum.value = 4;
+        } else {
+            cardNum.value = 20;
+        }
+    }
+
+    //Pack
+    else if(props.catalogueType === 'pack'){
+        cardNum.value = 1;
+    }
+
+    else {
         if(props.isMiniView){
             toggleSeeAllCard(false);
             if(window.innerWidth > 2256){
