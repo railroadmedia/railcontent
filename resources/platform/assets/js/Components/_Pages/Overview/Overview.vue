@@ -15,7 +15,7 @@
             :progress-label-text="headerData?.progressLabelText"
             :icon-name="headerData?.iconName"
             :ctas="headerCtas"
-            :lesson-data="data?.lesson"
+            :lesson-data="{ challenge: data?.lesson, next_lesson: data?.next_lesson }"
             :dark-mode-logo="headerData?.darkModeLogo"
             :light-mode-logo="headerData?.lightModeLogo"
         />
@@ -43,17 +43,17 @@
                 </div>
             </div>
         </div>
-        
+
         <template v-if="!isLoading">
             <div class="tw-flex tw-flex-col tw-my-[30px]">
                 <div class="tw-flex tw-w-full tw-flex-row">
                     <transition appear name="fade">
-                        <!-- 
+                        <!--
                             Don't change :content="OvervewChildData",
-                            unless you know what you're doing  
+                            unless you know what you're doing
                         -->
                         <ListCatalogue
-                            :content="OverviewChildData" 
+                            :content="OverviewChildData"
                             :content-type-override="contentType"
                             :is-admin="isAdmin"
                             :display-items-as-overview="childContentDisplayItemsAsOverview"
@@ -228,10 +228,10 @@ const isChallengeSolo = computed(() => {
 const generateChallengeCtas = (data) => {
     if(isChallengeEnrolled.value){
         //when next lesson is the first lesson
-        if(data.next_lesson.id === data.children[0].id){
+        if(data.next_lesson?.is_first_lesson){
             let type;
 
-            if(data.next_lesson.locked){
+            if(data.next_lesson?.is_locked){
                 type = 'LockedChallengeCta';
             } else {
                 type = 'PageHeaderPrimaryCta';
@@ -249,29 +249,33 @@ const generateChallengeCtas = (data) => {
             ]
         } else {
             // if next lesson is locked
-            if(data.next_lesson.is_locked){
-                return [
-                    {
-                        type: 'PageHeaderPrimaryCta',
-                        props: {
-                            text: `Replay ${data.previous_lesson.title}`,
-                            isPrimary: true,
-                        },
-                        lessonData: data.previous_lesson.web_url_path,
-                    }
-                ]
+            if(data.next_lesson?.is_locked){
+                if (data.previous_lesson?.title) {
+                    return [
+                        {
+                            type: 'PageHeaderPrimaryCta',
+                            props: {
+                                text: `Replay ${data.previous_lesson.title}`,
+                                isPrimary: true,
+                            },
+                            lessonData: data.previous_lesson.web_url_path,
+                        }
+                    ]
+                } else {
+                    return [];
+                }
             }
             // if next lesson is unlocked
             else {
                 let obj;
-                if(!data.previous_lesson.completed){
+                if(!data.previous_lesson?.completed){
                     obj = {
-                        url: data.previous_lesson.web_url_path,
+                        url: data.previous_lesson?.web_url_path,
                         text: 'Continue'
                     }
                 } else {
                     obj = {
-                        url: data.next_lesson.web_url_path,
+                        url: data.next_lesson?.web_url_path,
                         text: 'Next Lesson',
                         faIconClass: 'fas fa-play',
                     }

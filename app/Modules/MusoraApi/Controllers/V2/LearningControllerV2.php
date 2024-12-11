@@ -14,7 +14,6 @@ class LearningControllerV2 extends Controller
 
     public function getLearningPaths()
     {
-        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
-        return $this->learningPathsService->getNewLearningPaths($homepageV2);
+        return $this->learningPathsService->getNewLearningPaths();
     }
 }

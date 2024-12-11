@@ -356,21 +356,30 @@ class SanityGateway
         return $document;
     }
 
-    public function getChallengesWithOpenEnrollment(string $brand): array
+    public function getChallengeOpenEnrollmentCards(string $brand, bool $isAdmin): array
     {
+        $contentStatusQuery = $isAdmin ? '' : "&& status == 'published'";
+        $cardStatusQuery = $isAdmin ? '' : '&& is_draft != true';
         $challengeFields = $this->getFieldsString('challenge');
+        $publishedOnString = $this->getPublishedFilter(false);
         $query = "*[_type == 'challenge'
             && enrollment_start_time <= now()
             && enrollment_end_time >= now()
             && brand == '$brand'
-            ]{
+            $publishedOnString
+            $cardStatusQuery
+            $contentStatusQuery]{
             $challengeFields,
         }";
         $results = $this->sanity->fetch($query);
+        $filtered = [];
         foreach ($results as $document) {
             $this->postProcessDocument($document);
+            if(!$document['need_access']){ //filter out open enrollment challenges if they don't have access
+                $filtered[] = $document;
+            }
         }
-        return $results;
+        return $filtered;
     }
 
     public function getAssignmentsByRailcontentIds(
@@ -558,58 +567,112 @@ class SanityGateway
                         'header' :first_content.header,
                         'subheader': first_content.subheader,
                         'squareImg': first_content.squareImg.asset->url,
-                          'wideImg': first_content.wideImg.asset->url,
-                          'bgImg': first_content.bgImg.asset->url,
-                          'logo': first_content.logo.asset->url,
-                          'content': first_content.content->{
-                            _type,
-                            $fieldsString
-                          }
-                        },
+                        'wideImg': first_content.wideImg.asset->url,
+                        'bgImg': first_content.bgImg.asset->url,
+                        'logo': first_content.logo.asset->url,
+                        'content': first_content.content->{
+                          _type,
+                          $fieldsString
+                        }
+                      },
                       'second_content' : {
                         'header' :second_content.header,
                         'subheader': second_content.subheader,
                         'squareImg': second_content.squareImg.asset->url,
-                          'wideImg': second_content.wideImg.asset->url,
-                          'bgImg': second_content.bgImg.asset->url,
-                          'logo': second_content.logo.asset->url,
-                          'content': second_content.content->{
-                            _type,
-                            $fieldsString
-                          }
-                        },
+                        'wideImg': second_content.wideImg.asset->url,
+                        'bgImg': second_content.bgImg.asset->url,
+                        'logo': second_content.logo.asset->url,
+                        'content': second_content.content->{
+                          _type,
+                          $fieldsString
+                        }
+                      },
         } [0 ... 1]";
         $document = $this->sanity->fetch($query)[0] ?? null;
         if (is_null($document)) return $document;
         foreach(['first_content', 'second_content'] as $key) {
-            $content = $document[$key]['content'];
-            $type = $content['_type'];
-            $document[$key]['content_type'] = $type;
-            $document[$key]['id'] = $content['railcontent_id'];
-            $pageType = match($content['_type']) {
-                'challenge' => 'PackOverview',
-                'workout' => 'Lesson',
-                'course' => 'CourseOverview',
-                'quick-tips' => 'Lesson',
-                'song' => 'Song',
-                default => 'Lesson',
-            };
-            $pageParams = ['id' => $content['railcontent_id']];
-
-            $typesToIncludePageType = ['challenge', 'pack'];
-            if (in_array($type, $typesToIncludePageType)) {
-                $pageParams['type'] = 'Lesson';
-            }
-            if ($type == 'challenge') {
-                $pageParams['isChallenge'] = true;
-            }
-            $document[$key]['button'] = [
-                'content_url' => $content['web_url_path'],
-                'page_type' => $pageType,
-                'page_params' => $pageParams,
-            ];
+            $document[$key] = $this->formatBannerCardParamaters($document[$key]);
         }
         return $document;
+    }
+
+    public function getActiveBannerCards($brand, $showDrafts)
+    {
+        $statusString = $showDrafts ? '' : '&& is_draft != true';
+        $now = Carbon::now()->toISOString();
+        $timeRangeString = $showDrafts ? '' : "&& start_time <= '$now' && end_time >= '$now'";
+        $query = "*[_type == 'banner-card' && brand == '$brand' $statusString $timeRangeString]{
+                      brand,
+                      display_order,
+                      difficulty,
+                      name,
+                      is_draft,
+                      start_time,
+                      end_time,
+                      visible_on_desktop,
+                      visible_on_mobile,
+                      all_but_latest_version,
+                      super_title,
+                      super_title_colour,
+                      title,
+                      title_colour,
+                      description,
+                      description_colour,
+                      button_text,
+                      button_url,
+                      'bgImg' : bgImg.asset->url,
+                      'squareImg' : squareImg.asset->url,
+                      'wideImg' : wideImg.asset->url,
+                      'logo' : logo.asset->url,
+                      'content': content->{
+                        _type,
+                        'id' : railcontent_id,
+                        web_url_path,
+                        'registration_url': '/' + brand + '/enrollment/' + slug.current,
+                        enrollment_start_time,
+                        enrollment_end_time,
+                        is_solo,
+                    },
+        }";
+        $documents = $this->sanity->fetch($query) ?? null;
+        foreach($documents as $index => $document) {
+            if ($document['content']) {
+                // TODO update this to handle custom cards
+                $documents[$index] = $this->formatBannerCardParamaters($document);
+            }
+        }
+        return $documents;
+    }
+
+    private function formatBannerCardParamaters($contentCard)
+    {
+        $content = $contentCard['content'];
+        $type = $content['_type'];
+        $contentCard['content_type'] = $type;
+        $contentCard['id'] = $content['railcontent_id'];
+        $pageType = match($content['_type']) {
+            'challenge' => 'PackOverview',
+            'workout' => 'Lesson',
+            'course' => 'CourseOverview',
+            'quick-tips' => 'Lesson',
+            'song' => 'Song',
+            default => 'Lesson',
+        };
+        $pageParams = ['id' => $content['railcontent_id']];
+
+        $typesToIncludePageType = ['challenge', 'pack'];
+        if (in_array($type, $typesToIncludePageType)) {
+            $pageParams['type'] = 'Lesson';
+        }
+        if ($type == 'challenge') {
+            $pageParams['isChallenge'] = true;
+        }
+        $contentCard['button'] = [
+            'content_url' => $content['web_url_path'],
+            'page_type' => $pageType,
+            'page_params' => $pageParams,
+        ];
+        return $contentCard;
     }
 
     public function countLessonsAndAssignments($id)
@@ -937,5 +1000,4 @@ class SanityGateway
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
         return \Arr::pluck($userPermissions, 'permission_id');
     }
-
 }

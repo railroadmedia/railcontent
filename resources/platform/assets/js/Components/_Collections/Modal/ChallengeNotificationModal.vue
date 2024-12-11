@@ -1,6 +1,6 @@
 <template>
-    <InfoModal :selfContained="true" class-override="tw-max-w-[510px] tw-w-full" @onClose="emit('modalClose')">
-        <div class="tw-flex tw-flex-col tw-justify-center -tw-mt-[50px] dark:tw-text-white tw-text-center">
+    <InfoModal :selfContained="true" class-override="tw-max-w-[510px] tw-w-full" :hide-x-icon="true" :disable-overlay-click="true" @onClose="emit('modalClose')">
+        <div class="tw-flex tw-flex-col tw-justify-center dark:tw-text-white tw-text-center">
             <!-- Dark mode Logo -->
             <img class="tw-h-24 tw-object-contain tw-mb-5 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge?.dark_mode_logo_url}`" alt="challenge dark mode logo" />
             <!-- Light mode Logo -->

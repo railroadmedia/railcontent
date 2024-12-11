@@ -9,6 +9,7 @@ use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\Sanity\Artist;
 use App\Modules\Content\Models\Sanity\CatalogMetadata;
 use App\Modules\Content\Models\Sanity\Challenge;
+use App\Modules\Content\Models\Sanity\ChallengeDropDownItem;
 use App\Modules\Content\Models\Sanity\ChallengePart;
 use App\Modules\Content\Models\Sanity\CoachStream;
 use App\Modules\Content\Models\Sanity\Course;
@@ -79,6 +80,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Content\Models\Sanity\BannerCard;
 use Modules\Content\Models\Sanity\OnboardingContentCard;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Services\ConfigService;
@@ -97,6 +99,7 @@ class SanityStudioCMSController extends BaseController
         $token = env('SANITY_API_TOKEN_RW');
         // publishing workspace
         $types = [
+            (new ChallengeDropDownItem())->toArray(),
             (new Challenge())->toArray(),
             (new ChallengePart())->toArray(),
             (new Workout())->toArray(),
@@ -163,6 +166,7 @@ class SanityStudioCMSController extends BaseController
             (new License())->toArray(),
             (new Publisher())->toArray(),
             (new OnboardingContentCard())->toArray(),
+            (new BannerCard())->toArray(),
         ];
 
         $publishing = [

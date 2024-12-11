@@ -49,18 +49,6 @@ const { brand } = storeToRefs(userStore);
 const platformStore = usePlatformStore();
 const { isLoading } = storeToRefs(platformStore);
 
-const isHomepage = computed(() => {
-    return props.pageType === 'home';
-})
-
-const isDashboard = computed(() => {
-    return props.pageType === 'dashboard';
-})
-
-const isChallenge = computed(() => {
-    return props.pageType === 'challenge';
-})
-
 const showEnrollmentAward = (card) => {
     return card.type === 'challenge-award' && !card.is_user_enrolled;
 }

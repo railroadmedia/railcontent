@@ -79,7 +79,7 @@
 
     <!-- MOBILE -->
     <div :style="{ backgroundImage: `url('https://www.musora.com/cdn-cgi/image/width=400,quality=95/${mobileBGImage}')` }"
-         class="tw-shrink-0 tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-overflow-hidden tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-bg-cover tw-bg-center" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
+         class="tw-shrink-0 tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-overflow-hidden tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-bg-cover tw-bg-top" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
         <!-- Background Overlay -->
         <div v-if="!isAward" class="tw-absolute tw-inset-0 tw-bg-[linear-gradient(180deg,_rgba(0,0,0,0)_46.12%,_rgba(0,0,0,0.7)_65.36%,_#000000_100%)] tw-z-[1]"></div>
         <!-- Challenge Type Label -->
@@ -215,7 +215,7 @@ const thumbnail = computed(() => {
     } else {
         if(props.challenge.squareImg){
             if(bigDesktop.value){
-                return props.challenge.thumbnail;
+                return props.challenge.wideImg;
             } else {
                 return props.challenge.squareImg;
             }
@@ -231,7 +231,7 @@ const desktopBGImage = computed(() => {
             return 'https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-light-desktop-bg.png';
         }
     } else {
-            return props.challenge.bgImg;
+            return props.challenge.wideImg;
     }
 })
 

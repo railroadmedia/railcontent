@@ -2,7 +2,7 @@
     <header class="tw-bg-[#F1F7FE] tw-py-4 md:tw-py-7 tw-px-4" v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-relative">
             <div v-if="!isFromApp" class="2xl:tw-absolute 2xl:tw-top-0 2xl:-tw-left-28 tw-mb-3 md:tw-mb-6 2xl:tw-mb-0">
-                <button class="tw-bg-[rgba(0,12,23,0.40)] hover:tw-bg-[rgba(0,12,23,0.80)] tw-py-1 tw-px-2.5 tw-text-white tw-rounded-full" onclick="handleGoBack">
+                <button class="tw-bg-[rgba(0,12,23,0.40)] hover:tw-bg-[rgba(0,12,23,0.80)] tw-py-1 tw-px-2.5 tw-text-white tw-rounded-full" @click="handleGoBack">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
             </div>
@@ -33,19 +33,19 @@
                             :src="`https://www.musora.com/cdn-cgi/image/width=850,quality=95/${cohort['header_image_url']}`"
                             alt="header thumb"
                         />
-                        <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" @click="openTrailer = true">
+                        <div v-if="cohort['cohort_trailer']" class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" @click="openTrailer = true">
                             <i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div>
                         </div>
                     </div>
                     <div :class="`md:tw-flex ${isEnrolled ? 'md:tw-items-start' : 'md:tw-items-center'}`">
                         <!-- Get Notified Button -->
-                        <button v-if="showGetNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">
-                            <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
-                            Get Notified
-                        </button>
+<!--                        <button v-if="showGetNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">-->
+<!--                            <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>-->
+<!--                            Get Notified-->
+<!--                        </button>-->
                         <!-- TODO(challenge): add else state for when notification requested -->
                         <!--  Enrolled Buttons  -->
-                        <div v-else-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
+                        <div v-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
                             <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
                             <a :href="cohort['course_url']" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
                         </div>
@@ -156,7 +156,7 @@
 
     <section class="tw-bg-[#F1F7FE] tw-py-7 " v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10">
-            <div class="tw-relative tw-cursor-pointer tw-mb-10" @click="openTrailer = true">
+            <div class="tw-relative tw-cursor-pointer tw-mb-10" @click="playTrailer">
                 <!--  Body Image  -->
                 <img
                     class="tw-rounded-xl tw-transition-opacity tw-opacity-0"
@@ -168,6 +168,7 @@
             </div>
             <!--  Body logo  -->
             <img
+                v-if="cohort['body_logo']"
                 class="tw-h-10 sm:tw-h-16 tw-mb-8 tw-mx-auto tw-transition-opacity tw-opacity-0"
                 alt="just play logo"
                 :src="`https://www.musora.com/cdn-cgi/image/width=1220,quality=95/${cohort['body_logo']}`"
@@ -260,12 +261,12 @@
 
             <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
                 <!--  Buttons  -->
-                <button v-if="showGetNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">
-                    <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
-                    Get Notified
-                </button>
+<!--                <button v-if="showGetNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">-->
+<!--                    <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>-->
+<!--                    Get Notified-->
+<!--                </button>-->
                 <!-- TODO(challenge): add else state for when notification requested -->
-                <span v-else-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
+                <span v-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                 <template v-else>
                     <button v-if="showEnrollNow" id="bottomEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
                     <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
@@ -431,7 +432,7 @@ const enroll = async() => {
         const enrollUser = await postChallengesEnroll(props.cohort.id);
         isEnrolled.value = true;
         openChallengeNotificationModal.value = true;
-        sendPostMessage();
+        sendPostMessage('enroll');
     } catch (e){
         window.shownotification({
             icon: 'error',
@@ -448,7 +449,7 @@ const closeNotificationModal = () => {
 
 const handleNoGuide = () => {
     openChallengeActionModal.value = true;
-    sendPostMessage();
+    sendPostMessage('guide');
 }
 
 const closeActionModal = () => {
@@ -478,19 +479,28 @@ const handleGoBack = () => {
     history.back();
 }
 
-const sendPostMessage = () => {
-    window.ReactNativeWebView.postMessage(props.cohort);
+const sendPostMessage = (type) => {
+    if(isFromApp.value){
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+            type,
+            data:props.cohort
+        }));
+    }
 }
 
 const handleGetNotified = async () => {
     const response = await postChallengesEnrollmentNotification(props.cohort.id);
     notificationRequested.value = true;
     isGetNotifiedModalOpen.value = true;
-    sendPostMessage();
+    sendPostMessage('notify');
 }
 
 const closeGetNotifiedModal = () => {
     isGetNotifiedModalOpen.value = false;
+}
+
+const playTrailer = () => {
+    if(props.cohort['cohort_trailer']) openTrailer.value = true;
 }
 
 const countdown = () => {
@@ -529,7 +539,6 @@ const watchEnrollmentOpen = () => {
 }
 
 onBeforeMount(() => {
-    console.log('cohort', props.cohort)
     const openDate = new Date(props.cohort['enrollment_start_date']);
     const closeDate = new Date(props.cohort['enrollment_end_date']);
     const now = new Date();

@@ -71,7 +71,7 @@ class DevEndpointController extends Controller
         ]);
         return '';
     }
-
+    
     private function handleChallengesEndpoints($request): string
     {
         $action = $request->get('action');

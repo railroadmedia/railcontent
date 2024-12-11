@@ -2,25 +2,23 @@
     <div>
         <PageHeaderCta
             v-bind="$attrs"
-            text="Unlock Challenge"
+            url=""
+            :text="text"
             showAllAlways
             @click="handleOpen"
         />
-        <ChallengeActionModal v-if="modalOpen" modal-type="unlock" @close-modal="handleClose" :content-id="contentId" :challenge="lessonData.challenge" />
+        <ChallengeLockedModal v-if="modalOpen" :is-from-lesson="false" :date="unlockDate" @close-modal="handleClose" />
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { getDateFromIso } from '../../../../utils';
 import PageHeaderCta from '@collections/PageHeader/PageHeaderCta';
-import ChallengeActionModal from '@collections/Modal/ChallengeActionModal';
+import ChallengeLockedModal from '@collections/Modal/ChallengeLockedModal';
 
 const props = defineProps({
     text: String,
-    contentId: {
-        type: [String, Number],
-        default: null,
-    },
     lessonData: {
         type: Object,
         default: () => {},
@@ -36,4 +34,8 @@ const handleOpen = () => {
 const handleClose = () => {
     modalOpen.value = false;
 };
+
+const unlockDate = computed(() => {
+    return getDateFromIso(props.lessonData.next_lesson.unlock_date);
+})
 </script>

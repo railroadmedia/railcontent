@@ -13,7 +13,7 @@
                 title="Featured Challenges"
                 :see-all-url="`/${brand}/challenge`"
                 seeAllAriaLabel="See All Challenges"
-                catalogue-type="challenge"
+                catalogue-type="challenge-carousel"
                 page-type="challenge"
                 :preLoadedContent="carousels"
             />
@@ -98,7 +98,7 @@ onBeforeMount(() => {
 
         if (challengeCarousels) {
             carousels.value = challengeCarousels.filter((carousel) => {
-                return !carousel.show_everywhere;
+                return carousel.show_everywhere;
             });
         }
 

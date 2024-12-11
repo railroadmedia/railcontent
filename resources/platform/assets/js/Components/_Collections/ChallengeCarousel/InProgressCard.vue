@@ -17,23 +17,23 @@
         </div>
 
         <!-- Left -->
-        <div class="tw-shrink-0 tw-mr-4 2xl:tw-mr-0 2xl:tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
+        <div class="tw-mr-4 2xl:tw-mr-0 2xl:tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start lg:tw-w-[200px] 2xl:tw-w-auto tw-shrink-0">
             <!-- Challenge Logo -->
-            <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-3 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
-            <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-3 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
+            <img class="lg:tw-max-w-[200px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
+            <img class="lg:tw-max-w-[240px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
             <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
-            <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url">
+            <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url" class="tw-shrink-0">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
                 {{ ctaObj?.text }}
             </MuButton>
         </div>
         <!-- Right -->
-        <div class=" tw-grow 2xl:tw-flex-1 tw-relative tw-flex tw-items-center tw-justify-center 3xl:tw-justify-end 3xl:tw-mr-5">
+        <div class="2xl:tw-flex-1 tw-relative tw-flex tw-items-center tw-justify-center 3xl:tw-justify-end 3xl:tw-mr-5">
             <!-- Musora Logo -->
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
             <div class="tw-relative">
-                <div class="tw-rounded-[10px] tw-overflow-hidden tw-mb-5 tw-relative" :class="showSquareThumbnail ? 'tw-aspect-square 3xl:tw-aspect-video tw-w-[158px] 3xl:tw-w-[255px] 4xl:tw-w-[320px] tw-mx-[44px] 3xl:tw-mx-5' : 'tw-max-w-[255px] 3xl:tw-max-w-none 3xl:tw-w-[255px] 4xl:tw-w-[320px] tw-mx-5'">
+                <div class="tw-rounded-[10px] tw-overflow-hidden tw-mb-5 tw-relative tw-aspect-video tw-max-w-[270px] 3xl:tw-max-w-none 3xl:tw-w-[255px] 4xl:tw-w-[320px] tw-mx-5">
                     <!-- Thumbnail (Video ratio) -->
                     <img :class="showSquareThumbnail ? 'tw-w-full tw-hidden 3xl:tw-block' : ''" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challengeThumbnail}`" />
                     <!-- Thumbnail (Square ratio) -->
@@ -293,10 +293,10 @@ const ctaObj = computed(() => {
 const reFetchData = async () => {
     let data;
 
-    if(props.pageType === 'home' || props.pageType === 'challenge'){
+    if(props.pageType === 'home' || props.pageType === 'challenge-carousel'){
         data = await fetchCarouselCardData(brand.value);
 
-        if(props.pageType === 'challenge') {
+        if(props.pageType === 'challenge-carousel') {
             data = data.filter(challenge => !challenge.show_everywhere);
         }
     } else if(props.pageType === 'dashboard') {

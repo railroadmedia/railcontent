@@ -18,7 +18,7 @@
             <!-- Challenge Carousel -->
             <MiniCatalogueSection
                 :title="welcomeMessage"
-                catalogue-type="challenge"
+                catalogue-type="challenge-carousel"
                 page-type="home"
                 :preLoadedContent="data?.carousels"
             />
@@ -28,7 +28,7 @@
 
             <!-- Continue section -->
             <MiniCatalogueSection
-                v-if="!isLoading && data?.continueSection.length"
+                v-if="!isLoading && data?.continueSection?.length"
                 title="Continue"
                 seeAllAriaLabel="See All Lessons In Progress"
                 :seeAllUrl="`/${brand}/lesson-history/in-progress`"
@@ -59,7 +59,7 @@
 
             <!-- New Releases -->
             <MiniCatalogueSection
-                 v-if="(!isPackOrChallengeOnlyBoolean && ((!isV2User && data?.newReleases.length) || (isV2User && userHas30Days)))"
+                 v-if="(!isPackOrChallengeOnlyBoolean && ((!isV2User && data?.newReleases?.length) || (isV2User && userHas30Days)))"
                 title="New Releases"
                 seeAllAriaLabel="See All New Releases"
                 :seeAllUrl="`${brand}/lessons/all`"
@@ -109,22 +109,24 @@
                 />
 
 
-                <!-- Your Packs section : Packs Only -->
-                <HomepageCatalog
+                <!-- Your Challenges section : Challenges Only -->
+                <MiniCatalogueSection
                     v-if="isChallengeOnlyBoolean"
-                    collection-type="challenge"
                     title="Your Challenges"
+                    catalogue-type="challenge"
                     see-all-label="See All Challenges"
                     :see-all-url="`${brand}/challenge`"
+                    :preLoadedContent="data?.challenges"
                 />
 
                 <!-- Your Packs section : Packs Only -->
-                <HomepageCatalog
+                <MiniCatalogueSection
                     v-if="isPackOnlyBoolean"
-                    collection-type="pack"
                     title="Your Training Packs"
+                    catalogue-type="pack"
                     see-all-label="See All Packs"
                     :see-all-url="`${brand}/packs`"
+                    :preLoadedContent="data?.packs"
                 />
             </template>
 
@@ -164,12 +166,11 @@
     import { useUserStore } from "@stores/user";
     import {storeToRefs} from "pinia/dist/pinia";
     import { usePlaylistsStore } from "@stores/playlists";
+    import { fetchAll } from 'musora-content-services';
 
     import CohortBanner from '@collections/CohortBanner/CohortBanner.vue';
     import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
     import HomepageCatalog from '@collections/HomepageCatalog/HomepageCatalog.vue';
-    import LearningPathContainer from '@collections/LearningPaths/LearningPathContainer.vue';
-    import NewLearningPathContainer from '@collections/NewLearningPaths/NewLearningPathContainer.vue';
     import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
     import PopularConversations from '@collections/PopularConversations/PopularConversations.vue';
     import StaticHeader from  '@collections/HeaderCarousel/StaticHeader.vue';
@@ -247,13 +248,11 @@
     });
 
     const isChallengeOnlyBoolean = computed(() => {
-        console.log(props);
         return Boolean(props.isChallengeOnly);
     });
 
     const isPackOrChallengeOnlyBoolean = computed(() => {
         return Boolean(props.isPackOnly || props.isChallengeOnly);
-
     })
 
     const courseDataObject = computed(() => {
@@ -272,7 +271,7 @@
     const openPlaylistModal = () => {
         window.openplaylistmodal({
             modalType: 'create',
-            brand: brand,
+            brand: brand.value,
             data: {
                 name: '',
                 category: 'General',
@@ -285,10 +284,27 @@
     //Lifecycles
     onBeforeMount( async () => {
         playlistsStore.playlists = props.usersList;
+        if(isPackOrChallengeOnlyBoolean.value){
+            const [challenges, packs] = await Promise.all([
+                fetchAll(brand.value, 'challenge', {
+                    limit: 30,
+                }),
+                fetchAll(brand.value, 'pack', {
+                    limit: 30,
+                })
+            ]);
 
-        const { data: homeData, error: homeError, isLoading: homeLoading } = await useHomePageData(brand.value, userId.value, token.value);
-        data.value = homeData.value;
-        platformStore.setLoadingState(homeLoading.value);
+            data.value = {
+                challenges: challenges.entity,
+                packs: packs.entity,
+            }
+
+        } else {
+            const { data: homeData } = await useHomePageData(brand.value, userId.value, token.value);
+            data.value = homeData.value;
+        }
+
+        platformStore.setLoadingState(false);
     });
 
     onMounted(() => {

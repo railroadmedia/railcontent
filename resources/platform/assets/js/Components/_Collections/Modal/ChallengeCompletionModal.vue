@@ -103,7 +103,7 @@
                             <div class="tw-absolute tw-text-center tw-max-w-[200px]">
                                 <img class="tw-h-14 tw-mx-auto dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${lightModeLogo}`" alt="Challenge light mode logo" />
                                 <img class="tw-h-14 tw-mx-auto tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${darkModeLogo}`" alt="Challenge dark mode logo" />
-                                <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold tw-mt-[5px]">{{ nextLessonTitle }} Unlocks In</div>
+                                <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold tw-mt-[10px] -tw-mb-1">{{ nextLessonTitle }} Unlocks In</div>
                                 <div v-if="isNextLessonLocked" class="tw-font-bond tw-font-bebas-neue tw-text-[50px] -tw-mb-5">{{ countdownString }}</div>
                             </div>
                         </div>

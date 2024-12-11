@@ -49,7 +49,7 @@ export default function useCatalogueItem(props) {
     });
 
     const releaseDate = computed(() => {
-        if(props.item.is_locked){
+        if(props.item.is_locked || props.item.type === 'challenge-part'){
             // challenges dates are returned in ISO format with offset for the users current timezone
             return getDateFromIso(props.item.unlock_date);
         } else if (props.item.quarter_published) {
@@ -59,7 +59,13 @@ export default function useCatalogueItem(props) {
         return getDate(props.item.published_on);
     });
 
-    const isCompleted = computed(() => props.item.completed || progress_percent.value === 100);
+    const isCompleted = computed(() => {
+        if(props.item.type === 'challenge-part'){
+            return props.item.completed;
+        }
+
+        return progress_percent.value === 100;
+    });
 
     const completedIcon = computed(() => props.item.type === 'course' ? 'fa-trophy' : 'fa-check-circle');
 
