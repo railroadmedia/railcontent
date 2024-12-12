@@ -132,7 +132,6 @@ class SearchResponse extends AlgoliaSearchResponse
         $data["quarter_removed"] = $contentData['quarter_removed'] instanceof Carbon ? $contentData['quarter_removed']->toDateString() : $contentData['quarter_removed'];
         $data["quarter_published"] = $contentData['quarter_published'] instanceof Carbon ? $contentData['quarter_published']->toDateString() : $contentData['quarter_published'];
         $data["instructors"] = $contentData['*instructors'] ?? [];
-        $data["coaches"] = $contentData['*coaches'] ?? [];
         $data["user_playlists"] = $contentData['*user_playlists'] ?? [];
         $data["published_on_in_timezone"] = $contentData['published_on_in_timezone'] instanceof Carbon ? $contentData['published_on_in_timezone']->toDateString() : $contentData['published_on_in_timezone'];
         $data['data'] = $contentData['*data'] ?? [];
@@ -142,7 +141,7 @@ class SearchResponse extends AlgoliaSearchResponse
         foreach (array_keys($contentData) as $key) {
             if (!array_key_exists($key, $data)
                 && $key !== 'compiled_view_data'
-                && !Str::startsWith($key, ['instructors.', 'coaches.', 'data.', 'fields.', 'user_playlists.'])) {
+                && !Str::startsWith($key, ['instructors.', 'coaches.', 'data.', 'fields.', 'user_playlists.', 'chapters.', 'assignments.', '*'])) {
                 $data[$key] = $contentData[$key];
             }
         }
