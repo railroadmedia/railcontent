@@ -21,6 +21,8 @@ class ChallengesService
     const string COMMUNITY_NOTIFICATION_KEY = 'challenges_community_notifications';
     //TODO update for solo challenges - TCH-113
 
+    const int MAX_BUTTON_TEXT_LENGTH = 13;
+
 
     public function __construct(
         private CustomerIoService $customerIoService,
@@ -278,7 +280,11 @@ class ChallengesService
             $isCurriculumLesson = ChallengeUserProgress::isCurriculumSanityLesson($lesson);
             $dayRexeg = "/Day\s?#?[\d]*\.?[\d]*/";
             preg_match($dayRexeg, $lesson['title'], $matches);
-            $lessons[$index]['short_name'] = $matches[0] ?? $lesson['title'];
+            $shortName = $matches[0] ?? $lesson['title'];
+            if (strlen($shortName) > self::MAX_BUTTON_TEXT_LENGTH) {
+                $shortName = substr($shortName, 0, self::MAX_BUTTON_TEXT_LENGTH - 3) . '...';
+            }
+            $lessons[$index]['short_name'] = $shortName;
             if ($isCurriculumLesson) {
                 $curriculumDay += 1;
                 $lessons[$index]['index'] = $curriculumDay;

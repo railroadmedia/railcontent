@@ -221,9 +221,9 @@ const actionText = computed(() => {
     } else if(!hasChallengeStarted.value){
         return `You're enrolled! Lessons begin ${startDate.value}`;
     } else if(isNextLessonLocked.value){
-        return `${nextLessonShortName.value} unlocks in ${countdownString.value}`;
+        return `${nextLessonFullName.value} unlocks in ${countdownString.value}`;
     } else {
-        return `${nextLessonShortName.value} Unlocked!`;
+        return `${nextLessonFullName.value} Unlocked!`;
     }
 })
 
@@ -241,6 +241,10 @@ const challengeThumbnail = computed(() => {
 
 const isNextLessonLocked = computed(() => {
     return props.challenge.next_lesson.is_locked && countdownString.value !== '00:00';
+})
+
+const nextLessonFullName = computed(() => {
+    return props.challenge.next_lesson.title;
 })
 
 const nextLessonShortName = computed(() => {
