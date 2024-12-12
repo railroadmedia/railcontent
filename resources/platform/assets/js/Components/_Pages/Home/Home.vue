@@ -227,7 +227,7 @@
 
     const welcomeMessage = computed(() => {
         if (isFirstAccess.value) {
-            return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome back, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Let's get practicing</div>`
+            return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome back, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Let's get practicing!</div>`
         } else {
             return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Start Here</div>`
         }
