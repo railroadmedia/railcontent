@@ -138,12 +138,12 @@ class LeadGenController extends BaseController
     {
         return view('drumeo.lead-gen.pages.double-bass-101', ['recaptchaKey' => config('recaptcha.key')]);
     }
-    
+
     public function jazzDrumming101()
     {
         return view('drumeo.lead-gen.pages.jazz-drumming-101', ['recaptchaKey' => config('recaptcha.key')]);
     }
-    
+
     public function betterDoubles()
     {
         return view('drumeo.lead-gen.pages.better-doubles', ['recaptchaKey' => config('recaptcha.key')]);
@@ -152,6 +152,11 @@ class LeadGenController extends BaseController
     public function blueMan()
     {
         return view('drumeo.lead-gen.pages.blue-man', ['recaptchaKey' => config('recaptcha.key')]);
+    }
+
+    public function philcollins()
+    {
+        return view('drumeo.lead-gen.pages.phil-collins', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function johnGrooves(Request $request, $domain, $prefix = null, $page = null)
