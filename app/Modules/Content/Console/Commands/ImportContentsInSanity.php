@@ -5,13 +5,13 @@ namespace App\Modules\Content\Console\Commands;
 use App\Decorators\Content\VimeoTrailerDecorator;
 use App\Models\Cohort;
 use App\Modules\Content\ApiGateways\SanityGateway;
-use App\Modules\Content\Console\Commands\Data\OnboardingCards;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentHierarchy;
 use App\Modules\Content\Models\ContentInstructor;
 use App\Modules\Content\Models\ContentPermissions;
 use App\Modules\Content\Models\ContentStyle;
 use App\Modules\Content\Models\Permission;
+use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Enums\FilterType;
 use App\Modules\Content\Models\Vimeo;
 use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
@@ -23,7 +23,6 @@ use Modules\Content\Models\ContentGears;
 use Modules\Content\Models\ContentLifestyle;
 use Modules\Content\Models\ContentTheory;
 use Modules\Content\Models\ContentTopic;
-use Modules\Content\Services\ChallengesService;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 
@@ -528,7 +527,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 '412811' => 115
             ];
         $contentPermissions = ContentPermissions::with('permissions')->where('content_id', '=', $result->id);
-        if(isset($forcePermissions[$result->id])){
+        if(isset($forcePermissions[$result->id])) {
             $contentPermissions = $contentPermissions->where('permission_id', '=', $forcePermissions[$result->id]);
         }
         $contentPermissions = $contentPermissions->get();
@@ -642,7 +641,11 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 } elseif ($hierarchy->child->type == 'assignment') {
                     unset($songs['child_count']);
                     $songs['assignments_total_xp'] = $songs['assignments_total_xp'] + 25;
-                    $assignmentSheetMusicImage = $hierarchy->child->data->where('key', '=', 'sheet_music_image_url')->pluck('value')->toArray();
+                    $assignmentSheetMusicImage = collect($hierarchy->child->data->where('key', '=', 'sheet_music_image_url')->pluck('value')->toArray())
+                        ->map(fn ($url) => [
+                            '_type' => FieldType::URL->value,
+                            'url' => $url
+                        ])->toArray();
                     $songs["assignment"][] = [
                         'assignment_title'             => $hierarchy->child->title,
                         'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
@@ -723,17 +726,17 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             //'light_mode_logo'=> 'image',
             //'dark_mode_logo'=> 'image',
             //'body_logo'=> 'image',
-            'header_image_url'=> 'image',
-            'body_image_url'=> 'image',
-            'icon1_url'=> 'image',
-            'icon2_url'=> 'image',
-            'icon3_url'=> 'image',
-            'description_trailer_1_thumb_url'=> 'image',
-            'description_trailer_2_thumb_url'=> 'image',
-            'demo_background_image_url'=> 'image',
-            'demo_desktop_center_image_url'=> 'image',
-            'demo_mobile_center_image_url'=> 'image',
-            'product_image'=> 'image',
+            'header_image_url' => 'image',
+            'body_image_url' => 'image',
+            'icon1_url' => 'image',
+            'icon2_url' => 'image',
+            'icon3_url' => 'image',
+            'description_trailer_1_thumb_url' => 'image',
+            'description_trailer_2_thumb_url' => 'image',
+            'demo_background_image_url' => 'image',
+            'demo_desktop_center_image_url' => 'image',
+            'demo_mobile_center_image_url' => 'image',
+            'product_image' => 'image',
         ];
 
         foreach($fieldsToCopy as $field => $type) {
@@ -840,35 +843,35 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         if ($type == 'song') {
             $sanityDocuments['instrumentless'] = $result->instrumentless == 1;
         }
-        if($result->quarter_removed){
+        if($result->quarter_removed) {
             $sanityDocuments['quarter_removed'] = $result->quarter_removed;
         }
-        if($result->quarter_published){
+        if($result->quarter_published) {
             $sanityDocuments['quarter_published'] = $result->quarter_published;
         }
         if ($result->published_on) {
             $sanityDocuments['published_on'] = Carbon::parse($result->published_on)->toISOString();
         }
-        if($result->type == 'coach-stream'){
+        if($result->type == 'coach-stream') {
 
-            $instructorField = $result->fields->where('key','=','instructor')->first();
+            $instructorField = $result->fields->where('key', '=', 'instructor')->first();
             if($instructorField) {
                 $instructorId                    = $instructorField->value;
                 $instructor                      = Content::find($instructorId);
                 $sanityDocuments['web_url_path'] = '/'.$result->brand . '/coaches/' . $instructor->slug . '/' . $result->slug . '/' . $result->id;
             }
-        }elseif (!$result->web_url_path) {
-                $contentURLs =
-                    $railcontentURLProvider->getContentURLs(
-                        $result->id,
-                        $result->slug,
-                        $result->type,
-                        new ContentEntity($result->toArray())
-                    );
+        } elseif (!$result->web_url_path) {
+            $contentURLs =
+                $railcontentURLProvider->getContentURLs(
+                    $result->id,
+                    $result->slug,
+                    $result->type,
+                    new ContentEntity($result->toArray())
+                );
 
-                if (!empty($contentURLs)) {
-                    $sanityDocuments['web_url_path'] = $contentURLs->getWebURLPath();
-                }
+            if (!empty($contentURLs)) {
+                $sanityDocuments['web_url_path'] = $contentURLs->getWebURLPath();
+            }
         }
         if ($result->sort != 0) {
             $sanityDocuments['sort'] = $result->sort;
@@ -1247,7 +1250,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     }
 
                     return $carry;
-                },           [])
+                }, [])
             );
         }
 
@@ -1299,7 +1302,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
 
     }
 
-    private function  importOnboardingCards()
+    private function importOnboardingCards()
     {
         $structuredCards = [];
         $contentIds = [];
@@ -1389,7 +1392,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         return $output;
     }
 
-    private function formatDateForImport($date) : string
+    private function formatDateForImport($date): string
     {
         return Carbon::parse($date)->toISOString();
     }

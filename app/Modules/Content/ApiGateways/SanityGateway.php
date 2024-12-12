@@ -2,7 +2,6 @@
 
 namespace App\Modules\Content\ApiGateways;
 
-use App\Modules\Content\Models\Content;
 use Illuminate\Support\Carbon;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentService;
@@ -10,6 +9,17 @@ use Sanity\Client as SanityClient;
 
 class SanityGateway
 {
+    private const SHEET_MUSIC_QUERY = "
+        assignment_sheet_music_image[]{
+            _type == 'Image' => {
+              'url': asset->url
+            },
+            _type == 'URL' => {
+              url
+            }
+        }.url
+    ";
+
     private array $defaultFields = [
         "'sanity_id' : _id",
         "'id': railcontent_id",
@@ -108,7 +118,7 @@ class SanityGateway
                     "id": railcontent_id,
                     "soundslice_slug": assignment_soundslice,
                     "title": assignment_title,
-                    "sheet_music_image_url": assignment_sheet_music_image,
+                    "sheet_music_image_url": '.self::SHEET_MUSIC_QUERY.',
                     "timecode": assignment_timecode,
                     "description": assignment_description,
                     "title":assignment_title,
@@ -148,7 +158,7 @@ class SanityGateway
                 'id': railcontent_id,
                 'soundslice_slug': assignment_soundslice,
                 'title': assignment_title,
-                'sheet_music_image_url': assignment_sheet_music_image,
+                'sheet_music_image_url': ".self::SHEET_MUSIC_QUERY.",
                 'timecode': assignment_timecode,
                 'description': assignment_description,
                 'title':assignment_title,
@@ -392,7 +402,7 @@ class SanityGateway
         $filtered = [];
         foreach ($results as $document) {
             $this->postProcessDocument($document);
-            if(!$document['need_access']){ //filter out open enrollment challenges if they don't have access
+            if(!$document['need_access']) { //filter out open enrollment challenges if they don't have access
                 $filtered[] = $document;
             }
         }
@@ -425,7 +435,7 @@ class SanityGateway
                 },
   assignment[railcontent_id in  [{$idsString}]]{assignment_soundslice,
          assignment_title,
-         assignment_sheet_music_image,
+         'sheet_music_image_url': ".self::SHEET_MUSIC_QUERY.",
          assignment_timecode,
          assignment_description,
          railcontent_id}
@@ -443,8 +453,8 @@ class SanityGateway
                                 return 'Method';
                             case 'learning-path-level':
                                 return 'L' . collect($document['parent_content_data'])->keyBy(
-                                        'id'
-                                    )[$parent['id']]['position'];
+                                    'id'
+                                )[$parent['id']]['position'];
                             default:
                                 return $parent['title'];
                         }
@@ -461,7 +471,7 @@ class SanityGateway
                     'difficulty_string' => $document['difficulty_string'],
                     'published_on' => $document['published_on'],
                     'railcontent_id' => $assignment['railcontent_id'],
-                    'sheet_music_image_url' => $assignment['assignment_sheet_music_image'] ?? [],
+                    'sheet_music_image_url' => $assignment['sheet_music_image_url'] ?? [],
                     'timecode' => $assignment['assignment_timecode'] ?? null,
                     'description' => $assignment['assignment_description'] ?? null,
                     'soundslice_slug' => $assignment['assignment_soundslice'] ?? null,
@@ -606,7 +616,9 @@ class SanityGateway
                       },
         } [0 ... 1]";
         $document = $this->sanity->fetch($query)[0] ?? null;
-        if (is_null($document)) return $document;
+        if (is_null($document)) {
+            return $document;
+        }
         foreach(['first_content', 'second_content'] as $key) {
             $document[$key] = $this->formatBannerCardParamaters($document[$key]);
         }
