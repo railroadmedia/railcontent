@@ -315,7 +315,25 @@ class UserAccessPermissionsService
                 ->toArray();
         }
 
-        return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds);
+        if (!$this->cachedChallengePermissionIds) {
+            $permissions = $this->contentPermissionsService->getContentPermissionsLookup();
+            $challengeProducts = $this->productService->getAllChallenges();
+            $this->cachedChallengePermissionIds = $challengeProducts->map(function ($product) use ($permissions) {
+                return $product->getContentPermissions($permissions)
+                    ->pluck('id');
+            })
+                ->flatten(1)
+                ->unique()
+                ->toArray();
+        }
+
+        $permissionsBeforeChallengeLaunch = new UserAccessPermissionsCollection(
+            $userAccessPermissions->getUser(),
+            $userAccessPermissions->getCollection()->where('created_at', '<', '2024-12-16')
+        );
+
+        return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds)
+            || $permissionsBeforeChallengeLaunch->doesUserOwnPermissions($this->cachedChallengePermissionIds);
     }
 
     public function getOwnsChallenges(UserAccessPermissionsCollection $userAccessPermissions): bool
