@@ -208,29 +208,20 @@ class ChallengesService
 
         $progressData = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
         $firstIncompleteLesson = null;
-        $userData = [];
         $isUserActive = $progressData?->is_active ?? false;
         $challengeLessons = $this->combineUserLessonDataWithSanityLessonData($challengeLessons, $progressData);
-        if ($isUserActive) {
-            $firstIncompleteLesson = $this->getFirstIncompleteCirriculumLesson($challengeLessons, $progressData);
-
-            $userData = $progressData->getCompiledMetadata();
-            $userData['challenge_state'] = $this->getChallengeState($challenge, $userData['end_date']);
-            if ($isLesson) {
-                $nextPreviousLesson = $this->getPreviousAndNextLesson($contentId, $challengeLessons);
-            } else {
-                $nextPreviousLesson = $this->getPreviousAndNextLesson($firstIncompleteLesson['id'], $challengeLessons);
-                $nextPreviousLesson['next_lesson'] = $firstIncompleteLesson;
-            }
-        } else {
-            $userData['is_active'] = false;
-            $userData['challenge_state'] = $this->getChallengeState($challenge);
-            $nextPreviousLesson = ['next_lesson' => null, 'previous_lesson' => null];
-        }
-
+        $userData = $progressData?->getCompiledMetadata() ?? ['is_active' => false];
+        $userData['challenge_state'] = $this->getChallengeState($challenge, $userData['end_date'] ?? null);
+        $nextPreviousLesson = ['next_lesson' => null, 'previous_lesson' => null];
 
         // Assign the formatted lesson to the `lesson` object and add relevant challenge data
         if ($isLesson) { // This is on the lesson's index page
+            $nextPreviousLesson = $this->getPreviousAndNextLesson($contentId, $challengeLessons);
+            // This was originally needed for carousel buttons, but that logic has been moved elsewhere.
+            // I'm commenting this out incase I've forgotten some other wierd use case and need to revert
+//            $firstIncompleteLesson = $this->getFirstIncompleteCirriculumLesson($challengeLessons, $progressData);
+//            $nextPreviousLesson['next_lesson'] = $firstIncompleteLesson;
+
             foreach ($challengeLessons as $lesson) {
                 if ($lesson['id'] == $contentId) {
                     $lessonDocument = $lesson;
@@ -651,6 +642,17 @@ class ChallengesService
         $userProgress->is_active = false;
         $userProgress->hide_completed_banner = false;
         $userProgress->save();
+        $this->unlockChallenge($challengeId, $userId);
+    }
+
+    public function unlockChallenge($id, $userId) : ChallengeUserProgress|null
+    {
+        return $this->startChallenge(
+            $id,
+            $userId,
+            startDate: \Illuminate\Support\Carbon::now()->toISOString(),
+            isLocked: false
+        );
     }
 
     public function updateCustomerIONotifications($challengeId, $user, $notificationKey): void
