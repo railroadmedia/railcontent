@@ -18,10 +18,10 @@
     </InfoModal>
 </template>
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "@stores/platform";
-import { postChallengesLeave, postChallengesUnlock } from 'musora-content-services';
+import { postChallengesLeave, postChallengesUnlock, postChallengesEnroll } from 'musora-content-services';
 import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
 
@@ -36,7 +36,7 @@ const props = defineProps({
     },
 })
 
-const emit = defineEmits(['closeModal', 'onLeaveChallenge']);
+const emit = defineEmits(['closeModal', 'onLeaveChallenge', 'postRetake']);
 
 const platformStore = usePlatformStore();
 const { isDarkMode } = storeToRefs(platformStore);
@@ -105,12 +105,12 @@ const buttonAction = async () => {
             const unlock = await postChallengesUnlock(props.challenge?.id);
             window.location.reload();
         } else if(isRetakeModal.value){
-
+            const retake = await postChallengesEnroll(props.challenge?.id);
+            emit('postRetake');
         } else if(isLeaveModal.value){
             const leave = await postChallengesLeave(props.challenge?.id);
             emit('onLeaveChallenge', props.challenge?.id);
         }
-
         emit('closeModal');
     } catch(e) {
         window.shownotification({
