@@ -3,7 +3,7 @@
         <Breadcrumb :breadcrumbs="[{ title: 'Workouts' }]"/>
     </div>
 
-    <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-6">
+    <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-0">
 <!--        Chris asked me to leave in this functionality ... juuuust in case we wanted it later. nov 2024>-->
 <!--        <section v-if="carouselData.length">-->
 <!--            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">-->
@@ -34,31 +34,42 @@
 <!--            <HeaderCarousel :preloaded-carousel="carouselData"/>-->
 <!--        </section>-->
 
-        <br>
-
         <section id="workouts">
-            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                <div class="tw-flex tw-items-start">
-                    <div class="tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-2">Workouts</div>
-                    <div class="tw-hidden lg:tw-block">
-                        <Tooltip position="right">
-                            <template v-slot:trigger>
-                                <musora-icon icon-name="info" class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
-                            </template>
-                            <template v-slot:content>
-                                <div class="tw-max-w-[350px]">
-                                    <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Workout?</h1>
-                                    <div>{{ infoText['workout']['content'] }}</div>
+            <!-- Header -->
+            <header class="tw-py-5 md:tw-pt-[25px] tw-flex tw-flex-col tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">
+                <div class="tw-flex tw-items-center tw-flex-wrap tw-justify-center sm:tw-justify-end">
+                    <div class="tw-flex-grow tw-mr-auto">
+                        <div class="tw-flex tw-items-center">
+                            <musora-icon icon-name="workouts" class="tw-hidden sm:tw-block tw-w-[35px] tw-h-[35px] dark:tw-text-white tw-mr-2" />
+                            <div class="tw-flex tw-flex-col tw-self-stretch tw-mr-1 tw-w-full">
+                                <div class="tw-h-full tw-flex tw-flex-col tw-items-start tw-justify-center">
+                                    <div class="tw-flex">
+                                        <span class="tw-text-2xl sm:tw-text-[32px] sm:tw-leading-tight tw-font-bold dark:tw-text-white tw-line-clamp-3 tw-overflow-hidden tw-capitalize">
+                                            Workouts
+                                        </span>
+                                        <div class="tw-hidden lg:tw-block">
+                                            <Tooltip position="right">
+                                                <template v-slot:trigger>
+                                                    <musora-icon icon-name="info" class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
+                                                </template>
+                                                <template v-slot:content>
+                                                    <div class="tw-max-w-[350px]">
+                                                        <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Workout?</h1>
+                                                        <div>{{ infoText['workout']['content'] }}</div>
+                                                    </div>
+                                                </template>
+                                            </Tooltip>
+                                        </div>
+                                        <div class="tw-relative lg:tw-hidden">
+                                            <musora-icon @click="openModal('workout')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
+                                        </div>
+                                    </div>
                                 </div>
-                            </template>
-                        </Tooltip>
-                    </div>
-                    <div class="tw-relative lg:tw-hidden">
-                        <musora-icon @click="openModal('workout')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
+            </header>
 
             <!-- Continue section -->
             <div v-if="continueSection.length" class="tw-mt-[30px]">
