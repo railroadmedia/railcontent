@@ -20,7 +20,7 @@
                     Earned on {{ earnedDate }}
                 </div>
 
-                <div class="tw-flex-col sm:tw-flex-row tw-flex tw-justify-center tw-gap-[10px] tw-mb-16 sm:tw-mb-6 tw-z-[3] tw-relative">
+                <div class="tw-flex-col sm:tw-flex-row tw-flex tw-justify-center tw-gap-[10px] tw-mb-6 tw-z-[3] tw-relative">
                     <MuButton @click="openCertificate">View certificate</MuButton>
 <!--                    <MuButton v-if="isSharable" @click="openShareModal"><musora-icon icon-name="share" class="tw-h-6 tw-mr-1 -tw-mt-1 " /> Share</MuButton>-->
                 </div>
