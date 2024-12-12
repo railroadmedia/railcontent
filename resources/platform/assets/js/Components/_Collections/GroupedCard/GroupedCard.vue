@@ -3,8 +3,9 @@
     <SkeletonLoader v-if="collectionStoreLoading || isLoading" type="card-group-header" />
     <!--  Instructor Thumbnail  -->
     <div v-else class="tw-flex tw-justify-between tw-items-center tw-mb-4">
-        <a :href="item.web_url_path"
-            class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white hover:tw-underline"
+        <a :href="groupUrl"
+            class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white "
+           :class="groupUrl ? 'hover:tw-underline' : ''"
             style="text-underline-offset: 6px;">
             <img v-if="thumb" class="tw-rounded-full tw-w-20 tw-h-20 tw-border-2 tw-border-white tw-border-solid tw-mr-[10px]"
                 :src="`https://www.musora.com/cdn-cgi/image/width=200,quality=95/${thumb}`" :alt="`${name} Image`" />
@@ -80,12 +81,8 @@ const data = ref([]);
 const page = ref(1);
 const cardNum = ref(5);
 
-const parsedData = computed(() => {
-    return props.item;
-})
-
 const name = computed(() => {
-    return props.item.name || '';
+    return props.item.name + 'something' || '';
 })
 
 const thumb = computed(() => {
@@ -115,6 +112,13 @@ const contentType = computed(() => {
         return props.item.all_lessons_count > 1 ? 'lessons' : 'lesson';
     }
 
+})
+
+const groupUrl = computed(() => {
+    // remove the conditional when challenge group page is ready
+    if(!isChallenge.value){
+        return props.item.web_url_path;
+    }
 })
 
 const watchResize = () => {
@@ -162,4 +166,6 @@ watch(
 )
 
 const { getPageData, resetProgress, setOriginal, nextPage, prevPage, showPagination, isLastPage, isFirstPage } = useCarouselEvents(props.item.lessons, data, page, cardNum);
+
+console.log('group card',props.item)
 </script>
