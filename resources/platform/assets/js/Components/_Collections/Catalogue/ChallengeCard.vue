@@ -25,7 +25,7 @@
                 <div v-if="durationText && !isSolo" :class="`tw-bg-${brand} tw-rounded-t-md tw-text-white tw-text-[11px] lg:tw-text-sm tw-uppercase tw-font-bold tw-px-2 tw-pb-0.5 tw-pt-1`">{{ durationText }}</div>
                 <!-- Progress Bar -->
                 <div v-if="progressPercent" class="tw-flex tw-w-full tw-justify-start">
-                    <div class="tw-h-[5px] tw-bg-drumeo" :style="`width: ${progressPercent}%`"></div>
+                    <div class="tw-h-[5px]" :class="`tw-bg-${brand}`" :style="`width: ${progressPercent}%`"></div>
                 </div>
             </div>
             <!-- Completed Icon -->
