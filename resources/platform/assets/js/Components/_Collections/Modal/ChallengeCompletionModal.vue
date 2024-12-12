@@ -294,7 +294,7 @@ const openAwardModal = async() => {
 
 const handleCta = () => {
     if(isNextLessonLocked.value){
-        emit('closeModal');
+        window.location.href = `/${brand.value}`;
     } else {
         window.location.href = props.completionData?.next_lesson?.url;
     }
