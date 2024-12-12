@@ -198,7 +198,12 @@ class ChallengesMetaDataController extends Controller
     public function unlockChallenge(int $id): JsonResponse
     {
         $userId = user()->id;
-        $result = $this->challengesService->unlockChallenge($id, $userId);
+        $result = $this->challengesService->startChallenge(
+            $id,
+            $userId,
+            startDate: Carbon::now()->toISOString(),
+            isLocked: false
+        );
         if (is_null($result)) {
             return self::NotFoundErrorResponse($id, $userId);
         }

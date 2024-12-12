@@ -379,11 +379,10 @@ class SanityGateway
         $cardStatusQuery = $isAdmin ? '' : '&& is_banner_draft != true';
         $challengeFields = $this->getFieldsString('challenge');
         $publishedOnString = $this->getPublishedFilter(false);
-        $now = now()->toISOString();
-        $enrollmentDateString = " && enrollment_start_time <= '$now' && '$now' <= enrollment_end_time";
         $query = "*[_type == 'challenge'
+            && enrollment_start_time <= now()
+            && enrollment_end_time >= now()
             && brand == '$brand'
-            $enrollmentDateString
             $publishedOnString
             $cardStatusQuery]{
             $challengeFields,

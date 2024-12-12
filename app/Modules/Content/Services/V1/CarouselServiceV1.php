@@ -9,7 +9,6 @@ use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Services\ContentProgressService;
 use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Carbon;
 use App\Modules\Content\Services\ChallengesAwardService;
@@ -77,16 +76,8 @@ class CarouselServiceV1
 
 
         // Challenge with open enrollment (that the user is not a part of)
-        $inProgressAndCompleted = ChallengeUserProgress::query()
-            ->where('user_id', $user->id)
-            ->where(function (Builder $builder) {
-                return $builder->where('is_active', true)
-                    ->orWhereNotNull('last_completed_date');
-            })
-            ->orderBy('start_date')
-            ->get();
-
-        $railcontentIds = $inProgressAndCompleted->pluck('content_id');
+        $allProgress = ChallengeUserProgress::whereUserIdAndActive($user->id);
+        $railcontentIds = $allProgress->pluck('content_id');
         $challengeRecommendations = collect($this->sanity->getChallengeOpenEnrollmentCards($brand, $isAdmin))
             ->filter(fn($challenge) => !$railcontentIds->contains($challenge['id']));
         $allChallengeIds = [
@@ -99,7 +90,7 @@ class CarouselServiceV1
 
         $allChallengeMetaData = $this->challengesService->getChallengeMetaDataForUserProgress(
             $allChallengeIds,
-            $inProgressAndCompleted,
+            $allProgress,
             returnChallengeData: true,
             brand: $brand
         );
