@@ -166,7 +166,6 @@
     import { useUserStore } from "@stores/user";
     import {storeToRefs} from "pinia/dist/pinia";
     import { usePlaylistsStore } from "@stores/playlists";
-    import { fetchAll } from 'musora-content-services';
 
     import CohortBanner from '@collections/CohortBanner/CohortBanner.vue';
     import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
@@ -284,25 +283,8 @@
     //Lifecycles
     onBeforeMount( async () => {
         playlistsStore.playlists = props.usersList;
-        if(isPackOrChallengeOnlyBoolean.value){
-            const [challenges, packs] = await Promise.all([
-                fetchAll(brand.value, 'challenge', {
-                    limit: 30,
-                }),
-                fetchAll(brand.value, 'pack', {
-                    limit: 30,
-                })
-            ]);
-
-            data.value = {
-                challenges: challenges.entity,
-                packs: packs.entity,
-            }
-
-        } else {
-            const { data: homeData } = await useHomePageData(brand.value, userId.value, token.value);
-            data.value = homeData.value;
-        }
+        const { data: homeData } = await useHomePageData(brand.value, isPackOrChallengeOnlyBoolean.value);
+        data.value = homeData.value;
 
         platformStore.setLoadingState(false);
     });
