@@ -67,7 +67,7 @@ const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 const progressPercent = ref(0);
-const is_enrolled = ref(false);
+const is_enrolled = ref(null);
 const durationText = ref('');
 
 const widthStyles = computed(() => {
@@ -79,7 +79,7 @@ const widthStyles = computed(() => {
 const urlPath = computed(() => {
     if(is_enrolled.value){
         return props.item.web_url_path;
-    } else {
+    } else if(is_enrolled.value === false) {
         return props.item.registration_url;
     }
 })
