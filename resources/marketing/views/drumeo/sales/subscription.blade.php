@@ -301,7 +301,6 @@
 @section('body-data')
     x-data ='{
         soundslice : false,
-        BFwaitlist: false,
         waitlist: false,
         trailer : false,
         lazyLoad: false,
@@ -324,14 +323,9 @@
     @elseif(!empty($promoVersion))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
-            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
+            "hideMenu" => true,
         ])
-{{--        @include("drumeo.sales.partials._nav", [--}}
-{{--            "subscriptionVersion" => true,--}}
-{{--            "scrollToJoin" => true,--}}
-{{--            "hideMenu" => true,--}}
-{{--        ])--}}
     @elseif(!empty($month))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -347,27 +341,6 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
-
-    @if(!empty($bfVersion))
-        @include('_partials.layout.holiday.homepage-top-banner',[
-            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-banner.webp')",
-            'text' => 'Save up to 65% on <br class="sm:hidden">drum lessons, gear & more!',
-            'vimeo' => '885338636',
-        ])
-
-
-        <div class="sticky-trigger block"></div>
-        <div href="#customize-anchor"
-            class="promo-banner anchor-slide text-white flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] -mt-20 transition-none"
-            style="    background: linear-gradient(to bottom, #020306, #042c52);">
-            @include($theme.'._partials.holiday-logo', [
-                'styles' => 'w-auto h-10 sm:h-14',
-                'isProductPage' => true,
-                'productPageStyles' => 'w-auto h-10 sm:h-14 p-1'
-            ])
-        </div>
-    @endif
-
 
     @hasSection('top-bar')
         @yield('top-bar')
