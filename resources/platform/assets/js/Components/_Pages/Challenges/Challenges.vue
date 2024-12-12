@@ -3,7 +3,7 @@
         <Breadcrumb :breadcrumbs="breadcrumbs"/>
         <PageHeader
             title="Challenges"
-            icon-name="whistle"
+            icon-name="challenges"
             description="Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days."
         />
 

@@ -1,16 +1,16 @@
 <template>
   <div class="tw-flex tw-items-center">
     <template v-if="iconName">
-      <i v-if="isFontAswesome" class="fas tw-hidden sm:tw-block tw-text-3xl dark:tw-text-white tw-mr-2"
+      <i v-if="isFontAwesome" class="fas tw-hidden sm:tw-block tw-text-3xl dark:tw-text-white tw-mr-2"
         :class="iconName"></i>
       <musora-icon v-else :icon-name="iconName"
         class="tw-hidden sm:tw-block tw-w-[35px] tw-h-[35px] dark:tw-text-white tw-mr-2" />
     </template>
     <template v-else-if="heroImg">
       <div class="tw-flex-none tw-w-[80px] sm:tw-w-[150px] sm:tw-max-w-[150px] tw-flex tw-flex-col tw-mr-5">
-        <UserAvatar 
+        <UserAvatar
           v-if="pageType === 'settings'"
-          :access-level="userAccessLevel" 
+          :access-level="userAccessLevel"
           :avatar-image="heroImg"
         />
         <div v-else :class="heroImgClasses ?? 'square'">
@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "@collections/Modal/ModalRenderer";
 import Tooltip from "@collections/Tooltip/Tooltip";
@@ -91,7 +91,7 @@ import { useUserStore } from "@stores/user";
 
 //Pinia
 const userStore = useUserStore();
-const { userAccessLevel } = storeToRefs(userStore);   
+const { userAccessLevel } = storeToRefs(userStore);
 
 const props = defineProps({
   pageType: String,
@@ -106,14 +106,15 @@ const props = defineProps({
 })
 
 const isModalOpen = ref(false);
+
+const isFontAwesome = computed(() => props.iconName && props.iconName.startsWith('fa-'));
+
 const closeModal = () => {
   isModalOpen.value = false;
 };
 const openModal = () => {
   isModalOpen.value = true;
 };
-
-const isFontAswesome = props.iconName && props.iconName.startsWith('fa-');
 
 </script>
 <style lang="scss" scoped>
