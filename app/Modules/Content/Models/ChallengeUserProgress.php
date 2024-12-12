@@ -129,12 +129,13 @@ class ChallengeUserProgress extends Model
                 $unlockDate = Carbon::parse($lesson['unlock_date']);
                 $endDate = max($endDate, $unlockDate);
             }
+            $endDate = $endDate->toISOString();
         } else {
             $endDate = $startDate;
         }
         return [
             'start_date' => $startDate,
-            'end_date' => $endDate->toISOString(),
+            'end_date' => $endDate,
         ];
     }
 
@@ -148,72 +149,72 @@ class ChallengeUserProgress extends Model
 
         // Get today's date in the user's timezone
         $today = Carbon::parse(Carbon::now()->timezone($userTimezone)->startOfDay()->toDateTimeString());
+        if ($this->is_active){
+            foreach ($this->lessons_meta_data as $lesson) {
+                // Users today in their timezone should always compare directly with what unlock_date is in the DB
+                $unlockDate = Carbon::parse($lesson['unlock_date'])->startOfDay();
+                $completedAt = isset($lesson['completed_at']) ? Carbon::parse($lesson['completed_at']) : null;
+                $isCurriculumLesson = self::isCurriculumMetadataLesson($lesson);
 
-        foreach ($this->lessons_meta_data as $lesson) {
-            // Users today in their timezone should always compare directly with what unlock_date is in the DB
-            $unlockDate = Carbon::parse($lesson['unlock_date'])->startOfDay();
-            $completedAt = isset($lesson['completed_at']) ? Carbon::parse($lesson['completed_at']) : null;
-            $isCurriculumLesson = self::isCurriculumMetadataLesson($lesson);
-
-            // Skip lessons that are always unlocked, bonus, or unlock in the future
-            if (!$isCurriculumLesson || $unlockDate->gt($today)) {
-                continue;
-            }
-
-            // If the lesson doesn't have a "rest_day_used" field, initialize it
-            $lesson['rest_day_used'] = $lesson['rest_day_used'] ?? false;
-
-            // If the lesson unlock date is today, the user has until the end of the day to complete it
-            // If it's already marked as a rest day, make sure to count for that
-            if ($unlockDate->isSameDay($today) && !$completedAt) {
-                if ($lesson['rest_day_used']) {
-                    $totalRestDaysUsed++; // Track total rest days used
+                // Skip lessons that are always unlocked, bonus, or unlock in the future
+                if (!$isCurriculumLesson || $unlockDate->gt($today)) {
+                    continue;
                 }
 
-                continue;
-            }
+                // If the lesson doesn't have a "rest_day_used" field, initialize it
+                $lesson['rest_day_used'] = $lesson['rest_day_used'] ?? false;
 
-            // If the lesson was completed on its unlock date, it does NOT trigger a shift or use a rest day
-            // EVen if the user completed this day, if its marked as a rest day we still must decrease the rest day count
-            if ($completedAt && $completedAt->isSameDay($unlockDate)) {
-                if ($lesson['rest_day_used']) {
-                    $totalRestDaysUsed++; // Track total rest days used
+                // If the lesson unlock date is today, the user has until the end of the day to complete it
+                // If it's already marked as a rest day, make sure to count for that
+                if ($unlockDate->isSameDay($today) && !$completedAt) {
+                    if ($lesson['rest_day_used']) {
+                        $totalRestDaysUsed++; // Track total rest days used
+                    }
+
+                    continue;
                 }
 
-                $currentStreak++;
-                $bestStreak = max($bestStreak, $currentStreak);
-                continue;
-            }
-
-            // If the lesson has `rest_day_used = true`, do not count it as missed and maintain the streak but do not increase it
-            if ($lesson['rest_day_used']) {
-                $totalRestDaysUsed++; // Track total rest days used
-
-                // if they did complete the lesson when it was rescheduled to, increase their streak even if it was a rest day
+                // If the lesson was completed on its unlock date, it does NOT trigger a shift or use a rest day
+                // EVen if the user completed this day, if its marked as a rest day we still must decrease the rest day count
                 if ($completedAt && $completedAt->isSameDay($unlockDate)) {
+                    if ($lesson['rest_day_used']) {
+                        $totalRestDaysUsed++; // Track total rest days used
+                    }
+
                     $currentStreak++;
                     $bestStreak = max($bestStreak, $currentStreak);
+                    continue;
                 }
-            }
 
-            // If the lesson is not completed and is a past lesson, and did not use a rest day, consider it missed.
-            // If the lesson was completed, but it was at a later day than the unlock date, it should break the streak,
-            // but it should not count as a missed day.
-            if ((!$lesson['completed'] && !$today->isSameDay($unlockDate)) ||
-                (!empty($lesson['completed']) && !$completedAt->isSameDay($unlockDate))) {
-                $currentStreak = 0; // Reset streak if the lesson was missed
-            }
+                // If the lesson has `rest_day_used = true`, do not count it as missed and maintain the streak but do not increase it
+                if ($lesson['rest_day_used']) {
+                    $totalRestDaysUsed++; // Track total rest days used
 
-            // We only add missed lessons if it has never been completed. Students can go back to previous uncompleted
-            // days and complete them to reduce their missed lesson count.
-            // Doing so does not increase or restart their streak though.
-            if (!$lesson['completed']) {
-                $missedLessons++;
-            }
+                    // if they did complete the lesson when it was rescheduled to, increase their streak even if it was a rest day
+                    if ($completedAt && $completedAt->isSameDay($unlockDate)) {
+                        $currentStreak++;
+                        $bestStreak = max($bestStreak, $currentStreak);
+                    }
+                }
 
-            $bestStreak = max($bestStreak, $currentStreak);
+                // If the lesson is not completed and is a past lesson, and did not use a rest day, consider it missed.
+                // If the lesson was completed, but it was at a later day than the unlock date, it should break the streak,
+                // but it should not count as a missed day.
+                if ((!$lesson['completed'] && !$today->isSameDay($unlockDate)) ||
+                    (!empty($lesson['completed']) && !$completedAt->isSameDay($unlockDate))) {
+                    $currentStreak = 0; // Reset streak if the lesson was missed
+                }
+
+                // We only add missed lessons if it has never been completed. Students can go back to previous uncompleted
+                // days and complete them to reduce their missed lesson count.
+                // Doing so does not increase or restart their streak though.
+                if (!$lesson['completed']) {
+                    $missedLessons++;
+                }
+
+                $bestStreak = max($bestStreak, $currentStreak);
+            }
         }
-
         // Calculate the remaining rest days based on how many days explicitly used a rest day
         $remainingRestDays = max(0, $this->current_rest_days - $totalRestDaysUsed);
 
@@ -359,6 +360,7 @@ class ChallengeUserProgress extends Model
      */
     public function getCompletionPercent(): int
     {
+        if (!$this->is_active) return 0;
         $total = 0;
         $completed = 0;
         foreach ($this->lessons_meta_data as $lessons_meta_datum) {
