@@ -1,6 +1,6 @@
 import { DateTime, Duration } from 'luxon';
 import ContentHelpers from "../helper-functions/content.js";
-import {getDate} from "../../../../../utils";
+import { getDate, getDateFromIso } from "../../../../../utils";
 
 export default class ContentModel {
     constructor({ brand = 'drumeo', post }) {
@@ -121,7 +121,7 @@ export default class ContentModel {
 
     get postPublisedOn() {
         if(this.post.type == 'challenge-part'){
-            return getDate(this.post.unlock_date);
+            return getDateFromIso(this.post.unlock_date);
         } else if (this.post.quarter_published) {
             return getDate(this.post.quarter_published);
         }
