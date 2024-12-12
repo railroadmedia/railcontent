@@ -37,8 +37,6 @@ class ContentSearchRequest extends FormRequest
             'limit' => ['nullable', 'integer', 'gte:1', 'required_with:page'],
             'sort' => ['nullable', 'string'],
             'included_types' => ['nullable', 'array'],
-            'included_types.*' => new Enum(DocumentType::class),
-            // TODO do we need this?
             'include_future_scheduled_content_only' => ['nullable', 'boolean'],
         ];
     }
