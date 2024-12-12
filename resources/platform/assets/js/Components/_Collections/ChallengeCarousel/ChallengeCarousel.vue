@@ -2,7 +2,6 @@
     <div class="tw-flex tw-flex-nowrap tw-overflow-x-scroll tw-no-scrollbar lg:tw-grid tw-grid-cols-2 tw-gap-[6px] 2xl:tw-gap-[10px]">
         <SkeletonChallengeCarousel v-if="isLoading" v-for="n in 2" :key="n" />
         <template v-else v-for="card in preLoadedContent">
-            <!-- TODO(challenge): updated content_url to web_url_path -->
             <NewLearningPathCard
                 v-if="card.type === 'onboarding'"
                 :key="card.id"
@@ -11,7 +10,7 @@
                 :description="card.subheader"
                 :logo="card.logo"
                 :ctaText="card.ctaText"
-                :ctaUrl="card.button?.content_url"
+                :ctaUrl="card.button?.web_url_path"
                 :bgImg="card.bgImg"
                 :wideImg="card.wideImg"
                 :squareImg="card.squareImg"

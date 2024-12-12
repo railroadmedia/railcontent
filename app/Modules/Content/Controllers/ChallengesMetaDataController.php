@@ -19,7 +19,6 @@ class ChallengesMetaDataController extends Controller
 {
     public function __construct(
         private ChallengesService $challengesService,
-        private CohortService $cohortService,
         private ChallengesAwardService $challengesAwardService,
     ) {
     }
@@ -47,6 +46,7 @@ class ChallengesMetaDataController extends Controller
         $isEnrolled = $userProgress?->is_active ?? false;
         $hasCompletedChallenge = !is_null($userProgress?->last_completed_date);
 
+        $isNotified = $this->challengesService->isUserNotifiedForChallenge($challengeId, user(), ChallengesService::ENROLLMENT_NOTIFICATION_KEY);
         $enrollmentClosedDate = Carbon::parse($enrollmentPageData['enrollment_end_time']);
         $enrollmentClosed = !$enrollmentPageData['is_solo'] && $enrollmentClosedDate < Carbon::now();
 
@@ -58,7 +58,7 @@ class ChallengesMetaDataController extends Controller
             ??
             config('railcontent.cohort_timeline_image_urls')['pianote'];
         $enrollmentPageData['has_completed_challenge'] = $hasCompletedChallenge;
-
+        $enrollmentPageData['is_notified'] = $isNotified;
         $view = $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
 
         return view($view, [

@@ -685,7 +685,7 @@ class SanityGateway
             $pageParams['isChallenge'] = true;
         }
         $contentCard['button'] = [
-            'content_url' => $content['web_url_path'],
+            'web_url_path' => $content['web_url_path'],
             'page_type' => $pageType,
             'page_params' => $pageParams,
         ];

@@ -674,6 +674,21 @@ class ChallengesService
         );
     }
 
+    public function isUserNotifiedForChallenge($challengeId, $user, $notificationKey): bool
+    {
+        if (!$user) {
+            return false;
+        }
+        $musoraWorkspace = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
+        $customerIO = $this->customerIoService->getCustomerByEmail($musoraWorkspace, $user->email);
+        if (is_null($customerIO)) {
+            return false;
+        }
+        $existingNotifications = json_decode($customerIO->getExternalAttributes()[$notificationKey] ?? '[]');
+        return in_array($challengeId, $existingNotifications);
+    }
+
+
     /**
      * Return the date of the last day of the challenge
      * @param array $challenge - Sanity challenge document
