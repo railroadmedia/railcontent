@@ -119,6 +119,8 @@ class UserPlaylistsController extends BaseController
                                                                'total_results' => count($otherItems),
                                                            ]))->toResponseRawJson();
         $playlistItem = $otherItems->where('user_playlist_item_id', '=', $playlistItemId)->first();
+        throw_if((!$playlistItem), new NotFoundHttpException());
+
         $position = $otherItems->search(function ($item) use ($playlistItemId) {
             return $item['user_playlist_item_id'] == $playlistItemId;
         });
