@@ -74,8 +74,6 @@ export default class ContentModel {
         } else if (Array.isArray(this.post.instructors)) {
             return this.post.instructors.join(', ');
         }
-
-        return '';
     }
 
     getInstructors() {
@@ -122,8 +120,8 @@ export default class ContentModel {
     }
 
     get postPublisedOn() {
-        if(this.post.is_locked && this.post.type == 'challenge-part'){
-            return getDate(this.post.unlock_date.slice(0, 19));
+        if(this.post.type == 'challenge-part'){
+            return getDate(this.post.unlock_date);
         } else if (this.post.quarter_published) {
             return getDate(this.post.quarter_published);
         }

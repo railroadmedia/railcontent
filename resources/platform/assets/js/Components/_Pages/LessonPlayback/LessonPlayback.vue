@@ -120,7 +120,7 @@
             <section v-if="!noAccess" class="tw-col-span-3 xl:tw-row-span-2"
                 :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`">
                 <!-- Chapters -->
-                <VideoChapters v-if="videoData?.chapters?.length && isWorkout" :chapters="videoData.chapters"
+                <VideoChapters v-if="videoData?.chapters?.length && (isWorkout || isChallengePart)" :chapters="videoData.chapters"
                     @open-slice="openSlice" @seek-to-chapter="seekToChapter" />
 
                 <!-- Assignments -->
@@ -443,6 +443,10 @@ const closeChallengeCompletionModal = () => {
 
 const isWorkout = computed(() => {
     return videoData.value.type === 'workout';
+})
+
+const isChallengePart = computed(() => {
+    return videoData.value.type === 'challenge-part';
 })
 
 const breadcrumbsData = computed(() => {

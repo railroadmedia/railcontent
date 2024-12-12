@@ -1,7 +1,7 @@
 <template>
     <!-- DESKTOP -->
-    <div :style="{ backgroundImage: `url(${calculatedBgImg})` }"
-        class="tw-hidden xl:tw-flex tw-relative tw-overflow-hidden tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-h-[272px] 3xl:tw-h-[295px] 4xl:tw-h-[330px] tw-mr-[10px] lg:tw-mr-0 tw-bg-cover tw-bg-center">
+    <div class="tw-hidden xl:tw-flex tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-h-[272px] 3xl:tw-h-[295px] 4xl:tw-h-[330px] tw-mr-[10px] lg:tw-mr-0">
+        <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-center tw-rounded-[18px]" :src="calculatedBgImg" :alt="`${title} background image`" />
         <div class="tw-flex tw-absolute tw-w-full tw-h-full tw-backdrop-blur-sm tw-p-[20px] lg:tw-p-[30px]"
             :style="{ background: 'linear-gradient(270deg, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.5) 45.09%, #000000 100%)' }">
             <div
@@ -43,8 +43,8 @@
     </div>
 
     <!-- MOBILE -->
-    <div :style="{ backgroundImage: `url(${calculatedBgImg})` }"
-         class="tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-shrink-0 tw-bg-cover tw-bg-center">
+    <div class="tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-shrink-0">
+        <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-center tw-rounded-[18px]" :src="calculatedBgImg" :alt="`${title} background image`" />
         <div class="tw-flex tw-flex-col tw-items-center tw-absolute tw-w-full tw-h-full tw-p-[20px] tw-rounded-[10px]" :class="contentType !== 'challenge' ? 'tw-backdrop-blur-sm' : ''"
              :style="{
         background: contentType === 'challenge' ?

@@ -98,7 +98,23 @@ class SanityGateway
                 is_always_unlocked_for_challenge,
                 is_bonus_content_for_challenge,
                 video,
-                parent_content_data
+                parent_content_data,
+                "chapters": chapter[]{
+                    chapter_description,
+                    chapter_timecode,
+                    "chapter_thumbnail_url": chapter_thumbnail_url.asset->url
+                },
+                "assignments":assignment[]{
+                    "id": railcontent_id,
+                    "soundslice_slug": assignment_soundslice,
+                    "title": assignment_title,
+                    "sheet_music_image_url": assignment_sheet_music_image,
+                    "timecode": assignment_timecode,
+                    "description": assignment_description,
+                    "title":assignment_title,
+                },
+                soundslice_slug,
+                "resources": resource,
             }',
             'product_id',
             'is_banner_draft',
@@ -363,10 +379,11 @@ class SanityGateway
         $cardStatusQuery = $isAdmin ? '' : '&& is_banner_draft != true';
         $challengeFields = $this->getFieldsString('challenge');
         $publishedOnString = $this->getPublishedFilter(false);
+        $now = now()->toISOString();
+        $enrollmentDateString = " && enrollment_start_time <= '$now' && '$now' <= enrollment_end_time";
         $query = "*[_type == 'challenge'
-            && enrollment_start_time <= now()
-            && enrollment_end_time >= now()
             && brand == '$brand'
+            $enrollmentDateString
             $publishedOnString
             $cardStatusQuery]{
             $challengeFields,
