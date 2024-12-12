@@ -220,12 +220,11 @@
         <!-- PROGRESS INDICATOR OR LOCK ICON -->
         <div class="flex tw-flex-col icon-col tw-justify-center" :class="is_search || overview ? 'hide-xs-only' : ''">
 
-            <!-- LOCK ICON OR ADD TO CALENDAR -->
-            <div v-if="noAccess" class="body tw-inline-flex tw-h-full tw-items-center"
+            <!-- LOCK ICON -->
+            <div v-if="noAccess || !isReleased" class="body tw-inline-flex tw-h-full tw-items-center"
                  tabindex="0"
-                 :class="isBranchPath ? branchPathText : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'"
-                 title="Add to Calendar" data-open-modal="addToCalendarModal" @click="addEvent">
-                <i class="fas flex-center rounded" :class="isReleased ? 'fa-lock' : 'fa-calendar-plus'"></i>
+                 :class="isBranchPath ? branchPathText : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'">
+                <i class="fas flex-center rounded fa-lock"></i>
             </div>
 
             <!-- STARTED OR COMPLETED -->
