@@ -65,6 +65,8 @@ export default class ContentModel {
     }
 
     get postInstructor() {
+        if(this.post.artist_name) return this.post.artist_name; //Does not account for multiples..
+
         const instructor = this.getPostField('instructor') || this.post.instructors;
 
         if(Array.isArray(instructor)){
@@ -73,7 +75,7 @@ export default class ContentModel {
             return this.post.instructors.join(', ');
         }
 
-        return 'Instructor';
+        return '';
     }
 
     getInstructors() {
@@ -120,7 +122,7 @@ export default class ContentModel {
     }
 
     get postPublisedOn() {
-        if(this.post.type == 'challenge-part'){
+        if(this.post.is_locked && this.post.type == 'challenge-part'){
             return getDate(this.post.unlock_date.slice(0, 19));
         } else if (this.post.quarter_published) {
             return getDate(this.post.quarter_published);
