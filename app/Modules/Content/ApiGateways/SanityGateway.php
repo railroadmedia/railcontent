@@ -122,6 +122,7 @@ class SanityGateway
             "instrumentless",
             "high_soundslice_slug",
             "low_soundslice_slug",
+            'soundslice',
             "'chapters': chapter[]{
                     chapter_description,
                     chapter_timecode,
