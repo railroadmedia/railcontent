@@ -217,11 +217,6 @@ class ChallengesService
         // Assign the formatted lesson to the `lesson` object and add relevant challenge data
         if ($isLesson) { // This is on the lesson's index page
             $nextPreviousLesson = $this->getPreviousAndNextLesson($contentId, $challengeLessons);
-            // This was originally needed for carousel buttons, but that logic has been moved elsewhere.
-            // I'm commenting this out incase I've forgotten some other wierd use case and need to revert
-//            $firstIncompleteLesson = $this->getFirstIncompleteCirriculumLesson($challengeLessons, $progressData);
-//            $nextPreviousLesson['next_lesson'] = $firstIncompleteLesson;
-
             foreach ($challengeLessons as $lesson) {
                 if ($lesson['id'] == $contentId) {
                     $lessonDocument = $lesson;
@@ -247,7 +242,8 @@ class ChallengesService
                 $challengeLessons = $temp;
             }
         } else {
-            // format the duration of the challenge
+            $firstIncompleteLesson = $this->getFirstIncompleteCirriculumLesson($challengeLessons, $progressData);
+            $nextPreviousLesson['next_lesson'] = $firstIncompleteLesson;
             if ($userData['is_active']) {
                 $startDate = Carbon::parse($userData['start_date']);
                 $endDate = Carbon::parse($userData['end_date']);

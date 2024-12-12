@@ -243,17 +243,30 @@ class SanityStudioCMSController extends BaseController
         $urlDecorator = app()->make(UrlDecorator::class);
 
         if ($request->get('_type') === 'permission') {
-            $permissionService = app()->make(PermissionService::class);
-            $permission = $permissionService->getByName($request->get('name'));
-            if (!$permission) {
-                $permission = $permissionService->create($request->get('name'), $request->get('brand'));
+            $query = \App\Modules\Content\Models\Permission::query();
+            if($request->has('railcontent_id')) {
+                $permission = $query->where('id', '=', $request->get('railcontent_id'))->first();
+                    }else{
+                $permission = $query->where('name', '=', $request->get('name'))->first();
             }
-            return $permission;
+            if (!$permission) {
+                $permission = new \App\Modules\Content\Models\Permission();
+            }
+            $permission->name = $request->get('name');
+            $permission->brand = $request->get('brand');
+            $permission->sanity_ref = str_replace('drafts.','',$request->get('_id'));
+            $permission->save();
+            return ['railcontent_id'=> $permission->id];
         } else {
             $updatedContents = [];
             $lessonType = $this->getLessonType($request->get('_type'));
             $content = $this->findOrCreateContent($request, $lessonType);
             $assignments = $content->setAssignments($request->get('assignment'));
+            if($request->has('permission')){
+                $sanityPermissionsRef = collect($request->get('permission'))->pluck('_ref')->toArray();
+                $rcPermissions = \App\Modules\Content\Models\Permission::query()->whereIn('sanity_ref',$sanityPermissionsRef)->get();
+                $content->setPermissions(collect($rcPermissions)->pluck('id')->toArray());
+            }
 
             if($request->has('childrenArray')){
                 $chilrens = $request->get('childrenArray');
