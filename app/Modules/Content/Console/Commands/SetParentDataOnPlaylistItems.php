@@ -18,12 +18,12 @@ class SetParentDataOnPlaylistItems extends Command
     public function handle()
     {
         DB::statement("
-             UPDATE railcontent_user_playlist_content rpc
+              UPDATE railcontent_user_playlist_content rpc
 JOIN railcontent_content rc ON rpc.content_id = rc.id
 SET rpc.content_parent = JSON_UNQUOTE(
     JSON_EXTRACT(
         rc.parent_content_data,
-        CONCAT('$[', JSON_LENGTH(rc.parent_content_data) - 1, '].id')
+        '$[0].id'
     )
 )
 WHERE rc.parent_content_data IS NOT NULL AND JSON_LENGTH(rc.parent_content_data) > 0;

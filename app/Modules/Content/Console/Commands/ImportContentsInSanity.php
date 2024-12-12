@@ -425,8 +425,6 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $this->info("No data to import for $contentType");
             return;
         }
-        $vimeoVideos = [];
-
 
         $directory = resource_path() . '/sanitystudio';
         if ($deleteOldDocuments == "true") {
@@ -837,7 +835,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             'total_xp'         => (int)$result->total_xp,
             'show_in_new_feed' => $result->show_in_new_feed == 1,
             "web_url_path"     => $result->web_url_path,
-            "popularity"       => $result->popularity
+            "popularity"       => (int)$result->popularity
         ];
         if ($type == 'song') {
             $sanityDocuments['instrumentless'] = $result->instrumentless == 1;
@@ -1163,6 +1161,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         if ($vimeoData) {
                             $sanityDocuments['video']['hlsManifestUrl'] = $vimeoData['hlsManifestUrl'];
                             $sanityDocuments['video']['video_playback_endpoints'] = json_decode($vimeoData['video_playback_endpoints']);
+                            $sanityDocuments['video']['video_poster_image_url'] = $vimeoData['video_poster_image_url'] ?? null;
                             $length = $vimeoData['length_in_seconds'] ?? $sanityDocuments['length_in_seconds'];
                             $sanityDocuments['length_in_seconds'] = (int) $length;
                         }

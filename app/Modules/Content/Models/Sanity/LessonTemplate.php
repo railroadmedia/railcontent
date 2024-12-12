@@ -46,6 +46,7 @@ abstract class LessonTemplate extends BaseSanityModel
                         new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
                         new Field(FieldType::String, 'external_id', inputComponent: 'VimeoVideoInput'),
                         new Field(FieldType::String, 'hlsManifestUrl'),
+                        new Field(FieldType::String, 'video_poster_image_url'),
                         new Field(FieldType::Array, 'video_playback_endpoints', title:'video_playback_endpoints', of: new ListObject(
                             fields: [
                                 new Field(FieldType::String, 'vimeo_key'),
