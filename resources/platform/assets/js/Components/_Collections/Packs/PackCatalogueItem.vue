@@ -109,9 +109,9 @@
                     class="tw-flex tw-items-center tw-mt-3 sm:tw-mt-0"
                 >
                     <!-- Action button  -->
-                    <a :href="!noAccess ? packURL : null" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-mb-0 tw-flex-grow action" :class="progressButtonColor">
-                        <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> {{ progressText }}
-
+                    <a v-if="!noAccess" :href="packURL" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-mb-0 tw-flex-grow action" :class="progressButtonColor">
+                        <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> 
+                        {{ progressText }}
                     </a>
                     <button
                         v-if="progressText === 'Completed'"
