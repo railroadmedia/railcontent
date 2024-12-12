@@ -39,11 +39,13 @@ class ChallengesMetaDataController extends Controller
         $challengeId = $enrollmentPageData['id'];
         $nPackOwners = $this->challengesService->getActiveUsersCount($challengeId);
 
-        $isEnrolled = user() && (ChallengeUserProgress::whereChallengeIdAndUser(
+        $userProgress = user() ? ChallengeUserProgress::whereChallengeIdAndUser(
                 $challengeId,
                 user()->id
-            )?->is_active ?? false);
+            ) : null;
 
+        $isEnrolled = $userProgress?->is_active ?? false;
+        $hasCompletedChallenge = !is_null($userProgress?->last_completed_date);
 
         $enrollmentClosedDate = Carbon::parse($enrollmentPageData['enrollment_end_time']);
         $enrollmentClosed = !$enrollmentPageData['is_solo'] && $enrollmentClosedDate < Carbon::now();
@@ -55,6 +57,7 @@ class ChallengesMetaDataController extends Controller
             config('railcontent.cohort_timeline_image_urls')[brand()]
             ??
             config('railcontent.cohort_timeline_image_urls')['pianote'];
+        $enrollmentPageData['has_completed_challenge'] = $hasCompletedChallenge;
 
         $view = $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
 
