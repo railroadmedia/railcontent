@@ -149,7 +149,7 @@
             </div>
 
             <!-- Final Animation -->
-            <Vue3Lot tie v-if="isChallengeCompleted && !hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="completionAnimations.completed.styles" :animation-link="completionAnimations.completed[brand]" width="100%" height="100%" :loop="false" />
+            <Vue3Lottie v-if="isChallengeCompleted && !hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="completionAnimations.completed.styles" :animation-link="completionAnimations.completed[brand]" width="100%" height="100%" :loop="false" />
         </div>
 
         <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-700" :class="showAchievement ? 'tw-opacity-1 tw-z-10' : 'tw-opacity-0 tw-z-0'">
