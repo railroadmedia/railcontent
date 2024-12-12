@@ -428,8 +428,11 @@ class ChallengeUserProgress extends Model
         return null;
     }
 
-    public static function shiftUnlockDaysIfRestDayUsed(ChallengeUserProgress $challengeUserProgress): ChallengeUserProgress
+    public static function shiftUnlockDaysIfRestDayUsed(?ChallengeUserProgress $challengeUserProgress): ?ChallengeUserProgress
     {
+        if (!$challengeUserProgress) {
+            return null;
+        }
         $remainingRestDays = $challengeUserProgress->current_rest_days;
         $totalShiftDays = 0; // Total days to shift future unlocks (limited by total rest days)
         $userTimezone = UserTimezoneService::getUsersCurrentTimezone();
