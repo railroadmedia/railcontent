@@ -32,6 +32,7 @@ class OnboardingContentCard extends BaseSanityModel
             $formattedAllowedTypes[] = ['type' => $allowedType];
         }
         $contentFields = new ListObject( fields:[
+            new Field( FieldType::Boolean, 'is_draft', 'Is Draft'),
             new Field(FieldType::Reference, 'content', 'Content', to: $formattedAllowedTypes, validation: [new Required()]),
             new Field(FieldType::String, 'header', "Header", validation: [new Required()]),
             new Field(FieldType::String, 'subheader', "Sub Header", validation: [new Required()]),
@@ -45,17 +46,15 @@ class OnboardingContentCard extends BaseSanityModel
         $fields = [
             new Field(FieldType::String, 'description', "Description", readOnly: "true"),
             new BrandField(),
-            new Field(FieldType::String, 'access_level', "AccessLevel", validation: [new Required()], options: [
+            new Field(FieldType::String, 'access_level', "AccessLevel", validation: [new Required()], readOnly: "true", options: [
                 'list' => ['plus', 'basic'],
                 'layout' => 'dropdown'
             ]),
-            new Field(FieldType::String, 'experience_level', "Experience Level", validation: [new Required()], options: [
+            new Field(FieldType::String, 'experience_level', "Experience Level", validation: [new Required()], readOnly: "true", options: [
                 'list' => ['New', 'Beginner', 'Intermediate', 'Advanced', 'Expert'],
                 'layout' => 'dropdown'
             ]),
-
-            new Field(FieldType::Object, 'first_content', 'First Content', fields: $contentFields->fields),
-            new Field(FieldType::Object, 'second_content', 'Second Content', fields: $contentFields->fields),
+            new Field(FieldType::Array, 'card', 'Content Cards', of: $contentFields),
 
         ];
         $preview = new ListItemPreview('description');

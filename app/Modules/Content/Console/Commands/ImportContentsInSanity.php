@@ -1339,6 +1339,26 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     if (!$content1Document && !$content2Document) {
                         continue;
                     }
+                    $contentReferences = [
+                        [
+                            ...$this->getOnboardingCardContentFields($contentTuple[0]),
+                            'is_draft' => false,
+                            'content' => [
+                                "_type" => "reference",
+                                "_ref"  => $content1Document['_id'],
+                                "_weak" => false
+                            ],
+                        ],
+                        [
+                            ...$this->getOnboardingCardContentFields($contentTuple[1]),
+                            'is_draft' => false,
+                            'content' => [
+                                "_type" => "reference",
+                                "_ref"  => $content2Document['_id'],
+                                "_weak" => false
+                            ],
+                        ]
+                    ];
 
                     $structuredCards[] = [
                         '_type' => 'onboarding-content-card',
@@ -1347,22 +1367,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'brand' => $brand,
                         'access_level' => $accessLevel,
                         'experience_level' => $difficultyString,
-                        'first_content' => [
-                            ...$this->getOnboardingCardContentFields($contentTuple[0]),
-                            'content' => [
-                                "_type" => "reference",
-                                "_ref"  => $content1Document['_id'],
-                                "_weak" => false
-                            ],
-                        ],
-                        'second_content' => [
-                            ...$this->getOnboardingCardContentFields($contentTuple[1]),
-                            'content' => [
-                                "_type" => "reference",
-                                "_ref"  => $content2Document['_id'],
-                                "_weak" => false
-                            ],
-                        ],
+                        'card' => $contentReferences,
                     ];
                 }
             }

@@ -90,15 +90,12 @@ class LearningPathsService
                 ->experience_level ?? 0
         );
         $difficultyString = OnboardingSkillLevelEnum::tryFrom($experienceLevel)->name;
-        $document = $this->sanityGateway->getOnboardingCard($brand, $user->membership_level, $difficultyString) ?? [];
+        $document = $this->sanityGateway->getOnboardingCard($brand, $user->membership_level, $difficultyString, user()->isAdmin()) ?? [];
 
         if (empty($document)) {
             return [];
         }
 
-        return [
-            $document['first_content'],
-            $document['second_content'],
-        ];
+        return $document['card'];
     }
 }

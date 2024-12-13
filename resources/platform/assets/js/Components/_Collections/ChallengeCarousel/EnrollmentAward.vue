@@ -293,6 +293,11 @@ const isUserEnrolled = computed(() => {
     return props.challenge.is_user_enrolled;
 })
 
+const isUserNotified = computed(() => {
+    return props.challenge.is_user_notified;
+})
+
+
 const numberOfLessons = computed(() => {
     return props.challenge?.child_count;
 })
@@ -338,6 +343,7 @@ const ctaObj = computed(() => {
 
         //When enrollment is not opened
         //TODO(challenge): add conditional for when user is registered for notification
+        // Adrian Dec 13: You use isUserNotified.value to check
         if(!isEnrollmentOpened.value){
             obj.text = 'Get Notified';
             obj.icon = "fa-sharp fa-light fa-bell";

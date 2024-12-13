@@ -17,7 +17,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402199, "type" => 'Lesson'],
-                            "content_url" => '/drumeo/workouts/challenges/30-day-drummer/402199'
+                            "content_url" => '/drumeo/challenge/30-day-drummer/402199'
                         ],
                     ],
                     [
@@ -47,7 +47,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 405781, "type" => 'Lesson'],
-                            "content_url" => '/drumeo/workouts/challenges/groove-independence/405781'
+                            "content_url" => '/drumeo/challenge/groove-independence/405781'
                         ],
                     ],
                     [
@@ -77,7 +77,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 409875, "type" => 'Lesson'],
-                            "content_url" => '/drumeo/workouts/challenges/30-day-independence/409875'
+                            "content_url" => '/drumeo/challenge/30-day-independence/409875'
                         ],
                     ],
                     [
@@ -165,7 +165,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402199, "type" => 'Lesson'],
-                            "content_url" => '/drumeo/workouts/challenges/30-day-drummer/402199'
+                            "content_url" => '/drumeo/challenge/30-day-drummer/402199'
                         ],
                     ],
                     [
@@ -195,7 +195,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 405781, "type" => 'Lesson'],
-                            "content_url" => '/drumeo/workouts/challenges/groove-independence/405781'
+                            "content_url" => '/drumeo/challenge/groove-independence/405781'
                         ],
                     ],
                     [
@@ -225,7 +225,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 409875, "type" => 'Lesson'],
-                            "content_url" => '/drumeo/workouts/challenges/30-day-independence/409875'
+                            "content_url" => '/drumeo/challenge/30-day-independence/409875'
                         ],
                     ],
                     [
@@ -312,7 +312,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402201, "type" => 'Lesson'],
-                            "content_url" => '/pianote/workouts/challenges/new-piano-players-start-here/402201'
+                            "content_url" => '/pianote/challenge/new-piano-players-start-here/402201'
                         ],
                     ],
                     [
@@ -342,7 +342,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402201, "type" => 'Lesson'],
-                            "content_url" => '/pianote/workouts/challenges/new-piano-players-start-here/402201'
+                            "content_url" => '/pianote/challenge/new-piano-players-start-here/402201'
                         ],
                     ],
                     [
@@ -373,7 +373,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402196, "type" => 'Lesson'],
-                            "content_url" => '/pianote/workouts/challenges/30-day-blues/402196'
+                            "content_url" => '/pianote/challenge/30-day-blues/402196'
                         ],
                     ],
                     [
@@ -405,7 +405,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 404657, "type" => 'Lesson'],
-                            "content_url" => '/pianote/workouts/challenges/30-days-to-better-technique/404657'
+                            "content_url" => '/pianote/challenge/30-days-to-better-technique/404657'
                         ],
                     ],
                     [
@@ -437,7 +437,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 404657, "type" => 'Lesson'],
-                            "content_url" => '/pianote/workouts/challenges/30-days-to-better-technique/404657'
+                            "content_url" => '/pianote/challenge/30-days-to-better-technique/404657'
                         ],
                     ],
                     [
@@ -470,7 +470,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402201, "type" => 'Lesson'],
-                            "content_url" => '/pianote/workouts/challenges/new-piano-players-start-here/402201'
+                            "content_url" => '/pianote/challenge/new-piano-players-start-here/402201'
                         ],
                     ],
                     [
@@ -499,7 +499,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402201, "type" => 'Lesson'],
-                            "content_url" => '/pianote/workouts/challenges/new-piano-players-start-here/402201'
+                            "content_url" => '/pianote/challenge/new-piano-players-start-here/402201'
                         ],
                     ],
                     [
@@ -528,7 +528,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402196, "type" => 'Lesson'],
-                            "content_url" => '/pianote/workouts/challenges/30-day-blues/402196'
+                            "content_url" => '/pianote/challenge/30-day-blues/402196'
                         ],
                     ],
                     [
@@ -558,7 +558,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 404657, "type" => 'Lesson'],
-                            "content_url" => '/pianote/workouts/challenges/30-days-to-better-technique/404657'
+                            "content_url" => '/pianote/challenge/30-days-to-better-technique/404657'
                         ],
                     ],
                     [
@@ -588,7 +588,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 404657, "type" => 'Lesson'],
-                            "content_url" => '/pianote/workouts/challenges/30-days-to-better-technique/404657'
+                            "content_url" => '/pianote/challenge/30-days-to-better-technique/404657'
                         ],
                     ],
                     [
@@ -621,7 +621,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402198, "type" => 'Lesson'],
-                            "content_url" => '/guitareo/workouts/challenges/acoustic-guitarists-start-here/402198'
+                            "content_url" => '/guitareo/challenge/acoustic-guitarists-start-here/402198'
                         ],
                     ],
                     [
@@ -651,7 +651,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 410037, "type" => 'Lesson'],
-                            "content_url" => '/guitareo/workouts/challenges/30-days-to-better-strumming/410037'
+                            "content_url" => '/guitareo/challenge/30-days-to-better-strumming/410037'
                         ],
                     ],
                     [
@@ -767,7 +767,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402198, "type" => 'Lesson'],
-                            "content_url" => '/guitareo/workouts/challenges/acoustic-guitarists-start-here/402198'
+                            "content_url" => '/guitareo/challenge/acoustic-guitarists-start-here/402198'
                         ],
                     ],
                     [
@@ -797,7 +797,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 410037, "type" => 'Lesson'],
-                            "content_url" => '/guitareo/workouts/challenges/30-days-to-better-strumming/410037'
+                            "content_url" => '/guitareo/challenge/30-days-to-better-strumming/410037'
                         ],
                     ],
                     [
@@ -911,7 +911,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402200, "type" => 'Lesson'],
-                            "content_url" => '/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                            "content_url" => '/singeo/challenge/sing-better-in-30-days/402200'
                         ],
                     ],
                     [
@@ -941,7 +941,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402200, "type" => 'Lesson'],
-                            "content_url" => '/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                            "content_url" => '/singeo/challenge/sing-better-in-30-days/402200'
                         ],
                     ],
                     [
@@ -1059,7 +1059,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402200, "type" => 'Lesson'],
-                            "content_url" => '/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                            "content_url" => '/singeo/challenge/sing-better-in-30-days/402200'
                         ],
                     ],
                     [
@@ -1089,7 +1089,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402200, "type" => 'Lesson'],
-                            "content_url" => '/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                            "content_url" => '/singeo/challenge/sing-better-in-30-days/402200'
                         ],
                     ],
                     [
