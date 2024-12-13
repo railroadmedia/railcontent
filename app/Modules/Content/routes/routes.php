@@ -110,6 +110,11 @@ Route::prefix('content')
             'search',
             [ContentSearchController::class, 'search']
         )->name('content.search');
+
+        Route::get(
+            'live-chat',
+            [ContentMetadataController::class, 'getChatData']
+        )->name('content.live.chat');
     });
 
 Route::prefix('challenges')
