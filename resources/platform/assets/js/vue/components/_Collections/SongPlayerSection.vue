@@ -165,7 +165,7 @@
     import ContentLessonActionButtons from '../../vuesora/components/VideoResources/ContentLessonActionButtons.vue';
     import SoundSlice from "@collections/SoundSlice/SoundSlice.vue"
     import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
-    import { contentStatusCompleted, resetContentProgress } from 'musora-content-services';
+    import { contentStatusCompleted, contentStatusReset } from 'musora-content-services';
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '../../../stores/user';
 
@@ -217,7 +217,7 @@
                 callbacks: {
                     submit: () => {
                         lessonProgressRef.value = null;
-                        resetContentProgress(props.contentId)
+                        contentStatusReset(props.contentId)
                             .then((resolved) => {
                                 if (resolved) {
                                     window.shownotification({

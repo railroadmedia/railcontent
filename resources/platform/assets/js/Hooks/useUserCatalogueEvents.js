@@ -1,4 +1,4 @@
-import { resetContentProgress } from 'musora-content-services';
+import { contentStatusReset } from 'musora-content-services';
 
 export default function useUserCatalogueEvents(props, context) {
     function progressReset(event) {
@@ -61,7 +61,7 @@ export default function useUserCatalogueEvents(props, context) {
     }
 
     function resetProgressEventHandler(payload) {
-        return resetContentProgress(payload.content_id);
+        return contentStatusReset(payload.content_id);
     }
 
     function addEvent(payload) {

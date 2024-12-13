@@ -178,7 +178,7 @@ import SoundSlice from "@collections/SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import MembershipUpgradeSongCover from '../MembershipUpgradeSongCover/MembershipUpgradeSongCover';
 import DraftLabel from '@units/DraftLabel/DraftLabel';
-import { getProgressPercentage, contentStatusCompleted, resetContentProgress } from 'musora-content-services';
+import { getProgressPercentage, contentStatusCompleted, contentStatusReset } from 'musora-content-services';
 
 const userStore = useUserStore();
 const { brand, userId, userEmail, userDisplayName } = storeToRefs(userStore);
@@ -238,7 +238,7 @@ const markSongAsComplete = () => {
             callbacks: {
                 submit: () => {
                     lessonProgressRef.value = null;
-                    resetContentProgress(props.contentId)
+                    contentStatusReset(props.contentId)
                         .then((resolved) => {
                             if (resolved) {
                                 window.shownotification({
