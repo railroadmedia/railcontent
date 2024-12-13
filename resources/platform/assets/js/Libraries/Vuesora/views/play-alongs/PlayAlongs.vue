@@ -81,7 +81,7 @@ import InputLabel from "@units/InputLabel/InputLabel.vue";
 import { bgColor, textColor } from "@constants/brands";
 import { useFilterValues } from "@hooks/useFilterValues";
 import { useUserStore } from '@stores/user.js';
-import { fetchAll, fetchPlayAlongsCount } from 'musora-content-services';
+import { fetchAll, fetchPlayAlongsCount, contentStatusCompleted, resetContentProgress } from 'musora-content-services';
 import { usePlatformStore } from "@stores/platform";
 import { storeToRefs } from "pinia/dist/pinia";
 import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
@@ -790,9 +790,9 @@ export default {
         completedEventHandler(id) {
             const contentToComplete = this.content.find(item => item.id === id);
             if (contentToComplete.completed === true) {
-                ContentService.resetContentProgress(id);
+                resetContentProgress(id);
             } else {
-                ContentService.markContentAsComplete(id);
+                contentStatusCompleted(id);
             }
             contentToComplete.completed = !contentToComplete.completed;
         },

@@ -87,7 +87,6 @@ const uniqueSettings = reactive({
     audioSource: null,
 });
 
-
 // computed
 
 const trackingPayload = () => {

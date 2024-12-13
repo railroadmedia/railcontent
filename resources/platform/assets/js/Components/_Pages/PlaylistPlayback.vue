@@ -15,7 +15,6 @@ import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import ContentInfo from '@collections/ContentInfo/ContentInfo.vue';
 import VideoChapters from '@collections/VideoChapters/VideoChapters.vue';
 import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
-import ContentService from "@vuesora/assets/js/Services/content";
 import Comments from '@vuesora/views/comments/Comments.vue';
 import VideoMediaElement from '@vuesora/Components/MediaElement/MediaElement.vue';
 import VideoPlayer from '@vuesora/Components/VideoPlayer/VideoPlayer.vue';
@@ -26,6 +25,8 @@ import Helpscout from '@vuesora/assets/js/Services/helpscout';
 import AssignmentsContainer from '@vuesora/Components/AssignmentsContainer/AssignmentsContainer.vue';
 import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 import {usePlatformStore} from "@stores/platform";
+import { contentStatusCompleted } from 'musora-content-services';
+import content from '@vuesora/assets/js/Services/content';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -364,8 +365,8 @@ const showVideoChapters = computed(() => {
 
 //Methods
 const handleVideoPlay = (payload) => {
-    if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
-        ContentService.markContentAsStarted(payload.contentId);
+    if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {    
+        sendProgressTrackerEvent()
     }
     if (progressTracker == null) {
         progressTracker = new ProgressTracker();
@@ -378,8 +379,6 @@ const handleVideoPlay = (payload) => {
 };
 
 const sendProgressTrackerEvent = () => {
-
-    // REMOVE VIDEO DATA AND REPLACE PROPERLY
     if (progressTracker) {
         progressTracker.send({
             mediaType: 'video',
@@ -411,7 +410,7 @@ const handleVideoPause = () => {
 
 const handleVideoEnd = () => {
     sendProgressTrackerEvent();
-    ContentService.markContentAsComplete(props.contentId);
+    contentStatusCompleted(props.contentId);
 };
 
 const openSlice = (title, index, startAt, loop) => {soundsliceTitle.value = title;
