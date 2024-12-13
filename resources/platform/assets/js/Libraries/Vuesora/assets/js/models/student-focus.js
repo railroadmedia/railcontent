@@ -15,7 +15,7 @@ export default class StudentFocusContentModel extends ContentModel {
         this.card.content_type = `${this.card.content_type} Lesson`;
 
         this.list.color_title = this.postInstructor ? this.postInstructor : '';
-        this.list.thumbnail = this.post?.thumbnail_url ? this.post.thumbnail_url : fallBackThumb;
+        this.list.thumbnail = this.post?.thumbnail ? this.post.thumbnail : fallBackThumb;
         this.list.column_data = [
             this.getPostDuration(),
             this.postPublisedOn,
