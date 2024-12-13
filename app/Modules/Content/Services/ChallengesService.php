@@ -388,6 +388,7 @@ class ChallengesService
                         'Unlocked';
                     $challengeMetaDataToReturn = [
                         'is_user_enrolled' => true,
+                        'is_locked' => $userProgress->is_locked,
                         'progress_percent' => $userProgress->getCompletionPercent(),
                         'duration_text' => $durationText,
                         'is_solo' => $userProgress['is_solo'],
@@ -403,6 +404,7 @@ class ChallengesService
                     );
                     $challengeMetaDataToReturn = [
                         'is_user_enrolled' => true,
+                        'is_locked' => $userProgress->is_locked,
                         'progress_percent' => 100,
                         'duration_text' => $durationText,
                         'is_solo' => $challenge['is_solo'],
@@ -413,8 +415,10 @@ class ChallengesService
                 }
             }
             if (is_null($challengeMetaDataToReturn)) {
+                $isEnrolled = !($userProgress?->is_locked ?? true);
                 $challengeMetaDataToReturn = [
-                    'is_user_enrolled' => false,
+                    'is_user_enrolled' => $isEnrolled,
+                    'is_locked' => $userProgress?->is_locked ?? true,
                     'progress_percent' => 0,
                     'duration_text' => $this->getDurationText(
                         Carbon::parse($challenge['published_on']),
