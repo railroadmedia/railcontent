@@ -70,7 +70,6 @@
             <!-- Playlist section add arrows -->
             <ListSection
                 v-if="usersList.length"
-                :newContentUrl="newContentUrl"
                 :usersList="playlistsStore.playlists"
                 :my-list-url="`/${brand}/playlists`"
             />

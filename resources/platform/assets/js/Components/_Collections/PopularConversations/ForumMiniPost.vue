@@ -2,7 +2,7 @@
     <div class="tw-flex tw-flex-nowrap sm:tw-flex-wrap tw-transition-colors tw-flex-col tw-min-w-[340px] sm:tw-min-w-0 sm:tw-w-[340px] lg:tw-w-auto tw-rounded-md pa-2 hover:tw-shadow-lg dark:hover:tw-bg-[#081825] tw-border tw-border-transparent dark:hover:tw-border-[#223F57]">
         <a :href="url" class="tw-flex tw-flex-row tw-no-underline tw-flex-1">
             <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col">
-                <UserAvatar 
+                <UserAvatar
                     :access-level="authorAccessLevel"
                     :avatar-image="avatar"
                     :name="author"
@@ -46,15 +46,15 @@
 
     //Props
     const props = defineProps({
-        authorAccessLevel: String, 
+        authorAccessLevel: String,
         author: String,
         avatar: String,
         content: String,
         date: String,
-        rank: String, 
+        rank: String,
         title: String,
         url: String,
-        xp: String,
+        xp: [String, Number],
     });
 
     //Computed Props
