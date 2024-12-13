@@ -571,9 +571,8 @@ class ChallengesService
         $lessonData = $this->getCurrentLessonData($lessonId, $userId, isLesson: true, lessonDocument: $lessonDocument,challenge: $challenge);
         $active = true;
         $motivationalText = [];
-        // TODO this was removed for system test
-        // users that uncomplete and recomplete a previous lesson shouldn't get a popup modal, and $active is the flag that indicates to FEW/MA to not show
-        if (!$userProgress->is_locked ) { //|| !$lessonsProgress['added_to_streak']) {
+
+        if (!$userProgress->is_locked || !ChallengeUserProgress::isCurriculumSanityLesson($lessonData['lesson'])) {
             $active = false;
         } elseif ($lessonsProgress['is_milestone']) {
             $milestone = $isChallengeCompleted ? 'complete' : $lessonData['user_data']['current_streak'];
