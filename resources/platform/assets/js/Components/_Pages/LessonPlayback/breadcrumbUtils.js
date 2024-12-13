@@ -120,7 +120,7 @@ export const getBreadcrumbs = (data, brand) => {
                 });
                 breadcrumb.pages.push({
                     title: parseLessonTypeReadable(data.parent_content_data[0].slug) ?? '',
-                    url: `/${brand}/packs/${data.parent_content_data[0].slug}/${data.parent_content_data[0]?.id}`
+                    url: `/${brand}/packs/${data.parent_content_data[1].slug}/${data.parent_content_data[1]?.id}`
                 });
                 breadcrumb.pages.push({
                     title: data.title
