@@ -571,8 +571,8 @@ class ChallengesService
         $lessonData = $this->getCurrentLessonData($lessonId, $userId, isLesson: true, lessonDocument: $lessonDocument,challenge: $challenge);
         $active = true;
         $motivationalText = [];
-        
-        if (!$userProgress->is_locked || !ChallengeUserProgress::isCurriculumSanityLesson($lessonData['lesson'])) { //|| !$lessonsProgress['added_to_streak']) {
+
+        if (!$userProgress->is_locked || !ChallengeUserProgress::isCurriculumSanityLesson($lessonData['lesson'])) {
             $active = false;
         } elseif ($lessonsProgress['is_milestone']) {
             $milestone = $isChallengeCompleted ? 'complete' : $lessonData['user_data']['current_streak'];
