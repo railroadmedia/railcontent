@@ -7,6 +7,7 @@ use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Modules\Content\ApiGateways\SanityGateway;
+use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventTracking\Avo\AvoHelper;
@@ -43,7 +44,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class HomePageController extends BaseController
 {
     private const int DEFAULT_CONTENT_COUNT = 20;
-    private const int STARTED_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
     private const int RECSYS_CONTENT_COUNT = 50;
     private const int WORKOUTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
     private const int NEW_RELEASES_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
@@ -58,6 +58,9 @@ class HomePageController extends BaseController
         private readonly PackService $packService,
         private readonly DatabaseManager $databaseManager,
         private readonly UserContentProgressService $userContentProgressService,
+        // NOTE: Challenges/Sanity launch: Old carousel not needed anymore (for now), so it's commented out
+        // "just don't lose the code" - BUTLER, Chris; circa Dec 2024
+        // private readonly CarouselService $carouselService,
         private readonly CohortService $cohortService,
         private readonly OnboardingService $onboardingService,
         private readonly UserAccessPermissionsService $userAccessPermissionsService,
@@ -219,6 +222,8 @@ class HomePageController extends BaseController
             }
         }
 
+        // $carousel = $this->carouselService->getCarouselSlides();
+
         $brand = brand();
 
         $cohortBanner = [];
@@ -268,6 +273,7 @@ class HomePageController extends BaseController
         return view('home.index', [
             "brand" => $brand,
             "calendarId" => $currentEventCalendarId ?? null,
+            // "carousel" => $carousel,
             "coachEvent" => content_to_json([$currentEvent]),
             "cohortBanner" => json_encode($cohortBanner),
             "completedLevelsUrl" => $methodContent['url'] ?? '',

@@ -23,6 +23,11 @@
                 :preLoadedContent="data?.carousels"
             />
 
+            <!-- NOTE: Challenges/Sanity launch: Old carousel not needed anymore (for now), so it's commented out -->
+            <!-- "just don't lose the code" - BUTLER, Chris; circa Dec 2024 -->
+            <!-- Header carousel -->
+            <!-- <HeaderCarousel v-if="!isV2User" :preloadedCarousel="carousel" trackingSection="banner" /> -->
+
             <!-- Cohort banner -->
             <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
 
@@ -209,6 +214,7 @@
         nextLearningPathProgressPercent: { type: Number, default: 0 },
 
         // Array props
+        // carousel: { type: Array, default: () => ([]) },
         cohortBanner: { type: Array, default: () => ([]) },
         conversationData: { type: Array, default: () => ([]) },
         packData: { type: Array, default: () => ([]) },

@@ -10,6 +10,7 @@
         :is-pack-only="false"
         account-url="{{ user()->getDashboardUrl() }}"
         calendar-id="{{ $calendarId }}"
+        {{-- :carousel="{{ json_encode($carousel) }}" --}}
         :cohort-banner="{{ $cohortBanner }}"
         content-endpoint="/railcontent/content"
         continue-url="{{ url()->route('platform.lesson-history.in-progress') }}"
