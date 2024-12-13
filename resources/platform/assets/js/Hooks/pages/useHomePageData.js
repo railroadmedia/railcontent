@@ -10,10 +10,10 @@ export async function useHomePageData(brand, isPackOrChallengeOnly) {
     // Only pack or challenge users
     if(isPackOrChallengeOnly){
         const [challenges, packs, carousels] = await Promise.all([
-            fetchAll(brand.value, 'challenge', {
+            fetchAll(brand, 'challenge', {
                 limit: 30,
             }),
-            fetchAll(brand.value, 'pack', {
+            fetchAll(brand, 'pack', {
                 limit: 30,
             }),
             fetchCarouselCardData(brand),
