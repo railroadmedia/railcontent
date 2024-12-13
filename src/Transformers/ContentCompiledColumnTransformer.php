@@ -55,14 +55,14 @@ class ContentCompiledColumnTransformer
 
         $userPermissions = [];
 
-        if (isset($this->userPermissionsCache[user()->id]) && $userExists) {
+        if ($userExists && isset($this->userPermissionsCache[user()->id])) {
             $userPermissions = $this->userPermissionsCache[user()->id];
         } elseif ($userExists && !isset($this->userPermissionsCache[user()->id])) {
             $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
             $this->userPermissionsCache[user()->id] = $userPermissions;
         }
 
-        $userPermissionIds = Arr::pluck($userPermissions, 'permission_id');
+        $userPermissionIds = !empty($userPermissionIds) ? Arr::pluck($userPermissions, 'permission_id') : [];
         $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
         if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
             $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
