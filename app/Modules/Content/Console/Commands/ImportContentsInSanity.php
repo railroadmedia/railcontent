@@ -643,7 +643,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     $songs['assignments_total_xp'] = $songs['assignments_total_xp'] + 25;
                     $assignmentSheetMusicImage = collect($hierarchy->child->data->where('key', '=', 'sheet_music_image_url')->pluck('value')->toArray())
                         ->map(fn ($url) => [
-                            '_type' => FieldType::URL->value,
+                            '_type' => FieldType::URL->name,
                             'url' => $url
                         ])->toArray();
                     $songs["assignment"][] = [
