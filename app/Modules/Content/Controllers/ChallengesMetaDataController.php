@@ -45,6 +45,7 @@ class ChallengesMetaDataController extends Controller
 
         $isEnrolled = $userProgress?->is_active ?? false;
         $hasCompletedChallenge = !is_null($userProgress?->last_completed_date);
+        $lastCompletionDate = $userProgress?->last_completed_date->toISOString();
 
         $isNotified = $this->challengesService->isUserNotifiedForChallenge($challengeId, user(), ChallengesService::ENROLLMENT_NOTIFICATION_KEY);
         $enrollmentClosedDate = Carbon::parse($enrollmentPageData['enrollment_end_time']);
@@ -59,6 +60,7 @@ class ChallengesMetaDataController extends Controller
             config('railcontent.cohort_timeline_image_urls')['pianote'];
         $enrollmentPageData['has_completed_challenge'] = $hasCompletedChallenge;
         $enrollmentPageData['is_notified'] = $isNotified;
+        $enrollmentPageData['last_completion_date'] = $lastCompletionDate;
         $view = $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
 
         return view($view, [
