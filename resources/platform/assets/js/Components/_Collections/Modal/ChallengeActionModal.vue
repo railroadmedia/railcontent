@@ -103,7 +103,7 @@ const buttonAction = async () => {
     try {
         if(isUnlockModal.value){
             const unlock = await postChallengesUnlock(props.challenge?.id);
-            window.location.reload();
+            window.location.href = props.challenge.web_url_path;
         } else if(isRetakeModal.value){
             const retake = await postChallengesEnroll(props.challenge?.id);
             emit('postRetake');
