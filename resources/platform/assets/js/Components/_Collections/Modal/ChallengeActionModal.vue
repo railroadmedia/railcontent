@@ -85,7 +85,7 @@ const descriptionText = computed(() => {
     } else if(isRetakeModal.value){
         return `You completed ${props.challenge?.title} on August 23, 2024. You can retake the challenge to improve your streak and earn a new certificate. Your previously earned badges will remain unaffected.`;
     } else if(isLeaveModal.value){
-        return `Leaving the ${props.challenge?.title} will delete your progress`;
+        return `Leaving ${props.challenge?.title} will delete your progress`;
     }
 })
 
