@@ -18,7 +18,7 @@
         <catalogue
             catalogue-type="{{ $catalogueType }}"
             :lesson-type="{{ json_encode($lessonType) }}"
-            :catalogue-meta="{{ json_encode($catalogueMeta) }}"
+            {{-- :catalogue-meta="{{ json_encode($catalogueMeta) }}" --}}
             :breadcrumbs="{{ json_encode($breadcrumbs) }}"
             :session-token="{{ json_encode(railtracker_session_token()) }}"
             ask-question-recipient="{{ $askQuestionRecipient }}"
