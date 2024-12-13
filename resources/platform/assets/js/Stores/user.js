@@ -164,7 +164,6 @@ export const useUserStore = defineStore({
     async updateProfile(data) {
       try {
           const response = await updateUserProfile(this.token, this.userId, data);
-          console.log('user store', response)
 
           //Update Pinia values if they exist
           data.hasOwnProperty('display_name') && (this.user.display_name = data.display_name);

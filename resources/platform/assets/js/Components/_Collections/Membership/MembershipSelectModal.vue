@@ -26,7 +26,6 @@ const props = defineProps({
 });
 
 const buildDescription = (upgradeCost) => {
-    console.log(upgradeCost)
     if (upgradeCost && upgradeCost > 0) {
         descriptions.value = {
             month: `By clicking "Pay Monthly", I agree to be billed immediately for a prorated upgrade cost of $${upgradeCost}. I understand that my next renewal will be $40 for Musora+ with Songs.`,

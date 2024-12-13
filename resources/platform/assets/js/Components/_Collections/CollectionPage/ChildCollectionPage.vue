@@ -105,7 +105,5 @@ onBeforeMount(async() => {
         queryType: props.contentType,
         collectionType: props.collectionName,
     });
-
-    console.log('data', data);
 })
 </script>
