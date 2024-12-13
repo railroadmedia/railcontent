@@ -163,9 +163,9 @@
 <script setup>
     import { ref, onBeforeMount} from 'vue';
     import ContentLessonActionButtons from '../../vuesora/components/VideoResources/ContentLessonActionButtons.vue';
-    import SoundSlice from "../../components/SoundSlice/SoundSlice.vue"
-    import SoundSliceControls from "../../components/SoundSlice/SoundSliceControls.vue";
-    import ContentService from "../../vuesora/assets/js/services/content";
+    import SoundSlice from "@collections/SoundSlice/SoundSlice.vue"
+    import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
+    import { contentStatusCompleted, resetContentProgress } from 'musora-content-services';
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '../../../stores/user';
 
@@ -217,7 +217,7 @@
                 callbacks: {
                     submit: () => {
                         lessonProgressRef.value = null;
-                        ContentService.resetContentProgress(props.contentId)
+                        resetContentProgress(props.contentId)
                             .then((resolved) => {
                                 if (resolved) {
                                     window.shownotification({
@@ -238,7 +238,7 @@
             });
         } else {
             lessonProgressRef.value = '100';
-            ContentService.markContentAsComplete(props.contentId).then(() => {
+            contentStatusCompleted(props.contentId).then(() => {
                 window.shownotification({
                     icon: 'check',
                     text: `You completed this song!`

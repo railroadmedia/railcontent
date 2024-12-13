@@ -1,4 +1,4 @@
-import ContentService from '../assets/js/Services/content';
+import { resetContentProgress } from 'musora-content-services';
 import {useResetProgress} from "@hooks/useResetProgress";
 
 export default {
@@ -69,7 +69,7 @@ export default {
         resetProgressEventHandler(payload) {
             const post_index = this.content.map(post => post.id).indexOf(payload.content_id);
 
-            ContentService.resetContentProgress(payload.content_id)
+            resetContentProgress(payload.content_id)
                 .then((response) => {
                     if (response) {
                         window.shownotification({

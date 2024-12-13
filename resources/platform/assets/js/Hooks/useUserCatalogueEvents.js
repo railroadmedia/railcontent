@@ -1,4 +1,4 @@
-import ContentService from '@vuesora/assets/js/Services/content';
+import { resetContentProgress } from 'musora-content-services';
 
 export default function useUserCatalogueEvents(props, context) {
     function progressReset(event) {
@@ -61,7 +61,7 @@ export default function useUserCatalogueEvents(props, context) {
     }
 
     function resetProgressEventHandler(payload) {
-        return ContentService.resetContentProgress(payload.content_id);
+        return resetContentProgress(payload.content_id);
     }
 
     function addEvent(payload) {
