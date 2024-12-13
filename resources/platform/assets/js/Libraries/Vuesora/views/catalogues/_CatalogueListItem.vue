@@ -261,9 +261,6 @@ export default {
       default: () => false,
     },
   },
-  mounted() {
-    console.log('this.item', this.item)
-  },
   computed: {
     mappedData() {
       const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty')?.value;

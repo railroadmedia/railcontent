@@ -166,6 +166,4 @@ watch(
 )
 
 const { getPageData, resetProgress, setOriginal, nextPage, prevPage, showPagination, isLastPage, isFirstPage } = useCarouselEvents(props.item.lessons, data, page, cardNum);
-
-console.log('group card',props.item)
 </script>
