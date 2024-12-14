@@ -322,7 +322,8 @@
         id: cohort['id'],
         title: cohort['title'],
         next_lesson: cohort['next_lesson'],
-        web_url_path: cohort['course_url']
+        web_url_path: cohort['course_url'],
+        last_completion_date: cohort['last_completion_date'],
       }"
       @post-retake="handlePostRetake"
     />

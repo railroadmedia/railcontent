@@ -79,11 +79,15 @@ const headerText = computed(() => {
     }
 })
 
+const lastCompletionDate = computed(() => {
+    return new Date(props.challenge?.last_completion_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+})
+
 const descriptionText = computed(() => {
     if(isUnlockModal.value){
         return `Unlocking the ${props.challenge?.title} will reset your current streak and rest days information. This action is irreversible.`;
     } else if(isRetakeModal.value){
-        return `You completed ${props.challenge?.title} on August 23, 2024. You can retake the challenge to improve your streak and earn a new certificate. Your previously earned badges will remain unaffected.`;
+        return `You completed ${props.challenge?.title} on ${lastCompletionDate.value}. You can retake the challenge to improve your streak and earn a new certificate. Your previously earned badges will remain unaffected.`;
     } else if(isLeaveModal.value){
         return `Leaving ${props.challenge?.title} will delete your progress`;
     }
