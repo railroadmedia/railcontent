@@ -49,7 +49,7 @@
                     <template v-else-if="isCommunityChallenge">
                         <div class="tw-my-2 tw-flex">
                             <!-- Avatars -->
-                            <div v-for="user in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :style="`background-image: url('https://www.musora.com/cdn-cgi/image/quality=90,width=50/${user.profile_picture_url}')`"></div>
+                            <div v-for="(user, index) in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-2' : ''" :style="`background-image: url('${user.profile_picture_url}')`"></div>
                         </div>
                         <p class="tw-text-sm tw-line-clamp-2 tw-mb-2">
                             Join <span class="tw-font-bold">{{ userNames }},</span> and <span class="tw-font-bold">{{ totalEnrolled }}</span> other {{ otherText }} who have already enrolled! Runs {{ durationText }}.
@@ -126,7 +126,7 @@
                 <template v-else-if="isCommunityChallenge">
                     <div class="tw-flex tw-mb-2 3xl:tw-mb-0">
                         <!-- Avatars -->
-                        <div v-for="user in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden tw-bg-cover tw-bg-center" :style="`background-image: url('https://www.musora.com/cdn-cgi/image/quality=90,width=50/${user.profile_picture_url}')`"></div>
+                        <div v-for="(user, index) in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-2' : ''" :style="`background-image: url('${user.profile_picture_url}')`"></div>
                     </div>
                     <p class="tw-text-sm tw-line-clamp-3 tw-mb-2 tw-text-center">
                         Join <span class="tw-font-bold">{{ userNames }},</span> and <span class="tw-font-bold">{{ totalEnrolled }}</span> other {{ otherText }} who have already enrolled! Runs {{ durationText }}.
