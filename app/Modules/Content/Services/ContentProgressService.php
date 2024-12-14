@@ -9,6 +9,7 @@ use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\RailTracker\Models\MediaPlaybackSession;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
+use Railroad\Railcontent\Services\ContentService;
 
 class ContentProgressService
 {
@@ -78,20 +79,27 @@ class ContentProgressService
 
     private function getParentIds($contentId): array
     {
-        //        TODO: Integrate allowed types
-        //        $allowedTypesForStarted = array_merge(
-        //            config('railcontent.allowed_types_for_bubble_progress')[ProgressState::Started],
-        //            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
-        //        );
-        //        $allowedTypesForCompleted = array_merge(
-        //            config('railcontent.allowed_types_for_bubble_progress')[ProgressState::Completed],
-        //            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
-        //        );
-        //        $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
-
+//        $allowedTypesForStarted = array_merge(
+//            config('railcontent.allowed_types_for_bubble_progress')[ProgressState::Started->value],
+//            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
+//        );
+//        $allowedTypesForCompleted = array_merge(
+//            config('railcontent.allowed_types_for_bubble_progress')[ProgressState::Completed->value],
+//            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
+//        );
+//        $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
+        $statuses = [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_UNLISTED];
         return ContentHierarchy::query()
+            ->leftJoin(
+                'railcontent_content',
+                'railcontent_content_hierarchy.parent_id',
+                '=',
+                'railcontent_content.id'
+            )
             ->where('child_id', $contentId)
             ->whereNotNull('parent_id')
+            //->whereIn('railcontent_content.type', $allowedTypes)
+            ->whereIn('railcontent_content.status', $statuses)
             ->pluck('parent_id')
             ->toArray();
     }
