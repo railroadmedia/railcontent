@@ -186,6 +186,7 @@ const desktopShowDropdown = ref(false);
 const mobileShowDropdown = ref(false);
 const isAwardModalOpen = ref(false);
 const isGetNotifiedModalOpen = ref(false);
+const isUserNotified = ref(props.challenge?.is_user_notified);
 
 const isSoloChallenge = computed(() => {
     return props.challenge.is_solo;
@@ -250,10 +251,6 @@ const mobileBGImage = computed(() => {
 
 })
 
-const testComputed = computed(() => {
-    return isDarkMode.value;
-})
-
 const logo = computed(() => {
     if(isAward.value && !isDarkMode.value){
         return props.challenge.light_mode_logo_url;
@@ -293,10 +290,6 @@ const isEnrollmentOpened = computed(() => {
 
 const isUserEnrolled = computed(() => {
     return props.challenge.is_user_enrolled;
-})
-
-const isUserNotified = computed(() => {
-    return props.challenge.is_user_notified;
 })
 
 const numberOfLessons = computed(() => {
@@ -379,8 +372,8 @@ const closeMobileDropdown = () => {
 const registerNotification = async () => {
     try {
         const response = await postChallengesEnrollmentNotification(props.challenge.id);
-
         isGetNotifiedModalOpen.value = true;
+        isUserNotified.value = true;
     } catch(e){
         window.shownotification({
             icon: 'error',
