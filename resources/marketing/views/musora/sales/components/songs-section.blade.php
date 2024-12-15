@@ -30,7 +30,8 @@
             <div class="w-full sm:w-auto text-left -mt-8 sm:mt-0 sm:pl-5 lg:pl-8 flex-shrink-0">
                 @foreach ($songItems as $key => $songItem)
                     <div class="flex my-10 lg:my-14 w-full">
-                        <div class="w-9 sm:w-12 lg:w-16 flex-grow-0"><img alt="point icon" src="https://www.musora.com/cdn-cgi/image/{{ $songItem['icon'] }}" class="h-6 sm:h-7 lg:h-8 @if($theme == 'musora') filter invert @endif opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"></div>
+                        <div class="w-9 sm:w-12 lg:w-16 flex-grow-0"><img alt="point icon" src="
+                        https://www.musora.com/cdn-cgi/image/quality=95/{{ $songItem['icon'] }}" class="h-6 sm:h-7 lg:h-8 @if($theme == 'musora') filter invert @endif opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"></div>
                         <div class="flex-grow pl-1 lg:pl-2">
                             <h5><strong>{!!$songItem['title']!!}</strong></h5>
                             <p class="mx-0 mt-1 sm:mt-2 text-sm" style="max-width: 270px;">{!! $songItem['desc'] !!}</p>

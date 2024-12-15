@@ -113,65 +113,40 @@
             <h5 class="border-y border-y-black py-4 mb-7 uppercase tracking-widest font-bold">GIVEAWAY</h5>
         </header>
 
-        <div class="text-white px-3 sm:px-6 lg:px-10 py-6 lg:py-10 mb-5 rounded-xl" style="background-color:#222;">
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="w-full lg:w-5/12 lg:pl-8 lg:order-1 text-left px-2 sm:px-0 mb-4 lg:mb-0">
-                    <img class="w-full max-w-md" style="border-radius: 1.75rem !important;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/musora/lead-gen/youtube/win3.jpg">
-                </div>
-                <div class="w-full lg:w-7/12 text-left giveaway-form">
-                    <h2 class="uppercase leading-none mb-2"><strong>WIN A SIGNED DRUM HEAD AND STICKS FROM WOLFGANG VAN HALEN</strong></h2>
-                    @if(Carbon\Carbon::create(2024, 12, 13, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                        <p class="leading-normal mb-1">
-                            <strong>Enter to win a signed snare drum head and a signed pair of drum sticks from Wolfgang Van Halen.</strong>
-                        </p>
-                        @include("drumeo.lead-gen.partials.sign-up-form", [
-                            "recaptchaKey" => $recaptchaKey,
-                            "formName" => 'WVH gear Giveaway',
-                            "formId" => "Drumeo - Engagement - Trigger - WVH gear Giveaway - Web Form",
-                            "buttonText" => "I WANT TO WIN",
-                            "minimalForm" => true,
-                            "buttonColor" => "bg-musora text-black",
-                            "redirectUrl" => "https://www.musora.com/thank-you",
-                        ])
-                        <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/lead-gen/youtube/wvh-t-and-c.pdf"><u>View Terms & Conditions</u></a><br>
-                            By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
+        @if(Carbon\Carbon::create(2024, 12, 13, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+            <div class="text-white px-3 sm:px-6 lg:px-10 py-6 lg:py-10 mb-5 rounded-xl" style="background-color:#222;">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="w-full lg:w-5/12 lg:pl-8 lg:order-1 text-left px-2 sm:px-0 mb-4 lg:mb-0">
+                        <img class="w-full max-w-md" style="border-radius: 1.75rem !important;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/musora/lead-gen/youtube/win3.jpg">
+                    </div>
+                    <div class="w-full lg:w-7/12 text-left giveaway-form">
+                        <h2 class="uppercase leading-none mb-2"><strong>WIN A SIGNED DRUM HEAD AND STICKS FROM WOLFGANG VAN HALEN</strong></h2>
+                            <p class="leading-normal mb-1">
+                                <strong>Enter to win a signed snare drum head and a signed pair of drum sticks from Wolfgang Van Halen.</strong>
+                            </p>
+                            @include("drumeo.lead-gen.partials.sign-up-form", [
+                                "recaptchaKey" => $recaptchaKey,
+                                "formName" => 'WVH gear Giveaway',
+                                "formId" => "Drumeo - Engagement - Trigger - WVH gear Giveaway - Web Form",
+                                "buttonText" => "I WANT TO WIN",
+                                "minimalForm" => true,
+                                "buttonColor" => "bg-musora text-black",
+                                "redirectUrl" => "https://www.musora.com/thank-you",
+                            ])
+                            <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/lead-gen/youtube/wvh-t-and-c.pdf"><u>View Terms & Conditions</u></a><br>
+                                By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
 
-                    @else
-                        <h4 class="leading-normal mb-1">This giveaway has ended.</h4>
-                    @endif
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
 
-        <div class="text-white px-3 sm:px-6 lg:px-10 py-6 lg:py-10 rounded-xl" style="background-color:#222;">
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="w-full lg:w-5/12 lg:pl-8 lg:order-1 text-left px-2 sm:px-0 mb-4 lg:mb-0">
-                    <img class="w-full max-w-md" style="border-radius: 1.75rem !important;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/musora/lead-gen/youtube/win2.jpg">
-                </div>
-                <div class="w-full lg:w-7/12 text-left giveaway-form">
-                    <h2 class="uppercase leading-none mb-2"><strong>WIN A COPY OF PHOBIA BY BREAKING BENJAMIN, SIGNED BY CHAD SZELIGA</strong></h2>
-                    @if(Carbon\Carbon::create(2024, 12, 07, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                    <p class="leading-normal mb-1">
-                        <strong>Enter to win one copy of Phobia, signed by former Breaking Benjamin drummer Chad Szeliga.</strong>
-                    </p>
-                    @include("drumeo.lead-gen.partials.sign-up-form", [
-                        "recaptchaKey" => $recaptchaKey,
-                        "formName" => 'Phobia Giveaway',
-                        "formId" => "Drumeo - Engagement - Trigger - Phobia Giveaway - Web Form",
-                        "buttonText" => "I WANT TO WIN",
-                        "minimalForm" => true,
-                        "buttonColor" => "bg-musora text-black",
-                        "redirectUrl" => "https://www.musora.com/thank-you",
-                    ])
-                    <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/lead-gen/youtube/phobia-t-and-c.pdf"><u>View Terms & Conditions</u></a><br>
-                        By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
-
-                    @else
-                        <h4 class="leading-normal mb-1">This giveaway has ended.</h4>
-                    @endif
-                </div>
-            </div>
-        </div>
+        <a href="https://www.drumeo.com/giveaways" class="relative bg-cover bg-center group block rounded-2xl w-full pb-48 sm:pb-96"
+            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaways-bg.jpg');">
+            <img class="h-24 sm:h-32 absolute top-1/2 left-1/2 z-10 transform -translate-y-1/2 -translate-x-1/2"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaways-logo2.png">
+            <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>
+        </a>
 
         <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold mt-10 md:mt-16 mb-7">Free Video Lessons</h5>
         @php
@@ -269,7 +244,7 @@
                                 alt="Musora Playlists"
                                 class="rounded-2xl transition-transform duration-300"
                             >
-                            <i class="fa-regular fa-arrow-up-right absolute top-2 right-2 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2"></i>
+                            <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2"></i>
                         </a>
 
                         <a href="/history" class="relative bg-cover bg-center block group">
@@ -278,7 +253,7 @@
                                 alt="Today in Music History"
                                 class="rounded-2xl transition-transform duration-300"
                             >
-                            <i class="fa-regular fa-arrow-up-right absolute top-2 right-2 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2"></i>
+                            <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2"></i>
                         </a>
                     </div>
             </div>

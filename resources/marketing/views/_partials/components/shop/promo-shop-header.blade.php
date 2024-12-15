@@ -55,7 +55,7 @@
             <img class="h-14 sm:h-24 lg:h-28 -mr-2 sm:mr-0 -mt-4 sm:-mt-8 absolute top-0 right-0 z-10 transform sm:translate-x-full" src="{{ $badge }}">
         @endif
     </div>
-    <div class="inset-0 inline-block sm:hidden absolute bg-center bg-cover z-0" style="background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $bg }}');"></div>
-    <div class="inset-0 hidden sm:inline-block absolute bg-center bg-cover z-0" style="background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/{{ $bg }}');"></div>
+    <div class="inset-0 inline-block sm:hidden absolute bg-center bg-cover z-0" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=800,quality=95/{{ $bg }}');"></div>
+    <div class="inset-0 hidden sm:inline-block absolute bg-center bg-cover z-0" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=2000,quality=95/{{ $bg }}');"></div>
     {{--    <div class="inset-0 absolute z-0" style="background-size: 400px;background-image: url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif);"></div>--}}
 </header>

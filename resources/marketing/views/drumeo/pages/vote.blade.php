@@ -20,21 +20,20 @@
         "cartVersion" => true
     ])
 
-    <main class="text-white py-8 sm:py-24 lg:py-36 px-4 bg-cover bg-top min-h-screen" 
+    <main class="text-white py-8 sm:py-24 lg:py-36 px-4 bg-cover bg-top min-h-screen"
         style="background-color: #000; background-image: url(https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/marketing/drumeo/promos/november/countdown-bg.webp); min-height: calc(100vh - 214px);">
-        <div class="container mx-auto max-w-4xl rounded-xl px-6 py-16" 
+        <div class="container mx-auto max-w-4xl rounded-xl px-6 py-16"
             style="background: linear-gradient(180deg, #102B46 0%, #0D182A 100%); border: 2px solid #37597F; box-shadow: 0 0 60px 0px #26344B;">
-            <div class="flex flex-col items-center">
-                <div class="text-white rounded-lg shadow-lg text-center">
-                    <div class="mb-6">
-                        <img src="https://www.musora.com/musora-cdn/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png" 
-                            alt="Drumeo Awards" class="mx-auto h-24 md:h-28">
-                    </div>
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-6">
+                    <img src="https://www.musora.com/cdn-cgi/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png"
+                        alt="Drumeo Awards" class="mx-auto h-24 md:h-28">
+                </div>
 
+                @if(Carbon\Carbon::create(2024, 12, 15, 21, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                     <h1 class="text-2xl md:text-4xl font-extrabold mb-2 leading-tight">The Countdown to <br class="md:hidden">Voting is On!</h1>
-                    <p class="text-sm md:text-2xl font-medium mb-8">Voting opens @ 12:00 AM Dec 16th.</p>
-
-                   <div class="flex flex-row justify-center gap-2 sm:gap-4 sm:gap-6" x-data="timer()" x-init="countdown()" x-cloak>
+                    <p class="text-sm md:text-2xl font-medium mb-8">Voting opens @ 9:00 PM Dec 16th.</p>
+                    <div class="flex flex-row justify-center gap-2 sm:gap-4 sm:gap-6" x-data="timer()" x-init="countdown()" x-cloak>
                         <div class="text-center" x-cloak x-show="timeLeft > 0">
                             <div class="border border-white rounded-lg p-4 sm:p-6 min-w-[64px] sm:min-w-[80px]">
                                 <div class="text-xl sm:text-3xl md:text-5xl font-black" x-text="String(day).padStart(2, '0')">00</div>
@@ -59,12 +58,14 @@
                             </div>
                             <p class="text-xs sm:text-sm mt-2">Seconds</p>
                         </div>
-                         <div class="mt-6 text-sm text-white font-black" x-cloak x-show="timeLeft < 0">
+                        <div class="mt-6 text-sm text-white font-black" x-cloak x-show="timeLeft < 0">
                             Voting is now open!
                         </div>
                     </div>
-                   
-                </div>
+                @else
+                    <h1 class="text-2xl md:text-4xl font-extrabold mb-8 leading-tight">Voting is now open!</h1>
+                    <a href="/beat/2024-awards" class="join smaller drumeo">Vote Now &raquo;</a>
+                @endif
             </div>
         </div>
     </main>

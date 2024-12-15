@@ -175,7 +175,6 @@ a {
         box-sizing: border-box;
         height: 100%;
         float: left;
-        font-size: 0;
         padding: 6px 5px 6px 0;
         @include tablet {
             padding: 15px 0;
@@ -233,7 +232,6 @@ a {
         box-sizing: border-box;
         height: 100%;
         float: right;
-        font-size: 0;
         padding: 6px 5px 6px 0;
         @include tablet {
             padding: 8px 0;

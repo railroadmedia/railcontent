@@ -220,7 +220,4 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
-    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
-    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

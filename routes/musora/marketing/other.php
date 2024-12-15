@@ -77,7 +77,7 @@ Route::domain('{musoraDomain}')
         Route::get('free-music-lessons-for-life', [MarketingController::class, 'freeMusicLessonsForLife']);
         Route::get('everyday-musician', [MarketingController::class, 'everyDayMusician']);
         Route::get('history', [MarketingController::class, 'history']);
-        Route::get('youtube', [MarketingController::class, 'youtube']);
+        Route::get('{youtube}', [MarketingController::class, 'youtube'])->where('youtube', '(?i)youtube');
         Route::get('youtube/free-resources', [MarketingController::class, 'freeResources']);
         Route::get('lifetime', [MarketingController::class, 'lifetimeDeal']);
         // Route::get('extend', [MarketingController::class, 'extend']);

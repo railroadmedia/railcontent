@@ -309,7 +309,6 @@
 @section('body-data')
     x-data ='{
         soundslice : false,
-        BFwaitlist : false,
         workoutVid : false,
         trailer : false,
         unbox : false,
@@ -334,14 +333,9 @@
     @elseif(!empty($promoVersion))
         @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
-            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
+            "hideMenu" => true,
         ])
-{{--        @include("pianote.sales.partials._nav", [--}}
-{{--            "subscriptionVersion" => true,--}}
-{{--            "scrollToJoin" => true,--}}
-{{--            "hideMenu" => true,--}}
-{{--        ])--}}
     @elseif(!empty($month))
         @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -356,27 +350,6 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-    @endif
-
-    @if(!empty($bfVersion))
-        @include('_partials.layout.holiday.homepage-top-banner',[
-            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/xm-banner.webp')",
-            'text' => 'Save up to 69% on <br class="sm:hidden">piano lessons, gear & more!',
-            'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
-            'vimeo' => '885338636',
-            'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024,pdbonus&locked=true',
-        ])
-
-        <div class="sticky-trigger block"></div>
-        <div href="#customize-anchor"
-            class="promo-banner anchor-slide text-white flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] -mt-20 transition-none"
-            style="background:linear-gradient(to bottom, #020306, #4d050d);">
-            @include($theme.'._partials.holiday-logo', [
-                'styles' => 'w-auto h-10 sm:h-14',
-                'isProductPage' => true,
-                'productPageStyles' => 'w-auto h-10 sm:h-14 p-1'
-            ])
-        </div>
     @endif
 
     @hasSection('top-bar')

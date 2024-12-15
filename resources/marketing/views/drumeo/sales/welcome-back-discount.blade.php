@@ -315,7 +315,7 @@
             <h2 class="leading-tight mb-5"><strong>Rejoin {{ ucfirst($theme) }} and save<br> on your membership.</strong></h2>
             <div id="plusOptions" class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto" x-bind:class="{ 'hidden': !plusMembershipSelected }">
                 <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                    <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&locked=true&promo-code=welcome-back" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo" aria-label="Plan">
+                    <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&locked=true&promo-code=welcome-back,WBD24" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo" aria-label="Plan">
                         <div class="bg-white px-3 py-6 md:py-9">
                             <h2 class="mb-1"><strong>Annual</strong></h2>
                             <p class="leading-tight text-sm"><em>+ 2 Bonuses Worth $254</em></p>
