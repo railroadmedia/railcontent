@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use League\Fractal\TransformerAbstract;
 use Modules\UserManagementSystem\Models\FirebaseToken;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railnotifications\Contracts\UserProviderInterface;
