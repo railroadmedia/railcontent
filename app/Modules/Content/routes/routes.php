@@ -242,5 +242,7 @@ Route::prefix('playlists')
         Route::put('/pin/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@pinPlaylist')->name('pin.playlist');
         Route::put('/unpin/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@unpinPlaylist')->name('unpin.playlist');
         Route::put('/report/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@reportPlaylist')->name('report.playlist');
+        Route::get('/play/{playlistId}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@playback')->name('playlist.playback');
+
 
     });

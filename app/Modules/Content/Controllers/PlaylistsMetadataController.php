@@ -836,4 +836,18 @@ the pin icon on or off.',
                                     'message' => 'This playlist has been reported.',
                                 ], 201);
     }
+
+    public function playback($playlistId, Request $request): JsonResponse
+    {
+        $playbackItemId = $this->playlistsService->getPlaylistNextItem($playlistId);
+
+        if (!$playbackItemId) {
+            return response()->json([
+                                        'success' => false,
+                                        'message' => 'Playlist not exists.',
+                                    ], 404);
+        }
+
+        return $this->getPlaylistItem($playbackItemId, $request);
+    }
 }
