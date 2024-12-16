@@ -715,6 +715,8 @@ class ChallengesService
 
     public function isUserNotifiedForChallenge($challengeId, $user, $notificationKey): bool
     {
+        // TP-731 - Spamming c.io
+        return false;
         if (!$user) {
             return false;
         }
