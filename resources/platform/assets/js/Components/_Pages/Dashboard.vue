@@ -120,7 +120,7 @@
                         <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[24px]">
                             <p class="body">
                                 <span class="tw-font-bold">Bio:&nbsp;</span>
-                                <template v-html="dashboardUser?.biography"></template>
+                                <div v-html="dashboardUser?.biography"></div>
                             </p>
                         </div>
                     </div>
