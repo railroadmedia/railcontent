@@ -394,7 +394,7 @@ class SanityGateway
         $filtered = [];
         foreach ($results as $document) {
             $this->postProcessDocument($document);
-            if(!$document['need_access']){ //filter out open enrollment challenges if they don't have access
+            if (!$document['need_access']) { //filter out open enrollment challenges if they don't have access
                 $filtered[] = $document;
             }
         }
@@ -422,7 +422,7 @@ class SanityGateway
         $filtered = [];
         foreach ($results as $document) {
             $this->postProcessDocument($document);
-            if(!$document['need_access']){ //filter out open enrollment challenges if they don't have access
+            if (!$document['need_access']) { //filter out open enrollment challenges if they don't have access
                 $filtered[] = $document;
             }
         }
@@ -514,7 +514,7 @@ class SanityGateway
      * @param string $slug - Challenge Slug value
      * @return array | null - matching challenge document or null
      */
-    public function getChallengeEnrollmentPageData(string $slug): array | null
+    public function getChallengeEnrollmentPageData(string $slug): array|null
     {
         $fieldsString = $this->getFieldsString('challenge-part');
         //$publishedOnString = $this->getPublishedFilter(true);
@@ -628,9 +628,11 @@ class SanityGateway
                   },
         } [0 ... 1]";
         $document = $this->sanity->fetch($query)[0] ?? null;
-        if (is_null($document) || is_null($document['card'])) return $document;
+        if (is_null($document) || is_null($document['card'])) {
+            return $document;
+        }
         $formattedCards = [];
-        foreach($document['card'] as $index => $content) {
+        foreach ($document['card'] as $index => $content) {
             if ($isAdmin || !$content['is_draft']) {
                 $formattedCards[] = $this->formatBannerCardParamaters($content);
             }
@@ -677,10 +679,13 @@ class SanityGateway
         }";
         $documents = $this->sanity->fetch($query) ?? null;
         $formattedCards = [];
-        foreach($documents as $index => $document) {
+        foreach ($documents as $index => $document) {
             if ($isAdmin || !$document['is_draft']) {
                 // TODO ADRIAN - how do we format this data?
-                $formattedCards[] = $document['content'] ? [...$this->formatBannerCardParamaters($document), $document['is_draft']] : $document;
+                $formattedCards[] = $document['content'] ? [
+                    ...$this->formatBannerCardParamaters($document),
+                    $document['is_draft']
+                ] : $document;
             }
         }
         return $formattedCards;
@@ -692,7 +697,7 @@ class SanityGateway
         $type = $content['_type'];
         $contentCard['content_type'] = $type;
         $contentCard['id'] = $content['railcontent_id'];
-        $pageType = match($content['_type']) {
+        $pageType = match ($content['_type']) {
             'challenge' => 'PackOverview',
             'workout' => 'Lesson',
             'course' => 'CourseOverview',
@@ -922,7 +927,7 @@ class SanityGateway
         }
 
 
-        $isAdmin = user()->isAdmin();
+        $isAdmin = user()?->isAdmin() ?? false;
         $userPermissionIds = $this->getPermissionIds();
         if ($document['type'] == 'challenge' && ($document['lessons'] ?? false)) {
             $this->processNeedsAccessForChildren($document['lessons'], $userPermissionIds, $isAdmin);
@@ -990,7 +995,7 @@ class SanityGateway
     {
         $now = Carbon::now()->toISOString();
 
-        if (user()->isAdmin()) {
+        if (user()?->isAdmin() ?? false) {
             $statuses = [
                 ContentService::STATUS_DRAFT,
                 ContentService::STATUS_SCHEDULED,
@@ -1040,6 +1045,9 @@ class SanityGateway
 
     private function getPermissionIds(): array
     {
+        if (!user()) {
+            return [];
+        }
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
         return \Arr::pluck($userPermissions, 'permission_id');
     }
