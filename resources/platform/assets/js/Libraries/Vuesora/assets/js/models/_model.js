@@ -21,6 +21,7 @@ import ShowModel from './show';
 import SongModel from './song';
 import SongPartModel from './song-part';
 import StudentFocusModel from './student-focus';
+import SearchResultModel from './search-result';
 import StudentReviewModel from './student-review';
 import QnaModel from './question-and-answer';
 import UnitContentModel from './unit';
@@ -43,7 +44,7 @@ export default class ContentTypeModel {
         isSearch = false,
     }) {
         if (isSearch) {
-            return new StudentFocusModel({ brand, post });
+            return new SearchResultModel({ brand, post });
         }
         switch (type) {
         case 'chord-and-scale': return new ChordsAndScalesModel({ brand, post });

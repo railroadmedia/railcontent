@@ -79,6 +79,7 @@ export const trapFocus = (element) => {
 
 export const contentTypes = {
     'learning-path-lesson': { singular: 'Method Lesson', plural: 'Method Lessons' },
+    'learning-path-level': { singular: 'Method Level', plural: 'Method Levels' },
     'learning-path-course': { singular: 'Course', plural: 'Courses' },
     'pack-lesson': { singular: 'Pack Lesson', plural: 'Pack Lessons' },
     'quick-tips': { singular: 'Quick Tip', plural: 'Quick Tips' },
