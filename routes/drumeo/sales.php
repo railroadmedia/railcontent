@@ -34,7 +34,7 @@ Route::domain('{drumeoDomain}')
         Route::get('/song-demo/', [SalesController::class, 'songDemo']);
         Route::get('/tom-sawyer/', [SalesController::class, 'tomSawyer']);
         Route::get('/drumfest', [SalesController::class, 'drumFest']);
-        Route::get('/awards/', [SalesController::class, 'awards']);
+        Route::get('/awards/previous-winners', [SalesController::class, 'awards']);
         Route::get('/sonor/', [SalesController::class, 'sonor']);
 
         Route::get('/alesis', [SalesController::class, 'alesisNitro']);
