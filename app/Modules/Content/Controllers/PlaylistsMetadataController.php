@@ -45,8 +45,9 @@ class PlaylistsMetadataController extends Controller
         $sort             = $request->get('sort', '-created_at');
         $term = $request->get('term');
         $itemIdToCheck = $request->get('content_id');
+        $categories = $request->get('categories', null);
 
-        $results = $this->playlistsService->getPlaylists($sort, $brand, $term, $limit, $page, $itemIdToCheck);
+        $results = $this->playlistsService->getPlaylists($sort, $brand, $term, $limit, $page, $itemIdToCheck, $categories);
 
         return response()->json($results);
     }
