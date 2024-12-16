@@ -131,7 +131,7 @@ class SearchParameters
     // internal settings
     protected bool $hasOptions;
 
-    public function __construct(public AlgoliaSearchService $algoliaSearchService, public string $query)
+    public function __construct(public AlgoliaSearchService $algoliaSearchService, public ?string $query)
     {
         $this->hasOptions = false;
     }
