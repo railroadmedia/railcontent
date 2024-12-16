@@ -487,16 +487,24 @@ class ChallengesService
     private function getFirstIncompleteCirriculumLesson($challengeLessons, $progressData)
     {
         foreach ($challengeLessons as $lesson) {
-            foreach ($progressData->lessons_meta_data as $userProgressLesson) {
-                if ($lesson['id'] == $userProgressLesson['content_id']) {
-                    $isCurriculumLesson = ChallengeUserProgress::isCurriculumMetadataLesson($userProgressLesson);
-                    $isCompleted = $userProgressLesson['completed'];
-                    if ($isCurriculumLesson && !$isCompleted) {
-                        return $lesson;
+            if ($progressData) {
+                foreach ($progressData->lessons_meta_data as $userProgressLesson) {
+                    if ($lesson['id'] == $userProgressLesson['content_id']) {
+                        $isCurriculumLesson = ChallengeUserProgress::isCurriculumMetadataLesson($userProgressLesson);
+                        $isCompleted = $userProgressLesson['completed'];
+                        if ($isCurriculumLesson && !$isCompleted) {
+                            return $lesson;
+                        }
                     }
+                }
+            } else {
+                $isCurriculumLesson = ChallengeUserProgress::isCurriculumSanityLesson($lesson);
+                if ($isCurriculumLesson) {
+                    return $lesson;
                 }
             }
         }
+
         return null;
     }
 
