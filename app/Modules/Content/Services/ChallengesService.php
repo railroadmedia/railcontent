@@ -487,7 +487,7 @@ class ChallengesService
     private function getFirstIncompleteCirriculumLesson($challengeLessons, $progressData)
     {
         foreach ($challengeLessons as $lesson) {
-            if ($progressData) {
+            if ($progressData?->is_active ?? false) {
                 foreach ($progressData->lessons_meta_data as $userProgressLesson) {
                     if ($lesson['id'] == $userProgressLesson['content_id']) {
                         $isCurriculumLesson = ChallengeUserProgress::isCurriculumMetadataLesson($userProgressLesson);
