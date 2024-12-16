@@ -17,7 +17,7 @@ class MigrateChallengeV2Progress extends Command
      *
      * @var string
      */
-    protected $signature = 'MigrateChallengeV2Progress';
+    protected $signature = 'MigrateChallengeV2Progress {startIndex=0}';
 
     /**
      * The console command description.
@@ -40,12 +40,13 @@ class MigrateChallengeV2Progress extends Command
      */
     public function handle(ChallengesService $challengesService, SanityGateway $sanityGateway): void
     {
-        $this->withExecutionTime(function () use ($sanityGateway, $challengesService) {
-            $this->migrate($challengesService, $sanityGateway);
+        $startIndex = (int)$this->argument('startIndex') ?? 0;
+        $this->withExecutionTime(function () use ($sanityGateway, $challengesService, $startIndex) {
+            $this->migrate($challengesService, $sanityGateway, $startIndex);
         });
     }
 
-    public function migrate(ChallengesService $challengesService, SanityGateway $sanityGateway): void
+    public function migrate(ChallengesService $challengesService, SanityGateway $sanityGateway, $startIndex): void
     {
         $minId = 63500000; //lines up with Nov 16th
         $challengesProgressLookup = ChallengeUserProgress::all()->keyBy(function ($userChallengeProgress) {
@@ -75,6 +76,10 @@ class MigrateChallengeV2Progress extends Command
         $total = count($userIds);
         $this->info("MigrateChallengeV2Progress:  $total users to process");
         foreach ($userIds as $userId) {
+            if ($processed < $startIndex) {
+                $processed++;
+                continue;
+            }
             Timer::afterSeconds(5, function () use ($processed, $total) {
                 $this->info("Processed $processed/$total users");
             });
@@ -104,7 +109,7 @@ class MigrateChallengeV2Progress extends Command
 
                 $hasCompletedLessons = $lessonCompletedLookup->count() > 0;
                 if ($hasCompletedLessons) {
-                    if (!$challengeProgress){
+                    if (!$challengeProgress) {
                         $challengeStartDate = Carbon::parse($challengeProgressData->started_on)->toDate();
                         try {
                             $challengesService->startChallenge(
