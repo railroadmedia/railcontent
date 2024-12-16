@@ -85,10 +85,12 @@ class MigrateChallengeV2Progress extends Command
                 ->get()
                 ->keyBy('content_id');
             foreach ($challengeUserProgressLookup as $challengeId => $challengeProgressData) {
-                $challengeProgress = $challengesProgressLookup->get($userId . "_" . $challengeId);
-                if ($challengeProgress || $challengeProgressData->state != 'started') {
+                if ($challengeProgressData->state != 'started') {
                     continue;
                 }
+
+                $challengeProgress = $challengesProgressLookup->get($userId . "_" . $challengeId);
+
                 $challenge = $challengesLookup[$challengeId];
 
                 $lessonIds = collect($challenge['lessons'])->pluck('id')->toArray();
@@ -102,18 +104,20 @@ class MigrateChallengeV2Progress extends Command
 
                 $hasCompletedLessons = $lessonCompletedLookup->count() > 0;
                 if ($hasCompletedLessons) {
-                    $challengeStartDate = Carbon::parse($challengeProgressData->started_on)->toDate();
-                    try {
-                        $challengesService->startChallenge(
-                            $challengeId,
-                            $userId,
-                            startDate: $challengeStartDate,
-                            isLocked: false,
-                            challenge: $challenge,
-                        );
-                    } catch (\Throwable $exception) {
-                        $this->info("Error starting challenge user $userId challenge $challengeId");
-                        $this->info($exception->getMessage());
+                    if (!$challengeProgress){
+                        $challengeStartDate = Carbon::parse($challengeProgressData->started_on)->toDate();
+                        try {
+                            $challengesService->startChallenge(
+                                $challengeId,
+                                $userId,
+                                startDate: $challengeStartDate,
+                                isLocked: false,
+                                challenge: $challenge,
+                            );
+                        } catch (\Throwable $exception) {
+                            $this->info("Error starting challenge user $userId challenge $challengeId");
+                            $this->info($exception->getMessage());
+                        }
                     }
                     foreach ($lessonCompletedLookup as $completedLessonId => $completedLesson) {
                         $lesson = $lessonLookup[$completedLessonId];
