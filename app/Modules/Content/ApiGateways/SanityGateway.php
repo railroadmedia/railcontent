@@ -325,9 +325,10 @@ class SanityGateway
         $query = "*[_type == 'challenge']{
             'sanity_id': _id,
             'id': railcontent_id,
-            'product_id',
-            'is_solo'
+            product_id,
+            is_solo
         }";
+
         $results = $this->sanity->fetch($query);
         return $results;
     }
