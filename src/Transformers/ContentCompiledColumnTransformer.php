@@ -77,7 +77,7 @@ class ContentCompiledColumnTransformer
                         $userPermissionIds,
                         $contentPermissionIds
                     )));
-            $contentRows[$contentRowIndex]['need_access'] = $needAccess;
+            $contentRows[$contentRowIndex]['need_access'] = false;
 
 
             if (!is_array($contentRow)) {
