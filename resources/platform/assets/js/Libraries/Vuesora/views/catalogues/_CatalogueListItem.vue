@@ -138,7 +138,7 @@
       </div>
     </template>
 
-    <!-- ONLY SHOW TYPE ON SEARCHES -->
+    <!-- ONLY SHOW ON SEARCHES -->
     <template v-if="is_search">
       <div v-if="mappedData.column_data && mappedData.column_data.length"
           class="
@@ -153,7 +153,7 @@
       >
         {{ mappedData.column_data[0] }}
       </div>
-      <div v-if="item.type !== 'song'" class="
+      <div class="
           tw-hidden
           sm:tw-flex
           tw-flex-col
@@ -163,7 +163,7 @@
           tw-text-center
           tw-text-xs
         ">
-        {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
+        {{ mappedData.content_type }}
       </div>
       <div class="
           tw-hidden
