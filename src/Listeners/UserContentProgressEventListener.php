@@ -151,6 +151,7 @@ class UserContentProgressEventListener extends Event
                 'content_id' => $event->contentId,
                 'user_id' => $event->userId,
             ], [
+                'state' => $event->progressStatus,
                 'higher_key_progress' => $higherKeyProgress,
                 'updated_on' => Carbon::now()
                     ->toDateTimeString(),
