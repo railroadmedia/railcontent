@@ -153,6 +153,8 @@ class SearchParameters
             if (!empty($validStatuses)) {
                 $searchParams->onlyForStatus(...$validStatuses);
             }
+        } else {
+            $searchParams->onlyForStatus(...self::sanitizeEnumValues(Status::class, ['published']));
         }
 
         $requestedBrands = $request->get('brands');
@@ -161,6 +163,8 @@ class SearchParameters
             if (!empty($validBrands)) {
                 $searchParams->onlyForBrand(...$validBrands);
             }
+        } else {
+            $searchParams->onlyForBrand(...self::sanitizeEnumValues(Brand::class, [brand()]));
         }
 
         $instructors = Instructor::findMany($request->get('coach_ids', []));
@@ -174,15 +178,60 @@ class SearchParameters
             if (!empty($validDocumentTypes)) {
                 $searchParams->onlyForType(...$validDocumentTypes);
             }
+        } else {
+            $searchParams->onlyForType(
+                ...self::sanitizeEnumValues(DocumentType::class, [
+                'backstage-secret',
+                'behind-the-scenes',
+                'boot-camp',
+                'challenge',
+                'coach-stream',
+                'course',
+                'diy-drum-experiment',
+                'drum-fest-international-2022',
+                'exploring-beats',
+                'gear-guide',
+                'in-rhythm',
+                'learning-path',
+                'learning-path-course',
+                'learning-path-lesson',
+                'learning-path-level',
+                'live',
+                'on-the-road',
+                'pack',
+                'paiste-cymbals',
+                'performance',
+                'play-along',
+                'play-along-part',
+                'podcast',
+                'question-and-answer',
+                'quick-tips',
+                'rhythmic-adventures-of-captain-carson',
+                'rhythms-from-another-planet',
+                'routine',
+                'rudiment',
+                'semester-pack',
+                'semester-pack-lesson',
+                'solo',
+                'song',
+                'song-tutorial',
+                'sonor',
+                'spotlight',
+                'student-collaboration',
+                'student-focus',
+                'study-the-greats',
+                'tama',
+                'the-history-of-electronic-drums',
+                'workout',
+                'odd-times',
+            ])
+            );
         }
 
         $searchParams->withOptions(
             hitsPerPage: $request->get('limit'),
             page: $request->get('page')
         );
-
-        //TODO sort - I'm not sure how to make this work with Algolia ...
-        //TODO include_future_scheduled_content_only (if we're going to support it)
 
         return $searchParams;
     }
