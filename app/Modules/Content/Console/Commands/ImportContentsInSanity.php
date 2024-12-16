@@ -432,7 +432,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $resultCode = $this->runCliCommand("cd $directory && yarn sanity documents delete --dataset=development " . $ids);
         }
 
-        if ($this->option('vimeoRefresh')) {
+        if ($this->option('vimeoRefresh') && $vimeoVideos) {
             $this->syncVimeoData($vimeoVideos, $vimeoVideoSourcesDecorator, $sanityDocuments);
         }
 
@@ -643,11 +643,12 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     unset($songs['child_count']);
                     $songs['assignments_total_xp'] = $songs['assignments_total_xp'] + 25;
                     $assignmentSheetMusicImage = $hierarchy->child->data->where('key', '=', 'sheet_music_image_url')->pluck('value')->toArray();
+                    $timecode = $hierarchy->child->data->where('key', '=', 'timecode')->first()['value'] ?? null;
                     $songs["assignment"][] = [
                         'assignment_title'             => $hierarchy->child->title,
                         'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
                         'assignment_description'       => $hierarchy->child->data->where('key', '=', 'description')->first()['value'] ?? '',
-                        'assignment_timecode'          => $hierarchy->child->data->where('key', '=', 'timecode')->first()['value'] ?? null,
+                        'assignment_timecode'          => ($timecode) ? (int)$timecode :  null,
                         'assignment_sheet_music_image' => $assignmentSheetMusicImage,
                         'railcontent_id'               => $hierarchy->child->id,
                     ];
@@ -871,10 +872,10 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 }
         }
         if ($result->sort != 0) {
-            $sanityDocuments['sort'] = $result->sort;
+            $sanityDocuments['sort'] = (int)$result->sort;
         }
         if ($result->child_count != 0) {
-            $sanityDocuments['child_count'] = $result->child_count;
+            $sanityDocuments['child_count'] = (int)$result->child_count;
         }
         if (isset($parentType[$type])) {
             $sanityDocuments['parent_type'] = $parentType[$type];
