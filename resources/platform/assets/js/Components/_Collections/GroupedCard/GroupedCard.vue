@@ -82,7 +82,7 @@ const page = ref(1);
 const cardNum = ref(5);
 
 const name = computed(() => {
-    return props.item.name + 'something' || '';
+    return props.item.name || '';
 })
 
 const thumb = computed(() => {
