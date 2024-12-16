@@ -10743,16 +10743,16 @@
         },
         {
             "name": "railroad/railforums",
-            "version": "v3.0.2",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "616f6bbd4f857aa6303b928d300080d7f96e9a65"
+                "reference": "8a90b2e8ce1505440ee7c72dfc3efe7f51f64950"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/616f6bbd4f857aa6303b928d300080d7f96e9a65",
-                "reference": "616f6bbd4f857aa6303b928d300080d7f96e9a65",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/8a90b2e8ce1505440ee7c72dfc3efe7f51f64950",
+                "reference": "8a90b2e8ce1505440ee7c72dfc3efe7f51f64950",
                 "shasum": ""
             },
             "require": {
@@ -10784,9 +10784,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v3.0.2"
+                "source": "https://github.com/railroadmedia/railforums/tree/v3.0.4"
             },
-            "time": "2024-09-05T19:34:50+00:00"
+            "time": "2024-12-16T19:08:32+00:00"
         },
         {
             "name": "railroad/railnotifications",
