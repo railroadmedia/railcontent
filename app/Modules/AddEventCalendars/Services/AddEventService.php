@@ -48,7 +48,6 @@ class AddEventService
 
     /**
      * @param $contentType
-     * @return string
      * @throws Exception
      */
     public function getCalendarName($contentType): string
@@ -75,8 +74,6 @@ class AddEventService
 
     /**
      * @param $type
-     * @param bool $createIfDoesNotExist
-     * @return null|stdClass
      * @throws Exception
      */
     public function getCalendar($type, bool $createIfDoesNotExist = false): ?stdClass
@@ -104,8 +101,6 @@ class AddEventService
 
     /**
      * @param $calendarId
-     * @param string $upcoming
-     * @return void
      * @throws Exception
      *
      * WARNING, THIS IS BAD DESIGN. IF THERE ARE ALREADY EVENTS IN $this->eventsByCalendarId, THIS METHOD WILL NOT
@@ -145,8 +140,6 @@ class AddEventService
 
     /**
      * @param $event
-     * @param bool $getEnd
-     * @return Carbon
      * @throws Exception
      */
     private function getTimeFromEvent($event, bool $getEnd = false): Carbon
@@ -252,7 +245,6 @@ class AddEventService
 
     /**
      * @param $params
-     * @return string
      */
     public function arrayToQueryString($params): string
     {
@@ -311,7 +303,6 @@ class AddEventService
     /**
      * @param $strOne
      * @param $strTwo
-     * @return bool
      */
     public function stringsSameIfFormattingRemoved($strOne, $strTwo): bool
     {
@@ -333,10 +324,9 @@ class AddEventService
      * @param $event
      * @param $startDate
      * @param null $endDate
-     * @return bool
      * @throws Exception
      */
-    public function timesMatch($event, $startDate, $endDate = null)
+    public function timesMatch($event, $startDate, $endDate = null): bool
     {
         // clear trailing seconds from time (ex: '2022-01-12 10:00:13' to '2022-01-12 10:00') but validate first
         if (!is_string($startDate)) {
@@ -384,9 +374,6 @@ class AddEventService
         return $startFromEventTimestamp === $expectedTimestamp;
     }
 
-    /**
-     * @return boolean
-     */
     public function onProduction(): bool
     {
         return config('app.env') === 'production';
@@ -397,7 +384,6 @@ class AddEventService
     // =================================================================================================================
 
     /**
-     * @return array
      * @throws Exception
      */
     public function getCalendars(): array
@@ -433,8 +419,6 @@ class AddEventService
     /**
      * @param $title
      * @param null $description
-     * @param array $customDataArray
-     * @return stdClass
      * @throws Exception
      */
     public function createCalendar($title, $description = null, array $customDataArray = []): stdClass
@@ -461,7 +445,6 @@ class AddEventService
      * @param $calendarId
      * @param $title
      * @param $description
-     * @param array $customDataArray
      * @return mixed
      * @throws Exception
      */
@@ -488,8 +471,6 @@ class AddEventService
 
     /**
      * @param $calendarId
-     * @param bool $ensureDeletedWithSecondRequest
-     * @return bool
      * @throws Exception
      */
     public function deleteCalendar($calendarId, bool $ensureDeletedWithSecondRequest = true): bool
@@ -540,7 +521,6 @@ class AddEventService
      * @param null $month
      * @param null $year
      * @param null $upcoming
-     * @return array
      * @throws Exception
      */
     public function listEventsInCalendar(
@@ -586,17 +566,10 @@ class AddEventService
     /**
      * @param $calendarId
      * @param $title
-     * @param string $timezone
-     * @param Carbon $startDate
-     * @param Carbon|null $endDate
-     * @param string|null $description
      * @param null $organizer
      * @param null $organizerEmail
      * @param null $location
      * @param null $reminder
-     * @param bool $allDayEvent
-     * @param bool $throwExceptionOnFailure
-     * @param null|array $customData
      * @return mixed
      * @throws Exception
      */
@@ -676,15 +649,11 @@ class AddEventService
      * @param $eventId
      * @param $title
      * @param $timezone
-     * @param Carbon $startDate
-     * @param Carbon|null $endDate
      * @param null $description
      * @param null $organizer
      * @param null $organizerEmail
-     * @param bool $allDayEvent
      * @param null $location
      * @param null $reminder
-     * @param array $customData
      * @return array|bool|mixed|object
      * @throws Exception
      */

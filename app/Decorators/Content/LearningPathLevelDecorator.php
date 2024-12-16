@@ -2,6 +2,7 @@
 
 namespace App\Decorators\Content;
 
+use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
@@ -9,12 +10,7 @@ use Railroad\Railcontent\Support\Collection;
 
 class LearningPathLevelDecorator extends TypeDecoratorBase
 {
-    /**
-     * @param Collection $contents
-     *
-     * @return Collection
-     */
-    public function decorate(Collection $contents)
+    public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->where('type', 'learning-path-level');
 
@@ -45,10 +41,7 @@ class LearningPathLevelDecorator extends TypeDecoratorBase
         return $this->mergeDecorated($contents, $contentsOfType);
     }
 
-    /**
-     * @return \Illuminate\Database\ConnectionInterface
-     */
-    private function railcontentDB()
+    private function railcontentDB(): ConnectionInterface
     {
         return DB::connection(config('railcontent.database_connection_name'));
     }

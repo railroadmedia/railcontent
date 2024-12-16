@@ -14,7 +14,7 @@ class FixMobileTransactions extends Command
                             {endDate : The ISO 8601 date time for all Shopify orders to get where the created_at at or before. e.g. 2023-10-13T17:30:14+00:00}
                             {--limit= : The number of orders to process per batch.}';
 
-    public function handle()
+    public function handle(): void
     {
         $startDate = Carbon::parse($this->argument('startDate'));
         $endDate = Carbon::parse($this->argument('endDate'));

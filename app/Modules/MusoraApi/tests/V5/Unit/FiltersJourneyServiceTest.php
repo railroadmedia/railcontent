@@ -3,9 +3,9 @@
 namespace App\Modules\MusoraApi\tests\V5\Unit;
 
 use App\Modules\MusoraApi\Services\V5\FiltersJourneyService;
-use Tests\BaseTestCase;
+use Tests\TestCase;
 
-class FiltersJourneyServiceTest extends BaseTestCase
+class FiltersJourneyServiceTest extends TestCase
 {
     public function test_parse_filters_no_progress_set()
     {

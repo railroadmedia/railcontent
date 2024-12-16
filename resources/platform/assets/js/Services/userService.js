@@ -80,3 +80,74 @@ export const updateLoginPassword = (token, payload) => {
         headers
     });
 };
+
+//FETCH IN PROGRESS SONGS
+export async function fetchSongsInProgress(userId, brand, token) {
+    const url = `/content/in_progress/${userId}?content_type=song&brand=${brand}`;
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
+    };
+
+    try {
+        const response = await fetch(url, { headers });
+        const result = await response.json();
+        if(result){
+        console.log('fetchSongsInProgress', result);
+        return result;
+        } else {
+        console.log('result not json')
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+        return null;
+    }
+}
+  
+//SONG IS COMPLETED BY CURRENT USER
+export async function fetchCurrentSongComplete(userId, content_id, token) {
+    const url = `/content/user_progress/${userId}?content_ids[]=${content_id}`;
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
+    };
+
+    try {
+        const response = await fetch(url, { headers });
+        const result = await response.json();
+        if(result){
+        return result[userId];
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+        return null;
+    }
+}
+  
+//SONG IS COMPLETED BY CURRENT USER
+export async function fetchAllCompletedStates(userId, contentIds, token) {
+    const url = `/content/user_progress/${userId}?${contentIds.map(id => `content_ids[]=${id}`).join('&')}`;
+
+    // console.log(url)
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
+    };
+
+    try {
+        const response = await fetch(url, { headers });
+        const result = await response.json();
+        if(result){
+        return result;
+        } else {
+        console.log('result not json');
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+        return null;
+    }
+}
+  

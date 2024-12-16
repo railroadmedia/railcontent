@@ -9,14 +9,16 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
+use Modules\UserManagementSystem\Events\User\UserCreated;
+use Modules\UserManagementSystem\Listeners\ExploreTasksListener;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Railcontent\Events\UserContentProgressSaved;
+use Railroad\Railforums\Events\PostCreated;
 
 class UserManagementSystemServiceProvider extends ServiceProvider
 {
     /**
      * UsoraServiceProvider constructor.
-     *
-     * @param Application $application
      */
     public function __construct(Application $application)
     {
@@ -24,11 +26,26 @@ class UserManagementSystemServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap the application services.
+     * The event listener mappings for the application.
      *
-     * @return void
+     * @var array
      */
-    public function boot()
+    protected $listen = [
+        PostCreated::class => [
+            ExploreTasksListener::class . '@handlePostCreated'
+        ],
+        UserCreated::class => [
+            ExploreTasksListener::class . '@handleUserCreated'
+        ],
+        UserContentProgressSaved::class => [
+            ExploreTasksListener::class . '@handleUserContentProgressSaved'
+        ],
+    ];
+
+    /**
+     * Bootstrap the application services.
+     */
+    public function boot(): void
     {
         $this->commands(
             [
@@ -67,22 +84,15 @@ class UserManagementSystemServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../views', 'user-management-system');
 
         // model policies
-        Gate::guessPolicyNamesUsing(function ($modelClass) {
-            if ($modelClass === User::class) {
-                return UserPolicy::class;
-            }
-
-            return null;
-        });
+        Gate::policy(User::class, UserPolicy::class);
     }
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
+        parent::register();
         // Laravel auth integration
         $this->app->register(AuthenticationServiceProvider::class);
     }

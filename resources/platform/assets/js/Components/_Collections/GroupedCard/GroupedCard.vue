@@ -1,13 +1,14 @@
 <template>
     <!--  Instructor Thumbnail Loader -->
-    <SkeletonLoader v-if="collectionStoreLoading" type="card-group-header" />
+    <SkeletonLoader v-if="collectionStoreLoading || isLoading" type="card-group-header" />
     <!--  Instructor Thumbnail  -->
     <div v-else class="tw-flex tw-justify-between tw-items-center tw-mb-4">
-        <a :href="item.url"
-            class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white hover:tw-underline"
+        <a :href="groupUrl"
+            class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white "
+           :class="groupUrl ? 'hover:tw-underline' : ''"
             style="text-underline-offset: 6px;">
             <img v-if="thumb" class="tw-rounded-full tw-w-20 tw-h-20 tw-border-2 tw-border-white tw-border-solid tw-mr-[10px]"
-                :src="`https://www.musora.com/musora-cdn/image/width=200,quality=95/${thumb}`" :alt="`${name} Image`" />
+                :src="`https://www.musora.com/cdn-cgi/image/width=200,quality=95/${thumb}`" :alt="`${name} Image`" />
             <div>
                 <h3 class="tw-font-bold tw-text-lg md:tw-text-xl lg:tw-text-2xl">{{ name }}</h3>
                 <div class="tw-font-semibold">
@@ -24,6 +25,7 @@
     <div class="tw-mb-5">
         <transition appear name="fade">
             <SongCardContainer v-if="isSong" :preLoadedContent="data" :isGroupedView="true" :add-margin-bottom="false" />
+            <ChallengeCardContainer v-else-if="isChallenge" :is-grouped-view="true" :content="data" />
             <CatalogueCardContainer v-else :pre-loaded-content="data" :content-type-override="contentTypeOverride" :group-by-cards="true" :is-single-row="true" :no-results-message="noResultsMessage" />
         </transition>
     </div>
@@ -32,8 +34,11 @@
 import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useCollectionStore } from "@stores/collection";
+import { usePlatformStore } from "@stores/platform";
 import useCarouselEvents from "@hooks/useCarouselEvents";
+
 import CatalogueCardContainer from "@collections/Catalogue/CatalogueCardContainer";
+import ChallengeCardContainer from "@collections/Catalogue/ChallengeCardContainer";
 import SkeletonLoader from '@collections/SkeletonLoader/SkeletonLoader.vue';
 import SongCardContainer from "@collections/Catalogue/SongCardContainer.vue";
 import { contentTypes } from "../../../utils";
@@ -67,26 +72,21 @@ const props = defineProps({
 })
 
 const collectionStore = useCollectionStore();
+const platformStore = usePlatformStore();
+
 const { loading: collectionStoreLoading } = storeToRefs(collectionStore);
+const { isLoading } = storeToRefs(platformStore);
 
 const data = ref([]);
 const page = ref(1);
 const cardNum = ref(5);
 
-const parsedData = computed(() => {
-    return props.item;
-})
-
 const name = computed(() => {
-    return props.item.fields.find(field => field.key === 'name')?.value || '';
+    return props.item.name + 'something' || '';
 })
 
 const thumb = computed(() => {
-    return props.item.data.find(data => data.key === 'head_shot_picture_url')?.value || '';
-})
-
-const showSkeletonLoader = computed(() => {
-    return collectionStoreLoading.value;
+    return props.item.head_shot_picture_url || '';
 })
 
 const isWorkout = computed(() => {
@@ -114,23 +114,36 @@ const contentType = computed(() => {
 
 })
 
+const groupUrl = computed(() => {
+    // remove the conditional when challenge group page is ready
+    if(!isChallenge.value){
+        return props.item.web_url_path;
+    }
+})
+
 const watchResize = () => {
-    if(props.contentTypeOverride === 'song'){
+    if(isSong.value){
         if(window.innerWidth > 1536){
             cardNum.value = 7;
         } else if(window.innerWidth > 1024){
             cardNum.value = 5;
-        } else {
-            cardNum.value = 20;
+        }
+    } else if(isChallenge.value){
+        if(window.innerWidth > 1536){
+            cardNum.value = 6;
+        } else if(window.innerWidth > 1024){
+            cardNum.value = 4;
         }
     } else {
         if(window.innerWidth > 1536){
             cardNum.value = 5;
         } else if(window.innerWidth > 1024){
             cardNum.value = 4;
-        } else {
-            cardNum.value = 20;
         }
+    }
+
+    if(window.innerWidth <= 1024){
+        cardNum.value = 20;
     }
 
     getPageData();

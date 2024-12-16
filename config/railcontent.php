@@ -272,11 +272,9 @@ return [
     ],
 
     'all_routes_middleware' => [
-        \App\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\VerifyCsrfToken::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
         \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
@@ -284,11 +282,9 @@ return [
     ],
 
     'user_routes_middleware' => [
-        \App\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\VerifyCsrfToken::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
         \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
@@ -350,8 +346,6 @@ return [
             \App\Decorators\Content\SemesterPackDecorator::class,
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
             //            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
-
-            \App\Decorators\Content\ChallengeDecorator::class,
 
             \App\Decorators\Content\PlaylistItemDecorator::class,
 
@@ -998,7 +992,7 @@ return [
                 'sortBy' => 'sort',
             ],
             'backstage-secrets' => [
-                'thumbnailUrl' => 'https://www.musora.com/musora-cdn/image/width=500,height=500,quality=95,fit=cover/https://d1923uyy6spedc.cloudfront.net/RushDoc-Neil-02.jpg',
+                'thumbnailUrl' => 'https://www.musora.com/cdn-cgi/image/width=500,height=500,quality=95,fit=cover/https://d1923uyy6spedc.cloudfront.net/RushDoc-Neil-02.jpg',
                 'name' => 'Backstage Secrets',
                 'shortname' => 'Episodes',
                 'icon' => 'icon-shows',
@@ -2524,7 +2518,6 @@ return [
         'song-tutorial',
         'song-tutorial-children',
         'workout',
-        'challenge-part',
     ],
     'dashboardInProgressContentTypes' => [
         'course',

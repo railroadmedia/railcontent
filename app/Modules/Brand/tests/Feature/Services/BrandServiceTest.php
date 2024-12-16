@@ -23,9 +23,9 @@ class BrandServiceTest extends TestCase
         $this->brandService = app(BrandService::class);
     }
 
-    public function test_set_last_used_brand_empty()
+    public function test_set_last_used_brand_empty(): void
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -60,9 +60,9 @@ class BrandServiceTest extends TestCase
         $this->assertDatabaseHas('usora_users', ['id' => $user->id, 'last_used_brand' => Brand::Drumeo]);
     }
 
-    public function test_set_last_used_brand_unchanged()
+    public function test_set_last_used_brand_unchanged(): void
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -89,9 +89,9 @@ class BrandServiceTest extends TestCase
         $this->assertDatabaseHas('usora_users', ['id' => $user->id, 'last_used_brand' => Brand::Drumeo]);
     }
 
-    public function test_set_last_used_brand_change()
+    public function test_set_last_used_brand_change(): void
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([

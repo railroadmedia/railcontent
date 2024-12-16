@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Ecommerce\tests\Feature;
+namespace App\Modules\Ecommerce\tests\Unit\Services;
 
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Recharge\Subscription;
@@ -25,7 +25,7 @@ class EventTrackingServiceTest extends TestCase
         $this->eventTrackingService = $this->app->make(EventTrackingService::class);
     }
 
-    public function test_handle_subscription_paused()
+    public function test_handle_subscription_paused(): void
     {
         $user = User::factory()->create(['membership_expiration_date' => now()->addMonthsNoOverflow(2)]);
         $product = Product::factory()->create();
@@ -68,7 +68,7 @@ class EventTrackingServiceTest extends TestCase
         });
     }
 
-    public function test_handle_subscription_expired()
+    public function test_handle_subscription_expired(): void
     {
         $user = User::factory()->create(['membership_expiration_date' => now()->subMonthsNoOverflow(2)]);
         $product = Product::factory()->create();

@@ -12,9 +12,8 @@ class ResetPassword extends ResetPasswordBase
      * Build the mail representation of the notification.
      *
      * @param mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         if (static::$toMailCallback) {
             return call_user_func(static::$toMailCallback, $notifiable, $this->token);
@@ -24,12 +23,9 @@ class ResetPassword extends ResetPasswordBase
     }
 
     /**
-     * Get the reset password notification mail message for the given URL.
-     *
-     * @param string $url
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @inheritDoc
      */
-    protected function buildMailMessage($url)
+    protected function buildMailMessage($url): MailMessage
     {
         $user = User::where('email', request('email'))->first();
 
@@ -45,7 +41,7 @@ class ResetPassword extends ResetPasswordBase
                             'user_management_system.password.show-reset-form',
                             ['token' => $this->token, 'email' => request('email')]
                         ),
-                        'logo' => 'https://www.musora.com/musora-cdn/image/width=400,quality=85/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
+                        'logo' => 'https://www.musora.com/cdn-cgi/image/width=400,quality=85/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
                         'display-name' => $user->display_name
                     ]
                 ]

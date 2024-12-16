@@ -6,8 +6,7 @@ use Modules\UserManagementSystem\Controllers\ForgotPasswordController;
 use Modules\UserManagementSystem\Controllers\ResetPasswordController;
 use Modules\UserManagementSystem\Controllers\UserController;
 
-Route::group(
-    ['prefix' => 'admin/reports', 'middleware' => ['web_authenticated', 'web_authenticated_admin']],
+Route::prefix('admin/reports')->middleware('web_authenticated', 'web_authenticated_admin')->group(
     function () {
         Route::get(
             'generate/{id}',

@@ -11,8 +11,6 @@ class MusoraApiServiceProvider extends ServiceProvider
 {
     /**
      * ApiServiceProvider constructor.
-     *
-     * @param Application $application
      */
     public function __construct(Application $application)
     {
@@ -21,14 +19,19 @@ class MusoraApiServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap the application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
         // publish config file
-        $this->mergeConfigFrom(__DIR__ . '/../config/journey.php', 'journeys');
-        $this->mergeConfigFrom(__DIR__ . '/../config/learning.php', 'learning');
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/journey.php',
+            'journeys'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/learning.php',
+            'learning'
+        );
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/onboarding.php');
         $this->loadRoutesFrom(__DIR__ . '/../routes/referral.php');
@@ -42,8 +45,6 @@ class MusoraApiServiceProvider extends ServiceProvider
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
     public function register(): void
     {

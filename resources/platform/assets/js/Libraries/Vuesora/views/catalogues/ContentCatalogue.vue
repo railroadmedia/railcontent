@@ -267,7 +267,7 @@ export default {
     },
     searchEndpoint: {
       type: String,
-      default: () => "/railcontent/search",
+      default: () => "/content/search",
     },
     isPlaylists: {
       type: Boolean,
@@ -660,7 +660,7 @@ export default {
               icon: 'warning',
               text: "This is Embarrassing That didn't work. Refresh the page and try once more, if it happens again please let us know using the chat below."
           });
-          
+
           this.loading = false;
         });
     },

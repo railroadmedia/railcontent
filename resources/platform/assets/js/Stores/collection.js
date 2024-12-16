@@ -1,10 +1,13 @@
-import axios from "axios";
 import { defineStore } from 'pinia';
-import { useUserStore } from "./user";
+import { useUserStore } from "@stores/user";
+import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
+import { fetchAll, fetchCoachLessons, fetchAllFilterOptions, fetchMetadata } from 'musora-content-services';
+import { useLessonHistoryPageData } from '@hooks/pages/useLessonHistoryPageData';
+import { useChildCollectionPageData } from '@hooks/pages/useChildCollectionPageData';
 
-const { getFilterValues } = useFilterValues();
+const { getFilterValues, formatTabData } = useFilterValues();
 
 export const useCollectionStore = defineStore({
     id: 'Collection',
@@ -19,18 +22,21 @@ export const useCollectionStore = defineStore({
                 limit: 20,
                 params: {},
                 searchTerm: '',
-                sort: '',
+                sort: '-published_on',
                 progress: '',
             },
             filterColumns: [],
             isCoach: false,
             loading: false,
-            searchEndpointUrl: '',
             searching: false, //for threads page
             sortOptions: [],
             tabData: {},
+            tabOptions: [],
             totalPages: 0,
             totalResults: 0,
+            collectionType: '',
+            fetchType: '',
+            queryType: '',
         }
     },
     actions: {
@@ -59,14 +65,6 @@ export const useCollectionStore = defineStore({
             this.getData();
         },
 
-        coachEndpoint() {
-            return `/railcontent/content?only_subscribed=${this.filter.activeTab === 'All Coaches' ? '' : 'true'}`;
-        },
-
-        getEndpoint() {
-            return this.isCoach ? this.coachEndpoint() : ((this.filter.searchTerm && this.searchEndpointUrl) ? this.searchEndpointUrl : this.endpoint);
-        },
-
         updateIncludedFields(param) {
             const itemIndex = this.filter.included_fields.findIndex(f => f === param);
 
@@ -86,28 +84,113 @@ export const useCollectionStore = defineStore({
             return Array.isArray(this.tabData[this.filter.activeTab].key) ? this.tabData[this.filter.activeTab].key : [this.tabData[this.filter.activeTab].key];
         },
 
-        async fetchData() {
-            const userStore = useUserStore();
-            try {
+        getContentId (){
+            const pathname = window.location.pathname;
+            const match = pathname.match(/\/(\d+)\/?$/);
+            return match ? match[1] : null;
+        },
 
-                const response = await axios
-                    .get(
-                        this.isCoach ? this.coachEndpoint() : this.getEndpoint(),
-                        {
-                            params: {
-                                brand: userStore.brand,
-                                limit: this.filter.limit,
-                                page: this.tabData[this.filter.activeTab].currentPage,
-                                sort: this.filter.sort,
-                                ...this.filter.params,
-                                included_fields: this.filter.included_fields,
-                                count_filter_items: true,
-                                ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm }),
-                                ...(this.filter.activeTab && { tabs: this.formattedTabs() }),
-                                ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
-                            },
-                        })
-                return response;
+        async getEndpoint(type){
+            const userStore = useUserStore();
+
+            const endpoints = {
+                'coachLessons': async() => {
+                    return await fetchCoachLessons(userStore.brand, this.getContentId(), {
+                        page: this.tabData[this.filter.activeTab].currentPage,
+                        sort: this.filter.sort,
+                        limit: this.filter.limit,
+                        searchTerm: this.filter.searchTerm,
+                    })
+                },
+                'lessonHistory': async () => {
+                    const tabData = this.tabData?.[this.filter.activeTab];
+                    const page = tabData?.currentPage || 1; // Default to 1 if undefined
+                    const limit = this.filter?.limit || 10; // Default to 10 if undefined
+                    const sort = this.filter?.sort || '';
+                    const searchTerm = this.filter?.searchTerm || '';
+
+                    const { fetchLessonData, data } = useLessonHistoryPageData();
+
+                    await fetchLessonData(tabData.key, { page, limit, sort, searchTerm });
+                    return data.value;
+                },
+                'childCollection': async() => {
+                    return await useChildCollectionPageData(this.collectionType, this.queryType, {
+                        page: this.tabData[this.filter.activeTab].currentPage,
+                        limit: this.filter.limit,
+                        sort: this.filter.sort,
+                        searchTerm: this.filter.searchTerm,
+                    })
+                },
+            }
+
+            if(endpoints[type]){
+                return await endpoints[type]();
+            } else {
+                let progress = 'all';
+                switch(this.filter.progress){
+                    case 'started': progress = 'in progress';
+                        break;
+                    case 'not-started': progress = 'not started';
+                        break;
+                    case 'completed': progress = 'completed'
+                        break;
+                }
+                let data = await fetchAll(userStore.brand, this.queryType, {
+                    page: this.tabData[this.filter.activeTab].currentPage,
+                    searchTerm: this.filter.searchTerm,
+                    sort: this.filter.sort,
+                    limit: this.filter.limit,
+                    groupBy: this.getGroupBy(),
+                    includedFields: this.getFilterData(),
+                    progress: progress
+                })
+
+                return data;
+            }
+        },
+
+        async fetchCatalogMetadata() {
+            const userStore = useUserStore();
+            const data = await fetchMetadata(userStore.brand, this.queryType);
+            if (this.tabOptions.length === 0) {
+                //Set Tab Options
+                this.tabOptions = formatTabData(data.tabs, data.name ?? '');
+            }
+        },
+
+        async fetchFilterOptions() {
+            const userStore = useUserStore();
+
+            //Get Genre
+            const genreField = this.filter.included_fields.find(field => field.startsWith('genre'));
+            const genre = genreField ? genreField.split(',')[1] : null;
+
+            //Get Filter Options
+            const result = await fetchAllFilterOptions(
+                userStore.brand, //brand
+                [ ...this.filter.included_fields ], //filters array
+                genre, //style
+                "", //artist
+                this.queryType, //contentType
+                this.filter.searchTerm, //term
+                undefined, //progressIds
+                undefined, //coachIds
+            );
+            if (result) {
+                //Set Filter Columns
+                this.filterColumns = getFilterValues(result.meta.filterOptions);
+            } else {
+                throw new Error('Failed to fetch Filter Options');
+            }
+        },
+
+        async fetchData(fetchFilterOptions) {
+            try {
+                let promises = [this.getEndpoint(this.fetchType)];
+                if (fetchFilterOptions) promises.push(this.fetchFilterOptions());
+                const [response, filterResponse] = await Promise.allSettled(promises);
+                return response.value;
             } catch (e) {
                 console.error(e);
                 window.shownotification({
@@ -117,39 +200,44 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        async getData(replace = true, displayLoading = true) {
+        async getData(replace = true, displayLoading = true, fetchFilterOptions = true) {
             this.loading = displayLoading;
             this.fetching = true;
 
             if (replace) this.tabData[this.filter.activeTab].currentPage = 1;
 
-            const response = await this.fetchData();
+            const response = await this.fetchData(fetchFilterOptions);
             this.setData(response, replace);
             this.setURLParams();
             this.fetching = false;
+
+            return response;
         },
 
-        getURLParams() {
-            const params = new URLSearchParams(window.location.search);
+        getFilterData(){
+            let filters = [];
+            const tabValue = this.tabData[this.filter.activeTab].key;
+            if (tabValue?.includes(',')) {
+                filters.push(tabValue);
+            }
+            filters = filters.concat(this.filter.included_fields);
+            return filters;
+        },
 
-            //Get search params
-            if (params.get('term')) {
-                this.filter.searchTerm = params.get('term');
-            } else if (params.get('title')) {
-                this.filter.searchTerm = params.get('title');
+        getGroupBy(){
+            if(this.queryType === 'challenge' && this.tabData[this.filter.activeTab]){
+                return this.tabData[this.filter.activeTab].key;
+            } else if(this.tabData[this.filter.activeTab].groupByView){
+                return this.tabData[this.filter.activeTab].key;
             }
 
-            //Get sort
-            if (params.get('sort')) this.filter.sort = params.get('sort');
-
-            //Get filters
-            if (params.getAll('included_fields[]').length > 0) {
-                this.filter.included_fields = params.getAll('included_fields[]');
-            }
-
-            //GetProgress
-            if (params.getAll('included_user_states[]').length > 0) {
-                this.filter.progress = params.getAll('included_user_states[]')[0];
+            return '';
+        },
+        getIncludedFields(){
+            if(!this.tabData[this.filter.activeTab].groupByView && this.tabData[this.filter.activeTab].key){
+                return [...this.tabData[this.filter.activeTab].key]
+            }else {
+                return []
             }
         },
 
@@ -164,10 +252,61 @@ export const useCollectionStore = defineStore({
             }
         },
 
+        setActiveTab() {
+            const activeTab = this.tabOptions.find((tab) => {
+                return tab.key === this.filter.activeTab;
+            });
+
+            if(activeTab) {
+                this.filter.activeTab = activeTab.value;
+                this.tabData[this.filter.activeTab] = { ...activeTab };
+            } else {
+                this.filter.activeTab = this.tabOptions[0].value;
+                this.tabData[this.filter.activeTab] = { ...this.tabOptions[0] };
+            }
+
+
+        },
+
+        getFilterURLParams() {
+            const params = new URLSearchParams(window.location.search);
+            //Get filters
+            if (params.getAll('included_fields[]').length > 0) {
+                this.filter.included_fields = params.getAll('included_fields[]');
+            }
+        },
+
+        getURLParams() {
+            const params = new URLSearchParams(window.location.search);
+
+            //Get active tab
+            let tabParams = params.getAll('tabs[]');
+
+            //Set active tab from URL
+            if (tabParams && tabParams.length > 0 ){
+                this.filter.activeTab = tabParams[0].replace(/"/g, '');
+            }
+
+            //Get search params
+            if (params.get('term')) {
+                this.filter.searchTerm = params.get('term');
+            } else if (params.get('title')) {
+                this.filter.searchTerm = params.get('title');
+            }
+
+            //Get sort
+            if (params.get('sort')) this.filter.sort = params.get('sort');
+
+            //GetProgress
+            if (params.getAll('included_user_states[]').length > 0) {
+                this.filter.progress = params.getAll('included_user_states[]')[0];
+            }
+        },
+
         loadMore() {
             if (!this.fetching) {
                 this.tabData[this.filter.activeTab].currentPage++;
-                this.getData(false, false);
+                this.getData(false, false, false);
             }
         },
 
@@ -183,41 +322,34 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        setData(response, replace) {
+        resetPagination(){
+            this.tabData[this.filter.activeTab].currentPage = 1;
+        },
+
+        async setData(response, replace) {
+            const userStore = useUserStore();
             if (response) {
                 if (replace) {
-                    this.data = [...response.data.data];
-                    this.tabData[this.filter.activeTab].totalPages = Math.ceil(
-                        response.data.meta.totalResults / this.filter.limit
-                    );
-                    this.filterColumns = getFilterValues(response.data?.meta?.filterOptions);
+                    this.data = [...response.entity];
                 } else {
-                    this.data = [...this.data, ...response.data.data];
-                    if(response?.data?.meta?.totalResults){
-                        this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
-                    }
+                    this.data = [...this.data, ...response.entity];
                 }
-                this.trackRecommendedServed(response.data.data);
+                const hasMorePages = response.entity.length >= this.filter.limit;
+                const nextPage = Math.ceil(
+                    this.data.length / this.filter.limit
+                ) + (hasMorePages ? 1 : 0);
+                this.tabData[this.filter.activeTab].totalPages = nextPage; //hack to make it load another page without loading all results
+                //this.trackRecommendedServed(response.data.data);
             }
 
-            if (this.filter.searchTerm) {
-                this.searching = true;
-            } else {
-                this.searching = false;
-            }
+            this.searching = !!this.filter.searchTerm; // Sets searching to true if there is a search term
             this.loading = false;
         },
 
-        setDefaults(defaults) {
+        //THIS RUNS WHEN THE PAGE LOADS!!
+        async setDefaults(defaults) {
             if (defaults.isCoach) {
                 this.isCoach = defaults.isCoach;
-            }
-
-            if (defaults.content) {
-                this.data = defaults.content?.data || [];
-                if (defaults.content.meta?.filterOptions) {
-                    this.filterColumns = getFilterValues(defaults.content.meta.filterOptions);
-                }
             }
 
             if (defaults.filter) {
@@ -228,36 +360,37 @@ export const useCollectionStore = defineStore({
                 this.endpoint = defaults.endpoint;
             }
 
-            if (defaults.searchEndpointUrl) {
-                this.searchEndpointUrl = defaults.searchEndpointUrl;
-            }
-
             if (Array.isArray(defaults.sortOptions) && defaults.sortOptions.length > 0) {
                 this.sortOptions = defaults.sortOptions;
             }
 
-            //Set active tab
-            if (defaults.tabOptions) {
-                const params = new URLSearchParams(window.location.search);
-                let tabParams = params.getAll('tabs[]');
+            if(defaults.queryType){
+                this.queryType = defaults.queryType;
+            }
 
-                //Set active tab from URL
-                if (tabParams && tabParams.length > 0) {
-                    const activeTab = defaults.tabOptions.find((tab) => {
-                        if (Array.isArray(tab.key)) {
-                            return JSON.stringify(tab.key) === JSON.stringify(tabParams);
-                        } else {
-                            return tab.key === tabParams[0];
-                        }
-                    })
+            if(defaults.fetchType){
+                this.fetchType = defaults.fetchType;
+            }
 
-                    this.filter.activeTab = activeTab.value;
-                    this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...activeTab };
+            if(defaults.collectionType){
+                this.collectionType = defaults.collectionType;
+            }
 
-                    //Set active tab as first tab from tabOptions
-                } else {
-                    this.filter.activeTab = defaults.tabOptions[0].value;
-                    this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...defaults.tabOptions[0] };
+            this.getFilterURLParams();
+            await this.fetchCatalogMetadata();
+            this.getURLParams();
+
+            //Set Active Tab
+            this.setActiveTab();
+
+            if(!defaults.noFetchOnLoad){
+                const data = await this.getData();
+
+                const platformStore = usePlatformStore();
+                platformStore.setLoadingState(false);
+
+                if(this.fetchType === 'childCollection'){
+                    return data;
                 }
             }
         },
@@ -274,12 +407,8 @@ export const useCollectionStore = defineStore({
                 })
             }
 
-            if (Array.isArray(this.tabData[this.filter.activeTab].key)) {
-                this.tabData[this.filter.activeTab].key.map((key) => {
-                    key && url.searchParams.append('tabs[]', key);
-                })
-            } else {
-                url.searchParams.set('tabs[]', this.tabData[this.filter.activeTab].key);
+            if(this.tabData[this.filter.activeTab]?.key){
+                url.searchParams.set('tabs[]', this.tabData[this.filter.activeTab]?.key);
             }
 
             if (this.filter.progress) {
@@ -369,6 +498,7 @@ export const useCollectionStore = defineStore({
 
         trackFilter() {
             const userStore = useUserStore();
+
             const payload = {
                 brand: userStore.brand,
                 section: userStore.journeySection,
@@ -384,6 +514,7 @@ export const useCollectionStore = defineStore({
 
         trackFilterGroup(tab) {
             const userStore = useUserStore();
+
             const payload = {
                 brand: userStore.brand,
                 section: userStore.journeySection,
@@ -398,4 +529,3 @@ export const useCollectionStore = defineStore({
         }
     },
 });
-

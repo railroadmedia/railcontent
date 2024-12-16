@@ -2,6 +2,7 @@
 
 namespace App\Modules\Notifications\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Modules\UserManagementSystem\Models\User;
@@ -60,7 +61,7 @@ class Notification extends Model
     public const TYPE_LESSON_COMMENT_REPLY = 'lesson comment reply';
     public const TYPE_NEW_CONTENT_RELEASES = 'new content releases';
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'recipient_id');
     }

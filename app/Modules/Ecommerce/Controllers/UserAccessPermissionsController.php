@@ -33,7 +33,6 @@ class UserAccessPermissionsController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \App\Modules\Ecommerce\Models\UserAccessPermission|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
     public function store(Request $request)
@@ -53,7 +52,6 @@ class UserAccessPermissionsController extends Controller
 
     /**
      * @param $id
-     * @param Request $request
      * @return \App\Modules\Ecommerce\Models\UserAccessPermission|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
     public function update($id, Request $request)

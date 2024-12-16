@@ -15,7 +15,7 @@ class RepairVimeoDurations extends Command
     protected $signature = 'RepairVimeoDurations';
     protected $description = 'Repair wrong length_in_seconds values for vimeo-video contents-items.';
 
-    public function handle(ContentService $contentService)
+    public function handle(ContentService $contentService): int
     {
         $dbConnection = DB::connection(config('railcontent.database_connection_name'));
 

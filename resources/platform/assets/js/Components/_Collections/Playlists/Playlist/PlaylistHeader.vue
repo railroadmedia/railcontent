@@ -89,7 +89,7 @@
                 </button>
                 <!--Like-->
                 <button class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]"
-                        @click.prevent="likePlaylist()"
+                        @click.prevent="playlistLike()"
                 >
                     <musora-icon :icon-name="state.isLiked ? 'thumb-like-filled' : 'thumb-like'" class="tw-mb-1" />
                     <span class="tw-uppercase tw-font-bebas-neue">{{ state.isLiked ? 'Liked' : 'Like'}}</span>
@@ -149,6 +149,7 @@ import { usePlaylistsStore } from '@stores/playlists';
 import { onBeforeMount, ref, inject, reactive, computed, onUpdated } from 'vue';
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
+import {deletePlaylistLike, likePlaylist} from 'musora-content-services';
 
 //Inject
 const token = inject('csrf_token');
@@ -220,7 +221,7 @@ const dropdownOptions = [
 
 //--------------Computed--------------//
 const description = computed(() => {
-    return playlistsStore.activePlaylist.description.replace(/(<([^>]+)>)/gi, "");
+    return playlistsStore.activePlaylist.description ? playlistsStore.activePlaylist.description.replace(/(<([^>]+)>)/gi, ""):'';
 })
 
 //--------------Methods--------------//
@@ -250,10 +251,10 @@ const sharePlaylist = () => {
 };
 
 //Handle Like/Unllike
-const likePlaylist = () => {
+const playlistLike = () => {
     state.isLiked = !state.isLiked;
     if(state.isLiked){
-        PlaylistService.likePlaylist({ brand: brand.value, "playlist_id": props.playlist.id }, token)
+        likePlaylist(props.playlist.id)
             .then((response) => {
                 console.log('successfully liked')
             })
@@ -262,7 +263,7 @@ const likePlaylist = () => {
             });
     }
     else {
-        PlaylistService.unlikePlaylist(props.playlist.id, token)
+        deletePlaylistLike(props.playlist.id)
             .then((response) => {
                 console.log('successfully unliked')
             })

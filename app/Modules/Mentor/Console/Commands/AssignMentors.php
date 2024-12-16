@@ -14,7 +14,7 @@ class AssignMentors extends Command
     protected $signature = 'mentors:assign';
     protected $description = 'Checks new users and assigns mentors if required';
 
-    public function handle(MentorService $mentorService)
+    public function handle(MentorService $mentorService): void
     {
         $this->info("Processing $this->name");
         $timeStart = microtime(true);

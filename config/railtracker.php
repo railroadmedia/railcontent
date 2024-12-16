@@ -25,11 +25,9 @@ return [
 
     'table_prefix' => 'railtracker4_',
     'table_prefix_media_playback_tracking' => 'railtracker_',
-    'media_playback_types_table' => 'media_playback_types',
-    'media_playback_sessions_table' => 'media_playback_sessions',
 
     // cache
-    'redis_connection_name' => 'railtracker',
+    'redis_connection_name' => 'default',
     'cache_prefix' => 'mwp_railtracker_',
     'cache_duration' => 60 * 60 * 24 * 2, // 2 days
     'batch_prefix' => env('RAILTRACKER_BATCH_PREFIX', 'railtracker4_mwp_'),
@@ -44,9 +42,5 @@ return [
         '/members\/wp\-cron*/',
         '/members\/wp\-admin\/admin\-ajax*/',
     ],
-
-    // route middleware group
-    'route_middleware_logged_in_groups' => ['web_or_api_authenticated'],
-
     'ip_data_api_key' => env('IP_DATA_API_KEY', '3e2874cc4be1cd0bdb4c4197614c8dd9494fc50bc3c57e0485970413')
 ];

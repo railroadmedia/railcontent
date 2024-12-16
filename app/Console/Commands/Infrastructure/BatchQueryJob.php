@@ -37,7 +37,7 @@ abstract class BatchQueryJob implements ShouldQueue
         return false;
     }
 
-    public function handle()
+    public function handle(): void
     {
         if ($this->batch()?->cancelled()) {
             return;

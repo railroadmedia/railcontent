@@ -2,30 +2,40 @@
 
 namespace App\Modules\Content\Controllers;
 
+use App\Maps\PrimaryURLSlugToContentTypeMap;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Enums\ProgressState;
+use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Requests\ContentMetadataRequest;
-use Illuminate\Database\Eloquent\Builder;
+use App\Modules\Content\Requests\ContentProgressMetadataRequest;
+use App\Modules\Content\Services\ContentHierarchyService;
+use App\Modules\Tracker\Models\LastEngagedSeconds;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Validation\Rules\Enum;
+use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\MusoraApi\Contracts\ProductProviderInterface;
+use Railroad\Railcontent\Services\UserPermissionsService;
+use Railroad\Railchat\Services\RailchatService;
 
 class ContentMetadataController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(
+        private readonly ProductProviderInterface $productProvider,
+        private readonly UserPermissionsService $userPermissionsService,
+        private readonly ContentHierarchyService $contentHierarchyService,
+        private readonly RailchatService $railchatService
+    ) {
     }
 
     public function isLikedByUser(ContentMetadataRequest $request, ?User $user = null): JsonResponse
     {
         // if the user ID isn't provided, grab the user from the session
-        if (is_null($user)) {
-            $user = user();
-        }
+        $user = $user ?? user();
 
         $contentIds = $request->query('content_ids', []);
         $results = [];
@@ -38,9 +48,7 @@ class ContentMetadataController extends Controller
     public function userProgress(ContentMetadataRequest $request, ?User $user = null): JsonResponse
     {
         // if the user ID isn't provided, grab the user from the session
-        if (is_null($user)) {
-            $user = user();
-        }
+        $user = $user ?? user();
 
         try {
             $contentIds = $request->query('content_ids', []);
@@ -50,41 +58,138 @@ class ContentMetadataController extends Controller
                 $results[$contentId] = $progressState->toArray();
             }
             return response()->json($results);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         }
     }
 
-    public function inProgressForUser(Request $request, ?User $user = null): JsonResponse
+    public function inProgressForUser(ContentProgressMetadataRequest $request, ?User $user = null): JsonResponse
     {
-        $validated = $request->validate(
-            [
-                'content_type' => 'required|string',
-                'brand' => ['nullable',  new Enum(Brand::class)],
-                'user' => 'nullable'
-            ]
-        );
+        return $this->contentWithProgressForUser(ProgressState::Started, $request, $user);
+    }
 
+    public function completedByUser(ContentProgressMetadataRequest $request, ?User $user = null): JsonResponse
+    {
+        return $this->contentWithProgressForUser(ProgressState::Completed, $request, $user);
+    }
+
+    /**
+     * Retrieve the data for content with a progress state for the user
+     *
+     * @param ProgressState $progressState
+     * @param ContentProgressMetadataRequest $request
+     * @param User|null $user
+     * @return JsonResponse
+     */
+    private function contentWithProgressForUser(
+        ProgressState $progressState,
+        ContentProgressMetadataRequest $request,
+        ?User $user = null
+    ): JsonResponse {
         // if the user ID isn't provided, grab the user from the session
-        if (is_null($user)) {
-            $user = user();
-        }
+        $user = $user ?? user();
 
-        $type = $validated['content_type'];
-        $brandValue = $validated['brand'] ?? null;
+        $type = $request->get('content_type') ? (array_flip(PrimaryURLSlugToContentTypeMap::$contentTypeToSanityTypeMapping)[$request->get('content_type')] ?? $request->get('content_type')) : null;
+        $brandValue = $request['brand'] ?? null;
         $brand = null;
         if ($brandValue) {
             $brand = Brand::from($brandValue);
         }
+        $limit = $request['limit'] ?? null;
+        $page = $request['page'] ?? null;
 
-        $inProgress = $user->progress()
-            ->incomplete()
-            ->ofContentType($type)
-            ->when(!is_null($brand), function (Builder $q) use ($brand) {
-                return $q->ofContentBrand($brand);
-            })
-            ->pluck('content_id');
+        $results =
+            $user->progress()
+                ->when($progressState === ProgressState::Started, fn ($query) => $query->incomplete())
+                ->when($progressState === ProgressState::Completed, fn ($query) => $query->complete())
+                ->when(
+                    !is_null($type),
+                    fn ($query) => $query->ofContentType($type),
+                    // if not looking for a specific content type, use our restricted list
+                    fn ($query) => $query->ofHomePageContentTypes()
+                )
+                ->when(!is_null($brand), fn ($query) => $query->ofContentBrand($brand))
+                ->when(
+                    !is_null($page),
+                    // when we're using pagination, we need to apply the limit to the page
+                    fn ($query) => $query->forPage($page, $limit),
+                    // otherwise, apply the limit to the whole query (if it's there)
+                    fn ($query) => $query->when(!is_null($limit), fn ($query) => $query->limit($limit))
+                )
+                ->pluck('content_id');
 
-        return response()->json([ProgressState::Started->value => $inProgress]);
+        return response()->json([$progressState->value => $results]);
+    }
+
+    public function getContentPageUserData(int $contentId, ?User $user = null): array
+    {
+        //$userId = user()->id;
+        $isLiked = ContentLike::isContentLikedByUser($contentId, $user->id);
+        $likedCount = ContentLike::getContentLikedCount($contentId);
+        $currentSecond = LastEngagedSeconds::getResumeTimeSeconds($contentId, $user->id);
+        return [
+            'isLiked' => $isLiked,
+            'likeCount' => $likedCount,
+            'isAdded' => false,
+            'currentSecond' => $currentSecond
+        ];
+    }
+
+    public function nextContent(int $contentId, ?User $user = null): JsonResponse
+    {
+        try {
+            $content = Content::findOrFail($contentId);
+        } catch (ModelNotFoundException) {
+            return response()->json(['error' => "No content found for ID $contentId"], 404);
+        }
+
+        $nextContent = $this->contentHierarchyService->getNextContentForParentContentForUser(
+            $content,
+            $user ?? user()
+        );
+        return response()
+            ->json([
+                'next' => [
+                    'id' => $nextContent->id ?? null,
+                    'type' => $nextContent->type ?? null,
+                ]
+            ]);
+    }
+
+    public function getUserPermissions(): JsonResponse
+    {
+        $permissions = $this->userPermissionsService->getUserPermissions(user()->id);
+        $permissions = Arr::pluck($permissions, 'permission_id');
+        return response()->json($permissions);
+    }
+
+    public function getVimeoData($vimeoId): array
+    {
+        $content = $this->productProvider->getVimeoEndpoints($vimeoId);
+        return [
+            'vimeo_video_id' => $content['vimeo_video_id'] ?? null,
+            'video_playback_endpoints' => $content['video_playback_endpoints'] ?? [],
+            'length_in_seconds' => $content['length_in_seconds'] ?? 0,
+        ];
+    }
+
+    public function getChatData()
+    {
+        $user = user();
+        $token = $this->railchatService->getUserToken(
+            $user->id,
+            $user->display_name,
+            $user->profile_picture_url,
+            url()->route('platform.profile.dashboard', [$user->id]),
+            $user->isAdmin(),
+            $user->access_level
+        );
+
+        return [
+            'apiKey' => config('railchat.drumeo.get_stream_credentials')['key'] ?? '',
+            'chatChannelName' => config('railchat.drumeo.chat_channel_name'),
+            'questionsChannelName' => config('railchat.drumeo.questions_channel_name'),
+            'token' => $token,
+        ];
     }
 }

@@ -16,7 +16,7 @@ class ShopifySyncCustomerByEmailInS3File extends Command
     protected $signature = 'ecommerce:shopify-sync-customer-by-email-in-s3-file
                             {fileName : The name of the file in S3 storage that contains the email addresses. This expects one address per line, with no header.}';
 
-    public function handle()
+    public function handle(): int
     {
         $startAt = Carbon::now();
         $fileName = $this->argument('fileName');

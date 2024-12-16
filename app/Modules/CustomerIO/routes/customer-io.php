@@ -2,11 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(
-    [
-        'prefix' => 'customer-io',
-        'middleware' => config('customer-io.all_routes_middleware'),
-    ],
+Route::prefix('customer-io')->middleware(config('customer-io.all_routes_middleware'))->group(
     function () {
         Route::post(
             '/submit-email-form',

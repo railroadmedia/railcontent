@@ -11,40 +11,24 @@
           tw-no-underline
         "
        :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
-       :href="renderLink && isReleased ? item.url : null"
-       @click="openUpgradeModal"
+       :href="renderLink && isReleased ? item.web_url_path : null"
+       @click="openModal"
     >
-
-        <!-- LESSON NUMBERS -->
-        <div v-if="showNumbers" class="
-            tw-flex
-            tw-flex-col
-            tw-text-[#00101D]
-            dark:tw-text-white
-            align-left
-            tw-justify-center
-            number-col
-            title
-            hide-xs-only
-        ">
-            {{ lesson_number }}
-        </div>
-
         <!-- THUMBNAIL COLUMN -->
         <div v-if="!showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0"
-             :class="[thumbnailColumnClass, themeColor]">
+             :class="[thumbnailColumnClass, brand]">
             <div class="thumb-wrap corners-10">
                 <div class="thumb-img corners-10 thumb-wrap corners-10 bg-grey-2 dark:tw-bg-[#081825]" :class="thumbnailType">
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${contentModel.list.thumbnail}`" alt="Lesson Thumbnail"
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${isBranchPath ? branchThumbnail : contentModel.list.thumbnail}`" alt="Lesson Thumbnail"
                          class="tw-transition-opacity tw-duration-500 tw-opacity-0" loading="lazy" onload="this.classList.remove('tw-opacity-0')" />
 
                     <div class="lesson-progress overflow">
                         <span class="progress" :class="themeBgClass" :style="'width:' + progress_percent + '%'"></span>
                     </div>
 
-                    <div v-if="mappedData.thumb_title && overview" class="thumb-title flex-center text-center ph-1"
+                    <div v-if="mappedData.thumb_title && overview && !isBranchPath" class="thumb-title flex-center text-center ph-1"
                          :class="brand">
-                        <img v-if="mappedData.thumb_logo" :src="mappedData.thumb_logo" alt="Item Logo" style="max-width: 150px" />
+                        <img v-if="mappedData.image || mappedData.thumb_logo" :src="mappedData.image || mappedData.thumb_logo" alt="Item Logo" style="max-width: 150px" />
                         <h5 v-if="mappedData.thumb_title" class="large-display uppercase text-white">
                             {{ mappedData.thumb_title }}
                         </h5>
@@ -52,11 +36,11 @@
 
                     <span
                         class="thumb-hover flex-center"
-                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)]': noAccess }, { 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }]"
+                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)] tw-visible tw-opacity-100': noAccess || !isReleased || isCompleted }]"
                     >
                         <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
                         <i v-else class="fas" :class="thumbnailIcon"></i>
-                        <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
+                        <p v-if="!isReleased" class="tw-text-white tw-font-bold tw-mt-1" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
                           {{ releaseDate }}
                         </p>
                     </span>
@@ -86,7 +70,7 @@
                 New Method Path
             </div>
 
-            <p v-if="!isCoach"
+            <p v-if="!isCoach &&  mappedData.color_title?.length"
                class="tw-text-xs font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]" :class="[
               overview ? 'dense' : 'font-compressed',
             ]">
@@ -95,12 +79,12 @@
 
             <p class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title"
                :class="[overview ? 'heading' : 'tw-text-sm', { 'tw-text-[13px] sm:tw-text-2xl lg:tw-text-[28px] xl:tw-text-[32px]': isNextLesson }]">
-                {{ mappedData.black_title }}
+                {{ isBranchPath ? branchTitle : mappedData.black_title }}
             </p>
 
             <p v-if="mappedData.grey_title && overview"
                class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] item-title body tw-mt-1 tw-mb-4">
-                {{ mappedData.grey_title }}
+                {{ isBranchPath ? branchDescription : mappedData.grey_title }}
             </p>
 
             <p
@@ -124,7 +108,7 @@
                 :class="[`${overview && !isNextLesson ? 'tw-mt-4 2xl:tw-hidden' : 'xl:tw-hidden'}`, { 'tw-mt-1 sm:tw-mt-4': isNextLesson }]"
             >
                 <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
-                  <span v-if="i > 0" class="bullet">-</span>
+                  <span v-if="i > 0 && column_data && column_data.length" class="bullet">&nbsp;-</span>
                   {{ column_data }}
                 </span>
                 <!-- Difficulty Label -->
@@ -140,16 +124,16 @@
         </div>
 
         <!-- Difficulty Label -->
-        <DifficultyLabel 
-            v-if="mappedData.difficulty" 
-            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" 
+        <DifficultyLabel
+            v-if="mappedData.difficulty"
+            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase"
             :class="`${overview && !isNextLesson ? '2xl:tw-flex' : 'xl:tw-flex'}`"
         />
 
         <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
-        <template v-if="!is_search">
+        <template v-if="!is_search" v-for="(column_data, i) in mappedData.column_data">
             <div
-                v-for="(column_data, i) in mappedData.column_data"
+                v-if="column_data && column_data.length"
                 :key="`${item.id}-mappedData-${i}`"
                 class="
                   tw-hidden
@@ -236,21 +220,20 @@
         <!-- PROGRESS INDICATOR OR LOCK ICON -->
         <div class="flex tw-flex-col icon-col tw-justify-center" :class="is_search || overview ? 'hide-xs-only' : ''">
 
-            <!-- LOCK ICON OR ADD TO CALENDAR -->
-            <div v-if="noAccess" class="body tw-inline-flex tw-h-full tw-items-center"
+            <!-- LOCK ICON -->
+            <div v-if="noAccess || !isReleased" class="body tw-inline-flex tw-h-full tw-items-center"
                  tabindex="0"
-                 :class="isBranchPath ? branchPathText : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'"
-                 title="Add to Calendar" data-open-modal="addToCalendarModal" @click="addEvent">
-                <i class="fas flex-center rounded" :class="isReleased ? 'fa-lock' : 'fa-calendar-plus'"></i>
+                 :class="isBranchPath ? branchPathText : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'">
+                <i class="fas flex-center rounded fa-lock"></i>
             </div>
 
             <!-- STARTED OR COMPLETED -->
             <div v-else class="body tw-inline-flex tw-h-full tw-items-center">
                 <i
-                    v-if="item.started || item.completed"
+                    v-if="item.started || isCompleted"
                    class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]"
                    :class="[
-                            item.completed ? completedIcon : 'fa-adjust',
+                            isCompleted ? completedIcon : 'fa-adjust',
                             themeTextClass,
                     ]"></i>
 
@@ -265,7 +248,7 @@
 </template>
 
 <script setup>
-import {computed, ref} from "vue";
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "../../../Stores/platform";
 import { useUserStore } from "@stores/user";
@@ -276,10 +259,6 @@ import { useResetProgress } from "@hooks/useResetProgress";
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
 
 const props = defineProps({
-    brand: {
-        type: String,
-        default: () => 'drumeo',
-    },
     isCoach: {
         type: Boolean,
         default: () => false,
@@ -352,10 +331,6 @@ const props = defineProps({
         type: String,
         default: () => 'drumeo',
     },
-    themeColor: {
-        type: String,
-        default: () => 'drumeo',
-    },
     useThemeColor: {
         type: Boolean,
         default: () => true,
@@ -365,6 +340,8 @@ const props = defineProps({
         default: () => false,
     },
 })
+
+const emit = defineEmits(['openChallengeLockModal'])
 
 const userStore = useUserStore();
 const platformStore = usePlatformStore();
@@ -380,6 +357,7 @@ const {
     thumbnailType,
     is_added,
     completedIcon,
+    isCompleted,
 } = useCatalogueItem(props);
 
 const {
@@ -392,6 +370,7 @@ const {
 const { addToList, addEvent } = useUserCatalogueEvents({ ...props });
 const { resetProgress } = useResetProgress();
 
+//Ref
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
 //Computed
@@ -406,20 +385,19 @@ const branchPathText = computed(() => {
 const class_object = computed(() => {
     return {
         active: props.active,
-        completed: props.item.completed,
+        "completed": isCompleted.value,
         "content-overview pv-2": props.overview,
         "content-table-row pv-1": !props.overview,
         'tw-flex-nowrap': props.isNextLesson,
-        "no-access": noAccess.value,
         compact: props.compactLayout,
         "start-learning-path":
-            props.contentTypeOverride === "learning-path-part",
+        props.contentTypeOverride === "learning-path-part",
     };
 })
 
 const disableAddToListForMethods = computed(() => {
     if(props.item.type === 'learning-path-level') {
-        return props.brand === 'drumeo' || props.brand === 'pianote';
+        return brand.value === 'drumeo' || brand.value === 'pianote';
     }
 
     return false;
@@ -430,23 +408,25 @@ const itemStyle = computed(() => {
     return field.value;
 })
 
-const lesson_number = computed(() => {
-    if (props.item.type === "semester-pack-lesson") {
-        return contentModel.value.getPostField("week");
-    }
-
-    return props.index;
+//branchData
+//TODO: Add Branch Path to Sanity Studio
+const branchTitle = computed(() => {
+    const title = props.item.fields.find((field) => field.key === 'title');
+    return title.value;
+})
+const branchDescription = computed(() => {
+    const description = props.item.data.find((field) => field.key === 'description');
+    return description.value;
+})
+const branchThumbnail = computed(() => {
+    const thumbnail_url = props.item.data.find((field) => field.key === 'thumbnail_url');
+    return thumbnail_url.value;
 })
 
 const mappedData = computed(() => {
-    const difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value;
+    const difficultyValue = contentModel.value.post.difficulty_string;
     const newContentModel = JSON.parse(JSON.stringify(contentModel.value)) //Create a deep copy to not update reactive prop
     newContentModel.list.difficulty = difficultyValue;
-
-    const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
-    const filteredColumnData = newContentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
-    newContentModel.list.column_data = filteredColumnData
-
     return newContentModel.list;
 })
 
@@ -466,13 +446,21 @@ const thumbnailColumnClass = computed(() => {
     };
 })
 
+const isChallenge = computed(() => {
+    return props.item.type === "challenge-part";
+})
+
 const handleReset = () => {
     resetProgress(props.item.id, resetIcon, true);
 }
 
-const openUpgradeModal = () => {
-    noAccess.value && platformStore.openMembershipUpgradeModal();
+const openModal = () => {
+    if(isChallenge.value && !isReleased.value){
+        emit('openChallengeLockModal', releaseDate.value);
+    }
+    else if(noAccess.value){
+        platformStore.openMembershipUpgradeModal();
+    }
 }
-
 </script>
 

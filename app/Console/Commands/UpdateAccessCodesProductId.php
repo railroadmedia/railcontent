@@ -13,7 +13,7 @@ class UpdateAccessCodesProductId extends Command
     protected $description = 'Update the product ids of given access codes 124 to 420;
     https://musoraproduct.myjetbrains.com/youtrack/issue/MT-431/Test-TDT-BBDB-Redemption-Pages-Codes';
 
-    public function handle()
+    public function handle(): void
     {
         $this->info('###### Starting UpdateAccessCodesProductId command....  ######');
 

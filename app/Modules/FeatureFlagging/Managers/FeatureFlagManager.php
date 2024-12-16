@@ -4,6 +4,7 @@ namespace App\Modules\FeatureFlagging\Managers;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\FeatureFlagging\Contracts\FeatureFlagsContract;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\FeatureFlagging\Models\Branch;
 use App\Modules\FeatureFlagging\Models\Experiment;
 use App\Modules\FeatureFlagging\Models\Feature;
@@ -27,7 +28,7 @@ class FeatureFlagManager implements FeatureFlagsContract
     {
         $experiments = Experiment::all();
         $allowedBranches = [];
-        foreach ($experiments as $experiment) {
+        foreach($experiments as $experiment) {
             $allowedBranches[$experiment->name] = $this->branch($experiment->name, $user);
         }
         return $allowedBranches;
@@ -38,7 +39,7 @@ class FeatureFlagManager implements FeatureFlagsContract
     {
         $features = Feature::all();
         $allowedFeatures = [];
-        foreach ($features as $feature) {
+        foreach($features as $feature) {
             if ($this->accessible($feature->name, $user)) {
                 $allowedFeatures[] = $feature->name;
             }
@@ -58,11 +59,9 @@ class FeatureFlagManager implements FeatureFlagsContract
         if ($user && $this->doesUserMatchFilter($feature->block_filter, $user)) {
             return false;
         }
-        if (
-            $user &&
+        if ($user &&
             ($this->doesUserMatchFilter($feature->allow_filter, $user)
-                || $this->doesUserMatchUserList($feature->userid_list, $user))
-        ) {
+                || $this->doesUserMatchUserList($feature->userid_list, $user))) {
             return true;
         }
         return Carbon::parse($feature->active_at)->isPast();
@@ -100,7 +99,6 @@ class FeatureFlagManager implements FeatureFlagsContract
 
     /**
      * @param Collection<Branch> $branches
-     * @param User|null $user
      * @return \Closure|mixed|null
      */
     private function selectBranch(Collection $branches, ?User $user)
@@ -111,10 +109,8 @@ class FeatureFlagManager implements FeatureFlagsContract
         $selectedBranch = null;
         if ($user) {
             foreach ($branches as $branch) {
-                if (
-                    $this->doesUserMatchUserList($branch->userid_list, $user)
-                    || $this->doesUserMatchFilter($branch->allow_filter, $user)
-                ) {
+                if ($this->doesUserMatchUserList($branch->userid_list, $user)
+                    || $this->doesUserMatchFilter($branch->allow_filter, $user)) {
                     $selectedBranch = $branch;
                     break;
                 }
@@ -166,7 +162,7 @@ class FeatureFlagManager implements FeatureFlagsContract
     {
         if ($string_filter) {
             $filters = explode(',', $string_filter);
-            foreach ($filters as $filter) {
+            foreach($filters as $filter) {
                 if ($this->isUserMatch($filter, $user)) {
                     return true;
                 }
@@ -177,7 +173,7 @@ class FeatureFlagManager implements FeatureFlagsContract
 
     private function isUserMatch(string $filter, User $user): bool
     {
-        $isMatch = match (true) {
+        $isMatch = match(true) {
             $filter == 'admin' => $user->isAdmin(),
             $filter == 'musora' => $user->isMusoraAccount(),
             str_starts_with($filter, 'older_than') => $this->doesUserMatchAgeThanFilter($filter, $user, true),
@@ -199,7 +195,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         $count = intval($sections[2]);
         $createdTime = $user->created_at;
         $now = Carbon::now();
-        $earliestAllowedTime = match (strtolower($unit)) {
+        $earliestAllowedTime = match(strtolower($unit)) {
             'day', 'days' => $now->subDays($count),
             'month', 'months' => $now->subMonths($count),
             'year', 'years' => $now->subYears($count),
@@ -236,9 +232,8 @@ class FeatureFlagManager implements FeatureFlagsContract
 
     /**
      * @param array|string $allow_filter
-     * @return bool
      */
-    public static function isValidFilter(array|string|null $allow_filter)
+    public static function isValidFilter(array|string|null $allow_filter): bool
     {
         $validFilters = ['admin', 'musora'];
         $filters = is_array($allow_filter) ? $allow_filter : explode(',', $allow_filter);

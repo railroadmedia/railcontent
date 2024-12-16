@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Ecommerce\database\factories\AccessCodeFactory;
 use Carbon\Carbon;
@@ -59,12 +60,12 @@ class AccessCode extends Model
         return implode(", ", unserialize($this->product_ids));
     }
 
-    public function claimer()
+    public function claimer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'claimer_id');
     }
 
-    public function product()
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_ids');
     }

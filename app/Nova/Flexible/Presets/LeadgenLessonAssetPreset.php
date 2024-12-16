@@ -10,10 +10,8 @@ class LeadgenLessonAssetPreset extends Preset
 {
     /**
      * Execute the preset configuration
-     *
-     * @return void
      */
-    public function handle(Flexible $field)
+    public function handle(Flexible $field): void
     {
         $field->resolver(LeadgenLessonAssetResolver::class);
         $field->button('Add an asset');

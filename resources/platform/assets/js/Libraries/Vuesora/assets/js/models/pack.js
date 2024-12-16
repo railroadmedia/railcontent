@@ -9,8 +9,7 @@ export default class PackModel extends ContentModel {
 
         // this is only for pianote classical method pack which is show in the list view on pianote
         this.list.column_data = [
-            `${this.post.child_count} COURSES`,
-            `${this.post.total_xp} xp`,
+            `${this.post.xp} xp`,
         ];
     }
 }

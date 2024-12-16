@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Modules\Content\database\factories\ContentFieldFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,7 +36,7 @@ class ContentField extends Model
     protected $table = 'railcontent_content_fields';
     public $timestamps = false;
 
-    public function content()
+    public function content(): BelongsTo
     {
         return $this->belongsTo(Content::class, 'content_id');
     }

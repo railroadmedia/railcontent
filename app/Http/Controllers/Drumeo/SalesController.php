@@ -214,7 +214,7 @@ class SalesController extends BaseController
     public function thirtyDayJazz()
     {
         $productId = 1165;
-//        $productId = 930;
+        //        $productId = 930;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);
         $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);

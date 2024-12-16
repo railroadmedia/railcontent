@@ -17,5 +17,6 @@ use Illuminate\Database\Eloquent\Model;
 class UserPlaylistLike extends Model
 {
     protected $table = 'railcontent_playlist_likes';
+    public $timestamps = false;
 
 }

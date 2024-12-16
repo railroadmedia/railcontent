@@ -9,7 +9,6 @@ use Railroad\Railcontent\Support\Collection;
 class LearningPathCourseDecorator extends TypeDecoratorBase
 {
     /**
-     * @param Collection $contents
      * @return array|mixed|Collection
      */
     public function decorate(Collection $contents)
@@ -50,10 +49,7 @@ class LearningPathCourseDecorator extends TypeDecoratorBase
         return $this->mergeDecorated($contents, $contentsOfType);
     }
 
-    /**
-     * @return ConnectionInterface
-     */
-    private function railcontentDB()
+    private function railcontentDB(): ConnectionInterface
     {
         return DB::connection(config('railcontent.database_connection_name'));
     }

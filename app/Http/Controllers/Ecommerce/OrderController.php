@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -52,13 +55,6 @@ class OrderController extends Controller
 
     /**
      * OrderController constructor.
-     *
-     * @param AddressRepository $addressRepository
-     * @param CartAddressService $cartAddressService
-     * @param CartService $cartService
-     * @param PaymentMethodRepository $paymentMethodRepository
-     * @param UserProviderInterface $userProvider
-     * @param OrderRepository $orderRepository
      */
     public function __construct(
         AddressRepository $addressRepository,
@@ -76,7 +72,7 @@ class OrderController extends Controller
         $this->orderRepository = $orderRepository;
     }
 
-    public function checkEmailExists(Request $request)
+    public function checkEmailExists(Request $request): JsonResponse
     {
         return Response::json(
             [
@@ -328,12 +324,12 @@ class OrderController extends Controller
         );
     }
 
-    public function thankYouPageForCustomerOrder()
+    public function thankYouPageForCustomerOrder(): View
     {
         return view('musora.pages.order-thankyou');
     }
 
-    public function redirectToMusoraOrderForm(Request $request)
+    public function redirectToMusoraOrderForm(Request $request): RedirectResponse
     {
         $parse = parse_url($request->url());
 
@@ -353,7 +349,7 @@ class OrderController extends Controller
         return redirect()->to('/order/drumeo');
     }
 
-    public function redirectLegacyDrumeoAddToCartUrl(Request $request)
+    public function redirectLegacyDrumeoAddToCartUrl(Request $request): RedirectResponse
     {
         $input = $request->all();
         $addedProducts = [];

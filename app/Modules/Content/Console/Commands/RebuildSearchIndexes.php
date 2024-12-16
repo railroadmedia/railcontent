@@ -10,7 +10,7 @@ class RebuildSearchIndexes extends Command
     protected $signature = 'content:rebuildSearchIndexes';
     protected $description = 'Rebuilds search indexes';
 
-    public function handle(SearchService $searchService)
+    public function handle(SearchService $searchService): void
     {
         $this->withExecutionTime(function () use ($searchService) {
             $searchService->rebuildIndexes();

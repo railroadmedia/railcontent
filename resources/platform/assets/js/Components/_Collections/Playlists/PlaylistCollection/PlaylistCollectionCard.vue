@@ -38,7 +38,7 @@ const duration_formated = computed(() => {
     return props.listElement.duration_formated ? props.listElement.duration_formated.replace(/^0(?:0:0?)?/, '') : '0:00';
 })
 const description = computed(() => {
-    return props.listElement.description.replace(/(<([^>]+)>)/gi, "");
+    return props.listElement.description ? props.listElement.description.replace(/(<([^>]+)>)/gi, "") : '';
 })
 
 //-----------Reactive Data-----------//

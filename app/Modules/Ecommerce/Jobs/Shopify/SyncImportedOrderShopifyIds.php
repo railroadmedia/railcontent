@@ -71,8 +71,6 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
     /**
      * Execute the job
      *
-     * @param  Shopify  $shopify
-     * @return void
      * @throws Exception
      */
     public function handle(
@@ -88,8 +86,6 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
     /**
      * Get the applicable order data from Shopify
      *
-     * @param  string|null  $endCursor
-     * @return void
      * @throws Exception
      */
     protected function getOrderData(?string $endCursor): void
@@ -150,7 +146,6 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
      * Update our local order with the new shopify_id provided by the Shopify store
      *
      * @param  Collection<SyncImportedOrderShopifyIdsOrderData>  $orderData
-     * @return void
      */
     protected function updateOrders(Collection $orderData): void
     {
@@ -193,9 +188,7 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
     /**
      * Update our local order items with the new shopify_id provided by the Shopify store
      *
-     * @param  SyncImportedOrderShopifyIdsOrderData  $orderData
      * @param  Collection<OrderItem>  $orderItems
-     * @return void
      */
     protected function updateOrderItems(SyncImportedOrderShopifyIdsOrderData $orderData, Collection $orderItems): void
     {
@@ -243,9 +236,7 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
     /**
      * Update our local order item fulfillments with the new shopify_id provided by the Shopify store
      *
-     * @param  SyncImportedOrderShopifyIdsOrderData  $orderData
      * @param  Collection<OrderItem>  $orderItems
-     * @return void
      */
     protected function updateOrderItemFulfillments(
         SyncImportedOrderShopifyIdsOrderData $orderData,
@@ -301,8 +292,6 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
 
     /**
      * Print the results in a table.
-     *
-     * @return void
      */
     protected function printResults(): void
     {
@@ -329,9 +318,6 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
 
     /**
      * Pad the given string so that it will fill a table column for our output
-     *
-     * @param  string  $string
-     * @return string
      */
     protected function padForTable(string $string): string
     {
@@ -378,8 +364,6 @@ class SyncImportedOrderShopifyIdsOrderData
 
     /**
      * Get the local ecommerce order for this Shopify order data
-     *
-     * @return Order|null
      */
     public function getEcommerceOrder(): ?Order
     {

@@ -30,7 +30,7 @@ const handleChange = (e) => {
 </script>
 <template>
     <select :id="dropdownId" @change="handleChange"
-        class="tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[13px] sm:tw-text-[14px] dark:tw-text-white tw-w-full dark:tw-bg-black tw-px-[14px] tw-box-border" @keydown.prevent>
+        class="tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-pt-[8px] tw-pb-[9px] tw-px-[13px] tw-text-[13px] sm:tw-text-[14px] tw-w-full dark:tw-bg-black tw-px-[14px] tw-box-border" :class="selectedValue ? 'dark:tw-text-white' : 'tw-text-[#52525A] dark:tw-text-[#9EC0DC]'" @keydown.prevent>
         <option :selected="!selectedValue" disabled :value="null">
             {{ placeholderLabel }}
         </option>
@@ -38,6 +38,7 @@ const handleChange = (e) => {
                 :key="option.value"
                 :value="option.value"
                 :selected="option.value === selectedValue"
+                class="tw-text-black dark:tw-text-white"
         >
             {{ option.value }}
         </option>

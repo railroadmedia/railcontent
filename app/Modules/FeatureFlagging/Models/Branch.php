@@ -2,6 +2,7 @@
 
 namespace App\Modules\FeatureFlagging\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Modules\FeatureFlagging\Models\Feature;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     protected $table = 'features_branches';
-    public function experiment()
+    public function experiment(): BelongsTo
     {
         return $this->belongsTo(Experiment::class, 'experiment_id');
     }

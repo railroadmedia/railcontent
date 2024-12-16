@@ -2,16 +2,16 @@
 
 namespace App\Modules\MusoraApi\Controllers\V1;
 
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class LearningController extends Controller
 {
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function hideLearningPaths(Request $request)
+    public function hideLearningPaths(Request $request): Response
     {
         ['brand' => $brand] = $request->validate([
             'brand' => 'required',

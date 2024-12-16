@@ -12,7 +12,7 @@ import { computed } from 'vue';
 
 const props = defineProps({
     difficultyValue: {
-        type: String,
+        type: [String, Number],
         required: true
     },
     textCase: {
@@ -61,6 +61,7 @@ const difficultyText = computed(() => {
             case 'beginner':
             case 'intermediate':
             case 'advanced':
+            case 'expert':
                 return difficulty;
             default:
                 return 'all';

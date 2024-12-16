@@ -16,10 +16,10 @@ use Modules\UserManagementSystem\Services\ExploreTasksService;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
+use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Railroad\Railcontent\Services\CommentService;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
@@ -79,6 +79,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'isEdgeExpired' => !$user->membership_expiration_date || $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
             'isPackOnlyOwner' => $user->isPackOnlyOwner(),
+            'isChallengeOnlyOwner' => $user->isChallengeOnlyOwner(),
             'isAppleAppSubscriber' => $isAppleAppSubscriber,
             'isGoogleAppSubscriber' => $isGoogleAppSubscriber,
             'membership_level' => $user->membership_level,
@@ -89,6 +90,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'is_enrolled_into_cohort' => $user->isEnrolledIntoCohort(),
             'subcription_date' => Carbon::parse($user->created_at)->format('Y/m/d H:i:s'),
             'last_used_brand' => $user->last_used_brand,
+            'active_permissions_ids' => $user->getActivePermissionsIds(),
             'show_learning_paths_on_homepage' => $this->learningPathsService->showLearningPaths(brand()),
             'show_new_learning_paths' => $this->learningPathsService->showNewLearningPaths(),
             'homepage_v2' => $homepageV2,
@@ -132,6 +134,17 @@ class MusoraApiUserProvider implements UserProviderInterface
         ];
 
         $brand = brand();
+        $showLearningPathsOnHomepage = false;
+        $hideSection = $brand . '_trial_section_hide';
+
+        if ($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
+            $hasExperienceLevels =  count(
+                user()->onboardingExperience->filter(function ($item) use ($brand) {
+                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                })
+            ) > 0;
+            $showLearningPathsOnHomepage = ($hasExperienceLevels) ? true : false;
+        }
 
         $completedWorkouts = $this->contentService->countByTypesRecentUserProgressState(
             ['workout'],
@@ -153,11 +166,11 @@ class MusoraApiUserProvider implements UserProviderInterface
             'has_started_method' => $hasStartedMethod ?? false,
             'has_completed_method' => $hasCompletedMethod ?? false,
             'login_as_users' => $user->hasRole('login_as_users'),
-            'show_learning_paths_on_homepage' => $this->learningPathsService->showLearningPaths($brand),
-            'show_new_learning_paths' => $this->learningPathsService->showNewLearningPaths(brand()),
+            'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
             'completed_workouts' => $completedWorkouts,
             'branches' => $this->getAllBranchInformation(),
             'features' => $this->getAccessibleFeatures(),
+            'active_permissions_ids' => $user->getActivePermissionsIds(),
             'primary_brand' => $user->primary_brand,
         ], $extraData);
     }
@@ -209,12 +222,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         return $this->getCurrentUser();
     }
 
-    /**
-     * @param string|null $iosToken
-     * @param string|null $androidToken
-     * @return User|null
-     */
-    public function setCurrentUserFirebaseTokens(?string $iosToken, ?string $androidToken)
+    public function setCurrentUserFirebaseTokens(?string $iosToken, ?string $androidToken): ?User
     {
         $firebaseToken = [
             'type' => ($iosToken) ? 'ios' : 'android',
@@ -230,8 +238,6 @@ class MusoraApiUserProvider implements UserProviderInterface
     }
 
     /**
-     * @param string $deviceType
-     * @param int $reviewCount
      * @return mixed|\Modules\UserManagementSystem\Models\User|null
      */
     public function setReviewDataForCurrentUser(string $deviceType, int $reviewCount)
@@ -336,18 +342,12 @@ class MusoraApiUserProvider implements UserProviderInterface
         return null;
     }
 
-    /**
-     * @return array
-     */
-    public function getAllBranchInformation()
+    public function getAllBranchInformation(): array
     {
         return FeatureFlagging::allBranches(user());
     }
 
-    /**
-     * @return array
-     */
-    public function getAccessibleFeatures()
+    public function getAccessibleFeatures(): array
     {
         return FeatureFlagging::allowedFeatures(user());
     }

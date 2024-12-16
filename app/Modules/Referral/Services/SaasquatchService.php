@@ -21,8 +21,6 @@ class SaasquatchService
 
     /**
      * SaasquatchService constructor.
-     *
-     * @param  SaasquatchApi  $saasquatchApi
      */
     public function __construct(
         SaasquatchApi $saasquatchApi
@@ -32,14 +30,12 @@ class SaasquatchService
     }
 
     /**
-     * @param  int  $userId
      *
-     * @return SaasquatchUser|null
      *
      * @throws ReferralException
      * @throws SaasquatchException
      */
-    public function getUser($userId, $brand): ?SaasquatchUser
+    public function getUser(int $userId, $brand): ?SaasquatchUser
     {
         try {
             $userData = $this->saasquatchApi->getUser($userId);
@@ -52,14 +48,12 @@ class SaasquatchService
     }
 
     /**
-     * @param  int  $userId
      *
-     * @return SaasquatchUser
      *
      * @throws ReferralException
      * @throws SaasquatchException
      */
-    public function createOrGetUser($userId, $brand): SaasquatchUser
+    public function createOrGetUser(int $userId, $brand): SaasquatchUser
     {
         $userData = $this->getUser($userId, $brand);
 
@@ -73,13 +67,12 @@ class SaasquatchService
     /**
      * @param $userId
      * @param $referralCode
-     * @return bool
      * @throws NotFoundException
      * @throws ReferralException
      * @throws SaasquatchException
      * @throws SaasquatchUserExistsException
      */
-    public function applyReferralCode($userId, $referralCode, $brand)
+    public function applyReferralCode($userId, $referralCode, $brand): bool
     {
         $saasquatchUser = $this->createOrGetUser($userId, $brand);
 
@@ -88,12 +81,7 @@ class SaasquatchService
         return true;
     }
 
-    /**
-     * @param  object  $userData
-     *
-     * @return SaasquatchUser
-     */
-    public function hydrateSaasquatchUser($userData, $brand): SaasquatchUser
+    public function hydrateSaasquatchUser(object $userData, $brand): SaasquatchUser
     {
 
         $userId = $userData->id;

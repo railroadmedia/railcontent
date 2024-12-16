@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\Models\AppleReceipt;
 use App\Modules\Ecommerce\Models\Order;
 use App\Modules\Ecommerce\Models\Payment;
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
@@ -18,14 +19,13 @@ class PaymentService
      * @param $type
      * @param $purchasedAt
      * @param $transactionId
-     * @return Payment
      */
     public function create(
         $subscription,
         $type,
         $purchasedAt,
         $transactionId
-    ) {
+    ): Payment {
         $payment = Payment::where('external_id', $transactionId)
             ->where('external_provider', $type)->first();
         if (!$payment) {
@@ -62,7 +62,6 @@ class PaymentService
      * using the payments' source of truth
      *
      * @param  Order|SubscriptionPayment  $model
-     * @return float
      * @throws Exception
      */
     public function getTotalPaid(Order|SubscriptionPayment $model): float
@@ -71,9 +70,6 @@ class PaymentService
             fn (Payment $payment) => $payment->status == Payment::STATUS_PAID
         ) : collect([$model->payment]);
 
-        // Log::debug(sprintf('Getting total paid for %s %s with %s payment(s)',
-        //     class_basename($model), $model->id, $payments->count()
-        // ));
         $total = 0.0;
         $payments->each(function (Payment $payment) use (&$total) {
             $total += match ($payment->external_provider) {
@@ -84,17 +80,13 @@ class PaymentService
                 default => $this->getPaymentAmountForOther($payment)
             };
         });
-        // Log::debug(sprintf('Total paid for %s %s: %s',
-        //     class_basename($model), $model->id, number_format($total, 2, '.', ',')
-        // ));
+
         return $total;
     }
 
     /**
      * Get the total USD amount paid for the given payment, that was made with Stripe
      *
-     * @param  Payment  $payment
-     * @return float
      * @throws Exception
      */
     private function getPaymentAmountForStripe(Payment $payment): float
@@ -112,14 +104,10 @@ class PaymentService
         // @codeCoverageIgnoreEnd
 
         // we recorded the correct amount for Stripe payments, so we can just use that
-        return $this->getAsUsd(floatval($payment->totalPaidAfterRefund), $payment->currency, $payment->created_at);
+        return $this->getAsUsd(floatval($payment->total_paid), $payment->currency, $payment->created_at);
     }
 
     /**
-     * @param  float  $amount
-     * @param  string  $currency
-     * @param  Carbon  $date
-     * @return float
      * @throws Exception
      */
     private function getAsUsd(float $amount, string $currency, Carbon $date): float
@@ -186,9 +174,6 @@ class PaymentService
 
     /**
      * Check if the current code is a valid ISO 4217 currency code
-     *
-     * @param  string  $code
-     * @return bool
      */
     private function isValidCurrencyCode(string $code): bool
     {
@@ -201,8 +186,6 @@ class PaymentService
     /**
      * Get the total USD amount paid for the given payment, that was made with PayPal
      *
-     * @param  Payment  $payment
-     * @return float
      * @throws Exception
      */
     private function getPaymentAmountForPayPal(Payment $payment): float
@@ -220,14 +203,12 @@ class PaymentService
         // @codeCoverageIgnoreEnd
 
         // we recorded the correct amount for PayPal payments, so we can just use that
-        return $this->getAsUsd(floatval($payment->totalPaidAfterRefund), $payment->currency, $payment->created_at);
+        return $this->getAsUsd(floatval($payment->total_paid), $payment->currency, $payment->created_at);
     }
 
     /**
      * Get the total USD amount paid for the given payment, that was made with Apple
      *
-     * @param  Payment  $payment
-     * @return float
      * @throws Exception
      */
     private function getPaymentAmountForApple(Payment $payment): float
@@ -244,16 +225,22 @@ class PaymentService
         }
         // @codeCoverageIgnoreEnd
 
-        // DEV NOTE: our mobile receipts are unreliable, and the link to the payment might have the wrong local_price setting.
-        // Instead, we need to just use the payment's amount
-        return $this->getAsUsd(floatval($payment->totalPaidAfterRefund), $payment->currency, $payment->created_at);
+        // grab the Apple receipts for this payment
+        $receipts = $payment->appleReceipts()->whereNotNull('local_price')->get();
+        $total = 0.0;
+        $receipts->each(function (AppleReceipt $appleReceipt) use (&$total) {
+            $total += $this->getAsUsd(
+                $appleReceipt->local_price,
+                $appleReceipt->local_currency,
+                $appleReceipt->created_at
+            );
+        });
+        return $total;
     }
 
     /**
      * Get the total USD amount paid for the given payment, that was made with Google
      *
-     * @param  Payment  $payment
-     * @return float
      * @throws Exception
      */
     private function getPaymentAmountForGoogle(Payment $payment): float
@@ -270,15 +257,53 @@ class PaymentService
         }
         // @codeCoverageIgnoreEnd
 
-        // DEV NOTE: our mobile receipts are unreliable, and the link to the payment might have the wrong local_price setting.
-        // Instead, we need to just use the payment's amount
-        return $this->getAsUsd(floatval($payment->totalPaidAfterRefund), $payment->currency, $payment->created_at);
+        // grab the Google receipts for this payment
+        // DEV NOTE: we're hoping that there should only be one valid payment amount that we would actually report,
+        // so just grab the latest valid receipt.
+        $googleReceipt = $payment->googleReceipts()
+            ->whereNotNull('local_price')
+            ->where('valid', 1)
+            ->whereNot('notification_type', 'cancel')
+            ->orderByDesc('created_at')
+            ->first();
+
+        // get the receipt's value in USD
+        $total = 0.0;
+        if ($googleReceipt) {
+            $total = $this->getAsUsd(
+                $googleReceipt->local_price,
+                $googleReceipt->local_currency,
+                $googleReceipt->created_at
+            );
+        }
+
+        /*
+        // DEV NOTE: leaving this in case the hope above is wrong
+        // we have some duplicate entries, so make sure to get the unique entries
+        $receipts = $receipts->unique(function (GoogleReceipt $googleReceipt) {
+            $attributes = $googleReceipt->getAttributes();
+            unset($attributes['id']);
+            unset($attributes['created_at']);
+            unset($attributes['updated_at']);
+            return $attributes;
+        });
+
+        // go through each receipt and get its value in USD
+        $total = 0.0;
+        $receipts->each(function (GoogleReceipt $googleReceipt) use (&$total) {
+            $total += $this->getAsUsd(
+                $googleReceipt->local_price,
+                $googleReceipt->local_currency,
+                $googleReceipt->created_at
+            );
+        });
+        */
+        return $total;
     }
 
     /**
      * Get the payment amount for a payment that doesn't use an external service.
      *
-     * @param  Payment  $payment
      * @return float the float value of the payment in USD
      * @throws Exception
      */
@@ -304,7 +329,7 @@ class PaymentService
         }
         // @codeCoverageIgnoreEnd
 
-        return $this->getAsUsd(floatval($payment->totalPaidAfterRefund), $payment->currency, $payment->created_at);
+        return $this->getAsUsd(floatval($payment->total_paid), $payment->currency, $payment->created_at);
     }
 
 }

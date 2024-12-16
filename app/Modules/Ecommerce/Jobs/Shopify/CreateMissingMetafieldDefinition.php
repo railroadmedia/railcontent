@@ -46,8 +46,6 @@ class CreateMissingMetafieldDefinition implements ShouldQueue
     /**
      * Execute the job
      *
-     * @param  ShopifyGateway  $shopifyGateway
-     * @return void
      * @throws Exception
      */
     public function handle(

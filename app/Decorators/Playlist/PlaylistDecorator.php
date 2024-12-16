@@ -12,7 +12,7 @@ use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
-use Railroad\Railtracker\Services\ContentLastEngagedService;
+use App\Modules\RailTracker\Services\ContentLastEngagedService;
 
 class PlaylistDecorator extends ModeDecoratorBase
 {
@@ -24,10 +24,6 @@ class PlaylistDecorator extends ModeDecoratorBase
 
     public static $skip = false;
 
-    /**
-     * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
-     * @param UserPlaylistsService $userPlaylistsService
-     */
     public function __construct(
         PinnedPlaylistsRepository $pinnedPlaylistsRepository,
         UserPlaylistsService $userPlaylistsService,

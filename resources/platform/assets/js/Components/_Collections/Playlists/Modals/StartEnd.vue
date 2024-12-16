@@ -2,6 +2,7 @@
     import { inject, onBeforeMount, computed, reactive, onMounted } from 'vue';
     import PlaylistService from '@services/playlists.js';
     import { usePlaylistsStore } from '@stores/playlists';
+    import {updatePlaylistItem} from 'musora-content-services';
     import MuButton from '@units/Button/MuButton';
 
     //Emits
@@ -60,7 +61,6 @@
     const handleConfirm = () => {
         const payload = {
             user_playlist_item_id: props.data.user_playlist_item_id,
-            position: props.index,
             start_second: state.startTime,
             end_second: state.endTime,
             brand: props.brand,
@@ -71,9 +71,9 @@
             ...payload,
         });
         //Send Request
-        PlaylistService.updatePlaylistItem(payload, token)
+        updatePlaylistItem(payload)
             .then(function(response) {
-                if (response.status === 200) {
+                if (response.success === true) {
                     //show success message
                     window.shownotification({
                         icon: 'fa-pen-to-square',

@@ -9,7 +9,7 @@
                     </a>
                 </div>
                 <div class="tw-flex tw-items-center">
-                    <a :href="seeAllUrl" :aria-label="seeAllLabel" class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-mt-1"> 
+                    <a :href="seeAllUrl" :aria-label="seeAllLabel" class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-mt-1">
                         See All
                     </a>
                 </div>
@@ -25,6 +25,8 @@
 <script setup>
     import { useUserStore } from "@stores/user";
     import {storeToRefs} from "pinia/dist/pinia";
+    import {onMounted} from "vue";
+    import {useCollectionStore} from "@stores/collection";
 
     //Pinia Stores
     const userStore = useUserStore();
@@ -37,4 +39,16 @@
         seeAllUrl: { type: String, default: '' },
         title: { type: String, default: '' },
     });
+
+    const collectionStore = useCollectionStore();
+
+    onMounted(() => {
+        collectionStore.setDefaults({
+            filter: {
+                activeTab: ''
+            },
+            queryType: props.collectionType,
+        });
+    });
 </script>
+

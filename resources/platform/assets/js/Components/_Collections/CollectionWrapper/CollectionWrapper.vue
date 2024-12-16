@@ -1,42 +1,42 @@
 <template>
     <div>
-        <CollectionFilterWrapper :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"
-            :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon"
-            :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters"
-            :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm"
-            :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
-            :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
-            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange"
-            @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
-            @on-progress-change="handleProgressChange" />
+        <CollectionFilterWrapper
+            :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"  :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :hide-search="hideSearch" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptions" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
+            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
+        />
 
         <transition appear name="fade">
             <!-- Delete contentType prop after May 6th -->
-            <CollectionResults :content="data" :selected-filters="getSelectedFilters"
-                :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage"
-                :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore"
-                :contentType="collectionType">
+            <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore" :contentType="collectionType">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
+                <ChallengeCardContainer v-else-if="isChallenge" :content="data" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
-                <CoachCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
-                <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching"
-                    :search-term="getSearchTerm" />
-                <SongCardContainer v-else-if="isSong" :pre-loaded-content="data" :content-type-override="collectionType"
-                    :subscription-calendar-id="subscriptionCalendarId" />
+                <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
+                <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
+                <SongCardContainer
+                    v-else-if="isSong"
+                    :pre-loaded-content="data"
+                    :content-type-override="collectionType"
+                    :subscription-calendar-id="subscriptionCalendarId"
+                />
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
-                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
-                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
-                    :show-reset-progress="showResetProgress" />
-                <CatalogueCardContainer v-else :pre-loaded-content="data" :content-type-override="collectionType"
-                    :will-scroll="false" :subscription-calendar-id="subscriptionCalendarId" :is-admin="isAdmin" />
+                                   @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
+                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview" :show-reset-progress="showResetProgress" />
+                <CatalogueCardContainer
+                    v-else
+                    :pre-loaded-content="data"
+                    :content-type-override="collectionType"
+                    :will-scroll="false"
+                    :subscription-calendar-id="subscriptionCalendarId"
+                />
             </CollectionResults>
         </transition>
     </div>
 </template>
 
 <script setup>
-import { onMounted, computed, onBeforeMount } from "vue";
+import { onMounted, computed } from "vue";
 import { useCollectionStore } from "@stores/collection";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@stores/user";
@@ -50,10 +50,11 @@ import ListCatalogue from "@collections/ListCatalogue/ListCatalogue";
 import CatalogueCardContainer from "@collections/Catalogue/CatalogueCardContainer";
 import SongCardContainer from "@collections/Catalogue/SongCardContainer";
 import RoutinesCatalogue from "@collections/Catalogue/RoutineCatalogue";
-import CoachCatalogue from "@collections/Catalogue/CoachCatalogue";
+import CoachesGridCatalogue from "@vuesora/views/catalogues/CoachesGridCatalogue";
 import GroupedResultsContainer from "@collections/GroupedResultsContainer/GroupedResultsContainer";
 import DownloadsCatalogue from "@vuesora/views/catalogues/DownloadsCatalogue";
 import PackCatalogue from "@collections/Packs/PackCatalogue";
+import ChallengeCardContainer from '@collections/Catalogue/ChallengeCardContainer';
 
 const props = defineProps({
     collectionType: {
@@ -62,18 +63,6 @@ const props = defineProps({
     defaultSort: {
         type: String,
         default: '-published_on',
-    },
-    endpoint: {
-        type: String,
-        default: () => '',
-    },
-    searchEndpointUrl: {
-        type: String,
-        default: () => '',
-    },
-    filterableValues: {
-        type: Array,
-        default: () => [],
     },
     hideControls: {
         type: Boolean,
@@ -95,10 +84,6 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
-    includeFutureScheduledContentOnly: {
-        type: Boolean,
-        default: () => false,
-    },
     parentUrl: {
         type: String,
         default: () => "/",
@@ -107,14 +92,6 @@ const props = defineProps({
         type: [Number, Boolean],
         default: () => 20,
     },
-    preLoadedContent: {
-        type: Object,
-        default: () => ({}),
-    },
-    requiredFields: {
-        type: Array,
-        default: () => [],
-    },
     showResetProgress: {
         type: Boolean,
         default: () => false,
@@ -122,18 +99,6 @@ const props = defineProps({
     subscriptionCalendarId: {
         type: String,
         default: () => '',
-    },
-    requiredUserStates: {
-        type: Array,
-        default: () => [],
-    },
-    statuses: {
-        type: Array,
-        default: () => ["published"],
-    },
-    tabOptions: {
-        type: Array,
-        default: () => [],
     },
     title: {
         type: String,
@@ -161,21 +126,6 @@ const props = defineProps({
         type: String,
         default: '',
     },
-    withoutEnrollment: {
-        type: Boolean,
-        default: () => false,
-    },
-    includedTypes: {
-        default: '',
-    },
-    isAllContent: {
-        type: Boolean,
-        default: () => false,
-    },
-    isAdmin: {
-        type: Boolean,
-        default: () => false,
-    },
     showProgressFilters: {
         type: Boolean,
         default: () => true,
@@ -184,59 +134,16 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
-    noResultsMessage: {
-        type: String,
-        default: '',
-    },
 });
 
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 
-const { data, currentPage, filter, loading, totalPages, tabData, filterColumns, searching } = storeToRefs(collectionStore);
+const { data, currentPage, filter, loading, totalPages, tabData, filterColumns, searching, tabOptions } = storeToRefs(collectionStore);
 const { brand, journeySection } = storeToRefs(userStore);
 
-const request_params = computed(() => {
-    return {
-        required_fields: props.requiredFields,
-        included_fields: props.includedFields,
-        required_user_states: props.requiredUserStates,
-        ...(addIncludedTypes.value && { included_types: includedTypes.value }),
-        include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
-        limit: props.limit,
-        ...(isPack.value && { without_enrollment: props.withoutEnrollment }),
-        is_all: props.isAllContent,
-
-    };
-})
-
-const includedTypes = computed(() => {
-    let types = [];
-
-    if (isCoach.value) {
-        types.push('instructor');
-    } else if (props.multipleTypes) {
-        types = props.includedTypes;
-    } else {
-        types = [...types, ...props.includedTypes];
-
-        if (props.collectionType && !types.includes(props.collectionType)) {
-            types.push(props.collectionType);
-        }
-
-        if (isQuickTips.value) {
-            types.push('boot-camps');
-        }
-    }
-
-    return types;
-})
-
-const addIncludedTypes = computed(() => {
-    return includedTypes.value.length > 0;
-})
-
 //Collection type reactives
+
 const isRecommendation = computed(() => {
     return props.collectionType === 'Recommendation';
 })
@@ -331,33 +238,6 @@ const hideFilter = computed(() => {
     return isRoutine.value;
 })
 
-const getTabOptions = computed(() => {
-    if (props.tabs?.length) {
-        return props.tabs.map(({ name, value, is_required_field, is_group_by }) => {
-            return {
-                key: (is_group_by) ? ['group_by,' + value[0]] : value,
-                value: name,
-                groupByView: (is_group_by) ? true : false,
-            }
-        })
-    }
-    return [
-        { key: `all${props.title.replace(' ', '').toLowerCase()}`, value: `All ${props.title}` },
-    ]
-});
-
-const tabOptionData = computed(() => {
-    return props.tabOptions.length > 0 ? props.tabOptions : getTabOptions.value;
-})
-
-const getTabData = computed(() => {
-    return {
-        currentPage: 1,
-        totalPages: Object.keys(props.preLoadedContent).length > 0 ? Math.ceil(props.preLoadedContent?.meta?.totalResults / props.limit) : 0,
-        totalResults: Object.keys(props.preLoadedContent).length > 0 ? props.preLoadedContent?.meta?.totalResults : 0,
-    }
-})
-
 //prop reactives
 const activeTabData = computed(() => {
     return tabData.value[filter.value.activeTab];
@@ -422,29 +302,10 @@ const handleTabChange = (tab) => {
     collectionStore.switchTab(tab);
 }
 
-onBeforeMount(() => {
-    collectionStore.setDefaults({
-        isCoach: isCoach.value,
-        content: props.preLoadedContent,
-        filter: {
-            params: { ...request_params.value },
-            [isThreads.value || isCoach.value ? 'term' : 'title']: '',
-            sort: props.defaultSort,
-        },
-        tabData: getTabData.value,
-        tabOptions: tabOptionData.value,
-        endpoint: props.endpoint,
-        searchEndpointUrl: props.searchEndpointUrl,
-        sortOptions: props.sortOptions,
-    })
-    collectionStore.getURLParams();
-})
-
 onMounted(() => {
     // console.log('collection type',props.collectionType)
     // console.log(props.sortOptions, props.defaultSort)
     // console.log(props.preLoadedContent)
-
 
     if (isRecommendation.value && showGroupBy.value) {
         data.value.forEach(item => {

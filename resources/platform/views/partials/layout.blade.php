@@ -70,6 +70,15 @@
 
         @yield('styles')
         {!! \App\Analytics\Tracker::headBottom() !!}
+
+        <script>
+            window.Laravel = {
+                sanityProjectId: @json(config('app.sanity_project_id')),
+                sanityApiToken: @json(config('app.sanity_api_token')),
+                sanityDataset: @json(config('app.sanity_dataset')),
+                mcsDebug: @json(config('app.mcs_debug'))
+            };
+        </script>
     </head>
 
     <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative" @yield('body-data')>
@@ -138,6 +147,9 @@
         <script type="application/javascript">
             window.sidebarNavigationLinks = {!! $sidebarNavigationSectionsJson ?? '' !!};
             window.userNavigationDropdownLinks = {!! $userNavigationDropdownLinksJson ?? '' !!};
+            window.railcontentConfig = {};
+            window.railcontentConfig.token = "{{ csrf_token() }}";
+            window.railcontentConfig.userId = "{{  json_encode($userData['id']) }}";
         </script>
 
         {{-- Customer.io --}}

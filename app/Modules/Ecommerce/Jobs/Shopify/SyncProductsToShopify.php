@@ -84,10 +84,6 @@ class SyncProductsToShopify implements ShouldQueue
     /**
      * Execute the job
      *
-     * @param  Shopify  $shopify
-     * @param  ProductRepository  $productRepository
-     * @param  EcommerceEntityManager  $entityManager
-     * @return void
      * @throws Exception
      */
     public function handle(
@@ -110,7 +106,6 @@ class SyncProductsToShopify implements ShouldQueue
      * sorted to have the latest update first.
      * If there are no other related products, it will be empty.
      *
-     * @param  Product  $product
      * @return Collection<Product>
      * @throws ORMException
      */
@@ -143,9 +138,6 @@ class SyncProductsToShopify implements ShouldQueue
     /**
      * Build up a collection of SKUs that would match for other sizes of this product,
      * if the product looks like a size option. If not, the collection will be empty.
-     *
-     * @param  Product  $product
-     * @return Collection
      */
     private function buildProductSizeSkus(Product $product): Collection
     {
@@ -175,10 +167,6 @@ class SyncProductsToShopify implements ShouldQueue
     /**
      * Build up the data structure to send to Shopify, depending on product type and whether it has options or not
      *
-     * @param  Product  $product
-     * @param  bool  $isCreating
-     * @param  Collection  $options
-     * @return array
      * @throws Exception
      */
     private function buildPostData(
@@ -221,10 +209,6 @@ class SyncProductsToShopify implements ShouldQueue
 
     /**
      * Create the data to post to Shopify to create a simple product with no options or extra variants
-     *
-     * @param  Product  $product
-     * @param  int  $locationId
-     * @return array
      */
     private function createProductData(Product $product, int $locationId): array
     {
@@ -236,10 +220,7 @@ class SyncProductsToShopify implements ShouldQueue
     /**
      * Build an array with the properly formatted data for a Product
      *
-     * @param  Product  $product
-     * @param  bool  $withImage
      * @param  Collection|null  $allOptions  - the collection of alike products that will be options for the product in Shopify
-     * @return array
      */
     private function formatProductData(Product $product, bool $withImage, ?Collection $allOptions = null): array
     {
@@ -273,7 +254,6 @@ class SyncProductsToShopify implements ShouldQueue
      * "size", and get back the base name shared with all the given products.
      *
      * @param  Collection<Product>  $productOptions
-     * @return string
      */
     private function guessProductNameForOption(Collection $productOptions): string
     {
@@ -315,13 +295,6 @@ class SyncProductsToShopify implements ShouldQueue
 
     /**
      * Create the data required to post a product to Shopify as a variant
-     *
-     * @param  Product  $product
-     * @param  int|null  $locationId
-     * @param  bool  $isCreating
-     * @param  string|null  $sizeOptionName
-     * @param  bool  $includeInventory
-     * @return array
      */
     private function createVariantData(
         Product $product,
@@ -377,9 +350,6 @@ class SyncProductsToShopify implements ShouldQueue
 
     /**
      * Get the size of the product from its sku, following our conventions
-     *
-     * @param  Product  $product
-     * @return string|null
      */
     private function getSizeFromProductSku(Product $product): ?string
     {
@@ -404,9 +374,6 @@ class SyncProductsToShopify implements ShouldQueue
 
     /**
      * Build up the payload data to update a simple product with no options or extra variants
-     *
-     * @param  Product  $product
-     * @return array
      */
     private function updateProductData(Product $product): array
     {
@@ -432,10 +399,6 @@ class SyncProductsToShopify implements ShouldQueue
 
     /**
      * Build an array with the properly formatted data to update the given Product
-     *
-     * @param  Product  $product
-     * @param  ProductResource  $shopifyProduct
-     * @return array
      */
     private function formatUpdateProductData(Product $product, ProductResource $shopifyProduct): array
     {
@@ -484,10 +447,6 @@ class SyncProductsToShopify implements ShouldQueue
 
     /**
      * Get the variant data that needs to be updated for the given product
-     *
-     * @param  Product  $product
-     * @param  VariantResource  $shopifyVariant
-     * @return array
      */
     private function getUpdatedVariantData(Product $product, VariantResource $shopifyVariant): array
     {
@@ -512,10 +471,6 @@ class SyncProductsToShopify implements ShouldQueue
     /**
      * For the given collection of Products, create the data to send to Shopify with the root product, the size options,
      * and a variant for each of our Products, corresponding to a size option.
-     *
-     * @param  Collection  $productOptions
-     * @param  int|null  $locationId
-     * @return array
      */
     private function createProductDataWithOptions(Collection $productOptions, ?int $locationId): array
     {
@@ -545,9 +500,6 @@ class SyncProductsToShopify implements ShouldQueue
 
     /**
      * Sort the given collection of products, to be in order of size from smallest to largest
-     *
-     * @param  Collection  $productOptions
-     * @return Collection
      */
     private function sortProductOptionsBySize(Collection $productOptions): Collection
     {
@@ -565,10 +517,6 @@ class SyncProductsToShopify implements ShouldQueue
 
     /**
      * Build up the payload data to update a Product with Options (i.e. sizes)
-     *
-     * @param  Collection  $productOptions
-     * @param  int|null  $locationId
-     * @return array
      */
     private function updateProductDataWithOptions(Collection $productOptions, ?int $locationId): array
     {
@@ -666,9 +614,6 @@ class SyncProductsToShopify implements ShouldQueue
 
     /**
      * Sort the given array of variant data, to be in order of size from smallest to largest
-     *
-     * @param  array  $variantData
-     * @return array
      */
     private function sortVariantDataBySize(array $variantData): array
     {
@@ -687,10 +632,7 @@ class SyncProductsToShopify implements ShouldQueue
     /**
      * Simulate sending the post data for the product to Shopify, and record the results in the table rows
      *
-     * @param  Product  $product
-     * @param  array  $postData
      * @param $simulatedShopifyId
-     * @return void
      */
     private function simulateSendToShopify(Product $product, array $postData, &$simulatedShopifyId): void
     {
@@ -710,9 +652,6 @@ class SyncProductsToShopify implements ShouldQueue
      * Record the shopify ID of the variant on our Product entry,
      * and return the formatted array to print out in our log
      *
-     * @param  VariantResource  $variantData
-     * @param  Product|null  $product
-     * @return array
      * @throws OptimisticLockException
      * @throws \Doctrine\ORM\Exception\ORMException
      */

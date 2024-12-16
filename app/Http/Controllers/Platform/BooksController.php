@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -30,7 +31,7 @@ class BooksController extends Controller
         $this->contentService = $contentService;
     }
 
-    public function resources()
+    public function resources(): View
     {
         $chapterThumbs = [
             'https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/level-1.jpg',
@@ -52,7 +53,7 @@ class BooksController extends Controller
         ]);
     }
 
-    public function chapter($domain, $brand, $chapterNumber)
+    public function chapter($domain, $brand, $chapterNumber): View
     {
         $thisChapter = $this->getChapterData($chapterNumber);
 
@@ -517,13 +518,13 @@ class BooksController extends Controller
         return $foundations['units'][$levelNumber - 1]['lessons'] ?? [];
     }
 
-    public function bestBeginner(Request $request)
+    public function bestBeginner(Request $request): View
     {
         $isDigital = strpos($request->getPathInfo(), 'digital') !== false;
 
         $user = user();
 
-        $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
+        $hasAccess = $user && ($user->isAMember() || $user->isPackOrChallengeOnlyOwner());
 
         $chapters = [
             [
@@ -631,13 +632,13 @@ class BooksController extends Controller
         ]);
     }
 
-    public function bestBeginnerPlayAlongs()
+    public function bestBeginnerPlayAlongs(): View
     {
         ContentRepository::$bypassPermissions = true;
 
         $user = user();
 
-        $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
+        $hasAccess = $user && ($user->isAMember() || $user->isPackOrChallengeOnlyOwner());
 
         $idsToPull = ['28360', '20657', '23989', '23625', '8431', '24431', '14295', '11689', '23024', '24580'];
 
@@ -650,16 +651,17 @@ class BooksController extends Controller
         ]);
     }
 
-    public function drummersToolbox(Request $request)
+    public function drummersToolbox(Request $request): View
     {
         $isDigital = strpos($request->getPathInfo(), 'digital') !== false;
 
         $user = user();
 
-        $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
+        $hasAccess = $user && ($user->isAMember() || $user->isPackOrChallengeOnlyOwner());
 
         $isEdge = $user && $user->isAMember();
         $isPackOwner = $user && $user->isPackOnlyOwner();
+        $isChallengeOwner = $user && $user->isChallengeOnlyOwner();
 
         $chapters = [
             [
@@ -721,17 +723,18 @@ class BooksController extends Controller
             "user" => $user,
             "isEdge" => $isEdge,
             "isPackOwner" => $isPackOwner,
+            'isChallengeOwner' => $isChallengeOwner,
         ]);
     }
 
-    public function drummersToolboxChapter($domain, $brand, $chapterNumber, Request $request)
+    public function drummersToolboxChapter($domain, $brand, $chapterNumber, Request $request): View
     {
         ContentRepository::$bypassPermissions = true;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $user = user();
 
-        $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
+        $hasAccess = $user && ($user->isAMember() || $user->isPackOrChallengeOnlyOwner());
 
         $isDigital = strpos($request->getPathInfo(), 'digital') !== false;
         $chapter = $this->drummersToolboxChapters($chapterNumber);

@@ -116,7 +116,6 @@ class BulkCustomerCreateFromCustomers implements ShouldQueue
      * Create the data to post to Shopify to create a Customer from our collection of Customers
      *
      * @param Collection<Customer> $customers
-     * @return array
      */
     protected function createCustomerData(Collection $customers): array
     {
@@ -144,7 +143,6 @@ class BulkCustomerCreateFromCustomers implements ShouldQueue
      * Get all addresses for the customers, then format it to meet Shopify's expectation
      *
      * @param Collection<Customer> $customers
-     * @return Collection
      */
     protected function createAddressesData(Collection $customers): Collection
     {

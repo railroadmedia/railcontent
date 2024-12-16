@@ -11,7 +11,7 @@ class ResetReferralPerformsCount extends Command
 
     protected $description = 'Reset the referral count for referrals';
 
-    public function handle()
+    public function handle(): void
     {
         $this->info('###### Starting ResetReferralPerformsCount...  ######');
 

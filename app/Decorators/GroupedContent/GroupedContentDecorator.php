@@ -19,12 +19,6 @@ class GroupedContentDecorator extends ModeDecoratorBase
     protected ArtistService $artistService;
     protected GenreService $genreService;
 
-    /**
-     * @param UserContentProgressService $userContentProgressService
-     * @param ContentService $contentService
-     * @param ArtistService $artistService
-     * @param GenreService $genreService
-     */
     public function __construct(
         UserContentProgressService $userContentProgressService,
         ContentService $contentService,

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use Illuminate\Routing\Controller;
 
 class SupportController extends Controller
 {
-    public function memberSupport()
+    public function memberSupport(): View
     {
         $emailRecipient = config('mailora.' . brand() . '.support-email-address', "support@musora.com");
         $logoLink = config('mailora.' . brand() . '.logo-link');
@@ -17,7 +18,7 @@ class SupportController extends Controller
         ]);
     }
 
-    public function contact()
+    public function contact(): View
     {
         $emailRecipient = config('mailora.' . brand() . '.support-email-address', "support@musora.com");
         $logoLink = config('mailora.' . brand() . '.logo-link');

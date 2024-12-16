@@ -28,7 +28,7 @@ class CustomerIOSyncUser extends Command
      *
      * @throws Throwable
      */
-    public function handle(UserService $userService)
+    public function handle(UserService $userService): void
     {
         $userId = $this->argument('user');
         $user = $userService->getByIdOrNull($userId);

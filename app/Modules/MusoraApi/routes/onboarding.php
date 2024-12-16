@@ -1,7 +1,7 @@
 <?php
 
-use App\Modules\MusoraApi\Controllers\V1\OnboardingController as OnboardingControllerV1;
-use App\Modules\MusoraApi\Controllers\V5\OnboardingController as OnboardingControllerV5;
+use App\Modules\MusoraApi\Controllers\V1\OnboardingControllerV1;
+use App\Modules\MusoraApi\Controllers\V5\OnboardingControllerV5;
 
 Route::as('musora-api.')
     ->prefix('/musora-api')
@@ -81,7 +81,6 @@ Route::as('musora-api.')
             ->middleware('api_version:v1')
             ->name('v1.onboarding.answer_history_coach');
 
-        // Version 5
         Route::post('/v5/onboarding/goals', [OnboardingControllerV5::class, 'goals'])
             ->middleware('api_version:v5')
             ->name('v5.onboarding.goals');

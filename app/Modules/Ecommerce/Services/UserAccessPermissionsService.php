@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Models\Cohort;
+use App\Modules\Content\Services\CohortService;
 use App\Modules\Content\Services\ContentPermissionsService;
 use App\Modules\Ecommerce\Collections\OrderCollection;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
@@ -28,6 +30,8 @@ class UserAccessPermissionsService
     private ContentPermissionsService $contentPermissionsService;
 
     private ?array $cachedPackPermissionIds = null;
+    private ?array $cachedChallengePermissionIds = null;
+
     private UserProductService $userProductService;
     private UserService $userService;
     private SubscriptionService $subscriptionService;
@@ -67,6 +71,17 @@ class UserAccessPermissionsService
         return new UserAccessPermissionsCollection($user, $permissions);
     }
 
+    public function getUserAccessPermissionsIgnoreChallengeEnrollment(int $userId): UserAccessPermissionsCollection
+    {
+        $user = User::find($userId);
+        $permissions = $this->getUserAccessPermissionsQuery($userId)->where(
+            'source',
+            '!=',
+            UserAccessPermissionsSourceEnum::Challenges->value
+        )->get();
+        return new UserAccessPermissionsCollection($user, $permissions);
+    }
+
     public function getUserAccessPermissionsByUser(
         User $user,
         array $filterPermissionIds = []
@@ -76,12 +91,7 @@ class UserAccessPermissionsService
     }
 
     /**
-     * @param int $userId
      * @param int[] $productIds
-     * @param Carbon $startTime
-     * @param string $sourceId
-     * @param UserAccessPermissionsSourceEnum $source
-     * @return void
      */
     public function addUserAccessPermissionsForProducts(
         int $userId,
@@ -305,7 +315,63 @@ class UserAccessPermissionsService
                 ->toArray();
         }
 
-        return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds);
+        if (!$this->cachedChallengePermissionIds) {
+            $permissions = $this->contentPermissionsService->getContentPermissionsLookup();
+            $challengeProducts = $this->productService->getAllChallenges();
+            $this->cachedChallengePermissionIds = $challengeProducts->map(function ($product) use ($permissions) {
+                return $product->getContentPermissions($permissions)
+                    ->pluck('id');
+            })
+                ->flatten(1)
+                ->unique()
+                ->toArray();
+        }
+
+        $permissionsBeforeChallengeLaunch = new UserAccessPermissionsCollection(
+            $userAccessPermissions->getUser(),
+            $userAccessPermissions->getCollection()->where('created_at', '<', '2024-12-16')
+        );
+
+        return $userAccessPermissions->doesUserOwnPermissions($this->cachedPackPermissionIds)
+            || $permissionsBeforeChallengeLaunch->doesUserOwnPermissions($this->cachedChallengePermissionIds);
+    }
+
+    public function getOwnsChallenges(UserAccessPermissionsCollection $userAccessPermissions): bool
+    {
+        if (!$this->cachedChallengePermissionIds) {
+            $permissions = $this->contentPermissionsService->getContentPermissionsLookup();
+            $challengeProducts = $this->productService->getAllChallenges();
+            $this->cachedChallengePermissionIds = $challengeProducts->map(function ($product) use ($permissions) {
+                return $product->getContentPermissions($permissions)
+                    ->pluck('id');
+            })
+                ->flatten(1)
+                ->unique()
+                ->toArray();
+        }
+
+        return $userAccessPermissions->doesUserOwnPermissions($this->cachedChallengePermissionIds);
+    }
+
+    public function getOwnedChallengeProductIds(): array
+    {
+        $userAccessPermissions = $this->getUserAccessPermissionsIgnoreChallengeEnrollment(user()->id);
+        $permissions = $this->contentPermissionsService->getContentPermissionsLookup();
+        $challengeProducts = $this->productService->getAllChallenges();
+        $ownedProductIds = [];
+        $challengeProducts->each(function ($product) use (
+            $userAccessPermissions,
+            $permissions,
+            &$ownedProductIds
+        ) {
+            $permissionIds = $product->getContentPermissions($permissions)->pluck('id')->toArray();
+            $ownsProduct = $userAccessPermissions->doesUserOwnPermissions($permissionIds);
+            if ($ownsProduct) {
+                $ownedProductIds[] = $product->id;
+            }
+        });
+
+        return $ownedProductIds;
     }
 
     public function shouldSyncCustomerIOWorkspace(User $user, $brand): bool

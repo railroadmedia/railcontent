@@ -1,5 +1,5 @@
 <template>
-    <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-[29]" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${thumbnailUrl}`" alt="thumbnail" />
+    <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-[29]" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${thumbnailUrl}`" alt="thumbnail" />
     <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-backdrop-blur-sm tw-bg-[rgba(0,12,23,0.75)] tw-z-30 tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-[30px]">
         <div class="tw-text-[#000C17] dark:tw-text-white">
             <!-- Lock Icon -->

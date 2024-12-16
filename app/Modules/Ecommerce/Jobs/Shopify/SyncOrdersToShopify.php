@@ -86,8 +86,6 @@ class SyncOrdersToShopify implements ShouldQueue
 
     /**
      * Create a ShopifySync log, if we're executing
-     *
-     * @return ShopifySync|null
      */
     protected function createSyncLogIfExecuting(): ?ShopifySync
     {
@@ -115,11 +113,6 @@ class SyncOrdersToShopify implements ShouldQueue
 
     /**
      * Execute the job
-     *
-     * @param  Shopify  $shopify
-     * @param  ShopifySyncService  $shopifySyncService
-     * @param  TaxService  $taxService
-     * @return void
      */
     public function handle(
         Shopify $shopify,
@@ -188,7 +181,6 @@ class SyncOrdersToShopify implements ShouldQueue
      * Perform the sync action on each order in the collection
      *
      * @param  Collection<Order>  $orders
-     * @return void
      */
     private function loopOrdersSync(Collection $orders): void
     {
@@ -232,7 +224,6 @@ class SyncOrdersToShopify implements ShouldQueue
     /**
      * Sync the order up to Shopify
      *
-     * @param  Order  $order
      * @return bool if the order was synced with Shopify or not
      */
     private function syncOrder(Order $order): bool
@@ -404,9 +395,6 @@ class SyncOrdersToShopify implements ShouldQueue
     /**
      * Create the data to post to Shopify to create an Order
      *
-     * @param  Order  $order
-     * @param  bool  $withMetafields
-     * @return array
      * @throws Exception
      */
     private function createOrderData(Order $order, bool $withMetafields): array
@@ -533,9 +521,6 @@ class SyncOrdersToShopify implements ShouldQueue
     /**
      * Create the data required for all Order Items of the Order
      *
-     * @param  Order  $order
-     * @param  float  $refundAmount
-     * @return array
      * @throws Exception
      */
     private function createOrderItems(Order $order, float $refundAmount): array
@@ -630,9 +615,6 @@ class SyncOrdersToShopify implements ShouldQueue
     /**
      * Build the array of the taxes data for the order
      *
-     * @param  Order  $order
-     * @param  float  $price
-     * @return array
      * @throws Exception
      */
     protected function getTaxesData(Order $order, float $price): array
@@ -661,9 +643,6 @@ class SyncOrdersToShopify implements ShouldQueue
     /**
      * Get the payments for this order, and send the data to Shopify to create a payment transaction
      * for each one, recording the result's shopify_id
-     *
-     * @param  Order  $order
-     * @return void
      */
     private function sendPaymentsForOrderToShopify(Order $order): void
     {
@@ -716,9 +695,6 @@ class SyncOrdersToShopify implements ShouldQueue
     /**
      * Get all payments for this order that need to be synced up to Shopify, and transform the data into the
      * format required by Shopify
-     *
-     * @param  Order  $order
-     * @return Collection
      */
     private function getPaymentsDataToSync(Order $order): Collection
     {
@@ -744,9 +720,6 @@ class SyncOrdersToShopify implements ShouldQueue
 
     /**
      * Get the Fulfillment Order Resource from Shopify, for this Order
-     *
-     * @param  Order  $order
-     * @return ?array
      */
     private function getFulfillmentOrder(Order $order): ?array
     {
@@ -830,9 +803,6 @@ class SyncOrdersToShopify implements ShouldQueue
 
     /**
      * Generate a random string of numbers, to replicate an ID
-     *
-     * @param  int  $numDigits
-     * @return int
      */
     private function generateRandomId(int $numDigits): int
     {
@@ -847,11 +817,6 @@ class SyncOrdersToShopify implements ShouldQueue
     /**
      * Get all applicable fulfillments for the given order, and send the data to Shopify to have it create
      * a fulfillment with the information for our own fulfillments.
-     *
-     * @param  Order  $order
-     * @param  string  $shopifyOrderNumber
-     * @param  array  $shopifyOrderFulfillmentOrderData
-     * @return void
      */
     private function createShopifyFulfillmentForOrder(
         Order $order,
@@ -1011,8 +976,6 @@ class SyncOrdersToShopify implements ShouldQueue
 
     /**
      * Print out the results in an Info log
-     *
-     * @return void
      */
     protected function printResults(): void
     {
@@ -1060,9 +1023,6 @@ class SyncOrdersToShopify implements ShouldQueue
 
     /**
      * Finish the sync log and store the Shopify IDs
-     *
-     * @param  Collection  $shopifyIds
-     * @return void
      */
     protected function finishSyncLogIfExecuting(Collection $shopifyIds): void
     {

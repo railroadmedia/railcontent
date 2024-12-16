@@ -177,14 +177,6 @@ export default {
             type: String,
             default: null,
         },
-        isLiked: {
-            type: Boolean,
-            default: false,
-        },
-        likeCount: {
-            type: [Number, String],
-            default: 0,
-        },
         chapters: {
             type: Array,
             default: [],
@@ -314,7 +306,7 @@ export default {
                 // 'chromecast': this.castTitle != null,
                 airplay: true,
                 fullscreen: true,
-                markers: this.chapters.length > 0,
+                markers: this.chapters?.length > 0,
             };
             const mapArray = [];
 

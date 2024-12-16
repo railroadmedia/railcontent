@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Modules\Content\database\factories\InstructorFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -110,7 +111,7 @@ class Video extends Content
         $this->created_on = Carbon::now();
     }
 
-    public function fields()
+    public function fields(): HasMany
     {
         return $this->hasMany(ContentField::class, 'content_id');
     }

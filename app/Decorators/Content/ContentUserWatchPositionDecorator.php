@@ -5,7 +5,7 @@ namespace App\Decorators\Content;
 use App\Modules\Tracker\Models\LastEngagedSeconds;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Support\Collection;
-use Railroad\Railtracker\Repositories\MediaPlaybackRepository;
+use App\Modules\RailTracker\Repositories\MediaPlaybackRepository;
 
 class ContentUserWatchPositionDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
 {

@@ -43,7 +43,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         ]);
     }
 
-    public function test_no_user()
+    public function test_no_user(): void
     {
         $this->userMembershipFieldsService->sync(0);
 
@@ -54,7 +54,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         ]);
     }
 
-    public function test_no_user_products()
+    public function test_no_user_products(): void
     {
         $userId = User::factory()->create()->id;
 
@@ -63,7 +63,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         $this->assertAccess(null, null, false, '', false);
     }
 
-    public function test_basic_monthly_membership_access()
+    public function test_basic_monthly_membership_access(): void
     {
         $user = User::factory()->create();
         $product = ProductFactory::createSubscriptionProduct(
@@ -86,7 +86,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_plus_monthly_membership_access()
+    public function test_plus_monthly_membership_access(): void
     {
         $user = User::factory()->create();
         $product = ProductFactory::createSubscriptionProduct(
@@ -109,7 +109,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_basic_annual_membership_access()
+    public function test_basic_annual_membership_access(): void
     {
         $user = User::factory()->create();
         $product = ProductFactory::createSubscriptionProduct(
@@ -132,7 +132,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_lifetime()
+    public function test_lifetime(): void
     {
         $user = User::factory()->create();
         $product = ProductFactory::createLifetimeProduct();
@@ -150,7 +150,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_lifetime_upgrade()
+    public function test_lifetime_upgrade(): void
     {
         $user = User::factory()->create();
         $productLifetime = ProductFactory::createLifetimeProduct();
@@ -175,7 +175,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_lifetime_revoked()
+    public function test_lifetime_revoked(): void
     {
         $this->markTestSkipped("this test fails to run");
 
@@ -203,7 +203,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_aggregate_membership_access()
+    public function test_aggregate_membership_access(): void
     {
         $this->markTestSkipped("this test fails to run");
         $this->markTestSkipped("this test fails to run");
@@ -230,7 +230,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_expired()
+    public function test_expired(): void
     {
         $user = User::factory()->create();
         $product = ProductFactory::createSubscriptionProduct(
@@ -253,7 +253,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_pack_owner()
+    public function test_pack_owner(): void
     {
         $user = User::factory()->create();
         $product = ProductFactory::createPackProduct();
@@ -274,7 +274,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_admin_team()
+    public function test_admin_team(): void
     {
         $this->markTestSkipped("this test fails to run");
         $user = User::factory()->create(['permission_level' => 'administrator']);
@@ -296,7 +296,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_coach()
+    public function test_coach(): void
     {
         $this->markTestSkipped("this test fails to run");
         $user = User::factory()->create(['permission_level' => 'administrator']);
@@ -327,7 +327,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_house_coach()
+    public function test_house_coach(): void
     {
         $this->markTestSkipped("this test fails to run");
         $user = User::factory()->create(['permission_level' => 'administrator']);
@@ -365,7 +365,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
-    public function test_membership_total_as_days_for_trial_works()
+    public function test_membership_total_as_days_for_trial_works(): void
     {
         $product = ProductFactory::createSubscriptionProduct(
             'musora',
@@ -382,7 +382,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         $this->assertEquals(0, $product->getMembershipTimeAsTotalDays());
     }
 
-    public function test_membership_total_as_days_for_month_works()
+    public function test_membership_total_as_days_for_month_works(): void
     {
         $product = ProductFactory::createSubscriptionProduct(
             'musora',
@@ -400,7 +400,7 @@ class UserMembershipFieldsServiceTest extends TestCase
         $this->assertEquals(180, $product->getMembershipTimeAsTotalDays());
     }
 
-    public function test_membership_total_as_days_for_year_works()
+    public function test_membership_total_as_days_for_year_works(): void
     {
         $product = ProductFactory::createSubscriptionProduct(
             'musora',

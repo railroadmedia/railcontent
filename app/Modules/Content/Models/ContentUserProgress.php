@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Models;
 
+use App\Maps\ContentTypes;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Enums\ProgressState;
 use Carbon\Carbon;
@@ -15,11 +16,11 @@ use Modules\UserManagementSystem\Models\User;
 /**
  * App\Modules\Content\Models\Content
  *
- * @property integer $id
- * @property integer $content_id
- * @property integer $user_id
+ * @property int $id
+ * @property int $content_id
+ * @property int $user_id
  * @property string $state
- * @property integer $progress_percent
+ * @property int $progress_percent
  * @property string $higher_key_progress
  * @property Carbon $updated_on
  * @property Carbon $started_on
@@ -44,9 +45,9 @@ class ContentUserProgress extends Model
     public static function isCompletedByUser(int $contentId, int $userId): bool
     {
         return self::where('content_id', $contentId)
-        ->where('user_id', $userId)
-        ->where('state', ProgressState::Completed->value)
-        ->exists();
+            ->where('user_id', $userId)
+            ->where('state', ProgressState::Completed->value)
+            ->exists();
     }
 
     /**
@@ -58,12 +59,30 @@ class ContentUserProgress extends Model
     }
 
     /**
+     * Scope a query to only include records that are complete.
+     */
+    public function scopeComplete(Builder $query): Builder
+    {
+        return $query->where('state', ProgressState::Completed->value);
+    }
+
+    /**
      * Scope a query to only include progress for content of a given type.
      */
     public function scopeOfContentType(Builder $query, string $type): Builder
     {
         return $query->whereHas('content', function ($query) use ($type) {
             $query->where('type', $type);
+        });
+    }
+
+    /**
+     * Scope a query to only include progress for content of the types displayed on the home page
+     */
+    public function scopeOfHomePageContentTypes(Builder $query): Builder
+    {
+        return $query->whereHas('content', function ($query) {
+            $query->whereIn('type', ContentTypes::inProgressContentTypes());
         });
     }
 
@@ -80,7 +99,6 @@ class ContentUserProgress extends Model
     /**
      * Get the state of the progress for the content and user provided.
      *
-     * @return object{state: ProgressState, percent: int}
      * @throws Exception
      */
     public static function getState(int $contentId, int $userId): object
@@ -91,12 +109,14 @@ class ContentUserProgress extends Model
             ->get();
 
         if ($progressCollection->count() > 1) {
-            throw new Exception(sprintf(
-                'Multiple %s found for Content %s and User %s',
-                class_basename(__CLASS__),
-                $contentId,
-                $userId
-            ));
+            throw new Exception(
+                sprintf(
+                    'Multiple %s found for Content %s and User %s',
+                    class_basename(__CLASS__),
+                    $contentId,
+                    $userId
+                )
+            );
         }
 
         return new class ($progressCollection) {
@@ -122,5 +142,10 @@ class ContentUserProgress extends Model
                 ];
             }
         };
+    }
+
+    public static function getAllProgressDataByUser(int $userId): \Illuminate\Support\Collection
+    {
+        return self::query()->select(['content_id', 'state', 'progress_percent', 'updated_on'])->where('user_id', $userId)->get();
     }
 }

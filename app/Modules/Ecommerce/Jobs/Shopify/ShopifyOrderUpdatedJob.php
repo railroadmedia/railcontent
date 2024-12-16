@@ -7,7 +7,6 @@ use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
 
 class ShopifyOrderUpdatedJob
 {
-
     public function __construct(
         private $id,
         private $contents,
@@ -20,6 +19,7 @@ class ShopifyOrderUpdatedJob
     {
         $children = [
             new ShopifySyncCustomerJob($this->shopifyCustomerId, $this->email),
+            new OrderUpdateChallengesEnrollment($this->contents),
         ];
         dispatch(new WebhookJob('Shopify-order-updated', $this->id, $this->contents, $children));
     }

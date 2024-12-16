@@ -80,7 +80,6 @@ const handlePrev = () => {
 };
 
 onBeforeMount(() => {
-    console.log(props.brand)
     gearCarouselMap.forEach( (slide,index) => {
         if(props.brand === slide.brand) currentSlide.value = index;
     })

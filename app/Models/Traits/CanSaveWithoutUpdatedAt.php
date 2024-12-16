@@ -8,8 +8,6 @@ trait CanSaveWithoutUpdatedAt
 {
     /**
      * Save the model without updating the updated_at value
-     *
-     * @return bool
      */
     public function saveWithoutUpdatedAt(): bool
     {

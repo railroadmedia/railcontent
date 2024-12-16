@@ -14,7 +14,7 @@ class LoggingContextMiddleware
         return rand(1000, 9999);
     }
 
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): \Symfony\Component\HttpFoundation\Response
     {
         $user = user();
         $url = $request->url();

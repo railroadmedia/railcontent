@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use App\Modules\Ecommerce\Services\ShopifyAPIService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -24,7 +26,7 @@ class ShopifyCartAPIController extends Controller
         $this->shopifyStoreFrontAPIService = $shopifyStoreFrontAPIService;
     }
 
-    public function getCart(Request $request)
+    public function getCart(Request $request): JsonResponse
     {
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
 
@@ -358,7 +360,7 @@ class ShopifyCartAPIController extends Controller
         return $redirectResponse;
     }
 
-    public function redirectToShopifyOrderForm(Request $request)
+    public function redirectToShopifyOrderForm(Request $request): RedirectResponse
     {
 
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
@@ -411,7 +413,7 @@ class ShopifyCartAPIController extends Controller
         return redirect()->away($checkoutURL);
     }
 
-    public function redirectToCurrentCartShopPage(Request $request)
+    public function redirectToCurrentCartShopPage(Request $request): RedirectResponse
     {
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
 

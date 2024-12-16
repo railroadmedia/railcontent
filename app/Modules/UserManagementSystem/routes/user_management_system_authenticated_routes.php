@@ -8,8 +8,7 @@ use Modules\UserManagementSystem\Controllers\PictureUploadController;
 use Modules\UserManagementSystem\Controllers\UserController;
 use Modules\UserManagementSystem\Controllers\OnboardingController;
 
-Route::group(
-    ['prefix' => config('user_management_system.route_prefix'),],
+Route::prefix(config('user_management_system.route_prefix'))->group(
     function () {
         /*
          * User API

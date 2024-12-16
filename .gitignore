@@ -110,6 +110,8 @@ typings/
 public/mix-manifest.json
 public/platform/*
 
+public/sanity/*
+
 # Marketing generated files
 public/marketing/parcel/drumeo/*
 public/marketing/css/app.css
@@ -152,3 +154,12 @@ reports/*
 
 php-cs-fixer-results.txt
 .codebuddy
+
+/.phpunit.cache
+
+# Swap file genreated by Vim
+*.swp
+
+
+# sanity resource files
+resources/sanitystudio/*.ndjson

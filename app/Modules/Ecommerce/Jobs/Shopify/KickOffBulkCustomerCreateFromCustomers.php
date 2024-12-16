@@ -48,9 +48,6 @@ class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
     }
 
     /**
-     * @param  EcommerceEntityManager  $entityManager
-     * @param  Shopify  $shopify
-     * @return void
      * @throws Throwable
      */
     public function handle(EcommerceEntityManager $entityManager, Shopify $shopify): void
@@ -118,8 +115,6 @@ class KickOffBulkCustomerCreateFromCustomers implements ShouldQueue
      * Get the email addresses of all customers to create in Shopify
      * DEV NOTE: we start by getting the emails so that we can group the customers and use all entities to create
      * the singular customer in Shopify
-     *
-     * @return Collection
      */
     private function getEmailOfCustomersToCreate(): Collection
     {

@@ -30,7 +30,7 @@ class GrantPlusMembershipAccessUntil extends Command
     public function handle(
         UserAccessPermissionsService $accessPermissionsService,
         UserService $userService
-    ) {
+    ): void {
         $userIdOrEmail = $this->argument('userIdOrEmail');
         if (is_integer($userIdOrEmail)) {
             $user = $userService->getByIdOrNull($userIdOrEmail);

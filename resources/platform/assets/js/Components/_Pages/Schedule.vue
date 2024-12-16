@@ -2,8 +2,13 @@
     <div class="tw-w-full tw-relative">
         <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
             <Breadcrumb :breadcrumbs="[{ title: `${brand} Schedule` }]" />
-            <PageHeader pageType="schedule" :title="`${brand} Schedule`" iconName="calendar"
-                :description="description" :ctas="ctaConfig" />
+            <PageHeader 
+                pageType="schedule" 
+                :title="`${brand} Schedule`" 
+                iconName="calendar"
+                :description="description" 
+                :ctas="ctaConfig" 
+            />
         </div>
         <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
             <div class="tw-flex tw-flex-col tw-py-[30px]">
@@ -24,28 +29,41 @@
                         </button>
                     </div>
                 </div>
-                <div class="tw-flex tw-flex-row">
-                    <ContentSchedule v-if="scheduleData" :preloaded-content="scheduleData"
-                        :subscription-calendar-id="subscriptionCalendarId" :theme-color="brand" />
-                    <span v-else>No scheduled releases</span>
-                </div>
-            </div>
 
+                <!-- Content Schedule -->
+                <div v-if="!isLoading" class="tw-flex tw-flex-row">
+                    <ContentSchedule 
+                        v-if="schedule.length" 
+                        :preloaded-content="schedule"
+                        :subscription-calendar-id="subscriptionCalendarId" 
+                        :theme-color="brand" 
+                    />              
+                    <span class="dark:tw-text-white" v-else>No scheduled releases</span>
+                </div>
+                <div v-else class="tw-flex-col tw-w-full">
+                    <SkeletonListCatalogueItem v-for="i in 8" :key="i" />
+                </div>
+
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref, onBeforeMount } from 'vue';
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@stores/user";
 import ContentSchedule from '@vuesora/views/schedule/Schedule';
 import PageHeader from '@collections/PageHeader/PageHeader.vue';
+import { fetchUpcomingEvents } from 'musora-content-services';
+import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
 import { ChevronRightIcon } from "@heroicons/vue/solid";
 
+//Pinia
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
+//Props
 const props = defineProps({
     timezones: {
         type: Array,
@@ -55,21 +73,21 @@ const props = defineProps({
         type: String,
         default: () => '',
     },
-    scheduleData: {
-        type: Array,
-        default: () => [],
-    },
+    // scheduleData: {
+    //     type: Array,
+    //     default: () => [],
+    // },
     subscriptionCalendarId: {
         type: String,
         default: () => '',
     },
-})
+});
 
-// const isSelectedTimezone = (timezone) => {
-//     const area = timezone.split(' - ')[0];
-//     return area === props.selectedTimezone;
-// }
+//Refs
+const schedule = ref([]);
+const isLoading = ref(false);
 
+//Computed
 const description = computed(() => {
     return `Practice sessions, Q&A, celebrations, and more are available during <span class="tw-capitalize">${brand.value}</span> live lessons. Subscribe to an event or the whole calendar, so you don't miss out!`
 })
@@ -84,6 +102,25 @@ const ctaConfig = computed(() => {
             }
         },
     ];
+});
+
+//Lifecycles
+onBeforeMount(async () => {
+    isLoading.value = true;
+    try {
+        // Fetch upcoming events (assuming this function fetches future scheduled releases)
+        const upcomingEvents = await fetchUpcomingEvents(brand.value, {
+            page: 1,
+            limit: 20,
+        });
+
+        schedule.value = upcomingEvents;
+        console.log('schedule.value', schedule.value)
+    } catch (error) {
+        console.error('Error fetching schedule data:', error);
+    } finally {
+        isLoading.value = false;
+    }
 });
 </script>
 

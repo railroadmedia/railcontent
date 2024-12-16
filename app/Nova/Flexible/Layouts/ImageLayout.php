@@ -27,10 +27,8 @@ class ImageLayout extends Layout
 
     /**
      * Get the fields displayed by the layout.
-     *
-     * @return array
      */
-    public function fields()
+    public function fields(): array
     {
         $uuid  = Str::uuid();
 

@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Services\ShopifyAPIService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class LoginPageController extends BaseController
 {
@@ -93,7 +94,7 @@ class LoginPageController extends BaseController
         return view('pages.login', ['redirect' => $request->get('redirect_to')]);
     }
 
-    public function showResetForm(Request $request)
+    public function showResetForm(Request $request): View
     {
         return view('pages.login', ['redirect' => $request->get('redirect_to')]);
     }

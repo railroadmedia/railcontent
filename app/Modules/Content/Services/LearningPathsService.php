@@ -4,32 +4,33 @@ namespace App\Modules\Content\Services;
 
 use App\Models\Brand;
 use App\Models\TrialSection;
-use App\Modules\Brand\Enums\Brand as BrandEnum;
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
+use App\Modules\Content\ApiGateways\SanityGateway;
+use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Railroad\Railcontent\Services\ContentService;
 
 class LearningPathsService
 {
-    private ContentService $contentService;
-
     public function __construct(
-        ContentService $contentService
+        private ContentService $contentService,
+        private SanityGateway $sanityGateway,
     ) {
-        $this->contentService = $contentService;
+        ;
     }
 
-    public function getLearningPaths(): array
+    public function getLearningPaths()
     {
         $brandId =
             Brand::query()
-            ->where('name', brand())
-            ->first()->id;
+                ->where('name', brand())
+                ->first()->id;
 
         $learningPaths =
             TrialSection::query()
-            ->where('brand_id', $brandId)
-            ->orderBy('display_order')
-            ->get();
+                ->where('brand_id', $brandId)
+                ->orderBy('display_order')
+                ->get();
 
         $learningPaths->each(function (TrialSection $section) {
             $content = $this->contentService->getById($section->product_id);
@@ -40,7 +41,7 @@ class LearningPathsService
             if ($content['type'] == "learning-path") {
                 $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
                     $content['id'],
-                    auth()->id()
+                    Auth::id()
                 );
                 $section->ctaUrl = $nextContentForUser['url'];
             }
@@ -49,7 +50,7 @@ class LearningPathsService
             $section->state = ($content['completed']) ? 'completed' : ((!$content['started']) ? 'start' : 'continue');
         });
 
-        return $learningPaths->toArray();
+        return $learningPaths;
     }
 
     public function showLearningPaths(string $brand): bool
@@ -70,24 +71,13 @@ class LearningPathsService
     public function showNewLearningPaths(): bool
     {
         $user = user();
-        $homepageRedesign = FeatureFlagging::branch('homepage-learning-path-redesign', $user) === 'experiment';
-        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', $user));
-
-        //  NOTE: Homepage V2 Pilot
-        if ($homepageV2) {
-            return true;
-        }
-
-        return $user->is_trial
-            && $user->created_at->diffInDays(now()) <= 30
-            && ($homepageV2 || $homepageRedesign);
+        return Carbon::parse($user->created_at)->greaterThanOrEqualTo(Carbon::now()->subDays(30));
     }
 
-    public function getNewLearningPaths(bool $homepageV2): array
+    public function getNewLearningPaths(): array
     {
         $brand = brand();
-
-        if (!$homepageV2 && in_array($brand, [BrandEnum::Guitareo->value, BrandEnum::Singeo->value])) {
+        if (!$this->showNewLearningPaths()) {
             return [];
         }
 
@@ -99,7 +89,13 @@ class LearningPathsService
                 ->first()
                 ->experience_level ?? 0
         );
+        $difficultyString = OnboardingSkillLevelEnum::tryFrom($experienceLevel)->name;
+        $document = $this->sanityGateway->getOnboardingCard($brand, $user->membership_level, $difficultyString, user()->isAdmin()) ?? [];
 
-        return config('learning.v2.' . $brand . '.' . $user->membership_level)[$experienceLevel] ?? [];
+        if (empty($document)) {
+            return [];
+        }
+
+        return $document['card'];
     }
 }

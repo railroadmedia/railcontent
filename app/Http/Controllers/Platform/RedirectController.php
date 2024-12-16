@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\BaseController;
 use App\Models\Cohort;
 use App\Modules\Ecommerce\Services\ProductService;
@@ -16,37 +18,37 @@ class RedirectController extends BaseController
         $this->productService = $productService;
     }
 
-    public function homeRedirect()
+    public function homeRedirect(): RedirectResponse
     {
         return redirect()->route('platform.home', ['brand' => brand()]);
     }
 
-    public function profileRedirect()
+    public function profileRedirect(): RedirectResponse
     {
         return redirect("/" . brand() . "/profile/" . user()->id . "/dashboard");
     }
 
-    public function paymentSettingsRedirect()
+    public function paymentSettingsRedirect(): RedirectResponse
     {
         return redirect("/" . brand() . "/profile/" . user()->id . "/settings/payments");
     }
 
-    public function notificationsRedirect()
+    public function notificationsRedirect(): RedirectResponse
     {
         return redirect("/" . brand() . "/notifications");
     }
 
-    public function notificationSettingsRedirect()
+    public function notificationSettingsRedirect(): RedirectResponse
     {
         return redirect("/" . brand() . "/profile/" . user()->id . "/settings/notifications");
     }
 
-    public function redirect30day()
+    public function redirect30day(): View
     {
         return view('pages.redirect30day');
     }
 
-    public function redirectPurchase(Request $request, $domain, $brand)
+    public function redirectPurchase(Request $request, $domain, $brand): RedirectResponse
     {
         if ($brand == 'musora') {
             return redirect()->route('platform.onboarding');

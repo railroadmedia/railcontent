@@ -9,10 +9,8 @@ class FeatureTrackingIsFirstTouchHandled extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         Tracking::query()->update(['is_first_touch_handled' => true]);
     }

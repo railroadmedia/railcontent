@@ -63,10 +63,7 @@
                     :listElement="listElement" :isListView="state.isListView" :token="token" :brand="brand" :index="i" />
             </section>
             <section v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView" class="tw-w-full tw-block tw-no-scrollbar tw-pt-4 tw--mt-4 tw-overflow-x-auto lg:tw-overflow-x-visible">
-                <div
-                    class="PlaylistMiniCatalogContainer tw-w-full tw-gap-[6px] tw-relative tw-grid tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-6 lg:tw-grid-cols-5 2xl:tw-grid-cols-6 xl:tw-gap-[12px] 2xl:tw-gap-[16px] tw-min-w-max lg:tw-min-w-full tw-pt-4 tw--mt-4 tw-overflow-x-auto lg:tw-overflow-x-visible"
-                    :class="miniViewRowStyles"
-                >
+                <div class="PlaylistMiniCatalogContainer tw-w-full tw-gap-[6px] tw-relative tw-grid tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-6 lg:tw-grid-cols-5 2xl:tw-grid-cols-6 xl:tw-gap-[12px] 2xl:tw-gap-[16px] tw-min-w-max lg:tw-min-w-full tw-pt-4 tw--mt-4 tw-overflow-x-auto lg:tw-overflow-x-visible">
                     <!-- Mini Catalog -->
                     <playlist-collection-card v-for="(listElement, i) in playlists" :key="listElement.id"
                         :listElement="listElement" :isListView="false" :isMiniCatalog="true" :token="token" :index="i"
@@ -104,12 +101,12 @@
                 </template>
             </div>
         </div>
-
     </main>
 </template>
 
 <script setup>
 import { onBeforeMount, onMounted, onUpdated, watch, inject, reactive, computed } from 'vue';
+import { usePlatformStore } from '@stores/platform';
 import { usePlaylistsStore } from '@stores/playlists';
 import PlaylistCollectionControls from './PlaylistCollectionControls.vue';
 import PlaylistCollectionCard from './PlaylistCollectionCard.vue';
@@ -122,6 +119,7 @@ const token = inject('csrf_token');
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
+const platformStore = usePlatformStore();
 const userStore = useUserStore();
 
 const { brand } = storeToRefs(userStore)
@@ -141,16 +139,12 @@ const props = defineProps({
         default: false,
     },
     filterOptions: {
-        type: [Object, Array],
+        type: [Object],
         default: null
     },
     trackingSection: {
         type: String,
         default: ''
-    },
-    miniViewPage: {
-        type: Number,
-        default: 1
     },
     miniViewCardNum: {
         type: Number,
@@ -161,12 +155,6 @@ const props = defineProps({
 //---------Computed Props---------//
 const hasPlaylists = computed(() => {
     return props.playlistCount ? true : false;
-})
-
-const miniViewRowStyles = computed(() => {
-    if(props.miniViewPage > 1){
-        return 'tw-grid-rows-2 ';
-    }
 })
 
 //---------Reactive Data---------//
@@ -213,7 +201,10 @@ onMounted(()=> {
                 term: state.searchTerm,
                 sort: state.sortValue,
                 categories: state.categories ? [state.categories] : [],
-            }, token);
+            }, token).then(() => {
+                playlistsStore.loadingPlaylists = false;
+                platformStore.setLoadingState(false);
+            });
     }
     //For Create Modal to reload Playlists
     playlistsStore.pageHasPlaylistCatalog = true;

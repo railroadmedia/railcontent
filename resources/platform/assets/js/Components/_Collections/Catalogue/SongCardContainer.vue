@@ -24,23 +24,16 @@
                 </template>
             </div>
         </div>
-        <div v-if="!collectionStoreLoading && data.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
-            <div class="tw-flex tw-flex-column icon-col face-icon tw-mr-1">
-                <div class="icon-wrap square"></div>
-            </div>
-            <div class="tw-flex tw-flex-column">
-                <h4 class="body tw-text-[#00101D] dark:tw-text-white">{{ noResultsMessage }}</h4>
-            </div>
-        </div>
     </div>
 </template>
 <script setup>
-import { computed, ref } from 'vue'
-// In order for the horizontal scroll to work, you need to make parent container a block.
-import SongCard from '../Catalogue/SongCard.vue';
-import useUserCatalogueEvents from '@hooks/useUserCatalogueEvents';
+import { computed, ref } from 'vue';
 import { storeToRefs } from "pinia";
 import { useCollectionStore } from "@stores/collection";
+import { usePlatformStore } from "@stores/platform";
+import useUserCatalogueEvents from '@hooks/useUserCatalogueEvents';
+
+import SongCard from '../Catalogue/SongCard.vue';
 import SkeletonLoader from '@collections/SkeletonLoader/SkeletonLoader.vue';
 
 const props = defineProps({
@@ -63,6 +56,9 @@ const props = defineProps({
 });
 
 const collectionStore = useCollectionStore();
+const platformStore = usePlatformStore();
+
+const { isLoading: platformStoreLoading } = storeToRefs(platformStore);
 const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
 const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: props.preLoadedContent.data });
@@ -74,7 +70,7 @@ const data = computed(() => {
 })
 
 const showSkeletonLoader = computed(() => {
-    return collectionStoreLoading.value;
+    return collectionStoreLoading.value || platformStoreLoading.value;
 })
 
 const skeletonCardCount = computed(() => {

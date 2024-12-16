@@ -1,0 +1,302 @@
+<template>
+    <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8 dark:tw-text-white tw-pt-10">
+        <template v-if="!isLoading">
+            <!-- Onboarding banner -->
+            <TriggerBanner v-if="showTriggerBanner" />
+
+            <!-- Join Header: Pack Only -->
+            <StaticHeader
+                v-if="isPackOrChallengeOnlyBoolean"
+                title="JOIN THE COMMUNITY"
+                cta-text="UPGRADE YOUR MEMBERSHIP"
+                description="Click here to upgrade your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
+                :cta-url="upgradeMembershipUrl"
+                img="https://www.musora.com/cdn-cgi/image/width=720,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg"
+                class="tw-mt-4 tw-mb-8"
+            />
+
+            <!-- Challenge Carousel -->
+            <MiniCatalogueSection
+                :title="welcomeMessage"
+                catalogue-type="challenge-carousel"
+                page-type="home"
+                :preLoadedContent="data?.carousels"
+            />
+
+            <!-- NOTE: Challenges/Sanity launch: Old carousel not needed anymore (for now), so it's commented out -->
+            <!-- "just don't lose the code" - BUTLER, Chris; circa Dec 2024 -->
+            <!-- Header carousel -->
+            <!-- <HeaderCarousel v-if="!isV2User" :preloadedCarousel="carousel" trackingSection="banner" /> -->
+
+            <!-- Cohort banner -->
+            <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
+
+            <!-- Continue section -->
+            <MiniCatalogueSection
+                v-if="!isLoading && data?.continueSection?.length"
+                title="Continue"
+                seeAllAriaLabel="See All Lessons In Progress"
+                :seeAllUrl="`/${brand}/lesson-history/in-progress`"
+                :preLoadedContent="data?.continueSection"
+                :isMiniView="true"
+                :show-dropdown="true"
+                :use-ref-data="true"
+                trackingSection="continue"
+            />
+
+            <!-- Explore section -->
+            <ExploreSection v-if="exploreTasks.length" :exploreTasks="exploreTasks" />
+
+            <!-- Recommended section -->
+            <MiniCatalogueSection v-if="recommendedContent.data.length" title="Inspired By Your Activity"
+                seeAllAriaLabel="See All Content" :seeAllUrl="recommendedContentUrl"
+                :preLoadedContent="recommendedContent.data" trackingSection="recommended" />
+
+            <!-- Workouts section - REMOVING -->
+            <!-- <MiniCatalogueSection
+                v-if="data?.workouts?.length"
+                title="Workouts"
+                seeAllAriaLabel="See All Workouts"
+                :seeAllUrl="`${brand}/workouts`"
+                :preLoadedContent="data.workouts"
+                trackingSection="workouts"
+            /> -->
+
+            <!-- New Releases -->
+            <MiniCatalogueSection
+                 v-if="(!isPackOrChallengeOnlyBoolean && ((!isV2User && data?.newReleases?.length) || (isV2User && userHas30Days)))"
+                title="New Releases"
+                seeAllAriaLabel="See All New Releases"
+                :seeAllUrl="`${brand}/lessons/all`"
+                :preLoadedContent="data.newReleases"
+                trackingSection="new"
+            />
+
+            <!-- Playlist section add arrows -->
+            <ListSection
+                v-if="usersList.length"
+                :usersList="playlistsStore.playlists"
+                :my-list-url="`/${brand}/playlists`"
+            />
+
+            <!-- Live section -->
+            <CoachEvent
+                v-if="coachEvent  && !isV2User"
+                class="tw-mb-6"
+                :preloadedContent="coachEvent"
+                :currentDateString="currentDate"
+                :youtubeEventId="youtubeId"
+                :timeCutoffMinutes="timeCutoffMinutes"
+                trackingSection="live"
+            />
+
+            <!-- Upcoming section - REMOVING why????? -->
+            <!-- <MiniCatalogueSection
+                v-if="!isV2User && data?.upcomingEvents.length"
+                title="Upcoming Events"
+                seeAllAriaLabel="See All Upcoming Events"
+                :seeAllUrl="`${brand}/live`"
+                :force-no-links="true"
+                :preLoadedContent="data.upcomingEvents"
+                trackingSection="upcoming-events"
+            /> -->
+
+            <template v-if="isPackOrChallengeOnlyBoolean">
+                <!-- Your Courses section : Packs Only -->
+                <HomepageCatalog
+                    v-if="courseDataObject.data.length"
+                    collection-type="course"
+                    title="Your Courses"
+                    see-all-label="See All Courses"
+                    :see-all-url="`${brand}/courses`"
+                    :pre-loaded-content="courseDataObject"
+                />
+
+
+                <!-- Your Challenges section : Challenges Only -->
+                <MiniCatalogueSection
+                    v-if="isChallengeOnlyBoolean"
+                    title="Your Challenges"
+                    catalogue-type="challenge"
+                    see-all-label="See All Challenges"
+                    :see-all-url="`${brand}/challenge`"
+                    :preLoadedContent="data?.challenges"
+                />
+
+                <!-- Your Packs section : Packs Only -->
+                <MiniCatalogueSection
+                    v-if="isPackOnlyBoolean"
+                    title="Your Training Packs"
+                    catalogue-type="pack"
+                    see-all-label="See All Packs"
+                    :see-all-url="`${brand}/packs`"
+                    :preLoadedContent="data?.packs"
+                />
+            </template>
+
+            <!-- Popular Conversation : Packs Only -->
+            <PopularConversations
+                v-if="isPackOrChallengeOnlyBoolean && conversationData.length"
+                :posts="conversationData"
+                class="tw-mb-8"
+            />
+
+            <!-- Dashboard section -->
+            <DashboardSection
+                v-if="isV2User"
+                :accountUrl="accountUrl"
+                :xp-earned="userMetrics.xp.value"
+                :minutes-practiced="userMetrics.practiced.value"
+                :user-level-title="userMetrics.xp.label"
+            />
+
+            <!-- Stats section -->
+            <StatsSection
+                v-if="!isPackOrChallengeOnlyBoolean && !isV2User"
+                :accountUrl="accountUrl"
+                :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
+                :nextLearningPathLevel="nextLearningPathLevel"
+                :userMetrics="userMetrics"
+            />
+        </template>
+        <HomePageSkeleton v-else />
+    </div>
+</template>
+
+<script setup>
+    import { computed, onBeforeMount, onMounted, ref } from 'vue';
+    import { usePlatformStore } from '@stores/platform';
+    import { useHomePageData } from '@hooks/pages/useHomePageData';
+    import { useUserStore } from "@stores/user";
+    import {storeToRefs} from "pinia/dist/pinia";
+    import { usePlaylistsStore } from "@stores/playlists";
+
+    import CohortBanner from '@collections/CohortBanner/CohortBanner.vue';
+    import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
+    import HomepageCatalog from '@collections/HomepageCatalog/HomepageCatalog.vue';
+    import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
+    import PopularConversations from '@collections/PopularConversations/PopularConversations.vue';
+    import StaticHeader from  '@collections/HeaderCarousel/StaticHeader.vue';
+    import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
+    import HomePageSkeleton from "./HomePageSkeleton";
+    import ExploreSection from '@collections/ExploreSection/ExploreSection.vue';
+    import DashboardSection from '@collections/DashboardCard/DashboardSection.vue';
+    import StatsSection from '@collections/StatsSection/StatsSection.vue';
+    import ListSection from '@collections/ListSection/ListSection.vue';
+
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+    const userStore = useUserStore();
+    const platformStore = usePlatformStore();
+    const { brand, userId, token, showOnboardingBanner, userHas30Days, isFirstAccess, userFirstName, userDisplayName } = storeToRefs(userStore);
+    const { isLoading } = storeToRefs(platformStore);
+
+    const props = defineProps({
+        // String props
+        accountUrl: { type: String, default: '' },
+        calendarId: { type: [String, Number], default: '' },
+        continueUrl: { type: String, default: '' },
+        currentDate: { type: String, default: '' },
+        eventCoachProfileUrl: { type: String, default: '' },
+        recommendedContentUrl: { type: String, default: '' },
+        upgradeMembershipUrl: { type: String, default: '' },
+        youtubeId: { type: String, default: '' },
+        nextLearningPathLevel: { type: String, default: '' },
+
+        // Boolean props
+        existsCohortBanner: { type: Boolean, default: false },
+        isChallengeOnly: { type: [Number, Boolean], default: 0 },
+        isPackOnly: { type: [Number, Boolean], default: 0 },
+        isV2User: { type: Boolean, default: false },
+
+        // Number props
+        timeCutoffMinutes: { type: Number, default: 0 },
+        nextLearningPathProgressPercent: { type: Number, default: 0 },
+
+        // Array props
+        // carousel: { type: Array, default: () => ([]) },
+        cohortBanner: { type: Array, default: () => ([]) },
+        conversationData: { type: Array, default: () => ([]) },
+        packData: { type: Array, default: () => ([]) },
+        exploreTasks: { type: Array, default: () => ([]) },
+
+        // Object props
+        coachEvent: { type: Object, default: () => null },
+        courseData: { type: Object, default: () => ({}) },
+        newContent: { type: Object, default: () => ({}) },
+        recommendedContent: { type: Object, default: () => ({ data: [] }) },
+        usersList: { type: Object, default: () => ({}) },
+        userMetrics: { type: Object, default: () => ({}) }
+    });
+
+    const welcomeMessage = computed(() => {
+        if (isFirstAccess.value) {
+            return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome back, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Let's get practicing!</div>`
+        } else {
+            return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Start Here</div>`
+        }
+    })
+
+    //Computed
+    const hasCompleteYourAccountTask = computed(() => {
+        return props.exploreTasks.find(task => task.hook === 'complete-your-account');
+    });
+
+    const showTriggerBanner = computed(() => {
+        if (isPackOrChallengeOnlyBoolean || hasCompleteYourAccountTask.value) return false; //hide for packs only
+        return showOnboardingBanner.value;
+    });
+
+    const isPackOnlyBoolean = computed(() => {
+      return Boolean(props.isPackOnly);
+    });
+
+    const isChallengeOnlyBoolean = computed(() => {
+        return Boolean(props.isChallengeOnly);
+    });
+
+    const isPackOrChallengeOnlyBoolean = computed(() => {
+        return Boolean(props.isPackOnly || props.isChallengeOnly);
+    })
+
+    const courseDataObject = computed(() => {
+        if(!JSON.parse(props.courseData)) return;
+        return JSON.parse(props.courseData);
+    })
+
+    const packDataObject = computed(() => {
+        return { data: [...props.packData] };
+    })
+
+    //Refs
+    const data = ref(null);
+
+    //Methods
+    const openPlaylistModal = () => {
+        window.openplaylistmodal({
+            modalType: 'create',
+            brand: brand.value,
+            data: {
+                name: '',
+                category: 'General',
+                thumbnail_url: null,
+                description: ''
+            }
+        });
+    };
+
+    //Lifecycles
+    onBeforeMount( async () => {
+        playlistsStore.playlists = props.usersList;
+        const { data: homeData } = await useHomePageData(brand.value, isPackOrChallengeOnlyBoolean.value);
+        data.value = homeData.value;
+
+        platformStore.setLoadingState(false);
+    });
+
+    onMounted(() => {
+        if (window.location.href.includes('create-playlist-window')) {
+            openPlaylistModal();
+        }
+    });
+</script>

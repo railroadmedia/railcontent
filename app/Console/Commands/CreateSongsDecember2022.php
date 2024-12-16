@@ -36,10 +36,8 @@ class CreateSongsDecember2022 extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle(ContentRepository $contentRepository)
+    public function handle(ContentRepository $contentRepository): void
     {
         $this->info('Starting CreateSongsDecember2022...');
         //        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('csv_songs_imports/december_30_songs_import.csv')));
@@ -409,23 +407,16 @@ class CreateSongsDecember2022 extends Command
         }
     }
 
-    /**
-     * @param array $attributes
-     * @param array $values
-     * @return object
-     */
-    private function updateOrInsertAndGetFirst($table, array $attributes, array $values = [])
+    private function updateOrInsertAndGetFirst($table, array $attributes, array $values = []): object
     {
         $this->musoraDB()->from($table)->updateOrInsert($attributes, $values);
         return $this->getFirst($table, $attributes);
     }
 
     /**
-     * @param array $attributes
      * @param array $values
-     * @return object
      */
-    private function getFirst($table, array $attributes)
+    private function getFirst($table, array $attributes): object
     {
         return $this->musoraDB()->from($table)->where($attributes)->get()->first();
     }

@@ -4,12 +4,12 @@
     ]">
         <div class="tw-flex tw-flex-col">
             <!-- Thumbnail Section -->
-            <a @click="handleClick" :href="isReleased && renderLink && !forceNoLinks ? item.url : null"
+            <a @click="handleClick" :href="isReleased && renderLink && !forceNoLinks ? itemUrl : null"
                 class="tw-no-underline tw-flex tw-flex-col" :class="item.type + '-thumbnail'">
                 <div
                     class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031] tw-aspect-video">
                     <!-- Video Thumbnail -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail} `"
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${itemThumbnail} `"
                         class="tw-w-full tw-h-full tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0"
                         :class="[item.type === 'song' ? 'tw-blur-sm' : '']"
                          loading="lazy"
@@ -18,8 +18,8 @@
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'"
                         class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                        <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail"
-                            :alt="mappedData.black_title" />
+                        <img class="tw-h-full tw-object-cover" :src="itemThumbnail"
+                            :alt="itemTitle" />
                     </div>
 
                     <!-- Thumbnail Badge -->
@@ -58,13 +58,13 @@
                             <!-- Video Title -->
                             <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
                                 :class="{ 'tw-text-center': isGuitareoChordAndScale }">
-                                {{ mappedData.black_title }}
+                                {{ itemTitle }}
                             </h4>
                             <!-- Video Description -->
                             <p v-if="mappedData.show_description"
-                                class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2">
-                                {{ mappedData.description.replace(/<[^>]+>/g, '') }}
-                            </p>
+                                class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2"
+                                v-html="item.description ?? mappedData.description"
+                            ></p>
                             <!-- Content -->
                             <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
                                 :class="[{ 'tw-text-center': isGuitareoChordAndScale }]">
@@ -73,12 +73,14 @@
                                 </div>
                             </h6>
                         </div>
-                        <p
-                            class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
+                        <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
                             <!-- Difficulty Label -->
-                            <span v-if="mappedData.difficulty" class="tw-flex tw-items-center">
-                                <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
-                                    textCase="capitalize" />
+                            <span v-if="itemDifficulty || itemDifficulty === 0" class="tw-flex tw-items-center">
+                                <DifficultyLabel
+                                    class="tw-text-xs"
+                                    :difficultyValue="itemDifficulty"
+                                    textCase="capitalize"
+                                />
                                 <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
                             </span>
                             <span>
@@ -111,7 +113,7 @@
                             :class="is_added ? 'is-added' + `tw-text-${brand}` : 'tw-text-[#00101D] dark:tw-text-white'"
                             :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
                             :data-content-type="item.type"
-                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn-big`) : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
+                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn-big`) : $emit('addToList', { content_id: item.id, type: item.type, name: itemTitle, description: mappedData.description, thumbnail_url: itemThumbnail })">
                             <DotsHorizontalIcon v-if="showDropdown" class="tw-h-[24px] tw-w-[24px]" />
                             <svg v-else xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -120,10 +122,12 @@
                         </button>
 
                         <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"
-                            :dropdownOptions="dropdownOptions" @closeDropdown="state.dropdownOpen = false"
+                            :dropdownOptions="dropdownOptions"
+                            @closeDropdown="closeDropdown()"
                             :position="state.dropdownPosition"
-                            @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })"
-                            @progressReset="$emit('progressReset', { content_id: item.id })" />
+                            @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: itemTitle, description: mappedData.description, thumbnail_url: itemThumbnail })"
+                            @progressReset="$emit('progressReset', { content_id: item.id })"
+                        />
                     </div>
                 </div>
             </div>
@@ -131,7 +135,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onUnmounted, reactive, onMounted } from 'vue';
+import { computed, onUnmounted, ref, reactive, onMounted, onBeforeMount } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import Dropdown from './Dropdown';
@@ -208,9 +212,10 @@ const {
     contentModel,
     thumbnailIcon,
     renderLink,
-    progress_percent,
     isReleased,
     releaseDate,
+    progress_percent,
+    isCompleted,
 } = useCatalogueItem(props);
 
 const state = reactive({
@@ -258,6 +263,8 @@ const handleShowDropdown = (className) => {
 const contentTypeString = computed(() => {
     if (contentModel.value?.post?.type && contentTypes[contentModel.value.post.type]?.singular) {
         return contentTypes[contentModel.value.post.type].singular
+    } else if (props.item.type) {
+        return props.item.type;
     }
     return '';
 })
@@ -271,11 +278,16 @@ const hasProduct = computed(() => {
 })
 
 const registrationUrl = computed(() => {
-    return contentModel.value.post.fields.find(field => field.key === 'registration_url')?.value || '';
+    return contentModel.value?.post?.fields.find(field => field.key === 'registration_url')?.value || '';
 })
 
 const duration = computed(() => {
-    let time = props.item.fields.find(field => field.key === 'length_in_seconds')?.value || '';
+    let time;
+    if (props.item.fields) {
+        time = props.item.fields?.find(field => field.key === 'length_in_seconds')?.value;
+    } else {
+        time = props.item.length_in_seconds ?? 0;
+    }
     let hours = Math.floor(time / 3600);
     let minutes = Math.floor(time / 60);
     let seconds = time - minutes * 60;
@@ -295,7 +307,7 @@ const thumbnailBadge = computed(() => {
     } else if (props.item.type === 'workout') {
         return duration.value;
     } else if (props.item.type === 'course' || props.item.type === 'pack-bundle') {
-        return `${props.item.child_count} Lessons`;
+        return `${props.item.lesson_count} Lessons`;
     } else {
         return duration.value;
     }
@@ -306,20 +318,22 @@ const upcomingChallenge = computed(() => {
 })
 
 const contentCreator = computed(() => {
-    if (contentModel.value.post.fields) {
+    if (contentModel.value?.post?.fields) {
         if (isSongContent.value) {
-            return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
+            return contentModel.value?.post?.fields.find(field => field.key === 'artist')?.value || ''
         }
-        return contentModel.value.post.fields.find(field => field.key === 'instructor')?.value.name || ''
+        return contentModel.value?.post?.fields.find(field => field.key === 'instructor')?.value.name || ''
+    } else if (props.item.artist_name) {
+        return props.item.artist_name;
+    } else {
+        return '';
     }
-    return '';
-
 })
 
 const mappedData = computed(() => {
     let difficultyValue = 0; //default
-    if (contentModel.value.post.fields) {
-        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
+    if (contentModel.value?.post?.fields) {
+        difficultyValue = contentModel.value?.post?.fields.find(field => field.key === 'difficulty')?.value || 0;
     }
 
     contentModel.value.card.difficulty = difficultyValue;
@@ -327,37 +341,45 @@ const mappedData = computed(() => {
     return contentModel.value.card
 });
 
+//New Sanity Values
+const itemThumbnail = computed( () => {
+    return props.item.image ?? mappedData.value.thumbnail;
+})
+const itemTitle = computed( () => {
+    return props.item.title ?? mappedData.value.black_title;
+})
+const itemDifficulty = computed( () => {
+    return props.item.difficulty ?? mappedData.value.difficulty;
+})
+const itemUrl = computed( ()=> {
+    return props.item.web_url_path ?? props.item.url;
+})
 
 const wrapperClasses = computed(() => {
     const defaultWrapperClasses = 'tw-flex tw-flex-col tw-mr-3 lg:tw-mr-0 lg:tw-w-auto tw-shrink-0 tw-w-[267px]';
     return ({
         [defaultWrapperClasses]: defaultWrapperClasses && !props.wrapperClassOverride,
         'no-access': noAccess.value,
-        completed: props.item.completed,
+        completed: isCompleted.value,
         'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': props.isSingleRow,
         [props.wrapperClassOverride]: props.wrapperClassOverride,
     })
 });
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
-const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
+const showTrophy = computed(() => props.item.type === 'pack-bundle' && isCompleted.value);
 const isGuitareoChordAndScale = computed(() => brand === 'guitareo' && props.item.type === 'chord-and-scale');
 
-const closeDropdownOnScroll = () => {
+const closeDropdown = () => {
     if (state.dropdownOpen) {
         state.dropdownOpen = false;
     }
 };
 
-onMounted(() => {
-    const contentContainer = document.getElementById(props.scrollContainer);
-    contentContainer.addEventListener('scroll', closeDropdownOnScroll);
-});
-
-onUnmounted(() => {
-    const contentContainer = document.getElementById(props.scrollContainer);
-    contentContainer.removeEventListener('scroll', closeDropdownOnScroll);
-});
+const getPublishedOn = (item) => {
+    const dt = DateTime.fromSQL(item.published_on, { zone: 'utc' });
+    return dt.setZone('America/Los_Angeles').toFormat('LLL dd, yyyy');
+}
 
 const emit = defineEmits(['addToList', 'progressReset']);
 
@@ -376,9 +398,20 @@ const handleClick = (event) => {
                     section: props.trackingSection,
                 }
             }).finally(() => {
-                window.location.href = props.item.url;
+                window.location.href = itemUrl.value;
             });
         }
     }
 }
+
+onMounted(() => {
+    const contentContainer = document.getElementById(props.scrollContainer);
+    contentContainer.addEventListener('scroll', closeDropdown);
+});
+
+onUnmounted(() => {
+    const contentContainer = document.getElementById(props.scrollContainer);
+    contentContainer.removeEventListener('scroll', closeDropdown);
+});
+
 </script>

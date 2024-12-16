@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { XIcon } from "@heroicons/vue/solid";
 const isContainerCreated = ref(false);
-const props = defineProps(["modalId", "title", "selfContained", "classOverride", "showOverlay"]);
+const props = defineProps(["modalId", "title", "selfContained", "classOverride", "showOverlay", "containerStayOnClose", "hideXIcon", "disableOverlayClick"]);
 const emit = defineEmits(["onClose"]);
 
 const onClose = () => {
@@ -10,7 +10,7 @@ const onClose = () => {
 };
 
 const onOverlayClick = (event) => {
-  if (event.target.id === `${props.modalId}-overlay`) {
+  if (event.target.id === `${props.modalId}-overlay` && !props.disableOverlayClick) {
     emit("onClose", true);
   }
 };
@@ -24,7 +24,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  if (props.selfContained) {
+  if (props.selfContained && !props.containerStayOnClose) {
     const modalContainer = document.getElementById("modal-container");
     modalContainer.classList.add("tw-hidden");
     modalContainer.classList.remove("tw-fixed");
@@ -57,7 +57,8 @@ onUnmounted(() => {
           tw-w-full
           tw-rounded-[8px]
           tw-z-30
-          tw-p-[30px]
+          tw-p-5
+          sm:tw-p-[30px]
           tw-flex
           tw-flex-col
           tw-relative
@@ -82,7 +83,7 @@ onUnmounted(() => {
           "
         >
           <h3 class="tw-w-full tw-text-black dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-5" v-html="title"></h3>
-          <button @click="onClose" class="tw-text-[#000C17] dark:tw-text-white tw-z-20">
+          <button v-if="!hideXIcon" @click="onClose" class="tw-text-[#000C17] dark:tw-text-white tw-z-20">
             <XIcon class="tw-h-[28px] md:tw-h-[36px] tw-w-[28px] md:tw-w-[36px]" />
           </button>
         </div>

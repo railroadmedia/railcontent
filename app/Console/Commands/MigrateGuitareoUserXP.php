@@ -28,14 +28,12 @@ class MigrateGuitareoUserXP extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle(
         DatabaseManager $databaseManager,
         UserPointsService $userPointsService,
         UserProviderInterface $userProvider
-    ) {
+    ): void {
         $this->info("MigrateGuitareoUserXP command starts now \n");
 
         $guitareoDbConn = $databaseManager->connection(config('railforums.brand_database_connection_names.guitareo'));

@@ -3,7 +3,7 @@
         class="tw-flex tw-flex-col tw-gap-[10px] tw-justify-center tw-p-[10px] sm:tw-px-[17px] tw-h-[107px] tw-relative tw-w-[310px] lg:tw-w-auto tw-shrink-0 tw-border-[1px] tw-border-[#CBCBCD80] hover:tw-shadow-[0_4px_4px_0px_rgba(0,0,0,0.1)] dark:tw-border-none tw-bg-white dark:tw-bg-[#0020398C] hover:tw-bg-[rgba(255,255,255,0.8)] dark:hover:tw-bg-[#002039] tw-rounded-[10px]">
         <div v-if="!isCurrentSeeAllCard" class="tw-group tw-flex tw-items-center">
             <!-- Thumbnail Image -->
-            <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.url : null"
+            <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.web_url_path : null"
                 class="tw-flex-none tw-h-[72px] tw-w-[130px] tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#0E2031] tw-rounded-[5px]">
                 <div v-if="noAccess"
                     class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center">
@@ -16,13 +16,13 @@
                         {{ releaseDate }}
                     </p>
                 </div>
-                <img :src="mappedData.thumbnail" :alt="`${mappedData.color_title} thumbnail`"
+                <img :src="item.image" :alt="`${item.artist_name} thumbnail`"
                     class="tw-transition-opacity tw-h-[72px] tw-w-[130px] tw-rounded-[5px] tw-opacity-0"
                     :class="item.type === 'song' ? 'tw-blur-sm' : ''" loading="lazy"
                     onload="this.classList.remove('tw-opacity-0')">
                 <div v-if="item.type === 'song'"
                     class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-items-center">
-                    <img class="tw-h-[70px]" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
+                    <img class="tw-h-[70px]" :src="item.image" :alt="item.title" />
                 </div>
                 <div v-if="false" class="tw-absolute tw-right-1 tw-bottom-1 tw-p-1 tw-bg-black/70 tw-text-[12px] tw-rounded-[6px]">
                     {{ contentTypeString }}
@@ -30,25 +30,25 @@
             </a>
 
             <!-- Instructor Name and Title -->
-            <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.url : null"
+            <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.web_url_path : null"
                 class="tw-flex tw-flex-col tw-justify-between tw-flex-grow tw-ml-[10px] tw-font-open-sans tw-h-[72px] tw-max-h-[72px] tw-overflow-hidden tw-h-full">
                 <div>
                     <!-- Title -->
                     <div
                         class="tw-text-[#00101D] dark:tw-text-white tw-text-[12px] tw-line-clamp-2 tw-font-[700] tw-leading-[12px]">
-                        {{ mappedData.black_title }}
+                        {{ item.title }}
                     </div>
                     <!-- Instructor Name -->
                     <div
                         class="tw-font-semibold tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-[12px] tw-uppercase tw-truncate tw-leading-[12px] tw-pt-[5px]">
-                        {{ contentCreator }}
+                        {{ item.artist_name }}
                     </div>
                 </div>
                 <p
                     class="tw-flex tw-items-center tw-flex-wrap tw-text-[10px] tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC] tw-truncate">
                     <!-- Difficulty Label -->
-                    <span v-if="mappedData.difficulty" class="tw-flex tw-items-center">
-                        <DifficultyLabel :hideDot="true" class="tw-text-[10px]" :difficultyValue="mappedData.difficulty"
+                    <span v-if="typeof item.difficulty === 'string' || typeof item.difficulty === 'number'" class="tw-flex tw-items-center">
+                        <DifficultyLabel :hideDot="true" class="tw-text-[10px]" :difficultyValue="item.difficulty"
                             textCase="capitalize" />
                             <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
                         <span class="tw-overflow-hidden tw-line-clamp-1">
@@ -59,8 +59,7 @@
             </a>
 
             <!-- Action Button -->
-            <div
-                class="tw-flex tw-flex-col tw-justify-start sm:tw-justify-between tw-pl-[5px] tw-relative tw-h-[58px] sm:tw-h-[78px]">
+            <div class="tw-flex tw-flex-col tw-justify-start sm:tw-justify-between tw-pl-[5px] tw-relative tw-h-[58px] sm:tw-h-[78px]">
                 <button class="sm:tw-hidden" @click="toggleDropdown">
                     <svg class="" width="21" height="21" viewBox="0 0 25 25" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -126,16 +125,15 @@ import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@stores/user';
 import userJourney from '@services/userJourney';
-import { usePlatformStore } from "../../../Stores/platform";
+import { usePlatformStore } from "@stores/platform";
 import { contentTypes } from "../../../utils";
 import ProgressBar from './ProgressBar.vue';
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
 
-
 //Pinia Stores
 const platformStore = usePlatformStore();
 const userStore = useUserStore();
-const { brand } = storeToRefs(userStore);
+const { userId, brand } = storeToRefs(userStore);
 
 const props = defineProps({
     index: {
@@ -149,10 +147,6 @@ const props = defineProps({
     contentType: {
         type: String,
         default: '' // Default empty string
-    },
-    userId: {
-        type: String,
-        default: ''
     },
     isAdmin: {
         type: Boolean,
@@ -185,7 +179,6 @@ const props = defineProps({
 });
 
 const {
-    contentModel,
     thumbnailIcon,
     renderLink,
     isReleased,
@@ -196,35 +189,14 @@ const {
 
 const showDropdown = ref(false);
 
-const mappedData = computed(() => {
-    let difficultyValue = 0; //default
-    if (contentModel.value.post.fields) {
-        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
-    }
-
-    contentModel.value.card.difficulty = difficultyValue;
-
-    return contentModel.value.card
-});
 
 const isSongContent = computed(() => {
-    return contentModel.value.post.type === 'song'
-})
-
-const contentCreator = computed(() => {
-    if (contentModel.value.post.fields) {
-        if (isSongContent.value) {
-            return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || brand.value
-        }
-        return contentModel.value.post.fields.find(field => field.key === 'instructor')?.value.name || brand.value
-    }
-    return '';
-
+    return props.item.type === 'song'
 })
 
 const contentTypeString = computed(() => {
-    if (contentModel.value?.post?.type && contentTypes[contentModel.value.post.type]?.singular) {
-        return contentTypes[contentModel.value.post.type].singular
+if (props.contentType && contentTypes[props.contentType]?.singular) {
+        return contentTypes[props.contentType].singular
     }
     return '';
 })
@@ -237,8 +209,8 @@ const showProgressBar = computed(() => {
     return !isCurrentSeeAllCard.value
     && !isSongContent.value
     && !noAccess.value
-    && !contentModel.value.post.type !== 'play-along'
-    && !contentModel.value.post.type !== 'play-along-part';
+    && !props.item.type !== 'play-along'
+    && !props.item.type !== 'play-along-part';
 })
 
 const emit = defineEmits(['addToList', 'progressReset']);
@@ -257,7 +229,7 @@ const handleClick = (event) => {
                 section: props.trackingSection,
             }
         }).finally(() => {
-            window.location.href = props.item.url;
+            window.location.href = props.item.web_url_path;
         });
     }
 }
@@ -273,7 +245,7 @@ const closeDropdown = () => {
 const addToList = () => {
     showDropdown.value = false;
 
-    emit('addToList', { content_id: props.item.id, type: props.item.type, name: mappedData.value.black_title, description: mappedData.value.description, thumbnail_url: mappedData.value.thumbnail })
+    emit('addToList', { content_id: props.item.id, type: props.item.type, name: props.item.title, description: props.item?.description, thumbnail_url: props.item.image })
 }
 
 const resetProgress = () => {

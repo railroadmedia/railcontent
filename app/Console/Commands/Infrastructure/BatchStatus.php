@@ -10,7 +10,7 @@ class BatchStatus extends Command
     protected $signature = 'batch:status {batchID}';
     protected $description = 'Get status of batched jobs';
 
-    public function handle()
+    public function handle(): void
     {
         $batchId = $this->argument('batchID');
         $batch = Bus::findBatch($batchId);

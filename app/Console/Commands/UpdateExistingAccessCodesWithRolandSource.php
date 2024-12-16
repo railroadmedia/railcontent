@@ -11,7 +11,7 @@ class UpdateExistingAccessCodesWithRolandSource extends Command
 
     protected $description = 'Fill in the source attribute for the given musora ids from csv with roland-piano-promo value';
 
-    public function handle()
+    public function handle(): void
     {
         $this->info('###### Starting UpdateExistingAccessCodesWithRolandSource command....  ######');
 

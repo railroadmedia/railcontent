@@ -29,7 +29,7 @@ const props = defineProps({
         default: 0
     },
     filterOptions: {
-        type: [Object, Array],
+        type: [Object],
         default: null
     },
 })

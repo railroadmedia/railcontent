@@ -67,38 +67,12 @@ class PackPagesController extends Controller
         $this->cohortService = $cohortService;
     }
 
-    public function index(Request $request, $domain, $brand)
+    public function index(Request $request, $domain, $brand): View
     {
-        ContentRepository::$countFilterOptionItems = true;
-        ContentRepository::$catalogMetaAllowableFilters = config('railcontent.cataloguesMetadata')[brand()]['pack']['allowableFilters'] ?? [];
-
-        FiltersHelper::prepareFiltersFields();
-
-        if(user()->isPackOnlyOwner()) {
-            ContentRepository::$getEnrollmentContent = false;
-        }
-
-        $packs = $this->packService->getPacks(FiltersHelper::$includedFields, $request->get('sort', '-progress'));
-
-        if (user()->isALifetimeMember() && brand() == 'drumeo') {
-            foreach ($packs['results'] as $packIndex => $pack) {
-                // only lifetime drumeo members should have access to this pack 'lifetime-members-masterclass'
-                if ($pack['id'] == 353337) {
-                    unset($pack[$packIndex]);
-                }
-            }
-        }
-
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['pack'] ?? [];
-
-        return view('content.packs.packs-index', [
-            "packs" => $packs->toResponseRawJson(),
-            "catalogueMeta" => $catalogueMeta,
-        ]);
+        return view('content.packs.packs-index', []);
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @return Factory|RedirectResponse|View|NotFoundHttpException
      */
@@ -169,7 +143,6 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @return Factory|View|NotFoundHttpException
      */
@@ -181,7 +154,7 @@ class PackPagesController extends Controller
         $packId,
         $packBundleSlug,
         $packBundleId
-    ) {
+    ): View {
         ContentRepository::$pullFutureContent = true;
 
         Decorator::$typeDecoratorsEnabled = false;
@@ -284,11 +257,9 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @param $lessonSlug
      * @param $lessonId
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function packBundleLesson(
         Request $request,
@@ -300,7 +271,7 @@ class PackPagesController extends Controller
         $packBundleId,
         $packBundleLessonSlug,
         $packBundleLessonId
-    ) {
+    ): View {
         if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues = [
                 ContentService::STATUS_PUBLISHED,
@@ -311,7 +282,12 @@ class PackPagesController extends Controller
             ];
         } else {
             ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_UNLISTED,];
+                [
+                    ContentService::STATUS_PUBLISHED,
+                    ContentService::STATUS_ARCHIVED,
+                    ContentService::STATUS_SCHEDULED,
+                    ContentService::STATUS_UNLISTED,
+                ];
         }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
@@ -415,11 +391,9 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @param $lessonSlug
      * @param $lessonId
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function bundleLesson(
         Request $request,
@@ -427,7 +401,7 @@ class PackPagesController extends Controller
         $bundleSlug,
         $lessonSlug,
         $lessonId
-    ) {
+    ): View {
         if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues = [
                 ContentService::STATUS_PUBLISHED,
@@ -530,11 +504,9 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $id
-     * @return RedirectResponse
      */
-    public function start(Request $request, $id)
+    public function start(Request $request, $id): RedirectResponse
     {
         $learningPath = $this->contentService->getById($id);
 
@@ -553,11 +525,9 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function jumpToNextLesson(Request $request, $id)
+    public function jumpToNextLesson(Request $request, $id): RedirectResponse
     {
         $pack = $this->contentService->getById($id);
 
@@ -592,7 +562,7 @@ class PackPagesController extends Controller
         $packId,
         $semesterPackLessonSlug,
         $semesterPackLessonId
-    ) {
+    ): View {
         if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues = [
                 ContentService::STATUS_PUBLISHED,
@@ -603,7 +573,7 @@ class PackPagesController extends Controller
             ];
         } else {
             ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED,ContentService::STATUS_UNLISTED];
+                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_UNLISTED];
         }
 
         Decorator::$typeDecoratorsEnabled = false;
@@ -620,7 +590,7 @@ class PackPagesController extends Controller
 
         $parentChildren = $this->contentService->getByParentId($pack['id']);
 
-        foreach ($parentChildren as $parentChildIndex=>$parentChild) {
+        foreach ($parentChildren as $parentChildIndex => $parentChild) {
             if ($parentChild['id'] == $semesterPackLessonId) {
                 $lesson = $parentChild;
             }

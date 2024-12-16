@@ -911,13 +911,13 @@ Say you're learning a new song, and it's in the key of Eb major. But you haven't
 
 You simply pull out your handy Chords & Scales Book and use the keyboard tabs on the side to find Eb and quickly flip to the page:
 
-<img src='https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg' alt='image 1' />
+<img src='https://www.musora.com/cdn-cgi/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg' alt='image 1' />
 
 In there, you'll find all the major, minor, sus, and 7th chords you can expect in Eb, along with the notes of 9 different scales all starting on Eb.
 
 Or, say you need to quickly find an F major chord in 1st inversion. Again, just use the tab to flip to F and find all the information you need:
 
-<img src='https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg' alt='image 2' />
+<img src='https://www.musora.com/cdn-cgi/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg' alt='image 2' />
 
 Easy peasy!
 
@@ -989,13 +989,13 @@ Say you're learning a new song, and it's in the key of Eb major. But you haven't
 
 You simply pull out your handy Chords & Scales Book and use the keyboard tabs on the side to find Eb and quickly flip to the page:
 
-<img src='https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg' alt='image 1' />
+<img src='https://www.musora.com/cdn-cgi/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg' alt='image 1' />
 
 In there, you'll find all the major, minor, sus, and 7th chords you can expect in Eb, along with the notes of 9 different scales all starting on Eb.
 
 Or, say you need to quickly find an F major chord in 1st inversion. Again, just use the tab to flip to F and find all the information you need:
 
-<img src='https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg' alt='image 2' />
+<img src='https://www.musora.com/cdn-cgi/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg' alt='image 2' />
 
 Easy peasy!
 
@@ -1067,7 +1067,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
 
         <a target=\"_blank\" class=\"text-center\" style=\"display:inline-block\" href=\"https://pianote.s3.amazonaws.com/shop/products/practice-planner/preview.pdf\">
             <strong>Click to see inside &raquo;</strong><br>
-            <img class='w-full mt-1' src=\"https://www.musora.com/musora-cdn/image/width=850,quality=85/https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg\" alt='sample image' />
+            <img class='w-full mt-1' src=\"https://www.musora.com/cdn-cgi/image/width=850,quality=85/https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg\" alt='sample image' />
         </a>",
             "product_img" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg",
             "features" => [
@@ -1181,7 +1181,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
 
         <a target=\'_blank\" class=\"text-center\" style=\"display:inline-block\" href=\"https://pianote.s3.amazonaws.com/shop/products/practice-planner/preview.pdf\">
             <strong>Click to see inside &raquo;</strong><br>
-            <img class='w-full mt-1' src=\"https://www.musora.com/musora-cdn/image/width=850,quality=85/https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg\" alt='sample image' />
+            <img class='w-full mt-1' src=\"https://www.musora.com/cdn-cgi/image/width=850,quality=85/https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg\" alt='sample image' />
         </a>",
             "product_img" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg",
             "features" => [
@@ -2029,10 +2029,8 @@ APOP65 Nylon screen professional pop filter for studio-quality recordings',
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $products = self::C;
 

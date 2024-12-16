@@ -24,10 +24,8 @@ class SpectLayout extends Layout
 
     /**
      * Get the fields displayed by the layout.
-     *
-     * @return array
      */
-    public function fields()
+    public function fields(): array
     {
         return [
             Select::make('title')->options([

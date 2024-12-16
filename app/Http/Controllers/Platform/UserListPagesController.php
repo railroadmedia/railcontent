@@ -20,11 +20,6 @@ class UserListPagesController extends BaseController
     private ContentService $contentService;
     private UserContentProgressRepository $userContentRepository;
 
-    /**
-     * @param UserPlaylistsService $userPlaylistsService
-     * @param ContentService $contentService
-     * @param UserContentProgressRepository $userContentProgressRepository
-     */
     public function __construct(
         UserPlaylistsService $userPlaylistsService,
         ContentService $contentService,

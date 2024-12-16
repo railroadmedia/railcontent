@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Exception;
@@ -56,7 +57,7 @@ class OnboardingAnswerHistory extends Model
      */
     protected $fillable = ['user_id', 'brand', 'onboarding_question', 'onboarding_answer', 'coach_name'];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

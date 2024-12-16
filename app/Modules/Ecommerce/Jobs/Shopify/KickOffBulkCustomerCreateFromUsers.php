@@ -51,10 +51,6 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
 
 
     /**
-     * @param  CustomerRepository  $customerRepository
-     * @param  AddressRepository  $addressRepository
-     * @param  Shopify  $shopify
-     * @return void
      * @throws Throwable
      */
     public function handle(CustomerRepository $customerRepository, AddressRepository $addressRepository, Shopify $shopify): void
@@ -120,8 +116,6 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
 
     /**
      * Get the query builder that we'll use to get all users to create in Shopify
-     *
-     * @return Builder
      */
     private function getUsersToCreateQuery(): Builder
     {
@@ -131,9 +125,6 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
 
     /**
      * Get a collection of User IDs to start each batch of users in the BulkCustomerCreateFromUsers job
-     *
-     * @param int $batchSize
-     * @return Collection
      */
     private function getUserIdRangesToCreate(int $batchSize): Collection
     {

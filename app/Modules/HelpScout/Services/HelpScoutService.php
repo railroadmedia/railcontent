@@ -15,19 +15,14 @@ use HelpScout\Api\Entity\PagedCollection;
 class HelpScoutService extends HelpScoutServiceBase
 {
     /**
-     * @param int $userId
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $email
-     * @param array $email
      *
      * @throws Exception
      */
     public function createCustomer(
-        $userId,
-        $firstName,
-        $lastName,
-        $email,
+        int $userId,
+        string $firstName,
+        string $lastName,
+        array $email,
         $attributes
     ) {
         $customer = new Customer();
@@ -69,22 +64,16 @@ class HelpScoutService extends HelpScoutServiceBase
     }
 
     /**
-     * @param int $userId
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $email
-     * @param array $attributes
-     * @param array $brandsAttributesKeys
      *
      * @throws Exception
      */
     public function updateCustomer(
-        $userId,
-        $firstName,
-        $lastName,
-        $email,
-        $attributes,
-        $brandsAttributesKeys
+        int $userId,
+        string $firstName,
+        string $lastName,
+        string $email,
+        array $attributes,
+        array $brandsAttributesKeys
     ) {
         $customer = $this->getCustomerById($userId);
 
@@ -132,22 +121,16 @@ class HelpScoutService extends HelpScoutServiceBase
     }
 
     /**
-     * @param int $userId
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $email
-     * @param array $attributes
-     * @param array $brandsAttributesKeys
      *
      * @throws Exception
      */
     public function createOrUpdateCustomer(
-        $userId,
-        $firstName,
-        $lastName,
-        $email,
-        $attributes,
-        $brandsAttributesKeys
+        int $userId,
+        string $firstName,
+        string $lastName,
+        string $email,
+        array $attributes,
+        array $brandsAttributesKeys
     ) {
         /**
          * @var $localCustomer LocalCustomer
@@ -166,23 +149,16 @@ class HelpScoutService extends HelpScoutServiceBase
     }
 
     /**
-     * @param int $userId
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $email
-     * @param array $attributes
-     * @param array $brandsAttributesKeys
-     * @param Customer $customer
      *
      * @throws Exception
      */
     public function syncExistingCustomer(
-        $userId,
-        $firstName,
-        $lastName,
-        $email,
-        $attributes,
-        $brandsAttributesKeys,
+        int $userId,
+        string $firstName,
+        string $lastName,
+        string $email,
+        array $attributes,
+        array $brandsAttributesKeys,
         Customer $customer
     ) {
         $emails = $customer->getEmails()->toArray();
@@ -239,13 +215,11 @@ class HelpScoutService extends HelpScoutServiceBase
     }
 
     /**
-     * @param int $userId
      *
-     * @return Customer
      *
      * @throws Exception
      */
-    public function getCustomerById($userId): Customer
+    public function getCustomerById(int $userId): Customer
     {
         /**
          * @var $localCustomer LocalCustomer
@@ -261,18 +235,12 @@ class HelpScoutService extends HelpScoutServiceBase
         return $customer;
     }
 
-    /**
-     * @return PagedCollection
-     */
     public function getCustomersPage(): PagedCollection
     {
         return $this->client->customers()->list();
     }
 
     /**
-     * @param Customer $customer
-     * @param array $attributes
-     * @param array $brandsAttributesKeys
      *
      * @return PropertyOperation[]|array
      *

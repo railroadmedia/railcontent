@@ -419,7 +419,8 @@ class SyncAddressMetafieldsToShopify implements ShouldQueue
      */
     private function logResult(string $status, string $result, string $msgType = self::MESSAGE_TYPE_INFO): void
     {
-        Log::$msgType(sprintf('%s: %s %s - %s',
+        Log::$msgType(sprintf(
+            '%s: %s %s - %s',
             $this->getClassName(),
             $this->model->shopify_id,
             $status,

@@ -16,7 +16,7 @@ class UpdateUserSubscriptionType extends Command
     /**
      * @throws Throwable
      */
-    public function handle()
+    public function handle(): void
     {
         $this->withExecutionTime(function () {
             $type = $this->argument('subscriptionType');

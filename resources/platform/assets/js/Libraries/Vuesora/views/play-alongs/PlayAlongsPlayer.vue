@@ -186,7 +186,7 @@
                             class="bg-white tw-rounded-full"
                             :class="drums ? 'text-grey-5' : 'inverted text-white'"
                         >
-                            <i class="icon-drums"></i>
+                            <musora-icon icon-name="drum-set" class="tw-w-[20px]"></musora-icon>
                         </span>
                     </button>
 
@@ -197,7 +197,7 @@
                         @keydown.prevent
                     >
                         <span
-                            class="bg-white tw-rounded-full tw-rounded-full"
+                            class="bg-white tw-rounded-full"
                             :class="loop ? 'text-grey-5' : 'inverted text-white'"
                         >
                             <i class="fa fa-repeat"></i>
@@ -279,7 +279,7 @@ export default {
         },
 
         noSidebar: {
-            type: Boolean, 
+            type: Boolean,
             default: () => false,
         },
 
@@ -371,15 +371,15 @@ export default {
         },
 
         $_title() {
-            return this.activeItem ? this.activeItem.getPostField('title') : '';
+            return this.activeItem ? this.activeItem.post.title : '';
         },
 
         $_style() {
-            return this.activeItem ? this.activeItem.getPostFieldMulti('style').join(', ') : '';
+            return this.activeItem && this.activeItem.post.style ? this.activeItem.post.style.join(', ') : '';
         },
 
         $_bpm() {
-            return this.activeItem ? this.activeItem.getPostField('bpm') : '';
+            return this.activeItem ? this.activeItem.post.bpm : '';
         },
 
         durationOffsetStyles() {

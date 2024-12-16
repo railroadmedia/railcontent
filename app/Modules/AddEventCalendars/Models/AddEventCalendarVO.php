@@ -95,53 +95,41 @@ class AddEventCalendarVO
         $this->internalContentDescription = $internalContentDescription;
     }
 
-    /**
-     * @return string
-     */
-    public function getExternalId()
+    public function getExternalId(): string
     {
         return $this->externalId;
     }
 
     /**
      * The syncId is used to figure out which internal content id or data correlates to which calendar from the API.
-     * @return string|null
      */
-    public function getExternalCustomDataArray()
+    public function getExternalCustomDataArray(): ?string
     {
         return json_decode($this->externalCustomData, true);
     }
 
     /**
      * The syncId is used to figure out which internal content id or data correlates to which calendar from the API.
-     * @return string|null
      */
-    public function getExternalSyncId()
+    public function getExternalSyncId(): ?string
     {
         return $this->getExternalCustomDataArray()['generated_id'] ?? null;
     }
 
     /**
      * The syncId is used to figure out which internal content id or data correlates to which calendar from the API.
-     * @return string
      */
-    public function getInternalSyncId()
+    public function getInternalSyncId(): string
     {
         return self::generateSyncId($this->internalContentId, $this->internalContentBrand, $this->internalContentType);
     }
 
-    /**
-     * @return string
-     */
-    public function getTitleToSync()
+    public function getTitleToSync(): string
     {
         return ucwords($this->internalContentBrand) . ' - ' . $this->internalContentTitle;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescriptionToSync()
+    public function getDescriptionToSync(): string
     {
         // todo: prepend this with a link to the content catalogue page, with something like this:
 
@@ -161,10 +149,7 @@ class AddEventCalendarVO
         return $this->internalContentDescription;
     }
 
-    /**
-     * @return array
-     */
-    public function getCustomDataArrayToSync()
+    public function getCustomDataArrayToSync(): array
     {
         return [
             AddEventService::SYNC_ID_KEY => $this->getInternalSyncId(),
@@ -174,18 +159,12 @@ class AddEventCalendarVO
         ];
     }
 
-    /**
-     * @return bool
-     */
-    public function apiCreateRequired()
+    public function apiCreateRequired(): bool
     {
         return empty($this->externalId);
     }
 
-    /**
-     * @return bool
-     */
-    public function apiUpdateRequired()
+    public function apiUpdateRequired(): bool
     {
         return ($this->getTitleToSync()) != $this->externalTitle ||
             $this->getDescriptionToSync() != $this->externalDescription;
@@ -193,9 +172,8 @@ class AddEventCalendarVO
 
     /**
      * Should only be true if the getExternalCustomDataArray matches the passed in args but the internal content id is null? TBD
-     * @return bool
      */
-    public function apiDeleteRequired()
+    public function apiDeleteRequired(): bool
     {
         return false;
     }
@@ -204,9 +182,8 @@ class AddEventCalendarVO
      * @param $contentId
      * @param $contentBrand
      * @param $contentType
-     * @return string
      */
-    public static function generateSyncId($contentId, $contentBrand, $contentType)
+    public static function generateSyncId($contentId, $contentBrand, $contentType): string
     {
         return $contentId . '_' . $contentBrand . '_' . $contentType;
     }

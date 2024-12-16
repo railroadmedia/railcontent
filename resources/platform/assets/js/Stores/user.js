@@ -26,6 +26,7 @@ export const useUserStore = defineStore({
     userDashboardUrl: (state) => state.user?.get_dashboard_url,
     isUserAMember: (state) => state.user?.is_a_member,
     isAdmin: (state) => state.user?.permission_level === 'administrator',
+    isFirstAccess: (state) => state.user?.first_access_at,
     isLifetimeMember: (state) => state.user?.is_lifetime_member,
     userMembershipLevel: (state) => state.user?.membership_level,
     userMembershipExpiration: (state) => state.user?.membership_expiration_date,
@@ -89,6 +90,22 @@ export const useUserStore = defineStore({
         return false;
       }
     },
+    userNeedsAccess: (getters) => {
+      return (contentType, userProductIDs) => {
+        //If User is an admin
+        if(getters.isAdmin) {
+          return false;
+        }
+        //If user is not a member
+        if( getters.isUserAMember ) {
+          return true;
+        }
+        //Lifetime or Plus
+        if(!getters.isLifetimeMember || getters.userMembershipLevel !== 'plus') {
+          return true;
+        }
+      }
+    }
   },
   actions: {
     setUser (user) {
@@ -209,7 +226,7 @@ export const useUserStore = defineStore({
                               text: 'Woohoo! Avatar Successfully reset. Refreshing the page.'
                           });
                           //Reset in Pinia Store
-                          this.user.profile_picture_url = 'https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://s3.amazonaws.com/pianote/defaults/avatar.png';
+                          this.user.profile_picture_url = 'https://www.musora.com/cdn-cgi/image/quality=75,width=250,height=250,metadata=none/https://s3.amazonaws.com/pianote/defaults/avatar.png';
                       }
                   })
                   .catch(error => {

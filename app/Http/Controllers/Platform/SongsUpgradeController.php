@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use App\Http\Controllers\BaseController;
 use Railroad\Ecommerce\Services\MembershipTier;
 use Railroad\Ecommerce\Services\UpgradeService;
@@ -16,7 +17,7 @@ class SongsUpgradeController extends BaseController
         $this->upgradeService = $upgradeService;
     }
 
-    public function index(Request $request, $domain, $brand)
+    public function index(Request $request, $domain, $brand): View
     {
         $isLifetime = user()->isALifetimeMember();
         $currentTier = $this->upgradeService->getSubscriptionMembershipTier($isLifetime);

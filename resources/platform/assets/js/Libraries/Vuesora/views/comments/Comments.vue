@@ -1,5 +1,7 @@
 <template>
-    <div id="commentsSection" class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full lg:tw-mb-6">
+    <CommentSkeleton v-if="isPageLoading" />
+
+    <div v-else id="commentsSection" class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full lg:tw-mb-6">
         <div class="tw-flex tw-flex-row tw-w-full tw-flex-wrap tw-py-6 tw-items-center">
             <div class="tw-w-full tw-flex-wrap tw-text-[#00101D] dark:tw-text-white tw-flex tw-items-center">
                 <!-- Preview Cards -->
@@ -70,11 +72,11 @@
                              :class="currentUser.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
                              @load="currentUser.imageLoaded = true">
                     </div>
-                    <p v-if="showUserExp" class="tw-text-sm dense tw-uppercase tw-text-center mt-1">
+                    <p class="tw-text-sm dense tw-uppercase tw-text-center mt-1">
                         {{ userExpRank }}
                     </p>
-                    <p v-if="showUserExp" class="tw-text-sm dense tw-text-center font-compressed">
-                        {{ userExpValue }} XP
+                    <p class="tw-text-sm dense tw-text-center font-compressed">
+                        {{ currentUser.xp }} XP
                     </p>
                 </div>
 
@@ -126,6 +128,8 @@
 </template>
 <script>
 import axios from 'axios';
+import { usePlatformStore } from "@stores/platform";
+import { storeToRefs } from "pinia/dist/pinia";
 import * as QueryString from 'query-string';
 import TextEditor from '../../Components/TextEditor/TextEditor.vue';
 import CommentService from '../../assets/js/Services/comments';
@@ -137,6 +141,7 @@ import CommentMixin from './_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import MuButton from '../../../../Components/_Units/Button/MuButton';
 import { textColor } from '@constants/brands'
+import CommentSkeleton from '@collections/SkeletonLoader/CommentSkeleton';
 
 export default {
     name: 'Comments',
@@ -145,12 +150,17 @@ export default {
         'comment-post': CommentPost,
         'comment-likes-modal': CommentLikesModal,
         'MuButton': MuButton,
+        'CommentSkeleton': CommentSkeleton,
         // 'wysiwyg-editor': WYSIWYGEditor,
     },
     mixins: [ThemeClasses, CommentMixin],
     props: {
         contentId: {
             type: [Number, String],
+            default: () => '',
+        },
+        contentType: {
+            type: String,
             default: () => '',
         },
         collapsable: {
@@ -211,7 +221,8 @@ export default {
         },
 
         userExpValue() {
-            return Utils.parseXpValue(this.currentUser.xp);
+            // return Utils.parseXpValue(this.currentUser.xp);
+            return this.currentUser.xp;
         },
 
         userExpRank() {
@@ -256,15 +267,35 @@ export default {
             };
         },
 
-        showUserExp() {
-            return this.userExpValue != null && (['team', 'pack'].indexOf(this.currentUser.access_level) === -1);
-        },
+        // showUserExp() {
+        //     return this.userExpValue != null && (['team', 'pack'].indexOf(this.currentUser.access_level) === -1);
+        // },
 
         sortIcon() {
             return this.sortOptions.find(option => option.value === this.sortOption).icon;
         },
+
+        isPageLoading(){
+            const platformStore = usePlatformStore();
+            const { isLoading } = storeToRefs(platformStore);
+
+            return isLoading.value;
+        },
     },
+
+    watch: {
+        contentId(newValue) {
+            if (newValue) {
+                this.getComments(this.requestParams);
+            }
+        },
+    },
+
     mounted() {
+        if(this.contentType === "song") {
+            this.getComments(this.requestParams);
+        }
+
         // Check the URI Params if 'goToComment' exists
         const uriParams = QueryString.parse(window.location.search);
         // Run the goToComment method if it does
@@ -289,8 +320,6 @@ export default {
                 }
             }
         });
-
-        this.getComments(this.requestParams);
     },
     methods: {
         handleReplyOpened({ id }) {
@@ -329,6 +358,8 @@ export default {
                             this.comments = this.comments.filter(comment => comment.id !== this.pinnedComment.id);
                         }
                     }
+                }).catch( error => {
+                    console.log( 'error fetching comments: ', error)
                 });
         },
 

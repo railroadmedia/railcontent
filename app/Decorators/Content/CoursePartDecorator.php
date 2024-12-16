@@ -6,14 +6,9 @@ use Railroad\Railcontent\Support\Collection;
 
 class CoursePartDecorator extends TypeDecoratorBase
 {
-    /**
-     * @param Collection $contents
-     * @return Collection
-     */
-    public function decorate(Collection $contents)
+    public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->where('type', 'course-part');
-
         if ($contentsOfType->isEmpty()) {
             return $contents;
         }

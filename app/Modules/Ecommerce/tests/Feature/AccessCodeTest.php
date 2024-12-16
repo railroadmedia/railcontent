@@ -16,7 +16,7 @@ class AccessCodeTest extends TestCase
 
         $this->assertDatabaseHas('ecommerce_access_codes', [
             'is_claimed' => 0,
-            'product_ids' => 'a:1:{i:0;i:1;}',
+            'product_ids' => serialize([(int)$product->id]),
             'brand' => $product->brand,
             'source' => 'test_source'
         ]);

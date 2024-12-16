@@ -10,10 +10,8 @@ class BundlePreset extends Preset
 {
     /**
      * Execute the preset configuration
-     *
-     * @return void
      */
-    public function handle(Flexible $field)
+    public function handle(Flexible $field): void
     {
         $field->resolver(BundleResolver::class);
         $field->button('Add a bonus');

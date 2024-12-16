@@ -15,19 +15,7 @@ trait SavesShopifyIdOnAddresses
      * Go through the addresses for the given user (and any of their associated customers), or the given customer,
      * and retrieve any that have matching values to those provided.
      *
-     * @param int|null $userId
      * @param Collection<Customer>|null $customers
-     * @param string|null $firstName
-     * @param string|null $lastName
-     * @param string|null $address1
-     * @param string|null $address2
-     * @param string|null $city
-     * @param string|null $province
-     * @param string|null $provinceCode
-     * @param string|null $zip
-     * @param string|null $country
-     * @param string|null $countryCode
-     * @return Collection
      */
     protected function findAddressesWithMatchingData(
         ?int $userId,
@@ -131,8 +119,6 @@ trait SavesShopifyIdOnAddresses
      * Store the give shopify id on each address in the collection
      *
      * @param Collection<Address> $addresses
-     * @param int $shopifyId
-     * @return void
      * @throws ORMException
      */
     protected function storeShopifyId(Collection $addresses, int $shopifyId): void
@@ -149,9 +135,6 @@ trait SavesShopifyIdOnAddresses
 
     /**
      * Make a key out of the desired values from this address, so we can compare against our keyed values
-     *
-     * @param Address $address
-     * @return string
      */
     private function getKey(Address $address): string
     {
@@ -171,15 +154,11 @@ trait SavesShopifyIdOnAddresses
 
     /**
      * The Address Repository used to interact with the Ecommerce Address entities
-     *
-     * @return AddressRepository
      */
     abstract protected function getAddressRepository(): AddressRepository;
 
     /**
      * The Entity Manager used to update Ecommerce entities
-     *
-     * @return EcommerceEntityManager
      */
     abstract protected function getEntityManager(): EcommerceEntityManager;
 }

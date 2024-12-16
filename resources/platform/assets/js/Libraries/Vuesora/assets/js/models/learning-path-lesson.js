@@ -15,7 +15,7 @@ export default class LearningPathLessonContentModel extends ContentModel {
         this.list.description = this.getPostDatum('description');
         this.list.column_data = [
             this.getPostDuration(),
-            `${this.post.total_xp} XP`,
+            `${this.post.xp} XP`,
         ];
     }
 }

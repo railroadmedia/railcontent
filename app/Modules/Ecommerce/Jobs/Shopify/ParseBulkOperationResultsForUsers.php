@@ -122,8 +122,6 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
      * Find the user based on the metafield's value that we sent, and update it and any applicable customers
      * with the Shopify ID from the customer data.
      *
-     * @param object $customerData
-     * @return void
      * @throws Exception
      */
     protected function updateUserWithShopifyId(object $customerData): void
@@ -225,9 +223,6 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
     /**
      * Handle any errors that are returned in the response data
      *
-     * @param object $responseData
-     * @param int $lineNumber
-     * @return void
      * @throws Exception
      */
     protected function handleErrors(object $responseData, int $lineNumber): void
@@ -272,9 +267,6 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
     /**
      * Get the value of the given attribute for the user in our source file at the given line number
      *
-     * @param int $lineNumber
-     * @param string $attribute
-     * @return mixed
      * @throws Exception
      */
     protected function getUserValueFromSourceFile(int $lineNumber, string $attribute): mixed
@@ -286,7 +278,6 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
     /**
      * Get the array of users data from the source file
      *
-     * @return array
      * @throws Exception
      */
     protected function getSourceFileUsers(): array

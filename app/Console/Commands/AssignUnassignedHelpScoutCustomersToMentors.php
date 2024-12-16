@@ -25,13 +25,11 @@ class AssignUnassignedHelpScoutCustomersToMentors extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle(
         HelpScoutUserService $helpScoutUserService,
         HelpScoutMentorService $helpScoutMentorService
-    ) {
+    ): int {
         $this->info('Starting AssignUnassignedHelpScoutCustomersToMentors.');
 
         $filters = (new ConversationFilters())

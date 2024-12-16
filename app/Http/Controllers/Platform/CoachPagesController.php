@@ -47,8 +47,6 @@ class CoachPagesController extends Controller
 
     /**
      * CourseController constructor.
-     *
-     * @param ContentService $contentService
      */
     public function __construct(
         ContentService $contentService,
@@ -63,14 +61,11 @@ class CoachPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|Factory|Application|View
      * @throws \Exception
      */
-    public function coaches(Request $request)
+    public function coaches(Request $request): View
     {
-        $previousStatuses = ContentRepository::$availableContentStatues;
-        $previousPullFutureContent = ContentRepository::$pullFutureContent;
 
         if (user()->isAdmin()) {
             ContentRepository::$pullFutureContent = true;
@@ -87,33 +82,7 @@ class CoachPagesController extends Controller
         FiltersHelper::prepareFiltersFields();
         FiltersHelper::setRequiredFields('is_coach,1');
 
-        $coaches = $this->contentService->getFiltered(
-            $request->get('page', 1),
-            $request->get('limit', 18),
-            $request->get('sort', 'slug'),
-            [$lessonType],
-            [],
-            [],
-            FiltersHelper::$requiredFields,
-            [],
-            [],
-            [],
-            true,
-            false,
-            true,
-            $request->get('only_subscribed', false)
-        );
-
         ContentRepository::$countFilterOptionItems = false;
-        $activeCoaches = $this->contentService->getFiltered(
-            1,
-            20,
-            'slug',
-            [$lessonType],
-            [],
-            [],
-            ['is_active,1', 'is_coach,1']
-        );
 
         $featuredCoaches = $this->contentService->getFiltered(
             1,
@@ -160,22 +129,6 @@ class CoachPagesController extends Controller
             $currentEventCalendarId = $coachCalendar ?? $brandOverview;
         }
 
-        $followedCoaches = $this->contentFollowService->getUserFollowedContent(
-            user()->id,
-            config('railcontent.brand'),
-            $lessonType,
-            1,
-            6
-        );
-
-        $latestSubscribedLessons = $this->contentFollowService->getLessonsForFollowedCoaches(
-            config('railcontent.brand'),
-            [],
-            [],
-            1,
-            4
-        );
-
         $requiredFields = [];
         foreach ($featuredCoaches->results() as $featuredCoache) {
             $requiredFields[] = 'instructor,' . $featuredCoache['id'];
@@ -187,61 +140,26 @@ class CoachPagesController extends Controller
             }
         }
 
-        //latest featured lessons - Show the latest lessons from all the featured coaches.
-        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
-        ContentRepository::$pullFutureContent = true;
-
-        $includedTypes = array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
-
-        $latestLessons = $this->contentService->getFiltered(
-            1,
-            6,
-            '-published_on',
-            $includedTypes,
-            [],
-            [],
-            $requiredFields,
-            [],
-            [],
-            [],
-            false,
-            false,
-            false
-        );
-
         $upcomingCoaches = config('coaches.upcoming_coaches', []);
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['coaches'] ?? [];
         return view('content.coaches-index', [
-            'coaches' => $coaches,
-            'activeCoaches' => $activeCoaches->results(),
             'themeColor' => $themeColor,
-            'showSearch' => true,
             'coachEvent' => content_to_json([$currentEvent]),
             'currentEventCalendarId' => $currentEventCalendarId ?? null,
             'eventCoachProfileUrl' => $eventCoachUrl ?? '',
             'currentDate' => $currentDate,
             'timeCutoffMinutes' => self::NOT_LIVE_PAGE_SWITCH_MINUTES,
             'youtubeId' => $youtubeId ?? null,
-            "followedCoaches" => $followedCoaches->toResponseRawJson(),
-            "hasFollowedCoaches" => $followedCoaches->totalResults() > 0,
-            "latestLessons" => $latestLessons->toResponseRawJson(),
             "featuredCoaches" => $featuredCoaches,
-            "hasFeaturedCoaches" => $featuredCoaches->totalResults() > 0,
-            "hasActiveCoaches" => $activeCoaches->totalResults() > 0,
-            "latestSubscribedLessons" => $latestSubscribedLessons->toResponseRawJson(),
-            "onlySubscribedCoaches" => $request->get('only_subscribed', false),
             'upcomingCoaches' => $upcomingCoaches,
             'hasUpcomingCoaches' => ($upcomingCoaches && count($upcomingCoaches) > 0),
-            "catalogueMeta" => $catalogueMeta,
         ]);
     }
 
     /**
-     * @param Request $request
      * @param $coachSlug
      * @return Factory|Application|View
      */
-    public function show(Request $request, $domain, $brand, $coachSlug, $coachId)
+    public function show(Request $request, $domain, $brand, $coachSlug, $coachId): View
     {
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
@@ -354,13 +272,12 @@ class CoachPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $lessonType
      * @param $lessonId
      * @param bool $redirectToFirstChild
      * @return Factory|Application|RedirectResponse|View
      */
-    public function stream(Request $request, $domain, $brand, $coachSlug, $streamSlug, $streamId)
+    public function stream(Request $request, $domain, $brand, $coachSlug, $streamSlug, $streamId): View
     {
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];

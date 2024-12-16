@@ -9,7 +9,7 @@ use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
-use Railroad\Railtracker\Services\ContentLastEngagedService;
+use App\Modules\RailTracker\Services\ContentLastEngagedService;
 
 class PlaylistService
 {
@@ -17,11 +17,6 @@ class PlaylistService
     private UserPlaylistsService $userPlaylistsService;
     private ContentService $contentService;
 
-    /**
-     * @param ContentLastEngagedService $contentLastEngagedService
-     * @param UserPlaylistsService $userPlaylistsService
-     * @param ContentService $contentService
-     */
     public function __construct(
         ContentLastEngagedService $contentLastEngagedService,
         UserPlaylistsService $userPlaylistsService,

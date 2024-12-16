@@ -56,10 +56,7 @@ class RailnotificationsUserProvider implements UserProviderInterface
         return true;
     }
 
-    /**
-     * @return TransformerAbstract
-     */
-    public function getUserTransformer()
+    public function getUserTransformer(): TransformerAbstract
     {
         return new UserTransformer();
     }

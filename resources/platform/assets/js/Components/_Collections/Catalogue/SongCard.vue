@@ -7,14 +7,14 @@
         ]">
         <div class="tw-flex tw-items-center" :class="`${isGroupedView ? 'tw-flex-col' : 'tw-flex-row sm:tw-flex-col'}`">
             <!-- Thumbnail Section -->
-            <component :is="isReleased ? 'a' : 'div' " :href="item.url" class="tw-no-underline tw-flex tw-flex-col tw-aspect-square tw-mr-[10px] sm:tw-mr-0" :class="[
+            <component :is="isReleased ? 'a' : 'div' " :href="item.web_url_path" class="tw-no-underline tw-flex tw-flex-col tw-aspect-square tw-mr-[10px] sm:tw-mr-0" :class="[
                 { 'tw-w-full': isGroupedView },
                 { 'tw-w-[90px] sm:tw-w-full tw-flex-shrink-0': !isGroupedView },
             ]">
                 <div
                     :class="`tw-relative tw-overflow-hidden ${isGroupedView ? 'tw-rounded-[9px]' : 'tw-rounded-[5px] sm:tw-rounded-[9px]'} tw-bg-white dark:tw-bg-[#0E2031] tw-aspect-square`">
                     <!-- Thumbnail -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail} `"
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=500/${mappedData.thumbnail} `"
                         class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0 tw-aspect-square" loading="lazy"
                         onload="this.classList.remove('tw-opacity-0')">
 
@@ -34,7 +34,7 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full tw-justify-between tw-break-all">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block tw-grow-0 tw-shrink">
-                    <component :is="isReleased ? 'a' : 'div' " :href="item.url"
+                    <component :is="isReleased ? 'a' : 'div' " :href="item.web_url_path"
                         class="tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2 tw-flex">
                         <div class="tw-flex tw-flex-col">
                             <!-- Song Title -->
@@ -51,8 +51,8 @@
                         <p
                             class="tw-flex tw-items-center tw-flex-wrap tw-text-[11px] sm:tw-text-xs tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
                             <!-- Difficulty Label -->
-                            <span v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
-                                <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                            <span v-if="difficulty" class="tw-flex tw-items-center tw-mb-0.5">
+                                <DifficultyLabel class="tw-text-xs" :difficultyValue="difficulty"
                                     textCase="capitalize" />
                             </span>
                         </p>
@@ -113,29 +113,24 @@ const {
     progress_percent,
     isReleased,
     releaseDate,
+    isCompleted,
 } = useCatalogueItem({ ...props, brand: brand.value, contentTypeOverride: 'song' });
 
 const artistName = computed(() => {
-    if (contentModel.value.post.fields) {
-        return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
-    }
-    return '';
+    return props.item.artist_name || '';
 })
 
+const difficulty = computed(() => {
+    return props.item.difficulty_string;
+});
+
 const mappedData = computed(() => {
-    let difficultyValue = 0; //default
-    if (contentModel.value.post.fields) {
-        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
-    }
-
-    contentModel.value.card.difficulty = difficultyValue;
-
     return contentModel.value.card
 });
 
 const class_object = computed(() => ({
     'no-access': noAccess.value,
-    completed: props.item.completed,
+    completed: isCompleted.value,
 }));
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);

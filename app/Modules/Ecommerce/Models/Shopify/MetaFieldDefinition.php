@@ -40,9 +40,6 @@ class MetaFieldDefinition
 
     /**
      * Structure the MetaField Definition's values into an array for Shopify query
-     *
-     * @param  MetaFieldDefinition  $metaFieldDefinition
-     * @return array
      */
     public static function getStructureForShopifyQuery(self $metaFieldDefinition): array
     {
@@ -57,9 +54,6 @@ class MetaFieldDefinition
 
     /**
      * Structure the MetaField Definition's values into an array for Shopify mutation
-     *
-     * @param  MetaFieldDefinition  $metaFieldDefinition
-     * @return array
      */
     public static function getStructureForShopifyMutation(self $metaFieldDefinition): array
     {
@@ -76,9 +70,6 @@ class MetaFieldDefinition
 
     /**
      * Create a MetaFieldDefinition from Shopify's response data array
-     *
-     * @param  array  $data
-     * @return MetaFieldDefinition
      */
     public static function fromShopifyData(array $data): self
     {

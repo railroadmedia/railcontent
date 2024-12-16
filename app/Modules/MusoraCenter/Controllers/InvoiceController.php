@@ -2,6 +2,7 @@
 
 namespace App\Modules\MusoraCenter\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Routing\Controller;
 use Railroad\Ecommerce\Exceptions\NotFoundException;
 use Railroad\Ecommerce\Repositories\PaymentRepository;
@@ -44,7 +45,7 @@ class InvoiceController extends Controller
      * @throws NotFoundException
      * @throws \Doctrine\ORM\ORMException
      */
-    public function show($paymentId)
+    public function show($paymentId): View
     {
         $this->permissionService->canOrThrow(auth()->id(), 'send_payment_invoice');
 

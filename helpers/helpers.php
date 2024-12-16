@@ -78,7 +78,7 @@ if (!function_exists('cf_img')) {
             return '';
         }
 
-        $urlString = 'https://www.musora.com/musora-cdn/image/';
+        $urlString = 'https://www.musora.com/cdn-cgi/image/';
         $optionsStringArray = [];
 
         foreach ($options as $optionKey => $optionValue) {
@@ -458,3 +458,19 @@ function encodeURISub($url)
 
     return strtr(rawurlencode($url), array_merge($reserved, $unescaped, $score));
 }
+
+if (!function_exists('stripFromJson')) {
+    function stripFromJson($string)
+    {
+        $pattern = '/"?'.getStripFromJsonKey().'"?/';
+        return preg_replace($pattern, '', $string);
+    }
+}
+
+if (!function_exists('getStripFromJsonKey')) {
+    function getStripFromJsonKey()
+    {
+        return "ab9f2996-8b62-4b31-a7f7-2082f85fb897";
+    }
+}
+

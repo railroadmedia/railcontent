@@ -1,11 +1,12 @@
 <script setup>
 import {DateTime} from 'luxon';
-import {computed, onBeforeMount, reactive, ref} from 'vue';
+import {computed, onBeforeMount, onMounted, reactive, ref} from 'vue';
 import { usePlatformStore } from '../../../../Stores/platform';
 import { usePlaylistsStore } from '@stores/playlists';
 import { contentTypes } from '../../../../utils';
 import PlaylistDropdown from '../PlaylistDropdown.vue';
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel.vue'
+import {getProgressPercentage} from "musora-content-services";
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
@@ -59,7 +60,7 @@ const lessonThumbnail = computed(() => {
 })
 //Song Artist
 const artist = computed(() => {
-    return props.lesson.artist;
+    return props.lesson.artist_name;
 })
 
 const contentTypeString = computed(() => {
@@ -142,11 +143,11 @@ const lessonDateParsed = props.lesson.published_on_in_timezone ? Date.parse(prop
 const lessonDate = props.lesson.published_on_in_timezone ? props.lesson.published_on_in_timezone : props.lesson.published_on;
 
 //Parse Release Date
-const month = DateTime.fromSQL(lessonDate).toFormat('LLL');
-const day = DateTime.fromSQL(lessonDate).toFormat('ccc');
-const dayNumber = DateTime.fromSQL(lessonDate).toFormat('d');
-const yearNumber = DateTime.fromSQL(lessonDate).toFormat('yy');
-const time = DateTime.fromSQL(lessonDate).toFormat('h:mm a');
+const month = DateTime.fromISO(lessonDate).toFormat('LLL');
+const day = DateTime.fromISO(lessonDate).toFormat('ccc');
+const dayNumber = DateTime.fromISO(lessonDate).toFormat('d');
+const yearNumber = DateTime.fromISO(lessonDate).toFormat('yy');
+const time = DateTime.fromISO(lessonDate).toFormat('h:mm a');
 
 //-----------Methods-----------//
 
@@ -223,6 +224,13 @@ onBeforeMount(() => {
     }
 
 });
+
+const progress = ref(0)
+
+onMounted(() => {
+    getProgressPercentage(props.lesson.id).then( result => progress.value = result )
+})
+
 </script>
 <template>
     <div :id="cardId"
@@ -260,10 +268,10 @@ onBeforeMount(() => {
                     </div>
 
                     <!-- Overlay -->
-                    <div v-if="lesson.progress_percent === 100 || showOverlay"
+                    <div v-if="progress === 100 || showOverlay"
                          class="tw-z-10 tw-absolute tw-top-0 tw-w-full tw-h-full tw-text-white tw-left-0 tw-bg-black/70 tw-flex tw-flex-col tw-items-center tw-justify-center"
                     >
-                        <template v-if="showOverlay">
+                        <template v-if="showOverlay && lessonDate">
                             <p class="tw-text-xs text-white font-bold">
                                 {{ day }},
                                 <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber
@@ -271,7 +279,10 @@ onBeforeMount(() => {
                             </p>
                             <p class="tw-text-xs text-white">{{ time }}</p>
                         </template>
-                        <template v-if="lesson.progress_percent === 100">
+                        <template v-if="showOverlay && !lessonDate">
+                            <p class="tw-text-xs tw-font-bold">Unpublished</p>
+                        </template>
+                        <template v-if="progress === 100">
                             <musora-icon icon-name="circle-check-filled" class="tw-w-6 tw-h-6"/>
                         </template>
                     </div>
@@ -280,7 +291,7 @@ onBeforeMount(() => {
                     <div class="tw-z-[15] tw-absolute tw-flex tw-bottom-0 tw-left-0 tw-h-1 tw-w-full">
                         <span class="tw-h-full tw-absolute tw-left-0 tw-bottom-0"
                               :class="[`tw-bg-${brand}`]"
-                              :style="`width: ${lesson.progress_percent}%;`"
+                              :style="`width: ${progress}%;`"
                         >
                         </span>
                     </div>
@@ -368,7 +379,7 @@ onBeforeMount(() => {
                     <!-- Lesson Skill Level -->
                     <div class="tw-hidden xl:tw-inline-flex tw-justify-start tw-shrink-0 tw-w-[140px]" :title="contentTypeString">
                         <span v-if="lesson.item_type" class="tw-text-center tw-text-sm ">
-                            <DifficultyLabel class="" :difficultyValue="lesson.difficulty" textCase="uppercase" />
+                            <DifficultyLabel class="" :difficultyValue="lesson.difficulty_string" textCase="uppercase" />
                         </span>
                     </div>
                     <!-- Lesson Type -->

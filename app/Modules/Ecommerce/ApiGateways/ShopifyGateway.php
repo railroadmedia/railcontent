@@ -130,9 +130,6 @@ class ShopifyGateway
     /**
      * Get all unique customer email addresses who have an order that was updated between the given dates.
      *
-     * @param Carbon $startDate
-     * @param Carbon $endDate
-     * @return Collection
      * @throws Exception
      */
     public function getCustomersToUpdate(Carbon $startDate, Carbon $endDate): Collection
@@ -192,13 +189,10 @@ class ShopifyGateway
     /**
      * Get all order ids created between the given dates.
      *
-     * @param Carbon $startDate
-     * @param Carbon $endDate
      * @param int $limit The page limit for this query. Must be 1-250.
      * @param string $additionalFilter Additional query filter, e.g. " AND status:closed".
      *                       See https://shopify.dev/docs/api/usage/search-syntax
      * @param string $additionalFields Additional fields to include in result, e.g. ", processedAt".
-     * @return Collection
      * @throws Exception
      */
     public function getOrdersBetween(
@@ -353,8 +347,6 @@ class ShopifyGateway
     /**
      * Check if there's a metafield definition in Shopify that matches the given MetaFieldDefinition
      *
-     * @param MetaFieldDefinition $metaFieldDefinition
-     * @return bool
      * @throws Exception
      */
     public function doesMetaFieldDefinitionExist(
@@ -393,8 +385,6 @@ class ShopifyGateway
 
     /**
      * Create a new metafield definition in Shopify with the given MetaFieldDefinition
-     * @param MetaFieldDefinition $metaFieldDefinition
-     * @return mixed
      * @throws Exception
      */
     public function createMetaFieldDefinition(

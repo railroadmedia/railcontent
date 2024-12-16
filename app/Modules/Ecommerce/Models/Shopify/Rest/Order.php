@@ -34,8 +34,6 @@ class Order
     public float $totalDiscount;
     public float $totalTax;
     public float $totalPrice;
-    /** @var float the total price; reflecting order edits, returns, and refunds */
-    public float $currentTotalPrice;
     public ?string $currencyCode;
     public float $totalShipping;
     public array $discountCodes;
@@ -93,12 +91,8 @@ class Order
         $this->subtotalPrice = floatval($shopifyOrderData->subtotal_price);
         $this->totalDiscount = floatval($shopifyOrderData->total_discounts);
         $this->totalShipping = floatval($shopifyOrderData->total_shipping_price_set->shop_money->amount);
-        // total_tax is unreliable, so build it up from the tax_lines
-        $this->totalTax = collect($shopifyOrderData->tax_lines)->sum(function ($item) {
-            return floatval($item->price);
-        });
+        $this->totalTax = floatval($shopifyOrderData->total_tax);
         $this->totalPrice = floatval($shopifyOrderData->total_price_set->shop_money->amount);
-        $this->currentTotalPrice = floatval($shopifyOrderData->current_total_price);
         $this->currencyCode = $shopifyOrderData->total_price_set->shop_money->currency_code;
         $this->sourceName = $shopifyOrderData->source_name;
         $this->financialStatus = $shopifyOrderData->financial_status;
@@ -109,7 +103,6 @@ class Order
 
     /**
      * @param  bool  $refresh  get a fresh copy of the Metafields from Shopify
-     * @return Collection
      */
     public function getMetafields(bool $refresh = false): Collection
     {
@@ -136,8 +129,6 @@ class Order
 
     /**
      * Get if this order is for a trial
-     *
-     * @return bool
      */
     public function isTrialOrder(): bool
     {
@@ -149,8 +140,6 @@ class Order
 
     /**
      * Get if this order is for a membership
-     *
-     * @return bool
      */
     public function isMembershipOrder(): bool
     {

@@ -110,14 +110,6 @@ class Order extends Model
 
     /**
      * Query scope to get orders that need to be synced with Shopify, for the given constraints.
-     *
-     * @param  Builder  $query
-     * @param  int|null  $startingId
-     * @param  int|null  $endingId
-     * @param  bool|null  $fresh
-     * @param  Carbon|null  $startCreatedAt
-     * @param  Carbon|null  $endCreatedAt
-     * @return void
      */
     public function scopeToSyncWithShopify(
         Builder $query,

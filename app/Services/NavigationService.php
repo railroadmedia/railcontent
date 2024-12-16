@@ -14,37 +14,49 @@ class NavigationService
             return [];
         }
         $shopName = brand() == 'drumeo' ? 'drumshop' : 'shop';
-        if ($user->isPackOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
-            return [
-                [ // section
+        if ($user->isPackOrChallengeOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
+            $section1 = [[
+                'name' => 'Home',
+                'path' => '/'.brand(),
+                'icon' => 'home',
+            ]];
+            if ($user->isChallengeOnlyOwner()) {
+                $section1[] =
                     [
-                        'name' => 'Home',
-                        'path' => '/'.brand(),
-                        'icon' => 'home',
-                    ],
-                    [
-                        'name' => 'Shop',
-                        'path' => get_legacy_brand_base_url().'/'.$shopName,
-                        'icon' => 'cart',
-                    ]
-                ],
-                [ // section
+                        'name' => 'Challenges',
+                        'path' => '/'.brand().'/challenge',
+                        'icon' => 'challenges',
+                    ];
+            }
+            $section1[] =
+                [
+                    'name' => 'Shop',
+                    'path' => get_legacy_brand_base_url().'/'.$shopName,
+                    'icon' => 'cart',
+                ];
+            $menu = [$section1];
+
+            if ($user->isPackOnlyOwner()) {
+                $menu[] = [ // section
                     [
                         'name' => 'Packs',
                         'path' => '/'.brand().'/packs',
                         'icon' => 'box',
                     ],
-                ],
-                [ // section
+                ];
+            }
+
+            $menu[] =    [ // section
                     [
                         'name' => 'Forums',
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
 
-                ],
-            ];
+                ];
+            return $menu;
         }
+
 
         $methodurl = match(brand()) {
             'drumeo' => 'drumeo-method/241247',
@@ -68,6 +80,11 @@ class NavigationService
                 'name' => 'Songs',
                 'path' => '/'.brand().'/songs',
                 'icon' => 'headphones',
+            ],
+            [
+                'name' => 'Challenges',
+                'path' => '/'.brand().'/challenge',
+                'icon' => 'challenges',
             ],
             [
                 'name' => 'Workouts',
@@ -252,10 +269,7 @@ class NavigationService
         return [];
     }
 
-    /**
-     * @return string
-     */
-    public static function getSidebarSectionsJson()
+    public static function getSidebarSectionsJson(): string
     {
         return json_encode(self::getSidebarSections());
     }
@@ -263,7 +277,7 @@ class NavigationService
     /**
      * @return string[]
      */
-    public static function getUserDropDownLinks()
+    public static function getUserDropDownLinks(): array
     {
         if (empty(user())) {
             return [];
@@ -281,10 +295,7 @@ class NavigationService
         ];
     }
 
-    /**
-     * @return string
-     */
-    public static function getUserDropDownLinksJson()
+    public static function getUserDropDownLinksJson(): string
     {
         return json_encode(self::getUserDropDownLinks());
     }

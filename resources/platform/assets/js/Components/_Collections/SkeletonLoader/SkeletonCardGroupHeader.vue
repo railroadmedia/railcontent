@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-animate-pulse tw-flex tw-justify-between tw-items-center tw-mb-4 tw-mx-4 lg:tw-mx-0">
+    <div class="tw-animate-pulse tw-flex tw-justify-between tw-items-center tw-mb-4">
         <!-- Left Section Placeholder -->
         <div class="tw-flex tw-items-center">
             <!-- Image Placeholder -->

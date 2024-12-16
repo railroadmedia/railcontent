@@ -26,10 +26,6 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
     }
 
     /**
-     * @param CustomerIoService $customerIoService
-     * @param CustomerIoSyncService $customerIoSyncService
-     * @param UserService $userService
-     * @param UserAccessPermissionsService $userAccessPermissionsService
      * @throws Throwable
      */
     public function handle(
@@ -80,8 +76,6 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
 
     /**
      * The job failed to process.
-     *
-     * @param Throwable $exception
      */
     public function failed(Throwable $exception): void
     {

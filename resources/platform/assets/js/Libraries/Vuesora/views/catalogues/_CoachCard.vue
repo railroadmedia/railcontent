@@ -1,10 +1,10 @@
 <template>
   <a
-    :href="item.url"
+    :href="item.web_url_path"
     class="tw-relative tw-flex tw-bg-cover tw-bg-toptw-bg-gray-200 tw-overflow-hidden tw-rounded-lg lg:tw-rounded-xl tw-no-underline tw-text-white tw-group"
   >
-    <img :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${coachImage}`"
-         :alt="coachName"
+    <img :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${item.coach_card_image}`"
+         :alt="`${coachFirstName} ${coachLastName}`"
          class="tw-w-full tw-transition-opacity tw-duration-500"
          :class="[
             item.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0',
@@ -35,21 +35,6 @@
         <span class="tw-mt-1">HOUSE</span>
       </div>
     </div>
-
-    <!-- Subscribe To Coach -->
-    <button
-      class="tw-btn-primary tw-btn-small tw-h-6 tw-w-6 tw-p-0 tw-absolute tw-right-1 tw-top-1 tw-transitoin-all group-hover:tw-rotate-[15deg] tw-origin-center"
-      :title="item.current_user_is_subscribed ? 'Unsubscribe From Coach' : 'Subscribe to Coach'"
-      :class="
-        item.current_user_is_subscribed
-          ? 'tw-bg-yellow-500'
-          : 'tw-bg-[#00101d] tw-opacity-40'
-      "
-      @click.prevent="updateCoachSubscription(item.id)"
-    >
-      <i class="fas fa-bell tw-text-base"></i>
-    </button>
-
   </a>
 </template>
 <script>
@@ -60,13 +45,6 @@ import ContentService from "../../assets/js/Services/content";
 export default {
   name: "CoachCatalogueCard",
   mixins: [Mixin, ThemeClasses],
-  data() {
-    return {
-      coachName: "",
-      coachFocus: "",
-      coachImage: "",
-    };
-  },
   props: {
     brand: {
       type: String,
@@ -75,13 +53,19 @@ export default {
   },
   computed: {
     coachFirstName() {
-      return this.coachName.split(" ")[0];
+      return this.item.name.split(" ")[0];
     },
     hasLastName() {
-      return this.coachName.split(" ").length > 1;
+      return this.item.name.split(" ").length > 1;
     },
     coachLastName() {
-      return this.coachName.substr(this.coachName.indexOf(" ") + 1);
+      return this.item.name.substr(this.item.name.indexOf(" ") + 1);
+    },
+    coachFocus(){
+        if(this.item.focus && this.item.focus.length > 0){
+            return this.item.focus.join(' ');
+        }
+        return ''
     },
     themeBgClass() {
       return "tw-bg-" + this.brand;
@@ -89,40 +73,6 @@ export default {
     themeTextClass() {
       return "tw-text-" + this.brand;
     },
-  },
-  //Get name before mounting
-  beforeMount() {
-    this.item["fields"].forEach((field) => {
-      if (field.key === "name") {
-        this.coachName = field.value;
-      }
-    });
-
-    this.item["data"].forEach((obj) => {
-      if (obj.key === "focus_text") {
-        this.coachFocus = obj.value;
-      }
-      if (obj.key === "coach_card_image") {
-        this.coachImage = obj.value;
-      }
-    })
-  },
-  //Get new name when updated
-  beforeUpdate() {
-    this.item["fields"].forEach((field) => {
-      if (field.key === "name") {
-        this.coachName = field.value;
-      }
-    });
-
-    this.item["data"].forEach((obj) => {
-      if (obj.key === "focus_text") {
-        this.coachFocus = obj.value;
-      }
-      if (obj.key === "coach_card_image") {
-        this.coachImage = obj.value;
-      }
-    })
   },
   methods: {
     updateCoachSubscription(id) {
@@ -134,7 +84,6 @@ export default {
             this.$emit("onShowNotification", {
               text,
             });
-            console.log("Subscribed to: " + this.coachName);
           })
           .catch(() => {
             this.item.current_user_is_subscribed = false;

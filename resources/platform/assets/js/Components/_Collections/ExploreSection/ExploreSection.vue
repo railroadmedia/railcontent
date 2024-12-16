@@ -10,8 +10,8 @@
 </template>
 
 <script setup>
-import ExploreCard from '../ExploreCard/ExploreCard.vue';
-import NewMusoraIcon from '../NewMusoraIcon/NewMusoraIcon.vue';
+import ExploreCard from '@collections/ExploreCard/ExploreCard.vue';
+import NewMusoraIcon from '@collections/NewMusoraIcon/NewMusoraIcon.vue';
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 

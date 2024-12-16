@@ -16,7 +16,7 @@ class SetUserNeedsLogout extends Command
     /**
      * @throws \Throwable
      */
-    public function handle()
+    public function handle(): int
     {
         $userIds = $this->argument('userId');
 

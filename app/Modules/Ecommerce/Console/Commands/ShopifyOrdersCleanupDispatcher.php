@@ -3,24 +3,19 @@
 namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
-use App\Modules\Ecommerce\Jobs\Shopify\EvaluateOrder;
 use App\Modules\Ecommerce\Jobs\Shopify\EvaluateOrderJobManager;
-use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
-use Signifly\Shopify\Exceptions\NotFoundException;
-use Signifly\Shopify\Shopify;
 use Throwable;
 
 class ShopifyOrdersCleanupDispatcher extends Command
 {
     protected $signature = 'shopify:orders-cleanup
                             {--startProcessedAt= : (Optional) The ISO 8601 date time for all Shopify orders to get where the processed_at at or after. e.g. 2023-01-01T00:00:00+00:00}
-                            {--endProcessedAt= : (Optional) The ISO 8601 date time for all Shopify orders to get where the processed_at at or before. e.g. 2023-01-31T23:59:59+00:00}
-                            {--shopify_id= : (Optional) The Shopify Order ID to use, to process only a single order}';
+                            {--endProcessedAt= : (Optional) The ISO 8601 date time for all Shopify orders to get where the processed_at at or before. e.g. 2023-01-31T23:59:59+00:00}';
 
     protected $description = 'Dispatch jobs to review orders that were imported into Shopify, and populate the shopify_order_fixes table';
 
@@ -39,23 +34,8 @@ class ShopifyOrdersCleanupDispatcher extends Command
             return self::FAILURE;
         }
 
-        $orderId = $this->option("shopify_id");
-        if ($orderId) {
-            $shopify = app(Shopify::class);
-            try {
-                $orderResource = $shopify->getOrder($orderId);
-                $order = new Order(json_decode(json_encode($orderResource->getAttributes()), false));
-                $job = new EvaluateOrder($order);
-            } catch (NotFoundException $exception) {
-                $this->error(sprintf('No order found for in Shopify for id %s', $orderId));
-                return self::FAILURE;
-            }
-        } else {
-            $job = new EvaluateOrderJobManager(null, $startProcessedAt, $endProcessedAt);
-        }
-
         $startAt = Carbon::now();
-        $batch = Bus::batch($job)
+        $batch = Bus::batch(new EvaluateOrderJobManager(null, $startProcessedAt, $endProcessedAt))
             ->then(function (Batch $batch) use ($startAt) {
                 Log::info(
                     sprintf("EvaluateOrder: completed in %s seconds", $startAt->diffInSeconds())

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Modules\Ecommerce\database\factories\PaymentMethodFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,17 +41,17 @@ class PaymentMethod extends Model
         return PaymentMethodFactory::new();
     }
 
-    public function creditCard()
+    public function creditCard(): BelongsTo
     {
         return $this->belongsTo(CreditCard::class, 'credit_card_id');
     }
 
-    public function address()
+    public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class, 'billing_address_id');
     }
 
-    public function paypalBillingAgreement()
+    public function paypalBillingAgreement(): BelongsTo
     {
         return $this->belongsTo(PaypalBillingAgreement::class, 'paypal_billing_agreement_id');
     }

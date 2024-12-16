@@ -32,8 +32,6 @@ class FeatureFlaggingServiceProvider extends ServiceProvider
 {
     /**
      * UsoraServiceProvider constructor.
-     *
-     * @param Application $application
      */
     public function __construct(Application $application)
     {
@@ -42,8 +40,6 @@ class FeatureFlaggingServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap the application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -81,8 +77,6 @@ class FeatureFlaggingServiceProvider extends ServiceProvider
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
     public function register(): void
     {

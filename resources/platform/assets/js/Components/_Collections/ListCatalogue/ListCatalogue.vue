@@ -1,18 +1,14 @@
 <template>
     <div class="flex flex-column">
-
-        <template v-for="(item, i) in content" :key="'list' + item.id">
+        <template v-if="!isLoading && !collectionStoreLoading">
             <CatalogueListItem
+                v-for="(item, i) in content"
+                :key="'list' + item.id"
                 :index="item.week || i + 1"
                 :item="item"
                 :is-coach="isCoach"
                 :content-type="item.type"
-                :brand="brand"
-                :theme-color="themeColor"
-                :use-theme-color="useThemeColor"
                 :overview="displayItemsAsOverview"
-                :user-id="userId"
-                :is-admin="isAdmin"
                 :display-user-interactions="displayUserInteractions"
                 :content-type-override="contentTypeOverride"
                 :show-numbers="showNumbers"
@@ -24,24 +20,19 @@
                 :destroy-on-list-removal="destroyOnListRemoval"
                 :compact-layout="compactLayout"
                 :is-next-lesson="isNextLesson"
+                @open-challenge-lock-modal="openChallengeLockModal"
             />
 
-            <div id="branch-paths" :key="'branch' + item.id" v-if="branchPathIndex === i && branchPathContent.data" >
+            <div id="branch-paths" v-if="branchPathContent.data" >
                 <!-- Method Paths -->
                 <CatalogueListItem
                     v-for="(branchItem, j) in branchPathContent.data"
                     :key="'branch' + branchItem.id"
                     :index="branchItem.week || j + 1"
                     :item="branchItem"
-                    :is-coach="isCoach"
                     :is-branch-path="true"
-                    :content-type="branchItem.type"
-                    :brand="brand"
-                    :theme-color="themeColor"
-                    :use-theme-color="useThemeColor"
+                    content-type="learning-path-branch"
                     :overview="displayItemsAsOverview"
-                    :user-id="userId"
-                    :is-admin="isAdmin"
                     :display-user-interactions="displayUserInteractions"
                     :content-type-override="contentTypeOverride"
                     :show-numbers="showNumbers"
@@ -56,39 +47,29 @@
                 />
             </div>
         </template>
+        <SkeletonListCatalogueItem v-else v-for="i in 8" :key="i" />
     </div>
+
+    <ChallengeLockedModal v-if="isChallengeLockModalOpen" :date="selectedChallengeDate" @close-modal="closeChallengeLockModal" />
 </template>
 <script setup>
+import { ref } from 'vue';
+import { storeToRefs } from "pinia/dist/pinia";
+import { usePlatformStore } from "@stores/platform";
+import { useCollectionStore } from "@stores/collection";
+
 import CatalogueListItem from "./ListCatalogueItem";
+import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
+import ChallengeLockedModal from '@collections/Modal/ChallengeLockedModal';
 
 const props = defineProps({
     content: {
         type: Array,
         default: () => [],
     },
-    themeColor: {
-        type: String,
-        default: () => 'drumeo',
-    },
-    useThemeColor: {
-        type: Boolean,
-        default: () => true,
-    },
     isCoach: {
         type: Boolean,
         default: () => false,
-    },
-    userId: {
-        type: String,
-        default: () => '',
-    },
-    isAdmin: {
-        type: Boolean,
-        default: () => false,
-    },
-    brand: {
-        type: String,
-        default: () => 'drumeo',
     },
     cardType: {
         type: String,
@@ -156,4 +137,22 @@ const props = defineProps({
         default: () => false,
     },
 })
+
+const platformStore = usePlatformStore();
+const collectionStore = useCollectionStore();
+
+const { loading: collectionStoreLoading } = storeToRefs(collectionStore);
+const { isLoading } = storeToRefs(platformStore);
+
+const isChallengeLockModalOpen = ref(false);
+const selectedChallengeDate = ref(null);
+
+const openChallengeLockModal = (date) => {
+    selectedChallengeDate.value = date;
+    isChallengeLockModalOpen.value = true;
+}
+
+const closeChallengeLockModal = () => {
+    isChallengeLockModalOpen.value = false;
+}
 </script>

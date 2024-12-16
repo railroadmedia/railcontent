@@ -19,7 +19,7 @@ class PackBonusExpirationDateResyncTool extends Command
     public function handle(
         UserProductToUserContentPermissionListener $userProductToUserContentPermissionListener,
         UserMembershipFieldsService $userMembershipFieldsService
-    ) {
+    ): void {
         $this->info("Processing PackBonusExpirationDateResyncTool");
 
         $productId = $this->argument('productId');

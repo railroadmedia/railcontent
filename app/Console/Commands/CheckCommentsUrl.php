@@ -19,7 +19,7 @@ class CheckCommentsUrl extends Command
     public function handle(
         CommentRepository $commentRepository,
         CommentService $commentService
-    ) {
+    ): void {
         // Disable decorators
         SemesterPackDecorator::$skip = true;
         PackDecorator::$skip = true;
