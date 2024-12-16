@@ -20,6 +20,7 @@ use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 use Railroad\Railcontent\Services\UserPermissionsService;
+use Railroad\Railchat\Services\RailchatService;
 
 class ContentMetadataController extends Controller
 {
@@ -27,6 +28,7 @@ class ContentMetadataController extends Controller
         private readonly ProductProviderInterface $productProvider,
         private readonly UserPermissionsService $userPermissionsService,
         private readonly ContentHierarchyService $contentHierarchyService,
+        private readonly RailchatService $railchatService
     ) {
     }
 
@@ -168,6 +170,26 @@ class ContentMetadataController extends Controller
             'vimeo_video_id' => $content['vimeo_video_id'] ?? null,
             'video_playback_endpoints' => $content['video_playback_endpoints'] ?? [],
             'length_in_seconds' => $content['length_in_seconds'] ?? 0,
+        ];
+    }
+
+    public function getChatData()
+    {
+        $user = user();
+        $token = $this->railchatService->getUserToken(
+            $user->id,
+            $user->display_name,
+            $user->profile_picture_url,
+            url()->route('platform.profile.dashboard', [$user->id]),
+            $user->isAdmin(),
+            $user->access_level
+        );
+
+        return [
+            'apiKey' => config('railchat.drumeo.get_stream_credentials')['key'] ?? '',
+            'chatChannelName' => config('railchat.drumeo.chat_channel_name'),
+            'questionsChannelName' => config('railchat.drumeo.questions_channel_name'),
+            'token' => $token,
         ];
     }
 }
