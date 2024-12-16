@@ -622,6 +622,7 @@ class SanityGateway
                         'logo': logo.asset->url,
                         'content': content->{
                           _type,
+                          'registration_url': '/' + brand + '/enrollment/' + slug.current,
                           $fieldsString
                         },
                   },
@@ -708,8 +709,9 @@ class SanityGateway
         if ($type == 'challenge') {
             $pageParams['isChallenge'] = true;
         }
+        $contentUrl = $type == 'challenge' ? $content['registration_url'] : $content['web_url_path'];
         $contentCard['button'] = [
-            'web_url_path' => $content['web_url_path'],
+            'web_url_path' => $contentUrl,
             'page_type' => $pageType,
             'page_params' => $pageParams,
         ];
