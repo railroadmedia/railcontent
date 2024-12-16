@@ -211,8 +211,7 @@ const challengeTitle = computed(() => {
 })
 
 const startDate = computed(() => {
-    const utc = getDateFromIso(props.challenge.start_date);
-    return utc;
+    return getDateFromIso(props.challenge.start_date);
 })
 
 const actionText = computed(() => {
