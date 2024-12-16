@@ -194,6 +194,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
                                 isLocked: false,
                                 challenge: $challenge,
                             );
+                            sleep(1);
                         } catch (\Throwable $exception) {
                             $this->info("Error starting challenge user $userId challenge $challengeId");
                             $this->info($exception->getMessage());
