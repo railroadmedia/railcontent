@@ -116,6 +116,7 @@ class ContentMetadataController extends Controller
                     // otherwise, apply the limit to the whole query (if it's there)
                     fn ($query) => $query->when(!is_null($limit), fn ($query) => $query->limit($limit))
                 )
+                ->orderByDesc('updated_on')
                 ->pluck('content_id');
 
         return response()->json([$progressState->value => $results]);

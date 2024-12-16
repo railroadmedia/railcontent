@@ -2493,7 +2493,6 @@ return [
         'challenge-part',
     ],
     'homeInProgressContentTypes' => [
-        'course',
         'play-along',
         'coach-stream',
         'song',
@@ -2503,7 +2502,6 @@ return [
         'rudiment',
         'unit',
         'unit-part',
-        'course',
         'course-part',
         'song',
         'song-part',

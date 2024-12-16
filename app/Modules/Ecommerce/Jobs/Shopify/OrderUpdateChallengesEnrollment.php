@@ -27,7 +27,7 @@ class OrderUpdateChallengesEnrollment extends WebhookChildJob
         $lineItems = $this->contents['line_items'];
         $shopifyCustomerId = $this->contents['customer']['id'];
         $skus = Arr::pluck($lineItems, 'sku');
-        $orderProducts = $productService->getProductsBySkus([$skus]);
+        $orderProducts = $productService->getProductsBySkus($skus);
         $orderProductIds = $orderProducts->pluck('id')->toArray();
         $sanityChallenges = $sanityGateway->getProductInformationForAllChallenges();
         $user = $userService->getUserByShopifyCustomerId($shopifyCustomerId);
