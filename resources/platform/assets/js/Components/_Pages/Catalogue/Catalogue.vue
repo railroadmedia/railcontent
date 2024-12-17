@@ -128,7 +128,8 @@
       collectionStore.setDefaults({
         tabOptions: tabData.value,
         queryType: queryTypeConverter(props.lessonType),
-        ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true })
+        ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true }),
+        ...(props.lessonType === 'Recommendation' && { fetchType: 'recommendation' }),
       });
     } catch (error) {
         console.error('Error fetching continue section data:', error);
