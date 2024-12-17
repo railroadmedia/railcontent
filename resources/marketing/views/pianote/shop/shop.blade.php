@@ -60,6 +60,7 @@
 
 @section('x-data')
     filter: '{{ $category !== 'shop' ? $category : 'all' }}',
+    isIndexPage: {{ $isIndexPage ?? 'true' }},
 @endsection
 
 @section('layout-header')
@@ -155,7 +156,7 @@
             <div class="container" x-data="{ showAll: false }">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-globe-pointer text-{{ $brand }} mr-1"></i> Digital Deals</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
-                    :class="{ 'show-all': showAll }">
+                     :class="{ 'show-all': showAll || (!isIndexPage && filter !== 'all') || filter === 'lessons' }">
 {{--                @include('_partials.components.shop.product-card', [--}}
 {{--                    "badge" => "7-Day Free Trial",--}}
 {{--                      "price" => 240,--}}
@@ -221,7 +222,7 @@
 {{--                        'soldOut' => false,--}}
 {{--                    ])--}}
             </div>
-                <div class="-mt-3 sm:-mt-5 lg:-mt-8 sm:mt- lg:mb-10 text-center">
+                <div class="-mt-3 sm:-mt-5 lg:-mt-8 lg:mb-10 text-center" x-show="isIndexPage && filter === 'all'">
                     <span
                         @click="showAll = true"
                         x-show="!showAll"
@@ -322,7 +323,7 @@
             <div class="container" x-data="{ showAll: false }">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Physical Products</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
-                    :class="{ 'show-all': showAll }">
+                    :class="{ 'show-all': showAll || (!isIndexPage && filter !== 'all') || filter === 'accessories' }">
                 @foreach($accessories as $accessory)
                     @include('_partials.components.shop.product-card', [
                         "badge" => $accessory->badge_text,
@@ -368,7 +369,7 @@
                         ])
                     </div>
             </div>
-                <div class="-mt-3 sm:-mt-5 lg:-mt-8 sm:mt- lg:mb-10 text-center">
+                <div class="-mt-3 sm:-mt-5 lg:-mt-8 lg:mb-10 text-center" x-show="isIndexPage && filter === 'all'">
                     <span
                         @click="showAll = true"
                         x-show="!showAll"

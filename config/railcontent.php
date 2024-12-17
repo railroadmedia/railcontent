@@ -2518,7 +2518,6 @@ return [
         'song-tutorial',
         'song-tutorial-children',
         'workout',
-        'challenge-part',
     ],
     'dashboardInProgressContentTypes' => [
         'course',

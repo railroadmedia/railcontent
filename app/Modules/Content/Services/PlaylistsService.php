@@ -248,7 +248,7 @@ class PlaylistsService
      * @param mixed|null                          $itemIdToCheck   Optional item ID to check if it exists in the playlists.
      * @return array                              An array containing playlist data and metadata, including filter options.
      */
-    public function getPlaylists(mixed $sort, ?Brand $brand, mixed $term, mixed $limit, mixed $page, mixed $itemIdToCheck = null): array
+    public function getPlaylists(mixed $sort, ?Brand $brand, mixed $term, mixed $limit, mixed $page, mixed $itemIdToCheck = null, mixed $categories = null): array
     {
         $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn    = trim($sort, '-');
@@ -261,6 +261,7 @@ class PlaylistsService
         $playlists    = UserPlaylist::query()
             ->where('railcontent_user_playlists.user_id', $user->id)
             ->when(!is_null($brand), fn($query) => $query->ofBrand($brand))
+            ->when(!is_null($categories), fn($query) => $query->ofCategories($categories))
             ->searchTerm($term)
             ->sortBy($orderByColumn, $orderByDirection)
             ->paginate($limit, ['*'], 'page', $page);

@@ -45,8 +45,9 @@ class PlaylistsMetadataController extends Controller
         $sort             = $request->get('sort', '-created_at');
         $term = $request->get('term');
         $itemIdToCheck = $request->get('content_id');
+        $categories = $request->get('categories', null);
 
-        $results = $this->playlistsService->getPlaylists($sort, $brand, $term, $limit, $page, $itemIdToCheck);
+        $results = $this->playlistsService->getPlaylists($sort, $brand, $term, $limit, $page, $itemIdToCheck, $categories);
 
         return response()->json($results);
     }
@@ -834,5 +835,19 @@ the pin icon on or off.',
                                     'success' => true,
                                     'message' => 'This playlist has been reported.',
                                 ], 201);
+    }
+
+    public function playback($playlistId, Request $request): JsonResponse
+    {
+        $playbackItemId = $this->playlistsService->getPlaylistNextItem($playlistId);
+
+        if (!$playbackItemId) {
+            return response()->json([
+                                        'success' => false,
+                                        'message' => 'Playlist not exists.',
+                                    ], 404);
+        }
+
+        return $this->getPlaylistItem($playbackItemId, $request);
     }
 }

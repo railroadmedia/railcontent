@@ -64,10 +64,32 @@ class ChallengesService
             ->inRandomOrder()
             ->limit($count)
             ->get();
+
+        $resultsCount = count($results);
+        $enrolledCount = count($enrolledUserIds);
+        if ($resultsCount < 3) {
+            $fillerCount = 3 - $resultsCount;
+            $fillerResults = User::query()
+                ->whereIn('id', $this->getFillerAccountIds())
+                ->limit($fillerCount)
+                ->inRandomOrder()
+                ->get();
+            $results = $results->concat($fillerResults);
+            if ($enrolledCount < 3) {
+                $enrolledCount = 3;
+            }
+        }
         return [
             'users' => $results,
-            'total' => count($enrolledUserIds),
+            'total' => $enrolledCount,
         ];
+    }
+
+    // Return known dummy account ids to populate the user array in case there are no existing users
+    private function getFillerAccountIds() : array
+    {
+        //
+        return [4,5,7,8,136,145,5814,6747,6885,28224,75158,87011,96326,102905,149628,149629,149630,149632,149641,150243,150244,150245,150246,150247,150250,150259,150270,150378,150447,150458,150466,150474,150475,150478,150481,151112,151155,151917,152472,153715,154064,154138,154713,155577,155762,156169,156171,164416,164418,164681,166859,166904,166906,166907,166951,173259,245201,272444,274569,293043,298176,298348,314690,318009,321592,328363,340756,343979,344840,347345,349001,349574,350636,356084,360053,360551,361772,365658,388242,388344,389536,389914,391264,392696,393357,393449,394753,396653,397568,397822,398008,401282,402454,402486,403844,404255,406398,407824,412338,414874];
     }
 
     /**

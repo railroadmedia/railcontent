@@ -245,7 +245,7 @@ export function getHeaderData(catalogueMeta, brand, askQuestionRecipient, emailL
     if (lessonType === 'Recommendation') {
       return catalogueTypes[lessonType];
     }
-  
+    
     return catalogueTypes[catalogueMeta.name] || {
       type: 'generic',
       title: catalogueMeta.name,

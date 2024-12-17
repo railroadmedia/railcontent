@@ -67,6 +67,8 @@ export default class ContentModel {
     get postInstructor() {
         if(this.post.artist_name) return this.post.artist_name; //Does not account for multiples..
 
+        if(this.post.artist) return this.post.artist; //Does not account for multiples..
+
         const instructor = this.getPostField('instructor') || this.post.instructors;
 
         if(Array.isArray(instructor)){
@@ -111,7 +113,10 @@ export default class ContentModel {
             return `${parsedDuration} mins`;
         } else if (this.post?.length_in_seconds) {
             const duration = this.post?.length_in_seconds;
-
+            const parsedDuration = Math.round(Duration.fromMillis((duration * 1000)).as('minutes'));
+            return `${parsedDuration} mins`;
+        } else if (this.post?.fields?.find(field => field.key === 'length_in_seconds')) {
+            const duration = parseInt(this.post?.fields?.find(field => field.key === 'length_in_seconds').value, 10);
             const parsedDuration = Math.round(Duration.fromMillis((duration * 1000)).as('minutes'));
             return `${parsedDuration} mins`;
         }

@@ -131,4 +131,9 @@ class UserPlaylist extends Model
             ->groupBy('category');
     }
 
+    public function scopeOfCategories(Builder $query, array $categories): Builder
+    {
+        return $query->whereIn("{$this->table}.category", $categories);
+    }
+
 }

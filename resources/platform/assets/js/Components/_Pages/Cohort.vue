@@ -310,11 +310,18 @@
     <!-- Trailer Modal -->
     <VideoModal v-if="openTrailer" :videoUrl="cohort['cohort_trailer']" @onCloseModal="openTrailer = false" />
 
-    <ChallengeNotificationModal v-if="openChallengeNotificationModal && !isFromApp" :challengeType="challengeType" :challenge="{
-        ...cohort,
-        dark_mode_logo_url: cohort['dark_mode_logo'],
-        light_mode_logo_url: cohort['light_mode_logo'],
-    }" :challenge-type="challengeType" @modal-close="closeNotificationModal" />
+    <ChallengeNotificationModal
+        v-if="openChallengeNotificationModal && !isFromApp"
+        :challengeType="challengeType"
+        :challenge="{
+            ...cohort,
+            dark_mode_logo_url: cohort['dark_mode_logo'],
+            light_mode_logo_url: cohort['light_mode_logo'],
+        }"
+        :challenge-type="challengeType"
+        @modal-close="closeNotificationModal"
+        :hide-x-icon="true"
+    />
     <ChallengeActionModal v-if="challengeActionModalType && !isFromApp" :modal-type="challengeActionModalType"  @close-modal="closeActionModal"
       :challenge="{
         dark_mode_logo_url: cohort['dark_mode_logo'],
@@ -322,7 +329,8 @@
         id: cohort['id'],
         title: cohort['title'],
         next_lesson: cohort['next_lesson'],
-        web_url_path: cohort['course_url']
+        web_url_path: cohort['course_url'],
+        last_completion_date: cohort['last_completion_date'],
       }"
       @post-retake="handlePostRetake"
     />

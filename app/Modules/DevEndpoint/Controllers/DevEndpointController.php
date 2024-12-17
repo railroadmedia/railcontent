@@ -11,6 +11,7 @@ use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
 use App\Modules\Content\Services\ChallengesService;
+use App\Modules\Content\Services\V1\CarouselServiceV1;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -49,29 +50,37 @@ class DevEndpointController extends Controller
         private UserService $userService,
         private SanityGateway $sanityGateway,
         private RailcontentV2DataSyncingService $dataSyncingService,
+        private CarouselServiceV1 $carouselServiceV1,
     ) {
     }
 
 
     public function handleRequest(Request $request, $arg1 = null)
     {
+        return $this->carouselServiceV1->getCarouselCards('drumeo');
         if ($arg1 == 'challenges') {
             return $this->handleChallengesEndpoints($request);
         }
         return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
     }
 
+    private function deleteThingsFromSanity($queryString)
+    {
+        $temp = "_type == 'onboarding-content-card'";
+        $query = ["query" => "*[$queryString]"];
+        $this->sanityGateway->sanity->delete($query);
+    }
+
     private function runArtisanCommand()
     {
-        return 'We did not run anything but you can use this to debug commands';
+        //return 'We did not run anything but you can use this to debug commands';
         \Artisan::call('sanity:import-content', [
-            '--id' => 402199,
             'destination' => 'development',
-            'type' => 'challenge',
+            'type' => 'onboarding-card',
         ]);
         return '';
     }
-    
+
     private function handleChallengesEndpoints($request): string
     {
         $action = $request->get('action');

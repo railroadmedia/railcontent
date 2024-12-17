@@ -354,7 +354,7 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
                             <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block items-center">
                                 <div class="w-24 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
+                                    <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/quality=95/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
                                 </div>
                                 <div class="pl-4 sm:pl-0 text-left sm:text-center">
                                     <p class="mb-1 sm:mb-0 sm:mt-2 leading-normal sm:leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
@@ -368,7 +368,7 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
                             <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block items-center">
                                 <div class="w-24 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
+                                    <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/quality=95/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
                                 </div>
                                 <div class="pl-4 sm:pl-0 text-left sm:text-center">
                                     <p class="mb-1 sm:mb-0 sm:mt-2 leading-normal sm:leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
@@ -382,7 +382,7 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
                             <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block items-center">
                                 <div class="w-24 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
+                                    <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/quality=95/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
                                 </div>
                                 <div class="pl-4 sm:pl-0 text-left sm:text-center">
                                     <p class="mb-1 sm:mb-0 sm:mt-2 leading-normal sm:leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
@@ -396,7 +396,7 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
                             <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block items-center">
                                 <div class="w-24 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
+                                    <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/quality=95/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
                                 </div>
                                 <div class="pl-4 sm:pl-0 text-left sm:text-center">
                                     <p class="mb-1 sm:mb-0 sm:mt-2 leading-normal sm:leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>

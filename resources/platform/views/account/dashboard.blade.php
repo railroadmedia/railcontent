@@ -3,7 +3,7 @@
     $isCurrentUser = user()->id === $dashboardUser->id;
 
     $headerData = [
-        'title' => $dashboardUser->display_name,
+        'title' => $dashboardUser->isDeleted() ? 'Account Disabled' : $dashboardUser->display_name,
         'description' => null,
         'heroImg' => $dashboardUser->profile_picture_url,
         'heroImgClasses' => 'user-avatar' . ' ' . (in_array($currentUser['access_level'], ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '') . ' ' . $brand . ' ' . $currentUser['access_level'],

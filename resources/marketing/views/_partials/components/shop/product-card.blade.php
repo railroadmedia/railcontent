@@ -26,7 +26,7 @@ x-data="{ open: false }">
         @if(!empty($thumbnailFull))
             background-image:url('{{ $thumbnailFull }}');
         @else
-            background-image:url('https://www.musora.com/musora-cdn/image/width=520,quality=95/{{ $thumbnail }}');
+            background-image:url('https://www.musora.com/cdn-cgi/image/width=520,quality=95/{{ $thumbnail }}');
         @endif
         "
     >
@@ -56,7 +56,7 @@ x-data="{ open: false }">
 
         @if(!empty($logo))
             <div class="z-20 absolute bottom-0 left-0 right-0 px-4 py-3 text-center">
-                <img class="w-auto h-auto" style="max-height:55px;" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $logo }}"
+                <img class="w-auto h-auto" style="max-height:55px;" src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/{{ $logo }}"
                     alt="{{ $title }} logo" @if(!empty($fetch)) fetchpriority="high" @endif >
             </div>
             <div class="inset-0 absolute z-10" style="background:linear-gradient(to bottom, transparent 66%, rgba(0,0,0,0.75));"></div>
