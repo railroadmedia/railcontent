@@ -124,12 +124,16 @@ export const useCollectionStore = defineStore({
                     })
                 },
                 'new-release': async() => {
-                    return await fetchNewReleases( userStore.brand, {
+                    const data = await fetchNewReleases(userStore.brand, {
                         page: this.tabData[this.filter.activeTab].currentPage,
                         limit: this.filter.limit,
                         sort: this.filter.sort,
                         searchTerm: this.filter.searchTerm,
                     })
+
+                    return {
+                        entity: data
+                    }
                 },
                 'recommendation': async() => {
                     const data = await axios.get('/railcontent/recommended', {
@@ -352,20 +356,15 @@ export const useCollectionStore = defineStore({
         },
 
         async setData(response, replace) {
-            const userStore = useUserStore();
             if (response) {
-                let isNewRelease = this.fetchType === 'new-release'; 
                 if (replace) {
-                    this.data = isNewRelease ? [...response] : [...response.entity];
+                    this.data = [...response.entity];
                 } else {
-                    this.data = isNewRelease ? [...this.data, ...response] : [...this.data, ...response.entity];
+                    this.data = [...this.data, ...response.entity];
                 }
-                let hasMorePages;
-                if(isNewRelease) {
-                    hasMorePages = response.length >= this.filter.limit;
-                } else {
-                    hasMorePages = response.entity.length >= this.filter.limit;
-                }
+
+                const hasMorePages = response.entity.length >= this.filter.limit;
+
                 const nextPage = Math.ceil(
                     this.data.length / this.filter.limit
                 ) + (hasMorePages ? 1 : 0);

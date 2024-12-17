@@ -71,7 +71,7 @@
     breadcrumbs: Array,
     catalogueType: String,
     emailLogoLink: String,
-    isNewReleases: Boolean, 
+    isNewReleases: Boolean,
     lessonType: String,
     sessionToken: String,
     showInProgress: Boolean,
@@ -133,9 +133,8 @@
       collectionStore.setDefaults({
         tabOptions: tabData.value,
         queryType: queryTypeConverter(props.lessonType),
-        fetchType: props.isNewReleases ? 'new-release' : '',
         ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true }),
-        ...(props.lessonType === 'Recommendation' && { fetchType: 'recommendation' }),
+        ...(props.lessonType === 'Recommendation' ? { fetchType: 'recommendation' } : props.isNewReleases && { fetchType: 'new-release' }),
       });
     } catch (error) {
         console.error('Error fetching continue section data:', error);
