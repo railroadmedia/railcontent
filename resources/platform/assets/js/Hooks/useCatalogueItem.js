@@ -10,11 +10,11 @@ export default function useCatalogueItem(props) {
 
     const is_added = computed(() => props.item.is_added_to_primary_playlist);
 
-    const progress_percent = ref(0);
+    const progress = ref(0);
 
     // Progress Percentage
     getProgressPercentage(props.item.id).then(value => {
-        progress_percent.value = value;
+        progress.value = value;
     }).catch(error => {
         console.log('error fetching progress', error)
     })
@@ -49,7 +49,7 @@ export default function useCatalogueItem(props) {
     });
 
     const releaseDate = computed(() => {
-        if(props.item.type === 'challenge-part'){
+        if(isChallenge.value){
             // challenges dates are returned in ISO format with offset for the users current timezone
             return getDateFromIso(props.item.unlock_date);
         } else if (props.item.quarter_published) {
@@ -60,11 +60,11 @@ export default function useCatalogueItem(props) {
     });
 
     const isCompleted = computed(() => {
-        if(props.item.type === 'challenge-part'){
+        if(isChallenge.value){
             return props.item.completed;
         }
 
-        return progress_percent.value === 100;
+        return progress.value === 100;
     });
 
     const completedIcon = computed(() => props.item.type === 'course' ? 'fa-trophy' : 'fa-check-circle');
@@ -132,6 +132,18 @@ export default function useCatalogueItem(props) {
             brand: userStore.brand,
             post: props.item,
         });
+    });
+
+    const isChallenge = computed(() => {
+        return props.item.type === 'challenge-part';
+    })
+
+    const progress_percent = computed(() => {
+        if(isChallenge.value){
+            return isCompleted.value ? 100 : 0;
+        }
+
+        return progress.value;
     });
 
     return {
