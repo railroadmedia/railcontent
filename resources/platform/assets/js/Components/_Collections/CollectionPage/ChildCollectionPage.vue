@@ -97,8 +97,6 @@ const tabData = computed(() => {
 })
 
 onBeforeMount(async() => {
-    console.log('before mount', props.contentType, props.collectionName);
-
     const data = await collectionStore.setDefaults({
         tabOptions: tabData.value,
         fetchType: 'childCollection',

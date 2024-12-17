@@ -132,9 +132,10 @@
       // Set default collection store values
       collectionStore.setDefaults({
         tabOptions: tabData.value,
+        queryType: queryTypeConverter(props.lessonType),
         fetchType: props.isNewReleases ? 'new-release' : '',
-        queryType: queryTypeConverter(contentType.value),
-        ...(contentType.value === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true })
+        ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true }),
+        ...(props.lessonType === 'Recommendation' && { fetchType: 'recommendation' }),
       });
     } catch (error) {
         console.error('Error fetching continue section data:', error);
