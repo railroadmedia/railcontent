@@ -1,10 +1,10 @@
 <template>
-    <InfoModal :selfContained="true" class-override="tw-max-w-[510px] tw-w-full" :hide-x-icon="true" :disable-overlay-click="true" @onClose="emit('modalClose')">
+    <InfoModal :selfContained="true" class-override="tw-max-w-[510px] tw-w-full" :hide-x-icon="hideXIcon" :disable-overlay-click="hideXIcon" @onClose="emit('modalClose')">
         <div class="tw-flex tw-flex-col tw-justify-center dark:tw-text-white tw-text-center">
             <!-- Dark mode Logo -->
-            <img class="tw-h-24 tw-object-contain tw-mb-5 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge?.dark_mode_logo_url}`" alt="challenge dark mode logo" />
+            <img class="tw-h-24 tw-object-contain tw-mb-5 tw-hidden dark:tw-block" :class="!hideXIcon ? '-tw-mt-[50px]' : ''" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge?.dark_mode_logo_url}`" alt="challenge dark mode logo" />
             <!-- Light mode Logo -->
-            <img class="tw-h-24 tw-object-contain tw-mb-5 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge?.light_mode_logo_url}`" alt="challenge light mode logo" />
+            <img class="tw-h-24 tw-object-contain tw-mb-5 dark:tw-hidden" :class="!hideXIcon ? '-tw-mt-[50px]' : ''" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge?.light_mode_logo_url}`" alt="challenge light mode logo" />
 
             <!-- Step 1 -->
             <template v-if="step === 1">
@@ -76,6 +76,10 @@ const props = defineProps({
         default: 0,
     },
     isFromCarousel: {
+        type: Boolean,
+        default: false,
+    },
+    hideXIcon: {
         type: Boolean,
         default: false,
     },
