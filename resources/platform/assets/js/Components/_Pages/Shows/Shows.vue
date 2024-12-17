@@ -64,7 +64,6 @@ const breadcrumbs = [
 onBeforeMount(async() => {
     const data = await fetchShowsData('drumeo');
     shows.value = data;
-    console.log(data)
 
     platformStore.setLoadingState(false);
 })

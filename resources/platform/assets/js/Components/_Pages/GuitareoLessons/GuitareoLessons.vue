@@ -200,8 +200,6 @@ onBeforeMount( ()=> {
         courses.value = coursesData.entity;
         packs.value = packData.entity;
 
-        console.log(packs.value);
-
         platformStore.setLoadingState(false);
     }
 

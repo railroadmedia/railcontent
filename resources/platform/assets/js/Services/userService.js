@@ -94,8 +94,7 @@ export async function fetchSongsInProgress(userId, brand, token) {
         const response = await fetch(url, { headers });
         const result = await response.json();
         if(result){
-        console.log('fetchSongsInProgress', result);
-        return result;
+            return result;
         } else {
         console.log('result not json')
         }
@@ -104,7 +103,7 @@ export async function fetchSongsInProgress(userId, brand, token) {
         return null;
     }
 }
-  
+
 //SONG IS COMPLETED BY CURRENT USER
 export async function fetchCurrentSongComplete(userId, content_id, token) {
     const url = `/content/user_progress/${userId}?content_ids[]=${content_id}`;
@@ -125,7 +124,7 @@ export async function fetchCurrentSongComplete(userId, content_id, token) {
         return null;
     }
 }
-  
+
 //SONG IS COMPLETED BY CURRENT USER
 export async function fetchAllCompletedStates(userId, contentIds, token) {
     const url = `/content/user_progress/${userId}?${contentIds.map(id => `content_ids[]=${id}`).join('&')}`;
@@ -150,4 +149,3 @@ export async function fetchAllCompletedStates(userId, contentIds, token) {
         return null;
     }
 }
-  
