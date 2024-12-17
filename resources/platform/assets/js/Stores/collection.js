@@ -3,7 +3,7 @@ import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
-import { fetchAll, fetchCoachLessons, fetchAllFilterOptions, fetchMetadata } from 'musora-content-services';
+import { fetchAll, fetchCoachLessons, fetchNewReleases, fetchAllFilterOptions, fetchMetadata } from 'musora-content-services';
 import { useLessonHistoryPageData } from '@hooks/pages/useLessonHistoryPageData';
 import { useChildCollectionPageData } from '@hooks/pages/useChildCollectionPageData';
 
@@ -122,9 +122,17 @@ export const useCollectionStore = defineStore({
                         searchTerm: this.filter.searchTerm,
                     })
                 },
+                'new-release': async() => {
+                    return await fetchNewReleases( userStore.brand, {
+                        page: this.tabData[this.filter.activeTab].currentPage,
+                        limit: this.filter.limit,
+                        sort: this.filter.sort,
+                        searchTerm: this.filter.searchTerm,
+                    })
+                },
             }
 
-            if(endpoints[type]){
+            if( endpoints[type] ){
                 return await endpoints[type]();
             } else {
                 let progress = 'all';
@@ -329,12 +337,18 @@ export const useCollectionStore = defineStore({
         async setData(response, replace) {
             const userStore = useUserStore();
             if (response) {
+                let isNewRelease = this.fetchType === 'new-release'; 
                 if (replace) {
-                    this.data = [...response.entity];
+                    this.data = isNewRelease ? [...response] : [...response.entity];
                 } else {
-                    this.data = [...this.data, ...response.entity];
+                    this.data = isNewRelease ? [...this.data, ...response] : [...this.data, ...response.entity];
                 }
-                const hasMorePages = response.entity.length >= this.filter.limit;
+                let hasMorePages;
+                if(isNewRelease) {
+                    hasMorePages = response.length >= this.filter.limit;
+                } else {
+                    hasMorePages = response.entity.length >= this.filter.limit;
+                }
                 const nextPage = Math.ceil(
                     this.data.length / this.filter.limit
                 ) + (hasMorePages ? 1 : 0);
