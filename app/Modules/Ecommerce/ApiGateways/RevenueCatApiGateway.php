@@ -96,9 +96,13 @@ class RevenueCatApiGateway
 
         // empty result means success for some reason...
         if (!empty($result->errors) || empty($result->subscriber)) {
+            $errorMessage = $result->message ?? 'Revoking the subscription was unsuccessful.';
+
             Log::debug(
                 'RevenueCat REVOKE API call failed: '.curl_error($ch).' - '.var_export($result, true)
             );
+            curl_close($ch);
+            return $errorMessage;
         }
 
         curl_close($ch);
