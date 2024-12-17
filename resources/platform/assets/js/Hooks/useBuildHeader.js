@@ -1,6 +1,5 @@
 export function useBuildHeader(progressPercent) {
     const buildHeader = (contentType, result, progressPercent) => {
-        console.log('result', result)
         const header = {
             type: contentType,
             title: result.title,
