@@ -82,11 +82,11 @@ const page = ref(1);
 const cardNum = ref(5);
 
 const name = computed(() => {
-    return props.item.name || '';
+    return props.item.name || props.item.fields?.find(field => field.key === 'name')?.value ||'';
 })
 
 const thumb = computed(() => {
-    return props.item.head_shot_picture_url || '';
+    return props.item.head_shot_picture_url || props.item.data?.find(data => data.key === 'head_shot_picture_url')?.value || '';
 })
 
 const isWorkout = computed(() => {
