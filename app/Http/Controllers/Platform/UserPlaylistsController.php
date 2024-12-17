@@ -73,9 +73,9 @@ class UserPlaylistsController extends BaseController
 
         $playlistItems = $this->userPlaylistService->getPlaylistItems($playlist['brand'], $playlist['id']);
         // filter out any unpublished items
-        $playlistItems = $playlistItems->reject(function (array $playlistItem) {
+        $playlistItems = $playlistItems->filter(function (array $playlistItem) {
             $status = $playlistItem['status'] ?? null;
-            return $status === Status::STATUS_DRAFT->value;
+            return $status && Status::isVisibleForPlaylists(Status::from($status));
         });
 
         $items = new ContentFilterResultsEntity([
