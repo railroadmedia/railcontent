@@ -7,7 +7,7 @@
     >
         <p v-if="isFromLesson">Come back tomorrow to maintain your streak!</p>
         <div class="tw-flex tw-justify-end tw-mt-5">
-            <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white" @click="$emit('closeModal')">Okay!</MuButton>
+            <MuButton @click="$emit('closeModal')">Okay!</MuButton>
         </div>
     </InfoModal>
 </template>

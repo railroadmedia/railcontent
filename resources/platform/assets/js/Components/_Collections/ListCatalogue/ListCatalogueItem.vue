@@ -114,7 +114,7 @@
                 <!-- Difficulty Label -->
                 <DifficultyLabel v-if="mappedData.difficulty" class="xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
             </p>
-            <div v-if="isBonus" class="tw-flex tw-justify-start tw-mt-0.5">
+            <div v-if="isBonus" class="tw-flex tw-justify-start tw-mt-1">
                 <div :class="`tw-bg-${brand} tw-text-[11px] tw-text-white tw-px-2 tw-py-0.5 tw-rounded-full`">Bonus</div>
             </div>
         </div>
