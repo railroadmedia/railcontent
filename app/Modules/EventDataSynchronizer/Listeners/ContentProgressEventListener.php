@@ -348,6 +348,27 @@ class ContentProgressEventListener
             Log::warning("Content $contentId not found");
             return;
         }
+
+        if ($mediaPlaybackSession->secondsWatchedSinceLastTrack > 0) {
+            $user = user();
+
+            /**
+             * NOTE: TP-623: track minutes as well as we run the migration, so users won't lose their progress
+             * Once the migration is run (as many times as we want) we can safely remove this
+             */
+            $userBrandMinutesPracticed = $user->brand_minutes_practiced;
+            $initialValue = $userBrandMinutesPracticed[$content->brand] ?? 0;
+            $min = ($initialValue + round($mediaPlaybackSession->secondsWatchedSinceLastTrack / 60, 0));
+            $userBrandMinutesPracticed[$content->brand] = $min;
+            $user->brand_minutes_practiced = $userBrandMinutesPracticed;
+
+            $userBrandSecondsPracticed = $user->brand_seconds_practiced;
+            $initialValue = $userBrandSecondsPracticed[$content->brand] ?? ($min * 60);
+            $userBrandSecondsPracticed[$content->brand] = $initialValue + $mediaPlaybackSession->secondsWatchedSinceLastTrack;
+            $user->brand_seconds_practiced = $userBrandSecondsPracticed;
+            $user->save();
+        }
+
         switch ($mediaType) {
             case MediaTypeEnum::SoundSliceAssignment:
                 $this->handleMediaPlaybackTrackedSoundSlice($userId, $content, $mediaPlaybackSession);
@@ -523,14 +544,6 @@ class ContentProgressEventListener
         Content $content,
         MediaPlaybackSession $mediaPlaybackSession
     ): void {
-        if ($mediaPlaybackSession->seconds_played > 0) {
-            $userBrandMinutesPracticed = user()->brand_minutes_practiced;
-            $initialValue = $userBrandMinutesPracticed[$content->brand] ?? 0;
-            $min = ($initialValue + round($mediaPlaybackSession->seconds_played / 60, 0));
-            $userBrandMinutesPracticed[$content->brand] = $min;
-            user()->brand_minutes_practiced = $userBrandMinutesPracticed;
-            user()->save();
-        }
         $maxMinutesToTrack = 600;
 
         $totalTimeWatchedSeconds = $this->mediaPlaybackRepository->sumTotalPlayed(
