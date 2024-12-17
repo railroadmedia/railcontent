@@ -429,7 +429,6 @@
     @else
         @include('musora.sales.components.header-section', [
             'promoHeader' => true,
-            'BFheader' => 'Join today and get a free practice pad,<br class="inline sm:hidden"> sticks, and 3 digital courses.',
             'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
             'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> popular songs and unlimited personal support.',
             'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/jan-thumb-no-badge.webp',
@@ -524,37 +523,30 @@
 
     @elseif(!empty($promoVersion))
         @php
-            $targetSkus = ['quietpad', 'Drumeo-VaterSticks', '30-day-drummer-4', '30-day-independence', '30-day-double-bass'];
+            $bonuses = [
+                [
+                    'imageFull' => true,
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/bafe2908-b615-4892-a621-d246828f8cb4-30day-chops-cart.jpg',
+                    'title' => '30-Day Chops',
+                    'description' => 'Boost your creativity in just 30 days',
+                    'price' => floatval($productPrices['30-day-chops']->price),
+                ],
+                [
+                    'imageFull' => true,
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/57b58267-17bd-475a-89f7-874185438a7b-30DDs4_cart.jpg',
+                    'title' => '30-Day Drummer',
+                    'description' => 'Learn the drums with daily guided workouts.',
+                    'price' => floatval($productPrices['30-day-drummer-4']->price),
+                ],
+            ];
         @endphp
 
-        @include('drumeo._partials.bf-order-section-bonuses-modal', [
-        'bgColor' => 'background:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/marketing/drumeo/promos/november/2024/xm-bg.webp);',
-        'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-bundle-logo.svg',
+        @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
-        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'logoHeight' => 'h-16 sm:h-18',
-        'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong> Get a Drumeo Membership with $452.95 in free bonuses.</strong></h3>',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-holiday-bundle]=1&promo-code=holiday-bundle-drumeo,holiday-bundle-shipping&locked=true',
-        'belowButton' => true,
-        'bundle' => 'holiday',
+        'header' => 'Online drum lessons for all skill levels.',
+        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&locked=true&promo-code=special,WBD24',
         ])
-
-        @php
-            $videoBonuses = [];
-            foreach ($bonuses as $bonus) {
-                if (!empty($bonus['vimeoId']) && in_array($bonus['sku'], $targetSkus)) {
-                    $videoBonuses[] = ['name' => 'modal' . $bonus['vimeoId'], 'video' => $bonus['vimeoId']];
-                }
-            }
-        @endphp
-
-        @foreach ($videoBonuses as $modal)
-            @include('_partials.components.video-modal', [
-                'name' => $modal['name'],
-                'video' => $modal['video'],
-                'vimeo' => true,
-            ])
-        @endforeach
     @else
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,

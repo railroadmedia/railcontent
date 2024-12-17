@@ -43,11 +43,6 @@
                 </p>
             @endif
         @endif
-        @if(!empty($promoVersion) && empty($trialVersion))
-            @if(!empty($BFheader))
-                <h6 class="leading-tight py-2 px-3 text-white rounded-lg inline-block mb-5 lg:mb-7 @if($theme == 'drumeo') bg-drumeo @else bg-[#00BC75] @endif"><i class="far fa-badge-percent mr-1"></i> {!! $BFheader !!}</h6>
-            @endif
-        @endif
         <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
             <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))

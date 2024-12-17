@@ -438,8 +438,6 @@
             ])
         @else
             @include('musora.sales.components.header-section', [
-            'promoHeader' => true,
-            'BFheader' => 'Join today and get a free metronome, <br class="inline sm:hidden">books, and 3 digital courses.',
                 'header' => 'Piano lessons for<br> <span class="relative inline-block">all skill levels<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/header-thumb2.webp',
@@ -533,38 +531,30 @@
         ])
 
     @elseif(!empty($promoVersion))
-         @php
-            $targetSkus = ['metronome', 'read-music-in-30-days-workbook', 'piano-chords-and-scales-guide', 'new-piano-players-start-here', 'read-music-in-30-days', 'easy-chords'];
-        @endphp
-            <div id="customize-anchor"></div>
-            @include('drumeo._partials.bf-order-section-bonuses-modal', [
-            'maxWidth' => 'max-w-3xl',
-            'bgColor' => 'background-image: url(\'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp\'); background-repeat: no-repeat; background-size: cover;',
-            'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-bundle-logo.svg',
-            'logoHeight' => 'h-16 sm:h-20',
-            'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
-            'bonusWidth' => 'w-1/2 md:w-1/3',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Get a Pianote Membership with $538 in free bonuses.</h2>',
-            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-holiday-bundle-pianote]=1&promo-code=holiday-bundle-pianote,holiday-bundle-shipping&locked=true',
-            'bundle'=> "holiday-pianote",
-            ])
-
         @php
-            $videoBonuses = [];
-            foreach ($bonuses as $bonus) {
-                if (!empty($bonus['vimeoId']) && in_array($bonus['sku'], $targetSkus)) {
-                    $videoBonuses[] = ['name' => 'modal' . $bonus['vimeoId'], 'video' => $bonus['vimeoId']];
-                }
-            }
+            $bonuses = [
+                [
+                    'imageFull' => true,
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/95dc0c77-a0a5-4f01-b743-cb01d4912042-easy-chords-cart.jpg',
+                    'title' => 'Easy Chords',
+                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
+                    'price' => floatval($productPrices['easy-chords']->price),
+                ],
+                [
+                    'imageFull' => true,
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
+                    'title' => '30-Day Blues',
+                    'description' => 'Learn the Blues in just 30 days',
+                    'price' => floatval($productPrices['30-day-blues-piano']->price),
+                ],
+            ]
         @endphp
-
-        @foreach ($videoBonuses as $modal)
-            @include('_partials.components.video-modal', [
-                'name' => $modal['name'],
-                'video' => $modal['video'],
-                'vimeo' => true,
-            ])
-        @endforeach
+        @include('musora.sales.components.order-section-bonuses', [
+        'topImage' => 'marketing/pianote/membership/homepage/webp-format/pianote-annual-2w-card.webp',
+        'header' => 'Online piano lessons for all skill levels.',
+        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&redirect=/order&locked=true&promo-code=special,WBP24',
+        ])
     @else
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,
