@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Platform;
 
 use App\Http\Controllers\BaseController;
 use App\Modules\Brand\Enums\Brand;
+use App\Modules\Brand\Enums\Status;
 use App\Modules\Content\Models\UserPlaylist;
 use App\Modules\RailTracker\Services\ContentLastEngagedService;
 use App\Services\PlaylistService;
@@ -71,6 +72,11 @@ class UserPlaylistsController extends BaseController
         $playlist['has_access'] = ($playlist['user_id'] != $user->id && $playlist['private'] == true) ? 0 : 1;
 
         $playlistItems = $this->userPlaylistService->getPlaylistItems($playlist['brand'], $playlist['id']);
+        // filter out any unpublished items
+        $playlistItems = $playlistItems->reject(function (array $playlistItem) {
+            $status = $playlistItem['status'] ?? null;
+            return $status === Status::STATUS_DRAFT->value;
+        });
 
         $items = new ContentFilterResultsEntity([
                                                     'results' => $playlistItems,
