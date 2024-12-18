@@ -343,7 +343,7 @@ const closeMobileDropdown = () => {
 const runCountDown = (stop = false) => {
     const intervalCountdown = setInterval(() => {
         // remove UTC iso part of the string. It's already in the users timezone from the BE
-        const count = countdown(props.challenge.next_lesson?.unlock_date.substring(0, 19), true);
+        const count = countdown(props.challenge.next_lesson?.unlock_date.substring(0, 19));
         countdownString.value = count;
 
         if(count === '00:00:00'){

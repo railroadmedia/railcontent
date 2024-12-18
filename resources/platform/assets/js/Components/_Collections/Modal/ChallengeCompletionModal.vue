@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <div v-if="!isChallengeCompleted" class="tw-flex tw-justify-center tw-w-full">
-                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-20" @click="handleCta">Finish {{ currentLessonTitle }}</MuButton>
+                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-20" @click="handleCta">Complete {{ currentLessonShortTitle }}</MuButton>
                 </div>
             </div>
 
@@ -102,8 +102,7 @@
                             <div class="tw-absolute tw-text-center tw-max-w-[200px]">
                                 <img class="tw-h-14 tw-mx-auto dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${lightModeLogo}`" alt="Challenge light mode logo" />
                                 <img class="tw-h-14 tw-mx-auto tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${darkModeLogo}`" alt="Challenge dark mode logo" />
-                                <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold tw-mt-[10px] -tw-mb-1">{{ nextLessonTitle }} Unlocks In</div>
-                                <div v-if="isNextLessonLocked" class="tw-font-bond tw-font-bebas-neue tw-text-[50px] -tw-mb-5">{{ countdownString }}</div>
+                                <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold tw-mt-[10px] -tw-mb-1 tw-mx-2">{{ nextLessonTitle }} Unlocks In {{ countdownString }}</div>
                             </div>
                         </div>
                     </div>
@@ -143,7 +142,7 @@
                     </div>
                 </div>
                 <div v-if="!isChallengeCompleted" class="tw-flex tw-justify-center tw-w-full">
-                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10" @click="handleCta">Complete {{ currentLessonTitle }}</MuButton>
+                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10" @click="handleCta">Complete {{ currentLessonShortTitle }}</MuButton>
                 </div>
             </div>
 
@@ -238,6 +237,10 @@ const isRestDayAdded = computed(() => {
 })
 
 const currentLessonTitle = computed(() => {
+    return props.completionData?.title;
+})
+
+const currentLessonShortTitle = computed(() => {
     return props.completionData?.short_name;
 })
 
@@ -246,7 +249,7 @@ const lessonThumbnail = computed(() => {
 })
 
 const nextLessonTitle = computed(() => {
-    return props.completionData?.next_lesson?.short_name;
+    return props.completionData?.next_lesson?.title;
 })
 
 const isNextLessonLocked = computed(() => {
@@ -279,7 +282,7 @@ const runCountDown = (stop = false) => {
         const count = countdown(props.completionData?.next_lesson?.unlock_date.substring(0, 19));
         countdownString.value = count;
 
-        if(count === '00:00'){
+        if(count === '00:00:00'){
             clearInterval(intervalCountdown);
         }
     }, 1000)
