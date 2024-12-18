@@ -113,7 +113,7 @@
         <transition name="show-from-bottom">
             <div v-if="open" id="practiceOverlay" class="bg-white">
                 <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalParams"
-                    :soundslice-slug="soundsliceSlug" :content-id="lessonId" :loading="loading"
+                    :soundslice-slug="soundsliceSlug" :content-id="id" :loading="loading"
                     @onLoad="loading = false" @onPlay="handlePlay" @onPause="handlePause" soundsliceType="assignment">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="title" :disable-next="disableNext" :disable-prev="disablePrev"
@@ -370,7 +370,7 @@ export default {
         openAssignment() {
             if (this.thisAssignment.id === 0) {
                 this.accordionLoading = true;
-
+                // CHANGE THIS TO USE THE NEW CONTENT SERVICE
                 ContentService.getContentById(this.id)
                     .then((response) => {
                         if (response) {
@@ -426,8 +426,6 @@ export default {
             Utils.triggerEvent(window, 'vue-requesting-completion');
 
             if (this.isComplete) {
-                console.log('is complete');
-
                 window.showconfirmationmodal({
                     title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
                     subtitle: 'This cannot be undone.',
@@ -499,7 +497,6 @@ export default {
         handlePlay() {
             if (!this.hasBeenPlayed) {
                 this.hasBeenPlayed = true;
-                ContentService.markContentAsStarted(this.id);
             }
         },
 

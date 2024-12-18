@@ -214,6 +214,7 @@ import {
     getProgressState,
     // this is not getting percentage, this is getting lats watched position in seconds, possibly rename this function
     getProgressPercentage,
+    contentStatusCompleted
 } from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
 import { getBreadcrumbs } from './breadcrumbUtils';
@@ -295,7 +296,7 @@ const isNextLessonLocked = computed(() => {
 //Methods
 const handleVideoPlay = (payload) => {
     if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
-        ContentService.markContentAsStarted(payload.contentId);
+        sendProgressTrackerEvent();
     }
     if (progressTracker == null) {
         progressTracker = new ProgressTracker();
@@ -341,7 +342,7 @@ const handleVideoEnd = (showRelatedSection = true) => {
         isRelatedSectionOpen.value = true;
     }
     sendProgressTrackerEvent();
-    ContentService.markContentAsComplete(contentId.value);
+    contentStatusCompleted(contentId.value);
 };
 
 const getBrandSpecificParams = () => {
@@ -504,11 +505,12 @@ const fetchLessonData = async () => {
         isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
         nextPreviousLessons.value = nextPrevResult.status === 'fulfilled' ? nextPrevResult.value : null;
         relatedLessons.value = relatedLessonsResult.status === 'fulfilled' ? relatedLessonsResult.value.related_lessons : [];
-        progress_state.value = progressStateResult.status === 'fulfilled' ? progressStateResult.value : 'unstarted';
+        progress_state.value = progressStateResult.status === 'fulfilled' && progressStateResult.value ? progressStateResult.value : 'unstarted';
+
         if(progressResult.status === 'fulfilled') {
             progress_percent.value = progressResult.value;
             lastWatchedPositionInSeconds.value = progressResult.value;
-            isCompleted.value = progressResult.value === 100;
+            isCompleted.value = progress_state.value === 'completed';
         }
 
         // Optional: log errors for any rejected promises

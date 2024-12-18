@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { recordWatchSession } from 'musora-content-services';
 
 export default class ProgressTracker {
