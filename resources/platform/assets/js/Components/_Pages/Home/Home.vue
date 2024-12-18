@@ -188,7 +188,7 @@
     const playlistsStore = usePlaylistsStore();
     const userStore = useUserStore();
     const platformStore = usePlatformStore();
-    const { brand, userId, token, showOnboardingBanner, userHas30Days, isFirstAccess, userFirstName, userDisplayName } = storeToRefs(userStore);
+    const { brand, userId, token, showOnboardingBanner, userHas30Days, userFirstName, userDisplayName } = storeToRefs(userStore);
     const { isLoading } = storeToRefs(platformStore);
 
     const props = defineProps({
@@ -226,15 +226,16 @@
         newContent: { type: Object, default: () => ({}) },
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
         usersList: { type: Object, default: () => ({}) },
-        userMetrics: { type: Object, default: () => ({}) }
+        userMetrics: { type: Object, default: () => ({}) },
+        isFirstAccess: { type: Boolean, default: false },
     });
 
     const welcomeMessage = computed(() => {
-        if (isFirstAccess.value) {
-            return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome back, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Let's get practicing!</div>`
-        } else {
+        if (props.isFirstAccess) {
             return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Start Here</div>`
         }
+
+        return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome back, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Let's get practicing!</div>`
     })
 
     //Computed

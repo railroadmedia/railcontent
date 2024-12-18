@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import axios from 'axios';
 import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
@@ -122,6 +123,23 @@ export const useCollectionStore = defineStore({
                         searchTerm: this.filter.searchTerm,
                     })
                 },
+                'recommendation': async() => {
+                    const data = await axios.get('/railcontent/recommended', {
+                        params: {
+                            brand: userStore.brand,
+                            page: this.tabData[this.filter.activeTab].currentPage,
+                            limit: this.filter.limit,
+                            included_types: ['Recommendation'],
+                            include_future_scheduled_content_only: true,
+                            tabs: this.formattedTabs(),
+                            count_filter_items: true,
+                        }
+                    })
+
+                    return {
+                        entity: data.data.data,
+                    }
+                }
             }
 
             if(endpoints[type]){
@@ -177,6 +195,7 @@ export const useCollectionStore = defineStore({
                 undefined, //progressIds
                 undefined, //coachIds
             );
+
             if (result) {
                 //Set Filter Columns
                 this.filterColumns = getFilterValues(result.meta.filterOptions);
@@ -264,8 +283,6 @@ export const useCollectionStore = defineStore({
                 this.filter.activeTab = this.tabOptions[0].value;
                 this.tabData[this.filter.activeTab] = { ...this.tabOptions[0] };
             }
-
-
         },
 
         getFilterURLParams() {

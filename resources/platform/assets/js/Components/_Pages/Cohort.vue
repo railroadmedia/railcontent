@@ -310,11 +310,18 @@
     <!-- Trailer Modal -->
     <VideoModal v-if="openTrailer" :videoUrl="cohort['cohort_trailer']" @onCloseModal="openTrailer = false" />
 
-    <ChallengeNotificationModal v-if="openChallengeNotificationModal && !isFromApp" :challengeType="challengeType" :challenge="{
-        ...cohort,
-        dark_mode_logo_url: cohort['dark_mode_logo'],
-        light_mode_logo_url: cohort['light_mode_logo'],
-    }" :challenge-type="challengeType" @modal-close="closeNotificationModal" />
+    <ChallengeNotificationModal
+        v-if="openChallengeNotificationModal && !isFromApp"
+        :challengeType="challengeType"
+        :challenge="{
+            ...cohort,
+            dark_mode_logo_url: cohort['dark_mode_logo'],
+            light_mode_logo_url: cohort['light_mode_logo'],
+        }"
+        :challenge-type="challengeType"
+        @modal-close="closeNotificationModal"
+        :hide-x-icon="true"
+    />
     <ChallengeActionModal v-if="challengeActionModalType && !isFromApp" :modal-type="challengeActionModalType"  @close-modal="closeActionModal"
       :challenge="{
         dark_mode_logo_url: cohort['dark_mode_logo'],
