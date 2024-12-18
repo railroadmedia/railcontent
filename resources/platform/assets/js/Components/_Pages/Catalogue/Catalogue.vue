@@ -1,6 +1,6 @@
 <template>
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
-      <Breadcrumb :breadcrumbs="breadcrumbs" />
+      <Breadcrumb :breadcrumbs="breadcrumbData" />
       <PageHeader
         :is-loading="isLoading"
         :page-type="headerData?.type"
@@ -88,6 +88,7 @@
   const metaData = ref(null);
   const headerData = ref(null);
   const contentType = ref('');
+  const breadcrumbData = ref(null);
 
   const recommendedProps = computed(() => {
     const recommended = {};
@@ -110,8 +111,16 @@
   })
 
   onBeforeMount(async() => {
-    //Set Content Type
-    contentType.value = props.isNewReleases ? 'new-release' : props.lessonType;
+    //Account for 'New Releases' Catalog
+    if(props.isNewReleases) {
+      contentType.value = 'new-release';
+      breadcrumbData.value = [
+        { title: "New Releases" }
+      ]
+    } else {
+      contentType.value = props.lessonType;
+      breadcrumbData.value = props.breadcrumbs;
+    }
 
     try {
       // Fetch started content (in-progress workouts)
