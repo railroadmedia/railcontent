@@ -114,7 +114,7 @@ class ForumPagesController extends Controller
 
         foreach ($threads as $thread) {
             $latestPost = $thread->latest_post;
-            if($latestPost) {
+            if ($latestPost) {
                 $latestPost['created_at_diff'] =
                     Carbon::parse($latestPost['created_at'])
                         ->diffForHumans();
@@ -148,7 +148,7 @@ class ForumPagesController extends Controller
 
         foreach ($pinnedThreads as $pinnedThread) {
             $latestPost = $pinnedThread->latest_post;
-            if($latestPost) {
+            if ($latestPost) {
                 $latestPost['created_at_diff'] =
                     Carbon::parse($latestPost['created_at'])
                         ->diffForHumans();
@@ -242,14 +242,14 @@ class ForumPagesController extends Controller
         $categoryIds = [$categoryId];
         $pinned = (bool)$request->get('pinned');
         $followed = $request->has('followed') ? (bool)$request->get('followed') : null;
-        if($request->get('tabs', false)) {
+        if ($request->get('tabs', false)) {
             $tabs = $request->get('tabs', $request->get('tab'));
 
-            if(!is_array($request->get('tabs', $request->get('tab')))) {
+            if (!is_array($request->get('tabs', $request->get('tab')))) {
                 $tabs = [$request->get('tabs', $request->get('tab'))];
             }
 
-            foreach($tabs as $tab) {
+            foreach ($tabs as $tab) {
                 $extra = explode(',', $tab);
                 if ($extra['0'] == 'followed') {
                     $followed = (bool)$extra['1'];
@@ -564,7 +564,7 @@ class ForumPagesController extends Controller
         );
     }
 
-    public function getSearchResultsJson(Request $request, $domain, $brand): JsonResponse
+    public function getSearchResultsJson(Request $request, $domain, $brand): JsonPaginatedResponse
     {
         $term = trim($request->get('term', null));
 
