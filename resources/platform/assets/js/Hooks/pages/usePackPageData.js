@@ -5,6 +5,7 @@ import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
 
 export async function usePackPageData(contentType) {
+    console.log('contentType', contentType);
     const userStore = useUserStore();
 
     const data = ref(null);
@@ -23,11 +24,11 @@ export async function usePackPageData(contentType) {
     // Initialize the buildHeader hook
     const { buildHeader } = useBuildHeader(progressPercent);
 
-    if(contentType === "pack-overview" || contentType === "semester-pack") {
+    if(contentType === "pack-overview" || contentType === "semester-pack" || contentType === "pack") {
         try {
             const result = await fetchPackData(contentId);
             if (result) {
-                //console.log('result', result)
+                console.log('result', result)
                 data.value = result;
                 data.value.header = buildHeader("pack-bundle", result, progressPercent); // Use the hook to build header
             }
