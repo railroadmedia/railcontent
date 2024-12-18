@@ -122,9 +122,11 @@
       breadcrumbData.value = props.breadcrumbs;
     }
 
+    const metaType = props.isNewReleases ? 'new-release' : queryTypeConverter(props.lessonType);
+
     try {
       // Fetch started content (in-progress workouts)
-      fetchMetadata(brand.value, queryTypeConverter(props.lessonType)).then( result => {
+      fetchMetadata(brand.value, metaType).then( result => {
         metaData.value = result;
       }).catch( error => {
         console.log('error fetching catalog metaData', error)
