@@ -346,11 +346,6 @@
         @yield('top-bar')
     @endif
 
-
-    @php
-       $slides = $drumeo['slides'];
-    @endphp
-
     @if(empty($hideHeader) || !$hideHeader)
     @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
@@ -383,16 +378,136 @@
         @yield('promo-banner')
     @endif
 
-    @php
-        $buttons = $drumeo['buttons'];
 
-        $courses = $drumeo['courses'];
-    @endphp
+    <section class="text-center px-5 sm:px-6 pb-12 sm:pb-16 lg:pb-20 relative overflow-hidden text-white" style="background: linear-gradient(to bottom, #15549f, #0C1524 30%);">
+        <div class="container max-w-5xl mx-auto relative z-20">
+{{--            absolute top-0 left-0 right-0--}}
+            <div class=" text-white z-20 text-center px-4 py-48">
+                <h1 class="font-lexend text-3xl sm:text-5xl lg:text-7xl leading-none uppercase mb-3"><strong>STEP-BY-STEP</strong></h1>
+                <h1 class="font-lexend leading-none uppercase mb-3">to any goal.</h1>
+            </div>
 
-    @include('musora.sales.components.coaches-section', [
-        'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
-        'desc' => 'Amplify your skills with 200+ artist courses + <br class="hidden md:inline lg:hidden">access exclusive live events with drumming legends.'
-    ])
+            <div class="text-black bg-white rounded-xl px-4 sm:px-10 py-8 sm:py-12 mb-8">
+                <h5 class="uppercase text-drumeo">Step 1</h5>
+                <h2 class="leading-tight my-2"><strong>Choose Your Goal</strong></h2>
+                <p class="leading-tight mb-8">You’ll enjoy guided courses from the world’s best drummers. Take a peek at a few favorites:</p>
+                    <div
+                        x-data="{
+                            init() {
+                                new Splide(this.$refs.splide, {
+                                    classes: {
+                                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                                            prev: 'splide__arrow--prev your-class-prev -left-1',
+                                            next: 'splide__arrow--next your-class-next -right-1',
+                                            pagination: 'splide__pagination flex -bottom-10',
+                                    },
+                                    padding: '3rem',
+                                    perPage: 4,
+                                    perMove: 1,
+                                    type: 'loop',
+                                    focus: 0,
+                                    interval: 2000,
+                                    lazyLoad: 'nearby',
+                                    breakpoints: {
+                                        1020: {
+                                            padding: '2rem',
+                                        },
+                                        768: {
+                                            padding: '3rem',
+                                            perPage: 3,
+                                            drag: 'free',
+                                            snap: false,
+                                        },
+                                        620: {
+                                            padding: '1rem',
+                                            perPage: 2,
+                                            arrows: false,
+                                        },
+                                    },
+                                }).mount()
+                            },
+                        }"
+                    >
+                        <section x-ref="splide" class="splide mb-10 sm:mb-10">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    @php
+                                        $packs = [
+                                            [
+                                                "image" => "marketing/musora/membership/homepage/2024/packs/30DD.webp",
+                                            ],
+                                            [
+                                                "image" => "marketing/musora/membership/homepage/2024/packs/30DC.webp",
+                                            ],
+                                            [
+                                                "image" => "marketing/musora/membership/homepage/2024/packs/30DI.webp",
+                                            ],
+                                            [
+                                                "image" => "marketing/musora/membership/homepage/2024/packs/GI.webp",
+                                            ],
+                                            [
+                                                "image" => "marketing/musora/membership/homepage/2024/packs/4-Way-Coordination.webp",
+                                            ],
+                                            [
+                                                "image" => "marketing/musora/membership/homepage/2024/packs/Musical-Exercises.webp",
+                                            ],
+                                            [
+                                                "image" => "marketing/musora/membership/homepage/2024/packs/Rock-Drumming.webp",
+                                            ],
+                                            [
+                                                "image" => "marketing/musora/membership/homepage/2024/packs/Rudiments-Patterns.webp",
+                                            ],
+                                            [
+                                                "image" => "marketing/musora/membership/homepage/2024/packs/Songs-Breakdown.webp",
+                                            ],
+                                            [
+                                                "image" => "marketing/musora/membership/homepage/2024/packs/The-Creative-Mindset.webp",
+                                            ],
+                                            [
+                                                "image" => "marketing/musora/membership/homepage/2024/packs/Writing-Drum-Parts.webp",
+                                            ],
+                                        ]
+                                    @endphp
+                                    @foreach ($packs as $image)
+                                        <li class="splide__slide flex flex-col items-center justify-start px-1">
+                                            <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 150%;">
+                                                <picture>
+                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}">
+                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$image['image']}}">
+                                                    <img
+                                                        class="absolute top-0 left-0 w-full h-full object-cover object-top transition-opacity opacity-0 duration-300"
+                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}"
+                                                        onload="this.classList.remove('opacity-0');"
+                                                    />
+                                                </picture>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+            </div>
+
+            <div class="text-white pt-6 sm:pt-10 mb-8 rounded-xl overflow-hidden bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/august/tablet-demo-bg.webp');">
+                <h5 class="uppercase text-drumeo">Step 2</h5>
+                <h2 class="leading-tight my-2"><strong>Press Play</strong></h2>
+                <p class="leading-normal mb-8 px-4">We’ve tailored each course to keep you motivated – so you<br class="hidden sm:inline-block"> keep returning to the kit & experience amazing results!</p>
+
+                <div class="relative cursor-pointer autoplay-video" x-on:click="demoVid = true;">
+                    <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/august/tablet-demo-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/pianote/promos/august/tablet-demo.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                </div>
+            </div>
+
+            <div class="text-black bg-white rounded-xl px-4 sm:px-10 pt-8 sm:pt-12">
+                <h5 class="uppercase text-drumeo">Step 3</h5>
+                <h2 class="leading-tight my-2"><strong>Hear the result.</strong></h2>
+                <p class="leading-tight mb-8">If you love your lessons, you’re more likely to practice. And when you practice, <br class="hidden sm:inline-block"> you’ll hear the results way sooner – and so will everyone around you!</p>
+                <img class="w-full -mb-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/august/step3.png">
+            </div>
+        </div>
+    </section>
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/898668674/rendition/540p/file.mp4?loc=external&signature=d5f33375d3a16dc91641be1539d7d621d07ad049b030baa8a7f32c23e63e3ab4',
