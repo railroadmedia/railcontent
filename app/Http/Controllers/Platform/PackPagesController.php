@@ -119,6 +119,7 @@ class PackPagesController extends Controller
         } else {
             $infoData["lessons"] = count($packBundles);
         }
+        
         $infoData['xp'] = $pack->fetch('total_xp', 0);
 
         $backButton = [
@@ -132,13 +133,7 @@ class PackPagesController extends Controller
 
         return view('content.packs.pack-overview-bundles', [
             "pack" => $pack,
-            "parentContent" => $pack,
-            "childContent" => $childContent->toResponseRawJson(),
-            "infoData" => $infoData,
-            "backButton" => $backButton,
             "xpBonus" => $xpBonus,
-            "themeColor" => "pack",
-            "nextLessonUrl" => $pack->fetch('next_lesson_url'),
         ]);
     }
 

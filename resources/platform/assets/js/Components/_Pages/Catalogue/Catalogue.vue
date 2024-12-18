@@ -134,7 +134,7 @@
       const lessons = await fetchByRailContentIds(startedIds.started);
 
       headerData.value = getHeaderData(metaData.value, brand.value, props.askQuestionRecipient, props.emailLogoLink, contentType.value)
-
+      console.log(metaData.value)
       // Set the continue section with started workouts
       continueSection.value = lessons;
 

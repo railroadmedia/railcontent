@@ -43,7 +43,7 @@
     </div>
 </template>
 <script setup>
-import {ref, onMounted} from "vue";
+import {ref, onMounted, onBeforeMount} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "@stores/platform";
 import useUserCatalogueEvents from "@hooks/useUserCatalogueEvents";
@@ -55,22 +55,12 @@ import SkeletonCard from '@collections/SkeletonLoader/SkeletonCard.vue';
 import { usePackPageData } from '@hooks/pages/usePackPageData';
 
 const props = defineProps({
-    breadcrumbs: {
-        type: Array,
-        default: () => [],
-    },
-    breadcrumbClassOverride: {
+    breadcrumbs: Array,
+    packType: {
         type: String,
-        default: "",
-    },
-    pack: {
-        type: Object,
-        default: () => ({}),
-    },
-    xpBonus: {
-        type: Number,
-        default: 0,
-    },
+        default: ''
+    }, 
+    xpBonus: Number
 });
 
 const platformStore = usePlatformStore();
@@ -83,8 +73,7 @@ const data = ref(null);
 const header = ref(null)
 
 onMounted( async () => {
-    const { data: PackData, error: PackError, isLoading: PackLoading } = await usePackPageData('pack-bundle');
-        //console.log('packData', PackData.value )
+    const { data: PackData, error: PackError, isLoading: PackLoading } = await usePackPageData(props.packType);
         data.value = PackData.value;
         //Header Data
         header.value = PackData?.value?.header;
