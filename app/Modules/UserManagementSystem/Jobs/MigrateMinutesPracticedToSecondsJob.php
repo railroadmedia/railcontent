@@ -40,7 +40,7 @@ class MigrateMinutesPracticedToSecondsJob implements ShouldQueue
             ->get();
 
         foreach ($users as $user) {
-            $userBrandMinutesPracticed = $user->brand_minutes_practiced;
+            $userBrandMinutesPracticed = $user->brand_minutes_practiced ?? [];
 
             foreach (Brand::values() as $brand) {
                 if (array_key_exists($brand, $userBrandMinutesPracticed)) {
