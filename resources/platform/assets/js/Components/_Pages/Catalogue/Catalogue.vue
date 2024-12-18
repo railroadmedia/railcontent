@@ -124,7 +124,7 @@
 
     try {
       // Fetch started content (in-progress workouts)
-      fetchMetadata(brand.value, contentType.value).then( result => {
+      fetchMetadata(brand.value, queryTypeConverter(props.lessonType)).then( result => {
         metaData.value = result;
       }).catch( error => {
         console.log('error fetching catalog metaData', error)
