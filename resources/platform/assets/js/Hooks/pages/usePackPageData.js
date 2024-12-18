@@ -5,8 +5,6 @@ import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
 
 export async function usePackPageData(contentType) {
-    console.log('contentType', contentType);
-
     const userStore = useUserStore();
 
     const data = ref(null);
