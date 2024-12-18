@@ -2,7 +2,6 @@
 
 namespace App\Modules\RailTracker\Models;
 
-use App\Modules\Ecommerce\database\factories\ProductFactory;
 use App\Modules\RailTracker\database\Factories\MediaPlaybackSessionFactory;
 use App\Modules\RailTracker\Enums\MediaTypeEnum;
 use Carbon\Carbon;
@@ -32,6 +31,8 @@ class MediaPlaybackSession extends Model
     protected $table = 'railtracker_media_playback_sessions';
     protected $primaryKey = 'id';
     public $timestamps = false;
+
+    public int $secondsWatchedSinceLastTrack = 0;
 
     protected static function newFactory(): MediaPlaybackSessionFactory
     {

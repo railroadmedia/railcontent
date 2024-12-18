@@ -100,6 +100,7 @@ class UserFactory extends Factory
             'drumeo_onboarding_skip_setup' => 0,
             'brand_total_xp' => null,
             'brand_minutes_practiced' => null,
+            'brand_seconds_practiced' => null,
             'membership_level' => null,
             'is_drumeo_lifetime_member' => 0,
             'needs_logout' => false,
