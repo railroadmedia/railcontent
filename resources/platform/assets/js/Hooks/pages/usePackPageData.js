@@ -23,7 +23,7 @@ export async function usePackPageData(contentType) {
     // Initialize the buildHeader hook
     const { buildHeader } = useBuildHeader(progressPercent);
 
-    if(contentType === "pack-overview") {
+    if(contentType === "pack-overview" || contentType === "semester-pack") {
         try {
             const result = await fetchPackData(contentId);
             if (result) {
