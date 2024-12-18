@@ -32,7 +32,6 @@
         <h2 class="font-extrabold mb-10 text-center">Frequently Asked Questions</h2>
         @foreach($faqs as $faq)
             @include('_partials.components.question-dropdown', [
-                'num' => '?',
                 "title" => $faq['title'],
                 "desc" => $faq['desc'],
             ])

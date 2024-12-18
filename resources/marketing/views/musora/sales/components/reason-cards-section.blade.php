@@ -5,36 +5,7 @@
         <h2 class="leading-tight"><strong><span class="border-2 border-{{ $theme }} rounded-full px-3 sm:px-4 py-1 inline-block">@if(!empty($seven)) 7 @else 6 @endif</span> reasons why you’ll <br class="inline sm:hidden">love learning here.</strong></h2>
         <p class="mt-2 sm:mt-3 mb-6 sm:mb-10">Level up your skills with the lessons, teachers, and<br class="hidden sm:inline lg:hidden">  practice tools <strong class="font-black">trusted by <span class="text-{{ $theme }}">{{ number_format(Prices::$students) }}</span> active students</strong>. </p>
         <div class="flex flex-wrap text-left">
-            @if(!empty($seven))
-                @foreach ($gridItems as $key => $gridItem)
-                    @if($key == 6)
-                        <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
-                            <div class="pb-[70%] sm:pb-96 overflow-hidden text-white relative w-full rounded-xl"
-                                 :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                                 x-intersect.once="lazyLoad = true"
-                            >
-                                <picture>
-                                    <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/{{ $gridItem['image'] }}">
-                                    <source media="(min-width: 640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x770/filters:quality(95)/{{ $gridItem['image'] }}">
-                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x470/filters:quality(95)/{{ $gridItem['image'] }}"
-                                         alt="{{ $gridItem['title'] }}"
-                                        class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl opacity-0 transition-opacity"
-                                        style="object-position: 60% 0;" loading="lazy" onload="this.classList.remove('opacity-0')">
-                                </picture>
-
-                                <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-5 pb-5 sm:pb-7 pt-10 flex items-start" style="background:linear-gradient(to bottom, transparent, #000);">
-                                    <h5 class="rounded-full border-2 border-{{ $theme }} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>1</strong></h5>
-                                    <div class="pl-3">
-                                        <h5 class="leading-tight"><strong>{{ $gridItem['title'] }}</strong></h5>
-                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{{ $gridItem['desc'] }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
-            @endif
-            <div class="flex flex-wrap items-start justify-center text-left sm:mb-6 w-full sm:w-1/2">
+            <div class="flex flex-wrap items-start justify-center text-left w-full sm:w-1/2">
                 @foreach ($gridItems as $key => $gridItem)
                     @if($key < 3)
                     <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
@@ -65,7 +36,7 @@
                     @endif
                 @endforeach
             </div>
-            <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 w-full sm:w-1/2">
+            <div class="flex flex-wrap items-start justify-center text-left w-full sm:w-1/2">
                 @foreach ($gridItems as $key => $gridItem)
                     @if($key > 2 && $key < 6)
                         <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
@@ -97,6 +68,35 @@
                     @endif
                 @endforeach
             </div>
+            @if(!empty($seven))
+                @foreach ($gridItems as $key => $gridItem)
+                    @if($key == 6)
+                        <div class="flex flex-wrap items-start w-full sm:px-3 mb-7 sm:mb-14" x-data="{ open: false }">
+                            <div class="pb-[70%] sm:pb-96 overflow-hidden text-white relative w-full rounded-xl"
+                                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                                x-intersect.once="lazyLoad = true"
+                            >
+                                <picture>
+                                    <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/{{ $gridItem['image'] }}">
+                                    <source media="(min-width: 640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x770/filters:quality(95)/{{ $gridItem['image'] }}">
+                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x470/filters:quality(95)/{{ $gridItem['image'] }}"
+                                        alt="{{ $gridItem['title'] }}"
+                                        class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl opacity-0 transition-opacity"
+                                        style="object-position: 60% 0;" loading="lazy" onload="this.classList.remove('opacity-0')">
+                                </picture>
+
+                                <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-5 pb-5 sm:pb-7 pt-10 flex items-start" style="background:linear-gradient(to bottom, transparent, #000);">
+                                    <h5 class="rounded-full border-2 border-{{ $theme }} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>7</strong></h5>
+                                    <div class="pl-3">
+                                        <h5 class="leading-tight"><strong>{{ $gridItem['title'] }}</strong></h5>
+                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{{ $gridItem['desc'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            @endif
         </div>
        @if(empty($shortVersion))
         @if(empty($promoVersion))

@@ -576,15 +576,6 @@
     ])
 
     @php
-        $gridItems = $musora['gridItems'];
-    @endphp
-
-    @include('musora.sales.components.reason-cards-section', [
-        'bgColor' => "#f4f8fb",
-        'seven' => true,
-    ])
-
-    @php
         $workoutImages = $musora['workoutImages'];
     @endphp
 
@@ -592,14 +583,13 @@
         'workoutsBG' => 'marketing/musora/membership/homepage/2024/workouts-card2.jpg',
     ])
 
-
     @php
-        $songItems = $musora['songItems'];
+        $gridItems = $musora['gridItems'];
     @endphp
 
-    @include('musora.sales.components.songs-section', [
-        'subheader' => 'Practice and sing 300+ popular songs with note-for-note sheet music and digital tools.',
-        'media' => 'musora/membership/homepage/2024/musora-songs.webp',
+    @include('musora.sales.components.reason-cards-section', [
+        'bgColor' => "#f4f8fb",
+        'seven' => true,
     ])
 
     @php

@@ -120,6 +120,16 @@ $pianote = [
                 ],
             ]
         ],
+        [
+            'image' => 'marketing/musora/membership/homepage/2024/7-reasons-03.webp',
+            'title' => 'Note-for-Note Sheet Music for 1500+ Popular Songs',
+            'desc' => 'Slow down the tempo and loop the trouble spots to nail your favorite songs with expertly transcribed sheet music.',
+            'lessonInfo' => [
+                [
+                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-03.webp',
+                ],
+            ]
+        ],
     ],
     "buttons" => [
         'Styles', 'Technique', 'Creativity'

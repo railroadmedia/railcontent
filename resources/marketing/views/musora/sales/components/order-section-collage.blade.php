@@ -2,7 +2,7 @@
     @if(!empty($bgColor))
         style="background: {{ $bgColor }};"
     @else
-        style="background: linear-gradient(45deg, #07233e, #0c1524);"
+        style="background: linear-gradient(to bottom, #1D4689, #0C1524);"
   @endif
   x-data="{lazyLoad:false}">
     <div class="container mx-auto max-w-6xl mb-5 sm:mb-10">
@@ -26,7 +26,7 @@
             </div>
             <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0">
                 @if(!empty($logo))
-                    <img class="h-7 mb-4 sm:mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/{{ $logo }}" alt="logo">
+                    <img class="h-7 sm:h-9 mb-2 sm:mb-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/{{ $logo }}" alt="logo">
                 @endif
                 <p class="uppercase text-musora mb-2"><strong class="font-black">
                     @if(!empty($subHeader))
