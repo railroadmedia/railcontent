@@ -43,7 +43,7 @@
     </div>
 </template>
 <script setup>
-import {ref, onMounted, onBeforeMount} from "vue";
+import {ref, onMounted} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "@stores/platform";
 import useUserCatalogueEvents from "@hooks/useUserCatalogueEvents";
