@@ -397,5 +397,4 @@ const removeBanner = async () => {
         })
     }
 }
-console.log(props.challenge)
 </script>

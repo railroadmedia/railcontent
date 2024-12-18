@@ -18,7 +18,6 @@ use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -254,6 +253,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property mixed|null $brand_total_xp
  * @property Collection $subscriptions
  * @property mixed|null $brand_minutes_practiced
+ * @property mixed|null $brand_seconds_practiced
  * @property Collection $notificationSettings
  * @property string|null $membership_level // can be 'basic' or 'plus'
  * @property-read int|null $notification_settings_count
@@ -356,6 +356,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             'brand_method_levels' => 'json',
             'brand_total_xp' => 'json',
             'brand_minutes_practiced' => 'json',
+            'brand_seconds_practiced' => 'json',
             'needs_logout' => 'bool'
         ];
     }
@@ -434,7 +435,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         $brand = brand();
 
-        if (isset($this->brand_minutes_practiced[$brand])) {
+        if (isset($this->brand_seconds_practiced[$brand])) {
+            return intval(round($this->brand_seconds_practiced[$brand] / 60, 0));
+        } elseif (isset($this->brand_minutes_practiced[$brand])) {
             return $this->brand_minutes_practiced[$brand];
         }
 

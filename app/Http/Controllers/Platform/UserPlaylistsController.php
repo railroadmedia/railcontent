@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Platform;
 
 use App\Http\Controllers\BaseController;
 use App\Modules\Brand\Enums\Brand;
+use App\Modules\Brand\Enums\Status;
 use App\Modules\Content\Models\UserPlaylist;
 use App\Modules\RailTracker\Services\ContentLastEngagedService;
 use App\Services\PlaylistService;
@@ -71,6 +72,11 @@ class UserPlaylistsController extends BaseController
         $playlist['has_access'] = ($playlist['user_id'] != $user->id && $playlist['private'] == true) ? 0 : 1;
 
         $playlistItems = $this->userPlaylistService->getPlaylistItems($playlist['brand'], $playlist['id']);
+        // filter out any unpublished items
+        $playlistItems = $playlistItems->filter(function (array $playlistItem) {
+            $status = $playlistItem['status'] ?? null;
+            return $status && Status::isVisibleForPlaylists(Status::from($status));
+        });
 
         $items = new ContentFilterResultsEntity([
                                                     'results' => $playlistItems,
@@ -119,7 +125,8 @@ class UserPlaylistsController extends BaseController
                                                                'total_results' => count($otherItems),
                                                            ]))->toResponseRawJson();
         $playlistItem = $otherItems->where('user_playlist_item_id', '=', $playlistItemId)->first();
-        throw_if((!$playlistItem), new NotFoundHttpException());
+        // DEV NOTE: checking for the 'type' is a bit of a workaround to ensure that the data came from Sanity
+        throw_if((!$playlistItem || !$playlistItem['type']), new NotFoundHttpException());
 
         $position = $otherItems->search(function ($item) use ($playlistItemId) {
             return $item['user_playlist_item_id'] == $playlistItemId;

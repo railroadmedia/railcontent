@@ -176,10 +176,6 @@ const props = defineProps({
     }
 });
 
-onBeforeMount(() => {
-    console.log('songArtist', props.songArtist)
-})
-
 const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);
 const lessonProgressRef = ref(props.lessonProgress);
