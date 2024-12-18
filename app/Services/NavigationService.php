@@ -86,14 +86,14 @@ class NavigationService
                 'path' => '/'.brand().'/challenge',
                 'icon' => 'challenges',
             ],
+        ];
+
+        $commonContentSection = [
             [
                 'name' => 'Workouts',
                 'path' => '/'.brand().'/workouts',
                 'icon' => 'workouts',
             ],
-        ];
-
-        $commonContentSection = [
             [
                 'name' => 'Packs',
                 'path' => '/'.brand().'/packs',
