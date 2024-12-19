@@ -379,12 +379,21 @@
     @endif
 
 
-    <section class="text-center relative bg-cover bg-bottom text-white py-12 min-h-[500px] h-screen-nav max-h-[1100px]"
-        style="background-image:url(https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/course-wall.webp);"
+    <section class="text-center relative text-white py-12 min-h-[500px] h-screen-nav max-h-[1100px]"
+        style="background-color:#0c1524;"
         x-data="{ stick: false }"
         x-init="window.addEventListener('scroll', () => {
         stick = window.scrollY + window.innerHeight > $refs.stickySection.offsetTop + $refs.stickySection.offsetHeight;
     })">
+        <picture>
+            <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall.webp">
+            <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall-m.webp">
+            <img
+                class="absolute top-0 left-0 w-full h-full object-cover object-bottom transition-opacity opacity-0 duration-300"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall-m.webp"
+                onload="this.classList.remove('opacity-0');"
+            />
+        </picture>
         <div class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 z-10 sticky top-[40vh]"
             :class="{ 'bottom-auto': stick }" x-ref="stickySection">
             <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend text-3xl sm:text-5xl lg:text-7xl leading-none uppercase mb-3"><strong>STEP-BY-STEP</strong></h1>
