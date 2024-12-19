@@ -22,12 +22,13 @@
                         :isAdded= "isAdded"
                         :report-logo="reportLogo"
                         :no-access="noAccess"
+                        :show-draft="showDraft"
                     />
                 </div>
 
                 <!-- Related Lessons -->
                 <div class="tw-w-full tw-col-span-3 tw-flex tw-flex-col 2xl:tw-mt-0 2xl:tw-col-span-1 2xl:tw-row-span-3">
-                    <!-- Refactor as a colleciton component -->
+                    <!-- Refactor as a collection component -->
                     <div class="tw-mb-2">
                         <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
                             Related Songs
@@ -43,19 +44,19 @@
 
                 <!-- Comments Section -->
                 <div v-if="!noAccess" class="tw-col-span-3 2xl:tw-col-span-2 2xl:tw-row-span-2">
-                    <VideoComments 
-                        :is-loading="isLoading" 
-                        :theme-color="brand" 
-                        :brand="brand" 
+                    <VideoComments
+                        :is-loading="isLoading"
+                        :theme-color="brand"
+                        :brand="brand"
                         :user-id="userId"
-                        :is-admin="isAdmin" 
+                        :is-admin="isAdmin"
                         :content-id="contentId"
-                        contentType="song" 
+                        contentType="song"
                         :user-name="userDisplayName"
-                        :user-avatar="userProfilePictureUrl" 
-                        :user-xp="userXP" 
+                        :user-avatar="userProfilePictureUrl"
+                        :user-xp="userXP"
                         :user-access-level="userAccessLevel"
-                        :profile-base-route="`/${brand}/profile/${userId}/dashboard`" 
+                        :profile-base-route="`/${brand}/profile/${userId}/dashboard`"
                     />
                 </div>
 
@@ -66,38 +67,42 @@
     </div>
 </template>
 <script setup>
-    import { ref, onBeforeMount, computed } from 'vue';
-    import { storeToRefs } from 'pinia';
-    import { useUserStore } from '@stores/user';
-    import { usePlatformStore } from '@stores/platform';
-    import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
-    import SongPlayerSection from '@collections/SongPlayerSection/SongPlayerSection.vue';
-    import CatalogueListElement from '@collections/Catalogue/CatalogueListElement';
-    import SongSkeleton from '@pages/Song/SongSkeleton';
-    import { useSongPageData } from '@hooks/pages/useSongPageData';
-    import VideoComments from "@vuesora/views/comments/Comments.vue";
+import { ref, onBeforeMount, computed } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@stores/user';
+import { usePlatformStore } from '@stores/platform';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import SongPlayerSection from '@collections/SongPlayerSection/SongPlayerSection.vue';
+import CatalogueListElement from '@collections/Catalogue/CatalogueListElement';
+import SongSkeleton from '@pages/Song/SongSkeleton';
+import { useSongPageData } from '@hooks/pages/useSongPageData';
+import VideoComments from "@vuesora/views/comments/Comments.vue";
 
-    // Pinia Data
-    const userStore = useUserStore();
-    const platformStore = usePlatformStore();
-    const { user, brand, userId, userDisplayName, userAccessLevel, userProfilePictureUrl, userXP, isAdmin, token } = storeToRefs(userStore);
-    const { isLoading } = storeToRefs(platformStore)
+// Pinia Data
+const userStore = useUserStore();
+const platformStore = usePlatformStore();
+const { user, brand, userId, userDisplayName, userAccessLevel, userProfilePictureUrl, userXP, isAdmin, token } = storeToRefs(userStore);
+const { isLoading } = storeToRefs(platformStore);
 
-    // Refs 
-    const data = ref(null);
+// Refs
+const data = ref(null);
 
-    // Props
-    const props = defineProps({
-        contentId: Number,
-        noAccess: Boolean,
-        isAdded: Boolean,
-        reportLogo: String,
-    });
+// Props
+const props = defineProps({
+    contentId: Number,
+    noAccess: Boolean,
+    isAdded: Boolean,
+    reportLogo: String,
+});
 
-    onBeforeMount( async () => {
-        const { data: songData, error: songError, isLoading: songLoading } = await useSongPageData(props.contentId, brand.value, userId.value, token.value);
-        data.value = songData.value;
+const showDraft = computed(() => {
+    return data.value?.status === 'draft';
+})
 
-        platformStore.setLoadingState(songLoading.value);
-    });
+onBeforeMount( async () => {
+    const { data: songData, error: songError, isLoading: songLoading } = await useSongPageData(props.contentId, brand.value, userId.value, token.value);
+    data.value = songData.value;
+
+    platformStore.setLoadingState(songLoading.value);
+});
 </script>

@@ -473,8 +473,8 @@ class SanityGateway
                                 return 'Method';
                             case 'learning-path-level':
                                 return 'L' . collect($document['parent_content_data'])->keyBy(
-                                        'id'
-                                    )[$parent['id']]['position'];
+                                    'id'
+                                )[$parent['id']]['position'];
                             default:
                                 return $parent['title'];
                         }
@@ -705,7 +705,10 @@ class SanityGateway
             'song' => 'Song',
             default => 'Lesson',
         };
-        $pageParams = ['id' => $content['railcontent_id']];
+        $pageParams = [
+            'id' => $content['railcontent_id'],
+            'contentType' => $type,
+        ];
 
         $typesToIncludePageType = ['challenge', 'pack'];
         if (in_array($type, $typesToIncludePageType)) {

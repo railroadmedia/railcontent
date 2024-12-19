@@ -6,15 +6,12 @@ use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\ContentUserProgress;
-use App\Modules\Content\Services\ContentProgressService;
 use App\Modules\Content\Services\LearningPathsService;
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Carbon;
 use App\Modules\Content\Services\ChallengesAwardService;
 use App\Modules\Content\Services\ChallengesService;
-use Railroad\Railcontent\Services\UserContentProgressService;
 
 class CarouselServiceV1
 {
@@ -85,7 +82,7 @@ class CarouselServiceV1
 
         $railcontentIds = $inProgressAndCompleted->pluck('content_id');
         $challengeRecommendations = collect($this->sanity->getChallengePromotionalBannerCards($brand, $isAdmin))
-            ->filter(fn($challenge) => !$railcontentIds->contains($challenge['id']));
+            ->filter(fn ($challenge) => !$railcontentIds->contains($challenge['id']));
         $allChallengeIds = [
             ...$badges->pluck('content_id'),
             ...$communityProgresses->pluck('content_id'),
@@ -117,7 +114,7 @@ class CarouselServiceV1
     private function formatBannerCardFromChallenge($recommendations, $user, $allChallengeMetaData)
     {
         $enrollmentCards = [];
-        $recommendations->map(function($recommendation) use ($allChallengeMetaData, &$enrollmentCards, $user) {
+        $recommendations->map(function ($recommendation) use ($allChallengeMetaData, &$enrollmentCards, $user) {
             $enrollmentCards[] = [
                 ...$allChallengeMetaData[$recommendation['id']],
                 'type' => 'challenge-recommendation', // this is set after metadatum to override the existing type field
@@ -137,14 +134,14 @@ class CarouselServiceV1
     {
         $cardsWithDisplayOrder = [];
         $cardsWithoutDisplayOrder = [];
-        foreach($mutableCards as $card) {
+        foreach ($mutableCards as $card) {
             if (($card['display_order'] ?? 0) > 0) {
                 $cardsWithDisplayOrder[] = $card;
             } else {
                 $cardsWithoutDisplayOrder[] = $card;
             }
         }
-        usort($cardsWithDisplayOrder, function($a, $b) {
+        usort($cardsWithDisplayOrder, function ($a, $b) {
             return $a['display_order'] <=> $b['display_order'];
         });
         return [
