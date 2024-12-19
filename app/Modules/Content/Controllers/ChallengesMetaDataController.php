@@ -3,10 +3,6 @@
 namespace App\Modules\Content\Controllers;
 
 use App\Modules\Content\Models\ChallengeUserProgress;
-use App\Modules\Content\Services\CohortService;
-use App\Modules\Ecommerce\Services\ProductService;
-use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
-use App\Services\UserTimezoneService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -14,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\View\View;
 use App\Modules\Content\Services\ChallengesAwardService;
 use App\Modules\Content\Services\ChallengesService;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
 
 class ChallengesMetaDataController extends Controller
 {
@@ -39,13 +36,15 @@ class ChallengesMetaDataController extends Controller
         $nPackOwners = $this->challengesService->getActiveUsersCount($challengeId);
 
         $userProgress = user() ? ChallengeUserProgress::whereChallengeIdAndUser(
-                $challengeId,
-                user()->id
-            ) : null;
+            $challengeId,
+            user()->id
+        ) : null;
 
         $isEnrolled = $userProgress?->is_active ?? false;
         $hasCompletedChallenge = !is_null($userProgress?->last_completed_date);
-        if($hasCompletedChallenge) $lastCompletionDate = $userProgress?->last_completed_date->toISOString();
+        if ($hasCompletedChallenge) {
+            $lastCompletionDate = $userProgress?->last_completed_date->toISOString();
+        }
 
         $isNotified = $this->challengesService->isUserNotifiedForChallenge($challengeId, user(), ChallengesService::ENROLLMENT_NOTIFICATION_KEY);
         $enrollmentClosedDate = Carbon::parse($enrollmentPageData['enrollment_end_time']);
@@ -60,7 +59,9 @@ class ChallengesMetaDataController extends Controller
             config('railcontent.cohort_timeline_image_urls')['pianote'];
         $enrollmentPageData['has_completed_challenge'] = $hasCompletedChallenge;
         $enrollmentPageData['is_notified'] = $isNotified;
-        if($hasCompletedChallenge) $enrollmentPageData['last_completion_date'] = $lastCompletionDate;
+        if ($hasCompletedChallenge) {
+            $enrollmentPageData['last_completion_date'] = $lastCompletionDate;
+        }
         $view = $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
 
         return view($view, [
@@ -171,6 +172,18 @@ class ChallengesMetaDataController extends Controller
         if (is_null($result)) {
             return response()->json("Challenge $id not found", status: 404);
         }
+
+        CustomerIoCreateEventByUserId::dispatchAfterResponse(
+            $userId,
+            accountName: config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
+            eventName: 'challenge_enrolled',
+            eventData: [
+                'challenge_id' => $id,
+                'brand' => $challenge['brand'] ?? 'musora',
+            ],
+            eventTimestamp: Carbon::now()->timestamp
+        );
+
         return response()->json();
     }
 
