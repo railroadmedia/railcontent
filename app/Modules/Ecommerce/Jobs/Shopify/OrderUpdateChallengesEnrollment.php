@@ -10,6 +10,7 @@ use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use App\Modules\Content\Services\ChallengesService;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
 
 class OrderUpdateChallengesEnrollment extends WebhookChildJob
 {
@@ -51,11 +52,26 @@ class OrderUpdateChallengesEnrollment extends WebhookChildJob
                         ChallengesService::COMMUNITY_NOTIFICATION_KEY
                     );
                 }
+
+                dispatchWithDelay(
+                    new CustomerIoCreateEventByUserId(
+                        $user->id,
+                        accountName: config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
+                        eventName: 'challenge_enrolled',
+                        eventData: [
+                            'challenge_id' => $challengeId,
+                            'brand' => $challenge['brand'] ?? 'musora',
+                        ],
+                        eventTimestamp: Carbon::now()->timestamp
+                    ),
+                    3
+                );
             }
         }
         if ($ownsChallenge && !$user->is_challenge_owner) {
             $user->is_challenge_owner = true;
             $user->save();
         }
+
     }
 }

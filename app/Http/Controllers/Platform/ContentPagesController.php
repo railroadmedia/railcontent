@@ -27,7 +27,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Railroad\Railcontent\Controllers\ContentJsonController;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -277,7 +276,8 @@ class ContentPagesController extends BaseController
         }
     }
 
-    public function challengeFirstLevel(Request $request, $domain, $brand, $firstSlug, $firstId){
+    public function challengeFirstLevel(Request $request, $domain, $brand, $firstSlug, $firstId)
+    {
         return $this->firstLevel($request, $domain, $brand, 'challenge', $firstSlug, $firstId);
     }
 
@@ -1354,6 +1354,11 @@ class ContentPagesController extends BaseController
     public function search(ContentSearchRequest $request): View
     {
         $search = new AlgoliaSearchService();
+
+        if (!empty($request->get('page')) && is_numeric($request->get('page')) && (int)$request->get('page') >= 0) {
+            $request['page'] = ((integer)$request['page']) - 1;
+        }
+
         $searchParams = SearchParameters::fromRequest($search, $request);
 
         $searchResponse = $search->search($searchParams);
@@ -1796,47 +1801,19 @@ class ContentPagesController extends BaseController
     public function artistSongs($route, Request $request, $brand, $artistSlug): View
     {
         $artist = ($artistSlug);
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
         ContentRepository::$countFilterOptionItems = true;
         $types = ['song', 'song-tutorial'];
-        $initialContent = $this->contentService->getFiltered(
-            $request->get('page', 1),
-            $request->get('limit', 12),
-            $request->get('sort', '-popularity'),
-            $types,
-            $request->get('slug_hierarchy', []),
-            $request->get('required_parent_ids', []),
-            ['artist,'.$artist],
-            $request->get('included_fields', []),
-            $request->get('required_user_states', []),
-            $request->get('included_user_states', []),
-        );
-
         $artistName = $artistSlug;
-        $pluralContentType = Str::plural('song');
-
-        $totalPlays = $this->userContentProgressService->countByArtistTypesUserProgress(
-            ['song'],
-            $artist
-        );
         $artistData = $this->artistService->getByName($artist);
 
-        $contentSubtitle = $initialContent->totalResults().' '.$pluralContentType.'    '.$totalPlays.' plays';
-
         return view('content.child-collection', [
-            'initialContent' => $initialContent->toResponseRawJson(),
             'contentType' => $types,
-            'allowedTypes' => ['song', 'song-tutorial'],
             'collectionName' => $artistName,
             'contentName' => 'Songs',
             'contentTitle' => $artistName,
-            'contentSubtitle' => $contentSubtitle,
             'goBackUrl' => '/'.$brand.'/songs',
-            'requiredFields' => ['artist,'.$artistName],
-            'filterableValues' => $catalogueMeta['allowableFilters'],
             'thumbnail_url' => ($artistData) ? $artistData['head_shot_picture_url'] :
                 config('railcontent.default_avatar_artist')[config('railcontent.brand', 'drumeo')],
-            'pluralContentType' => $pluralContentType,
         ]);
     }
 
@@ -1844,11 +1821,7 @@ class ContentPagesController extends BaseController
     {
         $genre = urldecode($genre);
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$contentTypeName] ?? [];
         ContentRepository::$countFilterOptionItems = true;
-        $availableTypes =
-            (in_array($lessonType, ['quick-tips', 'boot-camps'])) ? ['quick-tips', 'boot-camps'] : [$lessonType];
-
         $contentTitle = ucwords($genre.' - '.$contentTypeName);
         $genreData = $this->genreService->getByName($genre);
         $thumb =
@@ -1858,16 +1831,11 @@ class ContentPagesController extends BaseController
 
         return view('content.child-collection', [
             'contentType' => $lessonType,
-            'allowedTypes' => $availableTypes,
             'collectionName' => $genre,
             'contentName' => $lessonType,
             'contentTitle' => $contentTitle,
-            'contentSubtitle' => '',
             'goBackUrl' => '/'.$brand.'/'.$contentTypeName,
-            'requiredFields' => ['style,'.$genre],
-            'filterableValues' => $catalogueMeta['allowableFilters'],
             'thumbnail_url' => $thumb,
-            'pluralContentType' => '',
         ]);
     }
 
