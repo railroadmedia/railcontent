@@ -369,6 +369,9 @@ class ContentProgressEventListener
             $user->save();
         }
 
+        $this->contentEngagementService->update($userId, $content->id, $mediaPlaybackSession->current_second);
+        $this->contentProgressService->updateContentProgress($mediaPlaybackSession, $content);
+
         switch ($mediaType) {
             case MediaTypeEnum::SoundSliceAssignment:
                 $this->handleMediaPlaybackTrackedSoundSlice($userId, $content, $mediaPlaybackSession);
@@ -623,8 +626,6 @@ class ContentProgressEventListener
         Content $content,
         MediaPlaybackSession $mediaPlaybackSession
     ): void {
-        $this->contentEngagementService->update($userId, $content->id, $mediaPlaybackSession->current_second);
-        $this->contentProgressService->updateContentProgress($mediaPlaybackSession, $content);
 
         $lengthInSeconds = $mediaPlaybackSession->media_length_seconds;
 
