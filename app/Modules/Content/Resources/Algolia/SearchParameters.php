@@ -228,9 +228,15 @@ class SearchParameters
             );
         }
 
+        // DEV NOTE: Algolia does pagination using 0th-based indexing, so convert our normal "page" if it was provided
+        $page = $request->get('page', 0);
+        if ($page > 0) {
+            --$page;
+        }
+
         $searchParams->withOptions(
             hitsPerPage: $request->get('limit'),
-            page: $request->get('page')
+            page: $page
         );
 
         return $searchParams;
