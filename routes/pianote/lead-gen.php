@@ -43,6 +43,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/technique-essentials', [LeadGenController::class, 'techniqueEssentials']);
         Route::get('/giveaway/win', [LeadGenController::class, 'win']);
         Route::get('/digital-christmas-songbook', [LeadGenController::class, 'digitalChristmasSongbook']);
+        Route::get('/chords-progressions-digital-book', [LeadGenController::class, 'chordsProgressionsDigitalBook']);
 
         Route::prefix('piano-complete-beginners-bootcamp')->group(
             function () {
