@@ -536,7 +536,7 @@ class ContentProgressEventListener
         $userBrandMethodLevels[$brand] = $event->higherKeyProgress;
         $content = $this->contentService->getById($event->contentId);
         //only brand method should be stored
-        if ($content['slug'] == $brand . '-method') {
+        if (($content['slug'] ?? '') == $brand . '-method') {
             user()->brand_method_levels = $userBrandMethodLevels;
             user()->save();
         }
