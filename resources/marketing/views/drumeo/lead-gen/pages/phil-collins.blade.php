@@ -60,7 +60,7 @@
             <br>
             <a class="join white outline smaller mb-2 sm:mb-0 w-3/4 sm:w-auto" href="/">STUDY WITH DRUMEO</a>
             <br class="sm:hidden">
-            <a class="join drumeo smaller w-3/4 sm:w-auto" target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/phil-collins/The-Genesis-of-Phil-Collins2.pdf">YOUR FREE E-BOOK</a>
+            <a class="join drumeo smaller w-3/4 sm:w-auto" target="_blank" href="https://zhljdcnyme.execute-api.us-east-1.amazonaws.com/image/marketing/drumeo/lead-gen/phil-collins/The-Genesis-of-Phil-Collins.pdf">YOUR FREE E-BOOK</a>
         </div>
     </section>
 
