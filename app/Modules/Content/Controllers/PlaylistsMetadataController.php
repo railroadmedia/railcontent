@@ -384,8 +384,7 @@ class PlaylistsMetadataController extends Controller
                                         'message' => 'Playlist not exists.',
                                     ], 404);
         }
-        $items = $this->playlistsService->getPlaylistItems($playlist->brand, $playlist->id, $request->get('sort','position'));
-
+        $items = $this->playlistsService->getPlaylistItems($playlist->brand, $playlist->id, $request->get('sort', 'position'));
         return response()->json($items);
     }
 
@@ -763,7 +762,7 @@ class PlaylistsMetadataController extends Controller
         }
 
         $pinned = $this->playlistsService->pinPlaylist($playlist);
-        if($pinned == -1) {
+        if ($pinned == -1) {
             return response()->json(
                 [
                     'success' => false,

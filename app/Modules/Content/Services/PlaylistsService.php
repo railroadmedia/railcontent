@@ -3,12 +3,14 @@
 namespace Modules\Content\Services;
 
 use App\Modules\Brand\Enums\Brand;
+use App\Modules\Brand\Enums\Status;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\ReportedPlaylists;
 use App\Modules\Content\Models\UserPlaylist;
 use App\Modules\Content\Models\UserPlaylistContent;
 use App\Modules\Content\Models\UserPlaylistPinned;
+use App\Modules\Content\Services\ContentProgressDataContext;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\RailTracker\Services\ContentLastEngagedService;
 use Carbon\Carbon;
@@ -20,7 +22,6 @@ use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
-use App\Modules\Content\Services\ContentProgressDataContext;
 
 class PlaylistsService
 {
@@ -94,13 +95,13 @@ class PlaylistsService
      * @param string $sort         Sorting parameter; 'position' by default; 'random' to shuffle items
      * @return array               An array of formatted playlist item data.
      */
-    public function getPlaylistItems(string $brand, int $playlistId,  $sort = "position"): \Illuminate\Support\Collection|array
+    public function getPlaylistItems(string $brand, int $playlistId, $sort = "position"): \Illuminate\Support\Collection|array
     {
         $query = UserPlaylistContent::query()
             ->where('user_playlist_id', $playlistId);
         if ($sort == 'random') {
             $query = $query->inRandomOrder();
-        } else{
+        } else {
             $query = $query ->orderBy('position', 'asc');
         }
 
@@ -128,7 +129,11 @@ class PlaylistsService
             return $this->formatPlaylistItemData($item, $sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions);
         });
 
-        return $mergedData;
+        // filter out any items that shouldn't be visible
+        return $mergedData->filter(function (array $playlistItem) {
+            $status = $playlistItem['status'] ?? null;
+            return $status && Status::isVisibleForPlaylists(Status::from($status));
+        });
     }
 
     /**
@@ -141,12 +146,13 @@ class PlaylistsService
      * @param array $userPermissions         An array of user permissions to check access for the playlist item.
      * @return array                         The formatted playlist item data, including route, metadata, and permissions.
      */
-    public function formatPlaylistItemData( mixed $item,
+    public function formatPlaylistItemData(
+        mixed $item,
         \Illuminate\Support\Collection $sanityDataAssoc,
         \Illuminate\Support\Collection $assignmentDataAssoc,
         int $playlistId,
-        array $userPermissions): array
-    {
+        array $userPermissions
+    ): array {
         $sanityInfo = $sanityDataAssoc->get($item->content_id);
         $assignmentInfo = $assignmentDataAssoc->get($item->content_id);
 
@@ -162,7 +168,7 @@ class PlaylistsService
                         return 'Method';
                     case 'learning-path-level':
                         $level = '';
-                        if($sanityInfo['parent_content_data']){
+                        if ($sanityInfo['parent_content_data']) {
                             $parentContentData = json_decode($sanityInfo['parent_content_data']);
                             $level = collect($parentContentData)->keyBy('id')[$parent['id']]->position;
                         }
@@ -260,8 +266,8 @@ class PlaylistsService
 
         $playlists    = UserPlaylist::query()
             ->where('railcontent_user_playlists.user_id', $user->id)
-            ->when(!is_null($brand), fn($query) => $query->ofBrand($brand))
-            ->when(!is_null($categories), fn($query) => $query->ofCategories($categories))
+            ->when(!is_null($brand), fn ($query) => $query->ofBrand($brand))
+            ->when(!is_null($categories), fn ($query) => $query->ofCategories($categories))
             ->searchTerm($term)
             ->sortBy($orderByColumn, $orderByDirection)
             ->paginate($limit, ['*'], 'page', $page);
@@ -304,7 +310,7 @@ class PlaylistsService
      */
     public function formatPlaylists(array $playlists): array
     {
-        $userIds = \Arr::pluck($playlists,'user_id');
+        $userIds = \Arr::pluck($playlists, 'user_id');
         $keyedUsers = User::query()
             ->whereIn('id', $userIds)
             ->get()
@@ -351,7 +357,7 @@ class PlaylistsService
     {
         $playlists = UserPlaylist::whereHas('pins', function ($query) {
             $query->where('user_id', user()->id);
-        })->with('pins')->where('brand','=',$brand)->get();
+        })->with('pins')->where('brand', '=', $brand)->get();
 
         return  $this->formatPlaylists($playlists->all());
     }
@@ -367,8 +373,8 @@ class PlaylistsService
         $allowedPinNumber = config('railcontent.pinned_playlists_nr', 5);
         $pinnedPlaylistsCount = UserPlaylist::whereHas('pins', function ($query) {
             $query->where('user_id', user()->id);
-        })->with('pins')->where('brand','=',$playlist->brand)->count();
-        if($pinnedPlaylistsCount < $allowedPinNumber){
+        })->with('pins')->where('brand', '=', $playlist->brand)->count();
+        if ($pinnedPlaylistsCount < $allowedPinNumber) {
             $pinnedData = [
                 'user_id'      => user()->id,
                 'playlist_id'         => $playlist->id,
@@ -464,7 +470,7 @@ class PlaylistsService
                 $progress = $this->contentProgressDataContext->get($nextItem->content_id, user()->id);
                 if ($progress && $progress['state'] === ProgressState::Completed->value) {
                     // Find the next eligible item from the playlist
-                    $otherItems = $playlistItems->filter(fn($item) => $item->id !== $nextItem->id);
+                    $otherItems = $playlistItems->filter(fn ($item) => $item->id !== $nextItem->id);
                     $contents = $otherItems->pluck('content_id')->toArray();
                     $progressOnOtherItems = $this->contentProgressDataContext->getByIds($contents, user()->id);
                     $nextItem = $otherItems->first(function ($item) use ($progressOnOtherItems) {
