@@ -379,13 +379,27 @@
     @endif
 
 
-    <section class="text-center px-5 sm:px-6 pb-12 sm:pb-16 lg:pb-20 relative overflow-hidden text-white" style="background: linear-gradient(to bottom, #15549f, #0C1524 30%);">
+    <section class="text-center relative bg-cover bg-bottom text-white py-12"
+        style="background-image:url(https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/course-wall.webp);"
+        x-data="{ stick: false }"
+        x-init="window.addEventListener('scroll', () => {
+        stick = window.scrollY + window.innerHeight > $refs.stickySection.offsetTop + $refs.stickySection.offsetHeight;
+    })">
+        <div class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 z-10 sticky top-[40vh]"
+            :class="{ 'bottom-auto': stick }" x-ref="stickySection">
+            <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend text-3xl sm:text-5xl lg:text-7xl leading-none uppercase mb-3"><strong>STEP-BY-STEP</strong></h1>
+            <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend leading-none uppercase mb-3">to any goal.</h1>
+        </div>
+        <div style="padding-bottom: 33%;">
+        </div>
+    </section>
+    <section class="text-center px-5 sm:px-6 pb-12 sm:pb-16 lg:pb-20 relative overflow-hidden text-white" style="background: linear-gradient(to bottom, #0c1524, #0C1524 30%);">
         <div class="container max-w-5xl mx-auto relative z-20">
 {{--            absolute top-0 left-0 right-0--}}
-            <div class=" text-white z-20 text-center px-4 py-48">
-                <h1 class="font-lexend text-3xl sm:text-5xl lg:text-7xl leading-none uppercase mb-3"><strong>STEP-BY-STEP</strong></h1>
-                <h1 class="font-lexend leading-none uppercase mb-3">to any goal.</h1>
-            </div>
+{{--            <div class=" text-white z-20 text-center px-4 py-48">--}}
+{{--                <h1 class="font-lexend text-3xl sm:text-5xl lg:text-7xl leading-none uppercase mb-3"><strong>STEP-BY-STEP</strong></h1>--}}
+{{--                <h1 class="font-lexend leading-none uppercase mb-3">to any goal.</h1>--}}
+{{--            </div>--}}
 
             <div class="text-black bg-white rounded-xl px-4 sm:px-10 py-8 sm:py-12 mb-8">
                 <h5 class="uppercase text-drumeo">Step 1</h5>
