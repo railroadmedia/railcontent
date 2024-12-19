@@ -296,7 +296,7 @@ const isNextLessonLocked = computed(() => {
 })
 
 const showDraft = computed(() => {
-    return videoData.value?.status === 'draft';
+    return videoData.value?.status?.toLowerCase() === 'draft';
 })
 
 //Methods

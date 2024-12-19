@@ -96,7 +96,7 @@ const props = defineProps({
 });
 
 const showDraft = computed(() => {
-    return data.value?.status === 'draft';
+    return data.value?.status?.toLowerCase() === 'draft';
 })
 
 onBeforeMount( async () => {
