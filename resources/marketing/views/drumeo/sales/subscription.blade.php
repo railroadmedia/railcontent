@@ -379,7 +379,7 @@
     @endif
 
 
-    <section class="text-center relative bg-cover bg-bottom text-white py-12"
+    <section class="text-center relative bg-cover bg-bottom text-white py-12 min-h-[500px] h-screen-nav max-h-[1100px]"
         style="background-image:url(https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/course-wall.webp);"
         x-data="{ stick: false }"
         x-init="window.addEventListener('scroll', () => {
@@ -390,7 +390,7 @@
             <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend text-3xl sm:text-5xl lg:text-7xl leading-none uppercase mb-3"><strong>STEP-BY-STEP</strong></h1>
             <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend leading-none uppercase mb-3">to any goal.</h1>
         </div>
-        <div style="padding-bottom: 33%;">
+        <div class="h-full">
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 pb-12 sm:pb-16 lg:pb-20 relative overflow-hidden text-white" style="background: linear-gradient(to bottom, #0c1524, #0C1524 30%);">

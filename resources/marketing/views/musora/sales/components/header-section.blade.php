@@ -1,9 +1,11 @@
-<header class="text-center relative overflow-hidden z-10 h-[560px] sm:h-[700px]"
+<header class="text-center relative overflow-hidden z-10 min-h-[500px] h-screen-nav max-h-[1100px]"
+    style="
     @if(!empty($bubbles))
-    style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);"
+    background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);
     @else
-    style="background:#000;color:#fff;"
+    background:#000;color:#fff;"
     @endif
+    "
 >
     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
         <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
@@ -64,10 +66,10 @@
         @endforeach
     @else
         <div class="transform bottom-0 left-0 w-full absolute z-20 px-4 pb-7 text-center opacity-50">
-            <p class="text-sm mb-3">As featured in:</p>
-            <img class="inline-block h-5" src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png">
-            <img class="inline-block h-5 mx-3" src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png">
-            <img class="inline-block h-5" src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png">
+            <p class="text-sm mb-1 lg:mb-3">As featured in:</p>
+            <img class="inline-block h-4 sm:h-5" src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png">
+            <img class="inline-block h-4 sm:h-5 mx-2 sm:mx-3" src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png">
+            <img class="inline-block h-4 sm:h-5" src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png">
         </div>
 
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: hsl(218deg 50% 5% / 70%);"></div>

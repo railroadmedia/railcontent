@@ -1,12 +1,12 @@
-<section class="py-10 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-8 relative overflow-hidden"
+<section class="px-4 lg:px-8 py-10 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize relative overflow-hidden min-h-[800px] h-screen-nav max-h-[1100px]"
     @if(!empty($bgColor))
         style="background: {{ $bgColor }};"
     @else
         style="background: linear-gradient(to bottom, #1D4689, #0C1524);"
   @endif
   x-data="{lazyLoad:false}">
-    <div class="container mx-auto max-w-6xl mb-5 sm:mb-10">
-        <div class="flex flex-wrap sm:flex-nowrap items-center">
+    <div class="container mx-auto max-w-6xl mb-5 sm:mb-10 h-full">
+        <div class="flex flex-wrap sm:flex-nowrap items-center h-full">
             <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0"
             :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
             x-intersect.once="lazyLoad = true; $refs.collage.src = $refs.collage.dataset.src;">
