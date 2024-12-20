@@ -1354,11 +1354,7 @@ class ContentPagesController extends BaseController
     public function search(ContentSearchRequest $request): View
     {
         $search = new AlgoliaSearchService();
-
-        if (!empty($request->get('page')) && is_numeric($request->get('page')) && (int)$request->get('page') >= 0) {
-            $request['page'] = ((integer)$request['page']) - 1;
-        }
-
+        
         $searchParams = SearchParameters::fromRequest($search, $request);
 
         $searchResponse = $search->search($searchParams);
