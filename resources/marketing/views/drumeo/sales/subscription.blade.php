@@ -517,8 +517,8 @@
                 <p class="leading-normal mb-8 px-4">We’ve tailored each course to keep you motivated – so you<br class="hidden sm:inline-block"> keep returning to the kit & experience amazing results!</p>
 
                 <div class="relative cursor-pointer autoplay-video" x-on:click="demoVid = true;">
-                    <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov-m2.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov2.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
             </div>
 
@@ -527,11 +527,11 @@
                 <h2 class="leading-tight my-2"><strong>Hear the result.</strong></h2>
                 <p class="leading-tight mb-8 px-4 sm:px-0">If you love your lessons, you’re more likely to practice. And when you practice, <br class="hidden sm:inline-block"> you’ll hear the results way sooner – and so will everyone around you!</p>
                 <picture>
-                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet2.png">
-                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet2.png">
+                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet3.webp">
+                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet3.webp">
                     <img
                         class="w-full -mb-6"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet-m2.png"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet-m3.webp"
                         onload="this.classList.remove('opacity-0');"
                     />
                 </picture>
