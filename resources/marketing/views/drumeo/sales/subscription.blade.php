@@ -404,7 +404,6 @@
 
 
     <section class="text-center relative text-white py-12 min-h-[500px] h-screen-nav max-h-[1100px]"
-        style="background-color:#0c1524;"
         x-data="{ stick: false }"
         x-init="window.addEventListener('scroll', () => {
         stick = window.scrollY + window.innerHeight > $refs.stickySection.offsetTop + $refs.stickySection.offsetHeight;
