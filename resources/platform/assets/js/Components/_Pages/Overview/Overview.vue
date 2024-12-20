@@ -13,11 +13,11 @@
             :hero-img="header?.thumbnail"
             :dropdowns="headerDropdown"
             :progress-label-text="headerData?.progressLabelText"
-            :icon-name="headerData?.iconName"
+            :icon-name="headerIconName"
             :ctas="headerCtas"
             :lesson-data="{ challenge: data?.lesson, next_lesson: data?.next_lesson }"
-            :dark-mode-logo="headerData?.darkModeLogo"
-            :light-mode-logo="headerData?.lightModeLogo"
+            :dark-mode-logo="header?.darkModeLogo"
+            :light-mode-logo="header?.lightModeLogo"
         />
 
         <div v-if="nextLesson?.length" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
@@ -315,6 +315,14 @@ const headerCtas = computed(() => {
     }
 })
 
+const headerIconName = computed(() => {
+    if(props.parentType === 'learning-path'){
+        return 'method';
+    }
+
+    return null;
+})
+
 onBeforeMount( async () => {
     const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType, props.parentType);
 
@@ -330,5 +338,6 @@ onBeforeMount( async () => {
     platformStore.setLoadingState(OverviewLoading.value);
 
     //console.log('OverviewData.value', OverviewData.value)
+    console.log('parent type', props.parentType)
 })
 </script>
