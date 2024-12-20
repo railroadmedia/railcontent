@@ -410,7 +410,7 @@
 {{--                <h1 class="font-lexend leading-none uppercase mb-3">to any goal.</h1>--}}
 {{--            </div>--}}
 
-            <div class="text-black bg-white rounded-xl px-4 sm:px-10 py-8 sm:py-12 mb-8">
+            <div class="text-black bg-white rounded-xl px-4 sm:px-6 py-8 sm:py-12 mb-8">
                 <h5 class="uppercase text-drumeo">Step 1</h5>
                 <h2 class="leading-tight my-2"><strong>Choose Your Goal</strong></h2>
                 <p class="leading-tight mb-8">You’ll enjoy guided courses from the world’s best drummers. Take a peek at a few favorites:</p>
@@ -424,79 +424,59 @@
                                             next: 'splide__arrow--next your-class-next -right-1',
                                             pagination: 'splide__pagination flex -bottom-10',
                                     },
-                                    padding: '3rem',
-                                    perPage: 4,
-                                    perMove: 1,
-                                    type: 'loop',
+                                    padding: '0rem',
+                                    arrows: false,
+                                    pagination: false,
+                                    perPage: 5,
                                     focus: 0,
                                     interval: 2000,
                                     lazyLoad: 'nearby',
                                     breakpoints: {
-                                        1020: {
-                                            padding: '2rem',
-                                        },
                                         768: {
                                             padding: '3rem',
                                             perPage: 3,
+                                            perMove: 1,
+                                            pagination: true,
+                                            arrows: true,
+                                            type: 'loop',
                                             drag: 'free',
                                             snap: false,
                                         },
                                         620: {
-                                            padding: '1rem',
-                                            perPage: 2,
-                                            arrows: false,
+                                            perPage: 1,
                                         },
                                     },
                                 }).mount()
                             },
                         }"
                     >
-                        <section x-ref="splide" class="splide mb-10 sm:mb-10">
+                        <section x-ref="splide" class="splide mb-10 lg:mb-0">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @php
                                         $packs = [
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/30DD.webp",
+                                                "image" => "marketing/drumeo/membership/homepage/2025/courses-01.webp",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/30DC.webp",
+                                                "image" => "marketing/drumeo/membership/homepage/2025/courses-02.webp",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/30DI.webp",
+                                                "image" => "marketing/drumeo/membership/homepage/2025/courses-03.webp",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/GI.webp",
+                                                "image" => "marketing/drumeo/membership/homepage/2025/courses-04.webp",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/4-Way-Coordination.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Musical-Exercises.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Rock-Drumming.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Rudiments-Patterns.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Songs-Breakdown.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/The-Creative-Mindset.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Writing-Drum-Parts.webp",
+                                                "image" => "marketing/drumeo/membership/homepage/2025/courses-05.webp",
                                             ],
                                         ]
                                     @endphp
                                     @foreach ($packs as $image)
                                         <li class="splide__slide flex flex-col items-center justify-start px-1">
-                                            <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 150%;">
+                                            <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 161%;">
                                                 <picture>
-                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}">
-                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$image['image']}}">
+                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/{{$image['image']}}">
                                                     <img
                                                         class="absolute top-0 left-0 w-full h-full object-cover object-top transition-opacity opacity-0 duration-300"
                                                         data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}"
@@ -512,22 +492,31 @@
                     </div>
             </div>
 
-            <div class="text-white pt-6 sm:pt-10 mb-8 rounded-xl overflow-hidden bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/august/tablet-demo-bg.webp');">
+            <div class="text-white pt-6 sm:pt-10 mb-8 rounded-xl overflow-hidden bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov-bg.webp');">
                 <h5 class="uppercase text-drumeo">Step 2</h5>
                 <h2 class="leading-tight my-2"><strong>Press Play</strong></h2>
                 <p class="leading-normal mb-8 px-4">We’ve tailored each course to keep you motivated – so you<br class="hidden sm:inline-block"> keep returning to the kit & experience amazing results!</p>
 
                 <div class="relative cursor-pointer autoplay-video" x-on:click="demoVid = true;">
-                    <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/august/tablet-demo-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/pianote/promos/august/tablet-demo.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
             </div>
 
-            <div class="text-black bg-white rounded-xl px-4 sm:px-10 pt-8 sm:pt-12">
+            <div class="text-black bg-white rounded-xl pl-4 lg:px-10 pt-8 sm:pt-12">
                 <h5 class="uppercase text-drumeo">Step 3</h5>
                 <h2 class="leading-tight my-2"><strong>Hear the result.</strong></h2>
-                <p class="leading-tight mb-8">If you love your lessons, you’re more likely to practice. And when you practice, <br class="hidden sm:inline-block"> you’ll hear the results way sooner – and so will everyone around you!</p>
-                <img class="w-full -mb-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/august/step3.png">
+                <p class="leading-tight mb-8 px-4 sm:px-0">If you love your lessons, you’re more likely to practice. And when you practice, <br class="hidden sm:inline-block"> you’ll hear the results way sooner – and so will everyone around you!</p>
+                <picture>
+                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet2.png">
+                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet2.png">
+                    <img
+                        class="w-full -mb-6"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet-m2.png"
+                        onload="this.classList.remove('opacity-0');"
+                    />
+                </picture>
+                <img class="" src="">
             </div>
         </div>
     </section>
@@ -545,7 +534,7 @@
     @include('musora.sales.components.reason-cards-section', [
         'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum featuring many of the world’s best teachers. ',
-        'seven' => true,
+        'full' => true,
     ])
 
 
@@ -577,13 +566,13 @@
     @elseif(!empty($trialVersion))
         @include('musora.sales.components.order-section-collage', [
         'orderUrl' => '/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true',
-        'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
+        'logo' => 'marketing/drumeo/membership/homepage/2025/logo.webp',
         'header' => 'Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and singing lessons with full access to all Musora communities.</li>',
-        'image' => 'marketing/drumeo/membership/homepage/2024/collage.webp',
+        'image' => 'marketing/drumeo/membership/homepage/2025/collage.webp',
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'drumming',
@@ -618,18 +607,18 @@
     @else
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,
-        'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
+        'logo' => 'marketing/drumeo/membership/homepage/2025/logo.webp',
         'header' => '<strong>Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and singing lessons with full access to all Musora communities.</li>',
-        'image' => 'marketing/drumeo/membership/homepage/2024/collage.webp',
+        'image' => 'marketing/drumeo/membership/homepage/2025/collage.webp',
         ])
     @endif
 
     @include('musora.sales.components.app-section', [
-        'image' => 'marketing/drumeo/membership/homepage/webp-format/devices.webp',
+        'image' => 'marketing/drumeo/membership/homepage/2025/devices.webp',
         'appleUrl' => 'https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.drumeo',
     ])

@@ -589,7 +589,7 @@
 
     @include('musora.sales.components.reason-cards-section', [
         'bgColor' => "#f4f8fb",
-        'seven' => true,
+        'full' => true,
     ])
 
     @php
