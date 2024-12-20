@@ -346,8 +346,9 @@ class SanityGateway
             $fieldsString
         }";
         $results = $this->sanity->fetch($query);
-        foreach ($results as $document) {
-            $this->postProcessDocument($document);
+
+        foreach ($results as $index => $document) {
+            $this->postProcessDocument($results[$index]);
         }
         return $results;
     }

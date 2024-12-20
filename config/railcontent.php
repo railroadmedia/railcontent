@@ -1128,6 +1128,13 @@ return [
                         'use_recommended_endpoint' => true,
                         'value' => ['filter,lesson']
                     ],
+                    [
+                        'name' => 'Workouts',
+                        'short_name' => 'WORKOUTS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,workout']
+                    ],
                 ]
             ],
             'pack' => [
