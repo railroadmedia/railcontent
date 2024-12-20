@@ -163,50 +163,58 @@ export const useUserStore = defineStore({
     },
     async updateProfile(data) {
       try {
-          const response = await updateUserProfile(this.token, this.userId, data);
-
-          //Update Pinia values if they exist
-          data.hasOwnProperty('display_name') && (this.user.display_name = data.display_name);
-          //About You
-          data.hasOwnProperty('first_name') && (this.user.first_name = data.first_name);
-          data.hasOwnProperty('last_name') && (this.user.last_name = data.last_name);
-          data.hasOwnProperty('country') && (this.user.country = data.country);
-          data.hasOwnProperty('birthday') && (this.user.birthday = data.birthday);
-          data.hasOwnProperty('biography') && (this.user.biography = data.biography);
-          //Drum Gear
-          data.hasOwnProperty('drums_playing_since_year') && (this.user.drums_playing_since_year = data.drums_playing_since_year);
-          data.hasOwnProperty('drums_gear_set_brands') && (this.user.drums_gear_set_brands = data.drums_gear_set_brands);
-          data.hasOwnProperty('drums_gear_cymbal_brands') && (this.user.drums_gear_cymbal_brands = data.drums_gear_cymbal_brands);
-          data.hasOwnProperty('drums_gear_hardware_brands') && (this.user.drums_gear_hardware_brands = data.drums_gear_hardware_brands);
-          data.hasOwnProperty('drums_gear_stick_brands') && (this.user.drums_gear_stick_brands = data.drums_gear_stick_brands);
-          //Piano Gear
-          data.hasOwnProperty('piano_playing_since_year') && (this.user.piano_playing_since_year = data.piano_playing_since_year);
-          data.hasOwnProperty('piano_gear_piano_brands') && (this.user.piano_gear_piano_brands = data.piano_gear_piano_brands);
-          data.hasOwnProperty('piano_gear_keyboard_brands') && (this.user.piano_gear_keyboard_brands = data.piano_gear_keyboard_brands);
-          //Guitar Gear
-          data.hasOwnProperty('guitar_playing_since_year') && (this.user.guitar_playing_since_year = data.guitar_playing_since_year);
-          data.hasOwnProperty('guitar_gear_guitar_brands') && (this.user.guitar_gear_guitar_brands = data.guitar_gear_guitar_brands);
-          data.hasOwnProperty('guitar_gear_amp_brands') && (this.user.guitar_gear_amp_brands = data.guitar_gear_amp_brands);
-          data.hasOwnProperty('guitar_gear_pedal_brands') && (this.user.guitar_gear_pedal_brands = data.guitar_gear_pedal_brands);
-          data.hasOwnProperty('guitar_gear_string_brands') && (this.user.guitar_gear_string_brands = data.guitar_gear_string_brands);
-          //Singing Gear
-          data.hasOwnProperty('singing_since_year') && (this.user.singing_since_year = data.singing_since_year);
-          data.hasOwnProperty('singing_gear_mic_brands') && (this.user.singing_gear_mic_brands = data.singing_gear_mic_brands);
-          //Video Settings
-          data.hasOwnProperty('use_legacy_video_player') && (this.user.use_legacy_video_player = data.use_legacy_video_player);
-
-          window.shownotification({
-              icon: 'check',
-              text: 'Profile successfully updated!'
-          });
-          return response;
-      } catch (error) {
-          window.shownotification({
+        const response = await updateUserProfile(this.token, this.userId, data);
+    
+        if (response.status === 200) {
+            // Update Pinia values if they exist
+            data.hasOwnProperty('display_name') && (this.user.display_name = data.display_name);
+            data.hasOwnProperty('first_name') && (this.user.first_name = data.first_name);
+            data.hasOwnProperty('last_name') && (this.user.last_name = data.last_name);
+            data.hasOwnProperty('country') && (this.user.country = data.country);
+            data.hasOwnProperty('birthday') && (this.user.birthday = data.birthday);
+            data.hasOwnProperty('biography') && (this.user.biography = data.biography);
+            // Drum Gear
+            data.hasOwnProperty('drums_playing_since_year') && (this.user.drums_playing_since_year = data.drums_playing_since_year);
+            data.hasOwnProperty('drums_gear_set_brands') && (this.user.drums_gear_set_brands = data.drums_gear_set_brands);
+            data.hasOwnProperty('drums_gear_cymbal_brands') && (this.user.drums_gear_cymbal_brands = data.drums_gear_cymbal_brands);
+            data.hasOwnProperty('drums_gear_hardware_brands') && (this.user.drums_gear_hardware_brands = data.drums_gear_hardware_brands);
+            data.hasOwnProperty('drums_gear_stick_brands') && (this.user.drums_gear_stick_brands = data.drums_gear_stick_brands);
+            // Piano Gear
+            data.hasOwnProperty('piano_playing_since_year') && (this.user.piano_playing_since_year = data.piano_playing_since_year);
+            data.hasOwnProperty('piano_gear_piano_brands') && (this.user.piano_gear_piano_brands = data.piano_gear_piano_brands);
+            data.hasOwnProperty('piano_gear_keyboard_brands') && (this.user.piano_gear_keyboard_brands = data.piano_gear_keyboard_brands);
+            // Guitar Gear
+            data.hasOwnProperty('guitar_playing_since_year') && (this.user.guitar_playing_since_year = data.guitar_playing_since_year);
+            data.hasOwnProperty('guitar_gear_guitar_brands') && (this.user.guitar_gear_guitar_brands = data.guitar_gear_guitar_brands);
+            data.hasOwnProperty('guitar_gear_amp_brands') && (this.user.guitar_gear_amp_brands = data.guitar_gear_amp_brands);
+            data.hasOwnProperty('guitar_gear_pedal_brands') && (this.user.guitar_gear_pedal_brands = data.guitar_gear_pedal_brands);
+            data.hasOwnProperty('guitar_gear_string_brands') && (this.user.guitar_gear_string_brands = data.guitar_gear_string_brands);
+            // Singing Gear
+            data.hasOwnProperty('singing_since_year') && (this.user.singing_since_year = data.singing_since_year);
+            data.hasOwnProperty('singing_gear_mic_brands') && (this.user.singing_gear_mic_brands = data.singing_gear_mic_brands);
+            // Video Settings
+            data.hasOwnProperty('use_legacy_video_player') && (this.user.use_legacy_video_player = data.use_legacy_video_player);
+    
+            window.shownotification({
+                icon: 'check',
+                text: 'Profile successfully updated!'
+            });
+    
+            return response;
+        } else {
+            console.log('error', response);
+        }
+    } catch (error) {
+        // Parse and display the error message
+        const errorMessage = error.response?.data?.errors?.['error-message'] || 'An unexpected error occurred.';
+        console.error('ERROR', errorMessage);
+    
+        window.shownotification({
             icon: 'error',
-            text: 'Hmm, something has gone wrong. Your profile could not be updated.'
-          });
-          throw new Error('Failed to update profile');
-      }
+            text: errorMessage
+        });
+    }
+    
     },
 
     clearUserProfilePictureUrl() {
