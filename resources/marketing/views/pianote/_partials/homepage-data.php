@@ -60,75 +60,36 @@ $pianote = [
     "gridItems" => [
         [
             "big" => true,
-            'image' => 'marketing/pianote/membership/homepage/2024/10-level-curriculum.webp',
+            'image' => 'marketing/pianote/membership/homepage/2025/reason-01.webp',
+            'imageM' => 'marketing/pianote/membership/homepage/2025/reason-01-m.webp',
             'title' => '10-Level Curriculum',
-            'desc' => 'Develop your core skills, techniques, and musicality to play beautifully in any setting. ',
-            'lessonInfo' => [
-                [
-                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/10-level-curriculum.webp',
-                ],
-            ]
+            'desc' => 'The most trusted step-by-step video lessons for every technique, pattern, and style.',
         ],
         [
-            'image' => 'marketing/pianote/membership/homepage/2024/practical-assignments.webp',
-            'title' => 'Practical Assignments',
-            'desc' => 'You\'ll always have on-screen assignments and practice tools to help you see results.',
-            'lessonInfo' => [
-                [
-                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/practical-assignments.webp',
-                ],
-            ]
+            'image' => 'marketing/pianote/membership/homepage/2025/reason-03.webp',
+            'imageM' => 'marketing/pianote/membership/homepage/2025/reason-03-m.webp',
+            'title' => '24/7 Access & Support',
+            'desc' => 'Weekly livestreams, student lesson plans, downloadable videos, and a global piano community.',
         ],
         [
-            'image' => 'marketing/pianote/membership/homepage/2024/downloadable-videos.webp',
-            'title' => 'Downloadable Videos',
-            'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime. ',
-            'lessonInfo' => [
-                [
-                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/downloadable-videos.webp',
-                ],
-            ]
-        ],
-        [
-            'image' => 'marketing/pianote/membership/homepage/2024/guided-workouts.webp',
+            'image' => 'marketing/pianote/membership/homepage/2025/reason-02.webp',
+            'imageM' => 'marketing/pianote/membership/homepage/2025/reason-02-m.webp',
             'title' => 'Guided Workouts',
             'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
-            'lessonInfo' => [
-                [
-                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/guided-workouts.webp',
-                ],
-            ]
         ],
         [
             "big" => true,
-            'image' => 'marketing/pianote/membership/homepage/2024/world-class-teachers2.webp',
+            'image' => 'marketing/pianote/membership/homepage/2025/reason-04.webp',
+            'imageM' => 'marketing/pianote/membership/homepage/2025/reason-04-m.webp',
             'title' => 'World-Class Teachers',
             'desc' => 'Lifetime teachers, touring performers, recording professionals, and trending stars. ',
-            'lessonInfo' => [
-                [
-                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/world-class-teachers2.webp',
-                ],
-            ]
         ],
         [
-            'image' => 'marketing/pianote/membership/homepage/2024/personalized-support.webp',
-            'title' => 'Personalized Support',
-            'desc' => 'Get weekly live streams, student lesson plans, and access to a global piano community. ',
-            'lessonInfo' => [
-                [
-                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/personalized-support.webp',
-                ],
-            ]
-        ],
-        [
-            'image' => 'marketing/musora/membership/homepage/2024/7-reasons-03.webp',
-            'title' => 'Note-for-Note Sheet Music for 1500+ Popular Songs',
-            'desc' => 'Slow down the tempo and loop the trouble spots to nail your favorite songs with expertly transcribed sheet music.',
-            'lessonInfo' => [
-                [
-                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-03.webp',
-                ],
-            ]
+            "full" => true,
+            'image' => 'marketing/pianote/membership/homepage/2025/reason-05.webp',
+            'imageM' => 'marketing/pianote/membership/homepage/2025/reason-05-m.webp',
+            'title' => '1500+ Songs',
+            'desc' => 'Slow down the tempo and loop the trouble spots to nail your favorite songs with expertly transcribed sheet music you can download and print.',
         ],
     ],
     "buttons" => [

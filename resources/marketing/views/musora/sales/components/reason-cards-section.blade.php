@@ -1,5 +1,5 @@
 <div id="method" class="anchor"></div>
-<section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
+<section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 relative bg-white"
 @if(!empty($bgColor)) style="background:{{ $bgColor }};" @endif>
     <div class="container max-w-5xl mx-auto">
         <h2 class="leading-tight"><strong><span class="border-2 border-{{ $theme }} rounded-full px-3 sm:px-4 py-1 inline-block">@if(!empty($full)) 5 @else 6 @endif</span> reasons why you’ll <br class="inline sm:hidden">love learning here.</strong></h2>

@@ -27,7 +27,7 @@
     ]
 @endphp
 
-<section class="py-12 md:py-20">
+<section class="py-12 md:py-20 relative bg-white">
     <div class="container mx-auto max-w-5xl px-6">
         <h2 class="font-extrabold mb-10 text-center">Frequently Asked Questions</h2>
         @foreach($faqs as $faq)

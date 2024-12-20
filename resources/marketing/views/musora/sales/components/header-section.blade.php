@@ -65,16 +65,24 @@
             </picture>
         @endforeach
     @else
-        <div class="transform bottom-0 left-0 w-full absolute z-20 px-4 pb-7 text-center opacity-50">
-            <p class="text-sm mb-1 lg:mb-3">As featured in:</p>
-            <img class="inline-block h-4 sm:h-5" src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png">
-            <img class="inline-block h-4 sm:h-5 mx-2 sm:mx-3" src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png">
-            <img class="inline-block h-4 sm:h-5" src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png">
-        </div>
+        @if(!empty($featured) && is_array($featured))
+            <div class="transform bottom-0 left-0 w-full absolute z-20 px-4 pb-7 text-center opacity-50">
+                <p class="text-sm mb-1 lg:mb-3">As featured in:</p>
+                @foreach($featured as $feature)
+                    <img class="inline-block h-4 sm:h-5 {{ !$loop->last ? 'mr-2 sm:mr-3' : '' }}" src="{{ $feature }}" alt="Featured logo">
+                @endforeach
+            </div>
+        @endif
 
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: hsl(218deg 50% 5% / 70%);"></div>
-        <video class="sm:hidden block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header6-m.mp4"></video>
-        <video class="hidden sm:block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header3.mp4"></video>
+        @if(!empty($video))
+            @if(!empty($videoM))
+                <video class="sm:hidden block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $video }}"></video>
+                <video class="hidden sm:block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $videoM }}"></video>
+            @else
+                <video class="object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $video }}"></video>
+            @endif
+        @endif
     @endif
 </header>
 @if(!empty($slides))

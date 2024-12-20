@@ -349,27 +349,51 @@
     @if(empty($hideHeader) || !$hideHeader)
     @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
+            'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header.mp4',
             'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => 'POPULAR SONGS',
+            'featured' => [
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+            ],
         ])
     @elseif(!empty($promoPage))
         @include('musora.sales.components.header-section', [
+            'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header.mp4',
             'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
+            'featured' => [
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+            ],
         ])
     @elseif(!empty($keyPage))
         @include('musora.sales.components.header-section', [
+            'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header.mp4',
             'header' => 'Unlimited<br> drum lessons +<br>  a <span class="relative inline-block">free drum key<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
+            'featured' => [
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+            ],
         ])
     @else
         @include('musora.sales.components.header-section', [
+            'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header.mp4',
             'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => 'POPULAR SONGS',
+            'featured' => [
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+            ],
         ])
     @endif
     @endif
@@ -385,13 +409,12 @@
         x-init="window.addEventListener('scroll', () => {
         stick = window.scrollY + window.innerHeight > $refs.stickySection.offsetTop + $refs.stickySection.offsetHeight;
     })">
-        <picture>
+        <picture class="fixed inset-0 -z-10">
             <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall.webp">
             <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall-m.webp">
             <img
-                class="absolute top-0 left-0 w-full h-full object-cover object-bottom transition-opacity opacity-0 duration-300"
+                class="w-full h-full object-cover object-bottom"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall-m.webp"
-                onload="this.classList.remove('opacity-0');"
             />
         </picture>
         <div class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 z-10 sticky top-[40vh]"
@@ -402,14 +425,10 @@
         <div class="h-full">
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 pb-12 sm:pb-16 lg:pb-20 relative overflow-hidden text-white" style="background: linear-gradient(to bottom, #0c1524, #0C1524 30%);">
+    <section class="text-center px-5 sm:px-6 pb-12 sm:pb-16 lg:pb-20 relative overflow-hidden text-white"
+        style="background: linear-gradient(to bottom, transparent 50%, #0C1524);"
+    >
         <div class="container max-w-5xl mx-auto relative z-20">
-{{--            absolute top-0 left-0 right-0--}}
-{{--            <div class=" text-white z-20 text-center px-4 py-48">--}}
-{{--                <h1 class="font-lexend text-3xl sm:text-5xl lg:text-7xl leading-none uppercase mb-3"><strong>STEP-BY-STEP</strong></h1>--}}
-{{--                <h1 class="font-lexend leading-none uppercase mb-3">to any goal.</h1>--}}
-{{--            </div>--}}
-
             <div class="text-black bg-white rounded-xl px-4 sm:px-6 py-8 sm:py-12 mb-8">
                 <h5 class="uppercase text-drumeo">Step 1</h5>
                 <h2 class="leading-tight my-2"><strong>Choose Your Goal</strong></h2>
@@ -516,7 +535,6 @@
                         onload="this.classList.remove('opacity-0');"
                     />
                 </picture>
-                <img class="" src="">
             </div>
         </div>
     </section>
@@ -526,17 +544,14 @@
         'workoutsBG' => 'marketing/drumeo/membership/homepage/2024/workouts-card3.webp',
     ])
 
-
     @php
         $gridItems = $drumeo['gridItems'];
     @endphp
-
     @include('musora.sales.components.reason-cards-section', [
         'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum featuring many of the world’s best teachers. ',
         'full' => true,
     ])
-
 
     @php
         $testimonials = $drumeo['testimonials'];
@@ -544,13 +559,13 @@
         $facebook = convertNumber(Prices::$drumeoFacebookLikes);
         $instagram = convertNumber(Prices::$drumeoInstagramFollowers);
     @endphp
-
     @include('musora.sales.components.testimonials-section', [
         'header' => 'drummers',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
         'facebookLink' => 'https://facebook.com/drumeo/',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
     ])
+
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
             'badge' => 'marketing/drumeo/membership/homepage/2024/guarantee.webp',
@@ -597,7 +612,6 @@
                 ],
             ];
         @endphp
-
         @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
         'header' => 'Online drum lessons for all skill levels.',
