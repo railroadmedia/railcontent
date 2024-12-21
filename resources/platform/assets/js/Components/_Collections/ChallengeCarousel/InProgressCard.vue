@@ -108,8 +108,8 @@
                 </svg>
                 <div class="tw-absolute tw-text-center tw-flex tw-flex-col tw-items-center">
                     <!-- Challenge Logos -->
-                    <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" />
-                    <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" />
+                    <img class="tw-h-14 tw-w-[155px] tw-object-contain tw-object-center tw-mb-1 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" />
+                    <img class="tw-h-14 tw-w-[155px] tw-object-contain tw-object-center tw-mb-1 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" />
                     <div class="tw-text-[11px] lg:tw-text-[13px] tw-font-bold tw-max-w-[160px] tw-mt-2" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
                 </div>
             </div>
@@ -343,7 +343,7 @@ const closeMobileDropdown = () => {
 const runCountDown = (stop = false) => {
     const intervalCountdown = setInterval(() => {
         // remove UTC iso part of the string. It's already in the users timezone from the BE
-        const count = countdown(props.challenge.next_lesson?.unlock_date.substring(0, 19), true);
+        const count = countdown(props.challenge.next_lesson?.unlock_date.substring(0, 19));
         countdownString.value = count;
 
         if(count === '00:00:00'){

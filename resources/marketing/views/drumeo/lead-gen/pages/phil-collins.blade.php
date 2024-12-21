@@ -4,8 +4,8 @@
     <title>The Genesis Of Phil Collins | Drumeo</title>
     <meta property="og:title" content="The Genesis Of Phil Collins | Drumeo">
 
-    <meta name="description" content="We made a free e-book for all of the Phil Collins fans out there – no pesky email address required. ">
-    <meta property="og:description" content="We made a free e-book for all of the Phil Collins fans out there – no pesky email address required. ">
+    <meta name="description" content="We made a free e-book for all of the Phil Collins fans out there – no strings attached.">
+    <meta property="og:description" content="We made a free e-book for all of the Phil Collins fans out there – no strings attached.">
 
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/lead-gen/phil-collins/header.webp" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
@@ -41,7 +41,7 @@
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2300x0/filters:quality(95)/marketing/drumeo/lead-gen/phil-collins/header.webp">
             <div class="my-7 sm:my-10">
                 <h2 class="leading-tight mb-4"><strong>Our gift to you.</strong></h2>
-                <p class="leading-normal text-left max-w-xl">We made a free e-book for all of the Phil Collins fans out there – no pesky email address required. 
+                <p class="leading-normal text-left max-w-xl">We made a free e-book for all of the Phil Collins fans out there – no strings attached.
                     <br><br>
                     But first, we just wanted to quickly introduce ourselves. 
                     <br><br>
@@ -60,7 +60,7 @@
             <br>
             <a class="join white outline smaller mb-2 sm:mb-0 w-3/4 sm:w-auto" href="/">STUDY WITH DRUMEO</a>
             <br class="sm:hidden">
-            <a class="join drumeo smaller w-3/4 sm:w-auto" target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/phil-collins/The-Genesis-of-Phil-Collins.pdf">YOUR FREE E-BOOK</a>
+            <a class="join drumeo smaller w-3/4 sm:w-auto" target="_blank" href="https://zhljdcnyme.execute-api.us-east-1.amazonaws.com/image/marketing/drumeo/lead-gen/phil-collins/The-Genesis-of-Phil-Collins.pdf">YOUR FREE E-BOOK</a>
         </div>
     </section>
 

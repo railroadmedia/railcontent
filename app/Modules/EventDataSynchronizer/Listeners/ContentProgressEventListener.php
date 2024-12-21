@@ -369,6 +369,9 @@ class ContentProgressEventListener
             $user->save();
         }
 
+        $this->contentEngagementService->update($userId, $content->id, $mediaPlaybackSession->current_second);
+        $this->contentProgressService->updateContentProgress($mediaPlaybackSession, $content);
+
         switch ($mediaType) {
             case MediaTypeEnum::SoundSliceAssignment:
                 $this->handleMediaPlaybackTrackedSoundSlice($userId, $content, $mediaPlaybackSession);
@@ -533,7 +536,7 @@ class ContentProgressEventListener
         $userBrandMethodLevels[$brand] = $event->higherKeyProgress;
         $content = $this->contentService->getById($event->contentId);
         //only brand method should be stored
-        if ($content['slug'] == $brand . '-method') {
+        if (($content['slug'] ?? '') == $brand . '-method') {
             user()->brand_method_levels = $userBrandMethodLevels;
             user()->save();
         }
@@ -623,8 +626,6 @@ class ContentProgressEventListener
         Content $content,
         MediaPlaybackSession $mediaPlaybackSession
     ): void {
-        $this->contentEngagementService->update($userId, $content->id, $mediaPlaybackSession->current_second);
-        $this->contentProgressService->updateContentProgress($mediaPlaybackSession, $content);
 
         $lengthInSeconds = $mediaPlaybackSession->media_length_seconds;
 

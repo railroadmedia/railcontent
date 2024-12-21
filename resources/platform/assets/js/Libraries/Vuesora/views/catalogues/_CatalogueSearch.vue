@@ -159,7 +159,7 @@ export default {
     },
     mounted() {
         // Create the debounced function when the component is mounted
-        this.debouncedSearch = debounce(this.submitSearchImmediate, 150);
+        this.debouncedSearch = debounce(this.submitSearchImmediate, 300);
     },
     beforeDestroy() {
         // Cancel the debounced function when the component is destroyed

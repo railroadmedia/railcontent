@@ -139,6 +139,19 @@ window.Vapor = require('laravel-vapor');
 let progressTracker;
 let hasBeenPlayed = false;
 
+const sendProgressTrackingEvent = (mediaElementVueInstance) => {
+    progressTracker.send({
+        mediaType: 'video',
+        mediaCategory: 'vimeo',
+        watchPosition: mediaElementVueInstance.currentTimeInSeconds
+            || mediaElementVueInstance.currentTime,
+        totalDuration: mediaElementVueInstance.videoLength
+            || mediaElementVueInstance.totalDuration,
+        brand:mediaElementVueInstance.brand,
+        contentId: mediaElementVueInstance.contentId
+    });
+};
+
 const app = createApp({
     provide: {
         sidebarNavigationLinks: window.sidebarNavigationLinks,
@@ -146,26 +159,17 @@ const app = createApp({
     },
     methods: {
         handleVideoPlay(payload) {
+            const { mediaElementVueInstance } = this.$refs;
+
             if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
-                ContentService.markContentAsStarted(payload.contentId);
+                sendProgressTrackingEvent(mediaElementVueInstance);
             }
             if (progressTracker == null) {
                 progressTracker = new ProgressTracker();
 
-                const { mediaElementVueInstance } = this.$refs;
-
                 if (mediaElementVueInstance) {
                     window.addEventListener('visibilitychange', (event) => {
-                      progressTracker.send({
-                            mediaType: 'video',
-                            mediaCategory: 'vimeo',
-                            watchPosition: mediaElementVueInstance.currentTimeInSeconds
-                                || mediaElementVueInstance.currentTime,
-                            totalDuration: mediaElementVueInstance.videoLength
-                                || mediaElementVueInstance.totalDuration,
-                            brand:mediaElementVueInstance.brand,
-                            contentId: mediaElementVueInstance.contentId
-                        });
+                      sendProgressTrackingEvent(mediaElementVueInstance);
                     });
                 }
             }
@@ -174,7 +178,10 @@ const app = createApp({
         },
 
         handleVideoPause() {
+            const { mediaElementVueInstance } = this.$refs;
+            
             progressTracker.stop();
+            sendProgressTrackingEvent(mediaElementVueInstance);
         },
     }
 });

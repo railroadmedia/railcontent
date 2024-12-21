@@ -524,7 +524,7 @@ class Content extends Model
     public function setParentId($value, $childPosition = 1)
     {
         $hierarhy =
-            ContentHierarchy::query()
+            ContentHierarchy::onWriteConnection()
                 ->where('parent_id', '=', $value)
                 ->where('child_id', '=', $this->id)
                 ->get();
@@ -821,7 +821,7 @@ class Content extends Model
     public function setChildId($value, $childPosition = 1)
     {
         $hierarhy =
-            ContentHierarchy::query()
+            ContentHierarchy::onWriteConnection()
                 ->where('parent_id', '=', $this->id)
                 ->where('child_id', '=', $value)
                 ->get();

@@ -87,7 +87,6 @@ const uniqueSettings = reactive({
     audioSource: null,
 });
 
-
 // computed
 
 const trackingPayload = () => {
@@ -122,7 +121,7 @@ const handlePlay = (event) => {
     //Update Content Service
     if (!hasBeenPlayed.value) {
         hasBeenPlayed.value = true;
-        ContentService.markContentAsStarted(props.contentId);
+        sendProgressTracking();
     }
     //Progress Tracker
     progressTracker.start();
@@ -139,15 +138,13 @@ const handlePause = () => {
 }
 
 const sendProgressTracking = () => {
-    if (props.soundsliceType === 'song') {
-        progressTracker.send({
-            contentId: props.contentId,
-            mediaType: 'assignment',
-            mediaCategory: 'soundslice',
-            watchPosition: Math.round(currentTimeRef.value),
-            totalDuration: Math.round(endTime.value)
-        });
-    }
+    progressTracker.send({
+        contentId: props.contentId,
+        mediaType: 'assignment',
+        mediaCategory: 'soundslice',
+        watchPosition: Math.round(currentTimeRef.value),
+        totalDuration: Math.round(endTime.value)
+    });
 }
 
 const spacebarToPlayPause = (event) => {
@@ -354,7 +351,7 @@ onBeforeMount(() => {
     }
 
     //GET Current Time
-    
+
     if (typeof props.startTime === 'number' || typeof props.startTime === 'string') {
         uniqueSettings.time = props.startTime;
     } else if (localStorage.getItem(`${props.soundsliceSlug}_currentTime`)) {

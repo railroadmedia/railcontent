@@ -320,7 +320,7 @@ class AuthenticationController extends Controller
     /**
      * @param $userId
      */
-    public function loginAsUser(Request $request, $userId): RedirectResponse
+    public function loginAsUser(Request $request, $userId): RedirectResponse|JsonResponse
     {
         $this->authorize('login_as_users');
 

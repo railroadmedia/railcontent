@@ -94,7 +94,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->append(\App\Http\Middleware\SessionDomains::class);
-        $middleware->append(\App\Http\Middleware\SetTestNow::class);
+        $middleware->append(\App\Http\Middleware\TempTokenAuthRedirectFixForMCSContentEndpoint::class);
 
         $middleware->group('web_public', [
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,

@@ -14,6 +14,7 @@ class ContentSearchController extends Controller
     {
         // TODO do we need to support date_time_cutoff? If so, update ContentSearchRequest and SearchParameters::fromRequest
         $search = new AlgoliaSearchService();
+
         $searchParams = SearchParameters::fromRequest($search, $request);
 
         $searchResponse = $search->search($searchParams);

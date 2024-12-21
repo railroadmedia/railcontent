@@ -1,6 +1,6 @@
 <template>
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
-      <Breadcrumb :breadcrumbs="breadcrumbs" />
+      <Breadcrumb :breadcrumbs="breadcrumbData" />
       <PageHeader
         :is-loading="isLoading"
         :page-type="headerData?.type"
@@ -67,13 +67,14 @@
   import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
 
   const props = defineProps({
-    lessonType: String,
-    breadcrumbs: Array,
-    sessionToken: String,
     askQuestionRecipient: String,
-    emailLogoLink: String,
-    showInProgress: Boolean,
+    breadcrumbs: Array,
     catalogueType: String,
+    emailLogoLink: String,
+    isNewReleases: Boolean,
+    lessonType: String,
+    sessionToken: String,
+    showInProgress: Boolean,
   });
 
   const collectionStore = useCollectionStore();
@@ -86,10 +87,12 @@
   const continueSection = ref([]);
   const metaData = ref(null);
   const headerData = ref(null);
+  const contentType = ref('');
+  const breadcrumbData = ref(null);
 
   const recommendedProps = computed(() => {
     const recommended = {};
-    if (props.lessonType === 'Recommendation') {
+    if (contentType.value === 'Recommendation') {
       recommended.endpoint = '/railcontent/recommended';
       recommended.noResultsMessage = 'Start your learning journey to help us select the appropriate videos for you.';
     }
@@ -108,19 +111,32 @@
   })
 
   onBeforeMount(async() => {
+    //Account for 'New Releases' Catalog
+    if(props.isNewReleases) {
+      contentType.value = 'new-release';
+      breadcrumbData.value = [
+        { title: "New Releases" }
+      ]
+    } else {
+      contentType.value = props.lessonType;
+      breadcrumbData.value = props.breadcrumbs;
+    }
+
+    const metaType = props.isNewReleases ? 'new-release' : queryTypeConverter(props.lessonType);
+
     try {
       // Fetch started content (in-progress workouts)
-      fetchMetadata(brand.value, props.lessonType).then( result => {
+      fetchMetadata(brand.value, metaType).then( result => {
         metaData.value = result;
       }).catch( error => {
         console.log('error fetching catalog metaData', error)
       });
 
-      const startedIds = await fetchContentInProgress(props.lessonType, brand.value, { limit: 20 });
+      const startedIds = await fetchContentInProgress(contentType.value, brand.value, { limit: 20 });
       const lessons = await fetchByRailContentIds(startedIds.started);
 
-      headerData.value = getHeaderData(metaData.value, brand.value, props.askQuestionRecipient, props.emailLogoLink, props.lessonType)
-
+      headerData.value = getHeaderData(metaData.value, brand.value, props.askQuestionRecipient, props.emailLogoLink, contentType.value)
+      
       // Set the continue section with started workouts
       continueSection.value = lessons;
 
@@ -129,7 +145,7 @@
         tabOptions: tabData.value,
         queryType: queryTypeConverter(props.lessonType),
         ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true }),
-        ...(props.lessonType === 'Recommendation' && { fetchType: 'recommendation' }),
+        ...(props.lessonType === 'Recommendation' ? { fetchType: 'recommendation' } : props.isNewReleases && { fetchType: 'new-release' }),
       });
     } catch (error) {
         console.error('Error fetching continue section data:', error);

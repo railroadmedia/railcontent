@@ -1084,6 +1084,21 @@ return [
                     'email' => 'Email'
                 ],
             ],
+            'Chords Progressions Digital Book' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_chords_progressions_digital_book',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
         ],
         'guitareo' => [
             'The Guitarists Toolbox' => [

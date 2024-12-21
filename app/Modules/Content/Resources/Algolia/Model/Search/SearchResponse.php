@@ -148,4 +148,14 @@ class SearchResponse extends AlgoliaSearchResponse
 
         return $data;
     }
+
+    public function getPage(): ?int
+    {
+        $page = parent::getPage();
+        // DEV NOTE: Algolia does pagination using 0th-based indexing, so convert to our normal "page" if we have one
+        if (!is_null($page)) {
+            ++$page;
+        }
+        return $page;
+    }
 }

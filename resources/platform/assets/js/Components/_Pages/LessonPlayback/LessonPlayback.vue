@@ -11,6 +11,8 @@
                 <div class="tw-w-full">
                     <!--Video-->
                     <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-relative">
+                        <DraftLabel v-if="showDraft" />
+
                         <!-- Skeleton Loading -->
                         <div v-if="isLoading"
                             class="tw-animate-pulse tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full tw-bg-[#F2F2F2] dark:tw-bg-[#002039]">
@@ -84,7 +86,7 @@
                         :description="videoData.description" :instructors="videoData.instructor" :is-liked="isLiked"
                         :like-count="likeData?.likeCount" :content-id="videoData.id" :user-id="userId"
                         :resources="videoData.resources" :difficulty="videoData.difficulty" :is-challenge="isChallenge"
-                        :show-practice-button="showPracticeButton" :show-share-button="false"
+                        :show-practice-button="showPracticeButton" :show-share-button="true"
                         :show-complete-button="isWorkout || isChallenge"
                         report-recipient="support+question-and-answer@drumeo.com" :is-completed="isCompleted"
                         :show-add-to-list="true" :show-info-button="showInfoButton"
@@ -194,7 +196,6 @@ import ContentInfo from "@collections/ContentInfo/ContentInfo.vue";
 import Intercom from "@vuesora/assets/js/Services/intercom";
 import Helpscout from "@vuesora/assets/js/Services/helpscout";
 import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
-import ContentService from "@vuesora/assets/js/Services/content";
 import ContentProgress from "@collections/ContentProgress/ContentProgress.vue";
 import RelatedLessonsToggle from "@collections/RelatedLessons/RelatedLessonsToggle.vue";
 import RelatedLessons from "@collections/RelatedLessons/RelatedLessons.vue";
@@ -204,6 +205,7 @@ import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCove
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import ChallengeCompletionModal from '@collections/Modal/ChallengeCompletionModal';
+import DraftLabel from '@units/DraftLabel/DraftLabel';
 import {
     fetchLessonContent,
     fetchRelatedLessons,
@@ -214,6 +216,7 @@ import {
     getProgressState,
     // this is not getting percentage, this is getting lats watched position in seconds, possibly rename this function
     getProgressPercentage,
+    contentStatusCompleted
 } from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
 import { getBreadcrumbs } from './breadcrumbUtils';
@@ -292,10 +295,14 @@ const isNextLessonLocked = computed(() => {
     return nextPreviousLessons.value?.nextLesson?.is_locked;
 })
 
+const showDraft = computed(() => {
+    return videoData.value?.status?.toLowerCase() === 'draft';
+})
+
 //Methods
 const handleVideoPlay = (payload) => {
     if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
-        ContentService.markContentAsStarted(payload.contentId);
+        sendProgressTrackerEvent();
     }
     if (progressTracker == null) {
         progressTracker = new ProgressTracker();
@@ -341,7 +348,7 @@ const handleVideoEnd = (showRelatedSection = true) => {
         isRelatedSectionOpen.value = true;
     }
     sendProgressTrackerEvent();
-    ContentService.markContentAsComplete(contentId.value);
+    contentStatusCompleted(contentId.value);
 };
 
 const getBrandSpecificParams = () => {
@@ -504,11 +511,12 @@ const fetchLessonData = async () => {
         isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
         nextPreviousLessons.value = nextPrevResult.status === 'fulfilled' ? nextPrevResult.value : null;
         relatedLessons.value = relatedLessonsResult.status === 'fulfilled' ? relatedLessonsResult.value.related_lessons : [];
-        progress_state.value = progressStateResult.status === 'fulfilled' ? progressStateResult.value : 'unstarted';
+        progress_state.value = progressStateResult.status === 'fulfilled' && progressStateResult.value ? progressStateResult.value : 'unstarted';
+
         if(progressResult.status === 'fulfilled') {
             progress_percent.value = progressResult.value;
             lastWatchedPositionInSeconds.value = progressResult.value;
-            isCompleted.value = progressResult.value === 100;
+            isCompleted.value = progress_state.value === 'completed';
         }
 
         // Optional: log errors for any rejected promises

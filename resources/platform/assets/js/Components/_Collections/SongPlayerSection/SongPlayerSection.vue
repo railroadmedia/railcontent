@@ -176,10 +176,9 @@ import { useUserStore } from '@stores/user';
 import ContentLessonActionButtons from '@vuesora/Components/VideoResources/ContentLessonActionButtons.vue';
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
-import ContentService from "@vuesora/assets/js/Services/content";
 import MembershipUpgradeSongCover from '../MembershipUpgradeSongCover/MembershipUpgradeSongCover';
 import DraftLabel from '@units/DraftLabel/DraftLabel';
-import { getProgressPercentage } from 'musora-content-services';
+import { getProgressPercentage, contentStatusCompleted, contentStatusReset } from 'musora-content-services';
 
 const userStore = useUserStore();
 const { brand, userId, userEmail, userDisplayName } = storeToRefs(userStore);
@@ -239,15 +238,13 @@ const markSongAsComplete = () => {
             callbacks: {
                 submit: () => {
                     lessonProgressRef.value = null;
-                    ContentService.resetContentProgress(props.contentId)
-                        .then((resolved) => {
-                            if (resolved) {
-                                window.shownotification({
-                                    icon: 'check',
-                                    text: `Removed! Your progress has been reset.`
-                                })
-                                lessonProgressRef.value = null;
-                            }
+                    contentStatusReset(props.contentId)
+                        .then(() => {
+                            window.shownotification({
+                                icon: 'check',
+                                text: `Removed! Your progress has been reset.`
+                            })
+                            lessonProgressRef.value = null;
                         }).catch(() => {
                             lessonProgressRef.value = 100;
                             window.shownotification({
@@ -260,7 +257,7 @@ const markSongAsComplete = () => {
         });
     } else {
         lessonProgressRef.value = 100;
-        ContentService.markContentAsComplete(props.contentId).then(() => {
+        contentStatusCompleted(props.contentId).then(() => {
             window.shownotification({
                 icon: 'check',
                 text: `You completed this song!`

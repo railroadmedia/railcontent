@@ -238,7 +238,7 @@ export default {
      * @param {String|Number} contentId - the content ID
      * @returns {Promise} resolved promise with the response.data object
      */
-    resetContentProgress(contentId) {
+    contentStatusReset(contentId) {
         return axios.put(`${endpointPrefix}/railcontent/reset`, {
             content_id: contentId,
         })
