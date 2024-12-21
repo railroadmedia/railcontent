@@ -35,6 +35,33 @@ $drumeo = [
             "credit" => "Rolling Stone Top 100 Drummer",
         ],
     ],
+    "packs" => [
+        [
+            "image" => "marketing/drumeo/membership/homepage/2025/courses-01.webp",
+            'vimeoId' => '884916532',
+            'name' => 'thirtydaydrummermodal',
+        ],
+        [
+            "image" => "marketing/drumeo/membership/homepage/2025/courses-02.webp",
+            'vimeoId' => '884916500',
+            'name' => 'thirtydaychopsmodal',
+        ],
+        [
+            "image" => "marketing/drumeo/membership/homepage/2025/courses-03.webp",
+            'vimeoId' => '1010405112',
+            'name' => 'thirtydaydoublebassmodal',
+        ],
+        [
+            "image" => "marketing/drumeo/membership/homepage/2025/courses-04.webp",
+            'vimeoId' => '1018759800',
+            'name' => 'thirtydayjazzmodal',
+        ],
+        [
+            "image" => "marketing/drumeo/membership/homepage/2025/courses-05.webp",
+            'vimeoId' => '975466470',
+            'name' => 'thirtydayindependencemodal',
+        ],
+    ],
     "gridItems" => [
         [
             "big" => true,

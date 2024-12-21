@@ -1,7 +1,7 @@
 @if(!empty($vid))
     <div class="cursor-pointer autoplay-video w-full relative z-20 bg-black min-h-[500px] h-screen-nav max-h-[1100px]" x-on:click="trailer = true;">
         <div class="absolute top-0 left-0 right-0 text-white z-20 text-center px-4 pt-7 sm:pt-10">
-            <h1 class="font-lexend  text-3xl sm:text-5xl lg:text-6xl leading-none uppercase mb-3"><strong>JUST PRESS PLAY</strong></h1>
+            <h1 class="font-lexend  text-3xl sm:text-5xl lg:text-6xl leading-none uppercase mb-3"><strong>PLAY TO LEARN</strong></h1>
             <h4 class="leading-tight">Improve your skills in<br class="sm:hidden"> just 10 minutes a day.</h4>
         </div>
         <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-20 mt-5"></i>
@@ -23,7 +23,7 @@
         <div class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 bg-white rounded-xl z-10 sticky top-[40vh]"
             :class="{ 'bottom-auto': stick }" x-ref="stickySection">
 
-            <h1 class="font-lexend  text-3xl sm:text-5xl lg:text-6xl leading-none uppercase mb-1 sm:mb-3"><strong>JUST PRESS PLAY</strong></h1>
+            <h1 class="font-lexend  text-3xl sm:text-5xl lg:text-6xl leading-none uppercase mb-1 sm:mb-3"><strong>PLAY TO LEARN</strong></h1>
             <h4 class="leading-tight">Improve your skills in just<br class="sm:hidden">  10 minutes a day.</h4>
         </div>
         <div class="overflow-hidden pt-2 sm:pt-6">

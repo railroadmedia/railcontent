@@ -1,6 +1,5 @@
 @php
     require_once(resource_path('marketing/views/drumeo/_partials/homepage-data.php'));
-    require_once(resource_path('marketing/views/drumeo/_partials/bonus-data.php'));
 @endphp
 
 @extends('drumeo._partials.global-layout')
@@ -297,18 +296,16 @@
     </style>
 
 @stop
-
 @section('body-data')
     x-data ='{
+        demoVid : false,
         soundslice : false,
         waitlist: false,
         trailer : false,
         lazyLoad: false,
         videoLoaded: false,
-        @foreach($bonuses as $bonus)
-            @if(!empty($bonus['vimeoId']))
-                modal{{ $bonus['vimeoId'] }}: false,
-            @endif
+        @foreach($drumeo['packs'] as $modalData)
+        {{ $modalData['name'] }}: false,
         @endforeach
     }'
 @endsection
@@ -356,9 +353,18 @@
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => 'POPULAR SONGS',
             'featured' => [
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                [
+                    'url' => 'https://www.nytimes.com/2024/10/22/arts/music/amplifier-newsletter-music-social-media-accounts.html',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                ],
+                [
+                    'url' => 'https://www.rollingstone.com/music/music-features/phil-collins-in-the-air-tonight-drum-fill-videos-1106780/',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                ],
+                [
+                    'url' => 'https://www.nme.com/news/music/dream-theater-mike-potnoy-play-pull-me-under-first-time-13-years-3563614',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                ],
             ],
         ])
     @elseif(!empty($promoPage))
@@ -366,9 +372,18 @@
             'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header.mp4',
             'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
             'featured' => [
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                [
+                    'url' => 'https://www.nytimes.com/2024/10/22/arts/music/amplifier-newsletter-music-social-media-accounts.html',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                ],
+                [
+                    'url' => 'https://www.rollingstone.com/music/music-features/phil-collins-in-the-air-tonight-drum-fill-videos-1106780/',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                ],
+                [
+                    'url' => 'https://www.nme.com/news/music/dream-theater-mike-potnoy-play-pull-me-under-first-time-13-years-3563614',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                ],
             ],
         ])
     @elseif(!empty($keyPage))
@@ -376,9 +391,18 @@
             'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header.mp4',
             'header' => 'Unlimited<br> drum lessons +<br>  a <span class="relative inline-block">free drum key<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
             'featured' => [
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                [
+                    'url' => 'https://www.nytimes.com/2024/10/22/arts/music/amplifier-newsletter-music-social-media-accounts.html',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                ],
+                [
+                    'url' => 'https://www.rollingstone.com/music/music-features/phil-collins-in-the-air-tonight-drum-fill-videos-1106780/',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                ],
+                [
+                    'url' => 'https://www.nme.com/news/music/dream-theater-mike-potnoy-play-pull-me-under-first-time-13-years-3563614',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                ],
             ],
         ])
     @else
@@ -390,9 +414,18 @@
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => 'POPULAR SONGS',
             'featured' => [
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
-                'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                [
+                    'url' => 'https://www.nytimes.com/2024/10/22/arts/music/amplifier-newsletter-music-social-media-accounts.html',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                ],
+                [
+                    'url' => 'https://www.rollingstone.com/music/music-features/phil-collins-in-the-air-tonight-drum-fill-videos-1106780/',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                ],
+                [
+                    'url' => 'https://www.nme.com/news/music/dream-theater-mike-potnoy-play-pull-me-under-first-time-13-years-3563614',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                ],
             ],
         ])
     @endif
@@ -413,13 +446,14 @@
             <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall-m.webp">
             <img
                 class="w-full h-full object-cover object-bottom"
+                style="background-color:#0C1524;"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall-m.webp"
             />
         </picture>
         <div class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 z-10 sticky top-[40vh]"
             :class="{ 'bottom-auto': stick }" x-ref="stickySection">
-            <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend text-3xl sm:text-5xl lg:text-7xl leading-none uppercase mb-3"><strong>STEP-BY-STEP</strong></h1>
-            <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend leading-none uppercase mb-3">to any goal.</h1>
+            <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend text-4xl sm:text-6xl lg:text-7xl leading-none uppercase mb-1 sm:mb-3"><strong>STEP-BY-STEP</strong></h1>
+            <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend leading-none uppercase mb-3">to any goal</h1>
         </div>
         <div class="h-full">
         </div>
@@ -471,33 +505,15 @@
                         <section x-ref="splide" class="splide mb-10 lg:mb-0">
                             <div class="splide__track">
                                 <ul class="splide__list">
-                                    @php
-                                        $packs = [
-                                            [
-                                                "image" => "marketing/drumeo/membership/homepage/2025/courses-01.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/drumeo/membership/homepage/2025/courses-02.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/drumeo/membership/homepage/2025/courses-03.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/drumeo/membership/homepage/2025/courses-04.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/drumeo/membership/homepage/2025/courses-05.webp",
-                                            ],
-                                        ]
-                                    @endphp
-                                    @foreach ($packs as $image)
+                                    @foreach ($drumeo['packs'] as $tile)
                                         <li class="splide__slide flex flex-col items-center justify-start px-1">
-                                            <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 161%;">
+                                            <div class="relative w-full rounded-xl overflow-hidden"
+                                                @if(!empty($tile['vimeoId'])) @click="{{ $tile['name'] }} = true" @endif>
                                                 <picture>
-                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/{{$image['image']}}">
+                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/{{$tile['image']}}">
                                                     <img
-                                                        class="absolute top-0 left-0 w-full h-full object-cover object-top transition-opacity opacity-0 duration-300"
-                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}"
+                                                        class="w-full transition-opacity opacity-0 duration-300"
+                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$tile['image']}}"
                                                         onload="this.classList.remove('opacity-0');"
                                                     />
                                                 </picture>
@@ -581,9 +597,9 @@
         @include('musora.sales.components.order-section-collage', [
         'orderUrl' => '/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true',
         'logo' => 'marketing/drumeo/membership/homepage/2025/logo.webp',
-        'header' => 'Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
+        'header' => '<strong>Unlimited drum lessons.<br>The world’s best teachers.<br> 1500+ popular songs.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online drum lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and singing lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/drumeo/membership/homepage/2025/collage.webp',
@@ -621,9 +637,9 @@
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,
         'logo' => 'marketing/drumeo/membership/homepage/2025/logo.webp',
-        'header' => '<strong>Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.</strong>',
+        'header' => '<strong>Unlimited drum lessons.<br>The world’s best teachers.<br> 1500+ popular songs.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online drum lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and singing lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/drumeo/membership/homepage/2025/collage.webp',
@@ -644,10 +660,22 @@
         'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[
+        'name' => 'demoVid',
+        'video' => '1017241160',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '898623255',
         'vimeo' => true,
     ])
+    @foreach ($drumeo['packs'] as $packModal)
+        @include('_partials.components.video-modal', [
+            'name' => $packModal['name'],
+            'video' => $packModal['vimeoId'],
+            'vimeo' => true,
+        ])
+    @endforeach
 
     @if(!empty($promoVersion))
         @include("drumeo.sales.partials._footer", [

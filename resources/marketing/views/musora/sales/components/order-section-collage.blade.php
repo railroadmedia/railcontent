@@ -1,12 +1,28 @@
-<section class="px-4 lg:px-8 py-10 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize relative overflow-hidden min-h-[800px] sm:min-h-[1000px] lg:min-h-[650px] h-screen-nav max-h-[1100px]"
+<section class="px-4 lg:px-8 py-10 sm:py-16 lg:py-24 relative overflow-hidden text-white text-center customize relative overflow-hidden"
     @if(!empty($bgColor))
         style="background: {{ $bgColor }};"
     @else
         style="background: linear-gradient(to bottom, #1D4689, #0C1524);"
   @endif
   x-data="{lazyLoad:false}">
-    <div class="container mx-auto max-w-6xl mb-5 sm:mb-10 h-full">
+    <div class="container mx-auto max-w-6xl mb-5 lg:mb-14 h-full">
         <div class="flex flex-wrap lg:flex-nowrap items-center h-full">
+            <div class="flex w-full justify-center lg:justify-start lg:w-1/2 lg:w-auto lg:order-1 lg:pl-10 mb-7 lg:mb-0"
+                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                x-intersect.once="lazyLoad = true; $refs.collage.src = $refs.collage.dataset.src;">
+                <picture>
+                    <source type="image/webp" media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/{!! $image !!}">
+                    <source type="image/webp" media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1350x0/filters:quality(95)/{!! $image !!}">
+                    <img x-ref="collage"
+                        class="object-contain h-auto max-w-lg sm:max-w-2xl lg:max-w-4xl transition-opacity opacity-0"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/30x0/filters:quality(10)/filters:blur(6)/{!! $image !!}"
+                        data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1030x0/filters:quality(95)/{!! $image !!}"
+                        alt="{{$theme}} collage image"
+                    >
+                </picture>
+            </div>
             <div class="text-center lg:text-left w-full lg:w-auto flex-shrink-0">
                 @if(!empty($logo))
                     <img class="h-11 sm:h-12 mb-2 sm:mb-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/{{ $logo }}" alt="logo">
@@ -92,23 +108,6 @@
                         @endif
                     </div>
                 @endif
-            </div>
-            <div class="flex w-full justify-center lg:justify-start lg:w-1/2 lg:w-auto lg:order-1 lg:pl-10"
-                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                x-intersect.once="lazyLoad = true; $refs.collage.src = $refs.collage.dataset.src;">
-                <picture>
-                    <source type="image/webp" media="(min-width:1280px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/{!! $image !!}">
-                    <source type="image/webp" media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1130x0/filters:quality(95)/{!! $image !!}">
-                    <source type="image/webp" media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1020x0/filters:quality(95)/{!! $image !!}">
-                    <img x-ref="collage"
-                        class="object-contain h-auto max-w-lg sm:max-w-2xl md:max-w-3xl lg:max-w-4xl transition-opacity opacity-0"
-                        loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/30x0/filters:quality(10)/filters:blur(6)/{!! $image !!}"
-                        data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/{!! $image !!}"
-                        alt="{{$theme}} collage image"
-                    >
-                </picture>
             </div>
         </div>
     </div>

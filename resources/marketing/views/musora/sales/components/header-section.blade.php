@@ -8,6 +8,9 @@
     "
 >
     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
+        <h4 class="relative w-auto inline-block mb-4 lg:mb-6 font-black font-lexend leading-none uppercase">
+            NEW YEAR. <span class="text-{{ $theme }}">NO EXCUSES.</span>
+        </h4><br>
         <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
             {!! $header !!}
         </h1>
@@ -44,7 +47,7 @@
                 @endif
             </a>
             @if(empty($noTrailer))
-                <div class="sm:mx-0.5 w-full sm:w-56 join outline @if(!empty($bubbles)) black @else white @endif smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+                <div class="sm:mx-0.5 w-full sm:w-56 join outline @if(!empty($bubbles)) black @else white @endif smaller autoplay-video" x-on:click="trailer = true;">1-MINUTE TRAILER</div>
             @endif
             @if(!empty($reviewsButton))
                 <a class="sm:mx-0.5 w-full sm:w-56 join outline @if(!empty($bubbles)) black @else white @endif smaller"
@@ -69,7 +72,9 @@
             <div class="transform bottom-0 left-0 w-full absolute z-20 px-4 pb-7 text-center opacity-50">
                 <p class="text-sm mb-1 lg:mb-3">As featured in:</p>
                 @foreach($featured as $feature)
-                    <img class="inline-block h-4 sm:h-5 {{ !$loop->last ? 'mr-2 sm:mr-3' : '' }}" src="{{ $feature }}" alt="Featured logo">
+                    <a href="{{ $feature['url'] }}">
+                        <img class="inline-block h-4 sm:h-5 {{ !$loop->last ? 'mr-2 sm:mr-3' : '' }}" src="{{ $feature['src'] }}" alt="Featured logo">
+                    </a>
                 @endforeach
             </div>
         @endif

@@ -57,13 +57,40 @@ $pianote = [
             'credit' => ' Website For Musicians',
         ],
     ],
+    "packs" => [
+        [
+            "image" => "marketing/pianote/membership/homepage/2025/courses-01b.webp",
+            'vimeoId' => '879916161',
+            'name' => 'newpianoplayersmodal',
+        ],
+        [
+            "image" => "marketing/pianote/membership/homepage/2025/courses-02.webp",
+            'vimeoId' => '823788317',
+            'name' => 'easychordsmodal',
+        ],
+        [
+            "image" => "marketing/pianote/membership/homepage/2025/courses-03.webp",
+            'vimeoId' => '879913986',
+            'name' => 'thirtydaybluespianomodal',
+        ],
+        [
+            "image" => "marketing/pianote/membership/homepage/2025/courses-04.webp",
+            'vimeoId' => '952486575',
+            'name' => 'readmusicmodal',
+        ],
+        [
+            "image" => "marketing/pianote/membership/homepage/2025/courses-05b.webp",
+            'vimeoId' => '928599834',
+            'name' => 'bettertechniquemodal',
+        ],
+    ],
     "gridItems" => [
         [
             "big" => true,
             'image' => 'marketing/pianote/membership/homepage/2025/reason-01.webp',
             'imageM' => 'marketing/pianote/membership/homepage/2025/reason-01-m.webp',
             'title' => '10-Level Curriculum',
-            'desc' => 'The most trusted step-by-step video lessons for every technique, pattern, and style.',
+            'desc' => 'Develop your core skills, techniques, and musicality to play beautifully in any setting.',
         ],
         [
             'image' => 'marketing/pianote/membership/homepage/2025/reason-03.webp',
@@ -82,14 +109,14 @@ $pianote = [
             'image' => 'marketing/pianote/membership/homepage/2025/reason-04.webp',
             'imageM' => 'marketing/pianote/membership/homepage/2025/reason-04-m.webp',
             'title' => 'World-Class Teachers',
-            'desc' => 'Lifetime teachers, touring performers, recording professionals, and trending stars. ',
+            'desc' => 'Lifetime teachers, touring performers, recording professionals, and trending stars.',
         ],
         [
             "full" => true,
             'image' => 'marketing/pianote/membership/homepage/2025/reason-05.webp',
             'imageM' => 'marketing/pianote/membership/homepage/2025/reason-05-m.webp',
-            'title' => '1500+ Songs',
-            'desc' => 'Slow down the tempo and loop the trouble spots to nail your favorite songs with expertly transcribed sheet music you can download and print.',
+            'title' => '500+ Songs',
+            'desc' => 'Learn your favorite songs faster with note-for-note sheet music and practice tools. ',
         ],
     ],
     "buttons" => [
