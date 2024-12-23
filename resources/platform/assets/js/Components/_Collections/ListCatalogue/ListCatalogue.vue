@@ -1,8 +1,9 @@
 <template>
     <div class="flex flex-column">
         <template v-if="!isLoading && !collectionStoreLoading">
+            <!-- First 5 regular items -->
             <CatalogueListItem
-                v-for="(item, i) in content"
+                v-for="(item, i) in content.slice(0, 5)"
                 :key="'list' + item.id"
                 :index="item.week || i + 1"
                 :item="item"
@@ -23,8 +24,8 @@
                 @open-challenge-lock-modal="openChallengeLockModal"
             />
 
-            <div id="branch-paths" v-if="branchPathContent.data" >
-                <!-- Method Paths -->
+            <!-- Branch paths at position 6 -->
+            <div id="branch-paths" v-if="branchPathContent.data">
                 <CatalogueListItem
                     v-for="(branchItem, j) in branchPathContent.data"
                     :key="'branch' + branchItem.id"
@@ -46,12 +47,37 @@
                     :is-next-lesson="isNextLesson"
                 />
             </div>
+
+            <!-- Remaining regular items -->
+            <CatalogueListItem
+                v-for="(item, i) in content.slice(5)"
+                :key="'list' + item.id"
+                :index="item.week || i + 6"
+                :item="item"
+                :is-coach="isCoach"
+                :content-type="item.type"
+                :overview="displayItemsAsOverview"
+                :display-user-interactions="displayUserInteractions"
+                :content-type-override="contentTypeOverride"
+                :show-numbers="showNumbers"
+                :no-link="lockUnowned && item.is_owned === false"
+                :lock-unowned="lockUnowned"
+                :is_search="is_search"
+                :force-wide-thumbs="forceWideThumbs"
+                :show-reset-progress="showResetProgress"
+                :destroy-on-list-removal="destroyOnListRemoval"
+                :compact-layout="compactLayout"
+                :is-next-lesson="isNextLesson"
+                @open-challenge-lock-modal="openChallengeLockModal"
+            />
         </template>
-        <SkeletonListCatalogueItem v-else v-for="i in 8" :key="i" />
+        <SkeletonListCatalogueItem v-else v-for="i in 8" :key="i"/>
     </div>
 
-    <ChallengeLockedModal v-if="isChallengeLockModalOpen" :date="selectedChallengeDate" @close-modal="closeChallengeLockModal" />
+    <ChallengeLockedModal v-if="isChallengeLockModalOpen" :date="selectedChallengeDate"
+                          @close-modal="closeChallengeLockModal"/>
 </template>
+
 <script setup>
 import { ref } from 'vue';
 import { storeToRefs } from "pinia/dist/pinia";
@@ -123,7 +149,6 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
-    //Branch Paths
     branchPathIndex: {
         type: Number,
         default: () => 0,
@@ -136,7 +161,7 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
-})
+});
 
 const platformStore = usePlatformStore();
 const collectionStore = useCollectionStore();
@@ -150,9 +175,9 @@ const selectedChallengeDate = ref(null);
 const openChallengeLockModal = (date) => {
     selectedChallengeDate.value = date;
     isChallengeLockModalOpen.value = true;
-}
+};
 
 const closeChallengeLockModal = () => {
     isChallengeLockModalOpen.value = false;
-}
+};
 </script>
