@@ -409,12 +409,22 @@ class ChallengesService
                         $challenge['lessons']
                     );
                     $previousCompletedLesson = $nextPreviousLessonAroundFirstIncompleteLesson['previous_lesson'];
-                    $durationText = $userProgress->is_locked ?
-                        $this->getDurationText(
-                            Carbon::parse($startEndDate['start_date']),
-                            Carbon::parse($startEndDate['end_date'])
-                        ) :
-                        'Unlocked';
+
+                    if ($challenge['is_solo'] ?? false) {
+                        $durationText = $userProgress->is_locked ?
+                            $this->getDurationText(
+                                Carbon::parse($startEndDate['start_date']),
+                                Carbon::parse($startEndDate['end_date'])
+                            ) :
+                            'Unlocked';
+                    } else {
+                        $durationText = $this->getDurationText(
+                            Carbon::parse($challenge['cohort_start_date']),
+                            Carbon::parse($challenge['cohort_end_date'])
+                        );
+                    }
+
+
                     $challengeMetaDataToReturn = [
                         'is_user_enrolled' => true,
                         'is_locked' => $userProgress->is_locked,
