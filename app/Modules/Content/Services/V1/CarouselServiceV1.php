@@ -7,6 +7,7 @@ use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Services\LearningPathsService;
+use App\Modules\Content\Services\UserNotificationKeys;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Carbon;
@@ -122,7 +123,7 @@ class CarouselServiceV1
                 'enrolled_users' => $this->challengesService->getEnrolledUsersMetadata(
                     $recommendation['id'],
                 ),
-                'is_user_notified' => $this->challengesService->isUserNotifiedForChallenge($recommendation['id'], $user, ChallengesService::ENROLLMENT_NOTIFICATION_KEY),
+                'is_user_notified' => $this->challengesService->isUserNotifiedForChallenge($recommendation['id'], $user, UserNotificationKeys::ENROLLMENT_NOTIFICATION_KEY),
                 'is_draft' => $recommendation['is_banner_draft'] ?? false,
                 'display_order' => $recommendation['display_order'] ?? 0,
             ];

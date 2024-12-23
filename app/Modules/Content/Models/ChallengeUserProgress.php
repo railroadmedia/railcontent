@@ -123,18 +123,23 @@ class ChallengeUserProgress extends Model
     public function getStartAndEndDate(): array
     {
         $startDate = $this->start_date;
+        $finalStartDate = null;
         if ($startDate) {
             $endDate = Carbon::parse($startDate);
             foreach ($this->lessons_meta_data as $lesson) {
+                if (is_null($finalStartDate) && self::isCurriculumMetadataLesson($lesson)) {
+                    $finalStartDate = Carbon::parse($lesson['unlock_date']);
+                }
                 $unlockDate = Carbon::parse($lesson['unlock_date']);
                 $endDate = max($endDate, $unlockDate);
             }
             $endDate = $endDate->toISOString();
         } else {
             $endDate = $startDate;
+            $finalStartDate = $startDate;
         }
         return [
-            'start_date' => $startDate,
+            'start_date' => $finalStartDate,
             'end_date' => $endDate,
         ];
     }

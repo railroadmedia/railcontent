@@ -2,7 +2,6 @@
 
 namespace App\Modules\Content\ApiGateways;
 
-use App\Modules\Content\Models\Content;
 use Illuminate\Support\Carbon;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentService;
@@ -41,6 +40,8 @@ class SanityGateway
         'challenge' => [
             'enrollment_start_time',
             'enrollment_end_time',
+            'cohort_start_date',
+            'cohort_end_date',
             "'registration_url': '/' + brand + '/enrollment/' + slug.current",
             'is_solo',
             '"lesson_count": child_count',
@@ -114,7 +115,7 @@ class SanityGateway
                     "title":assignment_title,
                 },
                 soundslice_slug,
-                "resources": resource,
+                "resources": resource[]{resource_name, _key, "resource_url": coalesce("https://d3fzm1tzeyr5n3.cloudfront.net"+string::split(resource_aws.asset->fileURL,"https://s3.us-east-1.amazonaws.com/musora-web-platform")[1], resource_url )},
             }',
             'product_id',
             'is_banner_draft',
@@ -134,7 +135,10 @@ class SanityGateway
             'parent_content_data',
             'video',
             "'soundslice_slug':soundslice[0]['soundslice_slug']",
-            '"resources": resource',
+            '"resources": resource[]{resource_name, _key, "resource_url": coalesce(
+            "https://d3fzm1tzeyr5n3.cloudfront.net"+string::split(resource_aws.asset->fileURL,"https://s3.us-east-1.amazonaws.com/musora-web-platform")[1],
+            resource_url
+          )}',
             "instrumentless",
             "high_soundslice_slug",
             "low_soundslice_slug",
@@ -444,7 +448,10 @@ class SanityGateway
             ? ", 'parents': *[railcontent_id in (^.parent_content_data[].id)] {  $fieldsString }"
             : '';
         $query = "*[brand == '{$brand}' && railcontent_id in [{$parentIdsString}]]{
-          $fieldsString, resource $parentQuery,
+          $fieldsString, 'resource':resource[]{resource_name, _key, 'resource_url':  coalesce(
+            'https://d3fzm1tzeyr5n3.cloudfront.net'+string::split(resource_aws.asset->fileURL,'https://s3.us-east-1.amazonaws.com/musora-web-platform')[1],
+            resource_url
+          )} $parentQuery,
           'instructors_details': instructor[]->{
                     'id':railcontent_id,
                     name,
@@ -515,11 +522,12 @@ class SanityGateway
      * @param string $slug - Challenge Slug value
      * @return array | null - matching challenge document or null
      */
-    public function getChallengeEnrollmentPageData(string $slug): array|null
+    public function getChallengeEnrollmentPageData(string $slug, string $brand): array|null
     {
         $fieldsString = $this->getFieldsString('challenge-part');
+        $brandString = " && brand == '$brand'";
         //$publishedOnString = $this->getPublishedFilter(true);
-        $query = "*[slug.current == '$slug' && _type == 'challenge']{
+        $query = "*[slug.current == '$slug' && _type == 'challenge' $brandString]{
                 'id': railcontent_id,
                 headline,
                 subheadline,
@@ -592,6 +600,7 @@ class SanityGateway
                 dropdown,
                 is_solo,
                 published_on,
+                status,
                 'next_lesson': child[0]->{
                     $fieldsString
                 }
@@ -734,7 +743,6 @@ class SanityGateway
         // Fetch only leaf nodes directly, traversing the hierarchy
         $query = "*[railcontent_id == {$id}]{
         $fieldsString,
-        resource,
         'thumbnail': thumbnail.asset->url,
         'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id, 'title':assignment_title},
         // Use a recursive-like approach to get only leaf nodes

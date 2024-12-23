@@ -11,14 +11,21 @@ use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
 use App\Services\UserTimezoneService;
 use Carbon\Carbon;
+use Gedmo\Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
 
+
+enum UserNotificationKeys : string
+{
+    case ENROLLMENT_NOTIFICATION_KEY = 'challenges_enrollment_notifications';
+    case COMMUNITY_NOTIFICATION_KEY = 'challenges_community_notifications';
+}
+
 class ChallengesService
 {
-    const string ENROLLMENT_NOTIFICATION_KEY = 'challenges_enrollment_notifications';
-    const string COMMUNITY_NOTIFICATION_KEY = 'challenges_community_notifications';
+
     //TODO update for solo challenges - TCH-113
 
     const int MAX_BUTTON_TEXT_LENGTH = 13;
@@ -402,12 +409,22 @@ class ChallengesService
                         $challenge['lessons']
                     );
                     $previousCompletedLesson = $nextPreviousLessonAroundFirstIncompleteLesson['previous_lesson'];
-                    $durationText = $userProgress->is_locked ?
-                        $this->getDurationText(
-                            Carbon::parse($startEndDate['start_date']),
-                            Carbon::parse($startEndDate['end_date'])
-                        ) :
-                        'Unlocked';
+
+                    if ($challenge['is_solo'] ?? false) {
+                        $durationText = $userProgress->is_locked ?
+                            $this->getDurationText(
+                                Carbon::parse($startEndDate['start_date']),
+                                Carbon::parse($startEndDate['end_date'])
+                            ) :
+                            'Unlocked';
+                    } else {
+                        $durationText = $this->getDurationText(
+                            Carbon::parse($challenge['cohort_start_date']),
+                            Carbon::parse($challenge['cohort_end_date'])
+                        );
+                    }
+
+
                     $challengeMetaDataToReturn = [
                         'is_user_enrolled' => true,
                         'is_locked' => $userProgress->is_locked,
@@ -437,15 +454,23 @@ class ChallengesService
                 }
             }
             if (is_null($challengeMetaDataToReturn)) {
+                if ($challenge['is_solo'] ?? false) {
+                    $durationText = $this->getDurationText(
+                        Carbon::parse($challenge['published_on']),
+                        $this->getChallengeEndDate($challenge)
+                    );
+                } else {
+                    $durationText = $this->getDurationText(
+                        Carbon::parse($challenge['cohort_start_date']),
+                        Carbon::parse($challenge['cohort_end_date'])
+                    );
+                }
                 $isEnrolled = !($userProgress?->is_locked ?? true);
                 $challengeMetaDataToReturn = [
                     'is_user_enrolled' => $isEnrolled,
                     'is_locked' => $userProgress?->is_locked ?? true,
                     'progress_percent' => 0,
-                    'duration_text' => $this->getDurationText(
-                        Carbon::parse($challenge['published_on']),
-                        $this->getChallengeEndDate($challenge)
-                    ),
+                    'duration_text' => $durationText,
                     'is_solo' => $challenge['is_solo'],
                     'status' => ChallengeUserProgressStatus::NOTSTARTED,
                     'next_lesson' => null,
@@ -548,11 +573,12 @@ class ChallengesService
     /**
      * Get enrollment Page information from Sanity by slug
      * @param $slug
+     * @param $brand
      * @return array | null
      */
-    public function getEnrollmentPageData($slug) : array | null
+    public function getEnrollmentPageData($slug, $brand) : array | null
     {
-        return $this->sanityGateway->getChallengeEnrollmentPageData($slug);
+        return $this->sanityGateway->getChallengeEnrollmentPageData($slug, $brand);
     }
 
     /**
@@ -690,19 +716,19 @@ class ChallengesService
         );
     }
 
-    public function updateCustomerIONotifications($challengeId, $user, $notificationKey): void
+    public function updateCustomerIONotifications(int $challengeId, User $user, UserNotificationKeys $notificationKey): void
     {
         $musoraWorkspace = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
         $customerIO = $this->customerIoService->getCustomerByEmail($musoraWorkspace, $user->email);
         if (is_null($customerIO)) {
             return;
         }
-        $existingNotifications = json_decode($customerIO->getExternalAttributes()[$notificationKey] ?? '[]');
+        $existingNotifications = json_decode($customerIO->getExternalAttributes()[$notificationKey->value] ?? '[]');
 
         if (!in_array($challengeId, $existingNotifications)) {
             $existingNotifications[] = $challengeId;
         }
-        $data = [$notificationKey => $existingNotifications];
+        $data = [$notificationKey->value => $existingNotifications];
 
         $this->customerIoService->createOrUpdateCustomerByUserId(
             $user->id,
@@ -713,19 +739,12 @@ class ChallengesService
         );
     }
 
-    public function isUserNotifiedForChallenge($challengeId, $user, $notificationKey): bool
+    public function isUserNotifiedForChallenge(int $challengeId, ?User $user, UserNotificationKeys $notificationKey): bool
     {
-        // TP-731 - Spamming c.io
-        return false;
         if (!$user) {
             return false;
         }
-        $musoraWorkspace = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
-        $customerIO = $this->customerIoService->getCustomerByEmail($musoraWorkspace, $user->email);
-        if (is_null($customerIO)) {
-            return false;
-        }
-        $existingNotifications = json_decode($customerIO->getExternalAttributes()[$notificationKey] ?? '[]');
+        $existingNotifications = $user[$notificationKey->value] ?? [];
         return in_array($challengeId, $existingNotifications);
     }
 
@@ -771,6 +790,19 @@ class ChallengesService
         $challenges = collect($this->sanityGateway->getAllByType('challenge', 10000));
         $ownedChallenges = $challenges->whereNotNull('product_id')->whereIn('product_id', $ownedProductIds);
         return $ownedChallenges;
+    }
+
+    public function updateChallengesNotificationForUser(int $challengeId, User $user, UserNotificationKeys $key)
+    {
+        try {
+            $existingNotifications = $user[$key->value] ?? [];
+            if (!in_array($challengeId, $existingNotifications)) {
+                $existingNotifications[] = $challengeId;
+            }
+            $user[$key->value] = $existingNotifications;
+            $user->save();
+        } catch (\Exception $ex) {
+        }
     }
 
 

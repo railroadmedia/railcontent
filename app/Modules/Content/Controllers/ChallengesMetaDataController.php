@@ -3,6 +3,7 @@
 namespace App\Modules\Content\Controllers;
 
 use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\Content\Services\UserNotificationKeys;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -28,7 +29,7 @@ class ChallengesMetaDataController extends Controller
      */
     public function enrollmentPage(Request $request, $slug, $purchased = false): View
     {
-        $enrollmentPageData = $this->challengesService->getEnrollmentPageData($slug);
+        $enrollmentPageData = $this->challengesService->getEnrollmentPageData($slug, brand());
         if (!$enrollmentPageData) {
             abort(404);
         }
@@ -46,7 +47,7 @@ class ChallengesMetaDataController extends Controller
             $lastCompletionDate = $userProgress?->last_completed_date->toISOString();
         }
 
-        $isNotified = $this->challengesService->isUserNotifiedForChallenge($challengeId, user(), ChallengesService::ENROLLMENT_NOTIFICATION_KEY);
+        $isNotified = $this->challengesService->isUserNotifiedForChallenge($challengeId, user(), UserNotificationKeys::ENROLLMENT_NOTIFICATION_KEY);
         $enrollmentClosedDate = Carbon::parse($enrollmentPageData['enrollment_end_time']);
         $enrollmentClosed = !$enrollmentPageData['is_solo'] && $enrollmentClosedDate < Carbon::now();
 
@@ -62,7 +63,10 @@ class ChallengesMetaDataController extends Controller
         if ($hasCompletedChallenge) {
             $enrollmentPageData['last_completion_date'] = $lastCompletionDate;
         }
-        $view = $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
+        if(!is_null($enrollmentPageData['cohort_start_date']) && !is_null($enrollmentPageData['cohort_end_date'])){
+            $enrollmentPageData['duration_text'] = $this->challengesService->getDurationText(Carbon::parse($enrollmentPageData['cohort_start_date']), Carbon::parse($enrollmentPageData['cohort_end_date']));
+        }
+        $view = false && $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
 
         return view($view, [
             'hasProduct' => $isEnrolled,
@@ -316,7 +320,7 @@ class ChallengesMetaDataController extends Controller
      */
     public function notificationsEnrollmentOpen(int $id): JsonResponse
     {
-        return $this->enableNotification($id, ChallengesService::ENROLLMENT_NOTIFICATION_KEY) ?
+        return $this->enableNotification($id, UserNotificationKeys::ENROLLMENT_NOTIFICATION_KEY) ?
             response()->json() :
             self::NotFoundErrorResponse($id);
     }
@@ -329,18 +333,20 @@ class ChallengesMetaDataController extends Controller
      */
     public function notificationsCommunityReminders(int $id): JsonResponse
     {
-        return $this->enableNotification($id, ChallengesService::COMMUNITY_NOTIFICATION_KEY) ?
+        return $this->enableNotification($id, UserNotificationKeys::COMMUNITY_NOTIFICATION_KEY) ?
             response()->json() :
             self::NotFoundErrorResponse($id);
     }
 
-    private function enableNotification($id, $key): bool
+    private function enableNotification($id, UserNotificationKeys $key): bool
     {
         $challenge = $this->challengesService->getChallengeById($id);
         if (is_null($challenge)) {
             return false;
         }
-        $this->challengesService->updateCustomerIONotifications($id, user(), $key);
+        $user = user();
+        $this->challengesService->updateChallengesNotificationForUser($id, $user, $key);
+        $this->challengesService->updateCustomerIONotifications($id, $user, $key);
         return true;
     }
 
