@@ -336,8 +336,5 @@ onBeforeMount( async () => {
     data.value = OverviewData.value;
 
     platformStore.setLoadingState(OverviewLoading.value);
-
-    //console.log('OverviewData.value', OverviewData.value)
-    console.log('parent type', props.parentType)
 })
 </script>
