@@ -86,7 +86,7 @@
                         :description="videoData.description" :instructors="videoData.instructor" :is-liked="isLiked"
                         :like-count="likeData?.likeCount" :content-id="videoData.id" :user-id="userId"
                         :resources="videoData.resources" :difficulty="videoData.difficulty" :is-challenge="isChallenge"
-                        :show-practice-button="showPracticeButton" :show-share-button="false"
+                        :show-practice-button="showPracticeButton" :show-share-button="true"
                         :show-complete-button="isWorkout || isChallenge"
                         report-recipient="support+question-and-answer@drumeo.com" :is-completed="isCompleted"
                         :show-add-to-list="true" :show-info-button="showInfoButton"

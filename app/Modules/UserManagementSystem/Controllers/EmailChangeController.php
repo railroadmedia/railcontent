@@ -2,21 +2,22 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Illuminate\Contracts\Hashing\Hasher;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Notifications\AnonymousNotifiable;
-use Modules\UserManagementSystem\Models\EmailChange;
-use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Events\EmailChangeRequest;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
+use Modules\UserManagementSystem\Models\EmailChange;
+use Modules\UserManagementSystem\Models\User;
 
 class EmailChangeController extends Controller
 {
@@ -32,7 +33,7 @@ class EmailChangeController extends Controller
     /**
      * Perform an email change request action.
      */
-    public function request(Request $request): RedirectResponse
+    public function request(Request $request): RedirectResponse|JsonResponse
     {
         $isJson = request()->expectsJson();
         try {
@@ -216,20 +217,14 @@ class EmailChangeController extends Controller
     /**
      * Generates a token
      * Similar with Illuminate\Auth\Passwords\DatabaseTokenRepository::createNewToken
-     *
-     * @return string
      */
     public function createNewToken(
         string $hash
-    ) {
+    ): string {
         return hash_hmac('sha256', Str::random(40), $hash);
     }
 
-    /**
-     * @param $token
-     * @param $email
-     */
-    public function sendEmailChangeNotification($token, $email)
+    public function sendEmailChangeNotification($token, $email): void
     {
         $class = config('user_management_system.email_change_notification_class');
         (new AnonymousNotifiable())->route(config('user_management_system.email_change_notification_channel'), $email)

@@ -18,10 +18,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Mailora\Services\MailService;
-use Railroad\Railcontent\Decorators\DecoratorInterface;
-use Railroad\Railcontent\Decorators\ModeDecoratorBase;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\ContentService;
 
 class PlaylistsService
 {
@@ -133,7 +129,7 @@ class PlaylistsService
         return $mergedData->filter(function (array $playlistItem) {
             $status = $playlistItem['status'] ?? null;
             return $status && Status::isVisibleForPlaylists(Status::from($status));
-        });
+        })->values();
     }
 
     /**
@@ -317,6 +313,13 @@ class PlaylistsService
             ->keyBy('id');
 
         foreach ($playlists as $index => $playlist) {
+            // filter out any items that shouldn't be visible
+            $items = $playlist['items'];
+            $playlist['items'] = $items->filter(function (UserPlaylistContent $playlistItem) {
+                $status = $playlistItem->content->status ?? null;
+                return $status && Status::isVisibleForPlaylists(Status::from($status));
+            })->values();
+
             $pinned = $playlist->pins()->where('user_id', user()->id)->exists();
             $playlists[$index] = $playlist->toArray();
             $minsec                                 = gmdate("i:s", $playlists[$index]['duration'] ?? 0);

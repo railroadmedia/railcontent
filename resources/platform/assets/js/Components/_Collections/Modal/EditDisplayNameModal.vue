@@ -66,7 +66,6 @@
             await userStore.updateProfile(formData.value);
             handleClose();
         } catch (error) {
-            console.error("Failed to update the display name:", error.message);
             formProcessing.value = false;
         }
     };
