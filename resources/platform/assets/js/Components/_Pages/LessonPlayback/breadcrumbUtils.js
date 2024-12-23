@@ -87,10 +87,23 @@ export const getBreadcrumbs = (data, brand) => {
                 title: data.title
             });
         } else if (data.type === 'learning-path-lesson') {
-            breadcrumb.pages.push({
-                title: `${data.brand} Method`,
-                url: `/${brand}/method/${data.parent_content_data?.[2]?.slug}/${data.parent_content_data?.[2]?.id}`
-            });
+            if (data.brand === 'drumeo' || data.brand === 'pianote') {
+                // TODO: This is not working for guitareo and singeo, should be fixed in the Sanity data
+                breadcrumb.pages.push({
+                    title: `${data.brand} Method`,
+                    url: `/${brand}/method/${data.parent_content_data?.[2]?.slug}/${data.parent_content_data?.[2]?.id}`
+                });
+            } else if (data.brand === 'guitareo') {
+                breadcrumb.pages.push({
+                    title: `${data.brand} Method`,
+                    url: `/guitareo/method/guitareo-method/333652`
+                });
+            } else if (data.brand === 'singeo') {
+                breadcrumb.pages.push({
+                    title: `${data.brand} Method`,
+                    url: `/singeo/method/singeo-method/308514`
+                });
+            }
             breadcrumb.pages.push({
                 title: data.parent_content_data?.[0]?.slug ?? '',
                 url: `/${brand}/method/${data.slug.current}/${data.id}/${data.parent_content_data?.[1]?.slug}/${data.parent_content_data?.[1]?.id}/${data.parent_content_data?.[0]?.slug}/${data.parent_content_data?.[0]?.id}`
