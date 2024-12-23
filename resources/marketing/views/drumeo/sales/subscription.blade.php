@@ -297,8 +297,6 @@
 @section('body-data')
     x-data ='{
         demoVid : false,
-        soundslice : false,
-        waitlist: false,
         trailer : false,
         lazyLoad: false,
         videoLoaded: false,
@@ -540,11 +538,11 @@
                 <h2 class="leading-tight my-2"><strong>Hear the result.</strong></h2>
                 <p class="leading-tight mb-8 px-4 sm:px-0">If you love your lessons, you’re more likely to practice. And when you practice, <br class="hidden sm:inline-block"> you’ll hear the results way sooner – and so will everyone around you!</p>
                 <picture>
-                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet3.webp">
-                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet3.webp">
+                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet5.png">
+                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet5.png">
                     <img
                         class="w-full -mb-6"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet-m3.webp"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet-m4.png"
                         onload="this.classList.remove('opacity-0');"
                     />
                 </picture>
@@ -652,11 +650,6 @@
 
     @include('drumeo._partials.faq')
 
-    @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
-        'video' => '23rlc',
-        'soundslice' => true,
-    ])
     @include('_partials.components.video-modal',[
         'name' => 'demoVid',
         'video' => '1017241160',

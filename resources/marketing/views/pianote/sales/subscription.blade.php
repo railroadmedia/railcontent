@@ -307,10 +307,7 @@
 @section('body-data')
     x-data ='{
         demoVid : false,
-        soundslice : false,
-        workoutVid : false,
         trailer : false,
-        unbox : false,
         rolandTrailer : false,
         lazyLoad: false,
         videoLoaded: false,
@@ -376,7 +373,7 @@
                         'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/pianist.svg',
                     ],
                     [
-                        'url' => 'https://americansongwriter.com/best-online-piano-lessons/',
+                        'url' => 'https://americansongwriter.com/why-every-guitarist-needs-to-learn-piano/',
                         'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/as.webp',
                     ],
                 ],
@@ -578,11 +575,11 @@
                 <p class="leading-tight mb-8 px-4 sm:px-0">The most important part of learning piano is building a daily habit. Practice a little<br class="hidden sm:inline-block">
                     each day, and you’ll hear the results way sooner (and so will everyone around you!).</p>
                 <picture>
-                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/membership/homepage/2025/tablet.webp">
-                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/pianote/membership/homepage/2025/tablet.webp">
+                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/membership/homepage/2025/tablet2.png">
+                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/pianote/membership/homepage/2025/tablet2.png">
                     <img
                         class="w-full -mb-6"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/2025/tablet-m.webp"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/2025/tablet-m2.png"
                         onload="this.classList.remove('opacity-0');"
                     />
                 </picture>
@@ -692,16 +689,6 @@
     @include('pianote._partials.faq')
 
     @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
-        'video' => '4JGlc',
-        'soundslice' => true,
-    ])
-    @include('_partials.components.video-modal',[
-        'name' => 'workoutVid',
-        'video' => '886960702',
-        'vimeo' => true,
-    ])
-    @include('_partials.components.video-modal',[
         'name' => 'demoVid',
         'video' => '802011057',
         'vimeo' => true,
@@ -709,11 +696,6 @@
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '785314388',
-        'vimeo' => true,
-    ])
-    @include('_partials.components.video-modal',[
-        'name' => 'unbox',
-        'video' => '774408046',
         'vimeo' => true,
     ])
     @foreach ($pianote['packs'] as $packModal)

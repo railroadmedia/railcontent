@@ -72,7 +72,7 @@
             <div class="transform bottom-0 left-0 w-full absolute z-20 px-4 pb-7 text-center opacity-50">
                 <p class="text-sm mb-1 lg:mb-3">As featured in:</p>
                 @foreach($featured as $feature)
-                    <a href="{{ $feature['url'] }}">
+                    <a href="{{ $feature['url'] }}" target="_blank">
                         <img class="inline-block h-4 sm:h-5 {{ !$loop->last ? 'mr-2 sm:mr-3' : '' }}" src="{{ $feature['src'] }}" alt="Featured logo">
                     </a>
                 @endforeach
