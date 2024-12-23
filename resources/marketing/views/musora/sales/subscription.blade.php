@@ -612,6 +612,7 @@
         @yield('final')
     @elseif(!empty($hideMenu))
         @include('musora.sales.components.order-section-collage', [
+        'old' => true,
             "orderUrl" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
         'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
         'header' => 'Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
@@ -625,6 +626,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'old' => true,
         'headerLight' => true,
         'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
         'header' => '<strong>Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.</strong>',

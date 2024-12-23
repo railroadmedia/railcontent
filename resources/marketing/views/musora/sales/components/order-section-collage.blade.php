@@ -14,7 +14,11 @@
                     <source type="image/webp" media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/{!! $image !!}">
                     <source type="image/webp" media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1350x0/filters:quality(95)/{!! $image !!}">
                     <img x-ref="collage"
-                        class="object-contain h-auto max-w-lg sm:max-w-2xl lg:max-w-4xl transition-opacity opacity-0"
+                        @if(!empty($old))
+                            class="object-contain h-64 sm:h-auto max-w-full sm:max-w-sm lg:max-w-full transition-opacity opacity-0"
+                        @else
+                            class="object-contain h-auto max-w-lg sm:max-w-2xl lg:max-w-4xl transition-opacity opacity-0"
+                        @endif
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/30x0/filters:quality(10)/filters:blur(6)/{!! $image !!}"

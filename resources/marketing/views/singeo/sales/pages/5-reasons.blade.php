@@ -178,6 +178,7 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
         @include('musora.sales.components.order-section-collage', [
+        'old' => true,
         'headerLight' => true,
         'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
         'header' => '<strong>Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.</strong>',

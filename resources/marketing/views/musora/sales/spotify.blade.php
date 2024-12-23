@@ -77,6 +77,7 @@
 
 @section('final')
     @include('musora.sales.components.order-section-collage', [
+        'old' => true,
     'emailSignup' => true,
     'logo' => 'marketing/musora/membership/redeem/musora-spotify-logo-white.svg',
     'subHeader' => 'LEARN YOUR FAVORITE SONGS FOR FREE.',

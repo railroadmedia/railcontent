@@ -453,6 +453,7 @@
     <div id="order" class="anchor"></div>
     @if(!empty($trialVersion))
         @include('musora.sales.components.order-section-collage', [
+        'old' => true,
             "orderUrl" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
         'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
         'header' => 'Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.',
@@ -486,6 +487,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'old' => true,
         'headerLight' => true,
         'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
         'header' => '<strong>Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',

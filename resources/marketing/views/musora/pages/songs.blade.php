@@ -897,6 +897,7 @@
         </div>
     </section>
     @include('musora.sales.components.order-section-collage', [
+        'old' => true,
     'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
     'header' => 'Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
     'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
