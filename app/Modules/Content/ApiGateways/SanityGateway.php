@@ -2,7 +2,6 @@
 
 namespace App\Modules\Content\ApiGateways;
 
-use App\Modules\Content\Models\Content;
 use Illuminate\Support\Carbon;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentService;
@@ -598,6 +597,7 @@ class SanityGateway
                 dropdown,
                 is_solo,
                 published_on,
+                status,
                 'next_lesson': child[0]->{
                     $fieldsString
                 }
