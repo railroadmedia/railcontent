@@ -39,13 +39,13 @@
                     </div>
                     <div :class="`md:tw-flex ${isEnrolled ? 'md:tw-items-start' : 'md:tw-items-center'}`">
                         <!-- Get Notified Button -->
-                        <button v-if="showGetNotified && !isNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">
-                            <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
-                            Get Notified
-                        </button>
-                        <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Notification requested!</span>
+<!--                        <button v-if="showGetNotified && !isNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">-->
+<!--                            <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>-->
+<!--                            Get Notified-->
+<!--                        </button>-->
+<!--                        <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Notification requested!</span>-->
                         <!--  Enrolled Buttons  -->
-                        <div v-else-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
+                        <div v-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
                             <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
                             <a :href="cohort['course_url']" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
                         </div>
@@ -262,12 +262,12 @@
             <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
                 <!--  Buttons-->
 
-                <button v-if="showGetNotified && !isNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">
-                    <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
-                    Get Notified
-                </button>
-                <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">Notification requested!</span>
-                <span v-else-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
+<!--                <button v-if="showGetNotified && !isNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">-->
+<!--                    <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>-->
+<!--                    Get Notified-->
+<!--                </button>-->
+<!--                <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">Notification requested!</span>-->
+                <span v-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                 <template v-else>
                     <button v-if="showEnrollNow" id="bottomEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
                     <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
@@ -564,8 +564,9 @@ const countdown = () => {
 const watchEnrollmentOpen = () => {
     const openDate = new Date(props.cohort['enrollment_start_date']);
     const now = new Date();
+    console.log('open', openDate <= now)
 
-    if(now <= openDate){
+    if(openDate <= now){
         isEnrollmentOpen.value = true;
         clearInterval(watchEnrollmentOpen);
     }
@@ -582,7 +583,9 @@ onBeforeMount(() => {
         setInterval(countdown, 1000);
     }
 
-    if(!isSolo.value && openDate < now){
+    console.log('mount', openDate, now, !isSolo.value)
+
+    if(!isSolo.value && openDate <= now){
         watchEnrollmentOpen();
         setInterval(watchEnrollmentOpen, 1000);
     }
@@ -597,4 +600,6 @@ onUnmounted(() => {
     clearInterval(countdown);
     clearInterval(watchEnrollmentOpen);
 })
+
+console.log(props.cohort)
 </script>
