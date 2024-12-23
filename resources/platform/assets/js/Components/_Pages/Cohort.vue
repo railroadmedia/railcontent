@@ -43,7 +43,7 @@
                             <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
                             Get Notified
                         </button>
-                        <span v-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Notification requested!</span>
+                        <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Notification requested!</span>
                         <!--  Enrolled Buttons  -->
                         <div v-else-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
                             <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
@@ -597,6 +597,4 @@ onUnmounted(() => {
     clearInterval(countdown);
     clearInterval(watchEnrollmentOpen);
 })
-
-console.log(props.cohort)
 </script>
