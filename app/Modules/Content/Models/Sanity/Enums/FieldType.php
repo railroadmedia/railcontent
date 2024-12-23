@@ -25,4 +25,5 @@ enum FieldType: string
     case Span = 'span';
     case Text = 'text';
     case URL = 'url';
+    case AWSMedia = 's3-files.media';
 }

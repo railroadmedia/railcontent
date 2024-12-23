@@ -114,7 +114,7 @@ class SanityGateway
                     "title":assignment_title,
                 },
                 soundslice_slug,
-                "resources": resource,
+                "resources": resource[]{resource_name, _key, "resource_url": coalesce("https://d3fzm1tzeyr5n3.cloudfront.net"+string::split(resource_aws.asset->fileURL,"https://s3.us-east-1.amazonaws.com/musora-web-platform")[1], resource_url )},
             }',
             'product_id',
             'is_banner_draft',
@@ -134,7 +134,10 @@ class SanityGateway
             'parent_content_data',
             'video',
             "'soundslice_slug':soundslice[0]['soundslice_slug']",
-            '"resources": resource',
+            '"resources": resource[]{resource_name, _key, "resource_url": coalesce(
+            "https://d3fzm1tzeyr5n3.cloudfront.net"+string::split(resource_aws.asset->fileURL,"https://s3.us-east-1.amazonaws.com/musora-web-platform")[1],
+            resource_url
+          )}',
             "instrumentless",
             "high_soundslice_slug",
             "low_soundslice_slug",
@@ -444,7 +447,10 @@ class SanityGateway
             ? ", 'parents': *[railcontent_id in (^.parent_content_data[].id)] {  $fieldsString }"
             : '';
         $query = "*[brand == '{$brand}' && railcontent_id in [{$parentIdsString}]]{
-          $fieldsString, resource $parentQuery,
+          $fieldsString, 'resource':resource[]{resource_name, _key, 'resource_url':  coalesce(
+            'https://d3fzm1tzeyr5n3.cloudfront.net'+string::split(resource_aws.asset->fileURL,'https://s3.us-east-1.amazonaws.com/musora-web-platform')[1],
+            resource_url
+          )} $parentQuery,
           'instructors_details': instructor[]->{
                     'id':railcontent_id,
                     name,
@@ -734,7 +740,6 @@ class SanityGateway
         // Fetch only leaf nodes directly, traversing the hierarchy
         $query = "*[railcontent_id == {$id}]{
         $fieldsString,
-        resource,
         'thumbnail': thumbnail.asset->url,
         'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id, 'title':assignment_title},
         // Use a recursive-like approach to get only leaf nodes

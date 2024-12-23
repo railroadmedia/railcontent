@@ -20,6 +20,7 @@
     "sanity": "^3.57.0",
     "sanity-plugin-iframe-pane": "^3.1.6",
     "sanity-plugin-media": "^2.2.5",
+    "sanity-plugin-s3-files": "^1.0.2",
     "styled-components": "^6.1.11",
     "web-vitals": "^2.1.4"
   },
@@ -31,7 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sanity": "./sanity.sh",
-      "watch": "npx mix --mix-config=webpack.mix.sanity.js watch"
+    "watch": "npx mix --mix-config=webpack.mix.sanity.js watch"
   },
   "eslintConfig": {
     "extends": [

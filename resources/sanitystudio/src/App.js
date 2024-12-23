@@ -18,6 +18,7 @@ import {defaultDocumentNode} from './defaultDocumentNode';
 import {musoraStructure} from './musoraStructure';
 import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
 import {media} from 'sanity-plugin-media';
+import {s3Files} from 'sanity-plugin-s3-files';
 import VimeoVideoInput from "./components/VimeoVideoInput"; // You can add more custom components here as needed
 
 // You can add more custom components here as needed
@@ -120,6 +121,19 @@ function App() {
                         visionTool(),
                         embeddingsIndexReferenceInput(),
                         embeddingsIndexDashboard(),
+                        s3Files(
+                            {
+                                toolTitle: 'S3',
+                                credentials: {
+                                    bucketKey: 'musora-web-platform',
+                                    bucketRegion: 'us-east-1',
+                                    getSignedUrlEndpoint: 'https://2rjsdcatywhzpbrtdskfrqcsom0vnupv.lambda-url.us-east-2.on.aws/',
+                                    deleteObjectEndpoint:'https://2rjsdcatywhzpbrtdskfrqcsom0vnupv.lambda-url.us-east-2.on.aws/',
+                                    secretForValidating: null,
+                                    folder: null
+                                }
+                            }
+                        )
                     ],
                     // TODO Removed with upgrade to PHP 8.3 React doesn't like the object return
                     // tools: (prev, {currentUser}) => {
