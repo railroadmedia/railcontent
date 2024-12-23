@@ -29,7 +29,7 @@ class ChallengesMetaDataController extends Controller
      */
     public function enrollmentPage(Request $request, $slug, $purchased = false): View
     {
-        $enrollmentPageData = $this->challengesService->getEnrollmentPageData($slug);
+        $enrollmentPageData = $this->challengesService->getEnrollmentPageData($slug, brand());
         if (!$enrollmentPageData) {
             abort(404);
         }
@@ -66,7 +66,7 @@ class ChallengesMetaDataController extends Controller
         if(!is_null($enrollmentPageData['cohort_start_date']) && !is_null($enrollmentPageData['cohort_end_date'])){
             $enrollmentPageData['duration_text'] = $this->challengesService->getDurationText(Carbon::parse($enrollmentPageData['cohort_start_date']), Carbon::parse($enrollmentPageData['cohort_end_date']));
         }
-        $view = $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
+        $view = false && $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
 
         return view($view, [
             'hasProduct' => $isEnrolled,
