@@ -152,13 +152,14 @@ const handleNext = async () => {
         if(props.challengeType === 'community'){
             if(selectedFrequency.value){
                 const setNotification = await postChallengesCommunityNotification(props.challenge.id);
-                const data = await fetchChallengeMetadata(props.challenge.id);
-                challengeData.value = data;
-
-                setTimeout(() => {
-                    slideIn.value = true;
-                },1500)
             }
+            
+            const data = await fetchChallengeMetadata(props.challenge.id);
+            challengeData.value = data;
+
+            setTimeout(() => {
+                slideIn.value = true;
+            },1500)
         }
 
         step.value = 2;
