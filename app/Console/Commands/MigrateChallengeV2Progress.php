@@ -150,6 +150,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
             ->where('id', '<', $maxId)
             ->whereIn('content_id', $challengeIds)
             ->where('state', '=', 'started')
+            ->where('updated_on', '>', '2024-11-16')
             ->orderBy('user_id');
         if (count($userIds) > 0) {
             $query->whereIn('user_id', $userIds);
@@ -174,6 +175,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
                 ->where('id', '>=', $minId)
                 ->where('id', '<', $maxId)
                 ->whereIn('content_id', $challengeIds)
+                ->where('updated_on', '>', '2024-11-16')
                 ->get()
                 ->keyBy('content_id');
             foreach ($challengeUserProgressLookup as $challengeId2 => $challengeProgressData) {
