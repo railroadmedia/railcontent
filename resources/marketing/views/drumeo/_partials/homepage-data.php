@@ -35,74 +35,66 @@ $drumeo = [
             "credit" => "Rolling Stone Top 100 Drummer",
         ],
     ],
+    "packs" => [
+        [
+            "image" => "marketing/drumeo/membership/homepage/2025/courses-01.webp",
+            'vimeoId' => '884916532',
+            'name' => 'thirtydaydrummermodal',
+        ],
+        [
+            "image" => "marketing/drumeo/membership/homepage/2025/courses-02.webp",
+            'vimeoId' => '884916500',
+            'name' => 'thirtydaychopsmodal',
+        ],
+        [
+            "image" => "marketing/drumeo/membership/homepage/2025/courses-03.webp",
+            'vimeoId' => '1010405112',
+            'name' => 'thirtydaydoublebassmodal',
+        ],
+        [
+            "image" => "marketing/drumeo/membership/homepage/2025/courses-04.webp",
+            'vimeoId' => '1018759800',
+            'name' => 'thirtydayjazzmodal',
+        ],
+        [
+            "image" => "marketing/drumeo/membership/homepage/2025/courses-05.webp",
+            'vimeoId' => '975466470',
+            'name' => 'thirtydayindependencemodal',
+        ],
+    ],
     "gridItems" => [
         [
             "big" => true,
-            "image" => "marketing/drumeo/membership/homepage/2024/10-level-curriculum.webp",
+            "image" => "marketing/drumeo/membership/homepage/2025/reason-01.webp",
+            "imageM" => "marketing/drumeo/membership/homepage/2025/reason-01-m.webp",
             "title" => "10-Level Curriculum",
             "desc" => "The most trusted step-by-step video lessons for every technique, pattern, and style.",
-            "lessonInfo" => [
-                [
-                    "thumb" =>
-                    "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/10-level-curriculum.webp",
-                ],
-            ],
         ],
         [
-            "image" => "marketing/drumeo/membership/homepage/2024/practical-assignments-new.webp",
-            "title" => "Practical Assignments",
-            "desc" => "Keep up your progress with clear assignments and handy practice tools for every level.",
-            "lessonInfo" => [
-                [
-                    "thumb" =>
-                    "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/practical-assignments-new.webp",
-                ],
-            ],
+            "image" => "marketing/drumeo/membership/homepage/2025/reason-04.webp",
+            "imageM" => "marketing/drumeo/membership/homepage/2025/reason-04-m.webp",
+            "title" => "24/7 Access & Support",
+            "desc" => "Weekly livestreams, student lesson plans, downloadable videos, and a global drum community.",
         ],
         [
-            "image" => "marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
-            "title" => "Downloadable Videos",
-            "desc" => "Stream your lessons OR download your videos so you can practice anywhere, anytime.",
-            "lessonInfo" => [
-                [
-                    "thumb" =>
-                        "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/downloadable-videos.webp",
-                ],
-            ],
-        ],
-        [
-            "image" => "marketing/drumeo/membership/homepage/2024/guided-workouts.webp",
+            "image" => "marketing/drumeo/membership/homepage/2025/reason-02.webp",
+            "imageM" => "marketing/drumeo/membership/homepage/2025/reason-02-m.webp",
             "title" => "Guided Workouts",
             "desc" => "Stay inspired with guided workouts where you’ll play along with your teacher in real time.",
-            "lessonInfo" => [
-                [
-                    "thumb" =>
-                    "https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/guided-workouts.webp",
-                ],
-            ],
         ],
         [
             "big" => true,
-            "image" => "marketing/drumeo/membership/homepage/2024/world-class-teachers-new.webp",
+            "image" => "marketing/drumeo/membership/homepage/2025/reason-03.webp",
+            "imageM" => "marketing/drumeo/membership/homepage/2025/reason-03-m.webp",
             "title" => "World-Class Teachers",
             "desc" => "The best drummers are here — including Grammy Award winners and touring musicians.",
-            "lessonInfo" => [
-                [
-                    "thumb" =>
-                    "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/world-class-teachers-new.webp",
-                ],
-            ],
         ],
         [
-            "image" => "marketing/drumeo/membership/homepage/2024/personalized-support-new.webp",
-            "title" => "Personalized Support",
-            "desc" => "Get weekly live streams, student lesson plans, and access to a global drum community.",
-            "lessonInfo" => [
-                [
-                    "thumb" =>
-                    "https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/personalized-support-new.webp",
-                ],
-            ],
+            "full" => true,
+            'image' => 'marketing/drumeo/membership/homepage/2025/reason-05.webp',
+            'imageM' => 'marketing/drumeo/membership/homepage/2025/reason-05-m.webp',
+            'title' => '1500+ Songs',
+            'desc' => 'Learn your favorite songs faster with note-for-note sheet music and practice tools.',
         ],
     ],
     "buttons" => ["Styles", "Technique", "Creativity"],

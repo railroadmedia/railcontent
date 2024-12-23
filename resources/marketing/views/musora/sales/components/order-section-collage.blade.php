@@ -1,32 +1,35 @@
-<section class="py-10 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-8 relative overflow-hidden"
+<section class="px-4 lg:px-8 py-10 sm:py-16 lg:py-24 relative overflow-hidden text-white text-center customize relative overflow-hidden"
     @if(!empty($bgColor))
         style="background: {{ $bgColor }};"
     @else
-        style="background: linear-gradient(45deg, #07233e, #0c1524);"
+        style="background: linear-gradient(to bottom, #1D4689, #0C1524);"
   @endif
   x-data="{lazyLoad:false}">
-    <div class="container mx-auto max-w-6xl mb-5 sm:mb-10">
-        <div class="flex flex-wrap sm:flex-nowrap items-center">
-            <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0"
-            :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-            x-intersect.once="lazyLoad = true; $refs.collage.src = $refs.collage.dataset.src;">
+    <div class="container mx-auto max-w-6xl mb-5 lg:mb-14 h-full">
+        <div class="flex flex-wrap lg:flex-nowrap items-center h-full">
+            <div class="flex w-full justify-center lg:justify-start lg:w-1/2 lg:w-auto lg:order-1 lg:pl-10 mb-7 lg:mb-0"
+                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                x-intersect.once="lazyLoad = true; $refs.collage.src = $refs.collage.dataset.src;">
                 <picture>
-                    <source type="image/webp" media="(min-width:1280px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/{!! $image !!}">
-                    <source type="image/webp" media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1130x0/filters:quality(95)/{!! $image !!}">
-                    <source type="image/webp" media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1020x0/filters:quality(95)/{!! $image !!}">
+                    <source type="image/webp" media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/{!! $image !!}">
+                    <source type="image/webp" media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1350x0/filters:quality(95)/{!! $image !!}">
                     <img x-ref="collage"
-                         class="object-contain h-64 sm:h-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-full transition-opacity opacity-0"
-                         loading="lazy"
-                         onload="this.classList.remove('opacity-0')"
-                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/30x0/filters:quality(10)/filters:blur(6)/{!! $image !!}"
-                         data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/{!! $image !!}"
-                         alt="{{$theme}} collage image"
+                        @if(!empty($old))
+                            class="object-contain h-64 sm:h-auto max-w-full sm:max-w-sm lg:max-w-full transition-opacity opacity-0"
+                        @else
+                            class="object-contain h-auto max-w-lg sm:max-w-2xl lg:max-w-4xl transition-opacity opacity-0"
+                        @endif
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/30x0/filters:quality(10)/filters:blur(6)/{!! $image !!}"
+                        data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1030x0/filters:quality(95)/{!! $image !!}"
+                        alt="{{$theme}} collage image"
                     >
                 </picture>
             </div>
-            <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0">
+            <div class="text-center lg:text-left w-full lg:w-auto flex-shrink-0">
                 @if(!empty($logo))
-                    <img class="h-7 mb-4 sm:mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/{{ $logo }}" alt="logo">
+                    <img class="h-11 sm:h-12 mb-2 sm:mb-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/{{ $logo }}" alt="logo">
                 @endif
                 <p class="uppercase text-musora mb-2"><strong class="font-black">
                     @if(!empty($subHeader))
@@ -82,7 +85,7 @@
                         </div>
                     </div>
                 @else
-                    <div class="w-72 lg:w-96 mx-auto sm:mx-0">
+                    <div class="w-72 lg:w-96 mx-auto lg:mx-0">
                         <a role="link" aria-label="Start your membership" class=" w-full sm:w-82 join smaller my-3 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
                         @if(!empty($orderUrl))
                             href="{{ $orderUrl }}"
@@ -98,6 +101,11 @@
                                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                             @endif
                         </a>
+                        @if(!empty($theme) && $theme == 'drumeo')
+                            <p class="text-sm">Need drums? <a class="underline" href="/drumshop/kit">Get the E-Kit Bundle</a></p>
+                        @elseif(!empty($theme) && $theme == 'pianote')
+                            <p class="text-sm">Need a piano? <a class="underline" href="/shop/prima">Get the Keyboard Bundle</a></p>
+                        @endif
 {{--                        <p class="text-xs"><em> Pay nothing for @if(!empty($month)) 30 @else 7 @endif days, <br class="lg:hidden">then $20/month billed annually.</em></p>--}}
                         @if(!empty($theme) && $theme == 'musora')
                             <div class="flex justify-center sm:justify-start">
