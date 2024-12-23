@@ -51,6 +51,7 @@ class GenerateAccessCodes extends Command
         $emails = [
             'alexandre@musora.com',
             'caleb@drumeo.com',
+            'robert@musora.com'
         ];
 
         $accessCodes = [];

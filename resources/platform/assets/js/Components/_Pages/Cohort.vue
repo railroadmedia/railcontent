@@ -537,7 +537,7 @@ const playTrailer = () => {
 }
 
 const countdown = () => {
-    const start = new Date(props.cohort['enrollment_end_date']);
+    const start = new Date(props.cohort['enrollment_end_time']);
     const now = Date.now();
     const isEnded = now >= start;
 
@@ -562,18 +562,18 @@ const countdown = () => {
 }
 
 const watchEnrollmentOpen = () => {
-    const openDate = new Date(props.cohort['enrollment_start_date']);
+    const openDate = new Date(props.cohort['enrollment_start_time']);
     const now = new Date();
 
-    if(now <= openDate){
+    if(openDate <= now){
         isEnrollmentOpen.value = true;
         clearInterval(watchEnrollmentOpen);
     }
 }
 
 onBeforeMount(() => {
-    const openDate = new Date(props.cohort['enrollment_start_date']);
-    const closeDate = new Date(props.cohort['enrollment_end_date']);
+    const openDate = new Date(props.cohort['enrollment_start_time']);
+    const closeDate = new Date(props.cohort['enrollment_end_time']);
     const now = new Date();
 
     //Start countdown for unclosed community challenges
@@ -582,7 +582,7 @@ onBeforeMount(() => {
         setInterval(countdown, 1000);
     }
 
-    if(!isSolo.value && openDate < now){
+    if(!isSolo.value && openDate <= now){
         watchEnrollmentOpen();
         setInterval(watchEnrollmentOpen, 1000);
     }
