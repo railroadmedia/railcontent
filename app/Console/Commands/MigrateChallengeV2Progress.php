@@ -180,7 +180,6 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
                 $lessonCompletedLookup = ContentUserProgress::query()
                     ->where('user_id', $userId)
                     ->where('id', '>=', $minId)
-                    ->where('id', '<', $maxId)
                     ->whereIn('content_id', $lessonIds)
                     ->where('state', '=', 'completed')
                     ->get()
