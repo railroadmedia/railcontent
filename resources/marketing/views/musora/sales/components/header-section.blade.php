@@ -47,7 +47,7 @@
                 @endif
             </a>
             @if(empty($noTrailer))
-                <div class="sm:mx-0.5 w-full sm:w-56 join outline @if(!empty($bubbles)) black @else white @endif smaller autoplay-video" x-on:click="trailer = true;">1-MINUTE TRAILER</div>
+                <div class="sm:mx-0.5 w-full sm:w-56 join outline @if(!empty($bubbles)) black @else white @endif smaller autoplay-video" x-on:click="trailer = true;">@if(!empty($theme) && $theme == 'pianote') 2-MINUTE @else 1-MINUTE @endif TRAILER</div>
             @endif
             @if(!empty($reviewsButton))
                 <a class="sm:mx-0.5 w-full sm:w-56 join outline @if(!empty($bubbles)) black @else white @endif smaller"
