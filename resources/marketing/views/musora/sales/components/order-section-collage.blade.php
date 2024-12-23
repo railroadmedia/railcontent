@@ -97,6 +97,9 @@
                                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                             @endif
                         </a>
+                        @if(!empty($theme) && $theme == 'drumeo')
+                            <p class="text-sm">Need drums? <a class="underline" href="/drumshop/kit">Get the E-Kit Bundle</a></p>
+                        @endif
 {{--                        <p class="text-xs"><em> Pay nothing for @if(!empty($month)) 30 @else 7 @endif days, <br class="lg:hidden">then $20/month billed annually.</em></p>--}}
                         @if(!empty($theme) && $theme == 'musora')
                             <div class="flex justify-center sm:justify-start">

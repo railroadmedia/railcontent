@@ -505,7 +505,7 @@
                                 <ul class="splide__list">
                                     @foreach ($drumeo['packs'] as $tile)
                                         <li class="splide__slide flex flex-col items-center justify-start px-1">
-                                            <div class="relative w-full rounded-xl overflow-hidden"
+                                            <div class="relative w-full rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
                                                 @if(!empty($tile['vimeoId'])) @click="{{ $tile['name'] }} = true" @endif>
                                                 <picture>
                                                     <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/{{$tile['image']}}">

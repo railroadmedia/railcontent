@@ -173,7 +173,7 @@
         .ajax-form button button {
             font-family: 'Bebas Neue', sans-serif;
             color: #fff;
-            background: #0b76db;
+            background: #f61a30;
             text-transform: uppercase;
             /*margin: 0 auto 15px;*/
             display: block;
@@ -263,7 +263,7 @@
             font:700 30px/1em "Bebas Neue", sans-serif;
             margin:15px auto;
             text-transform:uppercase;
-            color:#0b76db
+            color:#f61a30
         }
 
         @media (min-width:40em) {
@@ -435,7 +435,7 @@
         @else
             @include('musora.sales.components.header-section', [
                 'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/header.mp4',
-                'header' => 'Piano lessons for<br> <span class="relative inline-block">all skill levels<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
+                'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE PIANO<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #f61a30 " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #f61a30 " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
                 'pointOne' => 'GREAT TEACHERS',
                 'pointTwo' => 'VIDEO LESSONS',
                 'pointThree' => 'FUN PRACTICE',
@@ -539,7 +539,7 @@
                             <ul class="splide__list">
                                 @foreach ($pianote['packs'] as $tile)
                                     <li class="splide__slide flex flex-col items-center justify-start px-1">
-                                        <div class="relative w-full rounded-xl overflow-hidden"
+                                        <div class="relative w-full rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
                                             @if(!empty($tile['vimeoId'])) @click="{{ $tile['name'] }} = true" @endif>
                                             <picture>
                                                 <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/{{$tile['image']}}">
