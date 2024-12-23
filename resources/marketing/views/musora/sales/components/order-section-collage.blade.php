@@ -99,6 +99,8 @@
                         </a>
                         @if(!empty($theme) && $theme == 'drumeo')
                             <p class="text-sm">Need drums? <a class="underline" href="/drumshop/kit">Get the E-Kit Bundle</a></p>
+                        @elseif(!empty($theme) && $theme == 'pianote')
+                            <p class="text-sm">Need a piano? <a class="underline" href="/shop/prima">Get the Keyboard Bundle</a></p>
                         @endif
 {{--                        <p class="text-xs"><em> Pay nothing for @if(!empty($month)) 30 @else 7 @endif days, <br class="lg:hidden">then $20/month billed annually.</em></p>--}}
                         @if(!empty($theme) && $theme == 'musora')
