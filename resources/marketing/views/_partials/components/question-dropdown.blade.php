@@ -1,15 +1,12 @@
 <div
-    class="dropdown text-center rounded-xl mb-3 select-none text-black @if(empty($variant)) border-2 border-[#EFF3F5] bg-white @endif "
-    @if(!empty($variant))
-        style="background:linear-gradient(to bottom, #F6F8FC, #fff);"
-    @endif
+    class="dropdown text-center rounded-xl mb-3 select-none text-black border-2 border-[#EFF3F5] bg-white"
     x-data="{ open: @if(!empty($open) && $open) true @else false @endif }"
 >
     <div class="flex">
         <div class="text-left flex-grow relative">
             <div
                 class="pt-4 sm:pt-6
-                @if(!empty($variant) && !empty($num))
+                @if(empty($num))
                 px-4 sm:px-5
                 @else
                 pr-4 sm:pr-5 pl-8 sm:pl-12
@@ -18,16 +15,13 @@
                 x-on:click="open = !open;"
             >
                 <h5
-                    class="leading-tight sm:leading-loose font-black relative"
+                    class="leading-tight sm:leading-loose font-bold relative"
                     x-bind:class="open && 'mb-2'"
                 >
-                    @if(!empty($num))<span class="rounded-full px-2 md:px-2.5 min-w-0
-                    @if(!empty($variant))
-                        py-0.5 bg-white border-2 border-{{ $theme }}
-                    @else
-                        py-1 text-xs md:text-sm text-white absolute -left-11 sm:-left-14 md:-left-16 -top-0.5 sm:top-0.5
-                     @endif
-                    " :class="open ? 'bg-{{$theme}}' : ' @if(empty($variant)) bg-[#838C98] @endif '">{!! $num !!}</span>@endif
+                    @if(!empty($num))
+                        <span class="rounded-full px-2 md:px-2.5 min-w-0 py-1 text-xs md:text-sm text-white absolute -left-11 sm:-left-14 md:-left-16 -top-0.5 sm:top-0.5"
+                            :class="open ? 'bg-{{$theme}}' : 'bg-[#838C98]'">{!! $num !!}</span>
+                    @endif
                     {!! $title !!}
                 </h5>
             </div>

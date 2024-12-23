@@ -1,6 +1,5 @@
 @php
     require_once(resource_path('marketing/views/drumeo/_partials/homepage-data.php'));
-    require_once(resource_path('marketing/views/drumeo/_partials/bonus-data.php'));
 @endphp
 
 @extends('drumeo._partials.global-layout')
@@ -295,18 +294,14 @@
     </style>
 
 @stop
-
 @section('body-data')
     x-data ='{
-        soundslice : false,
-        waitlist: false,
+        demoVid : false,
         trailer : false,
         lazyLoad: false,
         videoLoaded: false,
-        @foreach($bonuses as $bonus)
-            @if(!empty($bonus['vimeoId']))
-                modal{{ $bonus['vimeoId'] }}: false,
-            @endif
+        @foreach($drumeo['packs'] as $modalData)
+        {{ $modalData['name'] }}: false,
         @endforeach
     }'
 @endsection
@@ -344,98 +339,90 @@
         @yield('top-bar')
     @endif
 
-
-    @php
-       $bubbles =  [
-            [
-                'src' => $bubble1,
-                'classes' => 'h-10 sm:h-14 lg:h-16 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
-            ],
-            [
-                'src' => $bubble2,
-                'classes' => 'h-24 sm:h-28 lg:h-44 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
-            ],
-            [
-                'src' => $bubble3,
-                'classes' => 'h-32 sm:h-40 lg:h-52 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
-            ],
-            [
-                'src' => $bubble4,
-                'classes' => 'h-10 sm:h-12 lg:h-16 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
-            ],
-            [
-                'src' => $bubble5,
-                'classes' => 'h-10 sm:h-12 lg:h-16 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
-            ],
-            [
-                'src' => $bubble6,
-                'classes' => 'h-28 sm:h-32 lg:h-48 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
-            ],
-            [
-                'src' => $bubble7,
-                'classes' => 'h-28 sm:h-36 lg:h-52 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
-            ],
-            [
-                'src' => $bubble8,
-                'classes' => 'h-12 sm:h-14 lg:h-16 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
-            ]
-        ];
-       $slides = $drumeo['slides'];
-    @endphp
-
     @if(empty($hideHeader) || !$hideHeader)
     @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
+            'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header.mp4',
             'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
-            'desc' => 'Try Drumeo’s award-winning online drum lessons for 7 days FREE:',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/jan-thumb-no-badge.webp',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo2.webp',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo-m2.webp',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => 'POPULAR SONGS',
+            'featured' => [
+                [
+                    'url' => 'https://www.nytimes.com/2024/10/22/arts/music/amplifier-newsletter-music-social-media-accounts.html',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                ],
+                [
+                    'url' => 'https://www.rollingstone.com/music/music-features/phil-collins-in-the-air-tonight-drum-fill-videos-1106780/',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                ],
+                [
+                    'url' => 'https://www.nme.com/news/music/dream-theater-mike-potnoy-play-pull-me-under-first-time-13-years-3563614',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                ],
+            ],
         ])
     @elseif(!empty($promoPage))
         @include('musora.sales.components.header-section', [
-            'promoHeader' => true,
-            'noCheck' => true,
+            'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header.mp4',
             'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> popular songs and unlimited personal support.',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/filters:quality(95)/marketing/drumeo/membership/homepage/2024/jan-thumb-no-badge.webp',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo2.webp',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo-m2.webp',
-            'pointOne' => 'GREAT TEACHERS',
-            'pointTwo' => 'VIDEO LESSONS',
-            'pointThree' => 'FUN PRACTICE',
-            'pointFour' => 'POPULAR SONGS',
+            'featured' => [
+                [
+                    'url' => 'https://www.nytimes.com/2024/10/22/arts/music/amplifier-newsletter-music-social-media-accounts.html',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                ],
+                [
+                    'url' => 'https://www.rollingstone.com/music/music-features/phil-collins-in-the-air-tonight-drum-fill-videos-1106780/',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                ],
+                [
+                    'url' => 'https://www.nme.com/news/music/dream-theater-mike-potnoy-play-pull-me-under-first-time-13-years-3563614',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                ],
+            ],
         ])
     @elseif(!empty($keyPage))
         @include('musora.sales.components.header-section', [
-            'promoHeader' => true,
-            'noCheck' => true,
+            'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header.mp4',
             'header' => 'Unlimited<br> drum lessons +<br>  a <span class="relative inline-block">free drum key<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> popular songs and unlimited personal support.',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/filters:quality(95)/marketing/drumeo/membership/homepage/2024/jan-thumb-no-badge.webp',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo2.webp',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo-m2.webp',
-            'pointOne' => 'GREAT TEACHERS',
-            'pointTwo' => 'VIDEO LESSONS',
-            'pointThree' => 'FUN PRACTICE',
-            'pointFour' => 'POPULAR SONGS',
+            'featured' => [
+                [
+                    'url' => 'https://www.nytimes.com/2024/10/22/arts/music/amplifier-newsletter-music-social-media-accounts.html',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                ],
+                [
+                    'url' => 'https://www.rollingstone.com/music/music-features/phil-collins-in-the-air-tonight-drum-fill-videos-1106780/',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                ],
+                [
+                    'url' => 'https://www.nme.com/news/music/dream-theater-mike-potnoy-play-pull-me-under-first-time-13-years-3563614',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                ],
+            ],
         ])
     @else
         @include('musora.sales.components.header-section', [
-            'promoHeader' => true,
+            'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header.mp4',
             'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> popular songs and unlimited personal support.',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/jan-thumb-no-badge.webp',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo2.webp',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo-m2.webp',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => 'POPULAR SONGS',
+            'featured' => [
+                [
+                    'url' => 'https://www.nytimes.com/2024/10/22/arts/music/amplifier-newsletter-music-social-media-accounts.html',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nyt.png',
+                ],
+                [
+                    'url' => 'https://www.rollingstone.com/music/music-features/phil-collins-in-the-air-tonight-drum-fill-videos-1106780/',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/rs.png',
+                ],
+                [
+                    'url' => 'https://www.nme.com/news/music/dream-theater-mike-potnoy-play-pull-me-under-first-time-13-years-3563614',
+                    'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/nme.png',
+                ],
+            ],
         ])
     @endif
     @endif
@@ -445,25 +432,123 @@
     @endif
 
 
-    @php
-        $gridItems = $drumeo['gridItems'];
-    @endphp
+    <section class="text-center relative text-white py-12 min-h-[500px] h-screen-nav max-h-[1100px]"
+        x-data="{ stick: false }"
+        x-init="window.addEventListener('scroll', () => {
+        stick = window.scrollY + window.innerHeight > $refs.stickySection.offsetTop + $refs.stickySection.offsetHeight;
+    })">
+        <picture class="fixed inset-0 -z-10">
+            <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall.webp">
+            <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall-m.webp">
+            <img
+                class="w-full h-full object-cover object-bottom"
+                style="background-color:#0C1524;"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall-m.webp"
+            />
+        </picture>
+        <div class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 z-10 sticky top-[40vh]"
+            :class="{ 'bottom-auto': stick }" x-ref="stickySection">
+            <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend text-4xl sm:text-6xl lg:text-7xl leading-none uppercase mb-1 sm:mb-3"><strong>STEP-BY-STEP</strong></h1>
+            <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend leading-none uppercase mb-3">to any goal</h1>
+        </div>
+        <div class="h-full">
+        </div>
+    </section>
+    <section class="text-center px-5 sm:px-6 pb-12 sm:pb-16 lg:pb-20 relative overflow-hidden text-white"
+        style="background: linear-gradient(to bottom, transparent 50%, #0C1524);"
+    >
+        <div class="container max-w-5xl mx-auto relative z-20">
+            <div class="text-black bg-white rounded-xl px-4 sm:px-6 py-8 sm:py-12 mb-8">
+                <h5 class="uppercase text-drumeo">Step 1</h5>
+                <h2 class="leading-tight my-2"><strong>Choose Your Goal</strong></h2>
+                <p class="leading-tight mb-8">You’ll enjoy guided courses from the world’s best drummers. Take a peek at a few favorites:</p>
+                    <div
+                        x-data="{
+                            init() {
+                                new Splide(this.$refs.splide, {
+                                    classes: {
+                                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                                            prev: 'splide__arrow--prev your-class-prev -left-1',
+                                            next: 'splide__arrow--next your-class-next -right-1',
+                                            pagination: 'splide__pagination flex -bottom-10',
+                                    },
+                                    padding: '0rem',
+                                    arrows: false,
+                                    pagination: false,
+                                    perPage: 5,
+                                    focus: 0,
+                                    interval: 2000,
+                                    lazyLoad: 'nearby',
+                                    breakpoints: {
+                                        768: {
+                                            padding: '3rem',
+                                            perPage: 3,
+                                            perMove: 1,
+                                            pagination: true,
+                                            arrows: true,
+                                            type: 'loop',
+                                            drag: 'free',
+                                            snap: false,
+                                        },
+                                        620: {
+                                            perPage: 1,
+                                        },
+                                    },
+                                }).mount()
+                            },
+                        }"
+                    >
+                        <section x-ref="splide" class="splide mb-10 lg:mb-0">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    @foreach ($drumeo['packs'] as $tile)
+                                        <li class="splide__slide flex flex-col items-center justify-start px-1">
+                                            <div class="relative w-full rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+                                                @if(!empty($tile['vimeoId'])) @click="{{ $tile['name'] }} = true" @endif>
+                                                <picture>
+                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/{{$tile['image']}}">
+                                                    <img
+                                                        class="w-full transition-opacity opacity-0 duration-300"
+                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$tile['image']}}"
+                                                        onload="this.classList.remove('opacity-0');"
+                                                    />
+                                                </picture>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+            </div>
 
-    @include('musora.sales.components.reason-cards-section', [
-        'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
-        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum featuring many of the world’s best teachers. ',
-    ])
+            <div class="text-white pt-6 sm:pt-10 mb-8 rounded-xl overflow-hidden bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov-bg.webp');">
+                <h5 class="uppercase text-drumeo">Step 2</h5>
+                <h2 class="leading-tight my-2"><strong>Press Play</strong></h2>
+                <p class="leading-normal mb-8 px-4">We’ve tailored each course to keep you motivated – so you<br class="hidden sm:inline-block"> keep returning to the kit & experience amazing results!</p>
 
-    @php
-        $buttons = $drumeo['buttons'];
+                <div class="relative cursor-pointer autoplay-video" x-on:click="demoVid = true;">
+                    <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov-m2.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov2.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                </div>
+            </div>
 
-        $courses = $drumeo['courses'];
-    @endphp
-
-    @include('musora.sales.components.coaches-section', [
-        'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
-        'desc' => 'Amplify your skills with 200+ artist courses + <br class="hidden md:inline lg:hidden">access exclusive live events with drumming legends.'
-    ])
+            <div class="text-black bg-white rounded-xl pl-4 lg:px-10 pt-8 sm:pt-12">
+                <h5 class="uppercase text-drumeo">Step 3</h5>
+                <h2 class="leading-tight my-2"><strong>Hear the result.</strong></h2>
+                <p class="leading-tight mb-8 px-4 sm:px-0">If you love your lessons, you’re more likely to practice. And when you practice, <br class="hidden sm:inline-block"> you’ll hear the results way sooner – and so will everyone around you!</p>
+                <picture>
+                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet5.png">
+                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet5.png">
+                    <img
+                        class="w-full -mb-6"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet-m4.png"
+                        onload="this.classList.remove('opacity-0');"
+                    />
+                </picture>
+            </div>
+        </div>
+    </section>
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/898668674/rendition/540p/file.mp4?loc=external&signature=d5f33375d3a16dc91641be1539d7d621d07ad049b030baa8a7f32c23e63e3ab4',
@@ -471,12 +556,12 @@
     ])
 
     @php
-        $songItems = $drumeo['songItems'];
+        $gridItems = $drumeo['gridItems'];
     @endphp
-
-    @include('musora.sales.components.songs-section', [
-        'subheader' => 'Practice and play 1500+ popular songs with <br class="lg:hidden">note-for-note transcriptions and digital tools.',
-        'media' => 'drumeo/membership/homepage/2024/drumeo-songs.webp',
+    @include('musora.sales.components.reason-cards-five-section', [
+        'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
+        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum featuring many of the world’s best teachers. ',
+        'full' => true,
     ])
 
     @php
@@ -485,13 +570,13 @@
         $facebook = convertNumber(Prices::$drumeoFacebookLikes);
         $instagram = convertNumber(Prices::$drumeoInstagramFollowers);
     @endphp
-
     @include('musora.sales.components.testimonials-section', [
         'header' => 'drummers',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
         'facebookLink' => 'https://facebook.com/drumeo/',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
     ])
+
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
             'badge' => 'marketing/drumeo/membership/homepage/2024/guarantee.webp',
@@ -507,13 +592,13 @@
     @elseif(!empty($trialVersion))
         @include('musora.sales.components.order-section-collage', [
         'orderUrl' => '/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true',
-        'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
-        'header' => 'Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
+        'logo' => 'marketing/drumeo/membership/homepage/2025/logo.webp',
+        'header' => '<strong>Unlimited drum lessons.<br>The world’s best teachers.<br> 1500+ popular songs.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online drum lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and singing lessons with full access to all Musora communities.</li>',
-        'image' => 'marketing/drumeo/membership/homepage/2024/collage.webp',
+        'image' => 'marketing/drumeo/membership/homepage/2025/collage.webp',
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'drumming',
@@ -538,7 +623,6 @@
                 ],
             ];
         @endphp
-
         @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
         'header' => 'Online drum lessons for all skill levels.',
@@ -548,18 +632,18 @@
     @else
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,
-        'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
-        'header' => '<strong>Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.</strong>',
+        'logo' => 'marketing/drumeo/membership/homepage/2025/logo.webp',
+        'header' => '<strong>Unlimited drum lessons.<br>The world’s best teachers.<br> 1500+ popular songs.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online drum lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and singing lessons with full access to all Musora communities.</li>',
-        'image' => 'marketing/drumeo/membership/homepage/2024/collage.webp',
+        'image' => 'marketing/drumeo/membership/homepage/2025/collage.webp',
         ])
     @endif
 
     @include('musora.sales.components.app-section', [
-        'image' => 'marketing/drumeo/membership/homepage/webp-format/devices.webp',
+        'image' => 'marketing/drumeo/membership/homepage/2025/devices.webp',
         'appleUrl' => 'https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.drumeo',
     ])
@@ -567,15 +651,22 @@
     @include('drumeo._partials.faq')
 
     @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
-        'video' => '23rlc',
-        'soundslice' => true,
+        'name' => 'demoVid',
+        'video' => '1017241160',
+        'vimeo' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '898623255',
         'vimeo' => true,
     ])
+    @foreach ($drumeo['packs'] as $packModal)
+        @include('_partials.components.video-modal', [
+            'name' => $packModal['name'],
+            'video' => $packModal['vimeoId'],
+            'vimeo' => true,
+        ])
+    @endforeach
 
     @if(!empty($promoVersion))
         @include("drumeo.sales.partials._footer", [

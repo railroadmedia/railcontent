@@ -19,8 +19,22 @@
                     alt="Device Image">
             </picture>
 
-            <div class="pr-4 lg:pr-7">
-                <h4 class="leading-normal mb-3 lg:mb-7"><strong>Available across web,<br> tablet, & mobile.</strong></h4>
+            <div class="pr-4 lg:pr-6">
+                <h4 class="leading-tight"><strong>{{ ucfirst($theme) }} is only available on
+                        Musora: The Music Lessons App.</strong></h4>
+                <p class="text-sm leading-normal mt-1 lg:mt-2 mb-3 lg:mb-5">
+                    @if($theme == 'drumeo')
+                        Get drum lessons across web, tablet, and mobile — plus access to piano, guitar, and singing lessons.
+                    @elseif($theme == 'pianote')
+                        Get piano lessons across web, tablet, and mobile — plus access to singing, guitar, and drum lessons.
+                    @elseif($theme == 'guitareo')
+                        Get guitar lessons across web, tablet, and mobile — plus access to singing, piano, and drum lessons.
+                    @elseif($theme == 'singeo')
+                        Get singing lessons across web, tablet, and mobile — plus access to piano, guitar, and drum lessons.
+                    @elseif($theme == 'musora')
+                        All-access for piano, guitar, drums and singing across web, tablet, and mobile.
+                    @endif
+                </p>
                 <a class="inline-block" href="{!! $appleUrl !!}" target="_blank" aria-label="Download from Apple Store">
                     <img
                         class="h-8 md:h-10 m-1 transition-opacity opacity-0"

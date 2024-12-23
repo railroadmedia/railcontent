@@ -373,10 +373,6 @@
     @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
             'header' => 'Singing lessons that <br> fit <span class="relative inline-block"> your schedule<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path></svg></span>. ',
-            'desc' => 'Learn to sing from home, anytime, with bite-sized <br class="hidden sm:inline"> video lessons and unlimited personal support. ',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/header-thumb2.webp',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb.webp',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb-m.webp',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
@@ -385,10 +381,6 @@
     @else
         @include('musora.sales.components.header-section', [
             'header' => 'THE <span class="text-singeo">NEW WAY</span> TO<br> <span class="relative inline-block">SING BETTER<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-            'desc' => 'Improve your vocal range, strength, and control with<br class="hidden sm:inline"> step-by-step lessons and unlimited personal support.',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/header-thumb2.webp',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb.webp',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb-m.webp',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
@@ -398,16 +390,6 @@
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
-
-    @php
-        $gridItems = $singeo['gridItems'];
-    @endphp
-
-
-    @include('musora.sales.components.reason-cards-section', [
-        'header' => 'Your singing goals start here.',
-        'desc' => 'An organized curriculum to help you understand your voice, how it functions, how to strengthen it, and sing with confidence.',
-    ])
 
     @php
         $buttons = $singeo['buttons'];
@@ -426,13 +408,15 @@
     ])
 
     @php
-        $songItems = $singeo['songItems'];
+        $gridItems = $singeo['gridItems'];
     @endphp
 
-    @include('musora.sales.components.songs-section', [
-        'subheader' => 'Practice and sing 300+ popular songs with note-for-note sheet music and digital tools.',
-        'media' => 'singeo/membership/homepage/2024/singeo-songs.webp',
+
+    @include('musora.sales.components.reason-cards-section', [
+        'header' => 'Your singing goals start here.',
+        'desc' => 'An organized curriculum to help you understand your voice, how it functions, how to strengthen it, and sing with confidence.',
     ])
+
 
     @php
         $testimonials = $singeo['testimonials'];
