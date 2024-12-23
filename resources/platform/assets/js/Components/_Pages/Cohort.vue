@@ -504,7 +504,7 @@ const formatDate = (date) =>{
 }
 
 const startDateText = computed(() => {
-    return formatDate(new Date(props.cohort['cohort_start_time']));
+    return formatDate(new Date(props.cohort['cohort_start_date']));
 })
 
 const handleGoBack = () => {

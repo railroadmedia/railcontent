@@ -126,7 +126,7 @@ const challengeTitle = computed(() => {
 })
 
 const startDate = computed(() => {
-    const converted = new Date(props.challenge.cohort_start_time);
+    const converted = new Date(props.challenge.cohort_start_date);
     return `${months[converted.getMonth()]} ${converted.getDate()}`;
 })
 
