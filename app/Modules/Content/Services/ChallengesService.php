@@ -444,15 +444,23 @@ class ChallengesService
                 }
             }
             if (is_null($challengeMetaDataToReturn)) {
+                if ($challenge['is_solo'] ?? false) {
+                    $durationText = $this->getDurationText(
+                        Carbon::parse($challenge['published_on']),
+                        $this->getChallengeEndDate($challenge)
+                    );
+                } else {
+                    $durationText = $this->getDurationText(
+                        Carbon::parse($challenge['cohort_start_date']),
+                        Carbon::parse($challenge['cohort_end_date'])
+                    );
+                }
                 $isEnrolled = !($userProgress?->is_locked ?? true);
                 $challengeMetaDataToReturn = [
                     'is_user_enrolled' => $isEnrolled,
                     'is_locked' => $userProgress?->is_locked ?? true,
                     'progress_percent' => 0,
-                    'duration_text' => $this->getDurationText(
-                        Carbon::parse($challenge['published_on']),
-                        $this->getChallengeEndDate($challenge)
-                    ),
+                    'duration_text' => $durationText,
                     'is_solo' => $challenge['is_solo'],
                     'status' => ChallengeUserProgressStatus::NOTSTARTED,
                     'next_lesson' => null,

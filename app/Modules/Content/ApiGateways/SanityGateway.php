@@ -40,6 +40,8 @@ class SanityGateway
         'challenge' => [
             'enrollment_start_time',
             'enrollment_end_time',
+            'cohort_start_date',
+            'cohort_end_date',
             "'registration_url': '/' + brand + '/enrollment/' + slug.current",
             'is_solo',
             '"lesson_count": child_count',
