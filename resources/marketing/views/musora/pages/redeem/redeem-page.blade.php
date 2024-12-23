@@ -322,7 +322,7 @@
     @endphp
 
     @include('musora.sales.components.reason-cards-section', [
-        'full' => true,
+        'seven' => true,
     ])
 
     @include('_partials.components.forms.redeem-form-script', [
