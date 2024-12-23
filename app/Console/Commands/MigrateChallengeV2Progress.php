@@ -150,7 +150,6 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
             ->where('id', '<', $maxId)
             ->whereIn('content_id', $challengeIds)
             ->where('state', '=', 'started')
-            ->where('updated_on', '>', '2024-11-16')
             ->orderBy('user_id');
         if (count($userIds) > 0) {
             $query->whereIn('user_id', $userIds);
