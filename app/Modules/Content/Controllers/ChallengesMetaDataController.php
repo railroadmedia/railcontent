@@ -29,7 +29,7 @@ class ChallengesMetaDataController extends Controller
      */
     public function enrollmentPage(Request $request, $slug, $purchased = false): View
     {
-        $enrollmentPageData = $this->challengesService->getEnrollmentPageData($slug);
+        $enrollmentPageData = $this->challengesService->getEnrollmentPageData($slug, brand());
         if (!$enrollmentPageData) {
             abort(404);
         }
@@ -63,7 +63,7 @@ class ChallengesMetaDataController extends Controller
         if ($hasCompletedChallenge) {
             $enrollmentPageData['last_completion_date'] = $lastCompletionDate;
         }
-        $view = $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
+        $view = false && $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
 
         return view($view, [
             'hasProduct' => $isEnrolled,

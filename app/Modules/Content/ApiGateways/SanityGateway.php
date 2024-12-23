@@ -520,11 +520,12 @@ class SanityGateway
      * @param string $slug - Challenge Slug value
      * @return array | null - matching challenge document or null
      */
-    public function getChallengeEnrollmentPageData(string $slug): array|null
+    public function getChallengeEnrollmentPageData(string $slug, string $brand): array|null
     {
         $fieldsString = $this->getFieldsString('challenge-part');
+        $brandString = " && brand == '$brand'";
         //$publishedOnString = $this->getPublishedFilter(true);
-        $query = "*[slug.current == '$slug' && _type == 'challenge']{
+        $query = "*[slug.current == '$slug' && _type == 'challenge' $brandString]{
                 'id': railcontent_id,
                 headline,
                 subheadline,

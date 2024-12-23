@@ -555,11 +555,12 @@ class ChallengesService
     /**
      * Get enrollment Page information from Sanity by slug
      * @param $slug
+     * @param $brand
      * @return array | null
      */
-    public function getEnrollmentPageData($slug) : array | null
+    public function getEnrollmentPageData($slug, $brand) : array | null
     {
-        return $this->sanityGateway->getChallengeEnrollmentPageData($slug);
+        return $this->sanityGateway->getChallengeEnrollmentPageData($slug, $brand);
     }
 
     /**
