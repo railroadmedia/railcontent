@@ -33,7 +33,8 @@ class SanityGateway
         "'description': description[0].children[0].text",
         "'artist_name':coalesce(artist->name, instructor[0]->name)",
         "'lesson_count': child_count",
-        "parent_content_data"
+        "parent_content_data",
+        'soundslice_slug',
     ];
 
     private array $contentSpecificFields = [
@@ -132,7 +133,7 @@ class SanityGateway
                 }',
             'parent_content_data',
             'video',
-            "'soundslice_slug':soundslice[0]['soundslice_slug']",
+            "'soundslice_slug': coalesce(soundslice_slug, soundslice[0]['soundslice_slug'])",
             '"resources": resource[]{resource_name, _key, "resource_url": coalesce(
             "https://d3fzm1tzeyr5n3.cloudfront.net"+string::split(resource_aws.asset->fileURL,"https://s3.us-east-1.amazonaws.com/musora-web-platform")[1],
             resource_url
