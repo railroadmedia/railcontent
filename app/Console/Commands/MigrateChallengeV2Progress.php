@@ -50,7 +50,8 @@ class MigrateChallengeV2Progress extends Command
 
     public function migrate(ChallengesService $challengesService, SanityGateway $sanityGateway, $startIndex): void
     {
-        $minId = 63500000; //lines up with Nov 16th
+        $minId = 59000000;
+        $maxId = 64800000;
         $challengesProgressLookup = ChallengeUserProgress::all()->keyBy(function ($userChallengeProgress) {
             return $userChallengeProgress->user_id . "_" . $userChallengeProgress->content_id;
         });
@@ -138,6 +139,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
         $userIds = ContentUserProgress::query()
             ->selectRaw('distinct user_id')
             ->where('id', '>=', $minId)
+            ->where('id', '<', $maxId)
             ->whereIn('content_id', $challengeIds)
             ->where('state', '=', 'started')
             ->orderBy('user_id')
@@ -159,6 +161,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
             $challengeUserProgressLookup = ContentUserProgress::query()
                 ->where('user_id', $userId)
                 ->where('id', '>=', $minId)
+                ->where('id', '<', $maxId)
                 ->whereIn('content_id', $challengeIds)
                 ->get()
                 ->keyBy('content_id');
@@ -177,6 +180,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
                 $lessonCompletedLookup = ContentUserProgress::query()
                     ->where('user_id', $userId)
                     ->where('id', '>=', $minId)
+                    ->where('id', '<', $maxId)
                     ->whereIn('content_id', $lessonIds)
                     ->where('state', '=', 'completed')
                     ->get()
