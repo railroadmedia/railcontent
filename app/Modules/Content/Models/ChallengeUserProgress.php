@@ -414,7 +414,7 @@ class ChallengeUserProgress extends Model
      */
     public static function whereChallengeIdAndUser(int $challengeId, int $userId): ChallengeUserProgress|null
     {
-        $challengeUserCollection = self::query()
+        $challengeUserCollection = self::onWriteConnection()
             ->where('content_id', $challengeId)
             ->where('user_id', $userId)
             ->get();
