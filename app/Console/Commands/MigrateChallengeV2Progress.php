@@ -65,9 +65,6 @@ class MigrateChallengeV2Progress extends Command
 
         $minId = 59000000;
         $maxId = 64800000;
-        $challengesProgressLookup = ChallengeUserProgress::all()->keyBy(function ($userChallengeProgress) {
-            return $userChallengeProgress->user_id . "_" . $userChallengeProgress->content_id;
-        });
         $this->info("$this->name: Test 2");
 
         $contentIdsByLessonId = [];
@@ -148,12 +145,16 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
         }
 
 
+
+
         $challengeIds = $challengesLookup->keys()->toArray();
         foreach ($challengeIds as $index => $challengeId) {
             $challengeIds[$index] = $challengeIdLookup[$challengeId] ?? $challengeId;
         }
         $userIds = User::query()->select('id')->skip($startIndex)->take($limit)->get()->pluck('id')->toArray();
-
+        $challengesProgressLookup = ChallengeUserProgress::query()->whereIn('user_id', $userIds)->get()->keyBy(function ($userChallengeProgress) {
+            return $userChallengeProgress->user_id . "_" . $userChallengeProgress->content_id;
+        });
         $processed = 0;
         $total = count($userIds);
         $this->info("MigrateChallengeV2Progress:  $total users to process");
