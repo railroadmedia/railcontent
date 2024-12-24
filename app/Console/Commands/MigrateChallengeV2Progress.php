@@ -19,7 +19,7 @@ class MigrateChallengeV2Progress extends Command
      *
      * @var string
      */
-    protected $signature = 'MigrateChallengeV2Progress {startIndex=0} {min=0} {max=0} {userIds=""}';
+    protected $signature = 'MigrateChallengeV2Progress {startIndex=0} {userIds=""}';
 
     /**
      * The console command description.
@@ -43,14 +43,12 @@ class MigrateChallengeV2Progress extends Command
     public function handle(ChallengesService $challengesService, SanityGateway $sanityGateway): void
     {
         $startIndex = (int)$this->argument('startIndex') ?? 0;
-        $min = (int)$this->argument('min') ?? 0;
-        $max = (int)$this->argument('max') ?? 0;
         $userIdString = $this->argument('userIds') ?? [];
         $userIds = array_filter(
             array_map('intval', explode(',', $userIdString))
         );
-        $this->withExecutionTime(function () use ($sanityGateway, $challengesService, $startIndex, $userIds, $min, $max) {
-            $this->migrate($challengesService, $sanityGateway, $startIndex, $userIds, $min, $max);
+        $this->withExecutionTime(function () use ($sanityGateway, $challengesService, $startIndex, $userIds) {
+            $this->migrate($challengesService, $sanityGateway, $startIndex, $userIds);
         });
     }
 
@@ -58,15 +56,10 @@ class MigrateChallengeV2Progress extends Command
         ChallengesService $challengesService,
         SanityGateway $sanityGateway,
         $startIndex,
-        $userIds,
-        $min,
-        $max
+        $userIds
     ): void {
         $minId = 59000000;
         $maxId = 64800000;
-
-        $minId2 = $min == 0 ? $minId : $min;
-        $maxId2 = $max == 0 ? $maxId : $max;
         $challengesProgressLookup = ChallengeUserProgress::all()->keyBy(function ($userChallengeProgress) {
             return $userChallengeProgress->user_id . "_" . $userChallengeProgress->content_id;
         });
@@ -153,8 +146,8 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
         }
         $query = ContentUserProgress::query()
             ->selectRaw('distinct user_id')
-            ->where('id', '>=', $minId2)
-            ->where('id', '<', $maxId2)
+            ->where('id', '>=', $minId)
+            ->where('id', '<', $maxId)
             ->whereIn('content_id', $challengeIds)
             ->where('state', '=', 'started')
             ->orderBy('user_id');
