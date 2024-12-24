@@ -116,7 +116,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
                         $ids[] = $oldContentId;
                         $slug2 = \DB::select($query)[0]?->slug ?? 0;
                         $title2 = \DB::select($query)[0]?->title ?? 0;
-                        //$this->info("$lessonId $slug $title ==== $oldContentId $slug2, $title2");
+                        $this->info("$lessonId $slug $title ==== $oldContentId $slug2, $title2");
                     } else {
                         $this->info("Unable to find related lesson for challenge $challengeId lesson $lessonId $slug");
                     }
@@ -173,10 +173,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
 
                 $challengeProgress = $challengesProgressLookup->get($userId . "_" . $challengeId);
 
-                $challenge = $challengesLookup[$challengeId] ?? null;
-                if (!$challenge) {
-                    continue;
-                }
+                $challenge = $challengesLookup[$challengeId];
 
                 $lessonIds = $lessonIdsByChallenge[$challenge['id']];
 
@@ -200,6 +197,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
                                 isLocked: false,
                                 challenge: $challenge,
                             );
+                            sleep(1);
                         } catch (\Throwable $exception) {
                             $this->info("Error starting challenge user $userId challenge $challengeId");
                             $this->info($exception->getMessage());
