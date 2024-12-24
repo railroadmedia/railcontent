@@ -119,179 +119,6 @@
             color:#fff!important;
         }
     </style>
-    <style>
-
-        [placeholder]:focus::-webkit-input-placeholder {
-            color:transparent
-        }
-
-        .ajax-form ::-webkit-input-placeholder, .ajax-form ::-moz-placeholder, .ajax-form :-ms-input-placeholder, .ajax-form :-moz-placeholder {
-            color:#777
-        }
-
-        .ajax-form {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        /*@media (min-width: 768px) {*/
-        /*    .ajax-form {*/
-        /*        margin: 0 auto 10px;*/
-        /*    }*/
-        /*}*/
-
-        .ajax-form input, .ajax-form button {
-            font: 400 18px/50px 'Open Sans', sans-serif;
-            height: 50px;
-            color: #999;
-            border-radius: 100px;
-            text-align: left;
-            padding: 7px 20px;
-            margin: 0 auto 15px;
-        }
-        @media (min-width: 768px) {
-            .ajax-form input, .ajax-form button {
-                font-size: 22px;
-                height: 65px;
-                line-height: 65px;
-            }
-        }
-        .ajax-form input[type="submit"],
-        .ajax-form button[type="submit"],
-        .ajax-form input button,
-        .ajax-form button button {
-            font-family: 'Bebas Neue', sans-serif;
-            color: #fff;
-            background: #0b76db;
-            text-transform: uppercase;
-            /*margin: 0 auto 15px;*/
-            display: block;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            text-align: center;
-            padding: 0;
-        }
-        .ajax-form input[type="submit"]:hover, .ajax-form button[type="submit"]:hover, .ajax-form input button:hover, .ajax-form button button:hover {
-            background: #258ff4;
-        }
-        .disclaimer {
-            display: none;
-            margin: 0 auto;
-            opacity: 0.9;
-            max-width: 500px;
-        }
-
-        .thank-you-box {
-            width:100%;
-            max-width:960px;
-            border-radius:5px;
-            height:auto;
-            max-height:0;
-            visibility:hidden;
-            opacity:0;
-            transition:all .4s ease-in;
-            display:block;
-            margin:0 auto;
-            background:#FFF;
-            text-align:center;
-            overflow:hidden;
-            color:#000
-        }
-
-        .thank-you-box.active {
-            max-height:1000px;
-            visibility:visible;
-            opacity:1;
-            padding:15px
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box.active {
-                padding:20px
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box.active {
-                padding:30px
-            }
-        }
-
-        .thank-you-box p {
-            font:400 15px/1.4em "Open Sans", sans-serif;
-            margin:0 auto
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box p {
-                font-size:19px
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box p {
-                font-size:23px
-            }
-        }
-
-        .thank-you-box p em {
-            line-height:1.4em;
-            max-width:550px;
-            display:inline-block;
-            font-size:12px
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box p em {
-                font-size:14px
-            }
-        }
-
-        .thank-you-box h2 {
-            font:700 30px/1em "Bebas Neue", sans-serif;
-            margin:15px auto;
-            text-transform:uppercase;
-            color:#0b76db
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box h2 {
-                font-size:37px;
-                margin:20px auto
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box h2 {
-                font-size:44px
-            }
-        }
-
-        .thank-you-box .social-media a {
-            background:#000;
-            color:#fff;
-            border-radius:50%;
-            display:inline-block;
-            text-align:center;
-            margin:20px 3px 0;
-            width:50px;
-            height:50px;
-            line-height:50px;
-            font-size:26px
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box .social-media a {
-                width:70px;
-                height:70px;
-                line-height:70px;
-                font-size:35px;
-                margin:25px 10px 0
-            }
-        }
-    </style>
 
 @stop
 @section('body-data')
@@ -342,7 +169,8 @@
     @if(empty($hideHeader) || !$hideHeader)
     @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
-            'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header.mp4',
+            'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header2.mp4',
+            'videoM' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2025/header-m.mp4',
             'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
@@ -431,124 +259,19 @@
         @yield('promo-banner')
     @endif
 
-
-    <section class="text-center relative text-white py-12 min-h-[500px] h-screen-nav max-h-[1100px]"
-        x-data="{ stick: false }"
-        x-init="window.addEventListener('scroll', () => {
-        stick = window.scrollY + window.innerHeight > $refs.stickySection.offsetTop + $refs.stickySection.offsetHeight;
-    })">
-        <picture class="fixed inset-0 -z-10">
-            <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall.webp">
-            <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall-m.webp">
-            <img
-                class="w-full h-full object-cover object-bottom"
-                style="background-color:#0C1524;"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/course-wall-m.webp"
-            />
-        </picture>
-        <div class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 z-10 sticky top-[40vh]"
-            :class="{ 'bottom-auto': stick }" x-ref="stickySection">
-            <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend text-4xl sm:text-6xl lg:text-7xl leading-none uppercase mb-1 sm:mb-3"><strong>STEP-BY-STEP</strong></h1>
-            <h1 style="text-shadow:0 0 20px rgba(0, 0, 0, 0.5);" class="font-lexend leading-none uppercase mb-3">to any goal</h1>
-        </div>
-        <div class="h-full">
-        </div>
-    </section>
-    <section class="text-center px-5 sm:px-6 pb-12 sm:pb-16 lg:pb-20 relative overflow-hidden text-white"
-        style="background: linear-gradient(to bottom, transparent 50%, #0C1524);"
-    >
-        <div class="container max-w-5xl mx-auto relative z-20">
-            <div class="text-black bg-white rounded-xl px-4 sm:px-6 py-8 sm:py-12 mb-8">
-                <h5 class="uppercase text-drumeo">Step 1</h5>
-                <h2 class="leading-tight my-2"><strong>Choose Your Goal</strong></h2>
-                <p class="leading-tight mb-8">You’ll enjoy guided courses from the world’s best drummers. Take a peek at a few favorites:</p>
-                    <div
-                        x-data="{
-                            init() {
-                                new Splide(this.$refs.splide, {
-                                    classes: {
-                                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                                            prev: 'splide__arrow--prev your-class-prev -left-1',
-                                            next: 'splide__arrow--next your-class-next -right-1',
-                                            pagination: 'splide__pagination flex -bottom-10',
-                                    },
-                                    padding: '0rem',
-                                    arrows: false,
-                                    pagination: false,
-                                    perPage: 5,
-                                    focus: 0,
-                                    interval: 2000,
-                                    lazyLoad: 'nearby',
-                                    breakpoints: {
-                                        768: {
-                                            padding: '3rem',
-                                            perPage: 3,
-                                            perMove: 1,
-                                            pagination: true,
-                                            arrows: true,
-                                            type: 'loop',
-                                            drag: 'free',
-                                            snap: false,
-                                        },
-                                        620: {
-                                            perPage: 1,
-                                        },
-                                    },
-                                }).mount()
-                            },
-                        }"
-                    >
-                        <section x-ref="splide" class="splide mb-10 lg:mb-0">
-                            <div class="splide__track">
-                                <ul class="splide__list">
-                                    @foreach ($drumeo['packs'] as $tile)
-                                        <li class="splide__slide flex flex-col items-center justify-start px-1">
-                                            <div class="relative w-full rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
-                                                @if(!empty($tile['vimeoId'])) @click="{{ $tile['name'] }} = true" @endif>
-                                                <picture>
-                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/{{$tile['image']}}">
-                                                    <img
-                                                        class="w-full transition-opacity opacity-0 duration-300"
-                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$tile['image']}}"
-                                                        onload="this.classList.remove('opacity-0');"
-                                                    />
-                                                </picture>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </section>
-                    </div>
-            </div>
-
-            <div class="text-white pt-6 sm:pt-10 mb-8 rounded-xl overflow-hidden bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov-bg.webp');">
-                <h5 class="uppercase text-drumeo">Step 2</h5>
-                <h2 class="leading-tight my-2"><strong>Press Play</strong></h2>
-                <p class="leading-normal mb-8 px-4">We’ve tailored each course to keep you motivated – so you<br class="hidden sm:inline-block"> keep returning to the kit & experience amazing results!</p>
-
-                <div class="relative cursor-pointer autoplay-video" x-on:click="demoVid = true;">
-                    <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov-m2.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov2.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-                </div>
-            </div>
-
-            <div class="text-black bg-white rounded-xl pl-4 lg:px-10 pt-8 sm:pt-12">
-                <h5 class="uppercase text-drumeo">Step 3</h5>
-                <h2 class="leading-tight my-2"><strong>Hear the result.</strong></h2>
-                <p class="leading-tight mb-8 px-4 sm:px-0">If you love your lessons, you’re more likely to practice. And when you practice, <br class="hidden sm:inline-block"> you’ll hear the results way sooner – and so will everyone around you!</p>
-                <picture>
-                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet5.png">
-                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet5.png">
-                    <img
-                        class="w-full -mb-6"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/tablet-m4.png"
-                        onload="this.classList.remove('opacity-0');"
-                    />
-                </picture>
-            </div>
-        </div>
-    </section>
+    @include('musora.sales.components.step-by-step-section', [
+        'wall' => 'marketing/drumeo/membership/homepage/2025/course-wall.webp',
+        'wallM' => 'marketing/drumeo/membership/homepage/2025/course-wall-m.webp',
+        'stepOne' => 'You’ll enjoy guided courses from the world’s best drummers. Take a peek at a few favorites:',
+        'packs' => $drumeo['packs'],
+        'stepTwoBg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2025/pov-bg.webp',
+        'stepTwo' => 'We’ve tailored each course to keep you motivated – so you<br class="hidden sm:inline-block"> keep returning to the kit & experience amazing results!',
+        'povM' => 'marketing/drumeo/membership/homepage/2025/pov-m2.webp',
+        'pov' => 'marketing/drumeo/membership/homepage/2025/pov2.webp',
+        'stepThree' => 'If you love your lessons, you’re more likely to practice. And when you practice, <br class="hidden sm:inline-block"> you’ll hear the results way sooner – and so will everyone around you!',
+        'tabletM' => 'marketing/drumeo/membership/homepage/2025/tablet-m4.png',
+        'tablet' => 'marketing/drumeo/membership/homepage/2025/tablet5.png',
+    ])
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/898668674/rendition/540p/file.mp4?loc=external&signature=d5f33375d3a16dc91641be1539d7d621d07ad049b030baa8a7f32c23e63e3ab4',
