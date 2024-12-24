@@ -603,13 +603,15 @@ class ChallengesService
         return $this->sanityGateway->getAllChallengesByBrand($brand);
     }
 
-    public function completeLessonAndGetCurrentProgressResults($lessonId, $userId, $completedTime = null, $lessonDocument = null, $challenge = null): array
+    public function completeLessonAndGetCurrentProgressResults($lessonId, $userId, $completedTime = null, $lessonDocument = null, $challenge = null, $userProgress = null): array
     {
         if (!$lessonDocument || !$challenge) {
             $lessonDocument = $this->sanityGateway->getChallengeChildAndParentData($lessonId);
             $challenge = $lessonDocument['parent'];
         }
-        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
+        if (!$userProgress) {
+            $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
+        }
         $wasChallengeCompleted = $userProgress->areAllLessonsCompleted();
         $secondsPracticed = $this->mediaPlaybackService->getSecondsWatchedSince(
             $lessonId,
