@@ -19,7 +19,7 @@ class MigrateChallengeV2Progress extends Command
      *
      * @var string
      */
-    protected $signature = 'MigrateChallengeV2Progress {startIndex=0} {userIds=""}';
+    protected $signature = 'MigrateChallengeV2Progress {startIndex=0}';
 
     /**
      * The console command description.
@@ -43,21 +43,13 @@ class MigrateChallengeV2Progress extends Command
     public function handle(ChallengesService $challengesService, SanityGateway $sanityGateway): void
     {
         $startIndex = (int)$this->argument('startIndex') ?? 0;
-        $userIdString = $this->argument('userIds') ?? [];
-        $userIds = array_filter(
-            array_map('intval', explode(',', $userIdString))
-        );
-        $this->withExecutionTime(function () use ($sanityGateway, $challengesService, $startIndex, $userIds) {
-            $this->migrate($challengesService, $sanityGateway, $startIndex, $userIds);
+        $this->withExecutionTime(function () use ($sanityGateway, $challengesService, $startIndex) {
+            $this->migrate($challengesService, $sanityGateway, $startIndex);
         });
     }
 
-    public function migrate(
-        ChallengesService $challengesService,
-        SanityGateway $sanityGateway,
-        $startIndex,
-        $userIds
-    ): void {
+    public function migrate(ChallengesService $challengesService, SanityGateway $sanityGateway, $startIndex): void
+    {
         $minId = 59000000;
         $maxId = 64800000;
         $challengesProgressLookup = ChallengeUserProgress::all()->keyBy(function ($userChallengeProgress) {
@@ -124,7 +116,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
                         $ids[] = $oldContentId;
                         $slug2 = \DB::select($query)[0]?->slug ?? 0;
                         $title2 = \DB::select($query)[0]?->title ?? 0;
-                        //$this->info("$lessonId $slug $title ==== $oldContentId $slug2, $title2");
+                        $this->info("$lessonId $slug $title ==== $oldContentId $slug2, $title2");
                     } else {
                         $this->info("Unable to find related lesson for challenge $challengeId lesson $lessonId $slug");
                     }
@@ -144,17 +136,14 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
         foreach ($challengeIds as $index => $challengeId) {
             $challengeIds[$index] = $challengeIdLookup[$challengeId] ?? $challengeId;
         }
-        $query = ContentUserProgress::query()
+        $userIds = ContentUserProgress::query()
             ->selectRaw('distinct user_id')
             ->where('id', '>=', $minId)
             ->where('id', '<', $maxId)
             ->whereIn('content_id', $challengeIds)
             ->where('state', '=', 'started')
-            ->orderBy('user_id');
-        if (count($userIds) > 0) {
-            $query->whereIn('user_id', $userIds);
-        }
-        $userIds = $query->get()
+            ->orderBy('user_id')
+            ->get()
             ->pluck('user_id')
             ->toArray();
 
