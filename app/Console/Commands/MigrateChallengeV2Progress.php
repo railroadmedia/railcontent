@@ -6,8 +6,6 @@ use App\Console\Commands\Infrastructure\Command;
 use App\Console\Commands\Infrastructure\Timer;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
-use App\Modules\Content\Models\Content;
-use App\Modules\Content\Models\ContentHierarchy;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Services\ChallengesService;
 use Carbon\Carbon;
@@ -20,14 +18,14 @@ class MigrateChallengeV2Progress extends Command
      *
      * @var string
      */
-    protected $signature = 'MigrateChallengeV2Progress {startIndex=0} {limit=1000}';
+    protected $signature = 'MigrateChallengeV2Progress2 {startIndex=0} {limit=1000}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'MigrateChallengeV2Progress';
+    protected $description = 'MigrateChallengeV2Progress2';
 
 
     /**
@@ -46,6 +44,7 @@ class MigrateChallengeV2Progress extends Command
         $startIndex = (int)$this->argument('startIndex') ?? 0;
         $limit = (int)$this->argument('limit') ?? 0;
         $this->withExecutionTime(function () use ($sanityGateway, $challengesService, $startIndex, $limit) {
+            $this->info("$this->name: Migration started");
             $this->migrate($challengesService, $sanityGateway, $startIndex, $limit);
         });
     }
