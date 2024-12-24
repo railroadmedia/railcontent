@@ -18,14 +18,14 @@ class MigrateChallengeV2Progress extends Command
      *
      * @var string
      */
-    protected $signature = 'MigrateChallengeV2Progress2 {startIndex=0} {limit=1000}';
+    protected $signature = 'MigrateChallengeV2Progress {startIndex=0} {limit=1000}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'MigrateChallengeV2Progress2';
+    protected $description = 'MigrateChallengeV2Progress';
 
 
     /**
@@ -39,14 +39,20 @@ class MigrateChallengeV2Progress extends Command
     /**
      * Execute the console command.
      */
-    public function handle(ChallengesService $challengesService, SanityGateway $sanityGateway): void
+    public function handle(ChallengesService $challengesService, SanityGateway $sanityGateway): int
     {
         $startIndex = (int)$this->argument('startIndex') ?? 0;
         $limit = (int)$this->argument('limit') ?? 0;
         $this->withExecutionTime(function () use ($sanityGateway, $challengesService, $startIndex, $limit) {
-            $this->info("$this->name: Migration started");
-            $this->migrate($challengesService, $sanityGateway, $startIndex, $limit);
+            $this->info("$this->name: $startIndex - $limit");
+            try {
+                $this->migrate($challengesService, $sanityGateway, $startIndex, $limit);
+            } catch (\Throwable $exception) {
+                \Log::error($exception->getMessage());
+                return self::FAILURE;
+            }
         });
+        return self::SUCCESS;
     }
 
     public function migrate(
@@ -55,16 +61,20 @@ class MigrateChallengeV2Progress extends Command
         $startIndex,
         $limit
     ): void {
+        $this->info("$this->name: Test 1");
+
         $minId = 59000000;
         $maxId = 64800000;
         $challengesProgressLookup = ChallengeUserProgress::all()->keyBy(function ($userChallengeProgress) {
             return $userChallengeProgress->user_id . "_" . $userChallengeProgress->content_id;
         });
+        $this->info("$this->name: Test 2");
 
         $contentIdsByLessonId = [];
         $lessonIdsByChallenge = [];
 
         $challengesLookup = collect($sanityGateway->getAllByType('challenge', 1000))->keyBy('railcontent_id');
+        $this->info("$this->name: Test 3");
 
         $challengeIdLookup = [
             402201 => 383674,
