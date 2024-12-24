@@ -151,19 +151,19 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
         foreach ($challengeIds as $index => $challengeId) {
             $challengeIds[$index] = $challengeIdLookup[$challengeId] ?? $challengeId;
         }
-        if (count($userIds) == 0) {
-            $userIds = ContentUserProgress::query()
-                ->selectRaw('distinct user_id')
-                ->where('id', '>=', $minId2)
-                ->where('id', '<', $maxId2)
-                ->whereIn('content_id', $challengeIds)
-                ->where('state', '=', 'started')
-                ->orderBy('user_id')
-                ->get()
-                ->pluck('user_id')
-                ->toArray();
+        $query = ContentUserProgress::query()
+            ->selectRaw('distinct user_id')
+            ->where('id', '>=', $minId2)
+            ->where('id', '<', $maxId2)
+            ->whereIn('content_id', $challengeIds)
+            ->where('state', '=', 'started')
+            ->orderBy('user_id');
+        if (count($userIds) > 0) {
+            $query->whereIn('user_id', $userIds);
         }
-
+        $userIds = $query->get()
+            ->pluck('user_id')
+            ->toArray();
 
         $processed = 0;
         $total = count($userIds);
