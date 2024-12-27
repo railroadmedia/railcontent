@@ -49,7 +49,7 @@ class PlaylistsService
      * from Sanity, and calculates the total duration by summing each content item's `length_in_seconds`.
      * The resulting duration is then saved to the `duration` field of the playlist.
      *
-     * @param  UserPlaylist  $playlist  The playlist for which to update the duration.
+     * @param UserPlaylist $playlist The playlist for which to update the duration.
      * @return UserPlaylist  The updated playlist instance with the calculated duration.
      */
     public function updateDuration(UserPlaylist $playlist): UserPlaylist
@@ -86,19 +86,22 @@ class PlaylistsService
      * Retrieves the items in a specific playlist, fetches related Sanity and Assignment data,
      * and formats the data for each item.
      *
-     * @param string $brand        The brand associated with the playlist.
-     * @param int $playlistId      The ID of the playlist whose items are being retrieved.
-     * @param string $sort         Sorting parameter; 'position' by default; 'random' to shuffle items
+     * @param string $brand The brand associated with the playlist.
+     * @param int $playlistId The ID of the playlist whose items are being retrieved.
+     * @param string $sort Sorting parameter; 'position' by default; 'random' to shuffle items
      * @return array               An array of formatted playlist item data.
      */
-    public function getPlaylistItems(string $brand, int $playlistId, $sort = "position"): \Illuminate\Support\Collection|array
-    {
+    public function getPlaylistItems(
+        string $brand,
+        int $playlistId,
+        $sort = "position"
+    ): \Illuminate\Support\Collection|array {
         $query = UserPlaylistContent::query()
             ->where('user_playlist_id', $playlistId);
         if ($sort == 'random') {
             $query = $query->inRandomOrder();
         } else {
-            $query = $query ->orderBy('position', 'asc');
+            $query = $query->orderBy('position', 'asc');
         }
 
         $items = $query->get();
@@ -121,9 +124,17 @@ class PlaylistsService
         $assignmentDataAssoc = collect($assignmentsData)->keyBy('railcontent_id');
         $userPermissions = user()->getActivePermissionsIds();
 
-        $mergedData = $items->map(function ($item) use ($sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions) {
-            return $this->formatPlaylistItemData($item, $sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions);
-        });
+        $mergedData = $items->map(
+            function ($item) use ($sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions) {
+                return $this->formatPlaylistItemData(
+                    $item,
+                    $sanityDataAssoc,
+                    $assignmentDataAssoc,
+                    $playlistId,
+                    $userPermissions
+                );
+            }
+        );
 
         // filter out any items that shouldn't be visible
         return $mergedData->filter(function (array $playlistItem) {
@@ -135,11 +146,11 @@ class PlaylistsService
     /**
      * Formats the data for a playlist item by merging information from Sanity, assignments, and item-specific data.
      *
-     * @param mixed $item                    The playlist item being formatted.
-     * @param \Illuminate\Support\Collection $sanityDataAssoc     A collection of Sanity data keyed by content ID.
+     * @param mixed $item The playlist item being formatted.
+     * @param \Illuminate\Support\Collection $sanityDataAssoc A collection of Sanity data keyed by content ID.
      * @param \Illuminate\Support\Collection $assignmentDataAssoc A collection of assignment data keyed by content ID.
-     * @param int $playlistId                The ID of the playlist the item belongs to.
-     * @param array $userPermissions         An array of user permissions to check access for the playlist item.
+     * @param int $playlistId The ID of the playlist the item belongs to.
+     * @param array $userPermissions An array of user permissions to check access for the playlist item.
      * @return array                         The formatted playlist item data, including route, metadata, and permissions.
      */
     public function formatPlaylistItemData(
@@ -195,7 +206,12 @@ class PlaylistsService
         $data = array_merge($sanityInfo ?? [], $assignmentInfo ?? [], $item->toArray());
         // Check if the user needs access
         $permissions = $data['permission_id'] ?? [];
-        $data['need_access'] = !user()->isAdmin() && empty(array_intersect($userPermissions, $data['permission_id'] ?? [])) && !empty($permissions);
+        $data['need_access'] = !user()->isAdmin() && empty(
+            array_intersect(
+                $userPermissions,
+                $data['permission_id'] ?? []
+            )
+            ) && !empty($permissions);
 
         if ($data['need_access']) {
             // Define membership checks
@@ -242,28 +258,36 @@ class PlaylistsService
     /**
      * Retrieves playlists for the current user based on various filters and sorting options.
      *
-     * @param mixed                               $sort            Sorting parameter, e.g., 'name', 'id', or '-created_at'.
-     * @param \App\Modules\Brand\Enums\Brand|null $brand           Optional brand to filter playlists.
-     * @param mixed                               $term            Search term for playlist filtering.
-     * @param mixed                               $limit           Number of playlists per page.
-     * @param mixed                               $page            Current page number for pagination.
-     * @param mixed|null                          $itemIdToCheck   Optional item ID to check if it exists in the playlists.
+     * @param mixed $sort Sorting parameter, e.g., 'name', 'id', or '-created_at'.
+     * @param \App\Modules\Brand\Enums\Brand|null $brand Optional brand to filter playlists.
+     * @param mixed $term Search term for playlist filtering.
+     * @param mixed $limit Number of playlists per page.
+     * @param mixed $page Current page number for pagination.
+     * @param mixed|null $itemIdToCheck Optional item ID to check if it exists in the playlists.
      * @return array                              An array containing playlist data and metadata, including filter options.
      */
-    public function getPlaylists(mixed $sort, ?Brand $brand, mixed $term, mixed $limit, mixed $page, mixed $itemIdToCheck = null, mixed $categories = null): array
-    {
+    public function getPlaylists(
+        mixed $sort,
+        ?Brand $brand,
+        mixed $term,
+        mixed $limit,
+        mixed $page,
+        mixed $itemIdToCheck = null,
+        mixed $categories = null
+    ): array {
         $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
-        $orderByColumn    = trim($sort, '-');
+        $orderByColumn = trim($sort, '-');
         if (!in_array($orderByColumn, ['name', 'id', 'created_at', 'last_progress', 'most_recent', 'pinned'])) {
             $orderByColumn = 'id';
         }
 
         $user = user();
 
-        $playlists    = UserPlaylist::query()
+        $playlists = UserPlaylist::query()
+            ->with('items.content')
             ->where('railcontent_user_playlists.user_id', $user->id)
-            ->when(!is_null($brand), fn ($query) => $query->ofBrand($brand))
-            ->when(!is_null($categories), fn ($query) => $query->ofCategories($categories))
+            ->when(!is_null($brand), fn($query) => $query->ofBrand($brand))
+            ->when(!is_null($categories), fn($query) => $query->ofCategories($categories))
             ->searchTerm($term)
             ->sortBy($orderByColumn, $orderByDirection)
             ->paginate($limit, ['*'], 'page', $page);
@@ -281,7 +305,7 @@ class PlaylistsService
         $playlists = $this->formatPlaylists($playlists->items());
 
         // Filter options processing
-        $filterOptions      = UserPlaylist::filterOptions($user->id, $brand, $term)->get();
+        $filterOptions = UserPlaylist::filterOptions($user->id, $brand, $term)->get();
         $filterOptionsArray = $this->processFilterOptions($filterOptions);
 
         // Final results structure
@@ -289,9 +313,9 @@ class PlaylistsService
             'data' => $playlists,
             'meta' => [
                 'filterOptions' => $filterOptionsArray,
-                'limit'         => $limit,
-                'page'          => $page,
-                'totalResults'  => $totalResults
+                'limit' => $limit,
+                'page' => $page,
+                'totalResults' => $totalResults
             ]
         ];
 
@@ -322,10 +346,13 @@ class PlaylistsService
 
             $pinned = $playlist->pins()->where('user_id', user()->id)->exists();
             $playlists[$index] = $playlist->toArray();
-            $minsec                                 = gmdate("i:s", $playlists[$index]['duration'] ?? 0);
-            $hours                                  = (gmdate("d", $playlists[$index]['duration'] ?? 0) - 1) * 24 + gmdate("H", $playlists[$index]['duration'] ?? 0);
+            $minsec = gmdate("i:s", $playlists[$index]['duration'] ?? 0);
+            $hours = (gmdate("d", $playlists[$index]['duration'] ?? 0) - 1) * 24 + gmdate(
+                    "H",
+                    $playlists[$index]['duration'] ?? 0
+                );
             $playlists[$index]['duration_formated'] = ($hours == 0) ? $minsec : $hours . ':' . $minsec;
-            $playlists[$index]['url']               =
+            $playlists[$index]['url'] =
                 url()->route('platform.user.playlist', ["id" => $playlist['id'], "brand" => brand()]);
 
             $playlists[$index]['playback_url'] = url()->route('platform.play.playlist', [
@@ -362,7 +389,7 @@ class PlaylistsService
             $query->where('user_id', user()->id);
         })->with('pins')->where('brand', '=', $brand)->get();
 
-        return  $this->formatPlaylists($playlists->all());
+        return $this->formatPlaylists($playlists->all());
     }
 
     /**
@@ -379,9 +406,9 @@ class PlaylistsService
         })->with('pins')->where('brand', '=', $playlist->brand)->count();
         if ($pinnedPlaylistsCount < $allowedPinNumber) {
             $pinnedData = [
-                'user_id'      => user()->id,
-                'playlist_id'         => $playlist->id,
-                'created_at'   => Carbon::now()->toDateTimeString(),
+                'user_id' => user()->id,
+                'playlist_id' => $playlist->id,
+                'created_at' => Carbon::now()->toDateTimeString(),
                 'brand' => $playlist->brand
             ];
             UserPlaylistPinned::create($pinnedData);
@@ -417,14 +444,14 @@ class PlaylistsService
     {
         $currentUser = user();
         ReportedPlaylists::updateOrCreate([
-                                              'playlist_id' => $playlist->id,
-                                              'reporter_id' => $currentUser->id,
-                                          ], [
+            'playlist_id' => $playlist->id,
+            'reporter_id' => $currentUser->id,
+        ], [
             'created_on' => Carbon::now()
                 ->toDateTimeString(),
         ]);
 
-        $input['subject'] = 'Playlist reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
+        $input['subject'] = 'Playlist reported by ' . $currentUser['display_name'] . " (" . $currentUser['email'] . ")";
         $input['sender-address'] = config('mailora.report-sender-address');
         $input['sender-name'] = config('mailora.report-sender-name');
         $input['lines'] = ['The following playlist has been reported:'];
@@ -436,25 +463,25 @@ class PlaylistsService
         }
 
         $input['unsubscribeLink'] = '';
-        $input['alert'] = 'Playlist reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
+        $input['alert'] = 'Playlist reported by ' . $currentUser['display_name'] . " (" . $currentUser['email'] . ")";
 
-        $input['logo'] = config('mailora.'.$playlist->brand.'.logo-link');
+        $input['logo'] = config('mailora.' . $playlist->brand . '.logo-link');
         $input['type'] = 'layouts/inline/alert';
-        $input['recipient'] = config('mailora.'.$playlist->id.'.report-comment-recipient');
+        $input['recipient'] = config('mailora.' . $playlist->id . '.report-comment-recipient');
 
         try {
             $this->mailService->sendSecure($input);
         } catch (\Exception $exception) {
             return response()->json([
-                                        "success" => false,
-                                        "message" => $exception->getMessage(),
-                                    ], 500);
+                "success" => false,
+                "message" => $exception->getMessage(),
+            ], 500);
         }
 
         return response()->json([
-                                    "success" => true,
-                                    "message" => "The playlist was reported",
-                                ], 200);
+            "success" => true,
+            "message" => "The playlist was reported",
+        ], 200);
     }
 
     public function getPlaylistNextItem($playlistId)
@@ -473,7 +500,7 @@ class PlaylistsService
                 $progress = $this->contentProgressDataContext->get($nextItem->content_id, user()->id);
                 if ($progress && $progress['state'] === ProgressState::Completed->value) {
                     // Find the next eligible item from the playlist
-                    $otherItems = $playlistItems->filter(fn ($item) => $item->id !== $nextItem->id);
+                    $otherItems = $playlistItems->filter(fn($item) => $item->id !== $nextItem->id);
                     $contents = $otherItems->pluck('content_id')->toArray();
                     $progressOnOtherItems = $this->contentProgressDataContext->getByIds($contents, user()->id);
                     $nextItem = $otherItems->first(function ($item) use ($progressOnOtherItems) {
