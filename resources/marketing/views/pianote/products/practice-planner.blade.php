@@ -33,6 +33,12 @@
                 background-size: cover;
             }
         }
+
+        .icon-gradient {
+            background: linear-gradient(180deg, #FDBD4F, #B87F34);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 @stop()
 
@@ -48,9 +54,17 @@
         "noBreadcrumb" => true
     ])
 
-        <header class="px-5 sm:px-6 pt-64 pb-12 sm:py-20 lg:py-36 bg-top" style="background-color:#F4F1EC;">
+        <header class="px-5 sm:px-6 py-12 sm:py-20 lg:py-36 bg-top" style="background-color:#F4F1EC;">
         <div class="container max-w-4xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center mt-28 sm:mt-0">
+            <div class="flex flex-wrap sm:flex-nowrap items-center sm:mt-0">
+             <img class="h-24 mx-auto mb-4 sm:hidden" alt="Read Music in 30 Days Logo" fetchpriority="high"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/logo.webp">
+                
+                <div class="w-full sm:w-7/12 text-center lg:text-left sm:order-1 px-10">
+                    <img class="w-full max-w-xs lg:max-w-md"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/950x0/filters:quality(95)/marketing/pianote/products/read-music-book/RMI30D-book2.webp"
+                        alt="Practice Planner Cover">
+                </div>
                 <div class="w-full sm:w-5/12 text-center lg:text-left">
                     <img class="w-96" alt="logo" fetchpriority="high"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/practice-planner/practice-planner-logo.svg"
@@ -79,68 +93,50 @@
 
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#FFFFFF">
         <div class="container mx-auto z-10 relative max-w-5xl">
-            <h2 class="leading-tight mb-3">
-                <strong>Everything you need for the <br> PERFECT practice.</strong>
-            </h2>
-            <p class="leading-normal mb-4 text-xs">It's what's inside that counts.</p>
-    
             @php
-            $items = [
-                [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/features-01.webp',
-                    'desc' => [
-                        'Practice doesn’t make perfect.',
-                        '<strong>Perfect practice makes perfect.</strong>',
-                        'And with the Pianote Practice Planner, you’ll get the most from your practice every time you sit at the keys.',
-                        'Plan in advance so you always know what to work on. Stick to your plan. Record the result.',
-                        'It’s the best way to make progress on the piano.',
-                        'You have goals on the piano.',
-                        'This planner will help you achieve them.'
-                    ],
-                    'alt' => 'Piano Key Overlay',
-                    'title' => 'Not all practice is created equal.',
-                ]
+            $item = [
+                'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-planner/planner-piano.png',
+                'desc' => [
+                    'Practice doesn’t make perfect.',
+                    '<strong>Perfect practice makes perfect.</strong>',
+                    'And with the Pianote Practice Planner, you’ll get the most from your practice every time you sit at the keys.',
+                    'Plan in advance so you always know what to work on. Stick to your plan. Record the result.',
+                    'It’s the best way to make progress on the piano.',
+                    'You have goals on the piano.',
+                    'This planner will help you achieve them.'
+                ],
+                'alt' => 'Piano Key Overlay',
+                'title' => 'Not all practice is <br class="hidden md:block"> created equal.',
             ];
             @endphp
     
-            @foreach ($items as $index => $item)
-                <div class="text-left flex flex-col sm:flex-row justify-center items-center md:py-10">
-                    @if ($index % 2 != 0)
-                        <div class="w-full sm:w-6/12 rounded-2xl order-1 sm:order-1" 
-                             loading="lazy" 
-                             onload="this.classList.remove('opacity-0')">
-                            <img class="object-cover w-full h-full" 
-                                 src="{{ $item['img'] }}" 
-                                 alt="{{ $item['alt'] }}">
-                        </div>
-                    @else
-                        <div class="w-full sm:w-6/12 rounded-2xl order-1 sm:order-2" 
-                             loading="lazy" 
-                             onload="this.classList.remove('opacity-0')">
-                            <img class="object-cover w-full h-full" 
-                                 src="{{ $item['img'] }}" 
-                                 alt="{{ $item['alt'] }}">
-                        </div>
-                    @endif
+            <div class="text-left flex flex-col sm:flex-row justify-center items-center md:py-10">
+                <div class="w-full sm:w-5/12 rounded-2xl order-1 sm:order-2" 
+                     loading="lazy" 
+                     onload="this.classList.remove('opacity-0')">
+                    <img class="object-cover w-full h-full rounded-2xl" 
+                         src="{{ $item['img'] }}" 
+                         alt="{{ $item['alt'] }}">
+                </div>
     
-                    <div class="flex flex-row md:flex-col sm:flex-1 justify-center items-start py-4 {{ $index % 2 == 0 ? 'sm:pl-4 md:pl-10' : 'sm:pr-4 md:pr-10' }} order-2 sm:order-1">
-                        <div>
-                            <h4 class="leading-tight mx-0 my-2 sm:my-4">
-                                <strong>{{ $item['title'] }}</strong>
-                            </h4>
-                            @foreach ($item['desc'] as $desc)
-                                <p class="pb-2">{!! $desc !!}</p>
-                            @endforeach
-                        </div>
+                <div class="flex flex-row md:flex-col sm:flex-1 justify-center items-start py-4 sm:pr-4 md:px-14 order-2 sm:order-1">
+                    <div>
+                        <h3 class="leading-tight mx-0 my-2 sm:my-4">
+                            <strong>{!! $item['title'] !!}</strong>
+                        </h3>
+                        @foreach ($item['desc'] as $desc)
+                            <p class="pb-2">{!! $desc !!}</p>
+                        @endforeach
                     </div>
                 </div>
-            @endforeach
+            </div>
         </div>
     </section>
 
+
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/digital-christmas-songbook/piano-bg.webp');">
         <h3 class="leading-tight"><strong>Take a look inside</strong></h3>
-        <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative text-[#FCBD50]" style="bottom:-7px"></i> <em>Click to see a sample of how to use your practice planner..</em> <i class="fa-light fa-arrow-turn-down ml-1 relative text-[#FCBD50]" style="bottom:-7px"></i></p>
+        <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative text-[#FCBD50]" style="bottom:-7px"></i> <em>Click to see a sample of how to use your practice planner.</em> <i class="fa-light fa-arrow-turn-down ml-1 relative text-[#FCBD50]" style="bottom:-7px"></i></p>
         <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/lead-gen/digital-christmas-songbook/pianote-christmas-songbook-sample.pdf" class="relative">
             <img class="inline-block lg:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/digital-christmas-songbook/piano-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             <img class="hidden lg:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/lead-gen/digital-christmas-songbook/piano.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
@@ -148,18 +144,18 @@
     </section>
 
 
-    <section class="bg-white sm:py-20 lg:py-36">
+    <section class="bg-white sm:py-20">
         <div class="py-8">
-            <div class="max-w-5xl mx-auto px-4">
+            <div class="max-w-6xl mx-auto px-4">
                 <h2 class="text-center mb-2">
                     <strong>Your guide to playing better.</strong>
                 </h2>
-                <p class="text-center mb-8">
+                <p class="text-center mb-2">
                     Here's a small sample of how the planner will help you get the most out of your valuable practice time.
                 </p>
                 <p class="text-center mb-6"><strong>You'll learn:</strong></p>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-3">
                     @php
                     $cards = [
                         [
@@ -179,15 +175,15 @@
                             'text' => 'How to <strong>stay motivated</strong> so you\'ll want to practice more (and get better).'
                         ],
                         [
-                            'icon' => 'fas fa-piano',
+                            'icon' => 'fas fa-piano-keyboard',
                             'text' => 'How to play <strong>any chord</strong> from <strong>any key</strong> with these chord formulas (including 6th, 7th, diminished, and augmented chords).'
                         ],
                         [
-                            'icon' => 'fas fa-bullseye',
+                            'icon' => 'fa-regular fa-bullseye-arrow',
                             'text' => 'The <strong>4 elements</strong> you need to set achievable goals (and how to follow through).'
                         ],
                         [
-                            'icon' => 'fas fa-times',
+                            'icon' => 'fa-solid fa-xmark-large',
                             'text' => 'What to do when you <strong>don\'t feel like practicing</strong> (one simple trick).'
                         ],
                         [
@@ -198,10 +194,10 @@
                     @endphp
 
                     @foreach ($cards as $index => $card)
-                        <div class="bg-[#F4F1EC] rounded-lg p-4 shadow-sm flex items-center md:block lg:min-h-[200px]" 
+                        <div class="bg-[#F4F1EC] rounded-lg p-4 shadow-sm flex items-center md:block lg:p-6 lg:min-h-[220px]" 
                             style="box-shadow: 0px 4px 4px 0px #00000040;">
                             <div class="icon-gradient w-12 h-12 flex items-center justify-center mb-4 md:mb-6 md:mr-0 mr-4">
-                                <i class="{{ $card['icon'] }} text-3xl" style="color:#EA7A00;"></i>
+                                <i class="{{ $card['icon'] }} text-4xl" style="color:#EA7A00;"></i>
                             </div>
                             <p class="flex-1 text-sm">{!! $card['text'] !!}</p>
                         </div>
@@ -213,27 +209,28 @@
 
     <div id="final" class="anchor"></div>
 
-     <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20" style="background:#F4F1EC">
+    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20" style="background:#F4F1EC">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
+                <img class="h-24 mx-auto mb-4 sm:hidden" alt="Read Music in 30 Days Logo" fetchpriority="high"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/logo.webp">
                 <div class="w-full sm:w-7/12 text-center lg:text-left sm:order-1 px-10">
                     <img class="w-full max-w-xs lg:max-w-md"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/950x0/filters:quality(95)/marketing/pianote/products/read-music-book/RMI30D-book2.webp"
-                        alt="Read Music Book Cover">
+                        alt="Practice Planner Cover">
                 </div>
                 <div class="w-full sm:w-5/12 text-center lg:text-left sm:pr-5">
-                    <img class="h-24 lg:h-28" alt="logo" fetchpriority="high"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/logo.webp"
-                        alt="Read Music in 30 Days Logo">
+                    <img class="h-24 hidden sm:block lg:h-28" alt="Read Music in 30 Days Logo" fetchpriority="high"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/logo.webp">
                     <p class="my-4 sm:my-6 text-black">Stay on track and see better results from your practice sessions.</p>
                     <p class="my-4 sm:my-6 text-black">Make every practice perfect.</p>
-
+    
                     <ul class="leading-relaxed">
                         <li><i class="fa fa-check text-pianote mb-2"></i> 186 Pages</li>
                         <li><i class="fa fa-check text-pianote mb-2"></i> Weekly templates to track your goals</li>
                         <li><i class="fa fa-check text-pianote mb-2"></i> Monthly check-ins</li>
                     </ul>
-
+    
                     <h2 class="my-4 sm:my-6">
                         @if (floatval($productPrices['pianote-practice-planner']->price) >
                                 floatval($productPrices['pianote-practice-planner']->discounted_price))
