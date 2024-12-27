@@ -48,6 +48,7 @@ Route::domain('{pianoteDomain}')
                 Route::get('/read-music', [SalesController::class, 'readMusic']);
                 Route::get('/read-music-book', [SalesController::class, 'readMusicBook']);
                 Route::get('/riffs-and-fills', [LeadGenController::class, 'riffsAndFills']);
+                Route::get('/the-best-beginner-piano-book', [SalesController::class, 'theBestBeginnerPianoBook']);
                 Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords']);
                 Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway']);
                 Route::get('/worship-piano', [SalesController::class, 'worshippiano']);

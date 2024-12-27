@@ -573,4 +573,10 @@ class SalesController extends BaseController
             'theme' => 'pianote',
         ]);
     }
+    public function theBestBeginnerPianoBook()
+    {
+        return view('pianote.products.the-best-beginner-piano-book', [
+            'theme' => 'pianote',
+        ]);
+    }
 }
