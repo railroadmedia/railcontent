@@ -165,7 +165,7 @@ Route::prefix('challenges')
             [ChallengesMetaDataController::class, 'getActiveChallengesForUser']
         )->name('challenges.user_active_challenges');
 
-        Route::post(
+        Route::match(['get', 'post'],
             'enroll/{id}',
             [ChallengesMetaDataController::class, 'enrollUser']
         )->name('challenges.enroll');
