@@ -51,6 +51,7 @@ export const useUserStore = defineStore({
     userPedalBrands: (state) => state.user?.guitar_gear_pedal_brands,
     userStringBrands: (state) => state.user?.guitar_gear_string_brands,
     useLegacyVideoPlayer: (state) => state.user?.use_legacy_video_player ? true : false,
+    userTimezone: (state) => state.user?.timezone,
     userBirthdayFormatted: (state) => {
       if (!state.user?.birthday) return '';
       const [year, month, day] = state.user.birthday.split('-');
@@ -204,7 +205,7 @@ export const useUserStore = defineStore({
         } else {
             console.log('error', response);
         }
-    } catch (error) {
+      } catch (error) {
         // Parse and display the error message
         const errorMessage = error.response?.data?.errors?.['error-message'] || 'An unexpected error occurred.';
         console.error('ERROR', errorMessage);
@@ -213,7 +214,7 @@ export const useUserStore = defineStore({
             icon: 'error',
             text: errorMessage
         });
-    }
+      }
     
     },
 
