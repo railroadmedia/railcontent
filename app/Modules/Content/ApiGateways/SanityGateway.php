@@ -171,6 +171,7 @@ class SanityGateway
     ];
 
     private UserPermissionsRepository $userPermissionsRepository;
+    private ?array $userPermissionsCached = null;
 
     public SanityClient $sanity;
 
@@ -482,8 +483,8 @@ class SanityGateway
                                 return 'Method';
                             case 'learning-path-level':
                                 return 'L' . collect($document['parent_content_data'])->keyBy(
-                                    'id'
-                                )[$parent['id']]['position'];
+                                        'id'
+                                    )[$parent['id']]['position'];
                             default:
                                 return $parent['title'];
                         }
@@ -1061,7 +1062,10 @@ class SanityGateway
         if (!user()) {
             return [];
         }
-        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
-        return \Arr::pluck($userPermissions, 'permission_id');
+        if (!$this->userPermissionsCached) {
+            $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
+            $this->userPermissionsCached = \Arr::pluck($userPermissions, 'permission_id');
+        }
+        return $this->userPermissionsCached;
     }
 }
