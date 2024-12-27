@@ -84,6 +84,13 @@ import { DateTime } from 'luxon';
 import ContentHelpers from "../../assets/js/helper-functions/content.js";
 import ContentModel from '../../assets/js/models/_model.js';
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
+import { storeToRefs } from "pinia";
+import { useUserStore } from "@stores/user";
+
+
+//Pinia
+const userStore = useUserStore();
+const { userTimezone } = storeToRefs(userStore);
 
 const props = defineProps({
     item: {
@@ -91,8 +98,6 @@ const props = defineProps({
         required: true,
     },
 });
-
-const timezone = ref("UTC"); // Default timezone
 
 const mappedData = getContentModel();
 
@@ -107,7 +112,7 @@ const releaseType = computed(() => props.item.status === 'scheduled' ? 'Live Bro
 
 function formatDate(isoDate, formatString) {
     return DateTime.fromISO(isoDate, { zone: 'utc' })
-        .setZone(timezone.value)
+        .setZone(userTimezone.value)
         .toFormat(formatString);
 }
 
@@ -130,28 +135,9 @@ function getContentModel() {
     return model.schedule;
 }
 
-function getRegionParam() {
-    try {
-        const currentUrl = window.location.href;
-
-        const urlObj = new URL(currentUrl);
-
-        const timezoneParam = urlObj.searchParams.get("timezone");
-
-        if (timezoneParam) {
-            const extractedValue = timezoneParam.split(" - ")[0];
-            timezone.value = extractedValue; 
-            //console.log("Extracted Timezone:", extractedValue);
-        } else {
-            console.warn("Timezone parameter not found in URL, defaulting to UTC.");
-        }
-    } catch (error) {
-        console.error("Error parsing URL for timezone:", error);
-    }
-}
-
 onBeforeMount(() => {
-    getRegionParam();
+    //getRegionParam();
+    //console.log('timezone', userTimezone.value)
     //console.log('published_on', props.item.published_on);
 });
 
