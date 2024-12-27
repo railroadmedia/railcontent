@@ -111,7 +111,7 @@
             @endphp
     
             <div class="text-left flex flex-col sm:flex-row justify-center items-center md:py-10">
-                <div class="w-full sm:w-5/12 rounded-2xl order-1 sm:order-2" 
+                <div class="w-full sm:w-6/12 rounded-2xl order-1 sm:order-2" 
                      loading="lazy" 
                      onload="this.classList.remove('opacity-0')">
                     <img class="object-cover w-full h-full rounded-2xl" 
@@ -119,7 +119,7 @@
                          alt="{{ $item['alt'] }}">
                 </div>
     
-                <div class="flex flex-row md:flex-col sm:flex-1 justify-center items-start py-4 sm:pr-4 md:px-14 order-2 sm:order-1">
+                <div class="flex flex-row md:flex-col sm:flex-1 justify-center items-start py-4 sm:pr-4 md:px-10 order-2 sm:order-1">
                     <div>
                         <h3 class="leading-tight mx-0 my-2 sm:my-4">
                             <strong>{!! $item['title'] !!}</strong>
@@ -133,8 +133,7 @@
         </div>
     </section>
 
-
-    <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/digital-christmas-songbook/piano-bg.webp');">
+    <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/digital-christmas-songbook/piano-bg.webp');">
         <h3 class="leading-tight"><strong>Take a look inside</strong></h3>
         <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative text-[#FCBD50]" style="bottom:-7px"></i> <em>Click to see a sample of how to use your practice planner.</em> <i class="fa-light fa-arrow-turn-down ml-1 relative text-[#FCBD50]" style="bottom:-7px"></i></p>
         <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/lead-gen/digital-christmas-songbook/pianote-christmas-songbook-sample.pdf" class="relative">
@@ -142,7 +141,6 @@
             <img class="hidden lg:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/lead-gen/digital-christmas-songbook/piano.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
         </a>
     </section>
-
 
     <section class="bg-white sm:py-20">
         <div class="py-8">
