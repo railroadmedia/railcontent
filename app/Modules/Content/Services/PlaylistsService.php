@@ -29,6 +29,7 @@ class PlaylistsService
     ) {
     }
 
+
     public function processFilterOptions(Collection $filterOptions): array
     {
         $filterOptionsArray = ['categories' => []];
@@ -330,6 +331,9 @@ class PlaylistsService
      */
     public function formatPlaylists(array $playlists): array
     {
+        $userPinsLookup = UserPlaylistPinned::query()->where('user_id', user()->id)->get()->keyBy(
+            'playlist_id'
+        )->toArray();
         $userIds = \Arr::pluck($playlists, 'user_id');
         $keyedUsers = User::query()
             ->whereIn('id', $userIds)
@@ -344,7 +348,7 @@ class PlaylistsService
                 return $status && Status::isVisibleForPlaylists(Status::from($status));
             })->values();
 
-            $pinned = $playlist->pins()->where('user_id', user()->id)->exists();
+            $pinned = $userPinsLookup[$playlist->id] ?? false;
             $playlists[$index] = $playlist->toArray();
             $minsec = gmdate("i:s", $playlists[$index]['duration'] ?? 0);
             $hours = (gmdate("d", $playlists[$index]['duration'] ?? 0) - 1) * 24 + gmdate(
