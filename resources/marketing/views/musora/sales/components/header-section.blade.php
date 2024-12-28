@@ -63,11 +63,11 @@
         @if(!empty($newYears))
             @if($theme == 'drumeo')
                 <p class="leading-tight relative py-3 pl-12 pr-5 mt-7 rounded-xl inline-block mx-auto text-musora" style="background-color:#0C1524;">
-                    <img class="absolute top-1/2 -translate-y-1/2 left-0 h-16 -ml-8 inline-block" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/140x0/filters:quality(95)/marketing/drumeo/promos/january/header-bar.webp">
+                    <img class="absolute top-1/2 -translate-y-1/2 left-0 h-16 -ml-8 inline-block" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/134x0/filters:quality(95)/marketing/drumeo/promos/january/header-bar.webp">
                     Save 20% On Your First Year<br class="sm:hidden"> + <strong>Get 7 Free Bonuses</strong></p>
             @else
                 <p class="leading-tight relative py-3 pl-24 pr-5 mt-7 rounded-xl inline-block mx-auto text-musora" style="background-color:#0C1524;">
-                    <img class="absolute top-1/2 -translate-y-1/2 left-0 h-16 -ml-8 inline-block" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/140x0/filters:quality(95)/marketing/pianote/promos/january/header-bar.webp">
+                    <img class="absolute top-1/2 -translate-y-1/2 left-0 h-16 -ml-8 inline-block" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/242x0/filters:quality(95)/marketing/pianote/promos/january/header-bar.webp">
                     Save 20% On Your First Year<br class="sm:hidden"> + <strong>Get 8 Free Bonuses</strong></p>
             @endif
         @endif
