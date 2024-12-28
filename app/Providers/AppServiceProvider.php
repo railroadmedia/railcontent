@@ -72,8 +72,11 @@ class AppServiceProvider extends ServiceProvider
         view()->composer([
             'partials.layout',
             'errors.404',
+            'errors::404',
             'errors.500',
+            'errors::500',
             'errors.503',
+            'errors::503',
             'errors.missing',
             'pages.devendpoint'
         ], NavigationViewComposer::class);
