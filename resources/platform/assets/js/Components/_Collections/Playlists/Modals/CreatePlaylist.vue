@@ -145,7 +145,7 @@
                         limit: 10,
                         term: '',
                         sort: 'most_recent',
-                    }, token);
+                    });
                 }
             }).catch((error)=>{
                 window.shownotification({
@@ -189,7 +189,7 @@
                             limit: 10,
                             term: '',
                             sort: 'most_recent',
-                        }, token);
+                        });
                     } else {
                         console.log('edit response code', response)
                     }
@@ -231,7 +231,7 @@
                             limit: 10,
                             term: '',
                             sort: 'most_recent',
-                        }, token);
+                        });
                     } else {
                         console.log('duplicate response code', response)
                     }

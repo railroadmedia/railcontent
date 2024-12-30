@@ -112,8 +112,6 @@
                         :is-live="{{ json_encode(isLive()) }}"
                         :is-onboarding="{{ json_encode($isOnboarding) }}"
                         search-url=""
-                        :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
-                        :most-recent-playlists="{{ json_encode($mostRecentPlaylists) }}" {{-- Preloaded Content --}}
                         @if(!empty( $hasUnreadNotifications ))
                             :has-notifications="{{ json_encode($hasUnreadNotifications) }}"
                         @endif
