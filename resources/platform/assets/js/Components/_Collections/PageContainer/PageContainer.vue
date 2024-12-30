@@ -17,6 +17,7 @@ import Footer from "@collections/Footer/Footer.vue";
 import PlaylistsModal from "@collections/Playlists/Modals/PlaylistsModal.vue";
 import MembershipUpgradeModal from '../Modal/MembershipUpgradeModal';
 import {fetchAll, fetchCarouselCardData} from "musora-content-services";
+import {useUserStore} from "@stores/user";
 
 const props = defineProps({
   isMobileAppWebView: {
@@ -56,9 +57,10 @@ const notification = useNotificationStore();
 const confirmation = useConfirmationStore();
 const playlistsStore = usePlaylistsStore();
 const platformStore = usePlatformStore();
+const userStore = useUserStore();
+const { brand, token } = storeToRefs(userStore);
 const { membershipUpgradeModal } = storeToRefs(platformStore);
 const { modalOpen: playlistModalProps } = storeToRefs(playlistsStore);
-const token = inject('csrf_token');
 
 const isDarkModeSelected = ref(false);
 
@@ -167,13 +169,13 @@ onBeforeMount(async() => {
 
     await Promise.all([
         await playlistsStore.getSidebarPlaylists({
-            brand: 'drumeo',
+            brand: brand.value,
             page: 1,
             limit: 10,
             term: '',
             sort: 'most_recent',
         }),
-        await playlistsStore.getPinnedPlaylists('drumeo', token)
+        await playlistsStore.getPinnedPlaylists(brand.value, token)
     ]);
 });
 

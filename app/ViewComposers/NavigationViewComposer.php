@@ -15,11 +15,6 @@ class NavigationViewComposer
      */
     private $notificationService;
 
-    /**
-     * @var PlaylistsService
-     */
-    private $playlistsService;
-
     private $viewDataCache;
 
     /**
@@ -39,8 +34,6 @@ class NavigationViewComposer
                 'sidebarNavigationSectionsJson' => NavigationService::getSidebarSectionsJson(),
                 'userNavigationDropdownLinksJson' => NavigationService::getUserDropDownLinksJson(),
                 "hasUnreadNotifications" => false,
-                "mostRecentPlaylists" => [],
-                "pinnedPlaylists" =>  []
             ];
 
             $view->with($this->viewDataCache);
@@ -49,7 +42,6 @@ class NavigationViewComposer
         }
 
         $this->notificationService = app(NotificationService::class);
-        $this->playlistsService = app(PlaylistsService::class);
 
         $unread = (user()) ? $this->notificationService->getUnreadCount(user()->id, brand()) : 0;
 
