@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import PlaylistService from '../Services/playlists';
-import {fetchUserPlaylists, fetchPlaylist} from "musora-content-services";
+import {fetchUserPlaylists, fetchPlaylist, fetchPinnedPlaylists} from "musora-content-services";
 
 export const usePlaylistsStore = defineStore({
   id: 'Playlists',
@@ -102,7 +102,7 @@ export const usePlaylistsStore = defineStore({
         //hard reload?
       }
     },
-    async getSidebarPlaylists(payload, token) {
+    async getSidebarPlaylists(payload) {
       try {
           const response = await fetchUserPlaylists(payload.brand, payload);
           this.loadingPlaylists = false;
