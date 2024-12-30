@@ -22,13 +22,13 @@
 
     <style>
 
-        header {
+        .header-bg {
             background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/practice-planner/header-bg-m.webp');
             background-size: cover;
         }
 
         @media (min-width: 639px) {
-            header {
+            .header-bg {
                 background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/practice-planner/header-bg.webp');
                 background-size: cover;
             }
@@ -48,20 +48,20 @@
     ])
 
     @include('_partials.components.shop.promo-banner-2', [
-        "name" => "Practice Kit",
+        "name" => "Practice Planner",
         "fullPrice" => floatval($productPrices['pianote-practice-planner']->price),
         "price" => floatval($productPrices['pianote-practice-planner']->discounted_price),
         "noBreadcrumb" => true
     ])
 
-        <header class="px-5 sm:px-6 py-12 sm:py-20 lg:py-28 bg-top" style="background-color:#F4F1EC;">
+    <header class="header-bg px-5 sm:px-6 py-12 sm:py-20 bg-top" style="background-color:#F4F1EC;">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center sm:mt-0">
-             <img class="w-96 mx-auto mb-4 sm:hidden" alt="Logo" fetchpriority="high"
+             <img class="w-96 mx-auto mb-4 sm:hidden px-6" alt="Logo" fetchpriority="high"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/practice-planner/logo-mobile.svg">
                 
                 <div class="w-full sm:w-7/12 text-center lg:text-left sm:order-1 px-10">
-                    <img class="w-full max-w-xs lg:max-w-md"
+                    <img class="w-full max-w-xs lg:max-w-md lg:p-6"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/practice-planner/planner.webp"
                         alt="Practice Planner Cover">
                 </div>
@@ -135,25 +135,28 @@
 
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-planner/piano-bg.webp');">
         <h3 class="leading-tight"><strong>Take a look inside</strong></h3>
-        <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative text-[#FCBD50]" style="bottom:-7px"></i> <em>Click to see a sample of how to use your practice planner.</em> <i class="fa-light fa-arrow-turn-down ml-1 relative text-[#FCBD50]" style="bottom:-7px"></i></p>
-        <a target="_blank" href="" class="relative"> {{-- TODO: Add link here --}}
+        <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5 text-xs sm:text-base"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative text-[#FCBD50]" style="bottom:-7px"></i> <em>Click to see a sample of how to use your practice planner.</em> <i class="fa-light fa-arrow-turn-down ml-1 relative text-[#FCBD50]" style="bottom:-7px"></i></p>
+        <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/practice-planner/practice-planner-sample.pdf" class="relative"> 
             <img class="inline-block lg:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-planner/piano-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             <img class="hidden lg:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/practice-planner/piano.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
         </a>
     </section>
 
-    <section class="bg-white sm:py-20">
+    <section class="bg-white md:py-10 lg:py-20">
         <div class="py-8">
             <div class="max-w-6xl mx-auto px-4">
-                <h2 class="text-center mb-2">
-                    <strong>Your guide to playing better.</strong>
+            <div class="max-w-sm md:max-w-4xl mx-auto px-4"> 
+                 <h2 class="text-center mb-2">
+                    <strong>Your guide to <br class="block md:hidden"> playing better.</strong>
                 </h2>
-                <p class="text-center mb-2">
+                <p class="text-center mb-2 px-10 md:px-0">
                     Here's a small sample of how the planner will help you get the most out of your valuable practice time.
                 </p>
                 <p class="text-center mb-6"><strong>You'll learn:</strong></p>
+            </div>
+               
                 
-                               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-3">
                     @php
                     $cards = [
                         [
@@ -195,7 +198,7 @@
                         <div class="bg-[#F4F1EC] rounded-lg p-4 shadow-sm flex items-center md:block lg:p-6 lg:min-h-[220px]" 
                             style="box-shadow: 0px 4px 4px 0px #00000040;">
                             <div class="icon-gradient w-12 h-12 flex items-center justify-center mb-4 md:mb-6 md:mr-0 mr-4">
-                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/practice-planner/{{ $card['icon'] }}" alt="Icon {{ $index + 1 }}" class="w-11 h-11">
+                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/practice-planner/{{ $card['icon'] }}" alt="Icon {{ $index + 1 }}" class="w-9 h-9 md:w-11 md:h-11">
                             </div>
                             <p class="flex-1 text-sm">{!! $card['text'] !!}</p>
                         </div>
@@ -207,13 +210,13 @@
 
     <div id="final" class="anchor"></div>
 
-    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20" style="background:#F4F1EC">
+    <section class="header-bg px-5 sm:px-6 py-12 sm:py-16 lg:py-20 bg-top">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <img class="w-96 mx-auto mb-4 sm:hidden" alt="Logo" fetchpriority="high"
+                <img class="w-96 mx-auto mb-4 sm:hidden px-6" alt="Logo" fetchpriority="high"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/practice-planner/logo-mobile.svg">
                 <div class="w-full sm:w-7/12 text-center lg:text-left sm:order-1 px-10">
-                    <img class="w-full max-w-xs lg:max-w-md"
+                    <img class="w-full max-w-xs lg:max-w-md lg:p-10"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/practice-planner/planner.webp"
                         alt="Practice Planner Cover">
                 </div>
