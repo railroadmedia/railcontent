@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Platform;
 
 use App\Decorators\Content\ContentLikesDecorator;
-use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Modules\Content\ApiGateways\SanityGateway;
@@ -36,7 +35,6 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
-use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -47,14 +45,12 @@ class HomePageController extends BaseController
     private const int RECSYS_CONTENT_COUNT = 50;
     private const int WORKOUTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
     private const int NEW_RELEASES_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
-    private const int PLAYLISTS_COUNTENT_COUNT = 24;
 
     public function __construct(
         private readonly ContentService $contentService,
         private readonly ContentFollowsService $contentFollowsService,
         private readonly LiveStreamEventService $liveStreamEventService,
         private readonly UserMetricsService $userMetricsService,
-        private readonly UserPlaylistsService $userPlaylistsService,
         private readonly PackService $packService,
         private readonly DatabaseManager $databaseManager,
         private readonly UserContentProgressService $userContentProgressService,
@@ -543,22 +539,6 @@ class HomePageController extends BaseController
         );
         ContentRepository::$pullFutureContent = $oldFutureContent;
         return $workouts;
-    }
-
-    /**
-     * @return ContentFilterResultsEntity
-     */
-    public function getUsersPlaylist(): ContentFilterResultsEntity
-    {
-        $playlists = $this->userPlaylistsService->getUserPlaylist(
-            userId: user()->id,
-            playlistType: 'user-playlist',
-            brand: brand(),
-            limit: self::PLAYLISTS_COUNTENT_COUNT,
-            sort: '-last_progress'
-        );
-
-        return new ContentFilterResultsEntity(['results' => $playlists]);
     }
 
     /**
