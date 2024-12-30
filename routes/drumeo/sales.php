@@ -10,6 +10,7 @@ Route::domain('{drumeoDomain}')
         Route::get('/', [SalesController::class, 'homeBF']);
         Route::get('/ultimate-bundle', [SalesController::class, 'homeBF']);
         Route::get('/lp', [SalesController::class, 'promoEG']);
+        Route::get('/new-year', [SalesController::class, 'promoNY']);
         Route::get('/beginner', [SalesController::class, 'promo']);
         Route::get('/student-only', [SalesController::class, 'promo']);
         Route::get('/choose-plan', [SalesController::class, 'choosePlan']);

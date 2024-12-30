@@ -6,11 +6,10 @@ use App\Console\Commands\Infrastructure\Command;
 use App\Console\Commands\Infrastructure\Timer;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
-use App\Modules\Content\Models\Content;
-use App\Modules\Content\Models\ContentHierarchy;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Services\ChallengesService;
 use Carbon\Carbon;
+use Modules\UserManagementSystem\Models\User;
 
 class MigrateChallengeV2Progress extends Command
 {
@@ -19,7 +18,7 @@ class MigrateChallengeV2Progress extends Command
      *
      * @var string
      */
-    protected $signature = 'MigrateChallengeV2Progress {startIndex=0}';
+    protected $signature = 'MigrateChallengeV2Progress {startIndex=0} {limit=1000}';
 
     /**
      * The console command description.
@@ -40,21 +39,30 @@ class MigrateChallengeV2Progress extends Command
     /**
      * Execute the console command.
      */
-    public function handle(ChallengesService $challengesService, SanityGateway $sanityGateway): void
+    public function handle(ChallengesService $challengesService, SanityGateway $sanityGateway): int
     {
         $startIndex = (int)$this->argument('startIndex') ?? 0;
-        $this->withExecutionTime(function () use ($sanityGateway, $challengesService, $startIndex) {
-            $this->migrate($challengesService, $sanityGateway, $startIndex);
+        $limit = (int)$this->argument('limit') ?? 0;
+        $this->withExecutionTime(function () use ($sanityGateway, $challengesService, $startIndex, $limit) {
+            $this->info("$this->name: $startIndex - $limit");
+            try {
+                $this->migrate($challengesService, $sanityGateway, $startIndex, $limit);
+            } catch (\Throwable $exception) {
+                \Log::error($exception->getMessage());
+                return self::FAILURE;
+            }
         });
+        return self::SUCCESS;
     }
 
-    public function migrate(ChallengesService $challengesService, SanityGateway $sanityGateway, $startIndex): void
-    {
+    public function migrate(
+        ChallengesService $challengesService,
+        SanityGateway $sanityGateway,
+        $startIndex,
+        $limit
+    ): void {
         $minId = 59000000;
         $maxId = 64800000;
-        $challengesProgressLookup = ChallengeUserProgress::all()->keyBy(function ($userChallengeProgress) {
-            return $userChallengeProgress->user_id . "_" . $userChallengeProgress->content_id;
-        });
 
         $contentIdsByLessonId = [];
         $lessonIdsByChallenge = [];
@@ -96,6 +104,7 @@ class MigrateChallengeV2Progress extends Command
             412431 => 414162,
             413049 => 414419,
         ];
+        $this->info("MigrateChallengeV2Progress:  Look up lessons");
 
         $lessonLookup = collect();
         foreach ($challengesLookup as $challenge) {
@@ -116,7 +125,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
                         $ids[] = $oldContentId;
                         $slug2 = \DB::select($query)[0]?->slug ?? 0;
                         $title2 = \DB::select($query)[0]?->title ?? 0;
-                        $this->info("$lessonId $slug $title ==== $oldContentId $slug2, $title2");
+                        //$this->info("$lessonId $slug $title ==== $oldContentId $slug2, $title2");
                     } else {
                         $this->info("Unable to find related lesson for challenge $challengeId lesson $lessonId $slug");
                     }
@@ -136,32 +145,30 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
         foreach ($challengeIds as $index => $challengeId) {
             $challengeIds[$index] = $challengeIdLookup[$challengeId] ?? $challengeId;
         }
-        $userIds = ContentUserProgress::query()
-            ->selectRaw('distinct user_id')
-            ->where('id', '>=', $minId)
-            ->where('id', '<', $maxId)
-            ->whereIn('content_id', $challengeIds)
-            ->where('state', '=', 'started')
-            ->orderBy('user_id')
-            ->get()
-            ->pluck('user_id')
-            ->toArray();
-
+        $userIds = User::query()->select('id')->skip($startIndex)->take($limit)->get()->pluck('id')->toArray();
+        $challengesProgressLookup = ChallengeUserProgress::query()->whereIn('user_id', $userIds)->get()->keyBy(
+            function ($userChallengeProgress) {
+                return $userChallengeProgress->user_id . "_" . $userChallengeProgress->content_id;
+            }
+        );
+        $clause = new Carbon('2024-11-16');
+        $clause2 = new Carbon('2024-12-17');
         $processed = 0;
         $total = count($userIds);
         $this->info("MigrateChallengeV2Progress:  $total users to process");
         foreach ($userIds as $userId) {
-            if ($processed < $startIndex) {
-                $processed++;
-                continue;
-            }
+//            if ($processed < $startIndex) {
+//                $processed++;
+//                continue;
+//            }
             Timer::afterSeconds(5, function () use ($processed, $total) {
-                $this->info("Processed $processed/$total users");
+                $this->info("MigrateChallengeV2Progress: Processed $processed/$total users");
             });
             $challengeUserProgressLookup = ContentUserProgress::query()
                 ->where('user_id', $userId)
                 ->where('id', '>=', $minId)
                 ->where('id', '<', $maxId)
+                ->where('updated_on', '>', '2024-11-16')
                 ->whereIn('content_id', $challengeIds)
                 ->get()
                 ->keyBy('content_id');
@@ -184,10 +191,13 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
                     ->where('state', '=', 'completed')
                     ->get()
                     ->keyBy('content_id');
-
-                $hasCompletedLessons = $lessonCompletedLookup->count() > 0;
+                $hasCompletedLessons = $lessonCompletedLookup->filter(function ($item) use ($clause2, $clause) {
+                        $updatedOn = Carbon::parse($item->updated_on);
+                        return $updatedOn > $clause && $updatedOn < $clause2;
+                    })->count() > 0;
                 if ($hasCompletedLessons) {
                     if (!$challengeProgress) {
+                        $this->info("MigrateChallengeV2Progress: Syncing Progress $userId $challengeId");
                         $challengeStartDate = Carbon::parse($challengeProgressData->started_on)->toDate();
                         try {
                             $challengeProgress = $challengesService->startChallenge(
@@ -204,6 +214,7 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
                         }
                     }
                     if ($challengeProgress->is_locked) {
+                        $this->info("MigrateChallengeV2Progress: Unlocking Challenge $userId $challengeId");
                         $challengesService->unlockChallenge($challengeId, $userId);
                     }
 
@@ -219,7 +230,8 @@ where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$titl
                                         $userId,
                                         Carbon::parse($completedLesson->updated_on),
                                         $lesson,
-                                        $challenge
+                                        $challenge,
+                                        $challengeProgress
                                     );
                                 } catch (\Throwable $exception) {
                                     $this->info(

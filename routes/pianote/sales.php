@@ -22,6 +22,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/ultimate-technique', [SalesController::class, 'promoUT']);
         Route::get('/anniversary', [SalesController::class, 'promoEG']);
         Route::get('/lp', [SalesController::class, 'promoEG']);
+        Route::get('/new-year', [SalesController::class, 'promoNY']);
         Route::get('/trial/more-time', [SalesController::class, 'promoMT']);
         Route::get('/trial/one-dollar', [SalesController::class, 'promoOD']);
         Route::get('/welcome-offer', [SalesController::class, 'promoWO']);
