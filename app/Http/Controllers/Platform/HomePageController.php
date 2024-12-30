@@ -124,8 +124,6 @@ class HomePageController extends BaseController
             return redirect()->route('platform.onboarding');
         }
 
-        $usersList = $this->getUsersPlaylist();
-
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = false;
 
@@ -175,12 +173,6 @@ class HomePageController extends BaseController
         Decorator::$typeDecoratorsEnabled = true;
         $collectionForDecoration = $collectionForDecoration->filter();
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
-
-        $collectionForDecoration = new RailcontentCollection();
-        PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
-        $collectionForDecoration = $collectionForDecoration->merge($usersList->results());
-        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'playlist');
-        PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $hasGear = count(
             user()->onboardingGear->filter(function ($item) {
@@ -294,7 +286,6 @@ class HomePageController extends BaseController
             "themeColor" => $themeColor,
             "timeCutoffMinutes" => LiveStreamEventService::NOT_LIVE_PAGE_SWITCH_MINUTES,
             "userMetrics" => $userMetrics,
-            "usersList" => $usersList,
             "isFirstAccess" => user()->isFirstAccess(),
             "homepageV2" => boolval(FeatureFlagging::branch('homepage-v2', user())),
             "exploreTasks" => $userTasks,
