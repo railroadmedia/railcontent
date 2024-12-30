@@ -5,6 +5,7 @@ namespace Modules\Ecommerce\Jobs\Shopify;
 use App\Jobs\WebhookChildJob;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\Content\Services\UserNotificationKeys;
 use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
@@ -49,7 +50,7 @@ class OrderUpdateChallengesEnrollment extends WebhookChildJob
                     $challengesService->updateCustomerIONotifications(
                         $challengeId,
                         $user,
-                        ChallengesService::COMMUNITY_NOTIFICATION_KEY
+                        UserNotificationKeys::COMMUNITY_NOTIFICATION_KEY
                     );
                 }
 
