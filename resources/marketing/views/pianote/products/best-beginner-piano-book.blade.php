@@ -81,7 +81,7 @@
 {{--                            <br>+ a FREE digital songbook--}}
 {{--                        @endif--}}
                     </h2>
-                    <a href="" class="join medium w-full">GET YOUR COPY &raquo;</a>
+                    <a href="#final" class="join medium w-full anchor-slide">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>
