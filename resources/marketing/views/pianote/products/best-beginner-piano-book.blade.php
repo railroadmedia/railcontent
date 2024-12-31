@@ -60,7 +60,7 @@
         ? floatval($productPrices['best-beginner-piano-book']->discounted_price)
         : number_format(floatval($productPrices['best-beginner-piano-book']->discounted_price), 2);
     @endphp
-    
+
     <header class="text-white px-5 sm:px-6 pt-96 pb-10 sm:py-20 lg:py-36 relative" style="background-color:#111729;">
         <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/header-bg-m.webp')"></div>
         <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/header.webp')"></div>
@@ -111,14 +111,14 @@
                 <strong>{!! $item['title'] !!}</strong>
             </h1>
             <div class="text-left flex flex-col sm:flex-row justify-center items-center md:py-10">
-                <div class="w-full sm:w-6/12 rounded-2xl order-1 sm:order-2" 
-                     loading="lazy" 
+                <div class="w-full sm:w-6/12 rounded-2xl order-1 sm:order-2"
+                     loading="lazy"
                      onload="this.classList.remove('opacity-0')">
-                    <img class="object-cover w-full h-full rounded-2xl" 
-                         src="{{ $item['img'] }}" 
+                    <img class="object-cover w-full h-full rounded-2xl"
+                         src="{{ $item['img'] }}"
                          alt="{{ $item['alt'] }}">
                 </div>
-    
+
                 <div class="flex flex-row md:flex-col sm:flex-1 justify-center items-start py-4 sm:pr-4 md:px-10 order-2 sm:order-1">
                     <div>
                         @foreach ($item['desc'] as $desc)
@@ -129,12 +129,12 @@
             </div>
         </div>
     </section>
-    
+
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/piano-bg.webp');">
         <h3 class="leading-tight"><strong>Take a look inside</strong></h3>
         <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5 text-xs sm:text-base">
-            <i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative text-[#F61A30]" style="bottom:-7px"></i> 
-            <em>Click to see inside the Best Beginner Piano Book.</em> 
+            <i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative text-[#F61A30]" style="bottom:-7px"></i>
+            <em>Click to see inside the Best Beginner Piano Book.</em>
             <i class="fa-light fa-arrow-turn-down ml-1 relative text-[#F61A30]" style="bottom:-7px"></i>
         </p>
         <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/the-best-beginner-piano-book/bbpb-sample.pdf" class="relative">
@@ -215,7 +215,7 @@
                 <div class="flex flex-col md:flex-row gap-4 {{ !$loop->last ? 'mb-4' : '' }}">
                     <!-- Image -->
                     <div class="w-full md:w-1/2 rounded-lg overflow-hidden relative aspect-[4/3] order-1 md:order-{{ $index % 2 === 0 ? '1' : '2' }}">
-                        <img 
+                        <img
                             src="{{ $section['image']['src'] }}"
                             alt="{{ $section['image']['alt'] }}"
                             class="w-full h-full object-cover"
@@ -230,7 +230,7 @@
                     <!-- Cards  -->
                     <div class="w-full md:w-1/2 grid sm:grid-cols-2 gap-4 order-2 md:order-{{ $index % 2 === 0 ? '2' : '1' }}">
                         @foreach ($section['cards'] as $card)
-                        <div class="bg-[#F2EFED] rounded-lg p-4 transition-shadow duration-200 flex flex-row md:flex-col" style="box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">                             
+                        <div class="bg-[#F2EFED] rounded-lg p-4 transition-shadow duration-200 flex flex-row md:flex-col" style="box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">
                             <div class="icon-gradient w-12 h-12 flex items-center justify-center mb-4 md:mb-6 md:mr-0 mr-4">
                                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/{{ $card['icon'] }}" alt="Icon {{ $index + 1 }}" class="w-9 h-9 md:w-11 md:h-11 object-contain">
                             </div>
@@ -244,7 +244,7 @@
         </div>
     </section>
 
-<section class="relative text-center px-3 sm:px-6 py-10 sm:py-14 lg:py-24" style="background: linear-gradient(180deg, #F2EFED 46.59%, rgba(242, 239, 237, 0) 100%);">       
+<section class="relative text-center px-3 sm:px-6 py-10 sm:py-14 lg:py-24" style="background: linear-gradient(180deg, #F2EFED 46.59%, rgba(242, 239, 237, 0) 100%);">
  <div class="absolute z-10 top-0 left-0 right-0 bg-cover bg-no-repeat bg-top z-10 h-1/2 lg:h-full" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/author-bg.webp');"></div>
         <div class="container max-w-5xl mx-auto relative z-20">
             <h3 class="text-center mb-24"><strong>About The Authors</strong></h3>
@@ -375,7 +375,7 @@
 
     </section>
     <div id="final" class="anchor"></div>
-            
+
    @php
     $offers = [
         [
@@ -385,7 +385,7 @@
             'originalPrice' => 49,
             'currentPrice' => 39,
             'discount' => '20%',
-            'link' => '/ecommerce/add-to-cart?products[best-beginner-piano-book]=1',
+            'link' => '/ecommerce/add-to-cart?products[best-beginner-piano-book]=1&promo-code=ny-books-shipping&locked=true',
             'imageSrc' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/bundle-01.webp',
             'imageClass' => 'h-48 opacity-0',
             'buttonText' => 'GET YOUR COPY',
@@ -423,12 +423,12 @@
          <section class="text-center px-4 py-10 sm:px-6 sm:pt-14 lg:pt-20 bg-[#F2EFED]">
         <div class="container mx-auto max-w-5xl">
             <img class="h-16 sm:h-20 lg:h-44" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/order-logo.svg" alt="Logo" />
-            
+
             <p class="mb-6 lg:mb-10 mt-2 lg:mt-4">
                 Stay on track and see better <br class="block sm:hidden"> results from your practice sessions.<br>
                 Make every practice perfect.
             </p>
-    
+
             <div class="flex flex-wrap lg:flex-nowrap items-stretch justify-center w-full mb-5 sm:mb-10 mx-auto space-y-4 md:space-y-0 md:space-x-4 lg:space-x-8">
                 @foreach($offers as $offer)
                     <div class="w-full md:w-1/2 lg:w-1/2 max-w-sm lg:px-1 px-1 relative border-2 border-{{ $offer['color'] }} rounded-2xl shadow-md mb-4 lg:mb-0 bg-white flex flex-col">
@@ -437,31 +437,31 @@
                                 {{ $offer['badge'] }}
                             </p>
                         @endif
-    
+
                         <div class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 border-white flex-grow flex flex-col">
                             <div class="bg-white px-3 py-6 md:py-7 flex-grow">
                                 <h3 class="leading-tight mb-2"><strong>{{ $offer['title'] }}</strong></h3>
-                                
+
                                 <img class="{{ $offer['imageClass'] }}"
                                     src="{{ $offer['imageSrc'] }}"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
                                     alt="{{ $offer['title'] }}"
                                 >
-    
+
                                 <h3 class="leading-tight mt-2">
                                     <span class="line-through text-gray-400">${{ $offer['originalPrice'] }}</span>
                                     <strong>${{ $offer['currentPrice'] }}</strong>
                                     <span class="text-pianote ml-1 text-sm lg:text-base">(Save {{ $offer['discount'] }})</span>
                                 </h3>
-    
+
                                 <p class="text-sm mb-5"><em>{!! $offer['subtext'] !!}</em></p>
-    
+
                                 <a class="w-full transition-opacity join text-xl md:text-2xl max-w-[300px] py-3 px-6 hover:opacity-80 rounded-full text-white bg-{{ $offer['color'] }}" href="{{ $offer['link'] }}">
                                     {{ $offer['buttonText'] }}
                                 </a>
                             </div>
-    
+
                             <div class="px-4 sm:px-4 md:px-10 pb-7">
                                 @foreach($offer['features'] as $feature)
                                     <div class="flex items-start text-left text-sm mb-1.5">
@@ -490,7 +490,7 @@
                     <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
                     <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
             </div>
-           
+
         </div>
     </section>
 

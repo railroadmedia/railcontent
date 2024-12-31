@@ -49,8 +49,8 @@
 
     @include('_partials.components.shop.promo-banner-2', [
         "name" => "Practice Planner",
-        "fullPrice" => floatval($productPrices['pianote-practice-planner']->price),
-        "price" => floatval($productPrices['pianote-practice-planner']->discounted_price),
+        "fullPrice" => floatval($productPrices['practice-planner']->price),
+        "price" => floatval($productPrices['practice-planner']->discounted_price),
         "noBreadcrumb" => true
     ])
 
@@ -59,7 +59,7 @@
             <div class="flex flex-wrap sm:flex-nowrap items-center sm:mt-0">
              <img class="w-96 mx-auto mb-4 sm:hidden px-6" alt="Logo" fetchpriority="high"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/practice-planner/logo-mobile.svg">
-                
+
                 <div class="w-full sm:w-7/12 text-center lg:text-left sm:order-1 px-10">
                     <img class="w-full max-w-xs lg:max-w-md lg:p-6"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/practice-planner/planner.webp"
@@ -72,19 +72,19 @@
                     <p class="my-4 sm:my-6 text-black">Stay on track and see better results from your practice sessions.</p>
                     <p>Make every practice perfect.</p>
                     <h2 class="mb-4 sm:mb-6">
-                        @if (floatval($productPrices['pianote-practice-planner']->price) >
-                                floatval($productPrices['pianote-practice-planner']->discounted_price))
+                        @if (floatval($productPrices['practice-planner']->price) >
+                                floatval($productPrices['practice-planner']->discounted_price))
                             <strong></strong> <s
-                                class="opacity-60">${{ floatval($productPrices['pianote-practice-planner']->price) }}</s>
-                            <strong>${{ floatval($productPrices['pianote-practice-planner']->discounted_price) }}</strong>
+                                class="opacity-60">${{ floatval($productPrices['practice-planner']->price) }}</s>
+                            <strong>${{ floatval($productPrices['practice-planner']->discounted_price) }}</strong>
                             (SAVE
-                            {{ round(100 - 100 * (floatval($productPrices['pianote-practice-planner']->discounted_price) / floatval($productPrices['pianote-practice-planner']->price))) }}%)
+                            {{ round(100 - 100 * (floatval($productPrices['practice-planner']->discounted_price) / floatval($productPrices['practice-planner']->price))) }}%)
                         @else
                             <strong>
-                                ${{ floatval($productPrices['pianote-practice-planner']->discounted_price) }}</strong>
+                                ${{ floatval($productPrices['practice-planner']->discounted_price) }}</strong>
                         @endif
                     </h2>
-                    <a href="/ecommerce/add-to-cart?products[pianote-practice-planner]=1"
+                    <a href="/ecommerce/add-to-cart?products[practice-planner]=1&promo-code=ny-books-shipping&locked=true"
                         class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
@@ -109,16 +109,16 @@
                 'title' => 'Not all practice is <br class="hidden md:block"> created equal.',
             ];
             @endphp
-    
+
             <div class="text-left flex flex-col sm:flex-row justify-center items-center md:py-10">
-                <div class="w-full sm:w-6/12 rounded-2xl order-1 sm:order-2" 
-                     loading="lazy" 
+                <div class="w-full sm:w-6/12 rounded-2xl order-1 sm:order-2"
+                     loading="lazy"
                      onload="this.classList.remove('opacity-0')">
-                    <img class="object-cover w-full h-full rounded-2xl" 
-                         src="{{ $item['img'] }}" 
+                    <img class="object-cover w-full h-full rounded-2xl"
+                         src="{{ $item['img'] }}"
                          alt="{{ $item['alt'] }}">
                 </div>
-    
+
                 <div class="flex flex-row md:flex-col sm:flex-1 justify-center items-start py-4 sm:pr-4 md:px-10 order-2 sm:order-1">
                     <div>
                         <h3 class="leading-tight mx-0 my-2 sm:my-4">
@@ -136,7 +136,7 @@
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-planner/piano-bg.webp');">
         <h3 class="leading-tight"><strong>Take a look inside</strong></h3>
         <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5 text-xs sm:text-base"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative text-[#FCBD50]" style="bottom:-7px"></i> <em>Click to see a sample of how to use your practice planner.</em> <i class="fa-light fa-arrow-turn-down ml-1 relative text-[#FCBD50]" style="bottom:-7px"></i></p>
-        <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/practice-planner/practice-planner-sample.pdf" class="relative"> 
+        <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/practice-planner/practice-planner-sample.pdf" class="relative">
             <img class="inline-block lg:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-planner/piano-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             <img class="hidden lg:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/practice-planner/piano.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
         </a>
@@ -145,7 +145,7 @@
     <section class="bg-white md:py-10 lg:py-20">
         <div class="py-8">
             <div class="max-w-6xl mx-auto px-4">
-            <div class="max-w-sm md:max-w-4xl mx-auto px-4"> 
+            <div class="max-w-sm md:max-w-4xl mx-auto px-4">
                  <h2 class="text-center mb-2">
                     <strong>Your guide to <br class="block md:hidden"> playing better.</strong>
                 </h2>
@@ -154,8 +154,8 @@
                 </p>
                 <p class="text-center mb-6"><strong>You'll learn:</strong></p>
             </div>
-               
-                
+
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-3">
                     @php
                     $cards = [
@@ -193,9 +193,9 @@
                         ]
                     ];
                     @endphp
-                
+
                     @foreach ($cards as $index => $card)
-                        <div class="bg-[#F4F1EC] rounded-lg p-4 shadow-sm flex items-center md:block lg:p-6 lg:min-h-[220px]" 
+                        <div class="bg-[#F4F1EC] rounded-lg p-4 shadow-sm flex items-center md:block lg:p-6 lg:min-h-[220px]"
                             style="box-shadow: 0px 4px 4px 0px #00000040;">
                             <div class="icon-gradient w-12 h-12 flex items-center justify-center mb-4 md:mb-6 md:mr-0 mr-4">
                                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/practice-planner/{{ $card['icon'] }}" alt="Icon {{ $index + 1 }}" class="w-9 h-9 md:w-11 md:h-11">
@@ -225,27 +225,27 @@
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/practice-planner/logo-desktop.svg">
                     <p class="my-4 sm:my-6 text-black">Stay on track and see better results from your practice sessions.</p>
                     <p class="my-4 sm:my-6 text-black">Make every practice perfect.</p>
-    
+
                     <ul class="leading-relaxed">
                         <li><i class="fa fa-check text-pianote mb-2"></i> 186 Pages</li>
                         <li><i class="fa fa-check text-pianote mb-2"></i> Weekly templates to track your goals</li>
                         <li><i class="fa fa-check text-pianote mb-2"></i> Monthly check-ins</li>
                     </ul>
-    
+
                     <h2 class="my-4 sm:my-6">
-                        @if (floatval($productPrices['pianote-practice-planner']->price) >
-                                floatval($productPrices['pianote-practice-planner']->discounted_price))
+                        @if (floatval($productPrices['practice-planner']->price) >
+                                floatval($productPrices['practice-planner']->discounted_price))
                             <strong></strong> <s
-                                class="opacity-60">${{ floatval($productPrices['pianote-practice-planner']->price) }}</s>
-                            <strong>${{ floatval($productPrices['pianote-practice-planner']->discounted_price) }}</strong>
+                                class="opacity-60">${{ floatval($productPrices['practice-planner']->price) }}</s>
+                            <strong>${{ floatval($productPrices['practice-planner']->discounted_price) }}</strong>
                             (SAVE
-                            {{ round(100 - 100 * (floatval($productPrices['pianote-practice-planner']->discounted_price) / floatval($productPrices['pianote-practice-planner']->price))) }}%)
+                            {{ round(100 - 100 * (floatval($productPrices['practice-planner']->discounted_price) / floatval($productPrices['practice-planner']->price))) }}%)
                         @else
                             <strong>
-                                ${{ floatval($productPrices['pianote-practice-planner']->discounted_price) }}</strong>
+                                ${{ floatval($productPrices['practice-planner']->discounted_price) }}</strong>
                         @endif
                     </h2>
-                    <a href="/ecommerce/add-to-cart?products[pianote-practice-planner]=1"
+                    <a href="/ecommerce/add-to-cart?products[practice-planner]=1&promo-code=ny-books-shipping&locked=true"
                         class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
