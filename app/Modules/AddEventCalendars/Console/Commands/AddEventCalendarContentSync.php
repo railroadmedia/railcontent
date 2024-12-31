@@ -2,11 +2,10 @@
 
 namespace App\Modules\AddEventCalendars\Console\Commands;
 
-use App\Modules\AddEventCalendars\Models\AddEventCalendarEventVO;
+use App\Console\Commands\Infrastructure\Command;
 use App\Modules\AddEventCalendars\Services\AddEventService;
 use App\Modules\AddEventCalendars\Services\CalendarSyncService;
 use App\Modules\Content\ApiGateways\SanityGateway;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
 
 class AddEventCalendarContentSync extends Command
@@ -17,8 +16,6 @@ class AddEventCalendarContentSync extends Command
     private AddEventService $addEventService;
     private SanityGateway $sanityGateway;
     private CalendarSyncService $calendarSyncService;
-
-    private $brandOverviewCalendar;
 
     private static $expectedLastFourDigitsOfSandboxApiToken = '9660';
 
@@ -31,112 +28,28 @@ class AddEventCalendarContentSync extends Command
         $this->sanityGateway = $sanityGateway;
         $this->calendarSyncService = $calendarSyncService;
 
-        //$this->environmentSafetyCheck();
+        $this->environmentSafetyCheck();
 
-        $brands = $this->determineBrands();
-
-        $timeTotalStart = time();
-
-        $this->info('Starting AddEventCalendarContentSync.');
-
-        foreach ($brands as $brand) {
-            // fetch addevent data
-//            $this->addEventService->init($brand);
-//            $this->initBrandOverviewCalendar($brand);
-
-            /*
-             * synchronize brand overview and content-specific calendars
-             * May need to run addevent:syncCalendarData to sync local database calendars
-$scheduledEvents$scheduledEvents
-             */
-            $this->info("Finding $brand scheduled content");
-            $scheduledEvents = $this->sanityGateway->getScheduledContent($brand);
-            $count = count($scheduledEvents);
-            $this->info("$count scheduled events found.");
-            $calendarName = $this->addEventService->generateBrandOverviewCalendarName($brand);
-            $calendar = $this->addEventService->getCalendarByNameIfExists($calendarName);
-            $this->calendarSyncService->syncContentListToCalendar($scheduledEvents, $calendar);
-        }
-
-        $timeTotalDurationSeconds = (time() - $timeTotalStart);
-        $timeTotalDurationMinutes = floor($timeTotalDurationSeconds / 60);
-
-        $this->info(
-            '========== AddEventCalendarContentSync finished in ' . $timeTotalDurationMinutes . ' minutes and ' .
-            ($timeTotalDurationSeconds - ($timeTotalDurationMinutes * 60)) . ' seconds =========='
-        );
-
-
-        return true;
+        $this->withExecutionTime(function () {
+            $brands = $this->determineBrands();
+            foreach ($brands as $brand) {
+                /*
+                 * synchronize brand overview and content-specific calendars
+                 * May need to run addevent:syncCalendarData to sync local database calendars
+    $scheduledEvents$scheduledEvents
+                 */
+                $this->info("Finding $brand scheduled content");
+                $scheduledEvents = $this->sanityGateway->getScheduledContent($brand);
+                $count = count($scheduledEvents);
+                $this->info("$count scheduled events found.");
+                $calendarName = $this->addEventService->generateBrandOverviewCalendarName($brand);
+                $calendar = $this->addEventService->getCalendarByNameIfExists($calendarName);
+                $this->calendarSyncService->syncContentListToCalendar($scheduledEvents, $calendar);
+            }
+        });
+        return self::SUCCESS;
     }
 
-    // =================================================================================================================
-    // AddEvent related methods
-    // =================================================================================================================
-
-
-    /**
-     * @param $existingEvent
-     * @param AddEventCalendarEventVO $eventVO
-     * @return void
-     */
-    private function setExternalDataIfAvailable($existingEvent, AddEventCalendarEventVO &$eventVO)
-    {
-        $customData = json_decode($existingEvent->custom_data, true);
-
-        if ($eventVO->getInternalSyncId() == ($customData[AddEventService::SYNC_ID_KEY] ?? null)) {
-            $eventVO->setExternalData(
-                $existingEvent->id,
-                null,
-                $existingEvent->unique,
-                $existingEvent->title,
-                null,
-                $existingEvent->description,
-                $existingEvent->location,
-                $existingEvent->organizer,
-                $existingEvent->organizer_email,
-                $existingEvent->date_start,
-                $existingEvent->date_start_time,
-                $existingEvent->date_start_ampm,
-                $existingEvent->date_start_unix,
-                $existingEvent->date_end,
-                $existingEvent->date_end_time,
-                $existingEvent->date_end_ampm,
-                $existingEvent->date_end_unix,
-                $existingEvent->all_day_event ?? null,
-                $existingEvent->date_format,
-                $existingEvent->timezone,
-                $existingEvent->reminder,
-                $existingEvent->rrule,
-                $existingEvent->template_id,
-                $existingEvent->color,
-                $existingEvent->updated_times,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                $existingEvent->custom_data,
-                $existingEvent->link_short,
-                $existingEvent->link_long,
-                $existingEvent->date_create,
-                $existingEvent->date_modified
-            );
-        }
-    }
-
-
-
-    /**
-     * @param string $additionalMessage
-     * @return void
-     */
     private function environmentSafetyCheck(): void
     {
         if (App::environment() === 'local') {
