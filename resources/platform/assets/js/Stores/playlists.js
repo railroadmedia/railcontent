@@ -73,13 +73,14 @@ export const usePlaylistsStore = defineStore({
     async getPlaylists(payload, token) {
       try {
         const response = await fetchUserPlaylists(payload.brand, payload);
-        this.loadingPlaylists = false;
         this.playlists = await response.data;
         this.playlistsQuantity = await response.meta.totalResults;
         this.filterOptions = await response.meta.filterOptions;
       } catch {
         console.log('there was an error with your request');
         //hard reload?
+      } finally {
+        this.loadingPlaylists = false;
       }
     },
     async getPlaylist(payload, token) {
