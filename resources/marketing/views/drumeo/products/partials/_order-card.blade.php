@@ -14,7 +14,7 @@
                 alt="card image"
             >
             <h2 class="leading-tight mt-2">
-                @if(!empty($fullPrice)) @if($fullPrice != $price) <s class="opacity-60 mr-1">{{$fullPrice}}</s> @endif @endif
+                @if(!empty($fullPrice)) @if($fullPrice > $price) <s class="opacity-60 mr-1">{{$fullPrice}}</s> @endif @endif
                 <strong>{!! $price !!}</strong>
             </h2>
             @if(!empty($specialText)) <p class="text-sm mb-5"><em>{!! $specialText !!}</em></p> @endif
