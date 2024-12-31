@@ -87,11 +87,11 @@
                 <img class="md:hidden object-cover w-full sm:max-w-2xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/december/header-collage2.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $692.95</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 65%)</span></h2>
-                    @if($stock > 0)
-                        <a class="join drumeo mt-4 w-full uppercase" href="{{ $orderUrl }}">get the deal</a>
-                    @else
+{{--                    @if($stock > 0)--}}
+{{--                        <a class="join drumeo mt-4 w-full uppercase" href="{{ $orderUrl }}">get the deal</a>--}}
+{{--                    @else--}}
                         <a class="join sold-out mt-4 w-full">SOLD OUT</a>
-                    @endif
+{{--                    @endif--}}
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             'case' => 'holiday',
-            'getDealUrl' => $orderUrl,
+//            'getDealUrl' => $orderUrl,
             ])
         </div>
     </section>
@@ -137,6 +137,7 @@
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-4"><strong>Annual membership with a free QuietPad, drumsticks and $381 in digital bonuses.</strong></h2>',
             'buttonLink' => $orderUrl,
             'bundle'=> 'holiday',
+            'soldOut'=> true,
             ])
     </div>
 
