@@ -16,7 +16,7 @@ export const usePlaylistsStore = defineStore({
       },
       playerExpanded: false,
       pageHasPlaylistCatalog: false,
-      loadingPlaylists: false,
+      loadingPlaylists: true,
       loadingLessons: false,
       sortingPlaylist: false,
       loadingPinnedPlaylists: false,
