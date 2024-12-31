@@ -74,7 +74,7 @@
 
             <!-- Playlist section add arrows -->
             <ListSection
-                v-if="playlistsStore.playlists.length"
+                v-if="!loadingPlaylists"
                 :usersList="playlistsStore.playlists"
                 :my-list-url="`/${brand}/playlists`"
             />
@@ -190,6 +190,7 @@
     const platformStore = usePlatformStore();
     const { brand, userId, token, showOnboardingBanner, userHas30Days, userFirstName, userDisplayName } = storeToRefs(userStore);
     const { isLoading } = storeToRefs(platformStore);
+    const { loadingPlaylists, playlists } = storeToRefs(playlistsStore);
 
     const props = defineProps({
         // String props
@@ -287,7 +288,7 @@
 
     //Lifecycles
     onBeforeMount( async () => {
-        playlistsStore.getPlaylists({ brand: brand.value, limit: 24, sort: '-last_progress' }, token);
+        loadingPlaylists.value = true;
         const { data: homeData } = await useHomePageData(brand.value, isPackOrChallengeOnlyBoolean.value);
         data.value = homeData.value;
 
@@ -298,5 +299,9 @@
         if (window.location.href.includes('create-playlist-window')) {
             openPlaylistModal();
         }
+
+        //Get Playlists
+        playlistsStore.getPlaylists({ brand: brand.value, limit: 24, sort: '-last_progress' }, token);
+        loadingPlaylists.value = false;
     });
 </script>
