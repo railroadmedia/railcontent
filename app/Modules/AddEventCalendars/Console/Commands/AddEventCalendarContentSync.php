@@ -39,7 +39,8 @@ class AddEventCalendarContentSync extends Command
     $scheduledEvents$scheduledEvents
                  */
                 $this->info("Finding $brand scheduled content");
-                $scheduledEvents = $this->sanityGateway->getScheduledContent($brand);
+                $typeUniquekeyMap = config("addevent.uniquekeys-by-brand.$brand.by-type", []);
+                $scheduledEvents = $this->sanityGateway->getScheduledContent($brand, array_keys($typeUniquekeyMap));
                 $count = count($scheduledEvents);
                 $this->info("$count scheduled events found.");
                 $calendarName = $this->addEventService->generateBrandOverviewCalendarName($brand);

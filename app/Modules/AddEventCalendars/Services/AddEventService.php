@@ -601,7 +601,7 @@ class AddEventService
         $event = $result->event;
 
         if ($throwExceptionOnFailure) {
-            $calendarIdsMatch = $event->calendar === $calendar->id;
+            $calendarIdsMatch = $event->calendar == $calendar->id;
             $descriptionsMatch = $this->stringsSameIfFormattingRemoved($description, $event->description);
             $titlesMatch = $this->stringsSameIfFormattingRemoved($title, $event->title);
             $eventWasSetAsAllDayEvent = $event->all_day_event === 'true';

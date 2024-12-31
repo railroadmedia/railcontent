@@ -933,10 +933,16 @@ class SanityGateway
         return $this->sanity->fetch($query);
     }
 
-    public function getScheduledContent(string $brand)
+    public function getScheduledContent(string $brand, array $types)
     {
         $now = Carbon::now()->toISOString();
-        $query = "*[brand == '$brand' && (status == 'scheduled' || status == 'published') && published_on >= '$now']{
+        $typesString = implode(
+            ',',
+            collect($types)->map(function ($type) {
+                return "'$type'";
+            })->toArray()
+        );
+        $query = "*[brand == '$brand' && _type in [$typesString] && (status == 'scheduled' || status == 'published') && published_on >= '$now']{
             'id': railcontent_id,
             'type': _type,
             brand,
