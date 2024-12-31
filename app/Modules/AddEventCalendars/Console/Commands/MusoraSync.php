@@ -37,6 +37,7 @@ class MusoraSync extends Command
     private function syncMusoraCalendar()
     {
         $calendar = $this->addEventService->getCalendarByNameIfExists($this->syncLiveEvents ? 'Musora Live' : 'Musora');
+        //TODO: These need to come from sanity as well
         $allContent = $this->getAllContent();
         $this->calendarSyncService->syncContentListToCalendar($allContent, $calendar);
     }

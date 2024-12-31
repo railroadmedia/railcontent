@@ -186,7 +186,7 @@ class AddEventService
 
     public function getCalendarByUniqueKey($uniquekey): ?AddEventCalendar
     {
-        return AddEventCalendar::query()->where('uniquekey', '=', $name)->first() ?? null;
+        return AddEventCalendar::query()->where('uniquekey', '=', $uniquekey)->first() ?? null;
     }
 
     public function generateBrandOverviewCalendarName($brand): string
