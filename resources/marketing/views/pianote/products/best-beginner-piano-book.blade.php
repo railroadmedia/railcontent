@@ -19,6 +19,7 @@
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
 
@@ -60,7 +61,7 @@
         : number_format(floatval($productPrices['best-beginner-piano-book']->discounted_price), 2);
     @endphp
     
-    <header class="text-white px-5 sm:px-6 pt-96 pb-10 sm:py-20 lg:py-36 relative" style="background-color:#0f5e8a;">
+    <header class="text-white px-5 sm:px-6 pt-96 pb-10 sm:py-20 lg:py-36 relative" style="background-color:#111729;">
         <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/header-bg-m.webp')"></div>
         <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/header.webp')"></div>
         <div class="container max-w-4xl mx-auto relative z-10">
@@ -68,8 +69,7 @@
                 <div class="w-full sm:w-5/12 text-center lg:text-left">
                     <img class="h-28 lg:h-40 mx-0" alt="logo" fetchpriority="high"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/header-logo.svg">
-                    <p class="leading-normal my-4 sm:my-6">The simplest guide for beginners to get <br class="block md:hidden"> started on the piano.
-                    </p>
+                    <p class="leading-normal my-4 sm:my-6">The simplest guide for beginners to <br class="block md:hidden"> get started on the piano.</p>
                     <h2 class="leading-tight mb-4 sm:mb-6">
                         @if(floatval($productPrices['best-beginner-piano-book']->price) > $discountedPrice)
                             <strong> <s class="opacity-60">${{ floatval($productPrices['best-beginner-piano-book']->price) }}</s></strong>
@@ -104,12 +104,12 @@
                         'You can apply it.'
                     ],
                     'alt' => 'Piano Key Overlay',
-                    'title' => 'The first step never felt so easy.',
+                    'title' => 'The first step never <br class="block md:hidden"> felt so easy.',
                 ];
             @endphp
-            <h2 class="leading-tight mx-0 my-2 sm:my-4" style="font-family: 'Playfair Display', serif;">
+            <h1 class="leading-tight mx-0 my-2" style="font-family: 'Playfair Display', serif;">
                 <strong>{!! $item['title'] !!}</strong>
-            </h2>
+            </h1>
             <div class="text-left flex flex-col sm:flex-row justify-center items-center md:py-10">
                 <div class="w-full sm:w-6/12 rounded-2xl order-1 sm:order-2" 
                      loading="lazy" 
@@ -146,11 +146,11 @@
     <section class="bg-white sm:py-20">
         <div class="py-8">
             <div class="max-w-6xl mx-auto px-4">
-                <h2 class="text-center mb-2 lg:mb-4">
+                <h3 class="text-center mb-2 lg:mb-4">
                     <strong>
-                    10 things this book will teach you.
+                    10 things this book <br class="block md:hidden"> will teach you.
                     </strong>
-                </h2>
+                </h3>
                 <p class="text-center mb-2 lg:mb-4">
                     The Best Beginner Piano Book is packed with useful information for your musical journey.
                 </p>
@@ -230,9 +230,9 @@
                     <!-- Cards  -->
                     <div class="w-full md:w-1/2 grid sm:grid-cols-2 gap-4 order-2 md:order-{{ $index % 2 === 0 ? '2' : '1' }}">
                         @foreach ($section['cards'] as $card)
-                        <div class="bg-[#F2EFED] rounded-lg p-4 transition-shadow duration-200" style="box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">                             
+                        <div class="bg-[#F2EFED] rounded-lg p-4 transition-shadow duration-200 flex flex-row md:flex-col" style="box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">                             
                             <div class="icon-gradient w-12 h-12 flex items-center justify-center mb-4 md:mb-6 md:mr-0 mr-4">
-                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/{{ $card['icon'] }}" alt="Icon {{ $index + 1 }}" class="w-11 h-11">
+                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/{{ $card['icon'] }}" alt="Icon {{ $index + 1 }}" class="w-9 h-9 md:w-11 md:h-11 object-contain">
                             </div>
                             <p class="leading-snug lg:pt-10">{!! $card['text'] !!}</p>
                         </div>
@@ -258,12 +258,14 @@
                         <img class="h-5 mt-4 sm:mt-3 mb-3 lg:mb-4 transition-all opacity-0" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')"
                             src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector.svg">
                         <p class="leading-normal">
-                            Lisa Witt is the lead instructor at Pianote and has inspired millions of students around the world with her infectious enthusiasm for this instrument.
-                            <br><br>Lisa grew up learning classical piano through the Royal Conservatory of Music, but it wasn’t easy.
-                            <br><br>“In fact, I mostly hated it,” she said.
-                            <br><br>“But there were some songs that made it all worth it. The beautiful songs by the great composers.”
-                            <br><br>Those songs are what drove Lisa to compile this book and share those beautiful pieces with you. She hand-picked each one to fill this book with 20 of the most beautiful classical piano pieces around.
-                            <br><br>Lisa’s teaching style is all about FUN. If you’re not having fun playing the piano, then you won’t keep learning. The pieces in this book reflect that style. They are beautiful, but also fun to learn. So you’ll keep coming back to them.
+                            Lisa Witt is the lead instructor at Pianote and head of Education at Musora (Drumeo, Singeo, Guirtareo). She has inspired millions of students around the world with her infectious enthusiasm for this instrument.
+                            <br><br>Her passion is helping people realize that it doesn’t take some special talent to play the piano.
+                            <br><br>All you need is the right information and a good teacher.
+                            <br><br>And good information can be hard to find.
+                            <br><br>“It can be really hard to know what piano book you should learn with as an adult,” says Lisa.
+                            <br><br>“You go into a music store and it's been the same exact books for as long as I've been a human.”
+                            <br><br>This book gives you both.
+                            <br><br>“We wanted to create something that would have everything a new piano student would need to understand how the instrument works, begin playing, and of course, have some fun.”
                             <br><br>Lisa is also the author of “Piano Chords & Scales: The Ultimate Guide” and “The Pianote Practice Planner.”
                         </p>
                     </div>
@@ -277,10 +279,12 @@
                             src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector-1.svg">
                         <p class="leading-normal">
                             Eleny Quapp is a skilled musician with over 20 years of experience. As a former student of the Royal Conservatory of Music, she has refined her skills at the piano and has since become an accomplished teacher, passing on her passion for music to her students.
-                            <br><br>Eleny's love for music is reflected in her teaching, where she emphasizes the importance of practice and dedication, but also discovering the fun in learning. She firmly believes in the profound effects that music can have on a person's life and will always find ways to inspire those around her.
-                            <br><br>With a particular affinity for classical music, Eleny enjoys sharing her passion for some of the world's most beautiful music with those around her.
-                            <br><br>The Most Beautiful Piano Classical Pieces is a delightful collection of some of her favorite pieces.
-                            <br><br>She has arranged all the simplified pieces to be accessible to students of all skill levels. Her arrangements reflect what she is most passionate about - sharing the joy and beauty of classical music.
+                            <br><br>And that skill shines through in this book. Eleny’s attention to detail and keen understanding of the student journey are beautifully reflected in the color diagrams and explanations found inside.
+                            <br><br>“Making music is a beautiful experience, and we wanted it to be accessible to everyone—without the pressure of fitting into a traditional mold,” says Eleny.
+                            <br><br>“Our hope is that learning to play the piano becomes a joyful adventure, and that's exactly why I love this book.”
+                            <br><br>“It blends the pure joy of music with a learning approach that feels free and fun and not confined by all the lines.”
+                            <br><br>All the musical examples were arranged by Eleny to be approachable and sound good while instilling the core concepts of each lesson.
+                            <br><br>Eleny is also the author of “The Most Beautiful Piano Classical Pieces.”
                         </p>
                     </div>
                 </div>
@@ -288,7 +292,7 @@
 
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 mb-20 sm:mb-24">
+    <section class="text-center px-4 sm:px-6 pb-10 sm:pb-14 lg:pb-20 mb-20 sm:mb-24">
         <div class="container max-w-6xl mx-auto">
             <h3 class="leading-tight text-center mb-6 sm:mb-7"><strong>The Best Beginner<br class="inline sm:hidden"> Piano Book</strong></h3>
 
@@ -321,44 +325,44 @@
 
             @component('drumeo._partials.modal-carousel', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
                 <div class="flex flex-wrap items-center">
-                    <div class="w-1/2 md:w-1/4">
-                        <div class="p-3 w-full">
+                    <div class="w-1/2 lg:w-1/4">
+                        <div class="p-1 md:p-2 lg:p-3 w-full">
                             <div @click="handleClick(1)"
                                 class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')">
                             </div>
                         </div>
-                        <div class="p-3 w-full">
+                        <div class="p-1 md:p-2 lg:p-3 w-full">
                             <div @click="handleClick(3)"
                                 class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')">
                             </div>
                         </div>
                     </div>
-                    <div class="w-1/2 md:w-1/4">
-                        <div class="p-3 w-full">
+                    <div class="w-1/2 lg:w-1/4">
+                        <div class="p-1 md:p-2 lg:p-3 w-full">
                             <div @click="handleClick(2)"
                                 class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[2]['img'] }}')">
                             </div>
                         </div>
                     </div>
-                    <div class="w-1/2 md:w-1/4">
-                        <div class="p-3 w-full">
+                    <div class="w-1/2 lg:w-1/4">
+                        <div class="p-1 md:p-2 lg:p-3 w-full">
                             <div @click="handleClick(0)"
                                 class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')">
                             </div>
                         </div>
                     </div>
-                    <div class="w-1/2 md:w-1/4">
-                        <div class="p-3 w-full">
+                    <div class="w-1/2 lg:w-1/4">
+                        <div class="p-1 md:p-3 w-full">
                             <div @click="handleClick(5)"
                                 class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[5]['img'] }}')">
                             </div>
                         </div>
-                        <div class="p-3 w-full">
+                        <div class="p-1 md:p-2 lg:p-3 w-full">
                             <div  @click="handleClick(4)"
                                 class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')">
@@ -374,7 +378,6 @@
             
    @php
     $offers = [
-    
         [
             'badge' => 'SAVE 20%',
             'color' => 'black',
@@ -407,36 +410,36 @@
             'imageClass' => 'h-48 opacity-0',
             'buttonText' => 'GET YOUR BOOKS',
             'buttonClass' => 'pianote',
-            'subtext' => 'Add the NEW Pianote Practice Planner for just $10',
+            'subtext' => 'Add the NEW Pianote  <br class="block sm:hidden"> Practice Planner for just $10',
                 'features' => [
                     '<i class="fa fa-check text-pianote"></i> Best Beginner Piano Book',
                     '<i class="fa fa-check text-pianote"></i> <strong>NEW</strong> Pianote Practice Planner ($39 value)',
-                    '<i class="fa fa-check text-pianote"></i> Free Shipping in the US & Canada'
+                    '<i class="fa fa-check text-pianote"></i> Free Shipping in the US & Canada',
                 ]
         ]
     ];
     @endphp
 
-    <section class="text-center px-4 py-10 sm:px-6 sm:pt-14 lg:pt-20 bg-[#F2EFED]">
+         <section class="text-center px-4 py-10 sm:px-6 sm:pt-14 lg:pt-20 bg-[#F2EFED]">
         <div class="container mx-auto max-w-5xl">
-            <img class="h-24 lg:h-44" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/order-logo.svg" alt="Logo" />
+            <img class="h-16 sm:h-20 lg:h-44" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/order-logo.svg" alt="Logo" />
             
-            <p class="mb-6 lg:mb-10 lg:mt-4">
-                Stay on track and see better results from your  <br class="block sm:hidden"> practice sessions.<br>
+            <p class="mb-6 lg:mb-10 mt-2 lg:mt-4">
+                Stay on track and see better <br class="block sm:hidden"> results from your practice sessions.<br>
                 Make every practice perfect.
             </p>
     
-            <div class="flex flex-wrap lg:flex-nowrap items-start justify-center w-full mb-5 sm:mb-10 mx-auto space-y-4 md:space-y-0 md:space-x-4 lg:space-x-8">
+            <div class="flex flex-wrap lg:flex-nowrap items-stretch justify-center w-full mb-5 sm:mb-10 mx-auto space-y-4 md:space-y-0 md:space-x-4 lg:space-x-8">
                 @foreach($offers as $offer)
-                    <div class="w-full md:w-1/2 lg:w-1/2 max-w-sm lg:px-1 px-1 relative border-2 border-{{ $offer['color'] }} rounded-2xl shadow-md mb-4 lg:mb-0 bg-white">
+                    <div class="w-full md:w-1/2 lg:w-1/2 max-w-sm lg:px-1 px-1 relative border-2 border-{{ $offer['color'] }} rounded-2xl shadow-md mb-4 lg:mb-0 bg-white flex flex-col">
                         @if($offer['badge'])
                             <p class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mb-1 px-5 py-1 z-10 leading-tight text-sm rounded-full tracking-widest text-white bg-{{$offer['color']}}">
                                 {{ $offer['badge'] }}
                             </p>
                         @endif
     
-                        <div class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 border-white">
-                            <div class="bg-white px-3 py-6 md:py-7">
+                        <div class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 border-white flex-grow flex flex-col">
+                            <div class="bg-white px-3 py-6 md:py-7 flex-grow">
                                 <h3 class="leading-tight mb-2"><strong>{{ $offer['title'] }}</strong></h3>
                                 
                                 <img class="{{ $offer['imageClass'] }}"
@@ -447,14 +450,14 @@
                                 >
     
                                 <h3 class="leading-tight mt-2">
-                                    <span class="line-through text-gray-400 mr-2">${{ $offer['originalPrice'] }}</span>
+                                    <span class="line-through text-gray-400">${{ $offer['originalPrice'] }}</span>
                                     <strong>${{ $offer['currentPrice'] }}</strong>
-                                    <span class="text-red-500 ml-1 text-sm">(Save {{ $offer['discount'] }})</span>
+                                    <span class="text-pianote ml-1 text-sm lg:text-base">(Save {{ $offer['discount'] }})</span>
                                 </h3>
     
-                                <p class="text-sm mb-5"><em>{{ $offer['subtext'] }}</em></p>
+                                <p class="text-sm mb-5"><em>{!! $offer['subtext'] !!}</em></p>
     
-                                <button class="w-full transition-opacity join text-xl md:text-2xl max-w-[300px] py-3 px-6 hover:opacity-60 rounded-full text-white bg-{{ $offer['color'] }}" href="{{ $offer['link'] }}">
+                                <button class="w-full transition-opacity join text-xl md:text-2xl max-w-[300px] py-3 px-6 hover:opacity-80 rounded-full text-white bg-{{ $offer['color'] }}" href="{{ $offer['link'] }}">
                                     {{ $offer['buttonText'] }}
                                 </button>
                             </div>
