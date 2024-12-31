@@ -457,9 +457,9 @@
     
                                 <p class="text-sm mb-5"><em>{!! $offer['subtext'] !!}</em></p>
     
-                                <button class="w-full transition-opacity join text-xl md:text-2xl max-w-[300px] py-3 px-6 hover:opacity-80 rounded-full text-white bg-{{ $offer['color'] }}" href="{{ $offer['link'] }}">
+                                <a class="w-full transition-opacity join text-xl md:text-2xl max-w-[300px] py-3 px-6 hover:opacity-80 rounded-full text-white bg-{{ $offer['color'] }}" href="{{ $offer['link'] }}">
                                     {{ $offer['buttonText'] }}
-                                </button>
+                                </a>
                             </div>
     
                             <div class="px-4 sm:px-4 md:px-10 pb-7">
