@@ -77,8 +77,9 @@
                             <strong></strong> <s
                                 class="opacity-60">${{ floatval($productPrices['practice-planner']->price) }}</s>
                             <strong>${{ floatval($productPrices['practice-planner']->discounted_price) }}</strong>
-                            (SAVE
+                            <span class="text-pianote text-base">(SAVE
                             {{ round(100 - 100 * (floatval($productPrices['practice-planner']->discounted_price) / floatval($productPrices['practice-planner']->price))) }}%)
+                            </span>
                         @else
                             <strong>
                                 ${{ floatval($productPrices['practice-planner']->discounted_price) }}</strong>
@@ -238,8 +239,9 @@
                             <strong></strong> <s
                                 class="opacity-60">${{ floatval($productPrices['practice-planner']->price) }}</s>
                             <strong>${{ floatval($productPrices['practice-planner']->discounted_price) }}</strong>
-                            (SAVE
+                            <span class="text-pianote text-base">(SAVE
                             {{ round(100 - 100 * (floatval($productPrices['practice-planner']->discounted_price) / floatval($productPrices['practice-planner']->price))) }}%)
+                            </span>
                         @else
                             <strong>
                                 ${{ floatval($productPrices['practice-planner']->discounted_price) }}</strong>
