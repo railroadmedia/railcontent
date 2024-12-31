@@ -184,30 +184,9 @@ class AddEventService
         return AddEventCalendar::query()->where('title', '=', $name)->first() ?? null;
     }
 
-    public function getCalendarByUniqueKey($uniquekey): ?AddEventCalendar
-    {
-        return AddEventCalendar::query()->where('uniquekey', '=', $uniquekey)->first() ?? null;
-    }
-
     public function generateBrandOverviewCalendarName($brand): string
     {
         return ucwords($brand);
-    }
-
-    public function getCalendarBySyncId($syncId)
-    {
-        if ($syncId) {
-            foreach ($this->calendars as $calendar) {
-                $customData = json_decode($calendar->custom_data, true);
-                $externalSyncId = $customData[self::SYNC_ID_KEY] ?? null;
-
-                if ($externalSyncId === $syncId) {
-                    return $calendar;
-                }
-            }
-        }
-
-        return null;
     }
 
     // =================================================================================================================
