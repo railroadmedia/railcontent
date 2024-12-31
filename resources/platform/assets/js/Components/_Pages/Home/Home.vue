@@ -74,7 +74,7 @@
 
             <!-- Playlist section add arrows -->
             <ListSection
-                v-if="usersList.length"
+                v-if="playlistsStore.playlists.length"
                 :usersList="playlistsStore.playlists"
                 :my-list-url="`/${brand}/playlists`"
             />
@@ -225,7 +225,6 @@
         courseData: { type: Object, default: () => ({}) },
         newContent: { type: Object, default: () => ({}) },
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
-        usersList: { type: Object, default: () => ({}) },
         userMetrics: { type: Object, default: () => ({}) },
         isFirstAccess: { type: Boolean, default: false },
     });
@@ -288,7 +287,7 @@
 
     //Lifecycles
     onBeforeMount( async () => {
-        playlistsStore.playlists = props.usersList;
+        playlistsStore.getPlaylists({ brand: brand.value, limit: 24, sort: '-last_progress' }, token);
         const { data: homeData } = await useHomePageData(brand.value, isPackOrChallengeOnlyBoolean.value);
         data.value = homeData.value;
 
