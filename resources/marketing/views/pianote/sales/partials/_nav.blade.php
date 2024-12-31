@@ -13,12 +13,12 @@
 
     @if(!empty($checkoutVersion))
         <div class="button-wrap text-white">
-            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join outline-button" style="background: linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);color:#000;" role="button" aria-label="Shop at Pianote shop">Shop Deals</a>
+            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join outline-button" role="button" aria-label="Shop at Pianote shop">Shop</a>
         </div>
     @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="{{ get_legacy_brand_base_url('pianote').'/shop' }}" class="join outline-button hover:no-underline" style="background: linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);color:#000;" role="button" aria-label="Shop at Pianote shop">Shop Deals</a>
+            <a href="{{ get_legacy_brand_base_url('pianote').'/shop' }}" class="join outline-button hover:no-underline" role="button" aria-label="Shop at Pianote shop">Shop</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
@@ -43,7 +43,7 @@
                     <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></span>
                     <span class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/choose-plan" >Pricing</a>
-                    <a style="color: #F61A30;" class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/shop" >Holiday Deals</a>
+                    <a class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/shop" >Shop</a>
                     <a class="" href="{{ get_legacy_brand_base_url('pianote') }}/blog" >Blog</a>
 
                 </div>
@@ -154,11 +154,11 @@
 {{--            "linkIcon" => "fas fa-money-bill-wave",--}}
 {{--            "linkUrl" => "/choose-plan",--}}
 {{--        ])--}}
-            @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "Holiday Deals",
-                "linkIcon" => "fas fa-tag",
-                "linkUrl" => "/shop",
-            ])
+        @include('drumeo.sales.partials._nav-link', [
+            "linkName" => "Shop",
+            "linkIcon" => "fas fa-tag",
+            "linkUrl" => "/shop",
+        ])
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Blog",
             "linkIcon" => "fas fa-comment-pen",

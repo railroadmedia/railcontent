@@ -67,11 +67,13 @@
 @endsection
 
 @section('body')
-    @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'Save up to 65% on drum lessons, gear & more!',
-        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-banner.webp',
-        'isShop' => true,
+    @include('_partials.components.shop.shop-header',[
+        'text' => 'GET LESSONS, MERCH, GEAR, & MUCH MORE',
+        'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg',
+        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/543x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png',
+        'logoStyles' => 'h-6 sm:h-8 mb-1',
     ])
+
 
     @include('_partials.components.shop.index-filters', [
         "all" => true
@@ -79,57 +81,10 @@
 
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
-        <section x-show="filter === 'all'">
-            <div class="container mx-auto">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
-                <div class="flex flex-wrap mb-5 sm:mb-10">
-                    <a href="/drumshop/holiday-bundle" class="w-full mx-auto p-1 sm:p-2 transition-opacity duration-500 hover:opacity-90">
-                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%] sm:pb-[35%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2228x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle-full-new.webp');"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle-m-new.webp');"></div>
-                        </div>
-                    </a>
-                    <div class="w-full p-2">
-                        <div class="flex flex-wrap sm:flex-nowrap items-center space-around border border-gray-300 px-4 sm:px-7 lg:px-6 py-4 sm:py-5 rounded-lg inline-block mx-auto"
-                            style="background:linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);">
-                            <p class="leading-normal flex-shrink-0 text-center pr-4 mb-3 sm:mb-0"><i class="fas fa-sparkle mr-3"></i><strong class="font-black">ALL HOLIDAY BUNDLES<i class="fas fa-sparkle ml-3 inline lg:hidden"></i><br class="lg:hidden"> = LOCKED CARTS</strong><i class="fas fa-sparkle ml-3 hidden lg:inline"></i></p>
-                            <p class="leading-normal text-sm text-center sm:text-left max-w-lg">You’ll get FREE SHIPPING for USA/Canada and discounted shipping worldwide.
-                                You won’t be able to add or remove items for any featured bundle.</p>
-                        </div>
-                    </div>
-                    <a href="/drumshop/kit" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
-                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle1.webp');"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle-m1.webp');"></div>
-                        </div>
-                    </a>
-                    <a href="/drumshop/gift-bundle" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
-                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle1.webp');"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle-m1.webp');"></div>
-                        </div>
-                    </a>
-{{--                    <div class="w-full">--}}
-{{--                        @php--}}
-{{--                            $bundles = [--}}
-{{--                                [--}}
-{{--                                    'slug' => '/drumshop/kit',--}}
-{{--                                    'full' => true,--}}
-{{--                                    'visible' => 1,--}}
-{{--                                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/shop/ekit-bundle-full.webp',--}}
-{{--                                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle-full-m.webp',--}}
-{{--                                ],--}}
-{{--                            ];--}}
-{{--                        @endphp--}}
-{{--                        @include('_partials.layout.holiday.bundle-tiles')--}}
-{{--                    </div>--}}
-                </div>
-            </div>
-        </section>
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container" x-data="{ showAll: false }">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-globe-pointer text-{{ $brand }} mr-1"></i> Digital Deals</strong></h5>
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-globe-pointer text-{{ $brand }} mr-1"></i> Digital Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
                     :class="{ 'show-all': showAll || (!isIndexPage && filter !== 'all') || filter === 'lessons' }">
 {{--                    @include('_partials.components.shop.product-card', [--}}
@@ -178,59 +133,11 @@
             </div>
         </section>
 
-        <section class="grid-view category-section" data-category="door-crashers" x-show="filter === 'door-crashers' || filter === 'all'">
-            <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Door Crashers</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 text-left">
-                    @include('_partials.components.shop.product-card', [
-                        "href" => "/drumshop/stickbag",
-                         "price" => floatval($productPrices['stickbag']->price),
-                         "discounted_price" => floatval($productPrices['stickbag']->discounted_price),
-                         "title" => "Drumeo StickBag",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-01c.webp",
-                         'soldOut' => false,
-                    ])
-                    @include('_partials.components.shop.product-card', [
-                        "href" => "/drumshop/eardrums",
-                         "price" => floatval($productPrices['drumeo-eardrums-black']->price),
-                         "discounted_price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
-                         "title" => "Drumeo EarDrums In-Ear Monitors",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02c.webp",
-                         'soldOut' => false,
-                    ])
-                    @include('_partials.components.shop.product-card', [
-                        "href" => "/drumshop/the-drummers-toolbox",
-                         "price" => floatval($productPrices['the-drummers-toolbox-book']->price),
-                         "discounted_price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
-                         "title" => "The Drummer’s Toolbox",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03b.webp",
-                         'soldOut' => false,
-                    ])
-                    @include('_partials.components.shop.product-card', [
-                        "href" => "/drumshop/practice-pad-full",
-                         "price" => floatval($productPrices['practicepad']->price),
-                         "discounted_price" => floatval($productPrices['practicepad']->discounted_price),
-                         "title" => "The P4 Practice Pad",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-04.webp",
-                         'soldOut' => false,
-                    ])
-                </div>
-            </div>
-        </section>
-
         <section class="grid-view category-section" data-category="gifts" x-show="filter === 'gifts' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-gift text-{{ $brand }} mr-1"></i> Gifts</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
 
-                    @include('_partials.components.shop.product-card', [
-                        "discounted_price" => 240,
-                        "href" => "/drumshop/gift-bundle",
-                        "price" =>  341.94,
-                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle.webp",
-                        "title" => "The Gift Bundle",
-                        'soldOut' => false,
-                    ])
                     @include('_partials.components.shop.product-card', [
                         "sku" => 'musora-gift-card-50',
                         "discounted_price" => 50,
@@ -282,16 +189,6 @@
                         "title" => $item->name,
                     ])
                 @endforeach
-                    <div x-cloak x-show="filter === 'accessories'">
-                        @include('_partials.components.shop.product-card', [
-                            "href" => "/drumshop/kit",
-                             "price" => 1474,
-                             "discounted_price" => 599,
-                             "title" => "The E-KIT Bundle",
-                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
-                             'soldOut' => false,
-                        ])
-                    </div>
                 </div>
                 <div class="-mt-3 sm:-mt-5 lg:-mt-8 mb-10 text-center" x-show="isIndexPage && filter === 'all'">
                     <span
