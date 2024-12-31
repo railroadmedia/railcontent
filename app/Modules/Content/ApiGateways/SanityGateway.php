@@ -933,6 +933,30 @@ class SanityGateway
         return $this->sanity->fetch($query);
     }
 
+    public function getScheduledContent(string $brand, array $types)
+    {
+        $now = Carbon::now()->toISOString();
+        $typesString = implode(
+            ',',
+            collect($types)->map(function ($type) {
+                return "'$type'";
+            })->toArray()
+        );
+        $query = "*[brand == '$brand' && _type in [$typesString] && (status == 'scheduled' || status == 'published') && published_on >= '$now']{
+            'id': railcontent_id,
+            'type': _type,
+            brand,
+            title,
+            'description': description[0].children[0].text,
+            published_on,
+            live_event_start_time,
+            live_event_end_time,
+        } | order(published_on desc) ";
+
+        $documents = $this->sanity->fetch($query);
+        return $documents;
+    }
+
     private function postProcessDocument(&$document): void
     {
         //fix parent_content_data for decorators
@@ -1068,4 +1092,6 @@ class SanityGateway
         }
         return $this->userPermissionsCached;
     }
+
+
 }

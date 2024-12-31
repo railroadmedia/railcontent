@@ -184,30 +184,9 @@ class AddEventService
         return AddEventCalendar::query()->where('title', '=', $name)->first() ?? null;
     }
 
-    public function getCalendarByUniqueKey($uniquekey): ?AddEventCalendar
-    {
-        return AddEventCalendar::query()->where('uniquekey', '=', $name)->first() ?? null;
-    }
-
     public function generateBrandOverviewCalendarName($brand): string
     {
         return ucwords($brand);
-    }
-
-    public function getCalendarBySyncId($syncId)
-    {
-        if ($syncId) {
-            foreach ($this->calendars as $calendar) {
-                $customData = json_decode($calendar->custom_data, true);
-                $externalSyncId = $customData[self::SYNC_ID_KEY] ?? null;
-
-                if ($externalSyncId === $syncId) {
-                    return $calendar;
-                }
-            }
-        }
-
-        return null;
     }
 
     // =================================================================================================================
@@ -622,7 +601,7 @@ class AddEventService
         $event = $result->event;
 
         if ($throwExceptionOnFailure) {
-            $calendarIdsMatch = $event->calendar === $calendar->id;
+            $calendarIdsMatch = $event->calendar == $calendar->id;
             $descriptionsMatch = $this->stringsSameIfFormattingRemoved($description, $event->description);
             $titlesMatch = $this->stringsSameIfFormattingRemoved($title, $event->title);
             $eventWasSetAsAllDayEvent = $event->all_day_event === 'true';

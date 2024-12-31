@@ -36,9 +36,14 @@ Schedule::command('mentors:assign')->hourly();
 
 Schedule::command('user:resyncExpiredProducts')->dailyAt('10:00'); //2am PST
 
-Schedule::command('addevent:syncMusora')->hourlyAt(50);
+Schedule::command('addevent:syncBrand drumeo')->hourlyAt(35);
+Schedule::command('addevent:syncBrand pianote')->hourlyAt(38);
+Schedule::command('addevent:syncBrand guitareo')->hourlyAt(41);
+Schedule::command('addevent:syncBrand singeo')->hourlyAt(44);
 
-Schedule::command('addevent:syncMusora --live')->hourlyAt(30);
+//Musora sync broken, need to fix this as well
+//Schedule::command('addevent:syncMusora')->hourlyAt(50);
+//Schedule::command('addevent:syncMusora --live')->hourlyAt(30);
 
 Schedule::command('SyncShopifyProductInventoryToProductsTable')->everyFiveMinutes();
 

@@ -333,14 +333,14 @@
                 @else
                     <a role="link" aria-label=" GET the deal" class="join sold-out mb-4 md:mb-5 w-full sm:max-w-xs md:max-w-lg lg:max-w-3xl uppercase" style="padding: 20px 10px;">SOLD OUT</a>
                 @endif
-                <br>
-                    @if($bundle == 'holiday')
-                    <a role="link" aria-label="Click here" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-4]=1&products[30-day-independence]=1&products[30-day-double-bass]=1&promo-code=HBDD&locked=true" class="inline-block text-white underline cursore-pointer opacity-90"><p>Or click here to get the bundle with no physical bonuses.</p></a>
-                    @elseif($bundle == 'holiday-pianote')
-                    <a role="link" aria-label="Click here" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&promo-code=HBPD&locked=true" class="inline-block text-white underline cursore-pointer opacity-90"><p>Or click here to get the bundle with no physical bonuses.</p></a>
-                    @else
-                    <p class=" @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif"><em>Renews at $240/year. Cancel anytime.</em></p>
-                    @endif
+{{--                <br>--}}
+{{--                    @if($bundle == 'holiday')--}}
+{{--                    <a role="link" aria-label="Click here" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-4]=1&products[30-day-independence]=1&products[30-day-double-bass]=1&promo-code=HBDD&locked=true" class="inline-block text-white underline cursore-pointer opacity-90"><p>Or click here to get the bundle with no physical bonuses.</p></a>--}}
+{{--                    @elseif($bundle == 'holiday-pianote')--}}
+{{--                    <a role="link" aria-label="Click here" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&promo-code=HBPD&locked=true" class="inline-block text-white underline cursore-pointer opacity-90"><p>Or click here to get the bundle with no physical bonuses.</p></a>--}}
+{{--                    @else--}}
+{{--                    <p class=" @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif"><em>Renews at $240/year. Cancel anytime.</em></p>--}}
+{{--                    @endif--}}
                 </div>
         </section>
     </div>
