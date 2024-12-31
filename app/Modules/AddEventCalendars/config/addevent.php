@@ -87,7 +87,16 @@ return [
         'pianote' => [ // run `php artisan AddEventCommand pianote`, select "getCalendarIdsForMusora" and paste output in this array
             // pianote
             'by-type' => [
+                'boot-camps' => 'SE143004',
+                'chord-and-scale' => 'jH143005',
+                'course' => 'pQ142503',
+                'learning-path' => 'CO143006',
                 'question-and-answer' => 'NC142504',
+                'quick-tips' => 'Wg142505',
+                'recording' => 'wq142506',
+                'student-review' => 'Mk143007',
+                'podcasts' => 'Eu292158',
+                'song' => 'Li142502',
             ],
         ],
         'guitareo' => [ // run `php artisan AddEventCommand guitareo`, select "getCalendarIdsForMusora" and paste output in this array
