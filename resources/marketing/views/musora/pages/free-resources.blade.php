@@ -110,23 +110,23 @@
         <header>
             <h1 class="text-3xl md:text-5xl lg:text-7xl"><strong>Free Resources</strong></h1>
             <p class="pb-10">Explore blogs, newsletters, and free tools for insights and productivity.</p>
-            <h5 class="border-y border-y-black py-4 mb-7 uppercase tracking-widest font-bold">GIVEAWAY</h5>
+{{--            <h5 class="border-y border-y-black py-4 mb-7 uppercase tracking-widest font-bold">GIVEAWAY</h5>--}}
         </header>
 
-        @if(Carbon\Carbon::create(2025, 1, 14, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-            <a href="https://www.drumeo.com/giveaways" class="relative bg-cover bg-center group block rounded-2xl w-full pb-32 sm:pb-56 lg:pb-96"
-                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaway-banner-stewart.webp');">
+{{--        @if(Carbon\Carbon::create(2025, 1, 14, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())--}}
+{{--            <a href="https://www.drumeo.com/giveaways" class="relative bg-cover bg-center group block rounded-2xl w-full pb-32 sm:pb-56 lg:pb-96"--}}
+{{--                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaway-banner-stewart.webp');">--}}
 {{--                <img class="h-24 sm:h-32 absolute top-1/2 left-1/2 z-10 transform -translate-y-1/2 -translate-x-1/2" src="">--}}
-                <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>
-            </a>
-        @else
-            <a href="https://www.drumeo.com/giveaways" class="relative bg-cover bg-center group block rounded-2xl w-full pb-48 sm:pb-96"
-                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaways-bg.jpg');">
-                <img class="h-24 sm:h-32 absolute top-1/2 left-1/2 z-10 transform -translate-y-1/2 -translate-x-1/2"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaways-logo2.png">
-                <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>
-            </a>
-        @endif
+{{--                <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>--}}
+{{--            </a>--}}
+{{--        @else--}}
+{{--            <a href="https://www.drumeo.com/giveaways" class="relative bg-cover bg-center group block rounded-2xl w-full pb-48 sm:pb-96"--}}
+{{--                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaways-bg.jpg');">--}}
+{{--                <img class="h-24 sm:h-32 absolute top-1/2 left-1/2 z-10 transform -translate-y-1/2 -translate-x-1/2"--}}
+{{--                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaways-logo2.png">--}}
+{{--                <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>--}}
+{{--            </a>--}}
+{{--        @endif--}}
 
 
         <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold mt-10 md:mt-16 mb-7">Free Video Lessons</h5>
