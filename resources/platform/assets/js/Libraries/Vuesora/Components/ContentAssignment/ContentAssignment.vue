@@ -62,8 +62,8 @@
         </div>
         <transition name="slide-down-fade">
             <div v-if="accordionActive && thisAssignment != null" v-show="!accordionLoading" class="flex flex-column">
-                <div v-show="$_description.length > 0" class="flex flex-row tw-pb-6">
-                    <div class="body tw-text-[#00101D] dark:tw-text-white tw-text-[13px] sm:tw-text-base" v-html="$_description">
+                <div v-show="description.length > 0" class="flex flex-row tw-pb-6">
+                    <div class="body tw-text-[#00101D] dark:tw-text-white tw-text-[13px] sm:tw-text-base" v-html="description">
                     </div>
                 </div>
                 <div v-show="$_totalPages > 0" class="flex flex-row tw-pb-6">
@@ -245,7 +245,6 @@ export default {
                 id: 0,
                 sheet_music_image_url: [],
                 soundslice_slug: '',
-                description: '',
             },
             isRequesting: false,
             isComplete: this.completed,
@@ -296,10 +295,6 @@ export default {
 
         $_soundslice_slug() {
             return this.thisAssignment.soundslice_slug || '';
-        },
-
-        $_description() {
-            return this.thisAssignment.description || '';
         },
 
         formattedTimecode() {
@@ -466,7 +461,7 @@ export default {
 
                 window.recalculateProgress(true, false, this.brand);
 
-                
+
                 assignmentStatusCompleted(this.id, this.lessonId)
                     .then((resolved) => {
                         if (resolved) {

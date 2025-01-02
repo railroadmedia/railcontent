@@ -12,6 +12,7 @@
                     :title="assignment.title"
                     :soundslice-slug="assignment.soundslice_slug"
                     :completed="assignment.completed"
+                    :description="assignment.description"
                     :user-id="userId"
                     :position="index"
                     :force-open="forceIndex === index"
