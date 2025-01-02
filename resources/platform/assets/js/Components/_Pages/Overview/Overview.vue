@@ -1,6 +1,6 @@
 <template>
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
-        <Breadcrumb :breadcrumbs="breadcrumbs" />
+        <Breadcrumb :breadcrumbs="breadcrumbsData" :isLoading="isLoading" />
 
         <PageHeader
             :title="header?.title"
@@ -123,10 +123,6 @@ const props = defineProps({
         type: String,
         required: true,
     },
-    breadcrumbs: {
-        type: Array,
-        default: () => [],
-    },
     childContent: {
         type: Object,
         default: () => {},
@@ -151,6 +147,7 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
+    // TODO: Remove this prop, need to migrate CTAs and progressLabelText
     headerData: {
         type: Object,
         default: () => {},
@@ -223,6 +220,16 @@ const isChallengeEnrolled = computed(() => {
 
 const isChallengeSolo = computed(() => {
     return data.value?.lesson?.is_solo;
+})
+
+const breadcrumbsData = computed(() => {
+    if (props.contentType === 'course-part') {
+        return [{ title: 'Courses', url: `/${brand.value}/courses` }, { title: header.value?.title }];
+    } else if (props.contentType === 'challenge-part') {
+        return [{ title: 'Challenges', url: `/${brand.value}/challenge` }, { title: header.value?.title }];
+    }
+    const middleBreadcrumbs = data.value?.breadcrumbs_data ? data.value?.breadcrumbs_data : []; 
+    return [...middleBreadcrumbs, { title: header.value?.title }];
 })
 
 const generateChallengeCtas = (data) => {
