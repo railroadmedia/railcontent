@@ -5,8 +5,7 @@ import {
     fetchFoundation,
     jumpToContinueContent,
     getProgressPercentage,
-    fetchUserChallengeProgress,
-    fetch
+    fetchUserChallengeProgress
 } from 'musora-content-services';
 
 import { useUserStore } from "@stores/user";
