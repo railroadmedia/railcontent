@@ -21,7 +21,6 @@ Schedule::command('forums:rebuildSearchIndexes')->hourly();
 
 Schedule::command('notifications:dailySummary')->dailyAt('12:00'); //4am PST
 
-Schedule::command('content:rebuildSearchIndexes')->dailyAt('2:00'); //6am PST
 Schedule::command('content:updatePopularityMWP')->cron('0 */8 * * *'); //every 8 hours
 Schedule::command('content:CreateVimeoVideoContentRecords', [50])->everyThirtyMinutes();
 Schedule::command('content:CreateYoutubeVideoContentRecordsViaClientAPI', [1])->cron(
