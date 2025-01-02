@@ -292,7 +292,7 @@ export default {
     },
 
     mounted() {
-        if(this.contentType === "song") {
+        if(this.contentType === "song" || this.contentType === 'playlist') {
             this.getComments(this.requestParams);
         }
 
