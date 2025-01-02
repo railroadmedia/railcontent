@@ -16,6 +16,7 @@ use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\PlaylistItemLoaded;
 use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Modules\Content\Models\ContentLike;
 
 class UserPlaylistsController extends BaseController
 {
@@ -119,6 +120,8 @@ class UserPlaylistsController extends BaseController
                                                                'total_results' => count($otherItems),
                                                            ]))->toResponseRawJson();
         $playlistItem = $otherItems->where('user_playlist_item_id', '=', $playlistItemId)->first();
+        $playlistItem['is_liked_by_current_user'] = ContentLike::isContentLikedByUser($playlistItem['id'], $user->id);
+        $playlistItem['like_count'] = ContentLike::getContentLikedCount($playlistItem['id']);
         // DEV NOTE: checking for the 'type' is a bit of a workaround to ensure that the data came from Sanity
         throw_if((!$playlistItem || !$playlistItem['type']), new NotFoundHttpException());
 
