@@ -1,8 +1,8 @@
 <script setup>
-import SquaredCard from "../../SquaredCard/SquaredCard.vue";
-import SquaresContainer from "../../SquaredCard/SquaresContainer.vue";
-import InstrumentCardContent from "../../SquaredCard/InstrumentCardContent.vue";
-import ProgressBar from "../../ProgressBar/ProgressBar.vue";
+import SquaredCard from "@collections/SquaredCard/SquaredCard.vue";
+import SquaresContainer from "@collections/SquaredCard/SquaresContainer.vue";
+import InstrumentCardContent from "@collections/SquaredCard/InstrumentCardContent.vue";
+import ProgressBar from "@collections/ProgressBar/ProgressBar.vue";
 import StepWrapper from "../StepWrapper.vue";
 
 import { brandUrl, bgImgCard } from "@constants/brands";

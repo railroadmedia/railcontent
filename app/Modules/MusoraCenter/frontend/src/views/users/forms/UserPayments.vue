@@ -414,7 +414,7 @@ export default {
 
                         if (response) {
                             this.$root.$emit('displayMessage', {
-                                text: 'Payment successfuly refunded!',
+                                text: 'Payment successfully refunded!',
                                 color: 'success',
                             });
 
@@ -471,7 +471,7 @@ export default {
                     .then((response) => {
                         if (response) {
                             this.$root.$emit('displayMessage', {
-                                text: 'Payment invoice successfuly sent!',
+                                text: 'Payment invoice successfully sent!',
                                 color: 'success',
                             });
                         } else {

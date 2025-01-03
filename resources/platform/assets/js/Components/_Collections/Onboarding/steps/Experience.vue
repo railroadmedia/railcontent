@@ -1,10 +1,10 @@
 <script setup>
-import ProgressBar from "../../ProgressBar/ProgressBar.vue";
-import SquaredCard from "../../SquaredCard/SquaredCard.vue";
-import SquaresContainer from "../../SquaredCard/SquaresContainer.vue";
-import ExperienceCardContent from "../../SquaredCard/ExperienceCardContent.vue";
+import ProgressBar from "@collections/ProgressBar/ProgressBar.vue";
+import SquaredCard from "@collections/SquaredCard/SquaredCard.vue";
+import SquaresContainer from "@collections/SquaredCard/SquaresContainer.vue";
+import ExperienceCardContent from "@collections/SquaredCard/ExperienceCardContent.vue";
 import StepWrapper from "../StepWrapper.vue";
-import {saveExperience} from "../services"
+import { saveExperience } from "../services"
 
 const experienceDescriptionMap = {
   pianote: {

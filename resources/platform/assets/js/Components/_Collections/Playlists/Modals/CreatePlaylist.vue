@@ -123,7 +123,7 @@
                     //show success message
                     window.shownotification({
                         icon: 'playlist',
-                        text: `${payload.name} was been successfully created.`
+                        text: `${payload.name} has been successfully created.`
                     })
                     if (props.playlist.hasAddItemCallback) {
                         window.addItemCallback(response.playlist.id)
