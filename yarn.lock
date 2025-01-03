@@ -14770,15 +14770,15 @@ __metadata:
   linkType: hard
 
 "musora-content-services@npm:^1.0.256":
-  version: 1.0.256
-  resolution: "musora-content-services@npm:1.0.256"
+  version: 1.0.257
+  resolution: "musora-content-services@npm:1.0.257"
   dependencies:
     "@babel/preset-env": "npm:^7.25.3"
     "@sanity/client": "npm:^5.4.2"
     babel-jest: "npm:^29.7.0"
     docdash: "npm:^2.0.2"
     groqd: "npm:^0.15.12"
-  checksum: 10c0/c97d0d9e4f19cab9953af2bfd687fa884241cb869afc175bd6b37a79e66252aea3c5b9fb71cefeda82cd92536a6f0ad1fc021c6c9d61a4b1aca3676e139fcae6
+  checksum: 10c0/eea0dbf5ecd952b1be55a41738a8996f258b9a63f2368d13bd2aa927c88e63f3b4e69a366387cb1c96e100d9a2502e1774a39246c8d56ae16e780793bdcede5b
   languageName: node
   linkType: hard
 

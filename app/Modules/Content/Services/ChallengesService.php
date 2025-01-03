@@ -6,6 +6,7 @@ use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\ChallengeUserProgressStatus;
 use App\Modules\Content\Models\ContentUserProgress;
+use App\Modules\Content\Models\Sanity\Challenge;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
@@ -21,6 +22,7 @@ enum UserNotificationKeys : string
 {
     case ENROLLMENT_NOTIFICATION_KEY = 'challenges_enrollment_notifications';
     case COMMUNITY_NOTIFICATION_KEY = 'challenges_community_notifications';
+    case SOLO_NOTIFICATION_KEY = 'challenges_solo_notifications';
 }
 
 class ChallengesService
@@ -718,7 +720,7 @@ class ChallengesService
         );
     }
 
-    public function updateCustomerIONotifications(int $challengeId, User $user, UserNotificationKeys $notificationKey): void
+    private function updateCustomerIONotifications(int $challengeId, User $user, UserNotificationKeys $notificationKey): void
     {
         $musoraWorkspace = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
         $customerIO = $this->customerIoService->getCustomerByEmail($musoraWorkspace, $user->email);
@@ -794,7 +796,7 @@ class ChallengesService
         return $ownedChallenges;
     }
 
-    public function updateChallengesNotificationForUser(int $challengeId, User $user, UserNotificationKeys $key)
+    private function updateChallengesNotificationForUser(int $challengeId, User $user, UserNotificationKeys $key)
     {
         try {
             $existingNotifications = $user[$key->value] ?? [];
@@ -803,6 +805,25 @@ class ChallengesService
             }
             $user[$key->value] = $existingNotifications;
             $user->save();
+        } catch (\Exception $ex) {
+        }
+    }
+
+    public function enableNotification(int $challengeId, User $user, UserNotificationKeys $key)
+    {
+        $this->updateChallengesNotificationForUser($challengeId, $user, $key);
+        $this->updateCustomerIONotifications($challengeId, $user, $key);
+    }
+
+    public function enableNotificationsForSoloChallengeAndClearProcessFlag(ChallengeUserProgress $userProgress) : void
+    {
+        if (!$userProgress->solo_notification_to_be_processed) {
+            return;
+        }
+        try {
+            $this->enableNotification($userProgress->content_id, $userProgress->user, UserNotificationKeys::SOLO_NOTIFICATION_KEY);
+            $userProgress->solo_notification_to_be_processed = 0;
+            $userProgress->save();
         } catch (\Exception $ex) {
         }
     }

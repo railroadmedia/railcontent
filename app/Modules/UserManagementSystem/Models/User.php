@@ -362,6 +362,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             'needs_logout' => 'bool',
             'challenges_enrollment_notifications' => 'array',
             'challenges_community_notifications' => 'array',
+            'challenges_solo_notifications' => 'array',
         ];
     }
 

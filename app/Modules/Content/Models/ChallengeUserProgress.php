@@ -38,6 +38,7 @@ enum ChallengeUserProgressStatus: string
  * @property boolean $is_locked
  * @property boolean $is_active
  * @property boolean $is_solo
+ * @property boolean $solo_notification_to_be_processed
  * @property boolean $hide_completed_banner
  * @property integer $current_rest_days
  * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, seconds_practiced, unlock_date, completed_at

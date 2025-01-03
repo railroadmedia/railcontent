@@ -338,6 +338,22 @@ class ChallengesMetaDataController extends Controller
             self::NotFoundErrorResponse($id);
     }
 
+    /**
+     * Notify the user for solo notifications
+     * @param int $id
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function notificationsSoloReminders(int $id): JsonResponse
+    {
+        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, user()->id);
+        if (!$userProgress) return self::NotFoundErrorResponse($id);
+        $userProgress->solo_notification_to_be_processed = 1;
+        $userProgress->save();
+        return response()->json();
+
+    }
+
     private function enableNotification($id, UserNotificationKeys $key): bool
     {
         $challenge = $this->challengesService->getChallengeById($id);
@@ -345,8 +361,7 @@ class ChallengesMetaDataController extends Controller
             return false;
         }
         $user = user();
-        $this->challengesService->updateChallengesNotificationForUser($id, $user, $key);
-        $this->challengesService->updateCustomerIONotifications($id, $user, $key);
+        $this->challengesService->enableNotification($id, $user, $key);
         return true;
     }
 
