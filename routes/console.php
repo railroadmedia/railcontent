@@ -40,6 +40,8 @@ Schedule::command('addevent:syncBrand pianote')->hourlyAt(38);
 Schedule::command('addevent:syncBrand guitareo')->hourlyAt(41);
 Schedule::command('addevent:syncBrand singeo')->hourlyAt(44);
 
+Schedule::command('challenges:processSoloNotifications')->hourlyAt(3);
+
 //Musora sync broken, need to fix this as well
 //Schedule::command('addevent:syncMusora')->hourlyAt(50);
 //Schedule::command('addevent:syncMusora --live')->hourlyAt(30);

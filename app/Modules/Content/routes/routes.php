@@ -196,6 +196,11 @@ Route::prefix('challenges')
         )->name('challenges.notifications.community_reminders');
 
         Route::post(
+            'notifications/solo_reminders/{id}',
+            [ChallengesMetaDataController::class, 'notificationsSoloReminders']
+        )->name('challenges.notifications.solo_reminders');
+
+        Route::post(
             'complete_lesson/{id}',
             [ChallengesMetaDataController::class, 'completeLesson']
         )->name('challenges.complete_lesson');
