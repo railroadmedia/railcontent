@@ -127,7 +127,23 @@
 {{--                <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>--}}
 {{--            </a>--}}
 {{--        @endif--}}
-
+        <a href="https://www.pianote.com/blog/giveaway" class="relative bg-cover bg-center group block rounded-2xl w-full pb-32 sm:pb-56 lg:pb-96"
+            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaway-banner-prima.webp');">
+            <img class="h-24 sm:h-32 absolute top-1/2 left-1/2 z-10 transform -translate-y-1/2 -translate-x-1/2" src="">
+            <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>
+        </a>
+{{--        <div class="flex flex-wrap sm:flex-nowrap gap-4">--}}
+{{--            <a href="https://www.drumeo.com/giveaways" class="relative bg-cover bg-center group block rounded-2xl w-full sm:w-1/2 pb-56 sm:pb-56 lg:pb-72"--}}
+{{--                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaway-banner-stewart-m.webp');">--}}
+{{--                <img class="h-24 sm:h-32 absolute top-1/2 left-1/2 z-10 transform -translate-y-1/2 -translate-x-1/2" src="">--}}
+{{--                <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>--}}
+{{--            </a>--}}
+{{--            <a href="https://www.pianote.com/blog/giveaway" class="relative bg-cover bg-center group block rounded-2xl w-full sm:w-1/2 pb-56 sm:pb-56 lg:pb-72"--}}
+{{--                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaway-banner-prima-m.webp');">--}}
+{{--                <img class="h-24 sm:h-32 absolute top-1/2 left-1/2 z-10 transform -translate-y-1/2 -translate-x-1/2" src="">--}}
+{{--                <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>--}}
+{{--            </a>--}}
+{{--        </div>--}}
 
         <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold mt-10 md:mt-16 mb-7">Free Video Lessons</h5>
         @php
