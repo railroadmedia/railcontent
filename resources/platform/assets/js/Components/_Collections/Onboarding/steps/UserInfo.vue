@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import AvatarUpload from "@collections/AvatarUpload/AvatarUpload.vue";
 import InputLabel from "@units/InputLabel/InputLabel.vue";
-import ProgressBar from "../../ProgressBar/ProgressBar.vue";
+import ProgressBar from "@collections/ProgressBar/ProgressBar.vue";
 import Button from "@units/Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import { saveDisplayName, checkDisplayName, aboutStepCompleted } from '../services';

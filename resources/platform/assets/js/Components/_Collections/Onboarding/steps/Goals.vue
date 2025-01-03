@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from "vue";
-import ProgressBar from "../../ProgressBar/ProgressBar.vue";
+import ProgressBar from "@collections/ProgressBar/ProgressBar.vue";
 import Button from "@units/Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import Branding from "../Branding.vue";
 import { getMultiSelectOptions } from "../utils";
 import { saveGoals } from "../services";
-import MultiSelect from "../../MultiSelect/MultiSelect.vue";
+import MultiSelect from "@collections/MultiSelect/MultiSelect.vue";
 
 const props = defineProps({
   brand: {
