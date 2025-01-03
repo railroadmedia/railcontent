@@ -27,18 +27,18 @@ $bonuses = [
         'physical' => true
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-11-new.webp',
+        'image' => 'marketing/pianote/membership/homepage/2025/bonuses-03-m.webp',
         'title' => 'Practice Planner',
-        'description' => 'Always know exactly what to practice.',
-        'price' => floatval($productPrices['pianote-practice-planner']->price),
+        'description' => 'The beloved Pianote Pracitce Planner has had a complete redesign for 2025. When you fail to plan, you plan to fail. This planner helps you set realistic and achievable goals so you can make the most out of your previous practice time.',
+        'price' => floatval($productPrices['practice-planner']->price),
         'shipping' => true,
         'sku' => 'pianote-practice-planner',
         'physical' => true
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-10-new.webp',
+        'image' => 'marketing/pianote/membership/homepage/2025/bonuses-01-m.webp',
         'title' => 'Chords & <br>Scales Book',
-        'description' => 'Your encyclopedia of piano chords & scales.',
+        'description' => 'This book will help you learn every chord shape, chord variation, and scale in EVERY key. The tabs on the side make it easy to look up any note and quickly find all the different scales and chords you need when it comes time to practice or learn a new song.',
         'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
         'shipping' => true,
         'sku' => 'piano-chords-and-scales-guide',
@@ -302,5 +302,13 @@ $bonuses = [
         'price' => 79,
         'physical' => true,
         'sku' => 'metronome'
+    ],
+    [
+        'image' => 'marketing/pianote/membership/homepage/2025/bonuses-02-m.webp',
+        'title' => 'The Best Beginner Piano Book',
+        'description' => 'This 182-page book is your foundation for learning the piano. You’ll be shown the essential theory and techniques required to go anywhere on your musical journey.',
+        'price' => 49,
+        'physical' => true,
+        'sku' => 'best-beginner-piano-book'
     ]
 ];

@@ -1,5 +1,6 @@
 @php
     require_once(resource_path('marketing/views/pianote/_partials/homepage-data.php'));
+    require_once(resource_path('marketing/views/pianote/_partials/bonus-data.php'));
 @endphp
 
 @extends('pianote.sales.subscription', [
@@ -29,10 +30,26 @@
                 EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO
                 <br class="sm:hidden">LEARN THE PIANO.
             </h1>
+            <br>
             <h5 class="leading-tight relative inline-block mx-auto text-musora mb-7 sm:mb-10">
                 Save 20% On Your First Year<br class="sm:hidden"> + <strong>Get 8 Free Bonuses</strong></h5>
-            <img class="hidden md:inline object-cover max-w-2xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/promos/january/order-collage.webp" alt="Bundle Collage">
-            <img class="md:hidden object-cover w-full sm:max-w-2xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/january/order-collage-m.webp" alt="Bundle Collage Mobile">
+            <div x-data="{lazyLoad: false}">
+            @php
+                $targetSkus = ['best-beginner-piano-book','pianote-practice-planner', 'piano-chords-and-scales-guide', 'new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
+            @endphp
+                <div id="customize-anchor"></div>
+                    @include('drumeo._partials.ny-order-section-bonuses', [
+                    'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
+                    'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
+                    'secondImage' => 'marketing/pianote/membership/homepage/2025/bonuses-02.webp',
+                    'thirdImage' => 'marketing/pianote/membership/homepage/2025/bonuses-03.webp',
+                    'fourthImage' => 'marketing/pianote/membership/homepage/2025/bonuses-01.webp',
+                    'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+                    'bundle'=> "holiday-pianote",
+                    'targetSkus' => $targetSkus,
+                    'maxWidth' => 'max-w-5xl',
+                    ])
+                </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
                 <h2 class="leading-none mt-3 md:mt-4"><s class="opacity-50"> $240</s><strong> $192</strong> <span class="text-musora text-xl">Save 20%</span></h2>
                 <p class="text-sm mt-1"><em>For the first year, then $240.</em></p>
@@ -41,6 +58,7 @@
             </div>
         </div>
     </section>
+   
     <section
         class="px-4 lg:px-8 pb-10 sm:pb-16 lg:pb-24 pt-10 relative overflow-hidden text-white text-center relative overflow-hidden"
         style="background: #0C1524;">

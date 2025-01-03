@@ -72,7 +72,7 @@ $bonuses = [
         'price' => 59.00
     ],
     [
-        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-12.webp',
+        'image' => 'marketing/drumeo/membership/homepage/2025/bonuses-01-m.webp',
         'title' => 'Practice Pad',
         'description' => 'The most versatile practice pad in the world, featuring four playing surfaces on three different levels for simulating movement around the kit.',
         'sku' => 'practicepad',
