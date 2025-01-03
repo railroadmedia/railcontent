@@ -414,7 +414,7 @@
     </div>
 </template>
 <script setup>
-    import { watch, ref, onBeforeMount } from "vue";
+    import { watch, ref, onBeforeMount, computed } from "vue";
     import { storeToRefs } from "pinia/dist/pinia";
     import { useUserStore } from "@stores/user";
     import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
@@ -436,7 +436,8 @@
         brand,
         userId,
         userDisplayName,
-        userFullName,
+        userFirstName,
+        userLastName,
         userCountry,
         userBirthdayFormatted,
         userBiography,
@@ -510,6 +511,10 @@
     const showGuitarPictureModal = ref(false);
     const showSingingPictureModal = ref(false);
     const showSignatureModal = ref(false);
+
+    const userFullName = computed(() => {
+        return `${userFirstName.value || ''} ${userLastName.value || ''}`;
+    })
 
     //Methods
 
