@@ -179,53 +179,8 @@ class SearchParameters
                 $searchParams->onlyForType(...$validDocumentTypes);
             }
         } else {
-            $searchParams->onlyForType(
-                ...self::sanitizeEnumValues(DocumentType::class, [
-                'backstage-secret',
-                'behind-the-scenes',
-                'boot-camp',
-                'challenge',
-                'coach-stream',
-                'course',
-                'diy-drum-experiment',
-                'drum-fest-international-2022',
-                'exploring-beats',
-                'gear-guide',
-                'in-rhythm',
-                'learning-path',
-                'learning-path-course',
-                'learning-path-lesson',
-                'learning-path-level',
-                'live',
-                'on-the-road',
-                'pack',
-                'paiste-cymbals',
-                'performance',
-                'play-along',
-                'play-along-part',
-                'podcast',
-                'question-and-answer',
-                'quick-tips',
-                'rhythmic-adventures-of-captain-carson',
-                'rhythms-from-another-planet',
-                'routine',
-                'rudiment',
-                'semester-pack',
-                'semester-pack-lesson',
-                'solo',
-                'song',
-                'song-tutorial',
-                'sonor',
-                'spotlight',
-                'student-collaboration',
-                'student-focus',
-                'study-the-greats',
-                'tama',
-                'the-history-of-electronic-drums',
-                'workout',
-                'odd-times',
-            ])
-            );
+            // if no type is given, restrict it to all document types
+            $searchParams->onlyForType(...DocumentType::cases());
         }
 
         // DEV NOTE: Algolia does pagination using 0th-based indexing, so convert our normal "page" if it was provided
