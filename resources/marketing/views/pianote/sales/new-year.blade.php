@@ -53,7 +53,7 @@
             <div class="px-3 mx-auto w-full max-w-2xl">
                 <h2 class="leading-none mt-3 md:mt-4"><s class="opacity-50"> $240</s><strong> $192</strong> <span class="text-musora text-xl">Save 20%</span></h2>
                 <p class="text-sm mt-1"><em>For the first year, then $240.</em></p>
-                <a class="join pianote my-4 sm:my-6 w-full max-w-md uppercase" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-new-years-bundle]=1&promo-code=NYPHP25,new-year,ny-member-shipping&locked=true">Save 20%</a>
+                <a class="join pianote my-4 sm:my-6 w-full max-w-md uppercase" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-new-years-bundle]=1&promo-code=NYPHP25,new-year,ny-member-shipping&locked=true">Save 20%<i class="fas fa-arrow-right ml-2" style="line-height: 0;" aria-hidden="true"></i></a>
                 <p class="text-sm"><em>Need a piano?  <a class="underline" href="/shop/prima">Get the Keyboard Bundle</a></em></p>
             </div>
         </div>
