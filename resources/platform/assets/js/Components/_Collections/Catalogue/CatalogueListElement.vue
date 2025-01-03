@@ -83,16 +83,17 @@
                                 :class="[{ 'tw-text-center': isGuitareoChordAndScale }]">
                                 <div v-if="contentCreator && contentCreator !== ''">
                                     <span>{{ contentCreator }}</span>
+                                    <span class="tw-mx-1">·</span>
                                 </div>
                                 <!-- Difficulty Label -->
-                                <span v-if="mappedData.difficulty" class="tw-flex tw-items-center" :class="contentCreator && contentCreator !== '' ? 'tw-ml-1' : ''">
+                                <div v-if="mappedData.difficulty" class="tw-flex tw-items-center" :class="contentCreator && contentCreator !== '' ? 'tw-ml-1' : ''">
                                     <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
                                                  textCase="capitalize" />
-                                    <span v-if="!isChallenge" class="tw-mx-1 tw-text-base tw-leading-none">·</span>
-                                </span>
-                                <span v-if="!isChallenge" class="tw-mb-0.5">
+                                    <span v-if="!isChallenge" class="tw-mx-1">·</span>
+                                </div>
+                                <div v-if="!isChallenge">
                                     {{ contentTypeString }}
-                                </span>
+                                </div>
                             </h6>
                             <!-- Bonus label -->
                             <div v-if="item?.is_bonus_content_for_challenge" class="tw-flex tw-mt-1">
