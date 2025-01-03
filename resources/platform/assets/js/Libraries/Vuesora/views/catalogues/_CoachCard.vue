@@ -61,11 +61,11 @@ export default {
     coachLastName() {
       return this.item.name.substr(this.item.name.indexOf(" ") + 1);
     },
-    coachFocus(){
-        if(this.item.focus && this.item.focus.length > 0){
-            return this.item.focus.join(' ');
-        }
-        return ''
+    coachFocus() {
+      if(this.item.focus_text) {
+        return this.item.focus_text;
+      }
+      return ''
     },
     themeBgClass() {
       return "tw-bg-" + this.brand;
