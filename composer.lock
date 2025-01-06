@@ -10311,16 +10311,16 @@
         },
         {
             "name": "railroad/lead-tracker",
-            "version": "v4.0.4",
+            "version": "v4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/lead-tracker.git",
-                "reference": "57ce0970942052fee563e52e9cbf60e8e2af4b91"
+                "reference": "b61450fbd67da4ddd03019c8cd452a5eb3f490e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/lead-tracker/zipball/57ce0970942052fee563e52e9cbf60e8e2af4b91",
-                "reference": "57ce0970942052fee563e52e9cbf60e8e2af4b91",
+                "url": "https://api.github.com/repos/railroadmedia/lead-tracker/zipball/b61450fbd67da4ddd03019c8cd452a5eb3f490e1",
+                "reference": "b61450fbd67da4ddd03019c8cd452a5eb3f490e1",
                 "shasum": ""
             },
             "require": {
@@ -10357,9 +10357,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/lead-tracker/issues",
-                "source": "https://github.com/railroadmedia/lead-tracker/tree/v4.0.4"
+                "source": "https://github.com/railroadmedia/lead-tracker/tree/v4.0.5"
             },
-            "time": "2024-11-22T21:49:58+00:00"
+            "time": "2025-01-06T20:02:57+00:00"
         },
         {
             "name": "railroad/location",
