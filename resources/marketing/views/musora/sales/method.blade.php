@@ -1,5 +1,5 @@
 @php
-    require_once(resource_path('marketing/views/musora/pages/method-data.php'));
+    require_once(resource_path('marketing/views/musora/sales/method-data.php'));
     require_once(resource_path('marketing/views/musora/_partials/homepage-data.php'));
 @endphp
 

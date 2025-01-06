@@ -565,6 +565,16 @@ return [
                     'musora',
                 ],
             ],
+            '30DD Challenge Sample' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_challenge-sample-30dd',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                    'musora',
+                ],
+            ],
         ],
         'pianote' => [
             'Passing Chords PDF' => [
