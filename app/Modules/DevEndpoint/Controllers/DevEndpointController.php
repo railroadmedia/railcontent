@@ -57,7 +57,6 @@ class DevEndpointController extends Controller
 
     public function handleRequest(Request $request, $arg1 = null)
     {
-        return $this->carouselServiceV1->getCarouselCards('drumeo');
         if ($arg1 == 'challenges') {
             return $this->handleChallengesEndpoints($request);
         }

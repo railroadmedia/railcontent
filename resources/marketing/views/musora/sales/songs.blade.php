@@ -1,5 +1,5 @@
 @php
-    require_once(resource_path('marketing/views/musora/pages/songs-data.php'))
+    require_once(resource_path('marketing/views/musora/sales/songs-data.php'))
 @endphp
 
 @extends('musora._partials._features-layout')

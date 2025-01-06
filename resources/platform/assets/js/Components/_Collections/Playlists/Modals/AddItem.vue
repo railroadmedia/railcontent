@@ -173,7 +173,7 @@ const handleSaveItem = () => {
         isLoadingPlaylists.value = true;
         return saveData().then((response) => {
             if(response) {
-                window.shownotification({ icon: 'check', text: `${title.value} has been successfuly added to your playlist(s).`, duration: 2000 });
+                window.shownotification({ icon: 'check', text: `${title.value} has been successfully added to your playlist(s).`, duration: 2000 });
             }
         }).catch(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });

@@ -87,25 +87,16 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-globe-pointer text-{{ $brand }} mr-1"></i> Digital Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
                     :class="{ 'show-all': showAll || (!isIndexPage && filter !== 'all') || filter === 'lessons' }">
-{{--                    @include('_partials.components.shop.product-card', [--}}
-{{--                    "badge" => "7-Day Free Trial",--}}
-{{--                     "price" => 240,--}}
-{{--                     "instructor" => "Award-Winning Membership",--}}
-{{--                     "discounted_price" => 240,--}}
-{{--                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",--}}
-{{--                     "title" => "Drumeo Membership",--}}
-{{--                     'soldOut' => false,--}}
-{{--                        "href" => "/",--}}
-{{--                    ])--}}
-{{--                    @include('_partials.components.shop.product-card', [--}}
-{{--                        "discounted_price" => 90,--}}
-{{--                        "href" => "https://www.musora.com/gift-card",--}}
-{{--                        "instructor" => "Award-Winning Membership",--}}
-{{--                        "price" =>  90,--}}
-{{--                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/musora/membership/redeem/access-pass.jpg",--}}
-{{--                        "title" => "Musora Gift Cards",--}}
-{{--                        'soldOut' => false,--}}
-{{--                    ])--}}
+                    @include('_partials.components.shop.product-card', [
+                    "badge" => "7-Day Free Trial",
+                     "price" => 240,
+                     "instructor" => "Award-Winning Membership",
+                     "discounted_price" => 240,
+                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",
+                     "title" => "Drumeo Membership",
+                     'soldOut' => false,
+                        "href" => "/",
+                    ])
                     @foreach($lessons as $key => $item)
                         @include('_partials.components.shop.product-card', [
                             "badge" => $item->badge_text,
@@ -175,6 +166,14 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Physical Products</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
                     :class="{ 'show-all': showAll || (!isIndexPage && filter !== 'all') || filter === 'accessories' }">
+                    @include('_partials.components.shop.product-card', [
+                            "href" => "/drumshop/kit",
+                             "price" => 1474,
+                             "discounted_price" => 599,
+                             "title" => "The E-KIT Bundle",
+                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
+                             'soldOut' => false,
+                        ])
                 @foreach($accessories as $item)
                     @include('_partials.components.shop.product-card', [
                         "badge" => $item->badge_text,

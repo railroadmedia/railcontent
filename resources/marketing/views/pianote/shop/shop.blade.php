@@ -175,6 +175,23 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Physical Products</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
                     :class="{ 'show-all': showAll || (!isIndexPage && filter !== 'all') || filter === 'accessories' }">
+                @include('_partials.components.shop.product-card', [
+                    "href" => "/shop/prima",
+                     "price" => 1474,
+                     "discounted_price" => 599,
+                     "title" => "The Keyboard Bundle",
+                     "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/520x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle.webp",
+                     'soldOut' => false,
+                ])
+
+                @include('_partials.components.shop.product-card', [
+                    "href" => "/shop/prima-ultimate",
+                     "price" => 1642,
+                     "discounted_price" => 799,
+                     "title" => "The ULTIMATE Bundle",
+                     "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/520x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle.webp",
+                     'soldOut' => false,
+                ])
                 @foreach($accessories as $accessory)
                     @include('_partials.components.shop.product-card', [
                         "badge" => $accessory->badge_text,
@@ -189,26 +206,6 @@
                         "sku" => (str_contains($accessory->sku, 'member') || str_contains($accessory->sku, 'products')) ? '' : $accessory->sku,
                     ])
                 @endforeach
-                    <div x-cloak x-show="filter === 'accessories'">
-                        @include('_partials.components.shop.product-card', [
-                            "href" => "/shop/prima",
-                             "price" => 1474,
-                             "discounted_price" => 599,
-                             "title" => "The Keyboard Bundle",
-                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/520x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle.webp",
-                             'soldOut' => false,
-                        ])
-                    </div>
-                    <div x-cloak x-show="filter === 'accessories'">
-                        @include('_partials.components.shop.product-card', [
-                            "href" => "/shop/prima-ultimate",
-                             "price" => 1642,
-                             "discounted_price" => 799,
-                             "title" => "The ULTIMATE Bundle",
-                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/520x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle.webp",
-                             'soldOut' => false,
-                        ])
-                    </div>
             </div>
                 <div class="-mt-3 sm:-mt-5 lg:-mt-8 lg:mb-10 text-center" x-show="isIndexPage && filter === 'all'">
                     <span

@@ -298,7 +298,7 @@ $bonuses = [
     [
         'image' => 'marketing/pianote/promos/december/holiday-bundle/bonus-06.webp',
         'header' => 'Companion Book "Read Music in 30 Days"',
-        'description' => '<p>This book has been designed to be used with our 30-Day Challenge. </p><p class="my-2">Each day’s exercises are exactly the same as the videos, with added explanations. </p>And you’ll find lots of bonus exercises at the back of the book.</p>',        
+        'description' => '<p>This book has been designed to be used with our 30-Day Challenge. </p><p class="my-2">Each day’s exercises are exactly the same as the videos, with added explanations. </p>And you’ll find lots of bonus exercises at the back of the book.</p>',
         'badge' => null,
         'price' => 39,
        'physical' => true,
@@ -315,7 +315,7 @@ $bonuses = [
     [
         'image' => 'marketing/pianote/membership/homepage/2025/bonuses-02-m.webp',
         'title' => 'The Best Beginner Piano Book',
-        'description' => 'This 182-page book is your foundation for learning the piano. You’ll be shown the essential theory and techniques required to go anywhere on your musical journey.',
+        'description' => 'This 194-page book is your foundation for learning the piano. You’ll be shown the essential theory and techniques required to go anywhere on your musical journey.',
         'price' => 49,
         'physical' => true,
         'sku' => 'best-beginner-piano-book'

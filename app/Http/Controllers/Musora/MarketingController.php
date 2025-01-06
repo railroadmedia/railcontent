@@ -146,7 +146,7 @@ class MarketingController extends BaseController
     }
     public function playlist()
     {
-        return view('musora.pages.playlist', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+        return view('musora.lead-gen.playlist', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function recitals()
@@ -164,23 +164,23 @@ class MarketingController extends BaseController
     }
     public function method()
     {
-        return view('musora.pages.method', [ 'theme' => 'musora', 'page' => 'method' ]);
+        return view('musora.sales.method', [ 'theme' => 'musora', 'page' => 'method' ]);
     }
     public function songs()
     {
-        return view('musora.pages.songs', [ 'theme' => 'musora', 'page' => 'songs' ]);
+        return view('musora.sales.songs', [ 'theme' => 'musora', 'page' => 'songs' ]);
     }
     public function community()
     {
-        return view('musora.pages.community', [ 'theme' => 'musora', ]);
+        return view('musora.sales.community', [ 'theme' => 'musora', ]);
     }
     public function choosePlan()
     {
-        return view('musora.pages.choose-plan', ['theme' => 'musora']);
+        return view('musora.sales.choose-plan', ['theme' => 'musora']);
     }
     public function choosePlanMonth(Request $request)
     {
-        return view('musora.pages.choose-plan', ['theme' => 'musora', 'month' => true, 'referralCode' => $request->get('referralCode')]);
+        return view('musora.sales.choose-plan', ['theme' => 'musora', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
     public function faster()
     {
@@ -192,27 +192,27 @@ class MarketingController extends BaseController
     }
     public function freeMusicLessonsForLife()
     {
-        return view('musora.pages.free-music-lessons-for-life', [ 'theme' => 'musora'],  ['recaptchaKey' => config('recaptcha.key')]);
+        return view('musora.lead-gen.free-music-lessons-for-life', [ 'theme' => 'musora'],  ['recaptchaKey' => config('recaptcha.key')]);
     }
     public function everyDayMusician()
     {
-        return view('musora.pages.everyday-musician', [ 'theme' => 'musora']);
+        return view('musora.lead-gen.everyday-musician', [ 'theme' => 'musora']);
     }
     public function history()
     {
-        return view('musora.pages.history', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+        return view('musora.lead-gen.history', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
     }
     public function youtube()
     {
-        return view('musora.pages.free-resources', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+        return view('musora.lead-gen.free-resources', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
     }
     public function freeResources()
     {
-        return view('musora.pages.free-resources', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+        return view('musora.lead-gen.free-resources', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
     }
     public function lifetimeDeal()
     {
-        return view('musora.pages.lifetime', [ 'theme' => 'musora']);
+        return view('musora.sales.lifetime', [ 'theme' => 'musora']);
     }
     public function extend()
     {

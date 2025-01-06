@@ -56,7 +56,8 @@ import { storeToRefs } from "pinia/dist/pinia";
 import {
     postChallengesSetStartDate,
     fetchChallengeMetadata,
-    postChallengesCommunityNotification
+    postChallengesCommunityNotification,
+    postChallengesSoloNotification,
 } from 'musora-content-services';
 
 import InfoModal from '@collections/Modal/InfoModal';
@@ -91,7 +92,7 @@ const userStore = useUserStore();
 const { userProfilePictureUrl, brand } = storeToRefs(userStore);
 
 const selectedFrequency = ref(true);
-const step = ref(props.defaultStep !== 0 ? props.defaultStep : props.challengeType === 'community' ? 1 : 2);
+const step = ref(props.defaultStep !== 0 ? props.defaultStep : 1);
 const selectedDate = ref(new Date(Date.now()));
 const slideIn = ref(false);
 const challengeData = ref({
@@ -149,18 +150,18 @@ const handleFrequencyChange = (val) => {
 
 const handleNext = async () => {
     try {
-        if(props.challengeType === 'community'){
-            if(selectedFrequency.value){
-                const setNotification = await postChallengesCommunityNotification(props.challenge.id);
+        if(selectedFrequency.value){
+            if(props.challengeType === 'community'){
+                await postChallengesCommunityNotification(props.challenge.id);
+            } else {
+                await postChallengesSoloNotification(props.challenge.id);
             }
-
-            const data = await fetchChallengeMetadata(props.challenge.id);
-            challengeData.value = data;
-
-            setTimeout(() => {
-                slideIn.value = true;
-            },1500)
         }
+        challengeData.value = await fetchChallengeMetadata(props.challenge.id);
+
+        setTimeout(() => {
+            slideIn.value = true;
+        },1500)
 
         step.value = 2;
     } catch (e) {

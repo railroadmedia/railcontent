@@ -385,7 +385,7 @@
             'originalPrice' => 49,
             'currentPrice' => 39,
             'discount' => '20%',
-            'link' => '/ecommerce/add-to-cart?products[best-beginner-piano-book]=1&promo-code=ny-books-shipping&locked=true',
+            'link' => '/ecommerce/add-to-cart?products[best-beginner-piano-book]=1&promo-code=ny-books-shipping',
             'imageSrc' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/bundle-01.webp',
             'imageClass' => 'h-48 opacity-0',
             'buttonText' => 'GET YOUR COPY',

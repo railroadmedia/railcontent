@@ -17,6 +17,7 @@ export const usePlaylistsStore = defineStore({
       playerExpanded: false,
       pageHasPlaylistCatalog: false,
       loadingPlaylists: true,
+      loadingSidebarPlaylists: true,
       loadingLessons: false,
       sortingPlaylist: false,
       loadingPinnedPlaylists: false,
@@ -107,6 +108,7 @@ export const usePlaylistsStore = defineStore({
       try {
           const response = await fetchUserPlaylists(payload.brand, payload);
           this.loadingPlaylists = false;
+          this.loadingSidebarPlaylists = false;
           this.sidebarPlaylists = await response.data;
       } catch {
           console.log('there was an error with your request');

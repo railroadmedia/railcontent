@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from "vue";
-import ProgressBar from "../../ProgressBar/ProgressBar.vue";
+import ProgressBar from "@collections/ProgressBar/ProgressBar.vue";
 import Button from "@units/Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import SkipStep from "../SkipStep.vue";
-import MultiSelect from "../../MultiSelect/MultiSelect.vue";
+import MultiSelect from "@collections/MultiSelect/MultiSelect.vue";
 import { getMultiSelectOptions } from "../utils";
 import { saveGenres } from '../services';
 

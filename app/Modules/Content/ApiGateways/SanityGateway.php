@@ -100,7 +100,13 @@ class SanityGateway
                 is_always_unlocked_for_challenge,
                 is_bonus_content_for_challenge,
                 video,
-                parent_content_data,
+                "parent_content_data": parent_content_data[]{
+                    "id": id,
+                    "title": *[railcontent_id == ^.id][0].title,
+                    "web_url_path": *[railcontent_id == ^.id][0].web_url_path,
+                    "slug": *[railcontent_id == ^.id][0].slug,
+                    "type": *[railcontent_id == ^.id][0]._type,
+                },
                 "chapters": chapter[]{
                     chapter_description,
                     chapter_timecode,
@@ -483,8 +489,8 @@ class SanityGateway
                                 return 'Method';
                             case 'learning-path-level':
                                 return 'L' . collect($document['parent_content_data'])->keyBy(
-                                        'id'
-                                    )[$parent['id']]['position'];
+                                    'id'
+                                )[$parent['id']]['position'];
                             default:
                                 return $parent['title'];
                         }

@@ -477,7 +477,7 @@
                     [
                         'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/practice-planner-card.webp',
                         'description' => 'Outline your week and then stick to it. It’s that simple.',
-                        'price' => floatval($productPrices['pianote-practice-planner']->price),
+                        'price' => floatval($productPrices['practice-planner']->price),
                         'shipping' => true,
                     ],
                     [
