@@ -158,7 +158,7 @@ const generatePdf = () => {
             orientation: 'landscape',
         }
     })
-    .save('test.pdf')
+    .save(`${challengeTitle.value} - Certificate.pdf`)
 }
 
 const generatePng = () => {
