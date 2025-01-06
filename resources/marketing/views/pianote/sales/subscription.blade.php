@@ -1,5 +1,6 @@
 @php
     require_once(resource_path('marketing/views/pianote/_partials/homepage-data.php'));
+    require_once(resource_path('marketing/views/pianote/_partials/bonus-data.php'));
 @endphp
 
 @extends('pianote._partials.global-layout')
@@ -351,30 +352,33 @@
         ])
 
     @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/95dc0c77-a0a5-4f01-b743-cb01d4912042-easy-chords-cart.jpg',
-                    'title' => 'Easy Chords',
-                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
-                    'price' => floatval($productPrices['easy-chords']->price),
-                ],
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
-                    'title' => '30-Day Blues',
-                    'description' => 'Learn the Blues in just 30 days',
-                    'price' => floatval($productPrices['30-day-blues-piano']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'marketing/pianote/membership/homepage/webp-format/pianote-annual-2w-card.webp',
-        'header' => 'Online piano lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&redirect=/order&locked=true&promo-code=special,WBP24',
-        ])
+        <section style="background:linear-gradient(30deg, #0a3761, #0c1526);">
+        <div class="px-4 lg:px-8 py-10 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize relative overflow-hidden"
+                :style="`background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/2024/order-bg-tile-2.webp') center center/160px;`""        
+                <div class="container mx-auto max-w-5xl">
+                    <div x-data="{lazyLoad: false}">
+                        @php
+                            $targetSkus = [
+                                'easy-chords',
+                                '30-day-blues-piano',
+                            ];
+                        @endphp
+                        <div id="customize-anchor"></div>
+                        @include('drumeo._partials.ny-order-section-bonuses', [
+                            'topImage' => 'marketing/pianote/membership/homepage/webp-format/pianote-annual-2w-card.webp',
+                            'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+                            'bundle' => 'holiday-pianote',
+                            'targetSkus' => $targetSkus,
+                            'maxWidth' => 'max-w-5xl',
+                            'ispromo' => "true",
+                            'promoHeader' => 'Online piano lessons for all skill levels.',
+                            'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
+                            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&redirect=/order&locked=true&promo-code=special,WBP24',
+                        ])
+                    </div>
+                </div>
+            </div>
+        <section>
     @else
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,
