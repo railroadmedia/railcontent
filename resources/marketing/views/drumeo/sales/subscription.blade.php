@@ -1,5 +1,6 @@
 @php
     require_once(resource_path('marketing/views/drumeo/_partials/homepage-data.php'));
+    require_once(resource_path('marketing/views/drumeo/_partials/bonus-data.php'));
 @endphp
 
 @extends('drumeo._partials.global-layout')
@@ -328,30 +329,33 @@
         ])
 
     @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/bafe2908-b615-4892-a621-d246828f8cb4-30day-chops-cart.jpg',
-                    'title' => '30-Day Chops',
-                    'description' => 'Boost your creativity in just 30 days',
-                    'price' => floatval($productPrices['30-day-chops']->price),
-                ],
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/57b58267-17bd-475a-89f7-874185438a7b-30DDs4_cart.jpg',
-                    'title' => '30-Day Drummer',
-                    'description' => 'Learn the drums with daily guided workouts.',
-                    'price' => floatval($productPrices['30-day-drummer-4']->price),
-                ],
-            ];
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
-        'header' => 'Online drum lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&locked=true&promo-code=special,WBD24',
-        ])
+        <section style="background:linear-gradient(30deg, #0a3761, #0c1526);">
+            <div class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
+                :style="`background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/2024/order-bg-tile-2.webp') center center/160px;`""        
+                <div class="container mx-auto max-w-5xl">
+                    <div x-data="{lazyLoad: false}">
+                        @php
+                            $targetSkus = [
+                                '30-day-chops',
+                                '30-day-drummer-4',
+                            ];
+                        @endphp
+                        <div id="customize-anchor"></div>
+                        @include('drumeo._partials.ny-order-section-bonuses', [
+                            'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
+                            'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+                            'bundle' => 'holiday-drumeo',
+                            'targetSkus' => $targetSkus,
+                            'maxWidth' => 'max-w-5xl',
+                            'ispromo' => "true",
+                            'promoHeader' => 'Online drum lessons for all skill levels.',
+                            'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
+                            'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&locked=true&promo-code=special,WBD24',
+                        ])
+                    </div>
+                </div>
+            </div>
+        <section>
     @else
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,

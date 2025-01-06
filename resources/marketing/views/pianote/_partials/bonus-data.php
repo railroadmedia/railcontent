@@ -7,7 +7,8 @@ $bonuses = [
         'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano.',
         'price' => floatval($productPrices['new-piano-players-start-here']->price),
         'vimeoId' => '879916161',
-        'sku' => 'new-piano-players-start-here'
+        'sku' => 'new-piano-players-start-here',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-03.webp',
@@ -15,7 +16,8 @@ $bonuses = [
         'description' => 'You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
         'price' => floatval($productPrices['easy-chords']->price),
         'vimeoId' => '823788317',
-        'sku' => 'easy-chords'
+        'sku' => 'easy-chords',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/headphones-cart.jpg',
@@ -137,7 +139,8 @@ $bonuses = [
         'title' => 'Piano Technique<br> Made Easy',
         'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
         'price' => floatval($productPrices['piano-technique-made-easy']->price),
-        'sku' => 'piano-technique-made-easy'
+        'sku' => 'piano-technique-made-easy',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
@@ -165,7 +168,8 @@ $bonuses = [
         'title' => 'Faster Fingers',
         'description' => 'Boost your speed and confidence with this guided practice course.',
         'price' => floatval($productPrices['faster-fingers']->price),
-        'sku' => 'faster-fingers'
+        'sku' => 'faster-fingers',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTPBP.jpg',
@@ -203,7 +207,9 @@ $bonuses = [
         'description' => 'Learn Blues structure, scales, and riffs in just 10 minutes a day.',
         'price' => 127,
         'vimeoId' => '879913986',
-        'sku' => '30-day-blues-piano'
+        'sku' => '30-day-blues-piano',
+        'access' => 'ONLINE ACCESS'
+
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-05.webp',
@@ -211,7 +217,8 @@ $bonuses = [
         'description' => 'Improve finger strength and speed with GRAMMY-winner Jordan Rudess.',
         'price' => 127,
         'vimeoId' => '928599834',
-        'sku' => '30-days-to-better-technique'
+        'sku' => '30-days-to-better-technique',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-06.webp',
@@ -219,7 +226,8 @@ $bonuses = [
         'description' => 'Play beautiful piano pieces with step-by-step tutorials.',
         'price' => 127,
         'vimeoId' => '1008560089',
-        'sku' => 'classical-piano-collection'
+        'sku' => 'classical-piano-collection',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-09.webp',
@@ -284,7 +292,8 @@ $bonuses = [
         'badge' => null,
         'price' => 127,
         'vimeoId' => '952486575',
-        'sku' => 'read-music-in-30-days'
+        'sku' => 'read-music-in-30-days',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/pianote/promos/december/holiday-bundle/bonus-06.webp',
