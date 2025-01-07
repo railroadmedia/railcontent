@@ -32,7 +32,6 @@ class BatchService
     public function storeRequest(RequestVO $requestVO)
     {
         if ($this->connection()) {
-            \Log::info("storeRequest $requestVO->id");
             $setKey = $this->batchKeyPrefix . 'set' . '_' . $requestVO->uuid;
 
             $this->connection()->sadd($setKey, serialize($requestVO));
