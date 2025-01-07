@@ -239,6 +239,7 @@ export default {
                     onReady() {
                         if (timeToSeekTo > 0) {
                             vm.player.seekTo(timeToSeekTo);
+                            vm.$emit('onUpdateCurrentTime', timeToSeekTo);
 
                             let intervalTries = 0;
 
@@ -298,6 +299,8 @@ export default {
                                     }
 
                                     vm.heartbeatTimer += 1;
+
+                                    vm.$emit('onUpdateCurrentTime', vm.currentTime);
                                 }, 1000);
                             }
 

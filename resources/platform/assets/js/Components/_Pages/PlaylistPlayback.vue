@@ -289,6 +289,7 @@ const likeData = ref({
     isLiked: props.isLiked,
     likeCount: parseInt(props.likeCount)
 })
+const lastWatchedPositionInSeconds = ref(0);
 const isContentCompleted = ref(false);
     //ref(props.playlistItems.data[props.playlistItemPosition - 1].completed);
 
@@ -392,6 +393,10 @@ const sendProgressTrackerEvent = () => {
         });
     }
 };
+
+const updateCurrentTime = (time) => {
+    lastWatchedPositionInSeconds.value = Math.floor(time);
+}
 
 const attachVisibilityAndPagehideEvents = () => {
     document.addEventListener('visibilitychange', () => {
@@ -502,7 +507,7 @@ onMounted(() => {
                                 :start-second="startSecond" :end-second="endSecond" :seek-to-time="seekToTime"
                                 :total-duration="totalDuration" :video-length="videoLength" :progress-state="progressState"
                                 :content-id="contentId" :use-intersection-observer="true" :theme-color="brand"
-                                @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" />
+                                @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" @onUpdateCurrentTime="updateCurrentTime" />
                         </div>
                         <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'"
                             id="lessonVideoWrap">
@@ -513,7 +518,7 @@ onMounted(() => {
                                     :current-second="currentSecond" :progress-state="progressState" :video-length="videoLength"
                                     :chapters="videoChapters" :user-id="userId" :like-count="likeCount" :is-liked="isLiked"
                                     :check-for-timecode="true" :seek-to-time="seekToTime" @playing="handleVideoPlay"
-                                    @pause="handleVideoPause" @ended="handleGoToNext">
+                                    @pause="handleVideoPause" @ended="handleGoToNext" @onUpdateCurrentTime="updateCurrentTime">
                                     <div :class="`widescreen title tw-text-${brand}`">
                                         <i class="fas fa-spinner fa-spin absolute-center"></i>
                                     </div>
@@ -527,7 +532,7 @@ onMounted(() => {
                                     :current-second="currentSecond" :content-id="contentId" :user-id="userId"
                                     :video-id="vimeoVideoId" :video-length="videoLength" :total-duration="totalDuration"
                                     :cast-title="playlistItemTitle" :use-intersection-observer="true" @play="handleVideoPlay"
-                                    :seek-to-time="seekToTime" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
+                                    :seek-to-time="seekToTime" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" @onUpdateCurrentTime="updateCurrentTime">
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </VideoPlayer>
                             </transition>
@@ -546,7 +551,7 @@ onMounted(() => {
                         :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail"
                         :report-user-name="userName" :artist="artist" :no-access="needAccess"
                         @open-practice-soundslice="openSlice(videoResources.title, videoChapters.length, 0, false)"
-                        @on-like-content="likeContent" @on-complete-content="completeContent"
+                        @on-like-content="likeContent" @on-complete-content="completeContent" :current-time-in-seconds="lastWatchedPositionInSeconds"
                     />
 
                     <!-- Info Section -->

@@ -29,7 +29,7 @@
                                     :video-length="videoData.length_in_seconds" :content-id="videoData?.id"
                                     :end-second="videoData.length_in_seconds"
                                     :total-duration="videoData.length_in_seconds" :seek-to-time="seekToTime"
-                                    @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleVideoEnd" />
+                                    @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleVideoEnd" @onUpdateCurrentTime="updateCurrentTime" />
                             </transition>
                             <!-- Vimeo video (legacy player) -->
                             <transition v-else-if="videoData?.video?.type === 'vimeo-video' && useLegacyVideoPlayer"
@@ -45,7 +45,7 @@
                                     :video-id="videoData?.video?.external_id" :content-id="videoData?.id"
                                     :video-length="videoData?.length_in_seconds" :chapters="videoData?.chapters"
                                     :user-id="userId" :like-count="likeData?.likeCount" @playing="handleVideoPlay"
-                                    @pause="handleVideoPause" @ended="handleVideoEnd">
+                                    @pause="handleVideoPause" @ended="handleVideoEnd" @onUpdateCurrentTime="updateCurrentTime">
                                     <div :class="`widescreen title tw-text-${brand}`">
                                         <i class="fas fa-spinner fa-spin absolute-center"></i>
                                     </div>
@@ -63,7 +63,7 @@
                                     :video-id="videoData?.video?.external_id"
                                     :video-length="videoData?.length_in_seconds"
                                     :total-duration="videoData.length_in_seconds" @play="handleVideoPlay"
-                                    @pause="handleVideoPause" @onVideoEnd="handleVideoEnd">
+                                    @pause="handleVideoPause" @onVideoEnd="handleVideoEnd" @onUpdateCurrentTime="updateCurrentTime">
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </video-player>
                             </transition>
@@ -92,7 +92,7 @@
                         :show-add-to-list="true" :show-info-button="showInfoButton"
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
                         @on-like-content="likeContent"
-                        @on-challenge-lesson-complete="completeChallengeLesson"
+                        @on-challenge-lesson-complete="completeChallengeLesson" :current-time-in-seconds="lastWatchedPositionInSeconds"
                     />
 
                     <ContentInfo :breadcrumbs="breadcrumbsData" :content-description="videoData.description"
@@ -459,6 +459,10 @@ const isChallengePart = computed(() => {
 const breadcrumbsData = computed(() => {
     return getBreadcrumbs(videoData.value, brand.value);
 });
+
+const updateCurrentTime = (time) => {
+    lastWatchedPositionInSeconds.value = Math.floor(time);
+}
 
 const fetchLessonData = async () => {
     if (isChallenge.value) {
