@@ -23,6 +23,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Modules\Content\Console\Commands\ChallengesV2UpdateWebUrlPath;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\APIEndPoint;
@@ -93,7 +94,8 @@ class DevEndpointController extends Controller
                 $this->prepChallengeData($challengeId, $request->get('start_date', null));
                 return "Prepped Challenge Data $challengeId";
             case ('complete'):
-                $this->challengesService->completeChallenge($challengeId, $userId);
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+                $this->challengesService->completeChallenge($userProgress);
                 return "Completed Challenge $challengeId for user $userId";
             case('move_days'):
                 $numDays = $request->get('num_days', 1);
