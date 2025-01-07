@@ -613,6 +613,8 @@ class ChallengesService
         }
         if (!$userProgress) {
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
+            // User has directly accessed a lesson and clicked complete.
+            if (!$userProgress) return ['show_modal' => false];
         }
         $wasChallengeCompleted = $userProgress->areAllLessonsCompleted();
         $secondsPracticed = $this->mediaPlaybackService->getSecondsWatchedSince(
@@ -661,10 +663,12 @@ class ChallengesService
                 'duration' => null,
             ];
         }
+        $userProgress->refresh();
         $userData = $userProgress->getCompiledMetadata();
         if (!$wasChallengeCompleted && $isChallengeCompleted) {
-            $this->completeChallenge($challenge['id'], $userId);
+            $this->completeChallenge($userProgress);
         }
+
         $challengeData = array_intersect_key(
             $lessonData['lesson'],
             array_flip(
@@ -690,14 +694,12 @@ class ChallengesService
     }
 
     /**
-     * @param $challengeId
-     * @param $userId
+     * @param ChallengeUserProgress $userProgress
      * @return void
      * @throws \Exception
      */
-    public function completeChallenge($challengeId, $userId)
+    public function completeChallenge(ChallengeUserProgress $userProgress)
     {
-        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
         $today = Carbon::now();
         $bestStreak = max($userProgress->getBestCurrentStreak(), $userProgress->completed_best_streak);
         $bestMinutesPracticed = max($userProgress->getMinutesPracticed(), $userProgress->completed_time_practiced);
@@ -707,7 +709,7 @@ class ChallengesService
         $userProgress->is_active = false;
         $userProgress->hide_completed_banner = false;
         $userProgress->save();
-        $this->unlockChallenge($challengeId, $userId);
+        $this->unlockChallenge($userProgress->content_id, $userProgress->user_id);
     }
 
     public function unlockChallenge($id, $userId) : ChallengeUserProgress|null

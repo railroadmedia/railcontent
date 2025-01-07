@@ -25,7 +25,7 @@
 <!--                    <MuButton v-if="isSharable" @click="openShareModal"><musora-icon icon-name="share" class="tw-h-6 tw-mr-1 -tw-mt-1 " /> Share</MuButton>-->
                 </div>
                 <div v-if="!openFromAwards" class="tw-text-center">
-                    <a :href="`/${brand}/challenges`" class="tw-uppercase tw-underline tw-font-bold tw-font-bebas-neue dark:tw-text-white tw-z-[3] tw-relative">Return to Challenges</a>
+                    <a :href="`/${brand}/challenge`" class="tw-uppercase tw-underline tw-font-bold tw-font-bebas-neue dark:tw-text-white tw-z-[3] tw-relative">Return to Challenges</a>
                 </div>
                 <div class="tw-mt-5 tw-text-xs tw-text-center">
                     Sharing is currently disabled in your browser. To share your awards with others, download the Musora app today!
