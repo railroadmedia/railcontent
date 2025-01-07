@@ -424,6 +424,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        currentTimeInSeconds: {
+            type: Number,
+            default: () => 0,
+        },
     },
 
     data() {
@@ -444,7 +448,7 @@ export default {
         shareUrl() {
             if (this.useTimecode) {
                 return `${location.protocol}//${location.host}${location.pathname
-                }?time=${Math.floor(this.getCurrentTime())}`;
+                }?time=${Math.floor(this.currentTimeInSeconds)}`;
             }
 
             return `${location.protocol}//${location.host}${location.pathname}`;
@@ -485,14 +489,6 @@ export default {
     methods: {
         openPracticeSoundslice() {
             this.$emit('openPracticeSoundslice');
-        },
-
-        getCurrentTime() {
-            if (this.$root.$refs?.mediaElementVueInstance) {
-                return this.$root.$refs.mediaElementVueInstance.currentTime;
-            }
-
-            return 0;
         },
         handleOpenModal() {
             this.showShareModal = !this.showShareModal;

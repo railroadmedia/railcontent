@@ -141,7 +141,7 @@ const props = defineProps({
 });
 
 //Investigate other events
-const emit = defineEmits(['onVideoEnd', 'play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state']);
+const emit = defineEmits(['onVideoEnd', 'onUpdateCurrentTime', 'play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state']);
 
 // Non reactive vars
 let shakaPlayer = null;
