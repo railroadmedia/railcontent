@@ -581,6 +581,10 @@ onBeforeMount(() => {
         countdown();
         setInterval(countdown, 1000);
     }
+    //End enrollment for community challenges
+    else if(!isSolo.value && now >= closeDate){
+        hasEnded.value = true;
+    }
 
     if(!isSolo.value && openDate <= now){
         watchEnrollmentOpen();
