@@ -194,6 +194,25 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
+    public function renderNewAccountRedeemPageR1000(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'theme' => 'musora',
+            'rockin1000' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function renderExistingAccountRedeemPageR1000(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => false,
+            'theme' => 'musora',
+            'rockin1000' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
     public function spotifyRedeemNewMusora(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
