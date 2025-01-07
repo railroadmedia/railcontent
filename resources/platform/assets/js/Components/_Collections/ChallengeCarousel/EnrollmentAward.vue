@@ -348,7 +348,7 @@ const ctaObj = computed(() => {
 
         //When enrollment is opened and user is not enrolled
         else if(isEnrollmentOpened.value && !isUserEnrolled.value){
-            obj.text = 'Learn More';
+            obj.text = 'Enroll now';
             obj.url = props.challenge.registration_url;
         }
     }
