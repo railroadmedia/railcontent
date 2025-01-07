@@ -165,13 +165,15 @@ class ContentJsonController extends Controller
         $sections = match(strtolower($filter)) {
             'songs', 'song' => [RecommenderSection::Song],
             // everything but songs
-            'lessons', 'lesson' => array_filter(RecommenderSection::cases(), function($section) { return $section != RecommenderSection::Song;}),
+            'lessons', 'lesson' => array_filter(RecommenderSection::cases(), function ($section) { return $section != RecommenderSection::Song && $section != RecommenderSection::Workout;}),
+            'workouts, workout' => [RecommenderSection::Workout],
             default => [],
         };
         if (!$sections) {
             $groupBySections = [
                 'Songs You Might Like' => [RecommenderSection::Song],
-                'Lessons You Might Like' => array_filter(RecommenderSection::cases(), function($section) { return $section != RecommenderSection::Song;})
+                'Lessons You Might Like' => array_filter(RecommenderSection::cases(), function($section) { return $section != RecommenderSection::Song;}),
+                'Workouts You Might Like' => [RecommenderSection::Workout],
             ];
         } else {
             $groupBySections = [];
