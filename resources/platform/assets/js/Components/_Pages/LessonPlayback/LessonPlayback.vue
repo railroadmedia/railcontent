@@ -27,9 +27,9 @@
                                     :use-intersection-observer="true" :start-second="lastWatchedPositionInSeconds"
                                     :progress-state="progress_state" :video-id="videoData?.video?.external_id"
                                     :video-length="videoData.length_in_seconds" :content-id="videoData?.id"
-                                    :end-second="videoData.length_in_seconds"
+                                    :end-second="videoData.length_in_seconds" :is-challenge="isChallenge" :is-completed="isCompleted"
                                     :total-duration="videoData.length_in_seconds" :seek-to-time="seekToTime"
-                                    @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleVideoEnd" @onUpdateCurrentTime="updateCurrentTime" />
+                                    @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleVideoEnd" @complete-challenge="completeChallengeLesson" />
                             </transition>
                             <!-- Vimeo video (legacy player) -->
                             <transition v-else-if="videoData?.video?.type === 'vimeo-video' && useLegacyVideoPlayer"
@@ -39,13 +39,13 @@
                                     :current-second="lastWatchedPositionInSeconds"
                                     :progress-state="progress_state" :seek-to-time="seekToTime"
                                     :is-liked="isLiked" :check-for-timecode="true"
-                                    :poster="videoData?.thumbnail_url"
+                                    :poster="videoData?.thumbnail_url" :is-challenge="isChallenge" :is-completed="isCompleted"
                                     :sources="videoData?.video?.video_playback_endpoints"
                                     :hls-manifest-url="videoData?.video?.hlsManifestUrl"
                                     :video-id="videoData?.video?.external_id" :content-id="videoData?.id"
                                     :video-length="videoData?.length_in_seconds" :chapters="videoData?.chapters"
                                     :user-id="userId" :like-count="likeData?.likeCount" @playing="handleVideoPlay"
-                                    @pause="handleVideoPause" @ended="handleVideoEnd" @onUpdateCurrentTime="updateCurrentTime">
+                                    @pause="handleVideoPause" @ended="handleVideoEnd" @complete-challenge="completeChallengeLesson" >
                                     <div :class="`widescreen title tw-text-${brand}`">
                                         <i class="fas fa-spinner fa-spin absolute-center"></i>
                                     </div>
@@ -60,10 +60,10 @@
                                     :sources="videoData?.video?.video_playback_endpoints"
                                     :hls-manifest-url="videoData?.video?.hlsManifestUrl" :chapters="videoData?.chapters"
                                     :content-id="videoData?.id" :user-id="userId"
-                                    :video-id="videoData?.video?.external_id"
+                                    :video-id="videoData?.video?.external_id" :is-challenge="isChallenge" :is-completed="isCompleted"
                                     :video-length="videoData?.length_in_seconds"
                                     :total-duration="videoData.length_in_seconds" @play="handleVideoPlay"
-                                    @pause="handleVideoPause" @onVideoEnd="handleVideoEnd" @onUpdateCurrentTime="updateCurrentTime">
+                                    @pause="handleVideoPause" @onVideoEnd="handleVideoEnd" @complete-challenge="completeChallengeLesson">
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </video-player>
                             </transition>
@@ -92,7 +92,7 @@
                         :show-add-to-list="true" :show-info-button="showInfoButton"
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
                         @on-like-content="likeContent"
-                        @on-challenge-lesson-complete="completeChallengeLesson" :current-time-in-seconds="lastWatchedPositionInSeconds"
+                        @on-challenge-lesson-complete="completeChallengeLesson"
                     />
 
                     <ContentInfo :breadcrumbs="breadcrumbsData" :content-description="videoData.description"
@@ -429,6 +429,7 @@ const likeContent = () => {
 const completeChallengeLesson = async () => {
     try{
         const complete = await postChallengesCompleteLesson(videoData.value.id);
+        console.log('complete challenge', complete)
         isCompleted.value = !isCompleted.value;
 
         if(complete.show_modal){
@@ -459,10 +460,6 @@ const isChallengePart = computed(() => {
 const breadcrumbsData = computed(() => {
     return getBreadcrumbs(videoData.value, brand.value);
 });
-
-const updateCurrentTime = (time) => {
-    lastWatchedPositionInSeconds.value = Math.floor(time);
-}
 
 const fetchLessonData = async () => {
     if (isChallenge.value) {
