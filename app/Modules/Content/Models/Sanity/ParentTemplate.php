@@ -153,8 +153,8 @@ abstract class ParentTemplate extends BaseSanityModel
         if ($this->withResources) {
             $resourceList = new ListObject(
                 fields: [new Field(FieldType::String, 'resource_name'),
-                            new Field(FieldType::URL, 'resource_url')],
-                previewItem: new ListItemPreview('resource_name', 'resource_url')
+                            new Field(FieldType::URL, 'resource_url'),
+                            new Field(FieldType::AWSMedia, 'resource_aws', options: ['accept' => '*', 'storeOriginalFilename' => '*'])],
             );
             $fields = array_merge($fields, [
                 new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList, group:$detailsGroup)
