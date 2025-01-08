@@ -2,7 +2,9 @@
 
 namespace App\Modules\Content\Models;
 
+use App\Modules\Content\database\factories\UserPlaylistFactory;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use App\Modules\Brand\Enums\Brand;
@@ -30,6 +32,8 @@ use Modules\UserManagementSystem\Models\User;
  */
 class UserPlaylist extends Model
 {
+    use HasFactory;
+
     protected $table = 'railcontent_user_playlists';
     protected $fillable = ['user_id', 'type', 'brand', 'name', 'description', 'thumbnail_url', 'category', 'private', 'created_at', 'first_item_thumbnail_url'];
 
@@ -136,4 +140,8 @@ class UserPlaylist extends Model
         return $query->whereIn("{$this->table}.category", $categories);
     }
 
+    protected static function newFactory()
+    {
+        return UserPlaylistFactory::new();
+    }
 }
