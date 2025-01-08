@@ -77,6 +77,14 @@ export default {
         seekToTime: {
             type: [String, Number],
             default: 0
+        },
+        isChallenge: {
+            type: Boolean,
+            default: false
+        },
+        isCompleted: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -90,6 +98,7 @@ export default {
             hasBeenPlayed: false,
             heartbeatTimer: 0,
             ninetyFivePercentTracked: false,
+            hasCompleted: false,
         };
     },
 
@@ -134,7 +143,7 @@ export default {
     watch: {
         seekToTime: function (newVal, oldVal) { // watch it
             this.player.seekTo(newVal);
-            pauseVideo(); //Pause when seeking? 
+            pauseVideo(); //Pause when seeking?
         }
     },
 
@@ -239,7 +248,6 @@ export default {
                     onReady() {
                         if (timeToSeekTo > 0) {
                             vm.player.seekTo(timeToSeekTo);
-                            vm.$emit('onUpdateCurrentTime', timeToSeekTo);
 
                             let intervalTries = 0;
 
@@ -290,6 +298,11 @@ export default {
                                         vm.ninetyFivePercentTracked = true; // Ensure this is only tracked once
                                     }
 
+                                    if(this.completed && this.isChallenge && !vm.hasCompleted && vm.currentTime >= Math.floor(0.97 * videoDuration)){
+                                        vm.hasCompleted = true;
+                                        vm.$emit('completeChallenge');
+                                    }
+
                                     if (vm.heartbeatTimer > 0 && vm.heartbeatTimer % 3 === 0) {
                                         window.sessionStorage.setItem(`${vm.contentCurrentTimeStorageKey}_currentTime`, vm.currentTime);
                                     }
@@ -299,8 +312,6 @@ export default {
                                     }
 
                                     vm.heartbeatTimer += 1;
-
-                                    vm.$emit('onUpdateCurrentTime', vm.currentTime);
                                 }, 1000);
                             }
 

@@ -1,5 +1,5 @@
 // useEventHandlers.js
-import { nextTick } from "vue";
+import { nextTick, ref } from "vue";
 import userJourney from "@services/userJourney";
 
 export default function ({
@@ -30,6 +30,8 @@ export default function ({
     contentId,
     progressState,
     endCallback,
+    isChallenge,
+    isCompleted,
 }) {
     const payload = (payloadOverride = {}) => ({
         brand,
@@ -43,6 +45,7 @@ export default function ({
     let heartbeatInterval = null;
     let heartbeatTimer = 0;
     let ninetyFivePercentTracked = false;
+    const hasCompleted = ref(false);
 
     const eventHandlers = {
         loading: () => {
@@ -77,8 +80,6 @@ export default function ({
         canplaythrough: (event) => {
             totalDuration.value = mediaElement.value.duration;
             currentTime.value = mediaElement.value.currentTime;
-
-            emit('onUpdateCurrentTime', currentTime.value);
 
             setTimeout(() => {
                 loading.value = false;
@@ -139,6 +140,8 @@ export default function ({
                 userJourney.trackVideo({ payload: payload(), type: 'playing' });
 
                 heartbeatInterval = setInterval(() => {
+
+                    console.log(currentTime.value)
                     if (heartbeatTimer % 15 === 0 && heartbeatTimer !== 0) {
                         userJourney.trackVideo({ payload: payload(), type: 'playing' });
                     }
@@ -147,10 +150,13 @@ export default function ({
                         ninetyFivePercentTracked = true;
                         endCallback(false);
                     }
+                    if (!isCompleted && isChallenge && !hasCompleted.value && currentTime.value >= Math.round(0.97 * totalDuration.value)){
+                        hasCompleted.value = true;
+                        emit('completeChallenge');
+                    }
                     if (!loading.value) {
                         heartbeatTimer += 1;
                     }
-                    emit('onUpdateCurrentTime', currentTime.value);
                 }, 1000);
             }
 
