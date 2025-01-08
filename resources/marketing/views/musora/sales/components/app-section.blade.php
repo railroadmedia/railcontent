@@ -20,7 +20,10 @@
             </picture>
 
             <div class="pr-4 lg:pr-6">
-                <h4 class="leading-tight"><strong>{{ ucfirst($theme) }} is only available on
+                <h4 class="leading-tight"><strong>
+                        @if($theme != 'musora')
+                        {{ ucfirst($theme) }} is only available on
+                        @endif
                         Musora: The Music Lessons App.</strong></h4>
                 <p class="text-sm leading-normal mt-1 lg:mt-2 mb-3 lg:mb-5">
                     @if($theme == 'drumeo')
