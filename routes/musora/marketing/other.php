@@ -49,9 +49,11 @@ Route::domain('{musoraDomain}')
         Route::get('/drum-faster', [MarketingController::class, 'faster']);
 
         Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
+        Route::get('redeem/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPage']);
         Route::get('friends', [CodeRedemptionController::class, 'friends']);
         Route::get('friends2', [CodeRedemptionController::class, 'friends2']);
-        Route::get('redeem/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPage']);
+        Route::get('rockin-1000', [CodeRedemptionController::class, 'renderNewAccountRedeemPageR1000']);
+        Route::get('rockin-1000/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPageR1000']);
         Route::get('redeem-thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
         Route::get('pianote/redeem', [CodeRedemptionController::class, 'showPianoteRedeemPageForNewUsers']);
         Route::get('pianote/redeem/existing', [CodeRedemptionController::class, 'showPianoteRedeemPageForExistingUsers']);
