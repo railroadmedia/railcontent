@@ -961,13 +961,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function isCoach(): Attribute
     {
         return Attribute::make(
-            get: function () {
-                return boolval(
-                    $this->associatedContent()
-                        ->where("is_coach", true)
-                        ->where("status", "published")
-                        ->count()
-                );
+            get: function ($value, $attributes) {
+                return $attributes['access_level'] == 'coach' || $attributes['access_level'] == 'house-coach';
             },
         );
     }
