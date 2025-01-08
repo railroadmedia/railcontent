@@ -1,6 +1,6 @@
 <template>
     <!-- Large Desktop -->
-    <div class="tw-hidden xl:tw-flex tw-justify-between tw-border tw-border-[#E0E0E1] dark:tw-border-[#081825] tw-rounded-[10px] tw-bg-white dark:tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-px-6 2xl:tw-px-12 tw-pb-5 tw-relative dark:tw-text-white tw-overflow-hidden tw-h-[272px] 3xl:tw-h-[295px] 4xl:tw-h-[330px]">
+    <div class="tw-hidden xl:tw-flex tw-justify-between tw-border tw-border-[#E0E0E1] dark:tw-border-[#081825] tw-rounded-[10px] tw-bg-white dark:tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-px-6 2xl:tw-px-12 tw-pb-5 tw-relative dark:tw-text-white tw-overflow-hidden tw-h-[295px] 4xl:tw-h-[330px]">
         <!-- Ellipsis -->
         <div class="tw-absolute tw-top-1.5 2xl:tw-top-[10px] tw-right-1.5 2xl:tw-right-[10px] 3xl:tw-right-6">
             <div class="tw-relative">
@@ -45,8 +45,8 @@
                 <div class="tw-flex tw-gap-2 tw-text-[11px] 3xl:tw-text-[13px] tw-relative tw-z-20 tw-shrink-0">
                     <!-- Streak -->
                     <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-px-1.5 2xl:tw-px-2 3xl:tw-px-2.5 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('streak')">
-                        <div v-if="streak === 0" class="tw-text-[16px] 2xl:tw-text-[18px] 3xl:tw-text-[24px] 3xl:tw-my-[5px] tw-mr-1">🔥</div>
-                        <Vue3Lottie v-else class="tw-w-[32px] 3xl:tw-w-[46px] -tw-ml-1.5 " animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
+                        <div v-if="streak === 0" class="tw-text-[16px] 2xl:tw-text-[18px] 3xl:tw-text-[20px] 3xl:tw-my-[5px] tw-mr-1">🔥</div>
+                        <Vue3Lottie v-else class="tw-w-[32px] 3xl:tw-w-[36px] -tw-ml-1.5 " animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
                         <div class="tw-flex-grow">
                             <div class="tw-font-extrabold">{{ streak }}</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
