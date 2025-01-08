@@ -36,7 +36,7 @@
                 </div>
                 <!-- Logo -->
                 <div>
-                    <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-h-[86px] 2xl:tw-h-[99px] 3xl:tw-h-[105px] 4xl:tw-h-[110px]' : 'tw-mb-1 tw-h-[65px]'" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} logo`" />
+                    <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-max-h-[86px] 2xl:tw-max-h-[99px] 3xl:tw-max-h-[105px] 4xl:tw-max-h-[110px] tw-max-w-[180px] 2xl:tw-max-w-[240px] 3xl:tw-max-w-none tw-w-full tw-h-full tw-object-contain' : 'tw-mb-1 tw-h-[65px]'" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} logo`" />
                     <template v-if="isAward">
                         <div class="tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white tw-mt-2">
                             You practiced for a total of <b>{{ minutesPracticed }} minutes</b> and achieved a <b>{{ streak }}-day streak</b> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
@@ -56,7 +56,7 @@
                         </p>
                     </template>
 
-                    <div v-else class="tw-text-sm tw-font-bold tw-mb-3 3xl:tw-mb-0 tw-flex tw-items-center ">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> <DifficultyLabel :difficulty-value="difficulty" /></div>
+                    <div v-else class="tw-text-sm tw-font-bold tw-mb-3 3xl:tw-mb-0 tw-flex tw-items-center tw-w-[200px]">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> <DifficultyLabel :difficulty-value="difficulty" /></div>
 
                 </div>
                 <!-- CTA -->
