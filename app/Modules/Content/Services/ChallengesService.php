@@ -349,7 +349,8 @@ class ChallengesService
                 'Y-m-d',
                 Carbon::today(UserTimezoneService::getUsersCurrentTimezone())->toDateString()
             )->startOfDay()->addSecond();
-
+            // TODO Rob Adrian Caleb, do we lock the lessons if previous lessons haven't been completed
+            // this was vaguely discussed in this thread: https://musoraworkspace.slack.com/archives/C0723ESKW49/p1733173597489469
             $shouldLessonBeLocked = $isLocked && $unlockDateForComparison->greaterThanOrEqualTo($todayForComparison);
 
             $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
