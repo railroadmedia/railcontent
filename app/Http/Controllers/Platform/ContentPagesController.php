@@ -18,6 +18,7 @@ use App\Modules\Content\Requests\ContentSearchRequest;
 use App\Modules\Content\Resources\Algolia\Enum\DocumentType;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
+use App\Modules\Content\Services\ChallengesService;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -62,6 +63,8 @@ class ContentPagesController extends BaseController
     private ArtistService $artistService;
     private GenreService $genreService;
 
+    private ChallengesService $challengesService;
+
     public function __construct(
         ContentService $contentService,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
@@ -74,7 +77,8 @@ class ContentPagesController extends BaseController
         MethodService $methodService,
         UserContentProgressService $userContentProgressService,
         ArtistService $artistService,
-        GenreService $genreService
+        GenreService $genreService,
+        ChallengesService $challengesService,
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
@@ -88,6 +92,7 @@ class ContentPagesController extends BaseController
         $this->userContentProgressService = $userContentProgressService;
         $this->artistService = $artistService;
         $this->genreService = $genreService;
+        $this->challengesService = $challengesService;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -312,6 +317,13 @@ class ContentPagesController extends BaseController
         $firstLevelContent = $this->contentService->getById($firstId);
         if (empty($firstLevelContent)) {
             throw new NotFoundHttpException();
+        }
+
+        if ($primaryPage == 'challenge') {
+            $response = $this->challengesService->getCurrentLessonData($firstId, user()->id, isLesson: false);
+            if (!$response['user_data']['is_active'] && !($response['user_data']['is_unlocked'] ?? false)) {
+                return redirect($response['lesson']['registration_url']);
+            }
         }
 
         if ($primaryPage == 'songs') {
@@ -1354,7 +1366,7 @@ class ContentPagesController extends BaseController
     public function search(ContentSearchRequest $request): View
     {
         $search = new AlgoliaSearchService();
-        
+
         $searchParams = SearchParameters::fromRequest($search, $request);
 
         $searchResponse = $search->search($searchParams);
