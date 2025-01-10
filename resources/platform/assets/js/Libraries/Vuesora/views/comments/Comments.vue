@@ -292,9 +292,7 @@ export default {
     },
 
     mounted() {
-        console.log('this.currentUser', this.currentUser)
-
-        if(this.contentType === "song") {
+        if(this.contentType === "song" || this.contentType === 'playlist') {
             this.getComments(this.requestParams);
         }
 
@@ -360,7 +358,7 @@ export default {
                             this.comments = this.comments.filter(comment => comment.id !== this.pinnedComment.id);
                         }
                     }
-                }).catch( error => { 
+                }).catch( error => {
                     console.log( 'error fetching comments: ', error)
                 });
         },

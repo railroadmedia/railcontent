@@ -118,10 +118,10 @@
                         </div>
 
                         <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[24px]">
-                            <p class="body">
+                            <div class="body">
                                 <span class="tw-font-bold">Bio:&nbsp;</span>
-                                <template v-html="dashboardUser?.biography"></template>
-                            </p>
+                                <div v-html="dashboardUser?.biography"></div>
+                            </div>
                         </div>
                     </div>
                     <!-- User gear details -->

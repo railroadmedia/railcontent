@@ -131,7 +131,7 @@ class SearchParameters
     // internal settings
     protected bool $hasOptions;
 
-    public function __construct(public AlgoliaSearchService $algoliaSearchService, public string $query)
+    public function __construct(public AlgoliaSearchService $algoliaSearchService, public ?string $query)
     {
         $this->hasOptions = false;
     }
@@ -153,6 +153,8 @@ class SearchParameters
             if (!empty($validStatuses)) {
                 $searchParams->onlyForStatus(...$validStatuses);
             }
+        } else {
+            $searchParams->onlyForStatus(...self::sanitizeEnumValues(Status::class, ['published']));
         }
 
         $requestedBrands = $request->get('brands');
@@ -161,6 +163,8 @@ class SearchParameters
             if (!empty($validBrands)) {
                 $searchParams->onlyForBrand(...$validBrands);
             }
+        } else {
+            $searchParams->onlyForBrand(...self::sanitizeEnumValues(Brand::class, [brand()]));
         }
 
         $instructors = Instructor::findMany($request->get('coach_ids', []));
@@ -174,15 +178,21 @@ class SearchParameters
             if (!empty($validDocumentTypes)) {
                 $searchParams->onlyForType(...$validDocumentTypes);
             }
+        } else {
+            // if no type is given, restrict it to all document types
+            $searchParams->onlyForType(...DocumentType::cases());
+        }
+
+        // DEV NOTE: Algolia does pagination using 0th-based indexing, so convert our normal "page" if it was provided
+        $page = $request->get('page', 0);
+        if ($page > 0) {
+            --$page;
         }
 
         $searchParams->withOptions(
             hitsPerPage: $request->get('limit'),
-            page: $request->get('page')
+            page: $page
         );
-
-        //TODO sort - I'm not sure how to make this work with Algolia ...
-        //TODO include_future_scheduled_content_only (if we're going to support it)
 
         return $searchParams;
     }

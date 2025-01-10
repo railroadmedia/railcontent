@@ -1,16 +1,17 @@
 <template>
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
-      <Breadcrumb :breadcrumbs="breadcrumbs" />
+      <Breadcrumb :breadcrumbs="breadcrumbData" />
       <PageHeader
-        :page-type="headerData.type"
-        :icon-name="headerData.iconName"
-        :title="headerData.title"
-        :description="headerData.description"
-        :hero-img="headerData.heroImg"
-        :progress="headerData.progress"
-        :content-id="headerData.contentId"
-        :info-data="headerData.infoData"
-        :ctas="headerData.ctas && headerData.ctas.length ? headerData.ctas : null"
+        :is-loading="isLoading"
+        :page-type="headerData?.type"
+        :icon-name="headerData?.iconName"
+        :title="headerData?.title"
+        :description="headerData?.description"
+        :hero-img="headerData?.heroImg"
+        :progress="headerData?.progress"
+        :content-id="headerData?.contentId"
+        :info-data="headerData?.infoData"
+        :ctas="headerData?.ctas && headerData?.ctas.length ? headerData?.ctas : null"
       />
 
       <!-- Continue section -->
@@ -28,7 +29,7 @@
 
       <div class="tw-mt-[30px]">
         <PlayAlongs
-          v-if="catalogueMeta.name === 'Play Alongs' && brand === 'drumeo'"
+          v-if="metaData?.name === 'Play Alongs' && brand === 'drumeo'"
           ref="playAlongsVueInstance"
           content-endpoint="/railcontent/content"
           :theme-color="brand"
@@ -39,7 +40,7 @@
           v-else
           v-bind="recommendedProps"
           :collection-type="lessonType"
-          :title="catalogueMeta.shortname || catalogueMeta.name"
+          :title="metaData?.shortname || metaData?.name"
           :hide-filter-icon="true"
           :hide-controls="lessonType === 'Recommendation'"
           :tab-options="tabData"
@@ -62,18 +63,18 @@
   import PageHeader from '@collections/PageHeader/PageHeader.vue';
   import PlayAlongs from '@vuesora/views/play-alongs/PlayAlongs.vue';
   import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
-  import { fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
+  import { fetchMetadata, fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
   import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
 
   const props = defineProps({
-    lessonType: String,
-    catalogueMeta: Object,
-    breadcrumbs: Array,
-    sessionToken: String,
     askQuestionRecipient: String,
-    emailLogoLink: String,
-    showInProgress: Boolean,
+    breadcrumbs: Array,
     catalogueType: String,
+    emailLogoLink: String,
+    isNewReleases: Boolean,
+    lessonType: String,
+    sessionToken: String,
+    showInProgress: Boolean,
   });
 
   const collectionStore = useCollectionStore();
@@ -84,18 +85,18 @@
 
   const onLoadData = ref([]);
   const continueSection = ref([]);
+  const metaData = ref(null);
+  const headerData = ref(null);
+  const contentType = ref('');
+  const breadcrumbData = ref(null);
 
   const recommendedProps = computed(() => {
     const recommended = {};
-    if (props.lessonType === 'Recommendation') {
+    if (contentType.value === 'Recommendation') {
       recommended.endpoint = '/railcontent/recommended';
       recommended.noResultsMessage = 'Start your learning journey to help us select the appropriate videos for you.';
     }
     return recommended;
-  });
-
-  const headerData = computed(() => {
-    return getHeaderData(props.catalogueMeta, brand.value, props.askQuestionRecipient, props.emailLogoLink, props.lessonType);
   });
 
   const recommendationLinks = {
@@ -106,15 +107,36 @@
   };
 
   const tabData = computed(() => {
-      return getTabData(props.catalogueType, props.catalogueMeta.shortname || props.catalogueMeta.name);
+      return getTabData(props.catalogueType, metaData.value?.shortname || metaData.value?.name);
   })
 
   onBeforeMount(async() => {
+    //Account for 'New Releases' Catalog
+    if(props.isNewReleases) {
+      contentType.value = 'new-release';
+      breadcrumbData.value = [
+        { title: "New Releases" }
+      ]
+    } else {
+      contentType.value = props.lessonType;
+      breadcrumbData.value = props.breadcrumbs;
+    }
+
+    const metaType = props.isNewReleases ? 'new-release' : queryTypeConverter(props.lessonType);
+
     try {
       // Fetch started content (in-progress workouts)
-      const startedIds = await fetchContentInProgress(props.lessonType, brand.value, { limit: 20 });
+      fetchMetadata(brand.value, metaType).then( result => {
+        metaData.value = result;
+      }).catch( error => {
+        console.log('error fetching catalog metaData', error)
+      });
+
+      const startedIds = await fetchContentInProgress(contentType.value, brand.value, { limit: 20 });
       const lessons = await fetchByRailContentIds(startedIds.started);
 
+      headerData.value = getHeaderData(metaData.value, brand.value, props.askQuestionRecipient, props.emailLogoLink, contentType.value)
+      
       // Set the continue section with started workouts
       continueSection.value = lessons;
 
@@ -122,7 +144,8 @@
       collectionStore.setDefaults({
         tabOptions: tabData.value,
         queryType: queryTypeConverter(props.lessonType),
-        ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true })
+        ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true }),
+        ...(props.lessonType === 'Recommendation' ? { fetchType: 'recommendation' } : props.isNewReleases && { fetchType: 'new-release' }),
       });
     } catch (error) {
         console.error('Error fetching continue section data:', error);

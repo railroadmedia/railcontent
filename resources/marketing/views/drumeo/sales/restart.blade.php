@@ -198,7 +198,7 @@
                         @foreach ($features as $key => $feature)
                             <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 my-2 sm:mb-0">
                                 <img
-                                    src="https://www.musora.com/cdn-cgi/image/{{ $feature['image'] }}"
+                                    src="https://www.musora.com/cdn-cgi/image/quality=95/{{ $feature['image'] }}"
                                     class="h-5 sm:h-7 mb-2 mr-4 sm:mr-0 transition-opacity opacity-0"
                                     alt="feature image{{$key+1}}"
                                     loading="lazy"

@@ -164,7 +164,19 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav")
+    <section class="text-white px-6 py-16" style="background: linear-gradient(180deg, #102B46 0%, #0D182A 100%);">
+        <div class="container mx-auto max-w-4xl">
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-6">
+                    <img src="https://www.musora.com/cdn-cgi/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png"
+                        alt="Drumeo Awards" class="mx-auto h-24 md:h-28">
+                </div>
 
+                    <h1 class="text-2xl md:text-4xl font-extrabold mb-8 leading-tight">2024 Voting is now open!</h1>
+                    <a href="/beat/2024-awards" class="join smaller drumeo">Vote Now &raquo;</a>
+            </div>
+        </div>
+    </section>
     <header class="text-white py-8 sm:py-14 lg:py-16 px-4 bg-cover bg-top" style="background-color:#000; background-image:url(https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/header-bg.jpg);">
         <div class="container mx-auto max-w-5xl">
             <div class="flex flex-wrap items-center">

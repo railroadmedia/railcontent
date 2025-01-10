@@ -69,7 +69,17 @@ class AppServiceProvider extends ServiceProvider
             Mail::alwaysTo('musora-dev-test-5632c3@inbox.mailtrap.io');
         }
 
-        view()->composer('*', NavigationViewComposer::class);
+        view()->composer([
+            'partials.layout',
+            'errors.404',
+            'errors::404',
+            'errors.500',
+            'errors::500',
+            'errors.503',
+            'errors::503',
+            'errors.missing',
+            'pages.devendpoint'
+        ], NavigationViewComposer::class);
 
         view()->composer(
             [

@@ -18,6 +18,7 @@ use App\Modules\Content\Requests\ContentSearchRequest;
 use App\Modules\Content\Resources\Algolia\Enum\DocumentType;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
+use App\Modules\Content\Services\ChallengesService;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -27,7 +28,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Railroad\Railcontent\Controllers\ContentJsonController;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -63,6 +63,8 @@ class ContentPagesController extends BaseController
     private ArtistService $artistService;
     private GenreService $genreService;
 
+    private ChallengesService $challengesService;
+
     public function __construct(
         ContentService $contentService,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
@@ -75,7 +77,8 @@ class ContentPagesController extends BaseController
         MethodService $methodService,
         UserContentProgressService $userContentProgressService,
         ArtistService $artistService,
-        GenreService $genreService
+        GenreService $genreService,
+        ChallengesService $challengesService,
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
@@ -89,6 +92,7 @@ class ContentPagesController extends BaseController
         $this->userContentProgressService = $userContentProgressService;
         $this->artistService = $artistService;
         $this->genreService = $genreService;
+        $this->challengesService = $challengesService;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -277,7 +281,8 @@ class ContentPagesController extends BaseController
         }
     }
 
-    public function challengeFirstLevel(Request $request, $domain, $brand, $firstSlug, $firstId){
+    public function challengeFirstLevel(Request $request, $domain, $brand, $firstSlug, $firstId)
+    {
         return $this->firstLevel($request, $domain, $brand, 'challenge', $firstSlug, $firstId);
     }
 
@@ -312,6 +317,13 @@ class ContentPagesController extends BaseController
         $firstLevelContent = $this->contentService->getById($firstId);
         if (empty($firstLevelContent)) {
             throw new NotFoundHttpException();
+        }
+
+        if ($primaryPage == 'challenge') {
+            $response = $this->challengesService->getCurrentLessonData($firstId, user()->id, isLesson: false);
+            if (!$response['user_data']['is_active'] && !($response['user_data']['is_unlocked'] ?? false)) {
+                return redirect($response['lesson']['registration_url']);
+            }
         }
 
         if ($primaryPage == 'songs') {
@@ -1354,6 +1366,7 @@ class ContentPagesController extends BaseController
     public function search(ContentSearchRequest $request): View
     {
         $search = new AlgoliaSearchService();
+
         $searchParams = SearchParameters::fromRequest($search, $request);
 
         $searchResponse = $search->search($searchParams);
@@ -1796,47 +1809,19 @@ class ContentPagesController extends BaseController
     public function artistSongs($route, Request $request, $brand, $artistSlug): View
     {
         $artist = ($artistSlug);
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
         ContentRepository::$countFilterOptionItems = true;
         $types = ['song', 'song-tutorial'];
-        $initialContent = $this->contentService->getFiltered(
-            $request->get('page', 1),
-            $request->get('limit', 12),
-            $request->get('sort', '-popularity'),
-            $types,
-            $request->get('slug_hierarchy', []),
-            $request->get('required_parent_ids', []),
-            ['artist,'.$artist],
-            $request->get('included_fields', []),
-            $request->get('required_user_states', []),
-            $request->get('included_user_states', []),
-        );
-
         $artistName = $artistSlug;
-        $pluralContentType = Str::plural('song');
-
-        $totalPlays = $this->userContentProgressService->countByArtistTypesUserProgress(
-            ['song'],
-            $artist
-        );
         $artistData = $this->artistService->getByName($artist);
 
-        $contentSubtitle = $initialContent->totalResults().' '.$pluralContentType.'    '.$totalPlays.' plays';
-
         return view('content.child-collection', [
-            'initialContent' => $initialContent->toResponseRawJson(),
             'contentType' => $types,
-            'allowedTypes' => ['song', 'song-tutorial'],
             'collectionName' => $artistName,
             'contentName' => 'Songs',
             'contentTitle' => $artistName,
-            'contentSubtitle' => $contentSubtitle,
             'goBackUrl' => '/'.$brand.'/songs',
-            'requiredFields' => ['artist,'.$artistName],
-            'filterableValues' => $catalogueMeta['allowableFilters'],
             'thumbnail_url' => ($artistData) ? $artistData['head_shot_picture_url'] :
                 config('railcontent.default_avatar_artist')[config('railcontent.brand', 'drumeo')],
-            'pluralContentType' => $pluralContentType,
         ]);
     }
 
@@ -1844,11 +1829,7 @@ class ContentPagesController extends BaseController
     {
         $genre = urldecode($genre);
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$contentTypeName] ?? [];
         ContentRepository::$countFilterOptionItems = true;
-        $availableTypes =
-            (in_array($lessonType, ['quick-tips', 'boot-camps'])) ? ['quick-tips', 'boot-camps'] : [$lessonType];
-
         $contentTitle = ucwords($genre.' - '.$contentTypeName);
         $genreData = $this->genreService->getByName($genre);
         $thumb =
@@ -1858,16 +1839,11 @@ class ContentPagesController extends BaseController
 
         return view('content.child-collection', [
             'contentType' => $lessonType,
-            'allowedTypes' => $availableTypes,
             'collectionName' => $genre,
             'contentName' => $lessonType,
             'contentTitle' => $contentTitle,
-            'contentSubtitle' => '',
             'goBackUrl' => '/'.$brand.'/'.$contentTypeName,
-            'requiredFields' => ['style,'.$genre],
-            'filterableValues' => $catalogueMeta['allowableFilters'],
             'thumbnail_url' => $thumb,
-            'pluralContentType' => '',
         ]);
     }
 

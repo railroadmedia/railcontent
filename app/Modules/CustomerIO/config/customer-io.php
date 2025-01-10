@@ -565,6 +565,16 @@ return [
                     'musora',
                 ],
             ],
+            '30DD Challenge Sample' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_challenge-sample-30dd',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                    'musora',
+                ],
+            ],
         ],
         'pianote' => [
             'Passing Chords PDF' => [
@@ -1075,6 +1085,21 @@ return [
                 ],
                 'events' => [
                     'pianote_prospect_digital_christmas_songbook',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
+            'Chords Progressions Digital Book' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_chords_progressions_digital_book',
                 ],
                 'accounts_to_sync' => [
                     'pianote',

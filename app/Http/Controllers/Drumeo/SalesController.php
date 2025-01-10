@@ -52,8 +52,9 @@ class SalesController extends BaseController
     }
     public function homeBF()
     {
-        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'bfVersion' => 'true', 'noEverflow' => true]);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'bfVersion' => 'true', 'noEverflow' => true]);
     }
+
     public function homeMonth()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'month' => true]);
@@ -97,6 +98,10 @@ class SalesController extends BaseController
     public function promoEG()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
+    }
+    public function promoNY()
+    {
+        return view('drumeo.sales.new-year', ['theme' => 'drumeo', 'promoVersion' => 'true', 'newYears' => 'true']);
     }
     public function choosePlanVDF()
     {

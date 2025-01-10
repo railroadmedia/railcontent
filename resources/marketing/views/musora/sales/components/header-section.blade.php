@@ -1,52 +1,27 @@
-<header class="text-center px-5 sm:px-6 py-44 sm:py-52 lg:py-56 relative overflow-hidden"
-    @if(!empty($testimonialVersion))
-    style="background:linear-gradient(to bottom, #fff, #F1EFED);"
+<header class="text-center relative overflow-hidden z-10 min-h-[700px] h-screen-nav max-h-[1100px]"
+    style="
+    @if(!empty($bubbles))
+    background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);
     @else
-    style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);"
+    background:#000;color:#fff;"
     @endif
+    "
 >
-    @if(!empty($bfVersion) && ($theme == 'singeo'))
-    <img class="h-10 sm:h-12 lg:h-16 mb-3 mx-auto relative" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/december/singeo-christmas-logo.svg" alt="logo">
-    @elseif(!empty($bfVersion) && ($theme == 'guitareo'))
-    <img class="h-10 sm:h-12 lg:h-16 mb-3 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/december/guitareo-christmas-logo.svg" alt="logo">
-    @endif
-    <div class="container max-w-6xl mx-auto relative z-20">
-        @if(!empty($testimonialVersion))
-            <h5 class="leading-tight uppercase"><strong>MUSIC STUDENTS <br class="sm:hidden">PREFER LEARNING HERE</strong></h5>
-            <h1 class="overflow-hidden leading-tight text-[35px] sm:text-5xl sm:leading-[76px] rotater-text my-1 sm:my-0" style="height: 100px;font-family: 'Sedgwick Ave', sans-serif!important; ">
-                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"Like my very own<br class="sm:hidden"> music coach!"</span><br>
-                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"So positive and<br class="sm:hidden"> uplifting!"</span><br>
-                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"Convenient and<br class="sm:hidden"> affordable."</span><br>
-                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"Try it once and<br class="sm:hidden"> you’ll see."</span><br>
-                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"The best teaching<br class="sm:hidden"> tool ever."</span><br>
-            </h1>
-        @else
-            <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
-                {!! $header !!}
-            </h1>
-        @endif
-        @if(!empty($boldText))
-            <h5 class="leading-normal mb-5 lg:mb-7 ">{!!  $boldText  !!}</h5>
-        @endif
-
-        @if(!empty($bfVersion) && ($theme == 'singeo' || $theme == 'guitareo'))
-        <h5 class="text-[#F61A30] leading-tight pb-1"><strong>START A FREE ANNUAL TRIAL & <br class="sm:hidden">  SAVE 20% ON YOUR FIRST YEAR.</strong></h5>
-        <h6 class="font-light pb-2 md:pb-4">ONLY <span class="opacity-40"><s>$240</s></span> $200 UNTIL DECEMBER 25.</h6>
-        @else
-            @if(empty($noCheck))
-                <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
-                    <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
-                    <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
-                    <br class="lg:hidden">
-                    <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
-                    <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
-                </p>
-            @endif
-        @endif
-        @if(!empty($promoVersion) && empty($trialVersion))
-            @if(!empty($BFheader))
-                <h6 class="leading-tight py-2 px-3 text-white rounded-lg inline-block mb-5 lg:mb-7 @if($theme == 'drumeo') bg-drumeo @else bg-[#00BC75] @endif"><i class="far fa-badge-percent mr-1"></i> {!! $BFheader !!}</h6>
-            @endif
+    <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
+        <h4 class="relative w-auto inline-block mb-4 lg:mb-6 font-black font-lexend leading-none uppercase">
+            NEW YEAR. <span class="text-{{ $theme }}">NO EXCUSES.</span>
+        </h4><br>
+        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
+            {!! $header !!}
+        </h1>
+        @if(!empty($pointOne))
+            <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
+                <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
+                <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
+                <br class="lg:hidden">
+                <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
+                <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
+            </p>
         @endif
         <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
             <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
@@ -63,6 +38,8 @@
             >
                 @if(!empty($cta))
                     {!! $cta !!}
+                @elseif(!empty($newYears))
+                    Save 20% &raquo;
                 @elseif(!empty($promoVersion) && empty($trialVersion))
                     SEE YOUR DEAL &raquo;
                 @elseif(!empty($month))
@@ -72,10 +49,10 @@
                 @endif
             </a>
             @if(empty($noTrailer))
-                <div class="sm:mx-0.5 w-full sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+                <div class="sm:mx-0.5 w-full sm:w-56 join outline @if(!empty($bubbles)) black @else white @endif smaller autoplay-video" x-on:click="trailer = true;">@if(!empty($theme) && $theme == 'pianote') 2-MINUTE @else 1-MINUTE @endif TRAILER</div>
             @endif
             @if(!empty($reviewsButton))
-                <a class="sm:mx-0.5 w-full sm:w-56 join outline black smaller"
+                <a class="sm:mx-0.5 w-full sm:w-56 join outline @if(!empty($bubbles)) black @else white @endif smaller"
                     href="https://www.shopperapproved.com/reviews/Musora.com"
                     rel="noopener noreferrer"
                     aria-label="See the reviews on Shopper Approved"
@@ -83,24 +60,48 @@
                 >SEE THE REVIEWS</a>
             @endif
         </div>
-        <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
-            <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" rel="noopener noreferrer" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-                <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-                <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
-            </a>
-            <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
-        </div>
+        @if(!empty($newYears))
+            @if($theme == 'drumeo')
+                <p class="leading-tight relative py-3 pl-12 pr-5 mt-7 rounded-xl inline-block mx-auto text-musora" style="background-color:#0C1524;">
+                    <img class="absolute top-1/2 -translate-y-1/2 left-0 h-16 -ml-8 inline-block" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/134x0/filters:quality(95)/marketing/drumeo/promos/january/header-bar.webp">
+                    Save 20% On Your First Year<br class="sm:hidden"> + <strong>Get 7 Free Bonuses</strong></p>
+            @else
+                <p class="leading-tight relative py-3 pl-24 pr-5 mt-7 rounded-xl inline-block mx-auto text-musora" style="background-color:#0C1524;">
+                    <img class="absolute top-1/2 -translate-y-1/2 left-0 h-16 -ml-8 inline-block" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/242x0/filters:quality(95)/marketing/pianote/promos/january/header-bar.webp">
+                    Save 20% On Your First Year<br class="sm:hidden"> + <strong>Get 8 Free Bonuses</strong></p>
+            @endif
+        @endif
     </div>
+    @if(!empty($bubbles))
         @foreach($bubbles as $bubble)
-    <picture>
-        <source media="(min-width:640px)" srcset="{{ $bubble['src'] }}">
-        <img class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 {{ $bubble['classes'] }}"
-            src="{{ $bubble['src'] }}" alt="header circle image" fetchpriority="high">
-    </picture>
-@endforeach
+            <picture>
+                <source media="(min-width:640px)" srcset="{{ $bubble['src'] }}">
+                <img class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 {{ $bubble['classes'] }}"
+                    src="{{ $bubble['src'] }}" alt="header circle image" fetchpriority="high">
+            </picture>
+        @endforeach
+    @else
+        @if(!empty($featured) && is_array($featured))
+            <div class="transform bottom-0 left-0 w-full absolute z-20 px-4 pb-7 text-center opacity-50">
+                <p class="text-sm mb-1 lg:mb-3">As featured in:</p>
+                @foreach($featured as $feature)
+                    <a href="{{ $feature['url'] }}" target="_blank">
+                        <img class="inline-block h-4 sm:h-5 {{ !$loop->last ? 'mr-2 sm:mr-3' : '' }}" src="{{ $feature['src'] }}" alt="Featured logo">
+                    </a>
+                @endforeach
+            </div>
+        @endif
+
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: hsl(218deg 50% 5% / 70%);"></div>
+        @if(!empty($video))
+            @if(!empty($videoM))
+                <video class="sm:hidden block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $video }}"></video>
+                <video class="hidden sm:block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $videoM }}"></video>
+            @else
+                <video class="object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $video }}"></video>
+            @endif
+        @endif
+    @endif
 </header>
 @if(!empty($slides))
     <section class="sm:px-6 py-4 sm:py-5 text-white relative z-10" style="background:#0c1524;">

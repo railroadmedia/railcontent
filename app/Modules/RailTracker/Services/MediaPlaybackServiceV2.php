@@ -33,6 +33,8 @@ class MediaPlaybackServiceV2 extends TrackerBase
             $mediaPlaybackSession->uuid = $sessionId;
             $mediaPlaybackSession->started_on = Carbon::now();
         }
+        $secondsTracked = $secondsPlayed - $mediaPlaybackSession->seconds_played;
+        $mediaPlaybackSession->secondsWatchedSinceLastTrack = $secondsTracked <= 0 ? 0 : $secondsTracked;
         $mediaPlaybackSession->media_id = $contentId;
         $mediaPlaybackSession->type_id = $mediaType->value;
         $mediaPlaybackSession->media_length_seconds = $mediaLengthSeconds;

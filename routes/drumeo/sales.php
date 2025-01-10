@@ -10,6 +10,7 @@ Route::domain('{drumeoDomain}')
         Route::get('/', [SalesController::class, 'homeBF']);
         Route::get('/ultimate-bundle', [SalesController::class, 'homeBF']);
         Route::get('/lp', [SalesController::class, 'promoEG']);
+        Route::get('/new-year', [SalesController::class, 'promoNY']);
         Route::get('/beginner', [SalesController::class, 'promo']);
         Route::get('/student-only', [SalesController::class, 'promo']);
         Route::get('/choose-plan', [SalesController::class, 'choosePlan']);
@@ -34,7 +35,7 @@ Route::domain('{drumeoDomain}')
         Route::get('/song-demo/', [SalesController::class, 'songDemo']);
         Route::get('/tom-sawyer/', [SalesController::class, 'tomSawyer']);
         Route::get('/drumfest', [SalesController::class, 'drumFest']);
-        Route::get('/awards/', [SalesController::class, 'awards']);
+        Route::get('/awards/previous-winners', [SalesController::class, 'awards']);
         Route::get('/sonor/', [SalesController::class, 'sonor']);
 
         Route::get('/alesis', [SalesController::class, 'alesisNitro']);

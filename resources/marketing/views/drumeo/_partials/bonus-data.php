@@ -7,7 +7,8 @@ $bonuses = [
         'description' => 'Learn the drums with daily guided workouts.',
         'sku' => '30-day-drummer-4',
         'vimeoId' => '884916532',
-        'price' => 127.00
+        'price' => 127.00,
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonus-30di.webp',
@@ -15,7 +16,8 @@ $bonuses = [
         'description' => 'Improve your coordination with daily guided workouts.',
         'sku' => '30-day-independence',
         'vimeoId' => '975466470',
-        'price' => 127.00
+        'price' => 127.00,
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonus-30ddb.webp',
@@ -23,7 +25,8 @@ $bonuses = [
         'description' => 'Unlock your foot speed & control on the drums.',
         'sku' => '30-day-double-bass',
         'vimeoId' => '1010405112',
-        'price' => 127.00
+        'price' => 127.00,
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonus-30dj.webp',
@@ -39,7 +42,8 @@ $bonuses = [
         'description' => 'Boost your creativity in just 30 days',
         'sku' => '30-day-chops',
         'vimeoId' => '884916500',
-        'price' => 127.00
+        'price' => 127.00,
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-07.webp',
@@ -72,9 +76,9 @@ $bonuses = [
         'price' => 59.00
     ],
     [
-        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-12.webp',
+        'image' => 'marketing/drumeo/membership/homepage/2025/bonuses-01-m.webp',
         'title' => 'Practice Pad',
-        'description' => 'The most versatile practice pad in the world, featuring four playing surfaces on three different levels for simulating movement around the kit.',
+        'description' => 'The P4 Practice Pad has helped 30,000+ drummers improve their hands away from the drum set. The 4-zone multi-level pad has a snare-like pad, harder neoprene for high-tom, strength-building rubber for floor tom, and a ride cymbal-like surface to make for a smoother transition to the drum set.',
         'sku' => 'practicepad',
         'shipping' => true,
         'phisical' => true,
@@ -92,7 +96,7 @@ $bonuses = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/drumeo-sticks-new.webp',
         'title' => 'Drumeo Drumsticks',
-        'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
+        'description' => 'Drumeo 5A Drumsticks by Vater have up to double the moisture content of regular drumsticks — giving you a longer-lasting stick you can count on. Chad Smith uses Vater sticks. You should too.',
         'sku' => 'Drumeo-VaterSticks',
         'physical' => true,
         'shipping' => true,
@@ -104,6 +108,7 @@ $bonuses = [
         'title' => 'Rock Drumming Masterclass',
         'description' => 'Todd Sucherman\'s 26-week masterclass to help you improve your rock drumming.',
         'sku' => 'rock-drumming-masterclass-pack',
+        'access' => 'ONLINE ACCESS',
     ],
     [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',

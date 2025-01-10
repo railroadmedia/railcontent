@@ -10,6 +10,7 @@
         :is-pack-only="false"
         account-url="{{ user()->getDashboardUrl() }}"
         calendar-id="{{ $calendarId }}"
+        {{-- :carousel="{{ json_encode($carousel) }}" --}}
         :cohort-banner="{{ $cohortBanner }}"
         content-endpoint="/railcontent/content"
         continue-url="{{ url()->route('platform.lesson-history.in-progress') }}"
@@ -26,7 +27,6 @@
         :recommended-content="{{ $recommendedContentJson }}"
         recommended-content-url="{{ url()->route('platform.recommended-lessons') }}"
         :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
-        :users-list="{{ json_encode($usersList->results())  }}"
         :user-metrics="{{ json_encode($userMetrics) }}"
         youtube-id="{{ $youtubeId ?? '' }}"
         :is-first-access="{{ $isFirstAccess ? 'true' : 'false' }}"

@@ -46,6 +46,7 @@ class BannerCard extends BaseSanityModel
                 validation:     [new Min(0), new Max(10)],
                 inputComponent: 'DifficultyInput',
             ),
+            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true"),
             new Field(FieldType::Boolean, 'visible_on_desktop', 'Visible On Desktop'),
             new Field(FieldType::Boolean, 'visible_on_mobile', 'Visible On Mobile'),
             new Field(FieldType::Boolean, 'all_but_latest_version', 'All But Latest Version'),

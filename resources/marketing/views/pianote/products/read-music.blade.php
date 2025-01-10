@@ -537,7 +537,7 @@
                 <strong class="font-black">
                     @if($productPrices['read-music-in-30-days']->price > $productPrices['read-music-in-30-days']->discounted_price)
                         <s class="opacity-60">${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}</s>
-                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} (SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)                   
+                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} (SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)
                         @else
                         Only ${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}
                     @endif
@@ -719,7 +719,7 @@
                 <strong class="font-black">
                     @if($productPrices['read-music-in-30-days']->price > $productPrices['read-music-in-30-days']->discounted_price)
                         <s class="opacity-60">${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}</s>
-                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} (SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)                   
+                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} (SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)
                         @else
                         Only ${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}
                     @endif
@@ -1141,7 +1141,7 @@
                 <strong class="font-black">
                     @if($productPrices['read-music-in-30-days']->price > $productPrices['read-music-in-30-days']->discounted_price)
                         <s class="opacity-60">${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}</s>
-                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} (SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)                   
+                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} (SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)
                         @else
                         Only ${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}
                     @endif
@@ -1199,7 +1199,7 @@
                 <h5 class="leading-tight mt-4 md: my-4 my-1"><strong>20 Guided Play-Along
                         Lessons. <br>
                         {{-- 4 Weekly Q&A Sessions. <br> --}}
-                        Lifetime Course Access. <br> 
+                        Lifetime Course Access. <br>
                         </h5>
 
                 <div class="flex flex-col items-start">
@@ -1221,7 +1221,7 @@
 
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
                     <a class="px-5 sm:px-7 py-7 sm:py-8 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-10/12 z-10" style="background: #ffffff;"
-                      
+
                     href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1"
                                              >
                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
@@ -1231,7 +1231,7 @@
                     <p class="text-sm mt-2 mb-3">Learn the language of music in just 30 days.</p>
                     <h2 class="inline-block"><strong class="text-4xl"> @if($productPrices['read-music-in-30-days']->price > $productPrices['read-music-in-30-days']->discounted_price)
                         <s class="opacity-60">${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}</s>
-                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} <span class="text-sm md:text-base">(SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)</span>                  
+                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} <span class="text-sm md:text-base">(SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)</span>
                         @else
                         Only ${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}
                     @endif</strong></h2>
@@ -1274,7 +1274,7 @@
                     </p>
                 </a> --}}
             </div>
-           
+
         </div>
     </section>
 

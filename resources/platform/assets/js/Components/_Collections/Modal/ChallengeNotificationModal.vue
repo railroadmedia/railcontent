@@ -1,10 +1,10 @@
 <template>
-    <InfoModal :selfContained="true" class-override="tw-max-w-[510px] tw-w-full" :hide-x-icon="true" :disable-overlay-click="true" @onClose="emit('modalClose')">
+    <InfoModal :selfContained="true" class-override="tw-max-w-[510px] tw-w-full" :hide-x-icon="hideXIcon" :disable-overlay-click="hideXIcon" @onClose="emit('modalClose')">
         <div class="tw-flex tw-flex-col tw-justify-center dark:tw-text-white tw-text-center">
             <!-- Dark mode Logo -->
-            <img class="tw-h-24 tw-object-contain tw-mb-5 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge?.dark_mode_logo_url}`" alt="challenge dark mode logo" />
+            <img class="tw-h-24 tw-object-contain tw-mb-5 tw-hidden dark:tw-block" :class="!hideXIcon ? '-tw-mt-[50px]' : ''" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge?.dark_mode_logo_url}`" alt="challenge dark mode logo" />
             <!-- Light mode Logo -->
-            <img class="tw-h-24 tw-object-contain tw-mb-5 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge?.light_mode_logo_url}`" alt="challenge light mode logo" />
+            <img class="tw-h-24 tw-object-contain tw-mb-5 dark:tw-hidden" :class="!hideXIcon ? '-tw-mt-[50px]' : ''" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge?.light_mode_logo_url}`" alt="challenge light mode logo" />
 
             <!-- Step 1 -->
             <template v-if="step === 1">
@@ -35,7 +35,7 @@
                 <h1 class="tw-mb-3 tw-text-2xl tw-font-bold">{{ challengeTitle }} starts on {{ startDate }}</h1>
                 <div class="tw-mb-[10px] tw-flex tw-justify-center">
                     <!-- Avatars -->
-                    <div v-for="(avatar, index) in challengeData.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-3' : ''" :style="`background-image: url('https://www.musora.com/cdn-cgi/image/width=40,quality=95/${avatar.profile_picture_url}')`"></div>
+                    <div v-for="(avatar, index) in challengeData.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-3' : ''" :style="`background-image: url('${avatar.profile_picture_url}')`"></div>
                     <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3 tw-transition-all tw-duration-1000" :class="slideIn ? '' : 'tw-absolute tw-opacity-0 tw-translate-x-10'" :style="`background-image: url('${userProfilePictureUrl}')`"></div>
                 </div>
                 <p class="tw-text-left">You’ve joined <span class="tw-font-bold">{{ userNames }}</span> and <span class="tw-font-bold">{{ challengeData.total }}</span> other {{ otherText }} who have already enrolled! {{ challengeTitle }} runs from {{ durationText }}</p>
@@ -56,7 +56,8 @@ import { storeToRefs } from "pinia/dist/pinia";
 import {
     postChallengesSetStartDate,
     fetchChallengeMetadata,
-    postChallengesCommunityNotification
+    postChallengesCommunityNotification,
+    postChallengesSoloNotification,
 } from 'musora-content-services';
 
 import InfoModal from '@collections/Modal/InfoModal';
@@ -79,6 +80,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    hideXIcon: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const emit = defineEmits(['modalClose', 'onReFetchData']);
@@ -87,7 +92,7 @@ const userStore = useUserStore();
 const { userProfilePictureUrl, brand } = storeToRefs(userStore);
 
 const selectedFrequency = ref(true);
-const step = ref(props.defaultStep !== 0 ? props.defaultStep : props.challengeType === 'community' ? 1 : 2);
+const step = ref(props.defaultStep !== 0 ? props.defaultStep : 1);
 const selectedDate = ref(new Date(Date.now()));
 const slideIn = ref(false);
 const challengeData = ref({
@@ -122,7 +127,7 @@ const challengeTitle = computed(() => {
 })
 
 const startDate = computed(() => {
-    const converted = new Date(props.challenge.published_on);
+    const converted = new Date(props.challenge.cohort_start_date);
     return `${months[converted.getMonth()]} ${converted.getDate()}`;
 })
 
@@ -145,17 +150,18 @@ const handleFrequencyChange = (val) => {
 
 const handleNext = async () => {
     try {
-        if(props.challengeType === 'community'){
-            if(selectedFrequency.value){
-                const setNotification = await postChallengesCommunityNotification(props.challenge.id);
-                const data = await fetchChallengeMetadata(props.challenge.id);
-                challengeData.value = data;
-
-                setTimeout(() => {
-                    slideIn.value = true;
-                },1500)
+        if(selectedFrequency.value){
+            if(props.challengeType === 'community'){
+                await postChallengesCommunityNotification(props.challenge.id);
+            } else {
+                await postChallengesSoloNotification(props.challenge.id);
             }
         }
+        challengeData.value = await fetchChallengeMetadata(props.challenge.id);
+
+        setTimeout(() => {
+            slideIn.value = true;
+        },1500)
 
         step.value = 2;
     } catch (e) {

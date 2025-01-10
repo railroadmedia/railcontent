@@ -23,6 +23,11 @@
                 :preLoadedContent="data?.carousels"
             />
 
+            <!-- NOTE: Challenges/Sanity launch: Old carousel not needed anymore (for now), so it's commented out -->
+            <!-- "just don't lose the code" - BUTLER, Chris; circa Dec 2024 -->
+            <!-- Header carousel -->
+            <!-- <HeaderCarousel v-if="!isV2User" :preloadedCarousel="carousel" trackingSection="banner" /> -->
+
             <!-- Cohort banner -->
             <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
 
@@ -69,9 +74,8 @@
 
             <!-- Playlist section add arrows -->
             <ListSection
-                v-if="usersList.length"
-                :newContentUrl="newContentUrl"
-                :usersList="playlistsStore.playlists"
+                v-if="playlists.length"
+                :usersList="playlists"
                 :my-list-url="`/${brand}/playlists`"
             />
 
@@ -166,7 +170,6 @@
     import { useUserStore } from "@stores/user";
     import {storeToRefs} from "pinia/dist/pinia";
     import { usePlaylistsStore } from "@stores/playlists";
-    import { fetchAll } from 'musora-content-services';
 
     import CohortBanner from '@collections/CohortBanner/CohortBanner.vue';
     import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
@@ -185,8 +188,9 @@
     const playlistsStore = usePlaylistsStore();
     const userStore = useUserStore();
     const platformStore = usePlatformStore();
-    const { brand, userId, token, showOnboardingBanner, userHas30Days, isFirstAccess, userFirstName, userDisplayName } = storeToRefs(userStore);
+    const { brand, userId, token, showOnboardingBanner, userHas30Days, userFirstName, userDisplayName } = storeToRefs(userStore);
     const { isLoading } = storeToRefs(platformStore);
+    const { playlists } = storeToRefs(playlistsStore);
 
     const props = defineProps({
         // String props
@@ -211,6 +215,7 @@
         nextLearningPathProgressPercent: { type: Number, default: 0 },
 
         // Array props
+        // carousel: { type: Array, default: () => ([]) },
         cohortBanner: { type: Array, default: () => ([]) },
         conversationData: { type: Array, default: () => ([]) },
         packData: { type: Array, default: () => ([]) },
@@ -221,16 +226,16 @@
         courseData: { type: Object, default: () => ({}) },
         newContent: { type: Object, default: () => ({}) },
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
-        usersList: { type: Object, default: () => ({}) },
-        userMetrics: { type: Object, default: () => ({}) }
+        userMetrics: { type: Object, default: () => ({}) },
+        isFirstAccess: { type: Boolean, default: false },
     });
 
     const welcomeMessage = computed(() => {
-        if (isFirstAccess.value) {
-            return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome back, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Let's get practicing</div>`
-        } else {
+        if (props.isFirstAccess) {
             return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Start Here</div>`
         }
+
+        return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome back, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Let's get practicing!</div>`
     })
 
     //Computed
@@ -283,26 +288,8 @@
 
     //Lifecycles
     onBeforeMount( async () => {
-        playlistsStore.playlists = props.usersList;
-        if(isPackOrChallengeOnlyBoolean.value){
-            const [challenges, packs] = await Promise.all([
-                fetchAll(brand.value, 'challenge', {
-                    limit: 30,
-                }),
-                fetchAll(brand.value, 'pack', {
-                    limit: 30,
-                })
-            ]);
-
-            data.value = {
-                challenges: challenges.entity,
-                packs: packs.entity,
-            }
-
-        } else {
-            const { data: homeData } = await useHomePageData(brand.value, userId.value, token.value);
-            data.value = homeData.value;
-        }
+        const { data: homeData } = await useHomePageData(brand.value, isPackOrChallengeOnlyBoolean.value);
+        data.value = homeData.value;
 
         platformStore.setLoadingState(false);
     });
@@ -311,5 +298,8 @@
         if (window.location.href.includes('create-playlist-window')) {
             openPlaylistModal();
         }
+
+        //Get Playlists
+        playlistsStore.getPlaylists({ brand: brand.value, limit: 24, sort: '-last_progress' }, token);
     });
 </script>

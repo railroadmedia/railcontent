@@ -18,7 +18,6 @@ use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -103,6 +102,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property int $notify_on_forum_post_like
  * @property int $notify_weekly_update
  * @property int $notify_on_lesson_comment_reply
+ * @property string|null $challenges_enrollment_notifications
+ * @property string|null $challenges_community_notifications
  * @property int $use_legacy_video_player
  * @property int|null $drums_skill_level
  * @property int|null $guitar_skill_level
@@ -254,6 +255,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property mixed|null $brand_total_xp
  * @property Collection $subscriptions
  * @property mixed|null $brand_minutes_practiced
+ * @property mixed|null $brand_seconds_practiced
  * @property Collection $notificationSettings
  * @property string|null $membership_level // can be 'basic' or 'plus'
  * @property-read int|null $notification_settings_count
@@ -356,7 +358,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             'brand_method_levels' => 'json',
             'brand_total_xp' => 'json',
             'brand_minutes_practiced' => 'json',
-            'needs_logout' => 'bool'
+            'brand_seconds_practiced' => 'json',
+            'needs_logout' => 'bool',
+            'challenges_enrollment_notifications' => 'array',
+            'challenges_community_notifications' => 'array',
+            'challenges_solo_notifications' => 'array',
         ];
     }
 
@@ -434,7 +440,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         $brand = brand();
 
-        if (isset($this->brand_minutes_practiced[$brand])) {
+        if (isset($this->brand_seconds_practiced[$brand])) {
+            return intval(round($this->brand_seconds_practiced[$brand] / 60, 0));
+        } elseif (isset($this->brand_minutes_practiced[$brand])) {
             return $this->brand_minutes_practiced[$brand];
         }
 
@@ -953,13 +961,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function isCoach(): Attribute
     {
         return Attribute::make(
-            get: function () {
-                return boolval(
-                    $this->associatedContent()
-                        ->where("is_coach", true)
-                        ->where("status", "published")
-                        ->count()
-                );
+            get: function ($value, $attributes) {
+                return $attributes['access_level'] == 'coach' || $attributes['access_level'] == 'house-coach';
             },
         );
     }

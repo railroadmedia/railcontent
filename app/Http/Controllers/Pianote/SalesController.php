@@ -32,8 +32,9 @@ class SalesController extends BaseController
 
     public function homeBF()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'bfVersion' => 'true', 'noEverflow' => true]);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'bfVersion' => 'true', 'noEverflow' => true]);
     }
+
     public function homeMonth()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'month' => true]);
@@ -65,6 +66,10 @@ class SalesController extends BaseController
     public function promoEG()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
+    }
+    public function promoNY()
+    {
+        return view('pianote.sales.new-year', ['theme' => 'pianote', 'promoVersion' => 'true', 'newYears' => 'true']);
     }
     public function promoWO()
     {
@@ -473,6 +478,10 @@ class SalesController extends BaseController
     {
         return view('pianote.products.practice-kit', ['theme' => 'pianote']);
     }
+    public function practicePlanner()
+    {
+        return view('pianote.products.practice-planner', ['theme' => 'pianote']);
+    }
 
     public function easyChordsTrial()
     {
@@ -569,6 +578,12 @@ class SalesController extends BaseController
     public function challengesBundle()
     {
         return view('pianote.products.challenges-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function bestBeginnerPianoBook()
+    {
+        return view('pianote.products.best-beginner-piano-book', [
             'theme' => 'pianote',
         ]);
     }

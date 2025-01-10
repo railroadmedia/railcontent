@@ -9,6 +9,7 @@ use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Services\ChallengesService;
 use Carbon\Carbon;
+use Modules\UserManagementSystem\Models\User;
 
 class MigrateChallengeV2Progress extends Command
 {
@@ -17,7 +18,7 @@ class MigrateChallengeV2Progress extends Command
      *
      * @var string
      */
-    protected $signature = 'MigrateChallengeV2Progress';
+    protected $signature = 'MigrateChallengeV2Progress {startIndex=0} {limit=1000}';
 
     /**
      * The console command description.
@@ -38,60 +39,151 @@ class MigrateChallengeV2Progress extends Command
     /**
      * Execute the console command.
      */
-    public function handle(ChallengesService $challengesService, SanityGateway $sanityGateway): void
+    public function handle(ChallengesService $challengesService, SanityGateway $sanityGateway): int
     {
-        $this->withExecutionTime(function () use ($sanityGateway, $challengesService) {
-            $this->migrate($challengesService, $sanityGateway);
+        $startIndex = (int)$this->argument('startIndex') ?? 0;
+        $limit = (int)$this->argument('limit') ?? 0;
+        $this->withExecutionTime(function () use ($sanityGateway, $challengesService, $startIndex, $limit) {
+            $this->info("$this->name: $startIndex - $limit");
+            try {
+                $this->migrate($challengesService, $sanityGateway, $startIndex, $limit);
+            } catch (\Throwable $exception) {
+                \Log::error($exception->getMessage());
+                return self::FAILURE;
+            }
         });
+        return self::SUCCESS;
     }
 
-    public function migrate(ChallengesService $challengesService, SanityGateway $sanityGateway): void
-    {
-        $minId = 63500000; //lines up with Nov 16th
-        $challengesProgressLookup = ChallengeUserProgress::all()->keyBy(function ($userChallengeProgress) {
-            return $userChallengeProgress->user_id . "_" . $userChallengeProgress->content_id;
-        });
-        $challengesLookup = collect($sanityGateway->getAllByType('challenge'), 1000)->keyBy('railcontent_id');
+    public function migrate(
+        ChallengesService $challengesService,
+        SanityGateway $sanityGateway,
+        $startIndex,
+        $limit
+    ): void {
+        $minId = 59000000;
+        $maxId = 64800000;
+
+        $contentIdsByLessonId = [];
+        $lessonIdsByChallenge = [];
+
+        $challengesLookup = collect($sanityGateway->getAllByType('challenge', 1000))->keyBy('railcontent_id');
+
+        $challengeIdLookup = [
+            402201 => 383674,
+            402202 => 389065,
+            402197 => 389228,
+            402196 => 392886,
+            402199 => 404048,
+            404657 => 404800,
+            413222 => 406312,
+            409875 => 406383,
+            410037 => 407309,
+            410337 => 407962,
+            410496 => 410409,
+            412987 => 410537,
+            412785 => 411082,
+            414162 => 412431,
+            414419 => 413049,
+        ];
+
+        $challengeIdReverseLookup = [
+            383674 => 402201,
+            389065 => 402202,
+            389228 => 402197,
+            392886 => 402196,
+            404048 => 402199,
+            404800 => 404657,
+            406312 => 413222,
+            406383 => 409875,
+            407309 => 410037,
+            407962 => 410337,
+            410409 => 410496,
+            410537 => 412987,
+            411082 => 412785,
+            412431 => 414162,
+            413049 => 414419,
+        ];
+        $this->info("MigrateChallengeV2Progress:  Look up lessons");
+
         $lessonLookup = collect();
         foreach ($challengesLookup as $challenge) {
+            $challengeId = $challenge['id'];
+            $mappedChallengeId = $challengeIdLookup[$challenge['id']] ?? 0;
             foreach ($challenge['lessons'] as $lesson) {
                 $lessonLookup[$lesson['id']] = $lesson;
+                $ids = [$lesson['id']];
+                if ($mappedChallengeId) {
+                    $lessonId = $lesson['id'];
+                    $slug = $lesson['slug'];
+                    $title = str_replace("'", "''", $lesson['title']);
+                    $query = "select c.id, c.slug, c.title from railcontent_content_hierarchy h inner join railcontent_content_hierarchy h2 on h.child_id = h2.parent_id
+inner join railcontent_content c on h2.child_id = c.id
+where h.parent_id = $mappedChallengeId and (c.slug = '$slug' || c.title = '$title')";
+                    $oldContentId = \DB::select($query)[0]?->id ?? 0;
+                    if ($oldContentId) {
+                        $ids[] = $oldContentId;
+                        $slug2 = \DB::select($query)[0]?->slug ?? 0;
+                        $title2 = \DB::select($query)[0]?->title ?? 0;
+                        //$this->info("$lessonId $slug $title ==== $oldContentId $slug2, $title2");
+                    } else {
+                        $this->info("Unable to find related lesson for challenge $challengeId lesson $lessonId $slug");
+                    }
+                }
+
+
+                $contentIdsByLessonId[$lesson['id']] = $ids;
+                $lessonIdsByChallenge[$challenge['id']] = array_merge(
+                    $ids,
+                    $lessonIdsByChallenge[$challenge['id']] ?? []
+                );
             }
         }
 
 
         $challengeIds = $challengesLookup->keys()->toArray();
-        $userIds = ContentUserProgress::query()
-            ->selectRaw('distinct user_id')
-            ->where('id', '>=', $minId)
-            ->whereIn('content_id', $challengeIds)
-            ->where('state', '=', 'started')
-            ->orderBy('user_id')
-            ->get()
-            ->pluck('user_id')
-            ->toArray();
-
+        foreach ($challengeIds as $index => $challengeId) {
+            $challengeIds[$index] = $challengeIdLookup[$challengeId] ?? $challengeId;
+        }
+        $userIds = User::query()->select('id')->skip($startIndex)->take($limit)->get()->pluck('id')->toArray();
+        $challengesProgressLookup = ChallengeUserProgress::query()->whereIn('user_id', $userIds)->get()->keyBy(
+            function ($userChallengeProgress) {
+                return $userChallengeProgress->user_id . "_" . $userChallengeProgress->content_id;
+            }
+        );
+        $clause = new Carbon('2024-11-16');
+        $clause2 = new Carbon('2024-12-17');
         $processed = 0;
         $total = count($userIds);
         $this->info("MigrateChallengeV2Progress:  $total users to process");
         foreach ($userIds as $userId) {
+//            if ($processed < $startIndex) {
+//                $processed++;
+//                continue;
+//            }
             Timer::afterSeconds(5, function () use ($processed, $total) {
-                $this->info("Processed $processed/$total users");
+                $this->info("MigrateChallengeV2Progress: Processed $processed/$total users");
             });
             $challengeUserProgressLookup = ContentUserProgress::query()
                 ->where('user_id', $userId)
                 ->where('id', '>=', $minId)
+                ->where('id', '<', $maxId)
+                ->where('updated_on', '>', '2024-11-16')
                 ->whereIn('content_id', $challengeIds)
                 ->get()
                 ->keyBy('content_id');
-            foreach ($challengeUserProgressLookup as $challengeId => $challengeProgressData) {
-                $challengeProgress = $challengesProgressLookup->get($userId . "_" . $challengeId);
-                if ($challengeProgress || $challengeProgressData->state != 'started') {
+            foreach ($challengeUserProgressLookup as $challengeId2 => $challengeProgressData) {
+                $challengeId = $challengeIdReverseLookup[$challengeId2] ?? $challengeId2;
+                if ($challengeProgressData->state != 'started') {
                     continue;
                 }
+
+                $challengeProgress = $challengesProgressLookup->get($userId . "_" . $challengeId);
+
                 $challenge = $challengesLookup[$challengeId];
 
-                $lessonIds = collect($challenge['lessons'])->pluck('id')->toArray();
+                $lessonIds = $lessonIdsByChallenge[$challenge['id']];
+
                 $lessonCompletedLookup = ContentUserProgress::query()
                     ->where('user_id', $userId)
                     ->where('id', '>=', $minId)
@@ -99,37 +191,55 @@ class MigrateChallengeV2Progress extends Command
                     ->where('state', '=', 'completed')
                     ->get()
                     ->keyBy('content_id');
-
-                $hasCompletedLessons = $lessonCompletedLookup->count() > 0;
+                $hasCompletedLessons = $lessonCompletedLookup->filter(function ($item) use ($clause2, $clause) {
+                        $updatedOn = Carbon::parse($item->updated_on);
+                        return $updatedOn > $clause && $updatedOn < $clause2;
+                    })->count() > 0;
                 if ($hasCompletedLessons) {
-                    $challengeStartDate = Carbon::parse($challengeProgressData->started_on)->toDate();
-                    try {
-                        $challengesService->startChallenge(
-                            $challengeId,
-                            $userId,
-                            startDate: $challengeStartDate,
-                            isLocked: false,
-                            challenge: $challenge,
-                        );
-                    } catch (\Throwable $exception) {
-                        $this->info("Error starting challenge user $userId challenge $challengeId");
-                        $this->info($exception->getMessage());
-                    }
-                    foreach ($lessonCompletedLookup as $completedLessonId => $completedLesson) {
-                        $lesson = $lessonLookup[$completedLessonId];
+                    if (!$challengeProgress) {
+                        $this->info("MigrateChallengeV2Progress: Syncing Progress $userId $challengeId");
+                        $challengeStartDate = Carbon::parse($challengeProgressData->started_on)->toDate();
                         try {
-                            $challengesService->completeLessonAndGetCurrentProgressResults(
-                                $completedLessonId,
+                            $challengeProgress = $challengesService->startChallenge(
+                                $challengeId,
                                 $userId,
-                                Carbon::parse($completedLesson->updated_on),
-                                $lesson,
-                                $challenge
+                                startDate: $challengeStartDate,
+                                isLocked: false,
+                                challenge: $challenge,
                             );
+                            sleep(1);
                         } catch (\Throwable $exception) {
-                            $this->info(
-                                "Error setting lesson completed for user $userId challenge $challengeId lesson $completedLessonId"
-                            );
+                            $this->info("Error starting challenge user $userId challenge $challengeId");
                             $this->info($exception->getMessage());
+                        }
+                    }
+                    if ($challengeProgress->is_locked) {
+                        $this->info("MigrateChallengeV2Progress: Unlocking Challenge $userId $challengeId");
+                        $challengesService->unlockChallenge($challengeId, $userId);
+                    }
+
+                    foreach ($challenge['lessons'] as $lesson) {
+                        $contentIdsForLesson = $contentIdsByLessonId[$lesson['id']] ?? [];
+                        foreach ($contentIdsForLesson as $contentId) {
+                            $completedLesson = $lessonCompletedLookup[$contentId] ?? '';
+                            if ($completedLesson) {
+                                $completedLessonId = $lesson['id'];
+                                try {
+                                    $challengesService->completeLessonAndGetCurrentProgressResults(
+                                        $completedLessonId,
+                                        $userId,
+                                        Carbon::parse($completedLesson->updated_on),
+                                        $lesson,
+                                        $challenge,
+                                        $challengeProgress
+                                    );
+                                } catch (\Throwable $exception) {
+                                    $this->info(
+                                        "Error setting lesson completed for user $userId challenge $challengeId lesson $completedLessonId"
+                                    );
+                                    $this->info($exception->getMessage());
+                                }
+                            }
                         }
                     }
                 }

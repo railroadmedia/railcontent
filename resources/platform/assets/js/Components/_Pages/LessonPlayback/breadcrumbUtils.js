@@ -1,5 +1,3 @@
-
-
 const parseLessonTypeReadable = (type, plural = false) => {
     switch (type) {
         case 'course-part':
@@ -79,22 +77,17 @@ export const getBreadcrumbs = (data, brand) => {
                 title: 'Challenges',
                 url: `/${brand}/challenge`
             });
-            breadcrumb.pages.push({
-                title: data.parent_content_data?.[0]?.slug ?? '',
-                url: `/${brand}/challenge/${data.parent_content_data?.[0]?.slug ?? ''}/${data.parent_content_data?.[0]?.id}`
-            });
+
+            const parentData = getParentData(data.parent_content_data);
+            breadcrumb.pages = breadcrumb.pages.concat(parentData);
+
             breadcrumb.pages.push({
                 title: data.title
             });
         } else if (data.type === 'learning-path-lesson') {
-            breadcrumb.pages.push({
-                title: `${data.brand} Method`,
-                url: `/${brand}/method/${data.parent_content_data?.[2]?.slug}/${data.parent_content_data?.[2]?.id}`
-            });
-            breadcrumb.pages.push({
-                title: data.parent_content_data?.[0]?.slug ?? '',
-                url: `/${brand}/method/${data.slug.current}/${data.id}/${data.parent_content_data?.[1]?.slug}/${data.parent_content_data?.[1]?.id}/${data.parent_content_data?.[0]?.slug}/${data.parent_content_data?.[0]?.id}`
-            });
+            const parentData = getParentData(data.parent_content_data);
+            breadcrumb.pages = breadcrumb.pages.concat(parentData);
+
             breadcrumb.pages.push({
                 title: data.title
             });
@@ -112,44 +105,31 @@ export const getBreadcrumbs = (data, brand) => {
             breadcrumb.pages.push({
                 title: data.title
             });
-        } else if (data.parent_content_data?.[0]) {
+        } else if (data.parent_content_data && data.parent_content_data.length > 0) {
             if (data.type === 'pack-bundle-lesson') {
                 breadcrumb.pages.push({
                     title: 'Packs',
                     url: `/${brand}/packs`
                 });
-                breadcrumb.pages.push({
-                    title: parseLessonTypeReadable(data.parent_content_data[0].slug) ?? '',
-                    url: `/${brand}/packs/${data.parent_content_data[0].slug}/${data.parent_content_data[0]?.id}`
-                });
-                breadcrumb.pages.push({
-                    title: data.title
-                });
+
             } else if (data.type === 'course-part') {
                 breadcrumb.pages.push({
                     title: 'Courses',
                     url: `/${brand}/courses`
-                });
-                breadcrumb.pages.push({
-                    title: parseLessonTypeReadable(data.parent_content_data[0].slug) ?? '',
-                    url: `/${brand}/courses/${data.parent_content_data[0].slug}/${data.parent_content_data[0].id}`
-                });
-                breadcrumb.pages.push({
-                    title: data.title
                 });
             } else {
                 breadcrumb.pages.push({
                     title: parseLessonTypeReadable(data.parent_content_data[0].type, true),
                     url: `/${brand}/${data.type}/${data.parent_content_data[0].type}`
                 });
-                breadcrumb.pages.push({
-                    title: data.parent_content_data[0].slug ?? '',
-                    url: data.parent_content_data[0].url ?? ''
-                });
-                breadcrumb.pages.push({
-                    title: data.title
-                });
             }
+
+            const parentData = getParentData(data.parent_content_data);
+            breadcrumb.pages = breadcrumb.pages.concat(parentData);
+
+            breadcrumb.pages.push({
+                title: data.title
+            });
         } else {
             const backUrl = data.url.split(data.slug.current)[0];
             breadcrumb.pages.push({
@@ -164,3 +144,14 @@ export const getBreadcrumbs = (data, brand) => {
         // Todo: Verify if the breadcrumb override is used at all
         return breadcrumb.pages;
 };
+
+const getParentData = (data) => {
+    const temp = [];
+    data.forEach((parent) => {
+        temp.push({
+            title: parent.title,
+            url: parent.web_url_path,
+        });
+    })
+    return [...temp].reverse();
+}

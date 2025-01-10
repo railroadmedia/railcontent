@@ -12,8 +12,6 @@
             <MiniCatalogueSection
                 v-if="carousels.length > 0"
                 title="Featured Challenges"
-                :see-all-url="`/${brand}/challenge`"
-                seeAllAriaLabel="See All Challenges"
                 catalogue-type="challenge-carousel"
                 page-type="challenge"
                 :preLoadedContent="carousels"

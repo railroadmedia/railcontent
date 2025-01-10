@@ -465,7 +465,13 @@
                     <tr>
                         <td>Investment</td>
                         <td class="rounded-b-xl">
-                            <strong>$97</strong><br>
+                            @if(floatval($productPrices['30-day-double-bass']->price) > floatval($productPrices['30-day-double-bass']->discounted_price))
+                                <s class="opacity-50 font-extralight">${{ floatval($productPrices['30-day-double-bass']->price) }}</s>
+                                <strong>${{ floatval($productPrices['30-day-double-bass']->discounted_price) }}</strong>
+                            @else
+                                <strong>${{ floatval($productPrices['30-day-double-bass']->discounted_price) }}</strong>
+                            @endif
+                                <br>
                             <span class="text-xs">Single Payment</span></td>
                         <td class="rounded-bl-xl"><strong>$30-$100</strong><br> <span class="text-xs">Per
                                     Lesson</span></td>
@@ -599,98 +605,53 @@
     <div id="final" class="anchor"></div>
 
     @if(empty($platformVersion))
-        <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
-            style="background-color:#eff7ff;">
-            <div class="container mx-auto max-w-6xl relative z-50 text-center">
-                <img class="h-20 sm:h-28 transition-opacity opacity-0" loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
-                    alt="30 day Double Bass With 66Samus logo">
-                <h3 class="leading-tight mt-2 sm:mt-4"><strong>Boost your speed,<br class="sm:hidden"> control, and creativity.</strong></h3>
-                <p class="leading-normal my-3 my-4">
-                    <i class="fas fa-check text-drumeo ml-3"></i> 20 Guided Workouts<br class="sm:hidden">
-                    @if(!empty($platformVersion))
-                    <i class="fas fa-check text-drumeo ml-3"></i> 4 Live Q&A Sessions<br class="lg:hidden">
-                    @endif
-                    @if(empty($platformVersion))
-                    <i class="fas fa-check text-drumeo ml-3"></i> 90-Day Money Back Guarantee<br class="sm:hidden">
-                    @endif
-                    <i class="fas fa-check text-drumeo ml-3"></i> Lifetime Course Access
-                </p>
-{{--                <a x-on:click="waitlistModal = true;" class="join sold-out medium">JOIN WAITLIST</a>--}}
-{{--                <h6 class="leading-normal mb-4 text-drumeo uppercase">--}}
-{{--                    @if(empty($platformVersion))--}}
-{{--                    <span x-cloak x-data="timer()" x-init="countdown()">--}}
-{{--                        Enrollment closes in--}}
-{{--                        <strong>--}}
-{{--                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>!--}}
-{{--                            <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>--}}
-{{--                        </strong>--}}
-{{--                    </span>--}}
-{{--                    @endif--}}
-{{--                </h6>--}}
+        <section class="px-3 sm:px-0 text-center customize relative z-50 overflow-hidden" style="background: #eff7ff;">
+            <div class="container max-w-6xl mx-auto relative z-50" style="background: #eff7ff;">
+                <div class="flex flex-wrap items-center justify-center px-4 sm:px-6 py-10 md:py-10 lg:py-20">
+                    <div class="text-center w-full sm:w-1/2 lg:w-5/12 sm:pl-5" style="background: #eff7ff;">
+                        <img class="h-20 sm:h-24 lg:h-26 -mb-3 sm:mb-0 lg:mb-3 transition duration-300 ease-in-out" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="30 day double bass logo">
+                        <h1 class="py-6 sm:py-4"><strong>Boost your speed, control, and creativity.</strong></h1>
+                        <div class="text-center sm:pb-5">
+                            <ul>
+                                <li>
+                                    <p class="pt-2"><i class="fas fa-check text-drumeo pr-1" aria-hidden="true"></i>
+                                        20 guided play-along lessons.</p>
+                                </li>
+                                <li>
+                                    <p class="pt-2"><i class="fas fa-check text-drumeo pr-1" aria-hidden="true"></i>
+                                        Lifetime access to watch &amp; re-watch.</p>
+                                </li>
+                                <li class="text-drumeo">
+                                    <p class="pt-2"><i class="fas fa-sharp fa-solid fa-certificate pr-1" aria-hidden="true"></i>
+                                        <strong>90-day money-back guarantee.</strong></p>
+                                </li>
+                            </ul>
+                            <div class="flex flex-wrap flex-col sm:flex-nowrap md:flex-row items-center justify-center mt-6 sm:mt-5 lg:mt-10">
+                                <div class="w-full md:w-2/3 text-center sm:pr-2 my-1">
+                                    <div class="w-full">
+                                        <a href="/ecommerce/add-to-cart?products[30-day-double-bass]=1" x-data="{ isHovered: false }">
+                                            <button class="text-xl md:text-2xl bg-drumeo uppercase rounded-full w-full sm:w-full md:w-full lg:w-full xl:w-full h-12 md:h-14 transition duration-300 ease-in-out text-white font-bebas tracking-widest" :style="'background-color: ' + (isHovered ? 'lighten($brand, 10%)' : 'bg-drumeo') + '; box-shadow: ' + (isHovered ? '0 0 7px rgba(0, 0, 0, 0.35)' : 'none') + '; filter: brightness(' + (isHovered ? '115%' : '100%') + ')'" @mouseenter="isHovered = true" @mouseleave="isHovered = false" style="background-color: bg-drumeo; box-shadow: none; filter: brightness(100%)">
+                                                GET STARTED
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full pt-4">
+                                <h5 class="leading-tight"> ONLY
+                                    @if(floatval($productPrices['30-day-double-bass']->price) > floatval($productPrices['30-day-double-bass']->discounted_price))
+                                        <s class="opacity-50 font-extralight">${{ floatval($productPrices['30-day-double-bass']->price) }}</s>
+                                        <strong>${{ floatval($productPrices['30-day-double-bass']->discounted_price) }}</strong>
+                                         <em class="text-drumeo text-sm">(Save {{ round(100 - (100 * (floatval($productPrices['30-day-double-bass']->discounted_price) / floatval($productPrices['30-day-double-bass']->price)))) }}%)</em>
+                                    @else
+                                        <strong>${{ floatval($productPrices['30-day-double-bass']->discounted_price) }}</strong>
+                                    @endif
+                                </h5>
+                            </div>
 
-                    <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10">
-                        @include('drumeo.products.partials._order-card', [
-                            'threeWide' => true,
-                            'header' => '30-Day Double Bass',
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course-no-pedal.png',
-                            'imageHeight' => 'h-32 md:h-40',
-                            'fullPrice' => "$".floatval($productPrices['30-day-jazz']->price),
-                            'price' => "$".floatval($productPrices['30-day-jazz']->discounted_price),
-                            'specialText' => "One time payment.",
-                            'cta' => 'GET STARTED',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1',
-                        ])
-{{--                        @include('drumeo.products.partials._order-card', [--}}
-{{--                            'threeWide' => true,--}}
-{{--                            'highlightBorder' => true,--}}
-{{--                            'badge' => 'Best Deal',--}}
-{{--                            'header' => 'Course +<br> Unlimited Lessons',--}}
-{{--                            'subheader' => '30-Day Double Bass<br> + Drumeo & 3 Bonuses',--}}
-{{--                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course.png',--}}
-{{--                            'imageHeight' => 'h-32 md:h-40',--}}
-{{--                            'price' => '$240',--}}
-{{--                            'specialText' => "Renews annually at $240.",--}}
-{{--                            'cta' => 'ENROLL NOW',--}}
-{{--                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',--}}
-{{--                            'bonuses' => [--}}
-{{--                                '<strong>30-Day Double Bass</strong>',--}}
-{{--                                '<strong>Drumeo Annual Membership</strong>',--}}
-{{--                                '<strong>FREE</strong> Double QuietKick',--}}
-{{--                                '<strong>FREE</strong> 30-Day Chops',--}}
-{{--                                '<strong>FREE</strong> 30-Day Independence',--}}
-{{--                            ],--}}
-{{--                        ])--}}
-{{--                        @include('drumeo.products.partials._order-card', [--}}
-{{--                            'threeWide' => true,--}}
-{{--                            'badge' => 'Double Pedal',--}}
-{{--                            'header' => 'Course + Pedal +<br> Unlimited Lessons',--}}
-{{--                            'subheader' => '30-Day Double Bass + Double Pedal<br> + Drumeo & 3 Bonuses',--}}
-{{--                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/demonator.png',--}}
-{{--                            'imageHeight' => 'h-32 md:h-40',--}}
-{{--                            'fullPrice' => '$1020',--}}
-{{--                            'price' => '$499',--}}
-{{--                            'specialText' => "Renews annually at $240.",--}}
-{{--                            'cta' => 'GET EVERYTHING',--}}
-{{--                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[pearl-demonator]=1&products[quietkick-double-bass]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&promo-code=pearl-annual-bundle&locked=true',--}}
-{{--                            'bonuses' => [--}}
-{{--                                '<strong>30-Day Double Bass</strong>',--}}
-{{--                                '<strong>Drumeo Annual Membership</strong>',--}}
-{{--                                '<strong>Pearl Demonator Double Pedal</strong>',--}}
-{{--                                '<strong>FREE</strong> Double QuietKick',--}}
-{{--                                '<strong>FREE</strong> 30-Day Chops',--}}
-{{--                                '<strong>FREE</strong> 30-Day Independence',--}}
-{{--                            ],--}}
-{{--                        ])--}}
-
+                        </div>
                     </div>
-
-{{--                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true">--}}
-{{--                <p><u><em><strong>Don't want to pay shipping?</strong> Click here to join Drumeo<br class="hidden sm:inline"> and get 30-Day Double Bass with no physical bonuses.</em></u></p></a>--}}
+                </div>
             </div>
         </section>
         {{-- <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">

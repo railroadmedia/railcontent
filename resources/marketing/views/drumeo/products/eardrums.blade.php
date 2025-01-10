@@ -773,7 +773,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
                         'imageHeight' => 'h-28 lg:h-32',
                         'fullPrice' => '$' . floatval($productPrices['drumeo-eardrums-black']->price),
-                        'price' => '$' . number_format(floatval($productPrices['drumeo-eardrums-black']->discounted_price), 2),
+                        'price' => '$' . floatval($productPrices['drumeo-eardrums-black']->discounted_price),
                         'specialText' => 'Just the IEMs',
                         'link' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1',
                         'cta' => 'SELECT',

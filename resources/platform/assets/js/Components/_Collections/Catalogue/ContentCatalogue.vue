@@ -393,7 +393,6 @@ export default {
                 this.selectedTab = 'allCoaches';
                 this.coachData['subscribedCoaches'] = [...this.content];
                 this.getContent(true, true);
-                console.log(this.coachData)
             });
 
             this.getFilterColumns();
@@ -661,7 +660,6 @@ export default {
         handleFilterChange(payload) {
             this.filter_params[payload.key] = payload.value;
             this.page = 1;
-            console.log(this.filter_params);
 
             if (this.useUrlParams) {
                 this.setUrlParams();

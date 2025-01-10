@@ -359,6 +359,11 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.digital-christmas-songbook', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
     }
 
+    public function chordsProgressionsDigitalBook()
+    {
+        return view('pianote.lead-gen.chords-progressions-digital-book', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
+    }
+
     public function leadgen(Request $request, $domain, $leadgenSlug = null)
     {
         $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->where('leadgens.visible', true)

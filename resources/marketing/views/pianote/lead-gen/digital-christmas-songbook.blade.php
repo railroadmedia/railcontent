@@ -44,18 +44,20 @@
                                 Enter your email address to get  <br class="lg:hidden">
                                 your FREE E-Book instantly.</strong></p>
                     </div>
-                    @include("pianote._partials.sign-up-form", [
-                     "recaptchaKey" => $recaptchaKey,
-                     "formName" => 'Digital Christmas Songbook',
-                     "formId" => "Pianote - Engagement - Trigger - Digital Christmas Songbook - Web Form",
-                     "buttonText" => "Get my book",
-                     "stacked" => true,
-                     "minimalForm" => true,
-                     "nameInput" => true,
-                     'inputBorder' => '1px solid #CCC',
-                 ])
+                    <div class="w-full lg:w-10/12">
+                        @include("pianote._partials.sign-up-form", [
+                        "recaptchaKey" => $recaptchaKey,
+                        "formName" => 'Digital Christmas Songbook',
+                        "formId" => "Pianote - Engagement - Trigger - Digital Christmas Songbook - Web Form",
+                        "buttonText" => "GET MY FREE E-BOOK",
+                        "stacked" => true,
+                        "minimalForm" => true,
+                        "nameInput" => true,
+                        'inputBorder' => '1px solid #CCC',
+                        ])
+                    </div>
                 </div>
-                <div class="hidden sm:w-1/2 lg:w-5/12 sm:block">
+                <div class="hidden sm:w-1/2 lg:w-6/12 sm:block">
                     <img class="w-full" alt="logo" fetchpriority="high"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/digital-christmas-songbook/devices.webp">
                 </div>
@@ -110,18 +112,20 @@
                                 Enter your email address to get  <br class="lg:hidden">
                                 your FREE E-Book instantly.</strong></p>
                     </div>
-                   @include("pianote._partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-                    "formName" => 'Digital Christmas Songbook',
-                    "formId" => "Pianote - Engagement - Trigger - Digital Christmas Songbook - Web Form2",
-                    "buttonText" => "Get my book",
-                    "stacked" => true,
-                    "minimalForm" => true,
-                    "nameInput" => true,
-                    'inputBorder' => '1px solid #CCC',
-                ])
+                    <div class="w-full lg:w-10/12">
+                        @include("pianote._partials.sign-up-form", [
+                            "recaptchaKey" => $recaptchaKey,
+                            "formName" => 'Digital Christmas Songbook',
+                            "formId" => "Pianote - Engagement - Trigger - Digital Christmas Songbook - Web Form2",
+                            "buttonText" => "GET MY FREE E-BOOK",
+                            "stacked" => true,
+                            "minimalForm" => true,
+                            "nameInput" => true,
+                            'inputBorder' => '1px solid #CCC',
+                        ])
+                    </div>
                 </div>
-                <div class="hidden sm:w-1/2 lg:w-5/12 sm:block">
+                <div class="hidden sm:w-1/2 lg:w-6/12 sm:block">
                 <img class="w-full" alt="logo" fetchpriority="high"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/digital-christmas-songbook/devices.webp">
             </div>

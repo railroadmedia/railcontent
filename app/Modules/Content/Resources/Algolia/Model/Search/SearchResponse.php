@@ -75,10 +75,12 @@ class SearchResponse extends AlgoliaSearchResponse
         $railcontentData = $contentService->getByIds($hits->pluck('railcontent_id')->toArray())->transform(fn (ContentEntity $entity) => $entity->dot())->keyBy('id');
 
         $hits->each(function ($hit) use ($railcontentData, &$data) {
-            try {
-                $data[] = $this->formatDataForHit($hit, $railcontentData[$hit->railcontent_id]);
-            } catch (Exception $e) {
-                Log::error($e->getMessage());
+            if ($railcontentData->has($hit->railcontent_id)) {
+                try {
+                    $data[] = $this->formatDataForHit($hit, $railcontentData[$hit->railcontent_id]);
+                } catch (Exception $e) {
+                    Log::error($e->getMessage());
+                }
             }
         });
 
@@ -132,7 +134,6 @@ class SearchResponse extends AlgoliaSearchResponse
         $data["quarter_removed"] = $contentData['quarter_removed'] instanceof Carbon ? $contentData['quarter_removed']->toDateString() : $contentData['quarter_removed'];
         $data["quarter_published"] = $contentData['quarter_published'] instanceof Carbon ? $contentData['quarter_published']->toDateString() : $contentData['quarter_published'];
         $data["instructors"] = $contentData['*instructors'] ?? [];
-        $data["coaches"] = $contentData['*coaches'] ?? [];
         $data["user_playlists"] = $contentData['*user_playlists'] ?? [];
         $data["published_on_in_timezone"] = $contentData['published_on_in_timezone'] instanceof Carbon ? $contentData['published_on_in_timezone']->toDateString() : $contentData['published_on_in_timezone'];
         $data['data'] = $contentData['*data'] ?? [];
@@ -142,11 +143,21 @@ class SearchResponse extends AlgoliaSearchResponse
         foreach (array_keys($contentData) as $key) {
             if (!array_key_exists($key, $data)
                 && $key !== 'compiled_view_data'
-                && !Str::startsWith($key, ['instructors.', 'coaches.', 'data.', 'fields.', 'user_playlists.'])) {
+                && !Str::startsWith($key, ['instructors.', 'coaches.', 'data.', 'fields.', 'user_playlists.', 'chapters.', 'assignments.', '*'])) {
                 $data[$key] = $contentData[$key];
             }
         }
 
         return $data;
+    }
+
+    public function getPage(): ?int
+    {
+        $page = parent::getPage();
+        // DEV NOTE: Algolia does pagination using 0th-based indexing, so convert to our normal "page" if we have one
+        if (!is_null($page)) {
+            ++$page;
+        }
+        return $page;
     }
 }

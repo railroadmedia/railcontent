@@ -169,7 +169,7 @@
 
            <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
 
-                    <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&locked=true">GET STARTED</a>
+                    <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&promo-code=CCPCP24&locked=true">GET STARTED</a>
                 <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
                         @click="trailer = true;">
                         &nbsp;Watch The Trailer
@@ -491,10 +491,8 @@
                     @endif
                 @endforeach
             </div>
-
-            </div>
         </div>
-                <div class="container max-w-4xl px-4 mx-auto text-left md:hidden pb-10">
+        <div class="container max-w-4xl px-4 mx-auto text-left md:hidden pb-10">
             @foreach ($gettings as $key => $getting)
                 <div class="mb-4" x-data="{ open: {{ $key === 0 ? 'true' : 'false' }} }" @click="open = !open">
                     <div class="w-full text-left flex justify-between items-center p-4 bg-gradient-to-b from-[#F4F0EB] to-white rounded-xl">
@@ -512,11 +510,12 @@
                     </div>
                 </div>
             @endforeach
+                <a class="anchor-slide join w-11/12 sm:w-3/4 max-w-lg bg-pianote" href="#customize-anchor">claim your bonuses</a>
         </div>
-          <a class="anchor-slide join w-11/12 sm:w-3/4 max-w-lg bg-pianote" href="#customize-anchor">claim your bonuses</a>
-            <div class="container px-4 sm:mx-auto max-w-xl text-black opacity-50 pt-4 lg:pt-6 leading-none">
-             <p class="text-sm">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>
-            <a class="underline cursor-pointer text-sm" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&locked=true">Click here to choose that option.</a>
+{{--            <div class="container px-4 sm:mx-auto max-w-xl text-black opacity-50 pt-4 lg:pt-6 leading-none">--}}
+{{--             <p class="text-sm">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>--}}
+{{--            <a class="underline cursor-pointer text-sm" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&locked=true">Click here to choose that option.</a>--}}
+{{--            </div>--}}
     </section>
 
     <section class="px-5 sm:px-6 pt-10 md::pt-16 lg:pt-20 relative text-white" style="background-color:#F4F0EB;">
@@ -555,7 +554,6 @@
     @endphp
     @include('musora.sales.components.testimonials-section-members', [
         'header' => 'Join The Best Online Piano Community',
-        'bgSplide' => '#f61a30',
         'bgColor' => 'linear-gradient(to bottom, #FFFFFF 20%, #F4F0EB 80%);',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
@@ -667,12 +665,12 @@
                 <s class="text-black opacity-40">${{ (floatval($originalPrice)) }}</s>
                 <span class="text-black">${{ (floatval($discountedPrice)) }}</strong>/yr</span>
             </h3>
-            <a class="join w-3/4 bg-pianote" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&locked=true">GET STARTED</a>
-            <br>
-            <div class="container mx-auto max-w-xl text-black pt-4 lg:pt-6 leading-none">
-                <p class="text-sm">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>
-                <a class="underline cursor-pointer text-sm" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&locked=true">Click here to choose that option.</a>
-            </div>
+            <a class="join w-3/4 bg-pianote" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&promo-code=CCPCP24&locked=true">GET STARTED</a>
+{{--            <br>--}}
+{{--            <div class="container mx-auto max-w-xl text-black pt-4 lg:pt-6 leading-none">--}}
+{{--                <p class="text-sm">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>--}}
+{{--                <a class="underline cursor-pointer text-sm" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&locked=true">Click here to choose that option.</a>--}}
+{{--            </div>--}}
         </div>
     </section>
 </div>

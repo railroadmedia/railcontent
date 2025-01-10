@@ -44,13 +44,16 @@ class SanityGateway
         "'description': description[0].children[0].text",
         "'artist_name':coalesce(artist->name, instructor[0]->name)",
         "'lesson_count': child_count",
-        "parent_content_data"
+        "parent_content_data",
+        'soundslice_slug',
     ];
 
     private array $contentSpecificFields = [
         'challenge' => [
             'enrollment_start_time',
             'enrollment_end_time',
+            'cohort_start_date',
+            'cohort_end_date',
             "'registration_url': '/' + brand + '/enrollment/' + slug.current",
             'is_solo',
             '"lesson_count": child_count',
@@ -108,7 +111,13 @@ class SanityGateway
                 is_always_unlocked_for_challenge,
                 is_bonus_content_for_challenge,
                 video,
-                parent_content_data,
+                "parent_content_data": parent_content_data[]{
+                    "id": id,
+                    "title": *[railcontent_id == ^.id][0].title,
+                    "web_url_path": *[railcontent_id == ^.id][0].web_url_path,
+                    "slug": *[railcontent_id == ^.id][0].slug,
+                    "type": *[railcontent_id == ^.id][0]._type,
+                },
                 "chapters": chapter[]{
                     chapter_description,
                     chapter_timecode,
@@ -124,7 +133,7 @@ class SanityGateway
                     "title":assignment_title,
                 },
                 soundslice_slug,
-                "resources": resource,
+                "resources": resource[]{resource_name, _key, "resource_url": coalesce("https://d3fzm1tzeyr5n3.cloudfront.net"+string::split(resource_aws.asset->fileURL,"https://s3.us-east-1.amazonaws.com/musora-web-platform")[1], resource_url )},
             }',
             'product_id',
             'is_banner_draft',
@@ -143,8 +152,11 @@ class SanityGateway
                 }',
             'parent_content_data',
             'video',
-            "'soundslice_slug':soundslice[0]['soundslice_slug']",
-            '"resources": resource',
+            "'soundslice_slug': coalesce(soundslice_slug, soundslice[0]['soundslice_slug'])",
+            '"resources": resource[]{resource_name, _key, "resource_url": coalesce(
+            "https://d3fzm1tzeyr5n3.cloudfront.net"+string::split(resource_aws.asset->fileURL,"https://s3.us-east-1.amazonaws.com/musora-web-platform")[1],
+            resource_url
+          )}',
             "instrumentless",
             "high_soundslice_slug",
             "low_soundslice_slug",
@@ -176,6 +188,7 @@ class SanityGateway
     ];
 
     private UserPermissionsRepository $userPermissionsRepository;
+    private ?array $userPermissionsCached = null;
 
     public SanityClient $sanity;
 
@@ -335,9 +348,10 @@ class SanityGateway
         $query = "*[_type == 'challenge']{
             'sanity_id': _id,
             'id': railcontent_id,
-            'product_id',
-            'is_solo'
+            product_id,
+            is_solo
         }";
+
         $results = $this->sanity->fetch($query);
         return $results;
     }
@@ -355,8 +369,9 @@ class SanityGateway
             $fieldsString
         }";
         $results = $this->sanity->fetch($query);
-        foreach ($results as $document) {
-            $this->postProcessDocument($document);
+
+        foreach ($results as $index => $document) {
+            $this->postProcessDocument($results[$index]);
         }
         return $results;
     }
@@ -396,13 +411,42 @@ class SanityGateway
             $enrollmentDateString
             $publishedOnString
             $cardStatusQuery]{
+            display_order,
             $challengeFields,
         }";
         $results = $this->sanity->fetch($query);
         $filtered = [];
         foreach ($results as $document) {
             $this->postProcessDocument($document);
-            if(!$document['need_access']) { //filter out open enrollment challenges if they don't have access
+            if (!$document['need_access']) { //filter out open enrollment challenges if they don't have access
+                $filtered[] = $document;
+            }
+        }
+        return $filtered;
+    }
+
+    public function getChallengePromotionalBannerCards(string $brand, bool $isAdmin): array
+    {
+        $cardStatusQuery = $isAdmin ? '' : '&& is_banner_draft != true';
+        $challengeFields = $this->getFieldsString('challenge');
+        $publishedOnString = $this->getPublishedFilter(false);
+        $now = now()->toISOString();
+        $startDateString = "(is_solo && is_custom_banner && start_time <= '$now' && '$now' <= end_time)";
+        $enrollmentDateString = "(enrollment_start_time <= '$now' && '$now' <= enrollment_end_time)";
+        $timeFilter = "&& ($startDateString || $enrollmentDateString)";
+        $query = "*[_type == 'challenge'
+            && brand == '$brand'
+            $timeFilter
+            $publishedOnString
+            $cardStatusQuery]{
+            display_order,
+            $challengeFields,
+        }";
+        $results = $this->sanity->fetch($query);
+        $filtered = [];
+        foreach ($results as $document) {
+            $this->postProcessDocument($document);
+            if (!$document['need_access']) { //filter out open enrollment challenges if they don't have access
                 $filtered[] = $document;
             }
         }
@@ -423,7 +467,10 @@ class SanityGateway
             ? ", 'parents': *[railcontent_id in (^.parent_content_data[].id)] {  $fieldsString }"
             : '';
         $query = "*[brand == '{$brand}' && railcontent_id in [{$parentIdsString}]]{
-          $fieldsString, resource $parentQuery,
+          $fieldsString, 'resource':resource[]{resource_name, _key, 'resource_url':  coalesce(
+            'https://d3fzm1tzeyr5n3.cloudfront.net'+string::split(resource_aws.asset->fileURL,'https://s3.us-east-1.amazonaws.com/musora-web-platform')[1],
+            resource_url
+          )} $parentQuery,
           'instructors_details': instructor[]->{
                     'id':railcontent_id,
                     name,
@@ -494,10 +541,12 @@ class SanityGateway
      * @param string $slug - Challenge Slug value
      * @return array | null - matching challenge document or null
      */
-    public function getChallengeEnrollmentPageData(string $slug): array | null
+    public function getChallengeEnrollmentPageData(string $slug, string $brand): array|null
     {
         $fieldsString = $this->getFieldsString('challenge-part');
-        $query = "*[slug.current == '$slug' && _type == 'challenge']{
+        $brandString = " && brand == '$brand'";
+        //$publishedOnString = $this->getPublishedFilter(true);
+        $query = "*[slug.current == '$slug' && _type == 'challenge' $brandString]{
                 'id': railcontent_id,
                 headline,
                 subheadline,
@@ -570,6 +619,7 @@ class SanityGateway
                 dropdown,
                 is_solo,
                 published_on,
+                status,
                 'next_lesson': child[0]->{
                     $fieldsString
                 }
@@ -581,63 +631,56 @@ class SanityGateway
         return $document;
     }
 
-    public function getOnboardingCard($brand, $access_level, $difficultyString)
+    public function getOnboardingCard($brand, $access_level, $difficultyString, bool $isAdmin = false)
     {
         $id = strtolower("onboarding_content_card_" . $brand . '_' . $access_level . '_' . $difficultyString);
         $fieldsString = $this->getFieldsString(null);
         $query = "*[_id == '$id' && _type == 'onboarding-content-card']{
-                      description,
-                      access_level,
-                      brand,
-                      experience_level,
-                      'first_content' : {
-                        'header' :first_content.header,
-                        'subheader': first_content.subheader,
-                        'squareImg': first_content.squareImg.asset->url,
-                        'wideImg': first_content.wideImg.asset->url,
-                        'bgImg': first_content.bgImg.asset->url,
-                        'logo': first_content.logo.asset->url,
-                        'content': first_content.content->{
+                    description,
+                    access_level,
+                    brand,
+                    _id,
+                    experience_level,
+                    'card': card[]{
+                        is_draft,
+                        header,
+                        subheader,
+                        'squareImg': squareImg.asset->url,
+                        'wideImg': wideImg.asset->url,
+                        'bgImg': bgImg.asset->url,
+                        'logo': logo.asset->url,
+                        'content': content->{
                           _type,
+                          'registration_url': '/' + brand + '/enrollment/' + slug.current,
                           $fieldsString
-                        }
-                      },
-                      'second_content' : {
-                        'header' :second_content.header,
-                        'subheader': second_content.subheader,
-                        'squareImg': second_content.squareImg.asset->url,
-                        'wideImg': second_content.wideImg.asset->url,
-                        'bgImg': second_content.bgImg.asset->url,
-                        'logo': second_content.logo.asset->url,
-                        'content': second_content.content->{
-                          _type,
-                          $fieldsString
-                        }
-                      },
+                        },
+                  },
         } [0 ... 1]";
         $document = $this->sanity->fetch($query)[0] ?? null;
-        if (is_null($document)) {
+        if (is_null($document) || is_null($document['card'])) {
             return $document;
         }
-        foreach(['first_content', 'second_content'] as $key) {
-            $document[$key] = $this->formatBannerCardParamaters($document[$key]);
+        $formattedCards = [];
+        foreach ($document['card'] as $index => $content) {
+            if ($isAdmin || !$content['is_draft']) {
+                $formattedCards[] = $this->formatBannerCardParamaters($content);
+            }
         }
+        $document['card'] = $formattedCards;
         return $document;
     }
 
-    public function getActiveBannerCards($brand, $showDrafts)
+    public function getActiveBannerCards($brand, $isAdmin)
     {
-        $statusString = $showDrafts ? '' : '&& is_draft != true';
+        $statusString = $isAdmin ? '' : '&& is_draft != true';
         $now = Carbon::now()->toISOString();
-        $timeRangeString = $showDrafts ? '' : "&& start_time <= '$now' && end_time >= '$now'";
+        $timeRangeString = "&& start_time <= '$now' && end_time >= '$now'";
         $query = "*[_type == 'banner-card' && brand == '$brand' $statusString $timeRangeString]{
                       brand,
                       display_order,
                       difficulty,
                       name,
                       is_draft,
-                      start_time,
-                      end_time,
                       visible_on_desktop,
                       visible_on_mobile,
                       all_but_latest_version,
@@ -648,14 +691,14 @@ class SanityGateway
                       description,
                       description_colour,
                       button_text,
-                      button_url,
+                      'button_url': coalesce(button_url, content->web_url_path),
                       'bgImg' : bgImg.asset->url,
                       'squareImg' : squareImg.asset->url,
                       'wideImg' : wideImg.asset->url,
                       'logo' : logo.asset->url,
                       'content': content->{
                         _type,
-                        'id' : railcontent_id,
+                        railcontent_id,
                         web_url_path,
                         'registration_url': '/' + brand + '/enrollment/' + slug.current,
                         enrollment_start_time,
@@ -664,13 +707,17 @@ class SanityGateway
                     },
         }";
         $documents = $this->sanity->fetch($query) ?? null;
-        foreach($documents as $index => $document) {
-            if ($document['content']) {
-                // TODO update this to handle custom cards
-                $documents[$index] = $this->formatBannerCardParamaters($document);
+        $formattedCards = [];
+        foreach ($documents as $index => $document) {
+            if ($isAdmin || !$document['is_draft']) {
+                // TODO ADRIAN - how do we format this data?
+                $formattedCards[] = $document['content'] ? [
+                    ...$this->formatBannerCardParamaters($document),
+                    $document['is_draft']
+                ] : $document;
             }
         }
-        return $documents;
+        return $formattedCards;
     }
 
     private function formatBannerCardParamaters($contentCard)
@@ -679,7 +726,7 @@ class SanityGateway
         $type = $content['_type'];
         $contentCard['content_type'] = $type;
         $contentCard['id'] = $content['railcontent_id'];
-        $pageType = match($content['_type']) {
+        $pageType = match ($content['_type']) {
             'challenge' => 'PackOverview',
             'workout' => 'Lesson',
             'course' => 'CourseOverview',
@@ -687,7 +734,10 @@ class SanityGateway
             'song' => 'Song',
             default => 'Lesson',
         };
-        $pageParams = ['id' => $content['railcontent_id']];
+        $pageParams = [
+            'id' => $content['railcontent_id'],
+            'contentType' => $type,
+        ];
 
         $typesToIncludePageType = ['challenge', 'pack'];
         if (in_array($type, $typesToIncludePageType)) {
@@ -696,8 +746,9 @@ class SanityGateway
         if ($type == 'challenge') {
             $pageParams['isChallenge'] = true;
         }
+        $contentUrl = $type == 'challenge' ? $content['registration_url'] : $content['web_url_path'];
         $contentCard['button'] = [
-            'web_url_path' => $content['web_url_path'],
+            'web_url_path' => $contentUrl,
             'page_type' => $pageType,
             'page_params' => $pageParams,
         ];
@@ -711,7 +762,6 @@ class SanityGateway
         // Fetch only leaf nodes directly, traversing the hierarchy
         $query = "*[railcontent_id == {$id}]{
         $fieldsString,
-        resource,
         'thumbnail': thumbnail.asset->url,
         'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id, 'title':assignment_title},
         // Use a recursive-like approach to get only leaf nodes
@@ -900,6 +950,30 @@ class SanityGateway
         return $this->sanity->fetch($query);
     }
 
+    public function getScheduledContent(string $brand, array $types)
+    {
+        $now = Carbon::now()->toISOString();
+        $typesString = implode(
+            ',',
+            collect($types)->map(function ($type) {
+                return "'$type'";
+            })->toArray()
+        );
+        $query = "*[brand == '$brand' && _type in [$typesString] && (status == 'scheduled' || status == 'published') && published_on >= '$now']{
+            'id': railcontent_id,
+            'type': _type,
+            brand,
+            title,
+            'description': description[0].children[0].text,
+            published_on,
+            live_event_start_time,
+            live_event_end_time,
+        } | order(published_on desc) ";
+
+        $documents = $this->sanity->fetch($query);
+        return $documents;
+    }
+
     private function postProcessDocument(&$document): void
     {
         //fix parent_content_data for decorators
@@ -908,7 +982,7 @@ class SanityGateway
         }
 
 
-        $isAdmin = user()->isAdmin();
+        $isAdmin = user()?->isAdmin() ?? false;
         $userPermissionIds = $this->getPermissionIds();
         if ($document['type'] == 'challenge' && ($document['lessons'] ?? false)) {
             $this->processNeedsAccessForChildren($document['lessons'], $userPermissionIds, $isAdmin);
@@ -976,7 +1050,7 @@ class SanityGateway
     {
         $now = Carbon::now()->toISOString();
 
-        if (user()->isAdmin()) {
+        if (user()?->isAdmin() ?? false) {
             $statuses = [
                 ContentService::STATUS_DRAFT,
                 ContentService::STATUS_SCHEDULED,
@@ -1026,7 +1100,15 @@ class SanityGateway
 
     private function getPermissionIds(): array
     {
-        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
-        return \Arr::pluck($userPermissions, 'permission_id');
+        if (!user()) {
+            return [];
+        }
+        if (!$this->userPermissionsCached) {
+            $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
+            $this->userPermissionsCached = \Arr::pluck($userPermissions, 'permission_id');
+        }
+        return $this->userPermissionsCached;
     }
+
+
 }

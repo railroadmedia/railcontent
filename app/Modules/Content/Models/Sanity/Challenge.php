@@ -8,6 +8,7 @@ use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Integer;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
@@ -25,7 +26,7 @@ class Challenge extends ParentTemplate
     public function __construct()
     {
         $enrollmentGroup = new Group('enrollmentFields', 'Enrollment', false);
-        $contentCardGroup = new Group('contentCards', 'Content Cards', false);
+        $contentCardGroup = new Group('banner', 'Banner Cards', false);
         parent::__construct(self::getName(), 'Challenge', withLogos: true, withEnrollment:true, withResources: true, extraGroups: [$enrollmentGroup, $contentCardGroup]) ;
         $detailsGroup = new Group('editorFields', 'Details', true);
 
@@ -33,10 +34,11 @@ class Challenge extends ParentTemplate
         $childReference = new Reference([['type' => "challenge-part"]]);
 
         $contentCardFields = [
-            new Field( FieldType::Boolean, 'is_banner', 'Show as Banner (not just for enrollment)', group: $contentCardGroup),
-            new Field( FieldType::Boolean, 'is_banner_draft', 'Is Draft', group: $contentCardGroup),
-            new Field(FieldType::Datetime, 'start_time', 'Start Time (Defaults to Enrollment Start', group: $contentCardGroup),
-            new Field(FieldType::Datetime, 'end_time', 'End Time (Defaults to Enrollment End', group: $contentCardGroup),
+            new Field( FieldType::Boolean, 'is_custom_banner', 'Show as Custom Banner (not just for enrollment)', group: $contentCardGroup),
+            new Field( FieldType::Boolean, 'is_banner_draft', 'Is Draft Banner', group: $contentCardGroup),
+            new Field(FieldType::Datetime, 'start_time', 'Start Time (Used for Custom Banner', group: $contentCardGroup),
+            new Field(FieldType::Datetime, 'end_time', 'End Time (Used for Custom Banner', group: $contentCardGroup),
+            new Field(FieldType::Number, 'display_order', 'Display Order', validation: [new Min(0)], group: $contentCardGroup),
             new Field(FieldType::Image, 'bgImg', 'Portrait Image', group: $contentCardGroup, options: ['accept' => '.png']),
             new Field(FieldType::Image, 'squareImg', 'Square Image', validation: [new Required()], group: $contentCardGroup, options: ['accept' => '.png']),
             new Field(FieldType::Image, 'wideImg', '16x9 Image', group: $contentCardGroup, options: ['accept' => '.png']),
@@ -122,8 +124,9 @@ class Challenge extends ParentTemplate
                             ... $contentCardFields,
                          ]);
         $enrollmentFieldNamesThatExistInDetails = ['brand', 'slug', 'title', 'light_mode_logo_url', 'dark_mode_logo_url', 'railcontent_id', 'enrollment_start_time', 'enrollment_end_time',];
-
         $this->addGroupToFields($enrollmentFieldNamesThatExistInDetails, $enrollmentGroup);
+        $contentCardFieldNamesThatExistInDetails = ['title', 'is_solo', 'enrollment_start_time', 'enrollment_end_time'];
+        $this->addGroupToFields($contentCardFieldNamesThatExistInDetails, $contentCardGroup);
 
     }
 

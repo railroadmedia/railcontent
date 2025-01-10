@@ -9,9 +9,9 @@
                 </button>
                 <!-- Dropdown -->
                 <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg tw-py-2">
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a :href="challenge.web_url_path" class="tw-text-black dark:tw-text-white tw-text-sm">View Details</a></li>
-                    <li v-if="isSoloChallenge && progressPercent === 0" class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal" class="tw-text-sm">Change Start Date</button></li>
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button class="tw-text-sm" @click="openLeaveModal">Leave {{ challengeTitle }}</button></li>
+                    <li><a :href="challenge.web_url_path" class="tw-text-black dark:tw-text-white tw-text-sm tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-block tw-w-full tw-text-left">View Details</a></li>
+                    <li v-if="isSoloChallenge && progressPercent === 0"><button @click="openNotificationModal" class="tw-text-sm tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-w-full tw-text-left">Change Start Date</button></li>
+                    <li><button class="tw-text-sm tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]" @click="openLeaveModal">Leave {{ challengeTitle }}</button></li>
                 </ul>
             </div>
         </div>
@@ -108,8 +108,8 @@
                 </svg>
                 <div class="tw-absolute tw-text-center tw-flex tw-flex-col tw-items-center">
                     <!-- Challenge Logos -->
-                    <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" />
-                    <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" />
+                    <img class="tw-h-14 tw-w-[155px] tw-object-contain tw-object-center tw-mb-1 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" />
+                    <img class="tw-h-14 tw-w-[155px] tw-object-contain tw-object-center tw-mb-1 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" />
                     <div class="tw-text-[11px] lg:tw-text-[13px] tw-font-bold tw-max-w-[160px] tw-mt-2" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
                 </div>
             </div>
@@ -211,8 +211,7 @@ const challengeTitle = computed(() => {
 })
 
 const startDate = computed(() => {
-    const utc = getDateFromIso(props.challenge.start_date);
-    return utc;
+    return getDateFromIso(props.challenge.start_date);
 })
 
 const actionText = computed(() => {
@@ -221,9 +220,9 @@ const actionText = computed(() => {
     } else if(!hasChallengeStarted.value){
         return `You're enrolled! Lessons begin ${startDate.value}`;
     } else if(isNextLessonLocked.value){
-        return `${nextLessonShortName.value} unlocks in ${countdownString.value}`;
+        return `${nextLessonFullName.value} unlocks in ${countdownString.value}`;
     } else {
-        return `${nextLessonShortName.value} Unlocked!`;
+        return `${nextLessonFullName.value} Unlocked!`;
     }
 })
 
@@ -241,6 +240,10 @@ const challengeThumbnail = computed(() => {
 
 const isNextLessonLocked = computed(() => {
     return props.challenge.next_lesson.is_locked && countdownString.value !== '00:00';
+})
+
+const nextLessonFullName = computed(() => {
+    return props.challenge.next_lesson.title;
 })
 
 const nextLessonShortName = computed(() => {
@@ -343,7 +346,7 @@ const runCountDown = (stop = false) => {
         const count = countdown(props.challenge.next_lesson?.unlock_date.substring(0, 19));
         countdownString.value = count;
 
-        if(count === '00:00'){
+        if(count === '00:00:00'){
             clearInterval(intervalCountdown);
         }
     }, 1000)

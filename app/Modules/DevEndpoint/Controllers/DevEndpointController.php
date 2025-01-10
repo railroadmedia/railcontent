@@ -11,6 +11,7 @@ use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
 use App\Modules\Content\Services\ChallengesService;
+use App\Modules\Content\Services\V1\CarouselServiceV1;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -22,6 +23,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Modules\Content\Console\Commands\ChallengesV2UpdateWebUrlPath;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\APIEndPoint;
@@ -49,6 +51,7 @@ class DevEndpointController extends Controller
         private UserService $userService,
         private SanityGateway $sanityGateway,
         private RailcontentV2DataSyncingService $dataSyncingService,
+        private CarouselServiceV1 $carouselServiceV1,
     ) {
     }
 
@@ -61,17 +64,23 @@ class DevEndpointController extends Controller
         return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
     }
 
+    private function deleteThingsFromSanity($queryString)
+    {
+        $temp = "_type == 'onboarding-content-card'";
+        $query = ["query" => "*[$queryString]"];
+        $this->sanityGateway->sanity->delete($query);
+    }
+
     private function runArtisanCommand()
     {
-        return 'We did not run anything but you can use this to debug commands';
+        //return 'We did not run anything but you can use this to debug commands';
         \Artisan::call('sanity:import-content', [
-            '--id' => 402199,
             'destination' => 'development',
-            'type' => 'challenge',
+            'type' => 'onboarding-card',
         ]);
         return '';
     }
-    
+
     private function handleChallengesEndpoints($request): string
     {
         $action = $request->get('action');
@@ -85,7 +94,8 @@ class DevEndpointController extends Controller
                 $this->prepChallengeData($challengeId, $request->get('start_date', null));
                 return "Prepped Challenge Data $challengeId";
             case ('complete'):
-                $this->challengesService->completeChallenge($challengeId, $userId);
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+                $this->challengesService->completeChallenge($userProgress);
                 return "Completed Challenge $challengeId for user $userId";
             case('move_days'):
                 $numDays = $request->get('num_days', 1);

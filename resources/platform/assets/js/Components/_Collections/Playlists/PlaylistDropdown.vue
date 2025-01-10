@@ -162,7 +162,6 @@ const pinPlaylist = () => {
         emit('pinItem', false)
         PlaylistService.unpinPlaylist(props.data.id, props.brand, token)
             .then((response) => {
-                console.log(response)
                 if (response.status === 200) {
                     //emit event or update pinia
                     playlistsStore.unpinPlaylist(props.data.id)

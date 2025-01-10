@@ -15,7 +15,6 @@ import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import ContentInfo from '@collections/ContentInfo/ContentInfo.vue';
 import VideoChapters from '@collections/VideoChapters/VideoChapters.vue';
 import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
-import ContentService from "@vuesora/assets/js/Services/content";
 import Comments from '@vuesora/views/comments/Comments.vue';
 import VideoMediaElement from '@vuesora/Components/MediaElement/MediaElement.vue';
 import VideoPlayer from '@vuesora/Components/VideoPlayer/VideoPlayer.vue';
@@ -26,6 +25,7 @@ import Helpscout from '@vuesora/assets/js/Services/helpscout';
 import AssignmentsContainer from '@vuesora/Components/AssignmentsContainer/AssignmentsContainer.vue';
 import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 import {usePlatformStore} from "@stores/platform";
+import { contentStatusCompleted } from 'musora-content-services';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -289,14 +289,16 @@ const likeData = ref({
     isLiked: props.isLiked,
     likeCount: parseInt(props.likeCount)
 })
+const lastWatchedPositionInSeconds = ref(0);
 const isContentCompleted = ref(false);
     //ref(props.playlistItems.data[props.playlistItemPosition - 1].completed);
-    
+
 let hasBeenPlayed = false;
 let progressTracker;
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
+const platformStore = usePlatformStore();
 
 const handleGoToNext = () => {
     const isShuffleOn = localStorage.getItem("playbackShuffleOn") ? JSON.parse(localStorage.getItem("playbackShuffleOn")) : false;
@@ -365,7 +367,7 @@ const showVideoChapters = computed(() => {
 //Methods
 const handleVideoPlay = (payload) => {
     if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
-        ContentService.markContentAsStarted(payload.contentId);
+        sendProgressTrackerEvent()
     }
     if (progressTracker == null) {
         progressTracker = new ProgressTracker();
@@ -378,8 +380,6 @@ const handleVideoPlay = (payload) => {
 };
 
 const sendProgressTrackerEvent = () => {
-
-    // REMOVE VIDEO DATA AND REPLACE PROPERLY
     if (progressTracker) {
         progressTracker.send({
             mediaType: 'video',
@@ -393,6 +393,10 @@ const sendProgressTrackerEvent = () => {
         });
     }
 };
+
+const updateCurrentTime = (time) => {
+    lastWatchedPositionInSeconds.value = Math.floor(time);
+}
 
 const attachVisibilityAndPagehideEvents = () => {
     document.addEventListener('visibilitychange', () => {
@@ -411,7 +415,7 @@ const handleVideoPause = () => {
 
 const handleVideoEnd = () => {
     sendProgressTrackerEvent();
-    ContentService.markContentAsComplete(props.contentId);
+    contentStatusCompleted(props.contentId);
 };
 
 const openSlice = (title, index, startAt, loop) => {soundsliceTitle.value = title;
@@ -463,7 +467,6 @@ const likeContent = () => {
 }
 
 onMounted(() => {
-    const platformStore = usePlatformStore();
     platformStore.setLoadingState(false);
 })
 </script>
@@ -504,7 +507,7 @@ onMounted(() => {
                                 :start-second="startSecond" :end-second="endSecond" :seek-to-time="seekToTime"
                                 :total-duration="totalDuration" :video-length="videoLength" :progress-state="progressState"
                                 :content-id="contentId" :use-intersection-observer="true" :theme-color="brand"
-                                @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" />
+                                @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" @onUpdateCurrentTime="updateCurrentTime" />
                         </div>
                         <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'"
                             id="lessonVideoWrap">
@@ -515,7 +518,7 @@ onMounted(() => {
                                     :current-second="currentSecond" :progress-state="progressState" :video-length="videoLength"
                                     :chapters="videoChapters" :user-id="userId" :like-count="likeCount" :is-liked="isLiked"
                                     :check-for-timecode="true" :seek-to-time="seekToTime" @playing="handleVideoPlay"
-                                    @pause="handleVideoPause" @ended="handleGoToNext">
+                                    @pause="handleVideoPause" @ended="handleGoToNext" @onUpdateCurrentTime="updateCurrentTime">
                                     <div :class="`widescreen title tw-text-${brand}`">
                                         <i class="fas fa-spinner fa-spin absolute-center"></i>
                                     </div>
@@ -529,7 +532,7 @@ onMounted(() => {
                                     :current-second="currentSecond" :content-id="contentId" :user-id="userId"
                                     :video-id="vimeoVideoId" :video-length="videoLength" :total-duration="totalDuration"
                                     :cast-title="playlistItemTitle" :use-intersection-observer="true" @play="handleVideoPlay"
-                                    :seek-to-time="seekToTime" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
+                                    :seek-to-time="seekToTime" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" @onUpdateCurrentTime="updateCurrentTime">
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </VideoPlayer>
                             </transition>
@@ -548,7 +551,7 @@ onMounted(() => {
                         :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail"
                         :report-user-name="userName" :artist="artist" :no-access="needAccess"
                         @open-practice-soundslice="openSlice(videoResources.title, videoChapters.length, 0, false)"
-                        @on-like-content="likeContent" @on-complete-content="completeContent"
+                        @on-like-content="likeContent" @on-complete-content="completeContent" :current-time-in-seconds="lastWatchedPositionInSeconds"
                     />
 
                     <!-- Info Section -->
@@ -612,9 +615,11 @@ onMounted(() => {
                 <!-- Comments Section -->
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full tw-mb-4">
                     <div class="tw-flex tw-flex-col tw-w-full">
-                        <Comments :collapsable="true" :theme-color="brand" :brand="brand" :content-id="contentId"
+                        <Comments
+                            :collapsable="true" :theme-color="brand" :brand="brand" :content-id="contentId" content-type="playlist"
                             :user-id="userId" :user-name="userName" :user-avatar="userAvatar" :user-xp="userXp"
-                            :user-access-level="userAccessLevel" profile-base-route="/profile/" :is-admin="false" />
+                            :user-access-level="userAccessLevel" profile-base-route="/profile/" :is-admin="false"
+                        />
                     </div>
                 </div>
             </div>

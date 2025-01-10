@@ -21,7 +21,6 @@ Schedule::command('forums:rebuildSearchIndexes')->hourly();
 
 Schedule::command('notifications:dailySummary')->dailyAt('12:00'); //4am PST
 
-Schedule::command('content:rebuildSearchIndexes')->dailyAt('2:00'); //6am PST
 Schedule::command('content:updatePopularityMWP')->cron('0 */8 * * *'); //every 8 hours
 Schedule::command('content:CreateVimeoVideoContentRecords', [50])->everyThirtyMinutes();
 Schedule::command('content:CreateYoutubeVideoContentRecordsViaClientAPI', [1])->cron(
@@ -36,9 +35,16 @@ Schedule::command('mentors:assign')->hourly();
 
 Schedule::command('user:resyncExpiredProducts')->dailyAt('10:00'); //2am PST
 
-Schedule::command('addevent:syncMusora')->hourlyAt(50);
+Schedule::command('addevent:syncBrand drumeo')->hourlyAt(35);
+Schedule::command('addevent:syncBrand pianote')->hourlyAt(38);
+Schedule::command('addevent:syncBrand guitareo')->hourlyAt(41);
+Schedule::command('addevent:syncBrand singeo')->hourlyAt(44);
 
-Schedule::command('addevent:syncMusora --live')->hourlyAt(30);
+Schedule::command('challenges:processSoloNotifications')->hourlyAt(3);
+
+//Musora sync broken, need to fix this as well
+//Schedule::command('addevent:syncMusora')->hourlyAt(50);
+//Schedule::command('addevent:syncMusora --live')->hourlyAt(30);
 
 Schedule::command('SyncShopifyProductInventoryToProductsTable')->everyFiveMinutes();
 

@@ -60,11 +60,11 @@
                 <img class="max-w-2xl sm:max-w-xl md:hidden object-cover w-full p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $341.94</s><strong> $240</strong> <span class="text-[#41F70F] text-xl md:text-3xl">(Save 31%)</span></h2>
-                    @if($stock > 0)
-                        <a class="join drumeo mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-gift-bundle-drumeo]=1&promo-code=the-gift-bundle-drumeo&locked=true">get the deal &raquo;</a>
-                    @else
+{{--                    @if($stock > 0)--}}
+{{--                        <a class="join drumeo mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-gift-bundle-drumeo]=1&promo-code=the-gift-bundle-drumeo&locked=true">get the deal &raquo;</a>--}}
+{{--                    @else--}}
                         <a class="join sold-out mt-4 w-full">SOLD OUT</a>
-                    @endif
+{{--                    @endif--}}
                     </div>
                 </div>
             </div>
@@ -120,6 +120,7 @@
         'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Give The Gift Of Music This Holiday Season. </strong></h2>',
         'buttonLink' => '/ecommerce/add-to-cart?products[the-gift-bundle-drumeo]=1&promo-code=the-gift-bundle-drumeo&locked=true',
         'bundle'=> 'gift',
+            'soldOut'=> true,
         ])
     </div>
 
@@ -144,7 +145,4 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    {{-- <script src="{{ mix('/platform/js/manifest.js') }}"></script>
-    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
-    <script src="{{ mix('/platform/js/app.js') }}"></script> --}}
 @stop

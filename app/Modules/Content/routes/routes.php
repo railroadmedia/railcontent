@@ -110,6 +110,11 @@ Route::prefix('content')
             'search',
             [ContentSearchController::class, 'search']
         )->name('content.search');
+
+        Route::get(
+            'live-chat',
+            [ContentMetadataController::class, 'getChatData']
+        )->name('content.live.chat');
     });
 
 Route::prefix('challenges')
@@ -160,7 +165,7 @@ Route::prefix('challenges')
             [ChallengesMetaDataController::class, 'getActiveChallengesForUser']
         )->name('challenges.user_active_challenges');
 
-        Route::post(
+        Route::match(['get', 'post'],
             'enroll/{id}',
             [ChallengesMetaDataController::class, 'enrollUser']
         )->name('challenges.enroll');
@@ -189,6 +194,11 @@ Route::prefix('challenges')
             'notifications/community_reminders/{id}',
             [ChallengesMetaDataController::class, 'notificationsCommunityReminders']
         )->name('challenges.notifications.community_reminders');
+
+        Route::post(
+            'notifications/solo_reminders/{id}',
+            [ChallengesMetaDataController::class, 'notificationsSoloReminders']
+        )->name('challenges.notifications.solo_reminders');
 
         Route::post(
             'complete_lesson/{id}',
@@ -237,5 +247,7 @@ Route::prefix('playlists')
         Route::put('/pin/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@pinPlaylist')->name('pin.playlist');
         Route::put('/unpin/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@unpinPlaylist')->name('unpin.playlist');
         Route::put('/report/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@reportPlaylist')->name('report.playlist');
+        Route::get('/play/{playlistId}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@playback')->name('playlist.playback');
+
 
     });

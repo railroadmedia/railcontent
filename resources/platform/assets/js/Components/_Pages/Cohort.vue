@@ -39,13 +39,13 @@
                     </div>
                     <div :class="`md:tw-flex ${isEnrolled ? 'md:tw-items-start' : 'md:tw-items-center'}`">
                         <!-- Get Notified Button -->
-<!--                        <button v-if="showGetNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">-->
-<!--                            <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>-->
-<!--                            Get Notified-->
-<!--                        </button>-->
-                        <!-- TODO(challenge): add else state for when notification requested -->
+                        <button v-if="showGetNotified && !isNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">
+                            <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
+                            Get Notified
+                        </button>
+                        <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Notification requested!</span>
                         <!--  Enrolled Buttons  -->
-                        <div v-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
+                        <div v-else-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
                             <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
                             <a :href="cohort['course_url']" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
                         </div>
@@ -260,13 +260,14 @@
             </template>
 
             <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
-                <!--  Buttons  -->
-<!--                <button v-if="showGetNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">-->
-<!--                    <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>-->
-<!--                    Get Notified-->
-<!--                </button>-->
-                <!-- TODO(challenge): add else state for when notification requested -->
-                <span v-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
+                <!--  Buttons-->
+
+                <button v-if="showGetNotified && !isNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">
+                    <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
+                    Get Notified
+                </button>
+                <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">Notification requested!</span>
+                <span v-else-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                 <template v-else>
                     <button v-if="showEnrollNow" id="bottomEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
                     <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
@@ -309,19 +310,31 @@
     <!-- Trailer Modal -->
     <VideoModal v-if="openTrailer" :videoUrl="cohort['cohort_trailer']" @onCloseModal="openTrailer = false" />
 
-    <ChallengeNotificationModal v-if="openChallengeNotificationModal" :challengeType="challengeType" :challenge="{
-        ...cohort,
-        dark_mode_logo_url: cohort['dark_mode_logo'],
-        light_mode_logo_url: cohort['light_mode_logo'],
-    }" :challenge-type="challengeType" @modal-close="closeNotificationModal" />
-    <ChallengeActionModal v-if="openChallengeActionModal" modal-type="unlock"  @close-modal="closeActionModal"
+    <ChallengeNotificationModal
+        v-if="openChallengeNotificationModal && !isFromApp"
+        :challengeType="challengeType"
+        :challenge="{
+            ...cohort,
+            dark_mode_logo_url: cohort['dark_mode_logo'],
+            light_mode_logo_url: cohort['light_mode_logo'],
+        }"
+        :challenge-type="challengeType"
+        @modal-close="closeNotificationModal"
+        :hide-x-icon="true"
+    />
+    <ChallengeActionModal v-if="challengeActionModalType && !isFromApp" :modal-type="challengeActionModalType"  @close-modal="closeActionModal"
       :challenge="{
         dark_mode_logo_url: cohort['dark_mode_logo'],
         light_mode_logo_url: cohort['light_mode_logo'],
         id: cohort['id'],
         title: cohort['title'],
-    }" />
-    <ChallengeGetNotifiedModal v-if="isGetNotifiedModalOpen" @close-modal="closeGetNotifiedModal" />
+        next_lesson: cohort['next_lesson'],
+        web_url_path: cohort['course_url'],
+        last_completion_date: cohort['last_completion_date'],
+      }"
+      @post-retake="handlePostRetake"
+    />
+    <ChallengeGetNotifiedModal v-if="isGetNotifiedModalOpen && !isFromApp" @close-modal="closeGetNotifiedModal" />
 </template>
 <script setup>
 import { inject, ref, computed, onBeforeMount, onUnmounted } from 'vue';
@@ -367,6 +380,7 @@ const props = defineProps({
 
 const token = inject('csrf_token');
 
+const isNotified = ref(props.cohort.is_notified)
 const notificationRequested = ref(false);
 const isEnrollmentOpen = ref(false);
 const isEnrolled = ref(props.hasProduct);
@@ -375,7 +389,7 @@ const openTrailer = ref(false);
 const openPurchase = ref(false);
 const hasEnded = ref(false);
 const openChallengeNotificationModal = ref(false);
-const openChallengeActionModal = ref(false);
+const challengeActionModalType = ref('');
 const isFromApp = ref(false);
 const isGetNotifiedModalOpen = ref(false);
 
@@ -429,18 +443,32 @@ const showGetNotified = computed(() => {
 
 const enroll = async() => {
     try {
-        const enrollUser = await postChallengesEnroll(props.cohort.id);
-        isEnrolled.value = true;
-        openChallengeNotificationModal.value = true;
-        sendPostMessage('enroll');
+        if(props.cohort.has_completed_challenge && isSolo.value){
+            openActionModal('retake');
+            sendPostMessage('retake');
+        } else {
+            const enrollUser = await postChallengesEnroll(props.cohort.id);
+            openChallengeNotificationModal.value = true;
+            isEnrolled.value = true;
+            sendPostMessage('enroll');
+        }
     } catch (e){
         window.shownotification({
             icon: 'error',
             text: 'Woops! Something wrong happened, please try again later.'
         })
     }
+}
 
-    openChallengeNotificationModal.value = true;
+const handlePostRetake = () => {
+    isEnrolled.value = true;
+    challengeActionModalType.value = '';
+
+    //To reopen the modal container
+    setTimeout(() => {
+        openChallengeNotificationModal.value = true;
+    }, 10)
+
 }
 
 const closeNotificationModal = () => {
@@ -448,12 +476,16 @@ const closeNotificationModal = () => {
 }
 
 const handleNoGuide = () => {
-    openChallengeActionModal.value = true;
+    openActionModal('unlock');
     sendPostMessage('guide');
 }
 
+const openActionModal = (type) => {
+    challengeActionModalType.value = type;
+}
+
 const closeActionModal = () => {
-    openChallengeActionModal.value = false;
+    challengeActionModalType.value = '';
 }
 
 const formatDate = (date) =>{
@@ -492,6 +524,7 @@ const handleGetNotified = async () => {
     const response = await postChallengesEnrollmentNotification(props.cohort.id);
     notificationRequested.value = true;
     isGetNotifiedModalOpen.value = true;
+    isNotified.value = true;
     sendPostMessage('notify');
 }
 
@@ -504,7 +537,7 @@ const playTrailer = () => {
 }
 
 const countdown = () => {
-    const start = new Date(props.cohort['enrollment_end_date']);
+    const start = new Date(props.cohort['enrollment_end_time']);
     const now = Date.now();
     const isEnded = now >= start;
 
@@ -529,18 +562,18 @@ const countdown = () => {
 }
 
 const watchEnrollmentOpen = () => {
-    const openDate = new Date(props.cohort['enrollment_start_date']);
+    const openDate = new Date(props.cohort['enrollment_start_time']);
     const now = new Date();
 
-    if(now <= openDate){
+    if(openDate <= now){
         isEnrollmentOpen.value = true;
         clearInterval(watchEnrollmentOpen);
     }
 }
 
 onBeforeMount(() => {
-    const openDate = new Date(props.cohort['enrollment_start_date']);
-    const closeDate = new Date(props.cohort['enrollment_end_date']);
+    const openDate = new Date(props.cohort['enrollment_start_time']);
+    const closeDate = new Date(props.cohort['enrollment_end_time']);
     const now = new Date();
 
     //Start countdown for unclosed community challenges
@@ -548,8 +581,12 @@ onBeforeMount(() => {
         countdown();
         setInterval(countdown, 1000);
     }
+    //End enrollment for community challenges
+    else if(!isSolo.value && now >= closeDate){
+        hasEnded.value = true;
+    }
 
-    if(!isSolo.value && openDate < now){
+    if(!isSolo.value && openDate <= now){
         watchEnrollmentOpen();
         setInterval(watchEnrollmentOpen, 1000);
     }

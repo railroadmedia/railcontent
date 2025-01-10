@@ -1,5 +1,5 @@
-import ContentService from '../assets/js/Services/content';
-import {useResetProgress} from "@hooks/useResetProgress";
+import { contentStatusReset } from 'musora-content-services';
+import { useResetProgress } from "@hooks/useResetProgress";
 
 export default {
     methods: {
@@ -47,9 +47,9 @@ export default {
         },
 
         progressReset(event) {
-            const {resetProgress} = useResetProgress();
+            const { resetProgress } = useResetProgress();
 
-            resetProgress(this.item.id, {value: 'fas fa-redo-alt fa-flip-horizontal'}, true);
+            resetProgress(this.item.id, { value: 'fas fa-redo-alt fa-flip-horizontal' }, true);
         },
 
         // Used to bus the event up one more level to the components parent
@@ -63,23 +63,20 @@ export default {
 
         // Used to handle the event when bussed to the top level parent
         addToListEventHandler(payload) {
-            window.openplaylistmodal({modalType: 'addItem', content: payload});
+            window.openplaylistmodal({ modalType: 'addItem', content: payload });
         },
 
         resetProgressEventHandler(payload) {
             const post_index = this.content.map(post => post.id).indexOf(payload.content_id);
 
-            ContentService.resetContentProgress(payload.content_id)
-                .then((response) => {
-                    if (response) {
-                        window.shownotification({
-                            icon: 'check',
-                            text: 'Ready to start again? Your progress has been reset.'
-                        });
+            contentStatusReset(payload.content_id)
+                .then(() => {
+                    window.shownotification({
+                        icon: 'check',
+                        text: 'Ready to start again? Your progress has been reset.'
+                    });
 
-                        this.content.splice(post_index, 1);
-                    }
-
+                    this.content.splice(post_index, 1);
 
                     payload.icon.classList.remove('fa-spin', 'fa-spinner');
                     payload.icon.classList.add('fa-undo');

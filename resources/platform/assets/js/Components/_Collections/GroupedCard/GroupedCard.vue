@@ -82,11 +82,11 @@ const page = ref(1);
 const cardNum = ref(5);
 
 const name = computed(() => {
-    return props.item.name + 'something' || '';
+    return props.item.name || props.item.fields?.find(field => field.key === 'name')?.value ||'';
 })
 
 const thumb = computed(() => {
-    return props.item.head_shot_picture_url || '';
+    return props.item.head_shot_picture_url || props.item.data?.find(data => data.key === 'head_shot_picture_url')?.value || '';
 })
 
 const isWorkout = computed(() => {
@@ -166,6 +166,4 @@ watch(
 )
 
 const { getPageData, resetProgress, setOriginal, nextPage, prevPage, showPagination, isLastPage, isFirstPage } = useCarouselEvents(props.item.lessons, data, page, cardNum);
-
-console.log('group card',props.item)
 </script>

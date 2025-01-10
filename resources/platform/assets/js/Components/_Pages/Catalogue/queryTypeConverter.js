@@ -12,5 +12,5 @@ export const queryTypeConverter = (type) => {
         'sonor-drums': 'sonor',
     }
 
-    return types[type] || type;
+    return types[type] || type.toLowerCase();
 }

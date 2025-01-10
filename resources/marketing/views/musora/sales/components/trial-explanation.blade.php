@@ -1,4 +1,4 @@
-<section class="py-12 sm:py-16 px-5 sm:px-6">
+<section class="py-12 sm:py-16 px-5 sm:px-6 bg-white">
     <div class="container mx-auto max-w-2xl">
         <h2 class="font-extrabold mb-5 sm:mb-8 text-center leading-tight">How your free trial works.</h2>
         <div class="relative pb-5">

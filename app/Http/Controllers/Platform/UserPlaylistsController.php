@@ -16,6 +16,7 @@ use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\PlaylistItemLoaded;
 use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Modules\Content\Models\ContentLike;
 
 class UserPlaylistsController extends BaseController
 {
@@ -119,14 +120,17 @@ class UserPlaylistsController extends BaseController
                                                                'total_results' => count($otherItems),
                                                            ]))->toResponseRawJson();
         $playlistItem = $otherItems->where('user_playlist_item_id', '=', $playlistItemId)->first();
-        throw_if((!$playlistItem), new NotFoundHttpException());
+        $playlistItem['is_liked_by_current_user'] = ContentLike::isContentLikedByUser($playlistItem['id'], $user->id);
+        $playlistItem['like_count'] = ContentLike::getContentLikedCount($playlistItem['id']);
+        // DEV NOTE: checking for the 'type' is a bit of a workaround to ensure that the data came from Sanity
+        throw_if((!$playlistItem || !$playlistItem['type']), new NotFoundHttpException());
 
-        $position = $otherItems->search(function ($item) use ($playlistItemId) {
+        $index = $otherItems->search(function ($item) use ($playlistItemId) {
             return $item['user_playlist_item_id'] == $playlistItemId;
         });
-        $position = $position === false ? 1 : $position + 1;
-        $previousPlaylistItem = $otherItems->get($position - 1);
-        $nextPlaylistItem = $otherItems->get($position + 1);
+        $position = $index === false ? 1 : $index + 1;
+        $previousPlaylistItem = $otherItems->get($index - 1);
+        $nextPlaylistItem = $otherItems->get($index + 1);
         $givenDate = Carbon::parse($playlistItem['published_on']);
         $today = Carbon::now();
         if ($givenDate->lt($today)) {

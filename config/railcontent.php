@@ -1128,6 +1128,13 @@ return [
                         'use_recommended_endpoint' => true,
                         'value' => ['filter,lesson']
                     ],
+                    [
+                        'name' => 'Workouts',
+                        'short_name' => 'WORKOUTS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,workout']
+                    ],
                 ]
             ],
             'pack' => [
@@ -2493,7 +2500,6 @@ return [
         'challenge-part',
     ],
     'homeInProgressContentTypes' => [
-        'course',
         'play-along',
         'coach-stream',
         'song',
@@ -2503,7 +2509,6 @@ return [
         'rudiment',
         'unit',
         'unit-part',
-        'course',
         'course-part',
         'song',
         'song-part',
@@ -2518,7 +2523,6 @@ return [
         'song-tutorial',
         'song-tutorial-children',
         'workout',
-        'challenge-part',
     ],
     'dashboardInProgressContentTypes' => [
         'course',

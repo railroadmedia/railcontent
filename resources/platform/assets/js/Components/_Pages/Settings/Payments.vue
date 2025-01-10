@@ -112,10 +112,6 @@
         }
     ]);
 
-    onBeforeMount(()=> {
-        console.log(props.shopifyOrders)
-    })
-
     //methods
     const formatDate = (dateString) => {
       const date = new Date(dateString);

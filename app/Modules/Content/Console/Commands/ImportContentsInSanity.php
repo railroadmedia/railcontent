@@ -28,7 +28,7 @@ use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 
 class ImportContentsInSanity extends \Illuminate\Console\Command
 {
-    protected $signature = 'sanity:import-content {destination=development} {clean=false} {brand=drumeo} {type=all} {delete=false} {--id=} {--vimeoRefresh}  {--deleteSanityDocumentId=}';
+    protected $signature = 'sanity:import-content {destination=development} {clean=false} {brand=drumeo} {delete=false} {--type=*} {--id=} {--vimeoRefresh}  {--deleteSanityDocumentId=}';
 
     protected $description = 'Import Contents from DB in Sanity';
 
@@ -66,6 +66,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             'song-part',
             'play-along-part',
             'play-along',
+            'semester-pack-lesson',
+            'semester-pack',
         ],
         'singeo' => [
             'routine'
@@ -74,7 +76,11 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
 
     public function handle(): int
     {
-        $contentType        = $this->argument('type');
+        $contentType = $this->option('type');
+        if (empty($contentType)) {
+            $contentType = ['all'];
+        }
+
         $deleteOldDocuments = $this->argument('delete');
         $destination        = $this->argument('destination');
         $deleteSanityDocumentId = $this->hasOption('deleteSanityDocumentId') ? $this->option('deleteSanityDocumentId') : null;
@@ -102,7 +108,6 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
 
         $instructors = $this->getInstructors($extraData);
 
-
         if ($contentType == "all") {
             $contentTypes = array_merge(
                 $this->specficContentTypesPerBrand[$this->argument('brand')] ?? [],
@@ -128,7 +133,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         } elseif ($contentType == "shows") {
             $contentTypes = config('railcontent.showTypes')[$this->argument('brand')];
         } else {
-            $contentTypes = [$contentType];
+            $contentTypes = $contentType;
         }
 
         //import  related models
@@ -431,7 +436,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $resultCode = $this->runCliCommand("cd $directory && yarn sanity documents delete --dataset=development " . $ids);
         }
 
-        if ($this->option('vimeoRefresh')) {
+        if ($this->option('vimeoRefresh') && $vimeoVideos) {
             $this->syncVimeoData($vimeoVideos, $vimeoVideoSourcesDecorator, $sanityDocuments);
         }
 
@@ -527,7 +532,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 '412811' => 115
             ];
         $contentPermissions = ContentPermissions::with('permissions')->where('content_id', '=', $result->id);
-        if(isset($forcePermissions[$result->id])) {
+        if (isset($forcePermissions[$result->id])) {
             $contentPermissions = $contentPermissions->where('permission_id', '=', $forcePermissions[$result->id]);
         }
         $contentPermissions = $contentPermissions->get();
@@ -646,11 +651,12 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                             '_type' => FieldType::URL->name,
                             'url' => $url
                         ])->toArray();
+                    $timecode = $hierarchy->child->data->where('key', '=', 'timecode')->first()['value'] ?? null;
                     $songs["assignment"][] = [
                         'assignment_title'             => $hierarchy->child->title,
                         'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
                         'assignment_description'       => $hierarchy->child->data->where('key', '=', 'description')->first()['value'] ?? '',
-                        'assignment_timecode'          => $hierarchy->child->data->where('key', '=', 'timecode')->first()['value'] ?? null,
+                        'assignment_timecode'          => ($timecode) ? (int)$timecode : null,
                         'assignment_sheet_music_image' => $assignmentSheetMusicImage,
                         'railcontent_id'               => $hierarchy->child->id,
                     ];
@@ -739,7 +745,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             'product_image' => 'image',
         ];
 
-        foreach($fieldsToCopy as $field => $type) {
+        foreach ($fieldsToCopy as $field => $type) {
             if ($type == 'bool') {
                 $sanityChallenge[$field] = ($cohort[$field] == 1);
             } elseif ($type == 'float') {
@@ -761,7 +767,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         }
         $lists = $cohort->dropdowns()->get();
         $sanityChallenge['dropdown'] = [];
-        foreach($lists as $list) {
+        foreach ($lists as $list) {
             $sanityChallenge['dropdown'][] = [
                 'title' => $list->title,
                 'description' => $list->description,
@@ -843,19 +849,19 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         if ($type == 'song') {
             $sanityDocuments['instrumentless'] = $result->instrumentless == 1;
         }
-        if($result->quarter_removed) {
+        if ($result->quarter_removed) {
             $sanityDocuments['quarter_removed'] = $result->quarter_removed;
         }
-        if($result->quarter_published) {
+        if ($result->quarter_published) {
             $sanityDocuments['quarter_published'] = $result->quarter_published;
         }
         if ($result->published_on) {
             $sanityDocuments['published_on'] = Carbon::parse($result->published_on)->toISOString();
         }
-        if($result->type == 'coach-stream') {
+        if ($result->type == 'coach-stream') {
 
             $instructorField = $result->fields->where('key', '=', 'instructor')->first();
-            if($instructorField) {
+            if ($instructorField) {
                 $instructorId                    = $instructorField->value;
                 $instructor                      = Content::find($instructorId);
                 $sanityDocuments['web_url_path'] = '/'.$result->brand . '/coaches/' . $instructor->slug . '/' . $result->slug . '/' . $result->id;
@@ -874,10 +880,10 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             }
         }
         if ($result->sort != 0) {
-            $sanityDocuments['sort'] = $result->sort;
+            $sanityDocuments['sort'] = (int)$result->sort;
         }
         if ($result->child_count != 0) {
-            $sanityDocuments['child_count'] = $result->child_count;
+            $sanityDocuments['child_count'] = (int)$result->child_count;
         }
         if (isset($parentType[$type])) {
             $sanityDocuments['parent_type'] = $parentType[$type];
@@ -1241,7 +1247,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         unset($sanityDocuments['assignments_total_xp']);
         unset($sanityDocuments['children_total_xp']);
 
-        if(isset($sanityDocuments["genre"])) {
+        if (isset($sanityDocuments["genre"])) {
             $sanityDocuments["genre"] = array_values(
                 array_reduce($sanityDocuments["genre"], function ($carry, $item) {
                     $refs = array_column($carry, '_ref');
@@ -1307,9 +1313,9 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $structuredCards = [];
         $contentIds = [];
         $cards = config('learning.v2');
-        foreach($cards as $brand => $accessLevels) {
-            foreach($accessLevels as $accessLevel => $difficulties) {
-                foreach($difficulties as $difficulty => $contentTuple) {
+        foreach ($cards as $brand => $accessLevels) {
+            foreach ($accessLevels as $accessLevel => $difficulties) {
+                foreach ($difficulties as $difficulty => $contentTuple) {
                     $contentIds[] = $contentTuple[0]['id'];
                     $contentIds[] = $contentTuple[1]['id'];
                 }
@@ -1324,13 +1330,13 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         }";
         $sanityGateway = app()->make(SanityGateway::class);
         $documents = $sanityGateway->sanity->fetch($query);
-        foreach($cards as $brand => $accessLevels) {
-            foreach($accessLevels as $accessLevel => $difficulties) {
-                foreach($difficulties as $difficulty => $contentTuple) {
+        foreach ($cards as $brand => $accessLevels) {
+            foreach ($accessLevels as $accessLevel => $difficulties) {
+                foreach ($difficulties as $difficulty => $contentTuple) {
                     $difficultyString = OnboardingSkillLevelEnum::tryFrom($difficulty)->name;
                     $content1Document = null;
                     $content2Document = null;
-                    foreach($documents as $document) {
+                    foreach ($documents as $document) {
                         if (!is_null($content1Document) && !is_null($content2Document)) {
                             break;
                         } elseif ($document['railcontent_id'] == $contentTuple[0]['id']) {
@@ -1342,6 +1348,26 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     if (!$content1Document && !$content2Document) {
                         continue;
                     }
+                    $contentReferences = [
+                        [
+                            ...$this->getOnboardingCardContentFields($contentTuple[0]),
+                            'is_draft' => false,
+                            'content' => [
+                                "_type" => "reference",
+                                "_ref"  => $content1Document['_id'],
+                                "_weak" => false
+                            ],
+                        ],
+                        [
+                            ...$this->getOnboardingCardContentFields($contentTuple[1]),
+                            'is_draft' => false,
+                            'content' => [
+                                "_type" => "reference",
+                                "_ref"  => $content2Document['_id'],
+                                "_weak" => false
+                            ],
+                        ]
+                    ];
 
                     $structuredCards[] = [
                         '_type' => 'onboarding-content-card',
@@ -1350,22 +1376,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'brand' => $brand,
                         'access_level' => $accessLevel,
                         'experience_level' => $difficultyString,
-                        'first_content' => [
-                            ...$this->getOnboardingCardContentFields($contentTuple[0]),
-                            'content' => [
-                                "_type" => "reference",
-                                "_ref"  => $content1Document['_id'],
-                                "_weak" => false
-                            ],
-                        ],
-                        'second_content' => [
-                            ...$this->getOnboardingCardContentFields($contentTuple[1]),
-                            'content' => [
-                                "_type" => "reference",
-                                "_ref"  => $content2Document['_id'],
-                                "_weak" => false
-                            ],
-                        ],
+                        'card' => $contentReferences,
                     ];
                 }
             }
@@ -1378,10 +1389,10 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $fields = ['header', 'subheader'];
         $imageFields = ['logo', 'bgImg', 'wideImg', 'squareImg'];
         $output = [];
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             $output[$field] = $cardContent[$field] ?? null;
         }
-        foreach($imageFields as $imageField) {
+        foreach ($imageFields as $imageField) {
             if (isset($cardContent[$imageField])) {
                 $output[$imageField] = [
                     '_type' => 'image',

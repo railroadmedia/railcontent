@@ -111,7 +111,7 @@ export default (function () {
 
             if (!clickTimeout && !isResetCompleteOpened) {
                 isResetCompleteOpened = true;
-                
+
                 window.showconfirmationmodal({
                     title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
                     subtitle: 'This cannot be undone.',
@@ -119,7 +119,7 @@ export default (function () {
                         submit: () => {
                             icon.classList.remove('fa-redo-alt', 'fa-flip-horizontal');
                             icon.classList.add('fa-spin', 'fa-spinner');
-                            
+
                             //Reset Progress!
                             contentStatusReset(contentId)
                                 .then(() => {
@@ -127,14 +127,14 @@ export default (function () {
                                         icon: 'check',
                                         text: 'Removed! Your progress has been reset.'
                                     });
-            
+
                                     if (document.querySelector('.trophy-progress')) {
                                         window.recalculateProgress(false, true, brand);
                                     }
                                     Array.from(resetProgressButtons).forEach((button) => {
                                         button.parentElement.classList.add('hide');
                                     });
-                                }).finally( () => {
+                                }).finally(() => {
                                     icon.classList.remove('fa-spin', 'fa-spinner');
                                     icon.classList.add('fa-redo-alt', 'fa-flip-horizontal');
                                     //Hard Reload
@@ -145,7 +145,7 @@ export default (function () {
                             isResetCompleteOpened = false;
                         }
                     }
-                });                
+                });
             }
 
             setClickTimeout();
@@ -186,34 +186,30 @@ export default (function () {
             const isRemoving = element.classList.contains('is-complete');
             const brand = element.dataset.brand || 'drumeo';
 
-            Utils.triggerEvent(window, 'requesting-completion'); 
+            Utils.triggerEvent(window, 'requesting-completion');
 
             if (!clickTimeout && !isRequesting) {
                 if (isRemoving) {
                     if (!isResetCompleteOpened) {
                         isResetCompleteOpened = true;
-                        
+
                         window.showconfirmationmodal({
                             title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
                             subtitle: 'This cannot be undone.',
                             callbacks: {
                                 submit: () => {
                                     element.classList.remove('is-complete');
-                        
+
                                     window.recalculateProgress(!isRemoving, true, brand);
-                                    
+
                                     //Actually Reset Progress
                                     contentStatusReset(contentId)
-                                        .then((resolved) => {
-                                            if (resolved) {
-                                                window.shownotification({
-                                                    icon: 'check',
-                                                    text: 'Ready to start again? Your progress has been reset.'
-                                                });
-                        
-                                                element.classList.add('remove-request-complete');
-                                            }
-                        
+                                        .then(() => {
+                                            window.shownotification({
+                                                icon: 'check',
+                                                text: 'Ready to start again? Your progress has been reset.'
+                                            });
+                                            element.classList.add('remove-request-complete');
                                             isRequesting = false;
                                         });
                                 },
@@ -221,17 +217,17 @@ export default (function () {
                                     isResetCompleteOpened = false;
                                 }
                             }
-                        });                        
+                        });
                     }
                 } else {
                     element.classList.add('is-complete');
 
                     //for Alpine JS Template Data
-                    if(document.querySelector('[x-data]') &&
+                    if (document.querySelector('[x-data]') &&
                         document.querySelector('[x-data]').__x &&
                         document.querySelector('[x-data]').__x.$data) {
                         //Trigger Modals if complete
-                        if(element.classList.contains('lesson-complete')) {
+                        if (element.classList.contains('lesson-complete')) {
                             document.querySelector('[x-data]').__x.$data.modalOpen = 'lessonComplete';
                         } else if (element.classList.contains('quest-complete')) {
                             document.querySelector('[x-data]').__x.$data.modalOpen = 'questComplete';
@@ -247,7 +243,7 @@ export default (function () {
                         .then(() => {
                             element.classList.add('add-request-complete');
                         })
-                        .finally( () => {
+                        .finally(() => {
                             isRequesting = false;
                         });
                 }

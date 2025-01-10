@@ -52,7 +52,6 @@ $userData = assembleUserAttributes(user());
 
                 <page-container
                     :is-live="{{ !empty($coachEvent) }}"
-                    :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
                     search-url=""
                     @if(!empty( $hasUnreadNotifications ))
                         :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"

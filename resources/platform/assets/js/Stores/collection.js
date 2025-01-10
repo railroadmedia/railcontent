@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia';
+import axios from 'axios';
 import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
-import { fetchAll, fetchCoachLessons, fetchAllFilterOptions, fetchMetadata } from 'musora-content-services';
+import { fetchAll, fetchCoachLessons, fetchNewReleases, fetchAllFilterOptions, fetchMetadata } from 'musora-content-services';
 import { useLessonHistoryPageData } from '@hooks/pages/useLessonHistoryPageData';
 import { useChildCollectionPageData } from '@hooks/pages/useChildCollectionPageData';
 
@@ -122,9 +123,38 @@ export const useCollectionStore = defineStore({
                         searchTerm: this.filter.searchTerm,
                     })
                 },
+                'new-release': async() => {
+                    const data = await fetchNewReleases(userStore.brand, {
+                        page: this.tabData[this.filter.activeTab].currentPage,
+                        limit: this.filter.limit,
+                        sort: this.filter.sort,
+                        searchTerm: this.filter.searchTerm,
+                    })
+
+                    return {
+                        entity: data
+                    }
+                },
+                'recommendation': async() => {
+                    const data = await axios.get('/railcontent/recommended', {
+                        params: {
+                            brand: userStore.brand,
+                            page: this.tabData[this.filter.activeTab].currentPage,
+                            limit: this.filter.limit,
+                            included_types: ['Recommendation'],
+                            include_future_scheduled_content_only: true,
+                            tabs: this.formattedTabs(),
+                            count_filter_items: true,
+                        }
+                    })
+
+                    return {
+                        entity: data.data.data,
+                    }
+                }
             }
 
-            if(endpoints[type]){
+            if( endpoints[type] ){
                 return await endpoints[type]();
             } else {
                 let progress = 'all';
@@ -177,6 +207,7 @@ export const useCollectionStore = defineStore({
                 undefined, //progressIds
                 undefined, //coachIds
             );
+
             if (result) {
                 //Set Filter Columns
                 this.filterColumns = getFilterValues(result.meta.filterOptions);
@@ -264,8 +295,6 @@ export const useCollectionStore = defineStore({
                 this.filter.activeTab = this.tabOptions[0].value;
                 this.tabData[this.filter.activeTab] = { ...this.tabOptions[0] };
             }
-
-
         },
 
         getFilterURLParams() {
@@ -327,14 +356,15 @@ export const useCollectionStore = defineStore({
         },
 
         async setData(response, replace) {
-            const userStore = useUserStore();
             if (response) {
                 if (replace) {
                     this.data = [...response.entity];
                 } else {
                     this.data = [...this.data, ...response.entity];
                 }
+
                 const hasMorePages = response.entity.length >= this.filter.limit;
+
                 const nextPage = Math.ceil(
                     this.data.length / this.filter.limit
                 ) + (hasMorePages ? 1 : 0);

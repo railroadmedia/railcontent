@@ -81,7 +81,7 @@
                             limit: 10,
                             term: '',
                             sort: 'most_recent',
-                        }, token);
+                        });
                     }
                 }
             })
