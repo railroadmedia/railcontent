@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 html {
   height: 100%;
@@ -487,12 +488,12 @@ button {
 
     &:hover {
       .vid-wrap {
-        border-color: lighten(#1f4261, 15%);
+        border-color: color.adjust(#1f4261, $lightness: 15%);
         opacity: 0.75;
       }
 
       p {
-        color: lighten(#1f4261, 15%);
+        color: color.adjust(#1f4261, $lightness: 15%);
       }
     }
 

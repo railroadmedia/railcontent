@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 h1, h2, h3, h4, h5, h6, p, li {
   font-family: $opensans;
@@ -32,7 +33,7 @@ h1, h2, h3, h4, h5, h6, p, li {
   }
 
   .text-blue {
-    color: lighten($drumeoBlue, 10%);
+    color: color.adjust($drumeoBlue, $lightness: 10%);
   }
 
   h2 {
@@ -793,7 +794,7 @@ h1, h2, h3, h4, h5, h6, p, li {
         padding: 0;
 
         &:hover {
-          background: lighten($drumeoBlue, 10%);
+          background: color.adjust($drumeoBlue, $lightness: 10%);
         }
       }
     }
@@ -1180,6 +1181,7 @@ h1, h2, h3, h4, h5, h6, p, li {
         cursor: pointer;
         -webkit-user-select: none;
         -moz-user-select: none;
+        user-select: none;
         font: 700 18px/1em $opensans;
         margin: 0 0 3px;
         width: 100%;
@@ -1228,6 +1230,7 @@ h1, h2, h3, h4, h5, h6, p, li {
       cursor: pointer;
       -webkit-user-select: none;
       -moz-user-select: none;
+      user-select: none;
       font: 700 15px/1em $bebas;
       white-space: nowrap;
       overflow: hidden;
@@ -1493,6 +1496,7 @@ h1, h2, h3, h4, h5, h6, p, li {
       overflow: hidden;
       -webkit-backface-visibility: hidden;
       -moz-backface-visibility: hidden;
+      backface-visibility: hidden;
       -webkit-transform: translateZ(0);
       transform: translateZ(0);
       height: 0;

@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 h1, h2, h3, h4, h5, h6, p, li {
   font-family: $opensans;
@@ -18,7 +19,7 @@ h1, h2, h3, h4, h5, h6, p, li {
   }
 
   &:hover, &:focus {
-    background: lighten($drumeoBlue, 10%);
+background: color.adjust($drumeoBlue, $lightness: 10%);
   }
 }
 

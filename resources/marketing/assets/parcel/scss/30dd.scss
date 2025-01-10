@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong, td strong {
     font-weight: 900;
@@ -341,11 +342,11 @@ table.comparison {
             background-color: #f2f5fa;
 
             td:nth-child(2) {
-                background-color: lighten($drumeoBlue, 2%);
+                background-color: color.adjust($drumeoBlue, $lightness: 2%);
             }
 
             td:nth-child(3), td:nth-child(4), td:nth-child(5) {
-                background-color: lighten(#f2f5fa, 1%);
+                background-color: color.adjust(#f2f5fa, $lightness: 1%);
             }
 
         }
