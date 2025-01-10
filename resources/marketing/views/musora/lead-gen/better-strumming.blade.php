@@ -28,10 +28,11 @@
             color:#fff;
         }
 
-        .join.outline:hover,
-        .join.outline:focus {
+        .join.outline.guitareo:hover,
+        .join.outline.guitareo:focus {
             background:#fff;
             color:#000;
+            border:2px solid black;
         }
         .lessons-list::-webkit-scrollbar {
             width: 6px;
@@ -77,29 +78,28 @@
                 >
                     @php
                         $benefits = [
-                            'Daily Guided Lessons',
-                            'Learn By Playing Along',
-                            'Guaranteed Results'
+                            'Daily <br class="block sm:hidden">Guided Lessons',
+                            'Learn By <br class="block sm:hidden">Playing Along',
+                            'Guaranteed <br class="block sm:hidden">Results'
                         ];
                     @endphp
-                    
+
                     <div class="text-center w-full mb-7 lg:mb-20">
                         @foreach ($benefits as $benefit)
                             <p class="hidden lg:inline p-2 leading-loose">
                                 <i class="fas fa-check-circle text-guitareo" aria-hidden="true"></i>
-                                {{ $benefit }}
+                                {!! $benefit !!}
                             </p>
                         @endforeach
                         <div class="flex inline lg:hidden my-3">
                             @foreach ($benefits as $benefit)
                                 <p class="w-1/2 leading-tight">
                                     <i class="fas fa-check-circle text-guitareo" aria-hidden="true"></i><br>
-                                    {{ $benefit }}
+                                    {!! $benefit !!}
                                 </p>
                             @endforeach
                         </div>
                     </div>
-
                     @php
                         $lessons = [
                     [
@@ -278,7 +278,7 @@
                     $cards = [
                         [
                             'header' => 'Lifetime Access to 30 Days To <br class="hidden lg:block"/> Better Strumming ',
-                            'price' => '$99',
+                            'price' => '$127',
                             'badge_text' => 'COURSE ONLY',
                             'badge_class' => 'border-black',
                             'subheader' => 'One time payment.',
@@ -286,7 +286,7 @@
                             'card_class' => 'bg-white',
                             'button_class' => 'join outline guitareo smaller w-11/12 lg:w-full transition-opacity duration-300 hover:opacity-80  uppercase',
                             'border_class' => 'border-[#64646480] border-opacity-60',
-                            'link' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1',
+                            'link' => 'https://www.guitareo.com/shop/30-days-to-better-strumming',
                             'description' => [
                                 'With the course only, you get:',
                                 '<i class="fas fa-check pt-3 pr-1"></i> 20 guided play-along lessons',
@@ -304,7 +304,7 @@
                             'button_class' => 'join smaller w-11/12 lg:w-full transition-opacity duration-300 hover:opacity-80 bg-guitareo uppercase',
                             'border_class' => 'border-guitareo bg-[#EFF7FF]',
                             'card_class' => 'bg-[#EFF7FF]',
-                            'link' => '/choose-plan',
+                            'link' => '/',
                             'description' => [
                                 'With the membership, you get:',
                                 '<i class="fas fa-check text-guitareo pt-3 pr-1"></i> Step-By-Step Lessons & Guided Workouts',

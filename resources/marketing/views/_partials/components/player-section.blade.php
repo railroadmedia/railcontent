@@ -132,34 +132,34 @@
                         x-transition:leave-end="opacity-0">
                         <div class="fixed inset-0"></div>
                         <div class="relative min-h-screen flex items-center justify-center p-4">
-                            <div class="relative bg-white rounded-xl max-w-xl w-full p-6">
+                            <div class="relative bg-white rounded-xl max-w-2xl w-full p-6 md:p-10 lg:p-16">
                                 @php
                                     $forms = [
                                         '30-day-drummer' => [
                                             'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/marketing/drumeo/products/30-day-drummer/30DayDrummerSeason3-Logo-10.png" alt="30 Day Drummer" class="mx-auto mb-4 w-32">
-                                                        <h4 class="leading-none"><strong>Enter Your Email to </br> Unlock 30-Day Drummer</strong></h4>
-                                                        <p class="mt-2 text-xs">Get access to the first week of 30-Day Drummer now. No payment info is required.</p>',
+                                                        <h4 class="leading-none"><strong>Enter Your Email to Unlock </br>30-Day Drummer</strong></h4>
+                                                        <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of 30-Day Drummer now. No payment info is required.</p>',
                                             'formName' => '30D Drummer Sample',
                                             'formId' => 'Musora - Engagement - Trigger - 30D Drummer Sample - WebForm',
                                         ],
                                         'new-piano-players-start-here' => [
                                             'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png" alt="Logo" class="mx-auto mb-4 h-16">
-                                                        <h4 class="leading-none"><strong>Enter Your Email to </br> Unlock New Piano Players Start Here</strong></h4>
-                                                        <p class="mt-2 text-xs">Get access to the first week of New Piano Players Start Here now. No payment info is required.</p>',
+                                                        <h4 class="leading-none"><strong>Enter Your Email to Unlock </br> New Piano Players Start Here</strong></h4>
+                                                        <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of New Piano Players Start Here now. No payment info is required.</p>',
                                             'formName' => 'New Piano Players Sample',
                                             'formId' => 'Musora - Engagement - Trigger - New Piano Players Sample - WebForm',
                                         ],
                                         '30-days-to-better-strumming' => [
                                             'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-black.png" alt="Logo" class="mx-auto mb-4 h-16">
-                                                        <h4 class="leading-none"><strong>Enter Your Email to </br> Unlock 30 Days To Better Strumming</strong></h4>
-                                                        <p class="mt-2 text-xs">Get access to the first week of 30 Days To Better Strumming now. No payment info is required.</p>',
+                                                        <h4 class="leading-none"><strong>Enter Your Email to Unlock </br>30 Days To Better Strumming</strong></h4>
+                                                        <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of 30 Days To Better Strumming now. No payment info is required.</p>',
                                             'formName' => 'Better Strumming Sample',
                                             'formId' => 'Musora - Engagement - Trigger - Better Strumming Sample - WebForm',
                                         ],
                                         'everyday-improv' => [
                                         'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/enrollment/logo.webp" alt="Logo" class="mx-auto mb-4 h-16">
-                                                    <h4 class="leading-none"><strong>Enter Your Email to </br> Unlock 30 Days To Everyday Improv</strong></h4>
-                                                    <p class="mt-2 text-xs">Get access to the first week of Everyday Improv now. No payment info is required.</p>',
+                                                    <h4 class="leading-none"><strong>Enter Your Email to Unlock </br> 30 Days To Everyday Improv</strong></h4>
+                                                    <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of Everyday Improv now. No payment info is required.</p>',
                                         'formName' => 'Everyday Improv Sample',
                                         'formId' => 'Musora - Engagement - Trigger - Everyday Improv Sample - WebForm',
                                     ],
@@ -175,6 +175,7 @@
                                         "nameInput" => "First Name",
                                         "inputText" => "Email Address",
                                         'header' => $forms[$slug]['header'],
+                                        'formClass' => 'max-w-md',
                                     ])
                                 @endif
                             </div>

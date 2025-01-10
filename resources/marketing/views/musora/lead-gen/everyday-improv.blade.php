@@ -28,10 +28,11 @@
             color:#fff;
         }
 
-        .join.outline:hover,
-        .join.outline:focus {
+        .join.outline.singeo:hover,
+        .join.outline.singeo:focus {
             background:#fff;
             color:#000;
+            border:2px solid black;
         }
         .lessons-list::-webkit-scrollbar {
             width: 6px;
@@ -77,24 +78,24 @@
                 >
                     @php
                         $benefits = [
-                            'Improve Your Skills',
-                            'Practice Every Day',
-                            'Learn By Doings'
+                            'Improve <br class="block sm:hidden">Your Skills',
+                            'Practice <br class="block sm:hidden">Every Day',
+                            'Learn By <br class="block sm:hidden">Doing'
                         ];
                     @endphp
-                    
+
                     <div class="text-center w-full mb-7 lg:mb-20">
                         @foreach ($benefits as $benefit)
                             <p class="hidden lg:inline p-2 leading-loose">
                                 <i class="fas fa-check-circle text-singeo" aria-hidden="true"></i>
-                                {{ $benefit }}
+                                {!! $benefit !!}
                             </p>
                         @endforeach
                         <div class="flex inline lg:hidden my-3">
                             @foreach ($benefits as $benefit)
                                 <p class="w-1/2 leading-tight">
                                     <i class="fas fa-check-circle text-singeo" aria-hidden="true"></i><br>
-                                    {{ $benefit }}
+                                    {!! $benefit !!}
                                 </p>
                             @endforeach
                         </div>
@@ -318,7 +319,7 @@
                     $cards = [
                         [
                             'header' => 'Lifetime Access to Everyday Improv',
-                            'price' => '$99',
+                            'price' => '$127',
                             'badge_text' => 'COURSE ONLY',
                             'badge_class' => 'border-black',
                             'subheader' => 'One time payment.',
@@ -326,7 +327,7 @@
                             'card_class' => 'bg-white',
                             'button_class' => 'join outline singeo smaller w-11/12 lg:w-full transition-opacity duration-300 hover:opacity-80  uppercase',
                             'border_class' => 'border-[#64646480] border-opacity-60',
-                            'link' => '/ecommerce/add-to-cart?products[everyday-improv]=1',
+                            'link' => 'https://singeo.com/shop/everyday-improv',
                             'description' => [
                                 'With the course only, you get:',
                                 '<i class="fas fa-check pt-3 pr-1"></i> 20 guided play-along lessons',
@@ -344,7 +345,7 @@
                             'button_class' => 'join smaller w-11/12 lg:w-full transition-opacity duration-300 hover:opacity-80 bg-singeo uppercase',
                             'border_class' => 'border-singeo bg-[#EFF7FF]',
                             'card_class' => 'bg-[#EFF7FF]',
-                            'link' => '/choose-plan',
+                            'link' => '/',
                             'description' => [
                                 'With the membership, you get:',
                                 '<i class="fas fa-check text-singeo pt-3 pr-1"></i> Step-By-Step Lessons & Guided Workouts',

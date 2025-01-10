@@ -28,10 +28,11 @@
             color:#fff;
         }
 
-        .join.outline:hover,
-        .join.outline:focus {
+        .join.outline.pianote:hover,
+        .join.outline.pianote:focus {
             background:#fff;
             color:#000;
+            border:2px solid black;
         }
         .lessons-list::-webkit-scrollbar {
             width: 6px;
@@ -80,171 +81,171 @@
                 >
                     @php
                         $benefits = [
-                            'Learn By Doing',
-                            'Play Every Day',
-                            'No Theory Required'
+                            'Learn By <br class="block sm:hidden">Doing',
+                            'Play <br class="block sm:hidden">Every Day',
+                            'No Theory <br class="block sm:hidden">Required'
                         ];
                     @endphp
-                    
+
                     <div class="text-center w-full mb-7 lg:mb-20">
                         @foreach ($benefits as $benefit)
                             <p class="hidden lg:inline p-2 leading-loose">
                                 <i class="fas fa-check-circle text-pianote" aria-hidden="true"></i>
-                                {{ $benefit }}
+                                {!! $benefit !!}
                             </p>
                         @endforeach
                         <div class="flex inline lg:hidden my-3">
                             @foreach ($benefits as $benefit)
                                 <p class="w-1/2 leading-tight">
                                     <i class="fas fa-check-circle text-pianote" aria-hidden="true"></i><br>
-                                    {{ $benefit }}
+                                    {!! $benefit !!}
                                 </p>
                             @endforeach
                         </div>
                     </div>
-                    @php
+                   @php
                     $lessons = [
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/32836468d4eec2d19b5156a010cf303d8530994e-1920x1081.jpg',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/32836468d4eec2d19b5156a010cf303d8530994e-1920x1081.jpg',
                         'title' => 'Course Kick-Off',
                         'name' => 'course-kick-off',
                         'videoId' => '886627419',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/051b241d41cf990010a94858eb30635f65e561b5-1920x1080.jpg',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/051b241d41cf990010a94858eb30635f65e561b5-1920x1080.jpg',
                         'title' => "Let's Get Started",
                         'name' => 'lets-get-started',
                         'videoId' => '797858281',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/caf485e118606f9e96d873c9912183cba968d5da-1920x1080.jpg',
-                        'title' => 'Day 1 - Your First Chord Progression',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/caf485e118606f9e96d873c9912183cba968d5da-1920x1080.jpg',
+                        'title' => 'Day 1 — Your First Chord Progression',
                         'name' => 'day1-first-chord-progression',
                         'videoId' => '802011057',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/6dc8c19c88880b3e36689dcab38dba53f55a24e4-1920x1080.jpg',
-                        'title' => 'Day 2 - Make It Musical',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/6dc8c19c88880b3e36689dcab38dba53f55a24e4-1920x1080.jpg',
+                        'title' => 'Day 2 — Make It Musical',
                         'name' => 'day2-make-it-musical',
                         'videoId' => '802011087',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/9c2e85d9a6854d9e7efbad50a376c7fe59de96b9-1920x1080.jpg',
-                        'title' => 'Day 3 - Your First Left Hand Chords',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/9c2e85d9a6854d9e7efbad50a376c7fe59de96b9-1920x1080.jpg',
+                        'title' => 'Day 3 — Your First Left Hand Chords',
                         'name' => 'day3-first-left-hand-chords',
                         'videoId' => '802011113',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/6d0921b443a24bdc7ec8f9dabf53578479a7effd-1920x1080.jpg',
-                        'title' => 'Day 4 - Playing With Both Hands',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/6d0921b443a24bdc7ec8f9dabf53578479a7effd-1920x1080.jpg',
+                        'title' => 'Day 4 — Playing With Both Hands',
                         'name' => 'day4-playing-both-hands',
                         'videoId' => '802011140',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/e501cfd5d6c9db0b34299ba01a69e188fb47c3d3-1920x1080.jpg',
-                        'title' => 'Day 5 - Feeling Comfortable',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/e501cfd5d6c9db0b34299ba01a69e188fb47c3d3-1920x1080.jpg',
+                        'title' => 'Day 5 — Feeling Comfortable',
                         'name' => 'day5-feeling-comfortable',
                         'videoId' => '891176724',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/0955970b2722e4bf79aaeb1c1ca387e30581d32a-1920x1080.jpg',
-                        'title' => 'Day 6 - Real Chords',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/0955970b2722e4bf79aaeb1c1ca387e30581d32a-1920x1080.jpg',
+                        'title' => 'Day 6 — Real Chords',
                         'name' => 'day6-real-chords',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/fe3bb0872d339af3c43ba5944a50059aebbbcc19-1920x1080.jpg',
-                        'title' => 'Day 7 - Real Chords Hands Together',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/fe3bb0872d339af3c43ba5944a50059aebbbcc19-1920x1080.jpg',
+                        'title' => 'Day 7 — Real Chords Hands Together',
                         'name' => 'day7-real-chords-hands-together',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/03f5de619b62a8635e6a9293ce56f00b0739627d-1920x1080.jpg',
-                        'title' => 'Day 8 - A More Exciting Left Hand',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/03f5de619b62a8635e6a9293ce56f00b0739627d-1920x1080.jpg',
+                        'title' => 'Day 8 — A More Exciting Left Hand',
                         'name' => 'day8-exciting-left-hand',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/d09b7722d49dcf2fde72209a0fa8807b690d2224-1920x1080.jpg',
-                        'title' => 'Day 9 - Feeling Confident',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/d09b7722d49dcf2fde72209a0fa8807b690d2224-1920x1080.jpg',
+                        'title' => 'Day 9 — Feeling Confident',
                         'name' => 'day9-feeling-confident',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/852a318d7ed3541a7c5321d9b8d95130808870dc-1920x1080.jpg',
-                        'title' => 'Day 10 - Start Sounding Better',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/852a318d7ed3541a7c5321d9b8d95130808870dc-1920x1080.jpg',
+                        'title' => 'Day 10 — Start Sounding Better',
                         'name' => 'day10-start-sounding-better',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/e749d14024fb3f60a8a7a9be3e2753192de2ad37-1920x1080.jpg',
-                        'title' => 'Day 11 - Quarter Notes',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/e749d14024fb3f60a8a7a9be3e2753192de2ad37-1920x1080.jpg',
+                        'title' => 'Day 11 — Quarter Notes',
                         'name' => 'day11-quarter-notes',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/0f739afe1a2f406f48c75acfba72a003d54fb1d0-1920x1080.jpg',
-                        'title' => 'Day 12 - Half Notes',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/0f739afe1a2f406f48c75acfba72a003d54fb1d0-1920x1080.jpg',
+                        'title' => 'Day 12 — Half Notes',
                         'name' => 'day12-half-notes',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/b5ea780ab60a3cdffdc75ca381d7071d5dedf7cb-1920x1080.jpg',
-                        'title' => 'Day 13 - Gaining Confidence With Rhythm',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/b5ea780ab60a3cdffdc75ca381d7071d5dedf7cb-1920x1080.jpg',
+                        'title' => 'Day 13 — Gaining Confidence With Rhythm',
                         'name' => 'day13-gaining-confidence-rhythm',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/801a728c56d89d0727f17b32b9c57a0823d2a1ba-1920x1080.jpg',
-                        'title' => 'Day 14 - A Beautiful Pattern',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/801a728c56d89d0727f17b32b9c57a0823d2a1ba-1920x1080.jpg',
+                        'title' => 'Day 14 — A Beautiful Pattern',
                         'name' => 'day14-beautiful-pattern',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/d54aa2adc394bc56aa554373945093d298c39025-1920x1080.jpg',
-                        'title' => 'Day 15 - An Even More Beautiful Pattern',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/d54aa2adc394bc56aa554373945093d298c39025-1920x1080.jpg',
+                        'title' => 'Day 15 — An Even More Beautiful Pattern',
                         'name' => 'day15-more-beautiful-pattern',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/dc21c05b003a51bb84675944f35661492b76cc63-1920x1080.jpg',
-                        'title' => 'Day 16 - Making It Fancy',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/dc21c05b003a51bb84675944f35661492b76cc63-1920x1080.jpg',
+                        'title' => 'Day 16 — Making It Fancy',
                         'name' => 'day16-making-it-fancy',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/b81b5cbedf3c04418544c7a4cd5aaddbeaee99cf-1920x1080.jpg',
-                        'title' => 'Day 17 - Adding Power',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/b81b5cbedf3c04418544c7a4cd5aaddbeaee99cf-1920x1080.jpg',
+                        'title' => 'Day 17 — Adding Power',
                         'name' => 'day17-adding-power',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/8349f91ec09c89f23427ed26af48a567149f8c67-1920x1080.jpg',
-                        'title' => 'Day 18 - A Beautiful Chord Secret',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/8349f91ec09c89f23427ed26af48a567149f8c67-1920x1080.jpg',
+                        'title' => 'Day 18 — A Beautiful Chord Secret',
                         'name' => 'day18-beautiful-chord-secret',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/86595d1d52230c2229c1605a6ff9d3db1af53977-1920x1080.jpg',
-                        'title' => 'Day 19 - Preparing For Your Best Performance',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/86595d1d52230c2229c1605a6ff9d3db1af53977-1920x1080.jpg',
+                        'title' => 'Day 19 — Preparing For Your Best Performance',
                         'name' => 'day19-preparing-best-performance',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/5b7b9a46917101e3bc1c89489b8887a16f09d155-1920x1080.jpg',
-                        'title' => 'Day 20 - Your Best Performance',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/5b7b9a46917101e3bc1c89489b8887a16f09d155-1920x1080.jpg',
+                        'title' => 'Day 20 — Your Best Performance',
                         'name' => 'day20-best-performance',
                         'videoId' => null
                     ]
-                ];
-                    @endphp
+                    ];
+                @endphp
                 @include('_partials.components.player-section', [
                     'title' => 'New Piano Players Start Here',
                     'slug' => 'new-piano-players-start-here',
@@ -273,7 +274,7 @@
                     $cards = [
                         [
                             'header' => 'Lifetime Access to New Piano Players <br class="hidden lg:block"/> Start Here',
-                            'price' => '$99',
+                            'price' => '$127',
                             'badge_text' => 'COURSE ONLY',
                             'badge_class' => 'border-black',
                             'subheader' => 'One time payment.',
@@ -281,7 +282,7 @@
                             'card_class' => 'bg-white',
                             'button_class' => 'join outline pianote smaller w-11/12 lg:w-full transition-opacity duration-300 hover:opacity-80  uppercase',
                             'border_class' => 'border-[#64646480] border-opacity-60',
-                            'link' => '/ecommerce/add-to-cart?products[new-piano-players-start-here]=1',
+                            'link' => 'https://www.pianote.com/shop/new-piano-players',
                             'description' => [
                                 'With the course only, you get:',
                                 '<i class="fas fa-check pt-3 pr-1"></i> 20 guided play-along lessons',
@@ -299,7 +300,7 @@
                             'button_class' => 'join smaller w-11/12 lg:w-full transition-opacity duration-300 hover:opacity-80 bg-pianote uppercase',
                             'border_class' => 'border-pianote bg-[#EFF7FF]',
                             'card_class' => 'bg-[#EFF7FF]',
-                            'link' => '/choose-plan',
+                            'link' => '/',
                             'description' => [
                                 'With the membership, you get:',
                                 '<i class="fas fa-check text-pianote pt-3 pr-1"></i> Step-By-Step Lessons & Guided Workouts',

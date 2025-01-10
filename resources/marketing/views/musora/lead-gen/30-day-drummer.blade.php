@@ -24,10 +24,11 @@
             color:#fff;
         }
 
-        .join.outline:hover,
-        .join.outline:focus {
+        .join.outline.drumeo:hover,
+        .join.outline.drumeo:focus {
             background:#fff;
             color:#000;
+            border: 2px solid black;
         }
         .lessons-list::-webkit-scrollbar {
             width: 6px;
@@ -68,7 +69,7 @@
     @endif
     <section class="text-center px-4 md:px-6 py-8 md:py-12 lg:py-16">
         <div x-intersect.once="visible = true;">
-            <div class="container max-w-6xl mx-auto">
+            <div class="container max-w-5xl mx-auto">
                 <img
                     alt="Challenge Logo"
                     class="h-24 sm:h-28 lg:h-32 mx-auto mb-2"
@@ -98,143 +99,142 @@
                         @endforeach
                     </div>
                 </div>
-               @php
-                 $lessons = [
-                      [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/590ae25f0258d3d5b627ba7161cb57406bb009ec-1920x1080.jpg',
+                @php
+                $lessons = [
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/590ae25f0258d3d5b627ba7161cb57406bb009ec-1920x1080.jpg',
                         'title' => 'Course Kick-Off',
                         'name' => 'coursekick-off',
                         'videoId' => '887785770',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/5f6e4a44b57d4a72bea8f3befece1df97f552e91-1920x1080.jpg',
-                        'title' => 'Day 1 – Your First Drum Beat – Lesson',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/5f6e4a44b57d4a72bea8f3befece1df97f552e91-1920x1080.jpg',
+                        'title' => 'Day 1 — Your First Drum Beat — Lesson',
                         'name' => 'day1-yourfirstdrumbeat-lesson',
                         'videoId' => '887787268',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/9afaf6258d5d687f1fe6cd8dd3b0761c1023dd8a-1920x1080.jpg',
-                        'title' => 'Day 2 – Your First Drum Beat – Workout 1',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/9afaf6258d5d687f1fe6cd8dd3b0761c1023dd8a-1920x1080.jpg',
+                        'title' => 'Day 2 — Your First Drum Beat — Workout 1',
                         'name' => 'day2-yourfirstdrumbeat-workout1',
                         'videoId' => '887787391',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/12d17c7a1f70551e987f3eff38694b162f7feb45-1920x1080.jpg',
-                        'title' => 'Day 3 – Your First Drum Beat – Workout 2',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/12d17c7a1f70551e987f3eff38694b162f7feb45-1920x1080.jpg',
+                        'title' => 'Day 3 — Your First Drum Beat — Workout 2',
                         'name' => 'day3-yourfirstdrumbeat-workout2',
                         'videoId' => '887787490',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/5f05758bfdd6e879666f125dddcf5ee59763a3eb-1920x1080.jpg',
-                        'title' => 'Day 4 – Your First Drum Beat – Workout 3',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/5f05758bfdd6e879666f125dddcf5ee59763a3eb-1920x1080.jpg',
+                        'title' => 'Day 4 — Your First Drum Beat — Workout 3',
                         'name' => 'day4-yourfirstdrumbeat-workout3',
                         'videoId' => '887787563',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/6f91509e648882056293acc4a211751e549bed84-1920x1080.jpg',
-                        'title' => 'Day 5 – Your First Drum Beat – Workout 4',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/6f91509e648882056293acc4a211751e549bed84-1920x1080.jpg',
+                        'title' => 'Day 5 — Your First Drum Beat — Workout 4',
                         'name' => 'day5-yourfirstdrumbeat-workout4',
                         'videoId' => '887787661',
                         'free' => true
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/ac3356e3bf6198e04ec4d65d52330564befb1341-1920x1080.jpg',
-                        'title' => 'Day 6 – Doubling It Up – Lesson',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/ac3356e3bf6198e04ec4d65d52330564befb1341-1920x1080.jpg',
+                        'title' => 'Day 6 — Doubling It Up — Lesson',
                         'name' => 'day6-doublingitup-lesson',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/b50511f9017b4f0ace396901fa89b3f3211fbafa-1920x1080.jpg',
-                        'title' => 'Day 7 – Doubling It Up – Workout 1',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/b50511f9017b4f0ace396901fa89b3f3211fbafa-1920x1080.jpg',
+                        'title' => 'Day 7 — Doubling It Up — Workout 1',
                         'name' => 'day7-doublingitup-workout1',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/f53cd343e2b246e9258b1a7ed5a4dd1c9cb233ca-1920x1080.jpg',
-                        'title' => 'Day 8 – Doubling It Up – Workout 2',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/f53cd343e2b246e9258b1a7ed5a4dd1c9cb233ca-1920x1080.jpg',
+                        'title' => 'Day 8 — Doubling It Up — Workout 2',
                         'name' => 'day8-doublingitup-workout2',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/cc50318e51b480b4999600b618fd32e30406ac44-1920x1080.jpg',
-                        'title' => 'Day 9 – Doubling It Up – Workout 3',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/cc50318e51b480b4999600b618fd32e30406ac44-1920x1080.jpg',
+                        'title' => 'Day 9 — Doubling It Up — Workout 3',
                         'name' => 'day9-doublingitup-workout3',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/f3a7803915d40aa1f171dd3f592a1c36244b86ca-1920x1080.jpg',
-                        'title' => 'Day 10 – Doubling It Up – Workout 4',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/f3a7803915d40aa1f171dd3f592a1c36244b86ca-1920x1080.jpg',
+                        'title' => 'Day 10 — Doubling It Up — Workout 4',
                         'name' => 'day10-doublingitup-workout4',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/abcd632bfeb1fab7c2847d44fbaa8d96649056d7-1920x1080.jpg',
-                        'title' => 'Day 11 – Adding Fills & Crashes – Lesson',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/abcd632bfeb1fab7c2847d44fbaa8d96649056d7-1920x1080.jpg',
+                        'title' => 'Day 11 — Adding Fills & Crashes — Lesson',
                         'name' => 'day11-addingfills&crashes-lesson',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/aa72f2fd805a324454cb92ac944645e4c45d0c18-1920x1080.jpg',
-                        'title' => 'Day 12 – Adding Fills & Crashes – Workout 1',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/aa72f2fd805a324454cb92ac944645e4c45d0c18-1920x1080.jpg',
+                        'title' => 'Day 12 — Adding Fills & Crashes — Workout 1',
                         'name' => 'day12-addingfills&crashes-workout1',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/cc25ee7fdcc09f6d131faa80d3c2d7a6f61088bc-1920x1080.jpg',
-                        'title' => 'Day 13 – Adding Fills & Crashes – Workout 2',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/cc25ee7fdcc09f6d131faa80d3c2d7a6f61088bc-1920x1080.jpg',
+                        'title' => 'Day 13 — Adding Fills & Crashes — Workout 2',
                         'name' => 'day13-addingfills&crashes-workout2',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/1aab0dbd932331fe4b544ae8fae226ff1d45aacc-1920x1080.jpg',
-                        'title' => 'Day 14 – Adding Fills & Crashes – Workout 3',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/1aab0dbd932331fe4b544ae8fae226ff1d45aacc-1920x1080.jpg',
+                        'title' => 'Day 14 — Adding Fills & Crashes — Workout 3',
                         'name' => 'day14-addingfills&crashes-workout3',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/5a83666de2b6125a40d7848bd47e86cafcb70afb-1920x1080.jpg',
-                        'title' => 'Day 15 – Adding Fills & Crashes – Workout 4',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/5a83666de2b6125a40d7848bd47e86cafcb70afb-1920x1080.jpg',
+                        'title' => 'Day 15 — Adding Fills & Crashes — Workout 4',
                         'name' => 'day15-addingfills&crashes-workout4',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/6f9098cba40dd97d457b7d167db4023de03e5869-1920x1080.jpg',
-                        'title' => 'Day 16 – Your First Song – Lesson',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/6f9098cba40dd97d457b7d167db4023de03e5869-1920x1080.jpg',
+                        'title' => 'Day 16 — Your First Song — Lesson',
                         'name' => 'day16-yourfirstsong-lesson',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/13ed16b1dab21b59339bb449be1f11a653fd8279-1920x1080.jpg',
-                        'title' => 'Day 17 – Your First Song – Workout 1',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/13ed16b1dab21b59339bb449be1f11a653fd8279-1920x1080.jpg',
+                        'title' => 'Day 17 — Your First Song — Workout 1',
                         'name' => 'day17-yourfirstsong-workout1',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/71a3c1a62a4c1c8ffcd95f63d32349f4890e8e84-1920x1080.jpg',
-                        'title' => 'Day 18 – Your First Song – Workout 2',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/71a3c1a62a4c1c8ffcd95f63d32349f4890e8e84-1920x1080.jpg',
+                        'title' => 'Day 18 — Your First Song — Workout 2',
                         'name' => 'day18-yourfirstsong-workout2',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/60c98136b3b6a32dc73784c3480507c751478aca-1920x1080.jpg',
-                        'title' => 'Day 19 – Your First Song – Workout 3',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/60c98136b3b6a32dc73784c3480507c751478aca-1920x1080.jpg',
+                        'title' => 'Day 19 — Your First Song — Workout 3',
                         'name' => 'day19-yourfirstsong-workout3',
                         'videoId' => null
                     ],
                     [
-                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/staging/41674bd0ddb956715bb353be05064bb3b52fdd33-1920x1080.jpg',
-                        'title' => 'Day 20 – Your First Song – Workout 4',
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/41674bd0ddb956715bb353be05064bb3b52fdd33-1920x1080.jpg',
+                        'title' => 'Day 20 — Your First Song — Workout 4',
                         'name' => 'day20-yourfirstsong-workout4',
                         'videoId' => null
                     ]
                 ];
                 @endphp
-            
                 @include('_partials.components.player-section', [
                     'title' => '30-Day Drummer',
                     'slug' => '30-day-drummer',
@@ -263,7 +263,7 @@
                     $cards = [
                         [
                             'header' => 'Lifetime Access to 30-Day Drummer',
-                            'price' => '$99',
+                            'price' => '$127',
                             'badge_text' => 'COURSE ONLY',
                             'badge_class' => 'border-black',
                             'subheader' => 'One time payment.',
@@ -289,7 +289,7 @@
                             'button_class' => 'join smaller w-11/12 lg:w-full transition-opacity duration-300 hover:opacity-80 bg-drumeo uppercase',
                             'border_class' => 'border-drumeo bg-[#EFF7FF]',
                             'card_class' => 'bg-[#EFF7FF]',
-                            'link' => '/choose-plan',
+                            'link' => '/',
                             'description' => [
                                 'With the membership, you get:',
                                 '<i class="fas fa-check text-drumeo pt-3 pr-1"></i> Step-By-Step Lessons & Guided Workouts',

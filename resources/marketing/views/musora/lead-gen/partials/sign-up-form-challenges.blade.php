@@ -35,7 +35,7 @@
           accept-charset="UTF-8" 
           method="POST"
           action="{{ url()->route('customer-io.submit-email-form-rc') }}"
-          class="ajax-form clearfix facebook-track-lead mx-auto relative flex flex-wrap">
+          class="ajax-form clearfix facebook-track-lead mx-auto relative flex flex-wrap {{$formClass ?? ''}}">
         
         @csrf
 
