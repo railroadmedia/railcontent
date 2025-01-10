@@ -42,21 +42,23 @@
                 <p class="tw-font-bold dark:tw-text-white">{{ chapter.chapter_description }}</p>
             </div>
           </div>
-          <div class="tw-hidden md:tw-flex tw-flex-shrink-0">
+          <div v-if="soundsliceSlug" class="tw-hidden md:tw-flex tw-flex-shrink-0">
             <!-- Practice Button -->
-            <button id="video-chapter-song"
-                    class="tw-btn-primary tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-mr-2 tw-flex tw-justify-center tw-items-center tw-group tw-px-[25px] tw-h-[40px]"
-                    @click="handleOpenSoundslice(chapter.chapter_description, index, chapter.chapter_timecode, false)"
-                    title="Practice"
+            <button
+                id="video-chapter-song"
+                class="tw-btn-primary tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-mr-2 tw-flex tw-justify-center tw-items-center tw-group tw-px-[25px] tw-h-[40px]"
+                @click="handleOpenSoundslice(chapter.chapter_description, index, chapter.chapter_timecode, false)"
+                title="Practice"
             >
               <musora-icon icon-name="practice-slice" class="tw-mr-[10px] tw-w-6" />
               Practice
             </button>
             <!-- Loop Button -->
-            <button id="video-chapter-loop"
-                  class="tw-flex tw-justify-center tw-items-center tw-btn-primary tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] tw-px-[25px] tw-h-[40px]"
-                  @click="handleOpenSoundslice(chapter.chapter_description, index, chapter.chapter_timecode, true)"
-                  title="Loop"
+            <button
+                id="video-chapter-loop"
+                class="tw-flex tw-justify-center tw-items-center tw-btn-primary tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] tw-px-[25px] tw-h-[40px]"
+                @click="handleOpenSoundslice(chapter.chapter_description, index, chapter.chapter_timecode, true)"
+                title="Loop"
             >
               <musora-icon icon-name="loop-slice" class="tw-mr-[10px] tw-w-6" />
               Loop
@@ -81,10 +83,14 @@ import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
 import SkeletonChapters from '@collections/SkeletonLoader/SkeletonChapters';
 
 const props = defineProps({
-chapters: {
-  type: Array,
-  default: () => [],
-},
+    chapters: {
+      type: Array,
+      default: () => [],
+    },
+    soundsliceSlug: {
+        type: String,
+        default: () => '',
+    },
 });
 
 const emit = defineEmits([
