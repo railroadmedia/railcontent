@@ -210,6 +210,38 @@ class MarketingController extends BaseController
     {
         return view('musora.lead-gen.free-resources', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
     }
+    public function challengeSample30DD()
+    {
+        return view('musora.lead-gen.30-day-drummer', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSample30DDUnlock()
+    {
+        return view('musora.lead-gen.30-day-drummer', [ 'theme' => 'musora'], [ 'unlocked' => true], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleNPPSH()
+    {
+        return view('musora.lead-gen.new-piano-players', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleNPPSHUnlock()
+    {
+        return view('musora.lead-gen.new-piano-players', [ 'theme' => 'musora'], [ 'unlocked' => true], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleBS()
+    {
+        return view('musora.lead-gen.better-strumming', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleBSUnlock()
+    {
+        return view('musora.lead-gen.better-strumming', [ 'theme' => 'musora'], [ 'unlocked' => true], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleEI()
+    {
+        return view('musora.lead-gen.everyday-improv', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleEIUnlock()
+    {
+        return view('musora.lead-gen.everyday-improv', [ 'theme' => 'musora'], [ 'unlocked' => true], ['recaptchaKey' => config('recaptcha.key')]);
+    }
     public function lifetimeDeal()
     {
         return view('musora.sales.lifetime', [ 'theme' => 'musora']);

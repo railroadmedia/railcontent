@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
   font-weight: 900;
@@ -236,7 +237,7 @@ img {
   padding: 13px 0;
 
   &:hover {
-    background: linear-gradient(to bottom, lighten(#df2a70, 10%), lighten(#fe5031, 10%));
+    background: linear-gradient(to bottom, color.adjust(#df2a70, $lightness: 10%), color.adjust(#fe5031, $lightness: 10%));
     color: #fff;
   }
 
@@ -252,7 +253,7 @@ img {
     color: $pianoteRed;
 
     &:hover {
-      background: lighten($pianoteRed, 10%);
+      background: color.adjust($pianoteRed, $lightness: 10%);
       color: #fff;
     }
 
@@ -317,7 +318,7 @@ img {
   background: linear-gradient(to bottom, #df2a70, #fe5031);
 
   &:hover {
-    background: linear-gradient(to bottom, lighten(#df2a70, 5%), lighten(#fe5031, 5%));
+    background: linear-gradient(to bottom, color.adjust(#df2a70, $lightness: 5%), color.adjust(#fe5031, $lightness: 5%));
   }
 }
 

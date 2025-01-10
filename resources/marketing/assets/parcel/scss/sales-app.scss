@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 
 $kidsPurple: #b500ff;
@@ -136,7 +137,7 @@ img {
       }
 
       &:hover {
-        background: lighten($drumeoBlue, 10%);
+    background: color.adjust($drumeoBlue, $lightness: 10%);
       }
     }
   }
@@ -193,7 +194,7 @@ img {
         background: $kidsPurple;
 
         &:hover {
-          background: lighten($kidsPurple, 10%);
+          background: color.adjust($kidsPurple, $lightness: 10%);
         }
       }
     }
@@ -430,9 +431,9 @@ img {
     }
 
     &:hover {
-      background: lighten($kidsPurple, 40%);
-      border-color: lighten($kidsBlue, 40%);
-      color: lighten(#8c9698, 5%);
+      background: color.adjust($kidsPurple, $lightness: 10%);
+      border-color: color.adjust($kidsPurple, $lightness: 10%);
+      color: color.adjust(#8c9698, $lightness: 5%);
 
       img {
         filter: invert(1) sepia(1) saturate(2) hue-rotate(140deg) brightness(0.65);

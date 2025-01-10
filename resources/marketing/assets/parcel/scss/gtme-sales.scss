@@ -1,4 +1,6 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
+
 $altGuitareoGreen: #00BC75;
 .no-padding {
   padding-left: 0;
@@ -62,7 +64,7 @@ body {
   }
 
   &:hover {
-    background: lighten(#00BC75, 10%);
+    background: color.adjust(#00BC75, $lightness: 10%);
     color: #FFF;
   }
 }
@@ -1879,7 +1881,7 @@ body.is-reveal-open {
         }
 
         &:hover {
-          background: lighten(#00BC75, 10%);
+          background: color.adjust(#00BC75, $lightness: 10%);
           color: #FFF;
         }
       }
