@@ -465,7 +465,13 @@
                     <tr>
                         <td>Investment</td>
                         <td class="rounded-b-xl">
-                            <strong>$97</strong><br>
+                            @if(floatval($productPrices['30-day-double-bass']->price) > floatval($productPrices['30-day-double-bass']->discounted_price))
+                                <s class="opacity-50 font-extralight">${{ floatval($productPrices['30-day-double-bass']->price) }}</s>
+                                <strong>${{ floatval($productPrices['30-day-double-bass']->discounted_price) }}</strong>
+                            @else
+                                <strong>${{ floatval($productPrices['30-day-double-bass']->discounted_price) }}</strong>
+                            @endif
+                                <br>
                             <span class="text-xs">Single Payment</span></td>
                         <td class="rounded-bl-xl"><strong>$30-$100</strong><br> <span class="text-xs">Per
                                     Lesson</span></td>
