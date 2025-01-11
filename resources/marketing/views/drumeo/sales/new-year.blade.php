@@ -26,65 +26,63 @@
             <div x-data="{lazyLoad: false}">
                 @php
                     $targetSkus = [
-                        'Drumeo-VaterSticks', 
-                        'practicepad', 
-                        '30-day-drummer-4', 
-                        '30-day-independence', 
-                        '30-day-double-bass', 
-                        '30-day-jazz', 
-                        '30-day-independence', 
+                        'Drumeo-VaterSticks',
+                        'practicepad',
+                        '30-day-drummer-4',
+                        '30-day-independence',
+                        '30-day-double-bass',
+                        '30-day-jazz',
+                        '30-day-independence',
                         '30-day-chops'
                     ];
                 @endphp
                 <div id="customize-anchor"></div>
-                @include('drumeo._partials.ny-order-section-bonuses', [
-                    'header' => '
-                        <h4 class="relative w-auto inline-block mb-4 lg:mb-6 font-black font-lexend leading-none uppercase">
-                            NEW YEAR. <span class="text-drumeo">NO EXCUSES.</span>
-                        </h4><br>
-                        <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-3 sm:mb-5 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
-                            EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO
-                            <br class="sm:hidden">LEARN THE DRUMS.
-                        </h1><br>
-                        <h5 class="leading-tight relative inline-block mx-auto text-musora mb-7 sm:mb-10">
-                            Save 20% On Your First Year<br class="sm:hidden"> + <strong>Get 7 Free Bonuses</strong>
-                        </h5>',
-                    'topImage' => 'marketing/drumeo/promos/november/2024/e-kit-bundle/bonus-am.webp',
-                    'secondImage' => 'marketing/drumeo/promos/november/2024/bonuses-new/drumeo-sticks.webp',
-                    'thirdImage' => 'marketing/drumeo/membership/homepage/2025/bonuses-01.webp',
-                    'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-                    'bundle' => 'holiday-drumeo',
-                    'targetSkus' => $targetSkus,
-                    'maxWidth' => 'max-w-4xl',
-                    'footer' => '
-                        <div class="px-3 mx-auto w-full max-w-2xl">
-                            <h2 class="leading-none mt-3 md:mt-4">
-                                <s class="opacity-50">$240</s><strong> $192</strong> 
-                                <span class="text-musora text-xl">Save 20%</span>
-                            </h2>
-                            <p class="text-sm mt-1"><em>For the first year, then $240.</em></p>
-                            <a class="join drumeo my-4 sm:my-6 w-full max-w-md uppercase" 
-                               href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-new-years-bundle]=1&promo-code=NYPHD25,new-year,ny-member-shipping&locked=true">
-                                Save 20% <i class="fas fa-arrow-right ml-2" style="line-height: 0;" aria-hidden="true"></i>
-                            </a>
-                            <p class="text-sm">
-                                <em>Need drums too? 
-                                    <a class="underline" href="/drumshop/kit">
-                                        Click here to grab the<br class="sm:hidden"> Drumeo Nitro Max E-Kit + 1 year of lessons.
-                                    </a>
-                                </em>
-                            </p>
-                        </div>',
-                ])
-            </div>
-        </div>
-    </section>
-    <section
-        class="px-4 lg:px-8 pb-10 sm:pb-16 lg:pb-24 pt-10 relative overflow-hidden text-white text-center relative overflow-hidden"
-        style="background: #0C1524;">
-        <div class="w-full px-4 lg:px-6 text-center">
-            <div class="container mx-auto max-w-5xl">
-                <p class="text-sm"><em>VAT an issue? <a class="underline" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-double-bass]=1&products[30-day-independence]=1&products[30-day-jazz]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&promo-code=welcome-back,NYD25&locked=true">Click here to join Drumeo<br class="sm:hidden"> for $180 with no physical bonuses.</a></em></p>
+                <h4 class="relative w-auto inline-block mb-4 lg:mb-6 font-black font-lexend leading-none uppercase">
+                    NEW YEAR. <span class="text-drumeo">NO EXCUSES.</span>
+                </h4><br>
+                <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
+                    EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO
+                    <br class="sm:hidden">LEARN THE DRUMS.
+                </h1>
+                @include('musora.sales.components.order-promo-cards-section', [
+                // general
+                'buttonText' => "GET STARTED",
+
+                // first deal
+                'firstDeal'=> "Drumeo Only",
+                'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/drumeo/promos/march/order-membership.webp',
+                'firstImageHeight' => 'h-24 sm:h-28',
+                'firstDealPrice' => 180,
+                'firstDealDiscount' => 240,
+                'firstDealSub' => "Save 25% on your first year.<br> No physical bonuses",
+                "firstDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-double-bass]=1&products[30-day-independence]=1&products[30-day-jazz]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&promo-code=welcome-back,NYD25&locked=true",
+
+                // second deal
+                'topBadge' => "BEST DEAL",
+                'secondDeal' => "New Year Bundle",
+                'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/670x0/filters:quality(95)/marketing/drumeo/promos/january/ny-collage2.webp',
+                'secondImageHeight' => 'h-24 sm:h-28',
+                'secondDealSub' => "Save 20% on your first year +<br>  get 7 bonuses worth $726.95.",
+                'secondDealPrice' => 192,
+                'secondDealDiscount' => 966.95,
+                "secondDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-new-years-bundle]=1&promo-code=NYPHD25,new-year,ny-member-shipping&locked=true",
+                'secondExtraBonuses' => [
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> P4 Practice Pad ($79 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> Drumeo Vater Drumsticks ($12.95 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Drummer ($127 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Independence ($127 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Double Bass ($127 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Jazz ($127 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Chops ($127 value)',
+            ],
+        ])
+                <p class="text-sm mb-7">
+                    <em>Need drums too?
+                        <a class="underline" href="/drumshop/kit">
+                            Click here to grab the<br class="sm:hidden"> Drumeo Nitro Max E-Kit + 1 year of lessons.
+                        </a>
+                    </em>
+                </p>
             </div>
         </div>
     </section>
