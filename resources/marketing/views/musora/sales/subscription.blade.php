@@ -518,6 +518,176 @@
 @endsection
 
 @section('layout-body')
+
+@php
+    $heading = 'Save on your lessons <br class="hidden sm:block">& spend more time drumming.';
+    $subheading = 'A Monthly Membership is great when you’re testing the waters for the first time. But if you love drumming and want all the awesome benefits of a Drumeo Membership for a lower price… an Annual plan is the best option.';
+    $gettings = [
+        [
+            'position' => 'left',
+            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to just $15 a month. <br><br>At this price, your drum lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your kit. (Who doesn’t love some new cymbals or a cushy drum throne?) ',
+            'alt' => 'Image with prices and savings.',
+            'img' => 'marketing/drumeo/membership/ascension/save-02.webp',
+        ],
+        [
+            'position' => 'right',
+            'desc' => 'We know how hard it is to learn an instrument. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you love for the next year.',
+            'alt' => 'Drummer playing drums.',
+            'img' => 'marketing/drumeo/membership/ascension/save-01.webp',
+        ]
+    ];
+@endphp
+
+@include('musora.sales.components.save-ascension-section', compact('heading', 'subheading', 'gettings'))
+
+@php
+    $heading = 'Save on your lessons & spend <br class="hidden sm:block">more time playing.';
+    $subheading = 'A Monthly Membership is great when you’re testing the waters for the first time. But if you love playing piano and want all the amazing benefits of a Pianote Membership for a lower price… an Annual plan is the best option.';
+    $gettings = [
+        [
+            'position' => 'left',
+            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to just $15 a month. <br><br>At this price, your piano lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your piano. (Who doesn’t love new music books or a comfier piano bench?)',
+            'alt' => 'Image with prices and savings.',
+            'img' => 'marketing/pianote/membership/ascension/save-02.webp',
+        ],
+        [
+            'position' => 'right',
+            'desc' => 'We know how hard it is to learn an instrument. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you love for the next year.',
+            'alt' => 'Piano player, playing piano.',
+            'img' => 'marketing/pianote/membership/ascension/save-01.webp',
+        ]
+    ];
+@endphp
+
+@include('musora.sales.components.save-ascension-section', compact('heading', 'subheading', 'gettings'))
+
+@php
+    $heading = 'Save on your lessons & spend  <br class="hidden sm:block">More Time Playing.';
+    $subheading = 'A Monthly Membership is great when you’re testing the waters for the first time. But if you love playing guitar and want all the awesome benefits of a Guitareo Membership for a lower price… an Annual plan is the best option.';
+    $gettings = [
+        [
+            'position' => 'left',
+            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to just $15 a month. <br><br>At this price, your guitar lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your guitar. (Who doesn’t love new picks or a new guitar case?)',
+            'alt' => 'Image with prices and savings.',
+            'img' => 'marketing/guitareo/membership/ascension/save-02.webp',
+        ],
+        [
+            'position' => 'right',
+            'desc' => 'We know how hard it is to learn an instrument. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you love for the next year.',
+            'alt' => 'Guitar player, playing guitar.',
+            'img' => 'marketing/guitareo/membership/ascension/save-01.webp',
+        ]
+    ];
+@endphp
+
+@include('musora.sales.components.save-ascension-section', compact('heading', 'subheading', 'gettings'))
+
+@php
+    $heading = 'Save on your lessons & spend  <br class="hidden sm:block">More Time Singing.';
+    $subheading = 'A Monthly Membership is great when you’re testing the waters for the first time. But if you love to sing and want all the amazing benefits of a Singeo Membership for a lower price… an Annual plan is the best option.';
+    $gettings = [
+        [
+            'position' => 'left',
+            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to just $15 a month. <br><br>At this price, your vocal lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your voice. (Who doesn’t love a new microphone?)',
+            'alt' => 'Image with prices and savings.',
+            'img' => 'marketing/singeo/membership/ascension/save-02.webp',
+        ],
+        [
+            'position' => 'right',
+            'desc' => 'We know how hard it is to learn to sing. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you love for the next year.',
+            'alt' => 'Singeo singer, singing.',
+            'img' => 'marketing/singeo/membership/ascension/save-01.webp',
+        ]
+    ];
+@endphp
+
+@include('musora.sales.components.save-ascension-section', compact('heading', 'subheading', 'gettings'))
+
+@include('musora.sales.components.get-serious-section', [
+    'title' => 'Get Serious About Your Drumming',
+    'items' => [
+        [
+            'icon' => 'marketing/drumeo/membership/ascension/icons-01.svg',
+            'heading' => 'Start a Lifelong Journey',
+            'description' => 'Once a drummer, always a drummer. While you can learn the basics in a month, a year allows you to really develop your skills and play music you never imagined you could.',
+        ],
+        [
+            'icon' => 'marketing/drumeo/membership/ascension/icons-02.svg',
+            'heading' => 'Strengthen Your Commitment',
+            'description' => 'As Buddy Rich said, "You only get better by playing." Committing to your drum set for a full year is the best way to level up your skills.',
+        ],
+        [
+            'icon' => 'marketing/drumeo/membership/ascension/icons-03.svg',
+            'heading' => 'Reach Your Drumming Goals',
+            'description' => 'The more time you practice—the better you\'ll become. In a year, you can look <br class="hidden lg:block">back and see how far you\'ve grown as a drummer.',
+        ],
+    ],
+])
+
+@include('musora.sales.components.get-serious-section', [
+    'title' => 'Get Serious About Piano',
+    'items' => [
+        [
+            'icon' => 'marketing/pianote/membership/ascension/icons-01.svg',
+            'heading' => 'Start a Lifelong Journey',
+            'description' => 'While a month of practice can introduce you to the basics, a year allows you to really develop your skills and play music you never imagined you could.',
+        ],
+        [
+            'icon' => 'marketing/pianote/membership/ascension/icons-02.svg',
+            'heading' => 'Strengthen Your Commitment',
+            'description' => 'As American musician Tom Lehrer once said, “What you get out of it depends on how you play it.” Committing to the piano for a full year is the best way to level up your skills.',
+        ],
+        [
+            'icon' => 'marketing/pianote/membership/ascension/icons-03.svg',
+            'heading' => 'Reach Your Piano Goals',
+            'description' => 'The more time you practice—the better you’ll become. In a year, you can look back and see how far you\'ve grown as a pianist!',
+        ],
+    ],
+])
+
+@include('musora.sales.components.get-serious-section', [
+    'title' => 'Get Serious About Guitar',
+    'items' => [
+        [
+            'icon' => 'marketing/guitareo/membership/ascension/icons-01.svg',
+            'heading' => 'Start a Lifelong Journey',
+            'description' => 'Once a guitarist, always a guitarist. While a month of practice can introduce you to the basics, a year allows you to really develop your skills and play songs you never imagined you could.',
+        ],
+        [
+            'icon' => 'marketing/guitareo/membership/ascension/icons-02.svg',
+            'heading' => 'Strengthen Your Commitment',
+            'description' => 'As Jimi Hendrix once said, "Sometimes you want to give up the guitar, you\'ll hate the guitar. But if you stick with it, you\'re gonna be rewarded." Committing to your guitar for a full year is the best way to level up your skills.',
+        ],
+        [
+            'icon' => 'marketing/guitareo/membership/ascension/icons-03.svg',
+            'heading' => 'Reach Your Guitar Goals',
+            'description' => 'The more time you practice—the better you’ll become. In a year, you can look <br class="hidden lg:block"> back and see how far you\'ve grown as a guitarist.',
+        ],
+    ],
+])
+
+@include('musora.sales.components.get-serious-section', [
+    'title' => 'Get Serious About Your Singing',
+    'items' => [
+        [
+            'icon' => 'marketing/singeo/membership/ascension/icons-01.svg',
+            'heading' => 'Start a Lifelong Journey',
+            'description' => 'While a month of practice can introduce you to the basics, a year allows you to really develop your skills and sing songs you never imagined you could.',
+        ],
+        [
+            'icon' => 'marketing/singeo/membership/ascension/icons-02.svg',
+            'heading' => 'Strengthen Your Commitment',
+            'description' => 'As jazz singer and musician George Benson once said, “The greatest teacher is just going out and playing.” Committing for a full year is the best way to level up your skills.',
+        ],
+        [
+            'icon' => 'marketing/singeo/membership/ascension/icons-03.svg',
+            'heading' => 'Reach Your Singing Goals',
+            'description' => 'The more time you practice—the better you’ll become. In a year, you can look back and see how far you\'ve grown as a singer!',
+        ],
+    ],
+])
+
+
     <header class="text-white relative overflow-hidden z-10 h-[560px] sm:h-[700px]" style="background-color:#101921;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
             @yield('spotify-banner')
