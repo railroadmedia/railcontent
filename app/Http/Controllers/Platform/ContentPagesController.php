@@ -320,9 +320,11 @@ class ContentPagesController extends BaseController
         }
 
         if ($primaryPage == 'challenge' && !user()->isAdmin()) {
-            $response = $this->challengesService->getCurrentLessonData($firstId, user()->id, isLesson: false);
-            if (!$response['user_data']['is_active'] && !($response['user_data']['is_unlocked'] ?? false)) {
-                return redirect($response['lesson']['registration_url']);
+            if (!$this->challengesService->hasAccess($firstId)) {
+                $challenge = $this->challengesService->getChallengeById($firstId);
+                $registrationUrl = $challenge['registration_url'];
+
+                return redirect($registrationUrl);
             }
         }
 
@@ -782,14 +784,18 @@ class ContentPagesController extends BaseController
             throw new NotFoundHttpException();
         }
 
-
-
         if (empty($contentToRenderAsLesson)) {
             throw new NotFoundHttpException();
         }
 
         if ($contentToRenderAsLesson instanceof Collection && $contentToRenderAsLesson->isEmpty()) {
             throw new NotFoundHttpException();
+        }
+
+        if ($contentToRenderAsLesson['type'] == 'challenge-part' && !user()->isAdmin()) {
+            if (!$this->challengesService->hasAccess($firstId)) {
+                throw new NotFoundHttpException();
+            }
         }
 
         ContentRepository::$pullFutureContent = user()->isAdmin();
