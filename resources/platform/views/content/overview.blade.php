@@ -1,7 +1,7 @@
 @extends('partials.layout', ['trackingSectionName' => $parentContent->fetch('fields.title')])
 
 @section('meta')
-    <title>{{ $parentContent->fetch('fields.title') }} | Musora</title>
+    <title>{{ $parentContent['title']  }} | Musora</title>
 @endsection
 
 {{-- Learning Path JS --}}
