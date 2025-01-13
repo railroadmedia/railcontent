@@ -7,9 +7,9 @@ use App\Modules\Content\Models\Sanity\Enums\FieldType;
 
 class UpdateAssignmentSheetMusicSanity extends \Illuminate\Console\Command
 {
-    protected $signature = 'sanity:update-assignments {--id=}';
+    protected $signature = 'sanity:update-assignments';
 
-    protected $description = 'Update Assignments in Sanity';
+    protected $description = 'Update Assignments Sheet Music Image field to new structure in Sanity';
 
     public function handle(): int
     {
