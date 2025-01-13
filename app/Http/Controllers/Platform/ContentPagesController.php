@@ -319,7 +319,7 @@ class ContentPagesController extends BaseController
             throw new NotFoundHttpException();
         }
 
-        if ($primaryPage == 'challenge') {
+        if ($primaryPage == 'challenge' && !user()->isAdmin()) {
             $response = $this->challengesService->getCurrentLessonData($firstId, user()->id, isLesson: false);
             if (!$response['user_data']['is_active'] && !($response['user_data']['is_unlocked'] ?? false)) {
                 return redirect($response['lesson']['registration_url']);

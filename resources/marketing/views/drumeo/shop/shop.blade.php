@@ -79,8 +79,26 @@
         "all" => true
     ])
 
-
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+        <section x-show="filter === 'all'">
+            <div class="container mx-auto">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
+                <div class="flex flex-wrap mb-5 sm:mb-10">
+                    <a href="/new-year" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
+                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]" style="padding-bottom:71%;">
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/january/ny-bundle.webp');"></div>
+                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/january/ny-bundle-m.webp');"></div>
+                        </div>
+                    </a>
+                    <a href="/drumshop/kit" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
+                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]" style="padding-bottom:71%;">
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/january/e-kit-bundle.webp');"></div>
+                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/january/e-kit-bundle-m.webp');"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container" x-data="{ showAll: false }">
