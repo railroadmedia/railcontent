@@ -260,7 +260,7 @@
                     'buttonClass'=> 'text-white',
                     'specs' => '<strong>Instructor:</strong> Lisa Witt<br>
                                 <strong>Lesson Length:</strong> 30 days<br>
-                                <strong>Course Contents:</strong> 20 Workouts, 4 Q&A’s',
+                                <strong>Course Contents:</strong> 20 Workouts',
                 ])
             </div>
         </div>
@@ -286,7 +286,6 @@
                             'description' => [
                                 'With the course only, you get:',
                                 '<i class="fas fa-check pt-3 pr-1"></i> 20 guided play-along lessons',
-                                '<i class="fas fa-check pr-1"></i> 4 recorded Q&A’s with Lisa',
                                 '<i class="fas fa-check pr-1"></i> 90-day money-back guarantee',
                             ]
                         ],
