@@ -29,6 +29,7 @@ class NotificationServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $this->loadViewsFrom(__DIR__ . '/../views', 'railnotifications');
 
         $this->commands([
             DailySummaryNotifications::class,
