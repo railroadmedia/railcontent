@@ -90,8 +90,16 @@ class ProcessTrackings extends Command
         $this->cookieJar = $cookieJar;
     }
 
+    protected function getArguments()
+    {
+        return [
+            ['maxRequestsToProcess', null, 'Optional maximum number of requests to process.']
+        ];
+    }
+
     public function handle()
     {
+        $maxRequestsToProcess = (int)$this->argument('maxRequestsToProcess') ?: null;
         $instance = rand(1000, 9999);
         $this->info("$instance:$this->name Processing");
         $timeStart = microtime(true);
@@ -100,10 +108,16 @@ class ProcessTrackings extends Command
 
         $exceptionsTrackedCount = 0;
         $successfulRequestsCount = 0;
+        $processedRequestsCount = 0;
 
         $timedout = false;
 
         while ($redisIterator !== 0) {
+            if ($maxRequestsToProcess !== null && $processedRequestsCount >= $maxRequestsToProcess) {
+                $this->info("Reached max requests limit of $maxRequestsToProcess");
+                return;
+            }
+
             try {
                 $diff = microtime(true) - $timeStart;
                 if ($diff > 55) {
@@ -126,6 +140,8 @@ class ProcessTrackings extends Command
                     continue;
                 }
 
+                $this->info("ProcessTrackings: Found redis keys " . count($keys));
+
                 $valuesThisChunk = new Collection();
 
                 foreach ($keys as $keyThisChunk) {
@@ -133,8 +149,11 @@ class ProcessTrackings extends Command
 
                     foreach ($values as $value) {
                         $valuesThisChunk->push(unserialize($value));
+                        $processedRequestsCount++;
                     }
                 }
+
+                $this->info("ProcessTrackings: Processing redis values " . $valuesThisChunk->count());
 
                 //$this->info('Starting to process ' . count($keys) . ' items.');
 
@@ -196,7 +215,11 @@ class ProcessTrackings extends Command
 
         $this->requestRepository->removeDuplicateVOs($requestVOs);
 
+        $this->info("ProcessTrackings: Request VOs created.");
+
         $requestVOs = $this->getAndAttachGeoIpData($requestVOs);
+
+        $this->info("ProcessTrackings: GEO IP data added.");
 
         foreach ($objectsFromCache as $item) {
             $type = get_class($item);
@@ -243,7 +266,11 @@ class ProcessTrackings extends Command
 
         $recordsInDatabase = $this->requestRepository->storeRequests($requestVOs);
 
+        $this->info("ProcessTrackings: Rows stored.");
+
         $this->updateUsersAnonymousRequests($recordsInDatabase);
+
+        $this->info("ProcessTrackings: Adding user data to eligible anon requests");
 
         return [
             'requestsCount' => count($recordsInDatabase),

@@ -288,11 +288,11 @@ const duration = computed(() => {
     } else {
         time = props.item.length_in_seconds ?? 0;
     }
-    let hours = Math.floor(time / 3600);
-    let minutes = Math.floor(time / 60);
-    let seconds = time - minutes * 60;
-    time = time - hours * 3600;
-    return `${hours ? `${hours}:` : ''}${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+
+    const hours = Math.floor(time / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    const seconds = time % 60;
+    return `${hours ? `${hours}:` : ''}${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 })
 
 const enrollmentOpen = computed(() => {
@@ -304,11 +304,11 @@ const thumbnailBadge = computed(() => {
         if (enrollmentOpen.value && !contentModel.value.post.has_product) return 'Enroll Now';
         if (upcomingChallenge.value) return 'Upcoming';
         return `${props.item.child_count} Workouts`;
-    } else if (props.item.type === 'workout') {
+    } else if (props.item.type === 'workout' && duration.value !== '0:00') {
         return duration.value;
-    } else if (props.item.type === 'course' || props.item.type === 'pack-bundle') {
+    } else if ((props.item.type === 'course' || props.item.type === 'pack-bundle') && props.item.lesson_count) {
         return `${props.item.lesson_count} Lessons`;
-    } else {
+    } else if (duration.value !== '0:00') {
         return duration.value;
     }
 })
