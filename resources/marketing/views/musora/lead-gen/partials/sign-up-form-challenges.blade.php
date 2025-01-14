@@ -31,12 +31,12 @@
             {!! $header !!}
         @endif
     </div>
-    <form id="{{ $cleanFormId }}" 
-          accept-charset="UTF-8" 
+    <form id="{{ $cleanFormId }}"
+          accept-charset="UTF-8"
           method="POST"
           action="{{ url()->route('customer-io.submit-email-form-rc') }}"
           class="ajax-form clearfix facebook-track-lead mx-auto relative flex flex-wrap {{$formClass ?? ''}}">
-        
+
         @csrf
 
         @if(!empty($formName))
@@ -54,10 +54,10 @@
         @if(!empty($nameInput))
             <div class="w-full px-2 sm:px-3">
                 <div class="my-2">
-                    <input type="text" 
-                           name="first_name" 
-                           id="sign-up-name" 
-                           class="block w-full rounded-full border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-{{$theme}} sm:text-sm sm:leading-6 {{$inputClass ?? ''}}" 
+                    <input type="text"
+                           name="first_name"
+                           id="sign-up-name"
+                           class="block w-full rounded-full border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-{{$theme}} sm:text-sm sm:leading-6 {{$inputClass ?? ''}}"
                            placeholder="{{ $nameInput ?? 'Your Name' }}"
                            required >
                 </div>
@@ -65,11 +65,11 @@
         @endif
 
         <div class="w-full px-2 sm:px-3 relative">
-            <input type="email" 
-                   name="email" 
-                   id="sign-up-email" 
+            <input type="email"
+                   name="email"
+                   id="sign-up-email"
                    class="block w-full rounded-full border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-{{$theme}} sm:text-sm sm:leading-6 {{$inputClass ?? ''}}"
-                   placeholder="{{ $inputText ?? 'Your Email' }}" 
+                   placeholder="{{ $inputText ?? 'Your Email' }}"
                    required >
             <p class="opacity-0 pt-0.5 pl-4 text-xs text-red-600 transition-opacity duration-300" id="email-error">
                 <i class="fa-solid fa-circle-exclamation text-red-600"></i> Not a valid email address.
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formContainer = form.closest('.form-container');
         const thankYouBox = formContainer ? formContainer.querySelector('.thank-you-box') : null;
         const contentBox =  formContainer ? formContainer.querySelector('.content-box') : null;
-      
+
         const emailInput = form.querySelector('input[type="email"]');
         if (emailInput) {
             emailInput.addEventListener('input', function() {
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (isValid && submitButton) {
                 const formData = new FormData(form);
-                
+
                 const preAdd = submitButton.querySelector('.pre-add');
                 const pending = submitButton.querySelector('.pending');
                 const success = submitButton.querySelector('.success');
@@ -156,17 +156,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 axios.post(form.action, formData)
                     .then(response => {
                         if (response.status === 201) {
+                            dataLayer.push({
+                                "event": "gtm.formSubmit",
+                                "formId": "{{ $cleanFormId }}",
+                                "formSuccess": true
+                            });
                             form.classList.add('hidden');
 
                         const modalCloseIcon = document.querySelector('.modal-close');
                         if (modalCloseIcon) {
                             modalCloseIcon.classList.add('hidden');
                         }
-                            
+
                             if (thankYouBox) {
                                 thankYouBox.innerHTML = `
                                     <div class="text-center p-8">
-                                        <i class="fa-duotone fa-solid fa-party-horn text-6xl text-{{ $theme }}"></i>                                        
+                                        <i class="fa-duotone fa-solid fa-party-horn text-6xl text-{{ $theme }}"></i>
                                         <h3 class="mb-2"><strong>Success!</strong></h3>
                                         <p>Please check the link in your email to get started.</p>
                                     </div>
@@ -180,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         } else {
                             if (pending) pending.classList.add('hidden');
                             if (fail) fail.classList.remove('hidden');
-                            
+
                             setTimeout(() => {
                                 if (fail) fail.classList.add('hidden');
                                 if (preAdd) preAdd.classList.remove('hidden');
