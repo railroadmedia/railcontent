@@ -30,8 +30,8 @@
         </a>
     </div>
     <div class="w-full md:w-1/2 lg:w-full max-w-md lg:px-1 px-1 relative">
-        <a href="{{$firstDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif @if(!empty($topBadge)) md:mt-7 @endif">
-            <div class="bg-white px-3 py-6 md:py-7" style="border-bottom: 1px solid white">
+        <a href="{{$firstDealLink}}" class="bg-white text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif @if(!empty($topBadge)) md:mt-7 @endif">
+            <div class="px-3 py-6 md:py-7" style="border-bottom: 1px solid white">
                 <h4 class="leading-tight mb-2"><strong>{{$firstDeal}}</strong></h4>
                 <img
                     class="{{$firstImageHeight}} rounded-md transition-opacity opacity-0"
@@ -42,7 +42,7 @@
                 >
                 <h3 class="leading-tight my-2">
                     @if(!empty($firstDealDiscount))
-                        <span class="line-through" style="color: #879097; margin-right: 5px;"> ${{$firstDealDiscount}} </span>
+                        <span class="line-through" style="color: #879097; margin-right: 5px;">${{$firstDealDiscount}}</span>
                     @endif
                     <strong>${{$firstDealPrice}}</strong>
                 </h3>
@@ -50,9 +50,9 @@
                 <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] {{ $theme }}" role="button" tabindex="0" aria-label="{{ $buttonText }}">{{$buttonText}}</div>
             </div>
             @if(!empty($firstExtraBonuses))
-                <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">
+                <div class="px-4 sm:px-4 lg:px-6 pb-7">
                     @foreach($firstExtraBonuses as $bonus)
-                        <p class="text-left text-sm mb-1.5 leading-tight">{!! $bonus !!}</p>
+                        <p class="text-left text-xs mb-1.5">{!! $bonus !!}</p>
                     @endforeach
                 </div>
             @endif

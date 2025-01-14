@@ -52,13 +52,21 @@
                 'buttonText' => "GET STARTED",
 
                 // first deal
-                'firstDeal'=> "Pianote Only",
+                'firstDeal'=> "Digital New Year Bundle",
                 'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/march/order-membership.webp',
                 'firstImageHeight' => 'h-24 lg:h-28',
                 'firstDealPrice' => 180,
-                'firstDealDiscount' => 240,
-                'firstDealSub' => "Save 25% on your first year.<br> No physical bonuses",
+                'firstDealDiscount' => 875,
+                'firstDealSub' => "Save 25% on your first year +<br>  get 5 digital bonuses.",
                 "firstDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[30-days-to-better-technique]=1&products[classical-piano-collection]=1&promo-code=welcome-back,NYP25&locked=true",
+                'firstExtraBonuses' => [
+                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> No shipping. No VAT required.',
+                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong class="text-pianote">BONUS</strong> New Piano Players Start Here ($127 Value)',
+                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong class="text-pianote">BONUS</strong> Easy Chords ($127 Value)',
+                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong class="text-pianote">BONUS</strong> 30-Day Blues Piano ($127 Value)',
+                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong class="text-pianote">BONUS</strong> 30 Days to Better Technique ($127 Value)',
+                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong class="text-pianote">BONUS</strong> Classical Piano Collection ($127 Value)',
+            ],
 
                 // second deal
                 'topBadge' => "BEST DEAL",
