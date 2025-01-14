@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (response.status === 201) {
                             dataLayer.push({
                                 "event": "gtm.formSubmit",
-                                "formId": "{{ $cleanFormId }}",
+                                "formId": formId,
                                 "formSuccess": true
                             });
                             form.classList.add('hidden');
