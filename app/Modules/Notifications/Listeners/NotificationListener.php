@@ -2,7 +2,6 @@
 
 namespace App\Modules\Notifications\Listeners;
 
-use App\Modules\Content\ApiGateways\SanityGateway;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -189,9 +188,8 @@ class NotificationListener
                     );
                 }
                 $receivingUserIds = ($originalComment && $originalComment['user_id'] != $comment['user_id']) ? [$originalComment['user_id']] : [];
-                $sanityGateway = app()->make(SanityGateway::class);
-                $content = $sanityGateway->getByRailContentIds([$comment['content_id']])[0];
 
+                $content = $this->contentProvider->getContentById($comment['content_id']);
                 $contentTitle = $content['title'];
                 $contentUrl =  $comment['url'] ?? $endpointPrefix . '/members/jump-to-comment/'. $content['id'].'/' . $comment['parent_id'];
                 $contentMobileAppUrl =
@@ -209,8 +207,7 @@ class NotificationListener
 
                 $authorId = $event->data['likerId'];
                 $receivingUserIds = [$comment['user_id']];
-                $sanityGateway = app()->make(SanityGateway::class);
-                $content = $sanityGateway->getByRailContentIds([$comment['content_id']])[0];
+                $content =  $content = $this->contentProvider->getContentById($comment['content_id']);
 
                 $contentTitle = $content['title'];
                 $contentUrl = $comment['url'] ?? $endpointPrefix. '/members/jump-to-comment/'. $content['id'].'/' . ($comment['parent_id'] ?? $comment['id']);
@@ -545,9 +542,7 @@ class NotificationListener
             );
         }
         $receivingUserIds = ($originalComment && $originalComment['user_id'] != $comment['user_id']) ? [$originalComment['user_id']] : [];
-        $sanityGateway = app()->make(SanityGateway::class);
-        $content = $sanityGateway->getByRailContentIds([$comment['content_id']])[0];
-
+        $content = $this->contentProvider->getContentById($comment['content_id']);
         $brand = $event->getBrand();
         $contentTitle = $content['title'];
         $contentUrl = $comment['url'] ?? url($brand . '/jump-to-comment/'. $content['id'].'/' . $comment['parent_id']);
@@ -590,9 +585,7 @@ class NotificationListener
         $authorId = $event->userId;
 
         $receivingUserIds = [$comment['user_id']];
-
-        $sanityGateway = app()->make(SanityGateway::class);
-        $content = $sanityGateway->getByRailContentIds([$comment['content_id']])[0];
+        $content = $this->contentProvider->getContentById($comment['content_id']);
 
         $brand = $event->getBrand();
         $contentTitle = $content['title'];
