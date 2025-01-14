@@ -13,6 +13,7 @@ use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
+use Modules\Content\Models\Sanity\Structure\ListArrayElement;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
@@ -28,14 +29,16 @@ class PlayAlong extends ParentTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Play Alongs', withResources: true);
+        parent::__construct(self::getName(), 'Play Alongs', withResources: true, parentType: 'learning-path');
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $assignmentsList = new ListObject(
             fields: [new Field(FieldType::String, 'assignment_title', validation: [new Required()]),
                         new Field(FieldType::String, 'assignment_soundslice'),
                         new Field(FieldType::String, 'assignment_description'),
-                        new Field(FieldType::URL, 'assignment_sheet_music_image')
+                        new Field(FieldType::Array, 'assignment_sheet_music_image', title:'Assignment sheet music image:', of: new ListArrayElement()),
+                        new Field(FieldType::Number, 'assignment_timecode', description: 'Time in seconds'),
+                        new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
                     ]
         );
         $video               = new ListObject(
