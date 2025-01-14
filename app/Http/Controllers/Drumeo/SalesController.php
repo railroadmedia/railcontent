@@ -87,6 +87,10 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.guitarcenter', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
     }
+    public function save300()
+    {
+        return view('drumeo.sales.save-300', ['theme' => 'drumeo', 'promoPage' => 'true', 'promoVersion' => 'true' ]);
+    }
     public function welcomeBackDiscount()
     {
         return view('drumeo.sales.welcome-back-discount', ['theme' => 'drumeo']);
