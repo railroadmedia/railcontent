@@ -29,8 +29,8 @@ class Song extends BaseSanityContentTypeModel
 
         $resourceList = new ListObject(
             fields: [new Field(FieldType::String, 'resource_name'),
-                        new Field(FieldType::URL, 'resource_url')],
-            previewItem: new ListItemPreview('resource_name', 'resource_url')
+                        new Field(FieldType::URL, 'resource_url'),
+                        new Field(FieldType::AWSMedia, 'resource_aws', options: ['accept' => '*', 'storeOriginalFilename' => '*'])],
         );
         $soundsliceList = new ListObject(
             fields: [new Field(FieldType::String, 'soundslice_title'),
