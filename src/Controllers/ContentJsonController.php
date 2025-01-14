@@ -166,7 +166,7 @@ class ContentJsonController extends Controller
             'songs', 'song' => [RecommenderSection::Song],
             // everything but songs
             'lessons', 'lesson' => array_filter(RecommenderSection::cases(), function ($section) { return $section != RecommenderSection::Song && $section != RecommenderSection::Workout;}),
-            'workouts, workout' => [RecommenderSection::Workout],
+            'workouts', 'workout' => [RecommenderSection::Workout],
             default => [],
         };
         if (!$sections) {
