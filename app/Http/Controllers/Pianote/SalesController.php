@@ -67,6 +67,10 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
     }
+    public function promoNY()
+    {
+        return view('pianote.sales.new-year', ['theme' => 'pianote', 'promoVersion' => 'true', 'newYears' => 'true']);
+    }
     public function promoWO()
     {
         return view('pianote.sales.welcome-offer', ['theme' => 'pianote', 'promoVersion' => 'true']);
@@ -474,6 +478,10 @@ class SalesController extends BaseController
     {
         return view('pianote.products.practice-kit', ['theme' => 'pianote']);
     }
+    public function practicePlanner()
+    {
+        return view('pianote.products.practice-planner', ['theme' => 'pianote']);
+    }
 
     public function easyChordsTrial()
     {
@@ -570,6 +578,12 @@ class SalesController extends BaseController
     public function challengesBundle()
     {
         return view('pianote.products.challenges-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function bestBeginnerPianoBook()
+    {
+        return view('pianote.products.best-beginner-piano-book', [
             'theme' => 'pianote',
         ]);
     }

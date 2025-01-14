@@ -69,11 +69,11 @@
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-gift-bundle/header-collage.webp" alt="Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $349</s><strong> $240</strong> <span class="text-[#41F70F] text-xl md:text-3xl">(Save 31%)</span></h2>
-                    @if($stock > 0)
-                        <a class="join pianote mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-gift-bundle-pianote]=1&promo-code=the-gift-bundle-pianote&locked=true">get the deal</a>
-                    @else
+{{--                    @if($stock > 0)--}}
+{{--                        <a class="join pianote mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-gift-bundle-pianote]=1&promo-code=the-gift-bundle-pianote&locked=true">get the deal</a>--}}
+{{--                    @else--}}
                         <a class="join sold-out mt-4 w-full">SOLD OUT</a>
-                    @endif
+{{--                    @endif--}}
                     </div>
                 </div>
             </div>
@@ -117,6 +117,7 @@
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Give The Gift Of Music This Holiday Season.</h2>',
             'buttonLink' => '/ecommerce/add-to-cart?products[the-gift-bundle-pianote]=1&promo-code=the-gift-bundle-pianote&locked=true',
             'bundle'=> "gift",
+            'soldOut'=> true,
             ])
     </div>
 

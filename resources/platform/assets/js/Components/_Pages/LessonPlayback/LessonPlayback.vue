@@ -29,7 +29,7 @@
                                     :video-length="videoData.length_in_seconds" :content-id="videoData?.id"
                                     :end-second="videoData.length_in_seconds"
                                     :total-duration="videoData.length_in_seconds" :seek-to-time="seekToTime"
-                                    @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleVideoEnd" />
+                                    @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleVideoEnd" @onUpdateCurrentTime="updateCurrentTime" />
                             </transition>
                             <!-- Vimeo video (legacy player) -->
                             <transition v-else-if="videoData?.video?.type === 'vimeo-video' && useLegacyVideoPlayer"
@@ -45,7 +45,7 @@
                                     :video-id="videoData?.video?.external_id" :content-id="videoData?.id"
                                     :video-length="videoData?.length_in_seconds" :chapters="videoData?.chapters"
                                     :user-id="userId" :like-count="likeData?.likeCount" @playing="handleVideoPlay"
-                                    @pause="handleVideoPause" @ended="handleVideoEnd">
+                                    @pause="handleVideoPause" @ended="handleVideoEnd" @onUpdateCurrentTime="updateCurrentTime">
                                     <div :class="`widescreen title tw-text-${brand}`">
                                         <i class="fas fa-spinner fa-spin absolute-center"></i>
                                     </div>
@@ -63,7 +63,7 @@
                                     :video-id="videoData?.video?.external_id"
                                     :video-length="videoData?.length_in_seconds"
                                     :total-duration="videoData.length_in_seconds" @play="handleVideoPlay"
-                                    @pause="handleVideoPause" @onVideoEnd="handleVideoEnd">
+                                    @pause="handleVideoPause" @onVideoEnd="handleVideoEnd" @onUpdateCurrentTime="updateCurrentTime">
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </video-player>
                             </transition>
@@ -86,13 +86,13 @@
                         :description="videoData.description" :instructors="videoData.instructor" :is-liked="isLiked"
                         :like-count="likeData?.likeCount" :content-id="videoData.id" :user-id="userId"
                         :resources="videoData.resources" :difficulty="videoData.difficulty" :is-challenge="isChallenge"
-                        :show-practice-button="showPracticeButton" :show-share-button="false"
+                        :show-practice-button="showPracticeButton" :show-share-button="true"
                         :show-complete-button="isWorkout || isChallenge"
                         report-recipient="support+question-and-answer@drumeo.com" :is-completed="isCompleted"
                         :show-add-to-list="true" :show-info-button="showInfoButton"
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
                         @on-like-content="likeContent"
-                        @on-challenge-lesson-complete="completeChallengeLesson"
+                        @on-challenge-lesson-complete="completeChallengeLesson" :current-time-in-seconds="lastWatchedPositionInSeconds"
                     />
 
                     <ContentInfo :breadcrumbs="breadcrumbsData" :content-description="videoData.description"
@@ -123,7 +123,7 @@
                 :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`">
                 <!-- Chapters -->
                 <VideoChapters v-if="videoData?.chapters?.length && (isWorkout || isChallengePart)" :chapters="videoData.chapters"
-                    @open-slice="openSlice" @seek-to-chapter="seekToChapter" />
+                    @open-slice="openSlice" @seek-to-chapter="seekToChapter" :soundslice-slug="videoData?.soundslice_slug" />
 
                 <!-- Assignments -->
                 <div v-if="videoData?.assignments?.length > 0 && !isWorkout"
@@ -276,7 +276,7 @@ const state = reactive({
 });
 
 const showPracticeButton = computed(() => {
-    return !!videoData.value?.soundslice_slug;
+    return videoData.value?.soundslice_slug;
 });
 
 const showInfoButton = computed(() => {
@@ -459,6 +459,10 @@ const isChallengePart = computed(() => {
 const breadcrumbsData = computed(() => {
     return getBreadcrumbs(videoData.value, brand.value);
 });
+
+const updateCurrentTime = (time) => {
+    lastWatchedPositionInSeconds.value = Math.floor(time);
+}
 
 const fetchLessonData = async () => {
     if (isChallenge.value) {

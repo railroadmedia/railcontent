@@ -18,6 +18,7 @@ use App\Modules\Content\Requests\ContentSearchRequest;
 use App\Modules\Content\Resources\Algolia\Enum\DocumentType;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
+use App\Modules\Content\Services\ChallengesService;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -62,6 +63,8 @@ class ContentPagesController extends BaseController
     private ArtistService $artistService;
     private GenreService $genreService;
 
+    private ChallengesService $challengesService;
+
     public function __construct(
         ContentService $contentService,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
@@ -74,7 +77,8 @@ class ContentPagesController extends BaseController
         MethodService $methodService,
         UserContentProgressService $userContentProgressService,
         ArtistService $artistService,
-        GenreService $genreService
+        GenreService $genreService,
+        ChallengesService $challengesService,
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
@@ -88,6 +92,7 @@ class ContentPagesController extends BaseController
         $this->userContentProgressService = $userContentProgressService;
         $this->artistService = $artistService;
         $this->genreService = $genreService;
+        $this->challengesService = $challengesService;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -312,6 +317,15 @@ class ContentPagesController extends BaseController
         $firstLevelContent = $this->contentService->getById($firstId);
         if (empty($firstLevelContent)) {
             throw new NotFoundHttpException();
+        }
+
+        if ($primaryPage == 'challenge' && !user()->isAdmin()) {
+            if (!$this->challengesService->hasAccess($firstId)) {
+                $challenge = $this->challengesService->getChallengeById($firstId);
+                $registrationUrl = $challenge['registration_url'];
+
+                return redirect($registrationUrl);
+            }
         }
 
         if ($primaryPage == 'songs') {
@@ -770,14 +784,18 @@ class ContentPagesController extends BaseController
             throw new NotFoundHttpException();
         }
 
-
-
         if (empty($contentToRenderAsLesson)) {
             throw new NotFoundHttpException();
         }
 
         if ($contentToRenderAsLesson instanceof Collection && $contentToRenderAsLesson->isEmpty()) {
             throw new NotFoundHttpException();
+        }
+
+        if ($contentToRenderAsLesson['type'] == 'challenge-part' && !user()->isAdmin()) {
+            if (!$this->challengesService->hasAccess($firstId)) {
+                throw new NotFoundHttpException();
+            }
         }
 
         ContentRepository::$pullFutureContent = user()->isAdmin();
@@ -1354,10 +1372,6 @@ class ContentPagesController extends BaseController
     public function search(ContentSearchRequest $request): View
     {
         $search = new AlgoliaSearchService();
-
-        if (!empty($request->get('page')) && is_numeric($request->get('page')) && (int)$request->get('page') >= 0) {
-            $request['page'] = ((integer)$request['page']) - 1;
-        }
 
         $searchParams = SearchParameters::fromRequest($search, $request);
 

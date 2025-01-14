@@ -27,8 +27,8 @@ export function useBuildHeader(progressPercent) {
         if (contentType === 'pack' || contentType === 'pack-bundle' || contentType === 'challenge') {
             header.thumbnail = 'https://www.musora.com/cdn-cgi/image/width=500,height=500/' + result.thumbnail;
             header.image = result.image;
-            header.darkModeLogo = result.dark_logo;
-            header.lightModeLogo = result.light_logo;
+            header.darkModeLogo = result.dark_logo || result.dark_mode_logo_url;
+            header.lightModeLogo = result.light_logo || result.light_mode_logo_url;
         }
 
         return header;

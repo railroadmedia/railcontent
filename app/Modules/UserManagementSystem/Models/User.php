@@ -102,6 +102,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property int $notify_on_forum_post_like
  * @property int $notify_weekly_update
  * @property int $notify_on_lesson_comment_reply
+ * @property string|null $challenges_enrollment_notifications
+ * @property string|null $challenges_community_notifications
  * @property int $use_legacy_video_player
  * @property int|null $drums_skill_level
  * @property int|null $guitar_skill_level
@@ -357,7 +359,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             'brand_total_xp' => 'json',
             'brand_minutes_practiced' => 'json',
             'brand_seconds_practiced' => 'json',
-            'needs_logout' => 'bool'
+            'needs_logout' => 'bool',
+            'challenges_enrollment_notifications' => 'array',
+            'challenges_community_notifications' => 'array',
+            'challenges_solo_notifications' => 'array',
         ];
     }
 
@@ -956,13 +961,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function isCoach(): Attribute
     {
         return Attribute::make(
-            get: function () {
-                return boolval(
-                    $this->associatedContent()
-                        ->where("is_coach", true)
-                        ->where("status", "published")
-                        ->count()
-                );
+            get: function ($value, $attributes) {
+                return $attributes['access_level'] == 'coach' || $attributes['access_level'] == 'house-coach';
             },
         );
     }

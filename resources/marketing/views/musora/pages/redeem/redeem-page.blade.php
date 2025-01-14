@@ -225,12 +225,21 @@
                         alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
                 <h3 class="leading-tight my-2"><strong>Redeem your @if(!empty($day90)) 90-Day @endif membership for Musora.</strong></h3>
+            @elseif(!empty($rockin1000))
+                <div class="mb-2 align-middle flex items-center justify-center w-full">
+                    <img class="inline-block h-12 sm:h-16 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/rockin-1000.png"
+                        alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <h2 class="inline-block font-black mx-3 sm:mx-5">+</h2>
+                    <img class="inline-block h-12 sm:h-20 transition-opacity opacity-0" src="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png"
+                        alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                </div>
+                <h3 class="leading-tight my-2"><strong>Redeem your membership<br class="sm:hidden"> for Musora.</strong></h3>
             @elseif(!empty($spotify))
                 <img class="h-7 sm:h-8 lg:h-9 mb-2 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/musora-spotify-logo-white.svg"
                     alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                 <h3 class="leading-tight my-2"><strong>Redeem your membership for Musora.</strong></h3>
             @else
-                <h3 class="leading-tight"><strong>Redeem your membership for Musora.</strong></h3>
+                <h3 class="leading-tight"><strong>Redeem your membership<br class="sm:hidden"> for Musora.</strong></h3>
             @endif
             <h5 class="leading-tight mt-2 mb-6 sm:mb-8 mx-auto max-w-md">Level up your skills with the lessons, songs, teachers, and practice tools trusted by <strong>thousands of active students.</strong></h5>
             <picture>
@@ -253,6 +262,8 @@
                                 href="/thomann/existing"
                             @elseif(!empty($guitarcenter))
                                 href="/guitarcenter/existing"
+                            @elseif(!empty($rockin1000))
+                                href="/rockin-1000/existing"
                             @else
                                 href="/redeem/existing"
                             @endif
@@ -283,6 +294,8 @@
                                 href="/thomann"
                             @elseif(!empty($guitarcenter))
                                 href="/guitarcenter"
+                            @elseif(!empty($rockin1000))
+                                href="/rockin-1000"
                             @else
                                 href="/redeem"
                             @endif>Click here to redeem on a new account.</a>

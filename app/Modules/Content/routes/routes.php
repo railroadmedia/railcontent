@@ -165,7 +165,7 @@ Route::prefix('challenges')
             [ChallengesMetaDataController::class, 'getActiveChallengesForUser']
         )->name('challenges.user_active_challenges');
 
-        Route::post(
+        Route::match(['get', 'post'],
             'enroll/{id}',
             [ChallengesMetaDataController::class, 'enrollUser']
         )->name('challenges.enroll');
@@ -194,6 +194,11 @@ Route::prefix('challenges')
             'notifications/community_reminders/{id}',
             [ChallengesMetaDataController::class, 'notificationsCommunityReminders']
         )->name('challenges.notifications.community_reminders');
+
+        Route::post(
+            'notifications/solo_reminders/{id}',
+            [ChallengesMetaDataController::class, 'notificationsSoloReminders']
+        )->name('challenges.notifications.solo_reminders');
 
         Route::post(
             'complete_lesson/{id}',

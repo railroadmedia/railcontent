@@ -554,7 +554,6 @@
     @endphp
     @include('musora.sales.components.testimonials-section-members', [
         'header' => 'Join The Best Online Piano Community',
-        'bgSplide' => '#f61a30',
         'bgColor' => 'linear-gradient(to bottom, #FFFFFF 20%, #F4F0EB 80%);',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',

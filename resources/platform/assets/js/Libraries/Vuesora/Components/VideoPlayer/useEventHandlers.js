@@ -78,6 +78,8 @@ export default function ({
             totalDuration.value = mediaElement.value.duration;
             currentTime.value = mediaElement.value.currentTime;
 
+            emit('onUpdateCurrentTime', currentTime.value);
+
             setTimeout(() => {
                 loading.value = false;
                 emit('canplaythrough', event);
@@ -148,6 +150,7 @@ export default function ({
                     if (!loading.value) {
                         heartbeatTimer += 1;
                     }
+                    emit('onUpdateCurrentTime', currentTime.value);
                 }, 1000);
             }
 

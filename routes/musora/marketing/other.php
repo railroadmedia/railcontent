@@ -49,9 +49,11 @@ Route::domain('{musoraDomain}')
         Route::get('/drum-faster', [MarketingController::class, 'faster']);
 
         Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
+        Route::get('redeem/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPage']);
         Route::get('friends', [CodeRedemptionController::class, 'friends']);
         Route::get('friends2', [CodeRedemptionController::class, 'friends2']);
-        Route::get('redeem/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPage']);
+        Route::get('rockin-1000', [CodeRedemptionController::class, 'renderNewAccountRedeemPageR1000']);
+        Route::get('rockin-1000/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPageR1000']);
         Route::get('redeem-thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
         Route::get('pianote/redeem', [CodeRedemptionController::class, 'showPianoteRedeemPageForNewUsers']);
         Route::get('pianote/redeem/existing', [CodeRedemptionController::class, 'showPianoteRedeemPageForExistingUsers']);
@@ -79,6 +81,14 @@ Route::domain('{musoraDomain}')
         Route::get('history', [MarketingController::class, 'history']);
         Route::get('{youtube}', [MarketingController::class, 'youtube'])->where('youtube', '(?i)youtube');
         Route::get('youtube/free-resources', [MarketingController::class, 'freeResources']);
+        Route::get('30-day-drummer', [MarketingController::class, 'challengeSample30DD']);
+        Route::get('30-day-drummer/unlocked', [MarketingController::class, 'challengeSample30DDUnlock']);
+        Route::get('new-piano-players', [MarketingController::class, 'challengeSampleNPPSH']);
+        Route::get('new-piano-players/unlocked', [MarketingController::class, 'challengeSampleNPPSHUnlock']);
+        Route::get('better-strumming', [MarketingController::class, 'challengeSampleBS']);
+        Route::get('better-strumming/unlocked', [MarketingController::class, 'challengeSampleBSUnlock']);
+        Route::get('everyday-improv', [MarketingController::class, 'challengeSampleEI']);
+        Route::get('everyday-improv/unlocked', [MarketingController::class, 'challengeSampleEIUnlock']);
         Route::get('lifetime', [MarketingController::class, 'lifetimeDeal']);
         // Route::get('extend', [MarketingController::class, 'extend']);
 

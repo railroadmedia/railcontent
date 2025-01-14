@@ -36,11 +36,7 @@ class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
                 $this->brand = $entity['brand'];
                 $entity[$entityIndex]['data'] = $this->decorateContentEntity($entity)['data'];
             } elseif ($entity instanceof CommentEntity) {
-                ContentRepository::$bypassPermissions = true;
-                $content = $this->contentService->getById($entity['content_id']);
-                $this->brand = $content['brand'] ?? '';
                 $this->id = $entity['id'];
-
                 $decoratedEntity = $this->decorateCommentEntity($entity);
                 $entity[$entityIndex]['comment'] = $decoratedEntity['comment'];
                 $entity[$entityIndex]['replies'] = $decoratedEntity['replies'] ?? [];

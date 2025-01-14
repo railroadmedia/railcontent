@@ -75,10 +75,12 @@ class SearchResponse extends AlgoliaSearchResponse
         $railcontentData = $contentService->getByIds($hits->pluck('railcontent_id')->toArray())->transform(fn (ContentEntity $entity) => $entity->dot())->keyBy('id');
 
         $hits->each(function ($hit) use ($railcontentData, &$data) {
-            try {
-                $data[] = $this->formatDataForHit($hit, $railcontentData[$hit->railcontent_id]);
-            } catch (Exception $e) {
-                Log::error($e->getMessage());
+            if ($railcontentData->has($hit->railcontent_id)) {
+                try {
+                    $data[] = $this->formatDataForHit($hit, $railcontentData[$hit->railcontent_id]);
+                } catch (Exception $e) {
+                    Log::error($e->getMessage());
+                }
             }
         });
 

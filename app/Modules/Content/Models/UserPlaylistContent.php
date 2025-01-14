@@ -2,7 +2,9 @@
 
 namespace App\Modules\Content\Models;
 
+use App\Modules\Content\database\factories\UserPlaylistContentFactory;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -26,8 +28,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class UserPlaylistContent extends Model
 {
+    use HasFactory;
+
     protected $table = 'railcontent_user_playlist_content';
     protected $fillable = ['start_second', 'end_second', 'playlist_item_name', 'content_id','user_playlist_id','content_parent','position', 'extra_data','content_name'];
+    protected $hidden = ['content'];
 
     public function content(): BelongsTo
     {
@@ -46,6 +51,11 @@ class UserPlaylistContent extends Model
             ->decrement('position');
 
         return boolval($this->delete());
+    }
+
+    protected static function newFactory()
+    {
+        return UserPlaylistContentFactory::new();
     }
 
 }

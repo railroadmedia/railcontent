@@ -118,218 +118,180 @@
 @endsection
 
 @section('body')
-<section x-data="{ visible: false, showVideoModal: false, videoId: null, currentVideoIndex: 0 }" x-intersect.once="visible = true;" class="text-white text-center px-4 md:px-6 py-8 md:py-12 lg:py-16" style="background: #111729;">
-    <div class="container max-w-5xl mx-auto">
-        <img
-            alt="30 Days To Better Strumming Logo"
-            class="h-14 sm:h-20 mx-auto mb-3 sm:mb-5"
-            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-white.png"
-        >
-        <div class="md:flex">
-            <div class="pb-4 md:w-2/3 lg:w-8/12 md:pr-4 flex-shrink-0 text-left">
-                <div
-                    class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
-                    role="button"
-                    @click="currentVideoIndex = 0; videoId = '944222905'; showVideoModal = true; loadAndPlayVideo(videoId, currentVideoIndex);"
+
+    <section class="bg-[#00101d] text-white"> 
+        <div x-intersect.once="visible = true;" class="text-center px-4 md:px-6 py-8 md:py-12 lg:py-16">
+            <div class="container max-w-5xl mx-auto">
+                <img
+                    alt="30 Days To Better Strumming Logo"
+                    class="h-14 sm:h-20 mx-auto mb-3 sm:mb-5"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-white.png"
                 >
-                    <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                    <img
-                        class="absolute inset-0 overflow-hidden object-cover w-full h-full z-0 opacity-0 transition-opacity"
-                        loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-01.webp"
-                        alt="Thumbnail for tutorial video"
-                    />
-                </div>
-                <div class="mt-4">
-                    <h5 class="leading-tight"><strong>Strum With Confidence In Just 30 Days</strong></h5>
-                    <p class="mt-4">
-                        <span>
-                            30 Days To Better Strumming is the perfect course for beginner &amp; intermediate guitarists who have ever felt stuck in their rhythm playing. Get step-by-step guidance to break through barriers and learn techniques that will stick with you for years.
-                        </span>
-                    </p>
-                </div>
-            </div>
-           <div
-                x-show="showVideoModal"
-                x-on:keydown.escape.prevent.stop="showVideoModal = false; pauseVideo();"
-                class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;"
-                role="dialog"
-                aria-modal="true"
-            >
-                <div x-show="showVideoModal" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-80" style="z-index: 1005;" @click="showVideoModal = false; pauseVideo();"></div>
-
-                <div
-                    x-show="showVideoModal"
-                    x-transition
-                    class="relative min-h-screen flex items-center justify-center px-4"
-                    style="z-index: 1006;"
-                    @click="showVideoModal = false; pauseVideo();"
-                >
-                    <i class="fa-light fa-times fa-2x fixed top-16 right-2 text-white cursor-pointer text-5xl z-150" @click="showVideoModal = false; pauseVideo();"></i>
-                    <div x-on:click.stop class="relative w-full max-w-6xl overflow-hidden rounded-xl">
-                        <div class="relative w-full" style="padding-top: 56.25%;">
-                            <div id="vimeo-player" class="absolute inset-0 w-full h-full"></div>
-                        </div>
-                        <a class="w-full sm:w-2/3 md:max-w-[320px] join smaller guitareo mt-4" x-show="showVideoModal" @click="nextLesson()">Next Lesson <i class="fas fa-chevrons-right"></i> </a>
-                    </div>
-                </div>
-            </div>
-
-            <div id="end-of-lessons-modal" class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" role="dialog" aria-modal="true">
-                <div class="fixed inset-0 bg-black bg-opacity-80" style="z-index: 1005;" @click="document.getElementById('end-of-lessons-modal').style.display = 'none'; resetModal();"></div>
-                <div class="relative min-h-screen flex items-center justify-center px-4" style="z-index: 1006;" @click="document.getElementById('end-of-lessons-modal').style.display = 'none'; resetModal();">
-                    <div class="relative overflow-y-visible px-4 md:px-5 lg:px-7 py-5 md:py-7 text-white mx-auto text-center" @click.stop>
-                        <h1 class="text-guitareo"><i class="fas fa-lock"></i></h1>
-                        <h3 class="leading-tight my-6"><strong>Start your free trial to<br class="hidden sm:inline">  continue watching</strong></h3>
-                        <a class="join guitareo smaller" href="/choose-plan-strumming">GET FULL ACCESS FOR FREE <i class="fas fa-chevrons-right"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            @component('_partials.components.modal', ['name' => 'unlock'])
-                @slot('content')
-                    <div class="relative overflow-y-visible px-4 md:px-5 lg:px-7 py-5 md:py-7 text-white mx-auto text-center">
-                        <h1 class="text-guitareo"><i class="fas fa-lock"></i></h1>
-                        <h3 class="leading-tight my-6"><strong>Start your free trial to<br class="hidden sm:inline">  continue watching</strong></h3>
-                        <a class="join guitareo smaller" href="/choose-plan-strumming">GET FULL ACCESS FOR FREE <i class="fas fa-chevrons-right"></i></a>
-                    </div>
-                @endslot
-            @endcomponent
-
-            <div class="text-black md:w-1/3 text-left">
-                <div class="relative rounded-xl overflow-hidden border border-gray-600" style="height: 509px;">
-                    <div class="overflow-y-auto h-full lessons-list">
-                        @php
-                           $lessons = [
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Chord Shapes-1715065612.jpg',
-                                    'title' => 'Chord Shapes For The Challenge',
-                                    'name' => 'chordShapes',
-                                    'videoId' => '944223156',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/1-1715253818.jpg',
-                                    'title' => 'Get Into The Groove',
-                                    'name' => 'getIntoTheGroove',
-                                    'videoId' => '944945269',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/2-1715253863.jpg',
-                                    'title' => 'Learning To Miss',
-                                    'name' => 'learningToMiss',
-                                    'videoId' => '944235965',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/3-1715253902.jpg',
-                                    'title' => 'Add In The Bridge',
-                                    'name' => 'addInTheBridge',
-                                    'videoId' => '944236131',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/4-1715253943.jpg',
-                                    'title' => 'The Campfire Strum Pattern',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/5-1715253975.jpg',
-                                    'title' => 'Add In A Variation',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/6-1715490929.jpg',
-                                    'title' => 'The Reggae Strum Pattern',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/7-1715491118.jpg',
-                                    'title' => 'Learn To Push Your Chords',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/8-1715491304.jpg',
-                                    'title' => 'The Rock ’N’ Roll Strum Pattern',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/9-1715491483.jpg',
-                                    'title' => 'The Too-Many-Ands Strum Pattern',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/10-1715491541.jpg',
-                                    'title' => 'Coming Up With Your Own Strum Patterns',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/11-1715495497.jpg',
-                                    'title' => 'Add Variations To Your Strums',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/12-1715495568.jpg',
-                                    'title' => 'Adding Accents',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/13-1715496223.jpg',
-                                    'title' => 'The 3-3-2 Strum Pattern',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/14-1715496361.jpg',
-                                    'title' => 'Add Palm Mutes',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/15-1715497833.jpg',
-                                    'title' => 'Thinking About Dynamics',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/16-1715496741.jpg',
-                                    'title' => 'Let’s Gallop',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/17-1715496918.jpg',
-                                    'title' => 'Give It A Smack',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/18-1715497021.jpg',
-                                    'title' => 'Double It Up',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/19-1715497134.jpg',
-                                    'title' => 'Put It All Together',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/20-1715497295.jpg',
-                                    'title' => 'Final Performance',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Week4 (1)-1715497438.jpg',
-                                    'title' => 'Week 4 — Rest & Review',
-                                ],
-                            ];
-                        @endphp
-                        @foreach ($lessons as $index => $lesson)
-                            <div class="w-full flex items-center px-3 py-4 cursor-pointer hover:opacity-80 transition-opacity"
-                                style="background: {{ $index % 2 == 0 ? '#071925' : '#000B17' }};"
-                                @click="
-                                    @if (isset($lesson['videoId']))
-                                        currentVideoIndex = {{ $index }};
-                                        videoId = '{{ $lesson['videoId'] }}';
-                                        showVideoModal = true;
-                                        loadAndPlayVideo(videoId, currentVideoIndex);
-                                    @else
-                                        unlock = true;
-                                    @endif
-                                ">
-                                <img src="{{ $lesson['thumb'] }}" alt="{{ $lesson['title'] }}" class="h-20 rounded-lg mr-4">
-                                <div class="flex flex-col">
-                                    <p class="leading-normal text-white font-semibold text-sm">
-                                    @if ($index < 4) <strong class="text-guitareo">FREE</strong><br> @endif
-                                    {{ $lesson['title'] }}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="absolute h-10 bottom-0 left-0 right-0 z-10" style="background: linear-gradient(to bottom, transparent, #000);"></div>
-                </div>
-{{--                <a href="/shop/30-days-to-better-strumming" class="w-full join smaller guitareo mb-3 text-base lg:text-xl">GET FULL ACCESS FOR FREE</a>--}}
-{{--                <a href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1" class="w-full join smaller white outline text-base lg:text-xl" style="outline: 0px;">BUY THE COURSE</a>--}}
-            </div>
+                 @php
+                        $lessons = [
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/eb806e481f29e1ced1011e427f74860454a67373-1920x1080.jpg',
+                        'title' => 'Course Kick-Off',
+                        'name' => 'course-kick-off',
+                        'videoId' => '944222905',
+                        'free' => true
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/82f78fe3d738610f02b183424d41f0634d2704f3-1920x1080.jpg',
+                        'title' => 'Gear Tips',
+                        'name' => 'gear-tips',
+                        'videoId' => '944223382',
+                        'free' => true
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/03ff53f012fe9c137bd25e6e4a818bf47c54c316-1920x1080.jpg',
+                        'title' => 'Chord Shapes For The Challenge',
+                        'name' => 'chord-shapes-challenge',
+                        'videoId' => '944223156',
+                        'free' => true
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/5a1a9ce37b26df9bd8e6c9b22dbd13f908b752c5-1920x1080.jpg',
+                        'title' => 'Day 1 — Get Into The Groove',
+                        'name' => 'day1-get-into-groove',
+                        'videoId' => '944945269',
+                        'free' => true
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/4e7a0db0e163cb79ebed05ec8be78bac503d1626-1920x1080.jpg',
+                        'title' => 'Day 2 — Learning To Miss',
+                        'name' => 'day2-learning-to-miss',
+                        'videoId' => '944235965',
+                        'free' => true
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/fc3b3bb51c93b10b1020cf11c31554702c47fbb4-1920x1080.jpg',
+                        'title' => 'Day 3 — Add In The Bridge',
+                        'name' => 'day3-add-bridge',
+                        'videoId' => '944236131',
+                        'free' => true
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/84555cfa794ec5e7b94ceec46e1b27151215c5da-1920x1080.jpg',
+                        'title' => 'Day 4 — The Campfire Strum Pattern',
+                        'name' => 'day4-campfire-strum',
+                        'videoId' => null,
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/6729ef2d94ebc3aa300d098f38ba7eba017d9305-1920x1080.jpg',
+                        'title' => 'Day 5 — Add In A Variation',
+                        'name' => 'day5-add-variation',
+                        'videoId' => null,
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/aea0869e6e8db7396ceb4cd84f5f324ef4da20a3-1920x1080.jpg',
+                        'title' => 'Day 6 — The Reggae Strum Pattern',
+                        'name' => 'day6-reggae-strum',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/5711817b2b1bc8fc2eedf2eb490674017bf3ab18-1920x1080.jpg',
+                        'title' => 'Day 7 — Learn To Push Your Chords',
+                        'name' => 'day7-push-chords',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/cb4b4c2879a046c6b3cce69d9facd9827ac834b7-1920x1080.jpg',
+                        'title' => "Day 8 — The Rock 'N' Roll Strum Pattern",
+                        'name' => 'day8-rock-roll-strum',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/0600a9301d880539f710a128643d086c55bb3b63-1920x1080.jpg',
+                        'title' => 'Day 9 — The Too-Many-Ands Strum Pattern',
+                        'name' => 'day9-too-many-ands-strum',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/978103610f9e5fb75f940469a878f8c75b89ea62-1920x1080.jpg',
+                        'title' => 'Day 10 — Coming Up With Your Own Strum Patterns',
+                        'name' => 'day10-own-strum-patterns',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/a3b672e0d3a087fd4b0bd586a1acdd33f7dc6c43-1920x1080.jpg',
+                        'title' => 'Day 11 — Add Variations To Your Strums',
+                        'name' => 'day11-strum-variations',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/30565737c95d75a91d12ec5bc53860f6f65cfa68-1920x1080.jpg',
+                        'title' => 'Day 12 — Adding Accents',
+                        'name' => 'day12-adding-accents',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/557473e90329029434ec47ea9b986055dc13a8a8-1920x1080.jpg',
+                        'title' => 'Day 13 — The 3-3-2 Strum Pattern',
+                        'name' => 'day13-332-strum',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/265fefe296030073175ab6d30a23b787598bf0b8-1920x1080.jpg',
+                        'title' => 'Day 14 — Add Palm Mutes',
+                        'name' => 'day14-palm-mutes',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/a2fae9d29be5d2ade1258d9484aa055421cb4fd3-1920x1080.jpg',
+                        'title' => 'Day 15 — Thinking About Dynamics',
+                        'name' => 'day15-dynamics',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/5c00bf1ea90312f47dd4229a6328a00089fa9506-1920x1080.jpg',
+                        'title' => "Day 16 — Let's Gallop",
+                        'name' => 'day16-gallop',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/97010e6e1d0d1e6a82b836644074a30da1e519fe-1920x1080.jpg',
+                        'title' => 'Day 17 — Give It A Smack',
+                        'name' => 'day17-give-smack',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/d32628668491939b7812f786900285af075f77ff-1920x1080.jpg',
+                        'title' => 'Day 18 — Double It Up',
+                        'name' => 'day18-double-it-up',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/69dc27c705f939fc679d2add0982cd8aed5f62db-1920x1080.jpg',
+                        'title' => 'Day 19 — Put It All Together',
+                        'name' => 'day19-put-together',
+                        'videoId' => null
+                    ],
+                    [
+                        'thumb' => 'https://cdn.sanity.io/images/4032r8py/production/17b34eaf9a89a4bffaca5b55335e7b242b8b4e95-1920x1080.jpg',
+                        'title' => 'Day 20 — Final Performance',
+                        'name' => 'day20-final-performance',
+                        'videoId' => null
+                    ]
+                ];
+                @endphp
+                @include('_partials.components.player-section', [
+                    'slugSanity' => '30-days-to-better-strumming',
+                    'accessibleVideosCount'=> 5,  
+                    'title' => 'Strum With Confidence In Just 30 Days',
+                    'description' =>
+                        '30 Days To Better Strumming is the perfect course for beginner & intermediate guitarists who have ever felt stuck in their rhythm playing. Get step-by-step guidance to break through barriers and learn techniques that will stick with you for years.',
+                    'theme' => 'guitareo',
+                    'aside_dark' => '#071925',
+                    'aside_light' => '#000B17',
+                    'cta' => 'GET FULL ACCESS FOR FREE',
+                    'link' => '/choose-plan-strumming',
+                    'simpleModal' => true,
+                ])
             </div>
         </div>
     </section>
+
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#F2F8FF;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
@@ -454,96 +416,3 @@
         </div>
     </section>
 @endsection
-
-<script src="https://player.vimeo.com/api/player.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const videoIds = @json(collect($lessons)->pluck('videoId')->filter()->all());
-
-        let player;
-        let currentIndex = 0;
-
-        function initializePlayer(videoId) {
-            const options = {
-                id: videoId,
-                loop: false,
-                width: '100%',
-                responsive: true
-            };
-
-            if (player) {
-                player.loadVideo(videoId).then(() => {
-                    playVideo();
-                }).catch(error => {
-                    console.error('Error loading video:', error);
-                });
-            } else {
-                player = new Vimeo.Player('vimeo-player', options);
-                player.on('ended', handleVideoEnd);
-                playVideo();
-            }
-        }
-
-        function playVideo() {
-            player.play().catch(error => {
-                console.error('Error playing video:', error);
-            });
-        }
-
-        function handleVideoEnd() {
-            currentIndex++;
-            if (currentIndex < videoIds.length) {
-                initializePlayer(videoIds[currentIndex]);
-            } else {
-                showEndOfLessonsModal();
-            }
-        }
-
-        function loadAndPlayVideo(videoId, startIndex) {
-            currentIndex = startIndex;
-            initializePlayer(videoId);
-        }
-
-        function pauseVideo() {
-            if (player) {
-                player.pause().catch(error => {
-                    console.error('Error pausing video:', error);
-                });
-            }
-        }
-
-        function nextLesson() {
-            currentIndex++;
-            if (currentIndex < videoIds.length) {
-                initializePlayer(videoIds[currentIndex]);
-                showVideoModal();
-            } else {
-                showEndOfLessonsModal();
-            }
-        }
-
-        function showVideoModal() {
-            document.querySelector('[x-show="showVideoModal"]').style.display = 'block';
-        }
-
-        function showEndOfLessonsModal() {
-            document.getElementById('end-of-lessons-modal').style.display = 'block';
-            pauseVideo();
-            document.querySelector('[x-show="showVideoModal"]').style.display = 'none';
-        }
-
-        function resetModal() {
-            document.getElementById('end-of-lessons-modal').style.display = 'none';
-            document.querySelector('[x-show="showVideoModal"]').style.display = 'block';
-        }
-
-        document.getElementById('end-of-lessons-modal').addEventListener('click', function() {
-            resetModal();
-        });
-
-        window.loadAndPlayVideo = loadAndPlayVideo;
-        window.nextLesson = nextLesson;
-        window.resetModal = resetModal;
-        window.pauseVideo = pauseVideo;
-    });
-</script>

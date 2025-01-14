@@ -43,7 +43,7 @@
                             <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
                             Get Notified
                         </button>
-                        <span v-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Notification requested!</span>
+                        <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Notification requested!</span>
                         <!--  Enrolled Buttons  -->
                         <div v-else-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
                             <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
@@ -537,7 +537,7 @@ const playTrailer = () => {
 }
 
 const countdown = () => {
-    const start = new Date(props.cohort['enrollment_end_date']);
+    const start = new Date(props.cohort['enrollment_end_time']);
     const now = Date.now();
     const isEnded = now >= start;
 
@@ -562,18 +562,18 @@ const countdown = () => {
 }
 
 const watchEnrollmentOpen = () => {
-    const openDate = new Date(props.cohort['enrollment_start_date']);
+    const openDate = new Date(props.cohort['enrollment_start_time']);
     const now = new Date();
 
-    if(now <= openDate){
+    if(openDate <= now){
         isEnrollmentOpen.value = true;
         clearInterval(watchEnrollmentOpen);
     }
 }
 
 onBeforeMount(() => {
-    const openDate = new Date(props.cohort['enrollment_start_date']);
-    const closeDate = new Date(props.cohort['enrollment_end_date']);
+    const openDate = new Date(props.cohort['enrollment_start_time']);
+    const closeDate = new Date(props.cohort['enrollment_end_time']);
     const now = new Date();
 
     //Start countdown for unclosed community challenges
@@ -581,8 +581,12 @@ onBeforeMount(() => {
         countdown();
         setInterval(countdown, 1000);
     }
+    //End enrollment for community challenges
+    else if(!isSolo.value && now >= closeDate){
+        hasEnded.value = true;
+    }
 
-    if(!isSolo.value && openDate < now){
+    if(!isSolo.value && openDate <= now){
         watchEnrollmentOpen();
         setInterval(watchEnrollmentOpen, 1000);
     }
@@ -597,6 +601,4 @@ onUnmounted(() => {
     clearInterval(countdown);
     clearInterval(watchEnrollmentOpen);
 })
-
-console.log(props.cohort)
 </script>

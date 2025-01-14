@@ -74,8 +74,8 @@
 
             <!-- Playlist section add arrows -->
             <ListSection
-                v-if="usersList.length"
-                :usersList="playlistsStore.playlists"
+                v-if="playlists.length"
+                :usersList="playlists"
                 :my-list-url="`/${brand}/playlists`"
             />
 
@@ -190,6 +190,7 @@
     const platformStore = usePlatformStore();
     const { brand, userId, token, showOnboardingBanner, userHas30Days, userFirstName, userDisplayName } = storeToRefs(userStore);
     const { isLoading } = storeToRefs(platformStore);
+    const { playlists } = storeToRefs(playlistsStore);
 
     const props = defineProps({
         // String props
@@ -225,7 +226,6 @@
         courseData: { type: Object, default: () => ({}) },
         newContent: { type: Object, default: () => ({}) },
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
-        usersList: { type: Object, default: () => ({}) },
         userMetrics: { type: Object, default: () => ({}) },
         isFirstAccess: { type: Boolean, default: false },
     });
@@ -288,7 +288,6 @@
 
     //Lifecycles
     onBeforeMount( async () => {
-        playlistsStore.playlists = props.usersList;
         const { data: homeData } = await useHomePageData(brand.value, isPackOrChallengeOnlyBoolean.value);
         data.value = homeData.value;
 
@@ -299,5 +298,8 @@
         if (window.location.href.includes('create-playlist-window')) {
             openPlaylistModal();
         }
+
+        //Get Playlists
+        playlistsStore.getPlaylists({ brand: brand.value, limit: 24, sort: '-last_progress' }, token);
     });
 </script>

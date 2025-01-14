@@ -5,6 +5,7 @@ namespace Modules\Ecommerce\Jobs\Shopify;
 use App\Jobs\WebhookChildJob;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\Content\Services\UserNotificationKeys;
 use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
@@ -46,10 +47,10 @@ class OrderUpdateChallengesEnrollment extends WebhookChildJob
                 $challengesService->startChallenge($challengeId, $user->id, $startDate);
                 //Send notifications it's not part of a bundle and is a community challenge
                 if (count($skus) == 1 && !$isSoloChallenge) {
-                    $challengesService->updateCustomerIONotifications(
+                    $challengesService->enableNotification(
                         $challengeId,
                         $user,
-                        ChallengesService::COMMUNITY_NOTIFICATION_KEY
+                        UserNotificationKeys::COMMUNITY_NOTIFICATION_KEY
                     );
                 }
 

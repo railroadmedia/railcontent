@@ -1,4 +1,6 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
+
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 h1 {
@@ -39,7 +41,7 @@ h3 {
       background: #10D05F;
 
       &:hover {
-        background: lighten(#10D05F, 10%);
+        background: color.adjust(#10D05F, $lightness: 10%);
       }
     }
   }

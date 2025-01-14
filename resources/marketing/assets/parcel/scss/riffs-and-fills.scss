@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 html {
     height: 100%;
@@ -117,6 +118,7 @@ button {
 
 [type=reset], [type=submit], button, html [type=button] {
     -webkit-appearance: button;
+    appearance: button;
 }
 
 .text-red {
@@ -289,12 +291,12 @@ button {
 
         &:hover {
             .vid-wrap {
-                border-color: lighten(#1f4261, 15%);
+                border-color: color.adjust(#1f4261, $lightness: 15%);
                 opacity: 0.75;
             }
 
             p {
-                color: lighten(#1f4261, 15%);
+                color: color.adjust(#1f4261, $lightness: 15%);
             }
         }
 
@@ -940,8 +942,8 @@ button {
     padding: 11px 0;
 
     &:hover {
-        background: lighten($pianoteRed, 10%);
-        border-color: lighten($pianoteRed, 10%);
+        background: color.adjust($pianoteRed, $lightness: 10%);
+        border-color: color.adjust($pianoteRed, $lightness: 10%);
         color: #fff;
     }
 
@@ -957,7 +959,7 @@ button {
         color: $pianoteRed;
 
         &:hover {
-            background: lighten($pianoteRed, 10%);
+            background: color.adjust($pianoteRed, $lightness: 10%);
             color: #fff;
         }
 
@@ -1021,7 +1023,7 @@ button {
     background: $pianoteRed;
 
     &:hover {
-        background: lighten($pianoteRed, 10%);
+        background: color.adjust($pianoteRed, $lightness: 10%);
     }
 }
 

@@ -1,6 +1,6 @@
 <template>
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
-        <Breadcrumb :breadcrumbs="breadcrumbs" />
+        <Breadcrumb :breadcrumbs="breadcrumbsData" :isLoading="isLoading" />
 
         <PageHeader
             :title="header?.title"
@@ -13,11 +13,11 @@
             :hero-img="header?.thumbnail"
             :dropdowns="headerDropdown"
             :progress-label-text="headerData?.progressLabelText"
-            :icon-name="headerData?.iconName"
+            :icon-name="headerIconName"
             :ctas="headerCtas"
             :lesson-data="{ challenge: data?.lesson, next_lesson: data?.next_lesson }"
-            :dark-mode-logo="headerData?.darkModeLogo"
-            :light-mode-logo="headerData?.lightModeLogo"
+            :dark-mode-logo="header?.darkModeLogo"
+            :light-mode-logo="header?.lightModeLogo"
         />
 
         <div v-if="nextLesson?.length" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
@@ -123,10 +123,6 @@ const props = defineProps({
         type: String,
         required: true,
     },
-    breadcrumbs: {
-        type: Array,
-        default: () => [],
-    },
     childContent: {
         type: Object,
         default: () => {},
@@ -151,6 +147,7 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
+    // TODO: Remove this prop, need to migrate CTAs and progressLabelText
     headerData: {
         type: Object,
         default: () => {},
@@ -223,6 +220,16 @@ const isChallengeEnrolled = computed(() => {
 
 const isChallengeSolo = computed(() => {
     return data.value?.lesson?.is_solo;
+})
+
+const breadcrumbsData = computed(() => {
+    if (props.contentType === 'course-part') {
+        return [{ title: 'Courses', url: `/${brand.value}/courses` }, { title: header.value?.title }];
+    } else if (props.contentType === 'challenge-part') {
+        return [{ title: 'Challenges', url: `/${brand.value}/challenge` }, { title: header.value?.title }];
+    }
+    const middleBreadcrumbs = data.value?.breadcrumbs_data ? data.value?.breadcrumbs_data : []; 
+    return [...middleBreadcrumbs, { title: header.value?.title }];
 })
 
 const generateChallengeCtas = (data) => {
@@ -315,6 +322,14 @@ const headerCtas = computed(() => {
     }
 })
 
+const headerIconName = computed(() => {
+    if(props.parentType === 'learning-path'){
+        return 'method';
+    }
+
+    return null;
+})
+
 onBeforeMount( async () => {
     const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType, props.parentType);
 
@@ -328,7 +343,5 @@ onBeforeMount( async () => {
     data.value = OverviewData.value;
 
     platformStore.setLoadingState(OverviewLoading.value);
-
-    //console.log('OverviewData.value', OverviewData.value)
 })
 </script>

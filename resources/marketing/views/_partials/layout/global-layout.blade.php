@@ -51,4 +51,5 @@
          @yield('layout-scripts')
         {!! \App\Analytics\Tracker::bodyBottom() !!}
     </body>
+     @stack('player-scripts')
 </html>

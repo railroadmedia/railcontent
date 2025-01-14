@@ -17,10 +17,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Gate;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
-use Railroad\Railcontent\Services\UserPermissionsService;
 use Railroad\Railchat\Services\RailchatService;
+use Railroad\Railcontent\Services\UserPermissionsService;
 
 class ContentMetadataController extends Controller
 {
@@ -117,7 +118,15 @@ class ContentMetadataController extends Controller
                     fn ($query) => $query->when(!is_null($limit), fn ($query) => $query->limit($limit))
                 )
                 ->orderByDesc('updated_on')
-                ->pluck('content_id');
+                ->with('content')
+                ->get()
+                ->pluck('content');
+
+        // filter out any content that the user shouldn't be able to access (e.g. was put into draft due to licensing after the user started it)
+        $results = $results->filter(function (Content $content) use ($user) {
+            return Gate::check('view', $content);
+        })
+        ->pluck('id');
 
         return response()->json([$progressState->value => $results]);
     }

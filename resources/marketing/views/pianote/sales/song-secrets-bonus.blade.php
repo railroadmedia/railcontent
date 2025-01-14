@@ -117,7 +117,6 @@
     x-data ='{
         soundslice : false,
         trailer : false,
-        unbox : false,
         rolandTrailer : false,
         lazyLoad: false
     }'
@@ -1009,11 +1008,6 @@ That’s the Play Better Guarantee™.',
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '785314388',
-        'vimeo' => true,
-    ])
-    @include('_partials.components.video-modal',[
-        'name' => 'unbox',
-        'video' => '774408046',
         'vimeo' => true,
     ])
 

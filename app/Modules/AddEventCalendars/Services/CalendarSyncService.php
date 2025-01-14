@@ -19,33 +19,31 @@ class CalendarSyncService
         $this->addEventService = $addEventService;
     }
 
-    public function syncContentListToCalendar($contentList, AddEventCalendar $calendar): void
+    public function syncContentListToCalendar($allScheduledContent, AddEventCalendar $calendar): void
     {
         $existingEvents = $this->addEventService->getExistingEvents($calendar, now()->subMonth()->toDateTimeString());
-        /** @var ContentEntity $contentEntity */
-        foreach ($contentList as $contentEntity) {
-            $this->syncContentToCalendar($contentEntity, $calendar, $existingEvents);
+        foreach ($allScheduledContent as $scheduledContent) {
+            $this->syncContentToCalendar($scheduledContent, $calendar, $existingEvents);
         }
-        $this->deleteEvents($contentList, $existingEvents);
+        $this->deleteEvents($allScheduledContent, $existingEvents);
     }
 
     private function syncContentToCalendar(
-        ContentEntity $contentEntity,
+        array $scheduledContent,
         AddEventCalendar $calendar,
         array $events,
     ): void {
-        $brand = $contentEntity['brand'];
         $eventVO = new AddEventCalendarEventVO();
         $eventVO->setInternalData(
-            $brand,
-            $contentEntity->fetch('type'),
-            $contentEntity->fetch('id'),
-            $contentEntity->fetch('fields.title'),
-            $contentEntity->fetch('published_on'),
-            $contentEntity->fetch('fields.live_event_start_time', null),
-            $contentEntity->fetch('fields.live_event_end_time', null),
-            $contentEntity->fetch('fields.live_stream_feed_type', null),
-            $contentEntity->fetch('data.description')
+            $scheduledContent['brand'],
+            $scheduledContent['type'],
+            $scheduledContent['id'],
+            $scheduledContent['title'],
+            $scheduledContent['published_on'],
+            $scheduledContent['live_event_start_time'],
+            $scheduledContent['live_event_end_time'],
+            null,
+            $scheduledContent['description'],
         );
 
         if (!empty($events)) {
@@ -167,9 +165,9 @@ class CalendarSyncService
     }
 
 
-    public function deleteEvents($content, $events)
+    public function deleteEvents($allScheduledContent, $events)
     {
-        $calendarHasMoreEventsThanReturned = count($events) > count($content);
+        $calendarHasMoreEventsThanReturned = count($events) > count($allScheduledContent);
 
         if ($calendarHasMoreEventsThanReturned) {
             foreach ($events as $key => $event) {
@@ -181,9 +179,9 @@ class CalendarSyncService
                 // if event is in list content returned when querying for future releases, it is not a candidate for
                 // deletion, thus disregard it
                 /** @var ContentEntity $contentEntity */
-                foreach ($content as $contentEntity) {
-                    $brand = $contentEntity['brand'];
-                    $internalSyncId = $contentEntity->fetch('id') . '_' . $brand . '_' . $contentEntity->fetch('type');
+                foreach ($allScheduledContent as $scheduledContent) {
+                    $brand = $scheduledContent['brand'];
+                    $internalSyncId = $scheduledContent['id'] . '_' . $brand . '_' . $scheduledContent['type'];
                     $externalSyncId = json_decode(
                         $event->custom_data,
                         true

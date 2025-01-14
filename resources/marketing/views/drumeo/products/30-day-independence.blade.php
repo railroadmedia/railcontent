@@ -523,7 +523,7 @@
     @include('drumeo.products.partials.evergreen._learn', [
         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp',
         'logoAlt' => '30 day Independence logo',
-        'title' => 'Improve your chops <br class="md:hidden"> in just 30 days.',
+        'title' => 'Improve your coordination <br class="md:hidden"> in just 30 days.',
         'points' => $points,
         'profileImageAlt' => 'student profile image',
         'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/order-collage.webp',

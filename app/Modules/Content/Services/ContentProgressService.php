@@ -116,7 +116,7 @@ class ContentProgressService
         if ($bubble) {
             $this->bubbleProgressToParent($contentId, $userId);
         }
-        event(new UserContentProgressSaved($userId, $contentId, $progress, ProgressState::Completed, false));
+        event(new UserContentProgressSaved($userId, $contentId, $progress, ProgressState::Completed->value, false));
     }
 
     public function resetContent(int $contentId, int $userId): void
@@ -130,7 +130,7 @@ class ContentProgressService
 
         event(new UserContentsProgressReset($userId, $idsToDelete));
         $this->bubbleProgressToParent($contentId, $userId);
-        event(new UserContentProgressSaved($userId, $contentId, 0, ProgressState::Started));
+        event(new UserContentProgressSaved($userId, $contentId, 0, ProgressState::Started->value));
     }
 
     public function saveContentProgress($contentId, $progress, $userId, $overwriteComplete = false): void

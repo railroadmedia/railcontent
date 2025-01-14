@@ -576,15 +576,6 @@
     ])
 
     @php
-        $gridItems = $musora['gridItems'];
-    @endphp
-
-    @include('musora.sales.components.reason-cards-section', [
-        'bgColor' => "#f4f8fb",
-        'seven' => true,
-    ])
-
-    @php
         $workoutImages = $musora['workoutImages'];
     @endphp
 
@@ -592,14 +583,13 @@
         'workoutsBG' => 'marketing/musora/membership/homepage/2024/workouts-card2.jpg',
     ])
 
-
     @php
-        $songItems = $musora['songItems'];
+        $gridItems = $musora['gridItems'];
     @endphp
 
-    @include('musora.sales.components.songs-section', [
-        'subheader' => 'Practice and sing 300+ popular songs with note-for-note sheet music and digital tools.',
-        'media' => 'musora/membership/homepage/2024/musora-songs.webp',
+    @include('musora.sales.components.reason-cards-section', [
+        'bgColor' => "#f4f8fb",
+        'seven' => true,
     ])
 
     @php
@@ -622,6 +612,7 @@
         @yield('final')
     @elseif(!empty($hideMenu))
         @include('musora.sales.components.order-section-collage', [
+        'old' => true,
             "orderUrl" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
         'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
         'header' => 'Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
@@ -635,6 +626,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'old' => true,
         'headerLight' => true,
         'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
         'header' => '<strong>Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.</strong>',

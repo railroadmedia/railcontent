@@ -7,7 +7,8 @@ $bonuses = [
         'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano.',
         'price' => floatval($productPrices['new-piano-players-start-here']->price),
         'vimeoId' => '879916161',
-        'sku' => 'new-piano-players-start-here'
+        'sku' => 'new-piano-players-start-here',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-03.webp',
@@ -15,7 +16,8 @@ $bonuses = [
         'description' => 'You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
         'price' => floatval($productPrices['easy-chords']->price),
         'vimeoId' => '823788317',
-        'sku' => 'easy-chords'
+        'sku' => 'easy-chords',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/headphones-cart.jpg',
@@ -27,18 +29,18 @@ $bonuses = [
         'physical' => true
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-11-new.webp',
+        'image' => 'marketing/pianote/membership/homepage/2025/bonuses-03-m.webp',
         'title' => 'Practice Planner',
-        'description' => 'Always know exactly what to practice.',
-        'price' => floatval($productPrices['pianote-practice-planner']->price),
+        'description' => 'The beloved Pianote Pracitce Planner has had a complete redesign for 2025. When you fail to plan, you plan to fail. This planner helps you set realistic and achievable goals so you can make the most out of your previous practice time.',
+        'price' => floatval($productPrices['practice-planner']->price),
         'shipping' => true,
         'sku' => 'pianote-practice-planner',
         'physical' => true
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-10-new.webp',
+        'image' => 'marketing/pianote/membership/homepage/2025/bonuses-01-m.webp',
         'title' => 'Chords & <br>Scales Book',
-        'description' => 'Your encyclopedia of piano chords & scales.',
+        'description' => 'This book will help you learn every chord shape, chord variation, and scale in EVERY key. The tabs on the side make it easy to look up any note and quickly find all the different scales and chords you need when it comes time to practice or learn a new song.',
         'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
         'shipping' => true,
         'sku' => 'piano-chords-and-scales-guide',
@@ -137,7 +139,8 @@ $bonuses = [
         'title' => 'Piano Technique<br> Made Easy',
         'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
         'price' => floatval($productPrices['piano-technique-made-easy']->price),
-        'sku' => 'piano-technique-made-easy'
+        'sku' => 'piano-technique-made-easy',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
@@ -165,7 +168,8 @@ $bonuses = [
         'title' => 'Faster Fingers',
         'description' => 'Boost your speed and confidence with this guided practice course.',
         'price' => floatval($productPrices['faster-fingers']->price),
-        'sku' => 'faster-fingers'
+        'sku' => 'faster-fingers',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTPBP.jpg',
@@ -203,7 +207,9 @@ $bonuses = [
         'description' => 'Learn Blues structure, scales, and riffs in just 10 minutes a day.',
         'price' => 127,
         'vimeoId' => '879913986',
-        'sku' => '30-day-blues-piano'
+        'sku' => '30-day-blues-piano',
+        'access' => 'ONLINE ACCESS'
+
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-05.webp',
@@ -211,7 +217,8 @@ $bonuses = [
         'description' => 'Improve finger strength and speed with GRAMMY-winner Jordan Rudess.',
         'price' => 127,
         'vimeoId' => '928599834',
-        'sku' => '30-days-to-better-technique'
+        'sku' => '30-days-to-better-technique',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-06.webp',
@@ -219,7 +226,8 @@ $bonuses = [
         'description' => 'Play beautiful piano pieces with step-by-step tutorials.',
         'price' => 127,
         'vimeoId' => '1008560089',
-        'sku' => 'classical-piano-collection'
+        'sku' => 'classical-piano-collection',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-09.webp',
@@ -284,12 +292,13 @@ $bonuses = [
         'badge' => null,
         'price' => 127,
         'vimeoId' => '952486575',
-        'sku' => 'read-music-in-30-days'
+        'sku' => 'read-music-in-30-days',
+        'access' => 'ONLINE ACCESS'
     ],
     [
         'image' => 'marketing/pianote/promos/december/holiday-bundle/bonus-06.webp',
         'header' => 'Companion Book "Read Music in 30 Days"',
-        'description' => '<p>This book has been designed to be used with our 30-Day Challenge. </p><p class="my-2">Each day’s exercises are exactly the same as the videos, with added explanations. </p>And you’ll find lots of bonus exercises at the back of the book.</p>',        
+        'description' => '<p>This book has been designed to be used with our 30-Day Challenge. </p><p class="my-2">Each day’s exercises are exactly the same as the videos, with added explanations. </p>And you’ll find lots of bonus exercises at the back of the book.</p>',
         'badge' => null,
         'price' => 39,
        'physical' => true,
@@ -302,5 +311,13 @@ $bonuses = [
         'price' => 79,
         'physical' => true,
         'sku' => 'metronome'
+    ],
+    [
+        'image' => 'marketing/pianote/membership/homepage/2025/bonuses-02-m.webp',
+        'title' => 'The Best Beginner Piano Book',
+        'description' => 'This 194-page book is your foundation for learning the piano. You’ll be shown the essential theory and techniques required to go anywhere on your musical journey.',
+        'price' => 49,
+        'physical' => true,
+        'sku' => 'best-beginner-piano-book'
     ]
 ];

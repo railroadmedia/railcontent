@@ -41,6 +41,7 @@ Route::domain('{pianoteDomain}')
                 Route::get('/piano-technique-made-easy', [SalesController::class, 'pianotechniquemadeeasy']);
                 Route::get('/play-beautiful-piano', [SalesController::class, 'playbeautifulpiano']);
                 Route::get('/practice-kit', [SalesController::class, 'practiceKit']);
+                Route::get('/practice-planner', [SalesController::class, 'practicePlanner']);
                 Route::get('/prestige-metronome', [SalesController::class, 'metronomePrestige']);
                 Route::get('/prima', [SalesController::class, 'prima']);
                 Route::get('/prima-ltm', [SalesController::class, 'primaLTM']);
@@ -48,6 +49,7 @@ Route::domain('{pianoteDomain}')
                 Route::get('/read-music', [SalesController::class, 'readMusic']);
                 Route::get('/read-music-book', [SalesController::class, 'readMusicBook']);
                 Route::get('/riffs-and-fills', [LeadGenController::class, 'riffsAndFills']);
+                Route::get('/best-beginner-piano-book', [SalesController::class, 'bestBeginnerPianoBook']);
                 Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords']);
                 Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway']);
                 Route::get('/worship-piano', [SalesController::class, 'worshippiano']);

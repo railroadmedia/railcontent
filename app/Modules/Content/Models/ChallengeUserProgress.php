@@ -38,6 +38,7 @@ enum ChallengeUserProgressStatus: string
  * @property boolean $is_locked
  * @property boolean $is_active
  * @property boolean $is_solo
+ * @property boolean $solo_notification_to_be_processed
  * @property boolean $hide_completed_banner
  * @property integer $current_rest_days
  * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, seconds_practiced, unlock_date, completed_at
@@ -123,18 +124,23 @@ class ChallengeUserProgress extends Model
     public function getStartAndEndDate(): array
     {
         $startDate = $this->start_date;
+        $finalStartDate = null;
         if ($startDate) {
             $endDate = Carbon::parse($startDate);
             foreach ($this->lessons_meta_data as $lesson) {
+                if (is_null($finalStartDate) && self::isCurriculumMetadataLesson($lesson)) {
+                    $finalStartDate = Carbon::parse($lesson['unlock_date']);
+                }
                 $unlockDate = Carbon::parse($lesson['unlock_date']);
                 $endDate = max($endDate, $unlockDate);
             }
             $endDate = $endDate->toISOString();
         } else {
             $endDate = $startDate;
+            $finalStartDate = $startDate;
         }
         return [
-            'start_date' => $startDate,
+            'start_date' => $finalStartDate,
             'end_date' => $endDate,
         ];
     }
@@ -175,7 +181,7 @@ class ChallengeUserProgress extends Model
                 }
 
                 // If the lesson was completed on its unlock date, it does NOT trigger a shift or use a rest day
-                // EVen if the user completed this day, if its marked as a rest day we still must decrease the rest day count
+                // Even if the user completed this day, if its marked as a rest day we still must decrease the rest day count
                 if ($completedAt && $completedAt->isSameDay($unlockDate)) {
                     if ($lesson['rest_day_used']) {
                         $totalRestDaysUsed++; // Track total rest days used
@@ -514,7 +520,10 @@ class ChallengeUserProgress extends Model
                 $newShiftDays = $totalShiftDays - $daysAlreadyShifted;
 
                 if ($newShiftDays > 0) {
-                    $lessonToShift['unlock_date'] = $currentUnlockDate->addDays($newShiftDays)->toISOString();
+                    // TODO Jan 8th Adrian Caleb Rob this needs to be patched to handle edge cases. this is a stopgap until Friday
+                    if ($challengeUserProgress->is_solo) {
+                        $lessonToShift['unlock_date'] = $currentUnlockDate->addDays($newShiftDays)->toISOString();
+                    }
                     $lessonToShift['days_shifted'] = $totalShiftDays; // Update the total shift days for this lesson
                 }
             }

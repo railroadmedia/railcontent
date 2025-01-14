@@ -123,7 +123,7 @@
                     //show success message
                     window.shownotification({
                         icon: 'playlist',
-                        text: `${payload.name} was been successfully created.`
+                        text: `${payload.name} has been successfully created.`
                     })
                     if (props.playlist.hasAddItemCallback) {
                         window.addItemCallback(response.playlist.id)
@@ -145,7 +145,7 @@
                         limit: 10,
                         term: '',
                         sort: 'most_recent',
-                    }, token);
+                    });
                 }
             }).catch((error)=>{
                 window.shownotification({
@@ -189,7 +189,7 @@
                             limit: 10,
                             term: '',
                             sort: 'most_recent',
-                        }, token);
+                        });
                     } else {
                         console.log('edit response code', response)
                     }
@@ -231,7 +231,7 @@
                             limit: 10,
                             term: '',
                             sort: 'most_recent',
-                        }, token);
+                        });
                     } else {
                         console.log('duplicate response code', response)
                     }

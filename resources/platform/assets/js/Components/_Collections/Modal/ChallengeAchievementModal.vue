@@ -14,7 +14,7 @@
                     <div class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700 -tw-top-3">Best!</div>
                     <Vue3Lottie class="tw-w-11 lg:tw-w-[46px] tw-ml-0 sm:tw-ml-1 tw-mr-0" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
                     <div class="tw-flex-grow">
-                        <div class="tw-font-extrabold tw-text-base">{{ completionData?.user_data?.current_streak }}</div>
+                        <div class="tw-font-extrabold tw-text-base">{{ completionData?.user_data?.current_best_streak }}</div>
                         <div class="tw-flex tw-items-center tw-justify-between -tw-mt-0.5">
                             Day Streak
                             <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="$emit('openStreakInfo')"></musora-icon>

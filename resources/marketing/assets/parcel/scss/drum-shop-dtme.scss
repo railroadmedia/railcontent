@@ -1,4 +1,6 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
+
 
 .no-padding {
   padding-left: 0;
@@ -184,7 +186,7 @@ body {
         padding: 0;
 
         &:hover {
-          background: lighten($meGreen, 10%);
+          background: color.adjust($meGreen, $lightness: 10%);
         }
       }
     }
@@ -226,7 +228,7 @@ body {
   }
 
   &:hover {
-    background: lighten($meGreen, 10%);
+    background: color.adjust($meGreen, $lightness: 10%); 
   }
 
   &.outline {
@@ -276,7 +278,8 @@ body {
     &:hover {
       -webkit-transform: translate(-50%, -50%) scale(1.1, 1.1);
       transform: translate(-50%, -50%) scale(1.1, 1.1);
-      background: lighten($meGreen, 5%);
+      background: color.adjust($meGreen, $lightness: 5%);
+
     }
   }
   @include desktop {
@@ -1991,7 +1994,7 @@ body.is-reveal-open {
           padding: 0;
 
           &:hover {
-            background: lighten($meGreen, 10%);
+            background: color.adjust($meGreen, $lightness: 10%);
           }
         }
       }

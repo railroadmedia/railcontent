@@ -78,8 +78,6 @@ class RailtrackerMiddleware
         // send request to cache
         try {
             $requestVO = new RequestVO($request);
-            $this->batchService->storeRequest($requestVO);
-
             // add response data and resend request to cache
             $requestVO->setResponseData($response);
 
