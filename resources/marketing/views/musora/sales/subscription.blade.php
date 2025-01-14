@@ -525,13 +525,13 @@
     $gettings = [
         [
             'position' => 'left',
-            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to just $15 a month. <br><br>At this price, your drum lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your kit. (Who doesn’t love some new cymbals or a cushy drum throne?) ',
+            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to <span class=italic> just $15 a month</span>. <br><br>At this price, your drum lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your kit. (Who doesn’t love some new cymbals or a cushy drum throne?) ',
             'alt' => 'Image with prices and savings.',
             'img' => 'marketing/drumeo/membership/ascension/save-02.webp',
         ],
         [
             'position' => 'right',
-            'desc' => 'We know how hard it is to learn an instrument. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you love for the next year.',
+            'desc' => 'We know how hard it is to learn an instrument. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you <span class=italic>love</span> for the next year.',
             'alt' => 'Drummer playing drums.',
             'img' => 'marketing/drumeo/membership/ascension/save-01.webp',
         ]
@@ -546,13 +546,13 @@
     $gettings = [
         [
             'position' => 'left',
-            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to just $15 a month. <br><br>At this price, your piano lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your piano. (Who doesn’t love new music books or a comfier piano bench?)',
+            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to <span class=italic> just $15 a month</span>. <br><br>At this price, your piano lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your piano. (Who doesn’t love new music books or a comfier piano bench?)',
             'alt' => 'Image with prices and savings.',
             'img' => 'marketing/pianote/membership/ascension/save-02.webp',
         ],
         [
             'position' => 'right',
-            'desc' => 'We know how hard it is to learn an instrument. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you love for the next year.',
+            'desc' => 'We know how hard it is to learn an instrument. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you <span class=italic>love</span> for the next year.',
             'alt' => 'Piano player, playing piano.',
             'img' => 'marketing/pianote/membership/ascension/save-01.webp',
         ]
@@ -567,13 +567,13 @@
     $gettings = [
         [
             'position' => 'left',
-            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to just $15 a month. <br><br>At this price, your guitar lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your guitar. (Who doesn’t love new picks or a new guitar case?)',
+            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to <span class=italic> just $15 a month</span>. <br><br>At this price, your guitar lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your guitar. (Who doesn’t love new picks or a new guitar case?)',
             'alt' => 'Image with prices and savings.',
             'img' => 'marketing/guitareo/membership/ascension/save-02.webp',
         ],
         [
             'position' => 'right',
-            'desc' => 'We know how hard it is to learn an instrument. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you love for the next year.',
+            'desc' => 'We know how hard it is to learn an instrument. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you <span class=italic>love</span> for the next year.',
             'alt' => 'Guitar player, playing guitar.',
             'img' => 'marketing/guitareo/membership/ascension/save-01.webp',
         ]
@@ -588,13 +588,13 @@
     $gettings = [
         [
             'position' => 'left',
-            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to just $15 a month. <br><br>At this price, your vocal lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your voice. (Who doesn’t love a new microphone?)',
+            'desc' => 'Right now, you’ll <strong> save $300</strong> by upgrading to an Annual Membership. That works out to <span class=italic> just $15 a month</span>. <br><br>At this price, your vocal lessons pay for themselves after 5 months. Keep the extra cash for yourself, or reinvest it into your voice. (Who doesn’t love a new microphone?)',
             'alt' => 'Image with prices and savings.',
             'img' => 'marketing/singeo/membership/ascension/save-02.webp',
         ],
         [
             'position' => 'right',
-            'desc' => 'We know how hard it is to learn to sing. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you love for the next year.',
+            'desc' => 'We know how hard it is to learn to sing. After all, building new skills and forming habits takes a lot longer than a month. So this is the perfect time to set yourself up for success and invest in something that you <span class=italic>love</span> for the next year.',
             'alt' => 'Singeo singer, singing.',
             'img' => 'marketing/singeo/membership/ascension/save-01.webp',
         ]
