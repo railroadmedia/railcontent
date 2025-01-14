@@ -1,6 +1,6 @@
 <template>
     <!-- DESKTOP -->
-    <component :is="!isAward && ctaObj.url ? 'a' : 'div'" :href="ctaObj.url"  class="tw-hidden xl:tw-block tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-h-[272px] 3xl:tw-h-[295px] 4xl:tw-h-[330px] tw-py-4 2xl:tw-py-6 3xl:tw-py-5 tw-px-[30px] 2xl:tw-px-[35px] 3xl:tw-px-7" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
+    <component :is="!isAward && ctaObj.url ? 'a' : 'div'" :href="ctaObj.url"  class="tw-hidden xl:tw-block tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-h-[295px] 4xl:tw-h-[330px] tw-py-[37.5px] 2xl:tw-py-[27.5px] 3xl:tw-py-9 tw-px-[30px] 2xl:tw-px-[35px] 3xl:tw-px-7" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
         <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-top tw-rounded-[16px]" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${desktopBGImage}`" :alt="`${challenge.title}`">
         <!-- Background Overlay -->
         <div v-if="!isAward"  class="tw-absolute tw-inset-0 tw-backdrop-blur-sm tw-bg-[linear-gradient(270deg,_rgba(0,0,0,0.3)_30%,_rgba(0,0,0,0.5)_45.09%,_#000000_100%)] tw-z-[1]"></div>
@@ -36,9 +36,9 @@
                 </div>
                 <!-- Logo -->
                 <div>
-                    <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-max-h-[86px] 2xl:tw-max-h-[99px] 3xl:tw-max-h-[105px] 4xl:tw-max-h-[110px] tw-max-w-[180px] 2xl:tw-max-w-[240px] 3xl:tw-max-w-none tw-w-full tw-h-full tw-object-contain' : 'tw-mb-1 tw-h-[65px]'" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} logo`" />
+                    <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-max-h-[86px] 2xl:tw-max-h-[99px] 3xl:tw-max-h-[105px] 4xl:tw-max-h-[110px] tw-max-w-[180px] 2xl:tw-max-w-[240px] 3xl:tw-max-w-none tw-w-full tw-h-full tw-object-contain tw-object-left' : 'tw-mb-1 tw-h-[65px]'" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} logo`" />
                     <template v-if="isAward">
-                        <div class="tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white tw-mt-2">
+                        <div class="tw-text-xs 2xl:tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white tw-mt-2">
                             You practiced for a total of <b>{{ minutesPracticed }} minutes</b> and achieved a <b>{{ streak }}-day streak</b> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
                         </div>
                         <div class="tw-text-[#3F3F46] dark:tw-text-[#888888] tw-mb-3">
@@ -47,22 +47,22 @@
                     </template>
 
                     <template v-else-if="isCommunityChallenge">
-                        <div class="tw-my-2 tw-flex">
+                        <div class="tw-my-2 tw-flex xl:tw-hidden">
                             <!-- Avatars -->
                             <div v-for="(user, index) in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-2' : ''" :style="`background-image: url('${user.profile_picture_url}')`"></div>
                         </div>
-                        <p class="tw-text-sm tw-line-clamp-2 tw-mb-2">
+                        <p class="tw-text-xs 2xl:tw-text-sm tw-line-clamp-2 tw-mb-2">
                             Join <span class="tw-font-bold">{{ userNames }},</span> and <span class="tw-font-bold">{{ totalEnrolled }}</span> other {{ otherText }} who have already enrolled! Runs {{ durationText }}.
                         </p>
                     </template>
 
-                    <div v-else class="tw-text-sm tw-font-bold tw-mb-3 3xl:tw-mb-0 tw-flex tw-items-center tw-w-[200px]">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> <DifficultyLabel :difficulty-value="difficulty" /></div>
+                    <div v-else class="tw-text-xs 2xl:tw-text-sm tw-font-bold tw-mb-3 3xl:tw-mb-0 tw-flex tw-items-center tw-w-[200px]">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> <DifficultyLabel :difficulty-value="difficulty" /></div>
 
                 </div>
                 <!-- CTA -->
                 <p v-if="ctaObj.type === 'text'" class="tw-text-sm">{{ ctaObj.text }}</p>
-                <MuButton v-else :variant="ctaObj.type" :class="ctaObj.style" :is-link="ctaObj.url !== undefined" :href="ctaObj.url || ''" @click="ctaObj.action">
-                    <svg v-if="ctaObj.text === 'Learn More'" class="tw-w-5 tw-h-5 tw-mr-1 tw-hidden 3xl:tw-block" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <MuButton v-else :variant="ctaObj.type" :class="`${ctaObj.style} tw-text-sm 2xl:tw-text-base`" :is-link="ctaObj.url !== undefined" :href="ctaObj.url || ''" @click="ctaObj.action">
+                    <svg v-if="ctaObj.text === 'Enroll now'" class="tw-w-5 tw-h-5 tw-mr-1 tw-hidden 3xl:tw-block" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <i v-if="ctaObj.icon" :class="`${ctaObj?.icon} tw-mr-2`"></i>
@@ -70,8 +70,8 @@
                 </MuButton>
             </div>
             <!-- Right -->
-            <div class="tw-flex tw-justify-end" :class="!isAward ? 'tw-flex-1' : 'tw-grow tw-shrink-0'">
-                <div class=" tw-overflow-hidden tw-relative" :class="!isAward ? 'tw-aspect-square 3xl:tw-aspect-video tw-w-[212px] 2xl:tw-w-[225px] 3xl:tw-w-full tw-rounded-[5px]' : 'xl:tw-pr-4 3xl:tw-pr-8 xl:tw-w-[150px] 2xl:tw-w-[200px] 3xl:tw-w-[250px]'">
+            <div class="tw-flex tw-justify-end tw-h-full" :class="!isAward ? 'tw-flex-1' : 'tw-grow tw-shrink-0'">
+                <div class=" tw-overflow-hidden tw-relative" :class="!isAward ? 'tw-aspect-square 3xl:tw-aspect-video 3xl:tw-h-full tw-rounded-[5px] tw-h-full' : 'xl:tw-pr-4 3xl:tw-pr-8 xl:tw-w-[150px] 2xl:tw-w-[200px] 3xl:tw-w-[250px]'">
                     <img :class="!isAward ? 'tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0' : ''" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${thumbnail}`" :alt="`${challengeTitle} Thumbnail`" />
                 </div>
             </div>
@@ -110,7 +110,7 @@
         </div>
 
         <div class="tw-absolute tw-z-[2] tw-inset-0 tw-flex tw-items-end">
-            <div class="tw-flex tw-flex-col tw-items-center tw-pb-5 tw-px-4 tw-w-full tw-max-w-[320px] tw-mx-auto">
+            <div class="tw-flex tw-flex-col tw-items-center tw-pb-5 tw-px-4 tw-w-full tw-mx-auto">
                 <!-- Award -->
                 <img v-if="isAward" class="tw-h-[200px] tw-mb-4" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${thumbnail}`" :alt="`${challengeTitle} Award`" />
                 <!-- Logo -->
@@ -135,8 +135,8 @@
                 <div v-else class="tw-text-sm tw-font-bold tw-mb-5 tw-flex tw-items-center">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> <DifficultyLabel :difficulty-value="difficulty" /> </div>
                 <!-- CTA -->
                 <p v-if="ctaObj.type === 'text'" class="tw-text-sm tw-text-center">{{ ctaObj.text }}</p>
-                <MuButton v-else :variant="ctaObj.type" :class="`${ctaObj.style} tw-max-w-[320px] tw-w-full`" :is-link="ctaObj.url !== undefined" :href="ctaObj.url || ''" @click="ctaObj.action">
-                    <svg v-if="ctaObj.text === 'Learn More'" class="tw-w-4 tw-h-4 tw-mr-1" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <MuButton v-else :variant="ctaObj.type" :class="`${ctaObj.style} tw-w-full tw-text-sm`" :is-link="ctaObj.url !== undefined" :href="ctaObj.url || ''" @click="ctaObj.action">
+                    <svg v-if="ctaObj.text === 'Enroll now'" class="tw-w-4 tw-h-4 tw-mr-1" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     {{ ctaObj.text }}

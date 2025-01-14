@@ -1,6 +1,6 @@
 <template>
     <!-- Large Desktop -->
-    <div class="tw-hidden xl:tw-flex tw-justify-between tw-border tw-border-[#E0E0E1] dark:tw-border-[#081825] tw-rounded-[10px] tw-bg-white dark:tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-px-6 2xl:tw-px-12 tw-pb-5 tw-relative dark:tw-text-white tw-overflow-hidden tw-h-[272px] 3xl:tw-h-[295px] 4xl:tw-h-[330px]">
+    <div class="tw-hidden xl:tw-flex 2xl:tw-gap-2 3xl:tw-gap-0 tw-justify-between tw-border tw-border-[#E0E0E1] dark:tw-border-[#081825] tw-rounded-[10px] tw-bg-white dark:tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-px-6 2xl:tw-px-12 tw-pb-5 tw-relative dark:tw-text-white tw-overflow-hidden tw-h-[295px] 4xl:tw-h-[330px]">
         <!-- Ellipsis -->
         <div class="tw-absolute tw-top-1.5 2xl:tw-top-[10px] tw-right-1.5 2xl:tw-right-[10px] 3xl:tw-right-6">
             <div class="tw-relative">
@@ -22,18 +22,18 @@
             <img class="lg:tw-max-w-[200px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
             <img class="lg:tw-max-w-[240px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
             <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
-            <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url" class="tw-shrink-0">
+            <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url" class="tw-shrink-0 tw-text-sm 2xl:tw-text-base">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
                 {{ ctaObj?.text }}
             </MuButton>
         </div>
         <!-- Right -->
-        <div class="2xl:tw-flex-1 tw-relative tw-flex tw-items-center tw-justify-center 3xl:tw-justify-end 3xl:tw-mr-5">
+        <div class="2xl:tw-flex-1 tw-relative tw-flex tw-items-center tw-justify-center 3xl:tw-justify-end 3xl:tw-mr-5 4xl:tw-mr-8">
             <!-- Musora Logo -->
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
             <div class="tw-relative">
-                <div class="tw-rounded-[10px] tw-overflow-hidden tw-mb-5 tw-relative tw-max-w-[270px] 3xl:tw-max-w-none 3xl:tw-w-[255px] 4xl:tw-w-[320px] tw-mx-5 tw-aspect-video">
+                <div class="tw-rounded-[10px] tw-overflow-hidden tw-mb-5 tw-relative tw-aspect-video tw-w-[225px] 2xl:tw-w-[280px] 3xl:tw-w-[300px] 4xl:tw-w-[360px]">
                     <!-- Thumbnail (Video ratio) -->
                     <img class="tw-object-cover tw-object-top" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challengeThumbnail}`" />
                     <!-- Thumbnail (Square ratio) -->
@@ -145,7 +145,7 @@
             </div>
         </div>
         <div class="tw-flex tw-flex-col tw-w-full tw-px-2 tw-w-full tw-mx-auto">
-            <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url">
+            <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url" class="tw-text-sm">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
                 {{ ctaObj?.text }}
             </MuButton>
