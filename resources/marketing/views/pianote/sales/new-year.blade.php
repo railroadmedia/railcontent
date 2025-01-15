@@ -65,8 +65,8 @@
                     '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong class="text-pianote">BONUS</strong> 30-Day Blues Piano ($127 Value)',
                     '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong class="text-pianote">BONUS</strong> 30 Days to Better Technique ($127 Value)',
                     '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong class="text-pianote">BONUS</strong> Classical Piano Collection ($127 Value)',
-                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> No shipping. No VAT required.',
-                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> 90-Day Guarantee.',
+                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> No shipping, No VAT required',
+                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> 90-Day Guarantee',
             ],
 
                 // second deal
@@ -87,8 +87,8 @@
                     '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong class="text-pianote">BONUS</strong> <span class="text-pianote">Best Beginner Piano Book ($49 value)</span>',
                     '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong class="text-pianote">BONUS</strong> <span class="text-pianote">Practice Planner ($39 value)</span>',
                     '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong class="text-pianote">BONUS</strong> <span class="text-pianote">Chords & Scales Book ($39 value) </span>',
-                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> Free shipping in the U.S. and Canada.',
-                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> 90-Day Guarantee.',
+                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> Free shipping in the U.S. and Canada',
+                    '<i class="fa-solid fa-check pr-1 text-pianote"></i> 90-Day Guarantee',
             ],
         ])
                 <p class="text-sm mb-7">
