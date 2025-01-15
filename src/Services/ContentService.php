@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Services;
 
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ContentUserProgress;
-use App\Modules\Content\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
@@ -115,7 +114,6 @@ class ContentService
 
 
     /**
-     * @param User $user -
      * @param string $brand -
      * @param string $filter
      * @param int $pageSize -
@@ -123,8 +121,9 @@ class ContentService
      * @param bool $groupByForLessonsPage - if true and section not sent, group by all sections
      * @return ContentFilterResultsEntity -
      */
-    public function getRecommendedContent(User $user, string $brand, string $filter='', int $pageSize=6, int $page=1, bool $groupByForLessonsPage = false)
+    public function getRecommendedContent(string $brand, string $filter='', int $pageSize=6, int $page=1, bool $groupByForLessonsPage = false)
     {
+        $user = user();
         $userId = $user->id;
         $sections = match(strtolower($filter)) {
             'songs', 'song' => [RecommenderSection::Song],

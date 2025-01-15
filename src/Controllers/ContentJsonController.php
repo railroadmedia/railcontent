@@ -163,7 +163,6 @@ class ContentJsonController extends Controller
         $pageSize = $request->get('limit', $defaultPageSize);
         $page = $request->get('page', 1);
         $contentData = $this->contentService->getRecommendedContent(
-            user(),
             $brand,
             $filter,
             pageSize:$pageSize,
