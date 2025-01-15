@@ -306,8 +306,7 @@
         $gridItems = $pianote['gridItems'];
     @endphp
     @include('musora.sales.components.reason-cards-five-section', [
-        'header' => 'Your piano goals<br class="inline sm:hidden"> start here.',
-        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum and direct access to real teachers. ',
+        'subHeader' => true,
         'full' => true,
     ])
 
@@ -354,7 +353,7 @@
     @elseif(!empty($promoVersion))
         <section style="background:linear-gradient(30deg, #0a3761, #0c1526);">
         <div class="px-4 lg:px-8 py-10 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize relative overflow-hidden"
-                :style="`background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/2024/order-bg-tile-2.webp') center center/160px;`""        
+                :style="`background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/2024/order-bg-tile-2.webp') center center/160px;`""
                 <div class="container mx-auto max-w-5xl">
                     <div x-data="{lazyLoad: false}">
                         @php
