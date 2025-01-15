@@ -120,10 +120,10 @@ class ContentService
      * @param string $filter
      * @param int $pageSize -
      * @param int $page -
-     * @param array $groupByForLessonsPage - Which RecommenderSection to bundle in a groupby filter
+     * @param bool $groupByForLessonsPage - if true and section not sent, group by all sections
      * @return ContentFilterResultsEntity -
      */
-    public function getRecommendedContent(User $user, string $brand, string $filter='', int $pageSize=6, int $page=1, bool $groupByForLessonsPage = [])
+    public function getRecommendedContent(User $user, string $brand, string $filter='', int $pageSize=6, int $page=1, bool $groupByForLessonsPage = false)
     {
         $userId = $user->id;
         $sections = match(strtolower($filter)) {
