@@ -16,6 +16,7 @@ use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
@@ -113,16 +114,45 @@ class ContentService
 
 
     /**
-     * @param string|int $userId -
      * @param string $brand -
-     * @param array[RecommenderSection] $sections - sections to include in the result
+     * @param string $filter
      * @param int $pageSize -
      * @param int $page -
-     * @param array $groupByForLessonsPage - Which RecommenderSection to bundle in a groupby filter
+     * @param bool $groupByForLessonsPage - if true and section not sent, group by all sections
      * @return ContentFilterResultsEntity -
      */
-    public function getRecommendedContent(string|int $userId, string $brand, array $sections=[], int $pageSize=6, int $page=1, array $groupByForLessonsPage = [])
+    public function getRecommendedContent(string $brand, string $filter='', int $pageSize=6, int $page=1, bool $groupByForLessonsPage = false)
     {
+        $user = user();
+        $userId = $user->id;
+        $sections = match(strtolower($filter)) {
+            'songs', 'song' => [RecommenderSection::Song],
+            'lessons', 'lesson' => [RecommenderSection::QuickTip, RecommenderSection::Course],
+            'workouts', 'workout' => [RecommenderSection::Workout],
+            default => [],
+        };
+        if (!$sections && $groupByForLessonsPage) {
+            $groupBySections = [
+                'Songs You Might Like' => [RecommenderSection::Song],
+                'Lessons You Might Like' => [RecommenderSection::QuickTip, RecommenderSection::Course],
+                'Workouts You Might Like' => [RecommenderSection::Workout],
+            ];
+        } else {
+            $groupBySections = [];
+        }
+        if(!$user->hasSongsAccess($brand)) {
+            $groupBySections =
+                array_filter($groupBySections, function ($key) {
+                    return $key != 'Songs You Might Like';
+                },
+                    ARRAY_FILTER_USE_KEY);
+
+            $sections = array_values(
+                array_filter($sections, function ($section) {
+                    return $section->name != 'Song';
+                })
+            );
+        }
         $useFastImplementation = config('railcontent.recsys.use_fast_implementation');
         $useCaching = config('railcontent.recsys.use_caching');
 
@@ -177,9 +207,9 @@ class ContentService
             $pageSize,
             $page,
             $userId,
-            $groupByForLessonsPage
+            $groupBySections
         );
-        return $this->getContentFilterResultsFromRecommendations($processedRecommendations, $groupByForLessonsPage);
+        return $this->getContentFilterResultsFromRecommendations($processedRecommendations, $groupBySections);
     }
 
     /**

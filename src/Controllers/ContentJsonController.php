@@ -162,40 +162,12 @@ class ContentJsonController extends Controller
         $defaultPageSize = $filter ? 20 : 10;
         $pageSize = $request->get('limit', $defaultPageSize);
         $page = $request->get('page', 1);
-        $sections = match(strtolower($filter)) {
-            'songs', 'song' => [RecommenderSection::Song],
-            // everything but songs
-            'lessons', 'lesson' => array_filter(RecommenderSection::cases(), function($section) { return $section != RecommenderSection::Song;}),
-            default => [],
-        };
-        if (!$sections) {
-            $groupBySections = [
-                'Songs You Might Like' => [RecommenderSection::Song],
-                'Lessons You Might Like' => array_filter(RecommenderSection::cases(), function($section) { return $section != RecommenderSection::Song;})
-            ];
-        } else {
-            $groupBySections = [];
-        }
-        if(!\user()->hasSongsAccess(brand())) {
-            $groupBySections =
-                array_filter($groupBySections, function ($key) {
-                    return $key != 'Songs You Might Like';
-                },
-                    ARRAY_FILTER_USE_KEY);
-
-            $sections = array_values(
-                array_filter($sections, function ($section) {
-                    return $section->name != 'Song';
-                })
-            );
-        }
         $contentData = $this->contentService->getRecommendedContent(
-            user()->id,
             $brand,
-            sections: $sections,
+            $filter,
             pageSize:$pageSize,
             page:$page,
-            groupByForLessonsPage: $groupBySections
+            groupByForLessonsPage: true,
         );
 
         return reply()->json($contentData['results'], [
