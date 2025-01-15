@@ -156,11 +156,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 axios.post(form.action, formData)
                     .then(response => {
                         if (response.status === 201) {
-                            dataLayer.push({
-                                "event": "gtm.formSubmit",
-                                "formId": "{{ $cleanFormId }}",
-                                "formSuccess": true
-                            });
+
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                            'event': "gtm.formSubmit",
+                            'formId': formId,
+                            'success': true
+                        });
                             form.classList.add('hidden');
 
                         const modalCloseIcon = document.querySelector('.modal-close');
