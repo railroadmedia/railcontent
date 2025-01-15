@@ -215,15 +215,22 @@ const startDate = computed(() => {
 })
 
 const actionText = computed(() => {
-    if(hasMissedLessons.value){
-        return `Complete ${missedLessons.value} lesson${missedLessons.value > 1 ? 's' : ''} to ${restDays.value > 0 ? 'maintain your' : 'start a new'}  streak!`;
-    } else if(!hasChallengeStarted.value){
+    if(!hasChallengeStarted.value){
         return `You're enrolled! Lessons begin ${startDate.value}`;
-    } else if(isNextLessonLocked.value){
-        return `${nextLessonFullName.value} unlocks in ${countdownString.value}`;
-    } else {
-        return `${nextLessonFullName.value} Unlocked!`;
     }
+
+    if(hasMissedLessons.value){
+        const lessonText = missedLessons.value > 1 ? 'lessons' : 'lesson';
+        const streakText = restDays.value > 0 ? 'maintain your' : 'start a new';
+        return `Complete ${missedLessons.value} ${lessonText} to ${streakText} streak!`;
+    }
+
+    if(isNextLessonLocked.value){
+        return `${nextLessonFullName.value} unlocks in ${countdownString.value}`;
+    }
+
+    return `${nextLessonFullName.value} Unlocked!`;
+
 })
 
 const showSquareThumbnail = computed(() => {
@@ -271,34 +278,41 @@ const missedLessons = computed(() => {
 })
 
 const ctaObj = computed(() => {
-    const obj = {};
-
     if(hasMissedLessons.value){
-        obj.text = 'Catch up now';
-        obj.url = props.challenge.next_lesson.web_url_path;
-        obj.icon = 'fas fa-play tw-mt-0.5';
-        obj.iconLocation = 'left';
-
-    } else if(isNextLessonLocked.value){
-        if(!hasChallengeStarted.value){
-            obj.text = 'View Challenge';
-            obj.url = props.challenge.web_url_path;
-            obj.icon = 'fa-solid fa-arrow-right-long';
-             obj.iconLocation = 'right';
-        } else {
-            obj.text = `Repeat ${props.challenge.previous_completed_lesson?.short_name}`;
-            obj.url = props.challenge.previous_completed_lesson?.web_url_path;
-            obj.icon = 'fas fas fa-redo-alt';
-            obj.iconLocation = 'left';
+        return {
+            text: 'Catch up now',
+            url: props.challenge.next_lesson.web_url_path,
+            icon: 'fas fa-play tw-mt-0.5',
+            iconLocation: 'left',
         }
-    } else {
-        obj.text = `Start ${nextLessonShortName.value}`;
-        obj.url = props.challenge.next_lesson.web_url_path;
-        obj.icon = 'fas fa-play tw-mt-0.5';
-        obj.iconLocation = 'left';
+
     }
 
-    return obj;
+    if(isNextLessonLocked.value){
+        if(!hasChallengeStarted.value){
+            return {
+                text: 'View Challenge',
+                url: props.challenge.web_url_path,
+                icon: 'fa-solid fa-arrow-right-long',
+                iconLocation: 'right',
+            }
+
+        } else {
+            return {
+                text: `Repeat ${props.challenge.previous_completed_lesson?.short_name}`,
+                url: props.challenge.previous_completed_lesson?.web_url_path,
+                icon: 'fas fas fa-redo-alt',
+                iconLocation: 'left',
+            }
+        }
+    }
+
+    return {
+        text: `Start ${nextLessonShortName.value}`,
+        url: props.challenge.next_lesson.web_url_path,
+        icon: 'fas fa-play tw-mt-0.5',
+        iconLocation: 'left',
+    }
 })
 
 const reFetchData = async () => {
