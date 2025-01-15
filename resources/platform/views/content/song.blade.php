@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>{{ $lessonContent->fetch('fields.title') }} | Musora</title>
+    <title>{{ $lessonContent['title'] }} | Musora</title>
 @endsection
 
 @section('content')
