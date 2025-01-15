@@ -21,7 +21,7 @@
             <!-- Challenge Logo -->
             <img class="lg:tw-max-w-[200px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
             <img class="lg:tw-max-w-[240px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
-            <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
+            <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5">{{ actionText }}</div>
             <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url" class="tw-shrink-0">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
                 {{ ctaObj?.text }}
@@ -216,7 +216,7 @@ const startDate = computed(() => {
 
 const actionText = computed(() => {
     if(hasMissedLessons.value){
-        return `You've missed ${missedLessons.value} lesson${missedLessons.value > 1 ? 's' : ''}.`;
+        return `Complete ${missedLessons.value} lesson${missedLessons.value > 1 ? 's' : ''} to ${restDays.value > 0 ? 'maintain your' : 'start a new'}  streak!`;
     } else if(!hasChallengeStarted.value){
         return `You're enrolled! Lessons begin ${startDate.value}`;
     } else if(isNextLessonLocked.value){
@@ -273,7 +273,13 @@ const missedLessons = computed(() => {
 const ctaObj = computed(() => {
     const obj = {};
 
-    if(isNextLessonLocked.value){
+    if(hasMissedLessons.value){
+        obj.text = 'Catch up now';
+        obj.url = props.challenge.next_lesson.web_url_path;
+        obj.icon = 'fas fa-play tw-mt-0.5';
+        obj.iconLocation = 'left';
+
+    } else if(isNextLessonLocked.value){
         if(!hasChallengeStarted.value){
             obj.text = 'View Challenge';
             obj.url = props.challenge.web_url_path;
