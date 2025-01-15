@@ -19,9 +19,9 @@
         </div>
         <div class="tw-flex tw-items-center tw-relative tw-z-[2] tw-h-full" :class="!isAward ? 'tw-gap-4 2xl:tw-gap-2' : 'tw-gap-8'">
             <!-- Left -->
-            <div class="tw-flex tw-flex-col tw-justify-center 3xl:tw-justify-between tw-items-start" :class="!isAward ? 'tw-flex-1 3xl:tw-self-stretch' : ''">
+            <div class="tw-flex tw-flex-col tw-justify-between tw-items-start tw-h-full" :class="!isAward ? 'tw-flex-1 3xl:tw-self-stretch' : ''">
                 <!-- Challenge Type Label -->
-                <div v-if="!isAward" class="tw-bg-[#374151] tw-rounded-[6px] tw-px-2 tw-py-1 tw-flex tw-text-[11px] tw-uppercase tw-font-bold tw-items-center tw-mb-2">
+                <div v-if="!isAward" class="tw-bg-[#374151] tw-rounded-[6px] tw-px-2 tw-py-1 tw-flex tw-text-[11px] tw-uppercase tw-font-bold tw-items-center">
                     <svg v-if="isCommunityChallenge" class="tw-w-4 tw-h-4 tw-mr-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.8031 5.38681C11.8031 6.78052 10.6733 7.91034 9.27957 7.91034C7.88587 7.91034 6.75604 6.78052 6.75604 5.38681C6.75604 3.9931 7.88587 2.86328 9.27957 2.86328C10.6733 2.86328 11.8031 3.9931 11.8031 5.38681Z" fill="#D1D5DB"/>
                         <path d="M16.009 7.06916C16.009 7.9983 15.2558 8.75152 14.3266 8.75152C13.3975 8.75152 12.6443 7.9983 12.6443 7.06916C12.6443 6.14003 13.3975 5.38681 14.3266 5.38681C15.2558 5.38681 16.009 6.14003 16.009 7.06916Z" fill="#D1D5DB"/>
