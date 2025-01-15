@@ -15,7 +15,7 @@ $this->load(app_path('Modules/Content/Console/Commands'));
 $this->load(app_path('Modules/EventTracking/Console/Commands'));
 
 //All times are in UTC
-//Schedule::command('ProcessTrackings')->everyMinute();
+Schedule::command('ProcessTrackings 5000')->everyMinute();
 
 Schedule::command('forums:rebuildSearchIndexes')->hourly();
 
