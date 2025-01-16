@@ -228,7 +228,7 @@
                     <h1 class="relative w-auto leading-tight">
                         A digital piano  <br class="block sm:hidden"><u style="text-decoration-color: #F61A30;"><strong>made for beginners</strong></u>.
                     </h1>
-                    <h4 class="relative w-auto leading-tight mt-3 mb-4 sm:mb-6">Everything you need in a first piano,  <br class="block sm:hidden">without the expensive price tag.</h4>
+                    <h5 class="relative w-auto leading-tight mt-3 mb-4 sm:mb-6">Everything you need in a first piano,  <br class="block sm:hidden">without the expensive price tag.</h5>
                     <h2 class="leading-tight inline-block">Only <span class="relative inline-block leading-none text-gray-300"><strong>$599</strong><img class="absolute z-10 inset-0 object-cover mt-2" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/v2/strike.png"> </span> </h2>
                     <h1 class="leading-tight mt-6 inline-block"><strong> $449</strong></h1>
                 <h6 class="leading-tight mt-1 mb-7 sm:mb-10"><em>Free worldwide shipping.</em></h6>
@@ -253,20 +253,22 @@
             src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/header.mp4"></video>
     </header>
 
-    <section class="py-12 lg:py-20 px-4 sm:px-6 lg:px-10 text-center" style="background:#f1efed;">
+    <section class="py-12 lg:py-16 px-4 sm:px-6 lg:px-10 text-center" style="background:#f1efed;">
         <div class="max-w-5xl mx-auto flex flex-col-reverse md:flex-row items-center md:gap-8 pt-6">
-            <div class="w-full lg:w-7/12 text-left lg:px-6 leading-normal">
-                <h2 class="leading-tight mb-2"><strong>Your <span class="text-pianote">perfect</span> first piano.</strong></h2>
-                <p class="mb-6">Choosing your first piano can be overwhelming. So we’ve made it simple.</p>
+            <div class="w-full sm:w-2/3 lg:w-7/12 text-left lg:px-6 leading-normal">
+                <h2 class="leading-tight mb-2 hidden sm:inline-block"><strong>Your <span class="text-pianote">perfect</span> first piano.</strong></h2>
+                <p class="hidden sm:inline-block">Choosing your first piano can be overwhelming. So we’ve made it simple.</p>
 
-                <p class="mb-4 border-l-4 border-pianote pl-4">The Pianote Prima is a full-size 88-key piano that feels and sounds like a real piano.</p>
+                <p class="mt-4 sm:mt-6 mb-4 border-l-4 border-pianote pl-4">The Pianote Prima is a full-size 88-key piano that feels and sounds like a real piano.</p>
                 <p class="mb-4 border-l-4 border-pianote pl-4">It has everything you need in a beginner instrument including beautiful sounds, stereo speakers, and Bluetooth.</p>
                 <p class="mb-6 border-l-4 border-pianote pl-4">But we’ve left out all the “extras” that only increase complexity and drive up the price.</p>
 
                 <p>That’s what makes it the <strong>best</strong> beginner digital piano.</p>
             </div>
 
-            <div class="flex-shrink-0 w-full sm:w-10/12 lg:w-5/12 flex justify-center items-center md:py-6">
+            <div class="flex-shrink-0 w-full sm:w-1/3 lg:w-5/12 flex flex-wrap justify-center items-center md:py-6">
+                <h2 class="leading-tight mb-2 inline-block sm:hidden"><strong>Your <span class="text-pianote">perfect</span> first piano.</strong></h2>
+                <p class="mb-6 inline-block sm:hidden">Choosing your first piano can be overwhelming. So we’ve made it simple.</p>
                 <img
                     src="https://d21q7xesnoiieh.cloudfront.net/1100x0/filters:quality(95)/marketing/pianote/products/prima/v2/playing-keyboard.jpg"
                     alt="Laptop Preview"
@@ -276,15 +278,16 @@
         </div>
     </section>
 
-    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background: #FFF;"
-    >
+    <section class="text-center sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background: #FFF;">
         <div class="container mx-auto z-10 relative max-w-5xl">
-            <h2 class="leading-tight mb-7 sm:mb-12">Premium Features. <strong>Beginner Price.</strong></h2>
-            <img
-                src="https://d21q7xesnoiieh.cloudfront.net/2050x0/filters:quality(95)/marketing/pianote/products/prima/v2/arrows.png"
-                alt="Laptop Preview"
-                class="w-full h-auto mb-5"
-            >
+            <h2 class="leading-tight mb-7 sm:mb-12">Premium Features. <br class="sm:hidden"><strong>Beginner Price.</strong></h2>
+
+            <picture>
+                <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/2050x0/filters:quality(95)/marketing/pianote/products/prima/v2/arrows.png">
+                <img class="transition-opacity opacity-0 w-full h-auto mb-5" alt="icon" loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/850x0/filters:quality(95)/marketing/pianote/products/prima/v2/arrows-m.png">
+            </picture>
             @php
                 $items = [
                     [
@@ -316,7 +319,7 @@
                 ];
             @endphp
            @foreach ($items as $index => $item)
-            <div class="text-left flex flex-col sm:flex-row justify-center items-center md:py-10">
+            <div class="px-5 sm:px-0 text-left flex flex-col sm:flex-row justify-center items-center md:py-10">
                 @if ($index % 2 == 0)
                     <video class="w-full sm:w-6/12 lg:w-1/2 rounded-xl order-1 sm:order-1" src="{{ $item['video'] }}" type="video/mp4" autoplay muted loop>
                     </video>
@@ -333,15 +336,16 @@
                 </div>
             </div>
             @endforeach
+            <div class="px-5 sm:px-0">
             <a href="#customize-anchor" class="join smaller w-full sm:w-5/12 mx-auto mt-6 sm:mt-10 anchor-slide">Start Playing</a>
-
+            </div>
         </div>
     </section>
 
     <section class="py-12 lg:py-20 px-4 sm:px-6 lg:px-10 text-center text-white" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/prima/v2/chart-bg.jpg');" x-data="{ tableClass: 'roland' }">
         <div class="container mx-auto max-w-6xl">
             <h2 class="leading-tight">How does the <strong>Pianote Prima</strong> stack up?</h2>
-            <p class="leading-tight mb-12 mt-3 sm:mt-5 sm:mb-12">Add the essential practice tools you need for the ultimate home practice space.</p>
+            <p class="leading-tight mb-12 mt-3 sm:mt-5 sm:mb-12">Compare the Pianote Prima to other popular beginner pianos.</p>
             <div class="relative">
                 <p class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower pt-2"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <div class="overflow-hidden rounded-xl">
@@ -483,7 +487,7 @@
     </section>
 
     <div id="customize-anchor" class="anchor"></div>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16" style="background-color:#F4F8FB;">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16 bg-cover" style="background-color:#efedee;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/prima/v2/order-bg.jpg');">
         <div class="container mx-auto relative z-10 max-w-6xl">
             <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8 lifetime-card">
                 @include('drumeo.products.partials._order-card', [
@@ -545,7 +549,7 @@
                     'threeWide' => true,
                    'firstOnMobile' => true,
                    'header' => 'get it ALL',
-                   'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/prima/order-02.webp',
+                   'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/prima/v2/all-bundle.png',
                    'imageHeight' => 'h-24 lg:h-16',
                     'fullPrice' => "$848",
                     'price' => "$649",
