@@ -39,7 +39,7 @@
         .splide__arrow svg {
             fill: #f61a30 !important;
         }
-        
+
         .splide__slide.is-active .active-bg {
             background-color:#1B2434!important;
             color:#fff!important;
@@ -65,8 +65,7 @@
         'ascension' => true,
         'noSubHeader' => true,
         'noTrailer' => true,
-        'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/header.mp4',
-        'videoM' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/header-m.mp4',
+                'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/header.mp4',
         'header' => 'SAVE <u style="text-decoration-color: #f61a30;">$300</u> COMPARED TO<br class="hidden sm:inline"> A MONTHLY MEMBERSHIP',
         'pointOne' => 'Song Breakdowns',
         'pointTwo' => 'Unlimited Piano Lessons',
@@ -91,7 +90,7 @@
                     ],
                 ],
     ])
-    
+
    @php
     $heading = 'Save on your lessons & spend <br class="hidden sm:block">more time playing.';
     $subheading = 'A Monthly Membership is great when you’re testing the waters for the first time. But if you love playing piano and want all the amazing benefits of a Pianote Membership for a lower price… an Annual plan is the best option.';
@@ -188,7 +187,7 @@
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
     ])
-    
+
     @include('musora.sales.components.guarantee-section', [
             'badge' => 'marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp',
             'header' => '<strong>Happy Student Guarantee</strong><br>Test-drive your lessons for 90 days. Zero risk.',
@@ -237,7 +236,7 @@
                 "desc" => "Yes! An Annual Membership is the best option for beginners if you plan on learning the piano for more than 4 months. It means you'll have access to unlimited lessons for a whole year, PLUS you'll save 62% compared to a monthly plan."
             ],
             [
-                "title" => "How much does an Annual Membership cost when it renews?", 
+                "title" => "How much does an Annual Membership cost when it renews?",
                 "desc" => "After your first year, an Annual Membership will cost $240 per year, which is still 50% less than what you would pay with a monthly Pianote Membership."
             ],
             [

@@ -103,8 +103,8 @@
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: hsl(218deg 50% 5% / 70%);"></div>
         @if(!empty($video))
             @if(!empty($videoM))
-                <video class="sm:hidden block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $video }}"></video>
-                <video class="hidden sm:block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $videoM }}"></video>
+                <video class="sm:hidden block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $videoM }}"></video>
+                <video class="hidden sm:block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $video }}"></video>
             @else
                 <video class="object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $video }}"></video>
             @endif
