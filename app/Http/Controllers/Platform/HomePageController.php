@@ -38,6 +38,7 @@ use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Railroad\Railcontent\Enums\RecommenderSection;
 
 class HomePageController extends BaseController
 {
@@ -124,9 +125,11 @@ class HomePageController extends BaseController
         ContentRepository::$pullFutureContent = false;
 
         $hotForumTopics = $this->getHotForumTopics();
-
+        $forYouExperiment = boolval(FeatureFlagging::accessible('for-you-experiment', user()));
         if (FeatureFlagging::accessible('recsys', user())) {
-            $recommendedContent = $this->getAllRecommendations();
+            $recommendedContent = $forYouExperiment ?
+                $this->getGroupedRecommendations() :
+                $this->getAllRecommendations();
         } else {
             $recommendedContent = new ContentFilterResultsEntity([]);
         }
@@ -157,18 +160,6 @@ class HomePageController extends BaseController
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
         $currentEvent = $this->liveStreamEventService->getCurrentOrNextLiveEvent();
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
-
-        $collectionForDecoration = new RailcontentCollection();
-        $collectionForDecoration = $collectionForDecoration->merge([$methodContent]);
-        if (!empty($currentEvent)) {
-            $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
-        }
-        $collectionForDecoration = $collectionForDecoration->merge($recommendedContent->results());
-        $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
-
-        Decorator::$typeDecoratorsEnabled = true;
-        $collectionForDecoration = $collectionForDecoration->filter();
-        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         $hasGear = count(
             user()->onboardingGear->filter(function ($item) {
@@ -273,18 +264,18 @@ class HomePageController extends BaseController
             "hasGear" => $hasGear,
             "hasGenres" => $hasGenres,
             "hasGoals" => $hasGoals,
-            "hasRecommendations" => count($recommendedContent->results()) > 0,
             "hasStartedLessons" => count($followedLessons->results()) > 0,
             "hasTopics" => $hasTopics,
             "hotForumTopics" => $hotForumTopics,
             "nextLearningPathProgressPercent" => $nextLearningPathProgressPercent,
-            "recommendedContentJson" => $recommendedContent->toResponseRawJson(),
+            "recommendedContent" => $forYouExperiment ? json_encode($recommendedContent) : $recommendedContent->toResponseRawJson(),
             "themeColor" => $themeColor,
             "timeCutoffMinutes" => LiveStreamEventService::NOT_LIVE_PAGE_SWITCH_MINUTES,
             "userMetrics" => $userMetrics,
             "isFirstAccess" => user()->isFirstAccess(),
             "homepageV2" => boolval(FeatureFlagging::branch('homepage-v2', user())),
             "exploreTasks" => $userTasks,
+            "forYouExperiment" => $forYouExperiment,
         ]);
     }
 
@@ -486,10 +477,47 @@ class HomePageController extends BaseController
     private function getAllRecommendations(): ContentFilterResultsEntity
     {
         return $this->contentService->getRecommendedContent(
-            user()->id,
             brand(),
             pageSize: self::RECSYS_CONTENT_COUNT,
         );
+    }
+
+    private function getGroupedRecommendations(): array
+    {
+        $grouped = $this->contentService->getRecommendedContent(
+            brand(),
+            '',
+            groupByForLessonsPage: true,
+            pageSize: self::RECSYS_CONTENT_COUNT,
+        );
+
+        $groupedResults = $grouped->results()->toArray();
+
+        $groupedAndFormattedResults = [];
+        $toMerge = [];
+        foreach ($groupedResults as $entity) {
+            $lessons = $entity['lessons'];
+            $groupedAndFormattedResults[$entity['id']] = $lessons;
+            $toMerge[] = $lessons;
+        }
+        $tabs = [];
+        foreach ($groupedAndFormattedResults as $key => $data) {
+            $shortName = explode(' ', $key)[0];
+            $tabs[] = [
+                'value' => $shortName,
+                'key' => $key,
+                'groupByView' => false,
+                'required' => false,
+            ];
+        }
+        $all = zipperMerge($toMerge);
+        $groupedAndFormattedResults['all'] = $all;
+
+
+        return [
+            "data" => $groupedAndFormattedResults,
+            "tabs" => $tabs,
+        ];
     }
 
     private function getNewContents(): ContentFilterResultsEntity

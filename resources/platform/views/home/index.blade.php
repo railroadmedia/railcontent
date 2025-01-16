@@ -4,6 +4,10 @@
     <title>{{ ucfirst($brand) }} Home | Musora</title>
 @endsection
 
+@php
+    //dd($recommendedContent);
+@endphp
+
 @section('content')
     {{-- MERGING NOTES: When merging this with sanity branch, manually merge HomeV2.vue changes into Home.vue component --}}
     <home
@@ -24,7 +28,7 @@
         :is-a-member="{{ user()->isAMember() ? 'true' : 'false' }}"
         next-learning-path-level="{{ user()->getMethodLevel() }}"
         :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
-        :recommended-content="{{ $recommendedContentJson }}"
+        :recommended-content="{{ $recommendedContent }}"
         recommended-content-url="{{ url()->route('platform.recommended-lessons') }}"
         :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
         :user-metrics="{{ json_encode($userMetrics) }}"
@@ -32,6 +36,7 @@
         :is-first-access="{{ $isFirstAccess ? 'true' : 'false' }}"
         :explore-tasks="{{ json_encode($exploreTasks) }}"
         :is-v2-user="{{ json_encode($homepageV2) }}"
+        :for-you-experiment="{{ json_encode($forYouExperiment) }}"
     ></home>
 
 @include('partials._railanalytics-brand-tracking-iframe')
