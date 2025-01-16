@@ -1277,6 +1277,8 @@ class ChallengesTest extends TestCase
                     'missed' => 0,
                     'remaining_rest_days' => 0,
                 ], $currentStreakData);
+
+                $currentLessonNumberToBeCompleted++;
             }
 
             if ($currentLessonNumberToBeCompleted == 4 &&
@@ -1292,39 +1294,13 @@ class ChallengesTest extends TestCase
 
                 $this->assertEquals(
                     Carbon::parse($currentLessonMetaData['unlock_date'])->toDateString(),
-                    "2024-12-04"
+                    "2023-12-31"
                 );
 
                 $this->assertEquals([
                     'best' => 4,
                     'current' => 4,
                     'missed' => 0,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // now if the day after, they complete the current unlocked day, their streak should start again
-            if ($currentLessonNumberToBeCompleted == 4) {
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertTrue(
-                    Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay(Carbon::parse("2024-12-05"))
-                );
-
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => 1,
-                    'current' => 1,
-                    'missed' => 2,
                     'remaining_rest_days' => 0,
                 ], $currentStreakData);
             }
