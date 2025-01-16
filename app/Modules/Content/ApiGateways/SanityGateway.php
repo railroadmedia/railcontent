@@ -610,6 +610,8 @@ class SanityGateway
                 is_solo,
                 published_on,
                 status,
+                'type': _type,
+                'permission_id': permission[]->railcontent_id,
                 'next_lesson': child[0]->{
                     $fieldsString
                 }
@@ -618,6 +620,7 @@ class SanityGateway
         if ($document) {
             $document['dropdown'] = $document['dropdown'] ?? [];
         }
+        $this->postProcessDocument($document);
         return $document;
     }
 
