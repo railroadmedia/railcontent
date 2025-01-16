@@ -13,19 +13,27 @@
                 onload="this.classList.remove('opacity-0')"
                 alt="card image"
             >
-            <h2 class="leading-tight mt-2">
-                @if(!empty($fullPrice)) @if($fullPrice > $price) <s class="opacity-60 mr-1">{{$fullPrice}}</s> @endif @endif
+            <h4 class="leading-tight mt-2">
+                @if(!empty($fullPrice))
+                    @if($fullPrice > $price)
+                        @if(!empty($customStrike))
+                            <span class="relative inline-block leading-none">{{$fullPrice}}<img class="absolute z-10 inset-0 object-cover mt-1" src="https://d21q7xesnoiieh.cloudfront.net/110x0/filters:quality(95)/marketing/pianote/products/prima/v2/strike.png"></span>
+                        @else
+                            <s class="opacity-60 mr-1">{{$fullPrice}}</s>
+                        @endif
+                    @endif
+                @endif
                 <strong>{!! $price !!}</strong>
-            </h2>
-            @if(!empty($specialText)) <p class="text-sm mb-5"><em>{!! $specialText !!}</em></p> @endif
+            </h4>
+            @if(!empty($specialText)) <p class="text-sm mt-2 mb-5"><em>{!! $specialText !!}</em></p> @endif
             <span class="join @if(!empty($highlightBorder)) {{ $theme }} @else musora-black @endif smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"
                 role="button" tabindex="0" aria-label="{{ $cta }}"> {{$cta}} </span>
         </div>
         @if(!empty($bonuses))
             <div class="px-4 lg:px-6 pb-7 bg-white">
-                <div class="text-center inline-block mx-auto">
+                <div class="inline-block text-left mx-0">
                     @foreach($bonuses as $bonus)
-                        <p class="text-left w-auto leading-tight text-sm mb-1.5">{!! $bonus !!}</p>
+                        <p class="text-xs inline-block text-left w-auto mx-0 leading-tight">{!! $bonus !!}</p><br>
                     @endforeach
 
                 </div>
