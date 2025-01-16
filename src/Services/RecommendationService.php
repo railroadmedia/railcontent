@@ -31,8 +31,6 @@ class RecommendationService
     ) {
         $this->defaultAccessMethod = AccessMethod::from(env('RECSYS_ACCESS_METHOD', 'DB'));
         $this->invalidConfigurations = [
-            'pianote' => [RecommenderSection::Course],
-            'singeo' => [RecommenderSection::Course],
         ];
     }
 

@@ -129,6 +129,7 @@ class ContentService
             'songs', 'song' => [RecommenderSection::Song],
             'lessons', 'lesson' => [RecommenderSection::QuickTip, RecommenderSection::Course],
             'workouts', 'workout' => [RecommenderSection::Workout],
+            'quick_tips', 'quick_tip', 'quick-tips', 'quick-tip' => [RecommenderSection::QuickTip],
             default => [],
         };
         if (!$sections && $groupByForLessonsPage) {
