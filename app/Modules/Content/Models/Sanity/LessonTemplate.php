@@ -13,6 +13,7 @@ use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
+use Modules\Content\Models\Sanity\Structure\ListArrayElement;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 use Modules\Content\Models\Sanity\Structure\ParentTypeField;
 use Modules\Content\Models\Sanity\Structure\StatusField;
@@ -167,7 +168,8 @@ abstract class LessonTemplate extends BaseSanityModel
                 fields: [new Field(FieldType::String, 'assignment_title', validation: [new Required()]),
                             new Field(FieldType::String, 'assignment_soundslice'),
                             new Field(FieldType::String, 'assignment_description'),
-                            new Field(FieldType::Array, 'assignment_sheet_music_image', title:'Assignment sheet music image:', of: self::ASSIGNMENT_SHEET_MUSIC_IMAGE_FIELD_TYPE),
+                            new Field(FieldType::Array, 'assignment_sheet_music_image', title:'Assignment sheet music image(imported):', of: new ListArrayElement()),
+                            new Field(FieldType::Array, 'assignment_sheet_music_image_new', title:'Assignment sheet music image:', of: self::ASSIGNMENT_SHEET_MUSIC_IMAGE_FIELD_TYPE),
                             new Field(FieldType::Number, 'assignment_timecode', description: 'Time in seconds'),
                             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
                         ]
