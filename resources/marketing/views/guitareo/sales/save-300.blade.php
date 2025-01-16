@@ -105,14 +105,14 @@
             "image" => "marketing/guitareo/membership/ascension/be-first-to-know.webp",
             "imageM" => "marketing/guitareo/membership/ascension/be-first-to-know-m.webp",
             "title" => "Be First To Know",
-            "desc" => "Get free access to all our latest drum challenges.",
+            "desc" => "Get free access to all our latest guitar challenges.",
         ],
         [
             "big" => true,
             "image" => "marketing/guitareo/membership/ascension/lifetime-bonuses.webp",
             "imageM" => "marketing/guitareo/membership/ascension/lifetime-bonuses-m.webp",
             "title" => "Lifetime Bonuses",
-            "desc" => "Keep two of our most popular challenges forever.",
+            "desc" => 'Keep one of our most popular challenges <span class="italic">forever.</span>',
         ],
         [
             "image" => "marketing/drumeo/membership/ascension/24-7-support.webp",
@@ -125,7 +125,7 @@
             'image' => 'marketing/drumeo/membership/ascension/learn-new.webp',
             'imageM' => 'marketing/drumeo/membership/ascension/learn-new-m.webp',
             'title' => 'Learn New Instruments',
-            'desc' => 'Taking a break from drums? Try Piano, Guitar, or Singing lessons anytime.',
+            'desc' => 'Taking a break from the guitar? Try Drums, Piano, or Singing lessons anytime.',
         ],
     ];
     @endphp

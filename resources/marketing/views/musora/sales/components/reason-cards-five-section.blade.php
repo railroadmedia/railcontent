@@ -40,7 +40,7 @@
 {{--                                <h5 class="rounded-full border-2 border-{{ $theme }} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>@if($theme == 'musora'){{ $key + 2 }}@else{{ $key + 1 }}@endif</strong></h5>--}}
                                 <div {{--class="pl-3"--}}>
                                     <h5 class="leading-tight"><strong>{{ $gridItem['title'] }}</strong></h5>
-                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{{ $gridItem['desc'] }}</p>
+                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{!! $gridItem['desc'] !!}</p>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
 {{--                                    <h5 class="rounded-full border-2 border-{{ $theme }} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>@if($theme == 'musora'){{ $key + 2 }}@else{{ $key + 1 }}@endif</strong></h5>--}}
                                     <div {{--class="pl-3"--}}>
                                         <h5 class="leading-tight"><strong>{{ $gridItem['title'] }}</strong></h5>
-                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{{ $gridItem['desc'] }}</p>
+                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{!! $gridItem['desc'] !!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
 {{--                                    <h5 class="rounded-full border-2 border-{{ $theme }} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>7</strong></h5>--}}
                                     <div {{--class="pl-3"--}}>
                                         <h5 class="leading-tight"><strong>{{ $gridItem['title'] }}</strong></h5>
-                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{{ $gridItem['desc'] }}</p>
+                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{!! $gridItem['desc'] !!}</p>
                                     </div>
                                 </div>
                             </div>

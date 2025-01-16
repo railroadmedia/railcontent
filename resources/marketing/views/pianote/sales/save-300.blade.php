@@ -124,14 +124,14 @@
             "image" => "marketing/pianote/membership/ascension/be-first-to-know.webp",
             "imageM" => "marketing/pianote/membership/ascension/be-first-to-know-m.webp",
             "title" => "Be First To Know",
-            "desc" => "Get free access to all our latest drum challenges.",
+            "desc" => "Get free access to all our latest piano challenges.",
         ],
         [
             "big" => true,
             "image" => "marketing/pianote/membership/ascension/lifetime-bonuses.webp",
             "imageM" => "marketing/pianote/membership/ascension/lifetime-bonuses-m.webp",
             "title" => "Lifetime Bonuses",
-            "desc" => "Keep two of our most popular challenges forever.",
+            "desc" => 'Keep two of our most popular challenges <span class="italic">forever.</span>',
         ],
         [
             "image" => "marketing/drumeo/membership/ascension/24-7-support.webp",
@@ -144,7 +144,7 @@
             'image' => 'marketing/drumeo/membership/ascension/learn-new.webp',
             'imageM' => 'marketing/drumeo/membership/ascension/learn-new-m.webp',
             'title' => 'Learn New Instruments',
-            'desc' => 'Taking a break from drums? Try Piano, Guitar, or Singing lessons anytime.',
+            'desc' => 'Taking a break from the piano? Try Drums, Guitar, or Singing lessons anytime.',
         ],
     ];
     @endphp
@@ -286,7 +286,7 @@
         </div>
     </section>
 
-    @include("drumeo.sales.partials._footer", [
+    @include("pianote.sales.partials._footer", [
         "minimal" => true
     ])
 
