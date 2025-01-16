@@ -318,7 +318,7 @@ const headerCtas = computed(() => {
     if(isChallenge.value){
         return data.value && generateChallengeCtas(data.value);
     } else {
-        return props.headerData.ctas;
+        return header.value?.ctas;
     }
 })
 

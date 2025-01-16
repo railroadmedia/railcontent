@@ -16,9 +16,9 @@ use Gedmo\Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
-enum UserNotificationKeys : string
+enum UserNotificationKeys: string
 {
     case ENROLLMENT_NOTIFICATION_KEY = 'challenges_enrollment_notifications';
     case COMMUNITY_NOTIFICATION_KEY = 'challenges_community_notifications';
@@ -27,10 +27,9 @@ enum UserNotificationKeys : string
 
 class ChallengesService
 {
-
     //TODO update for solo challenges - TCH-113
 
-    const int MAX_BUTTON_TEXT_LENGTH = 13;
+    public const int MAX_BUTTON_TEXT_LENGTH = 13;
 
 
     public function __construct(
@@ -40,6 +39,16 @@ class ChallengesService
         private ContentUserProgress $contentUserProgress,
         private UserAccessPermissionsService $userAccessPermissionsService,
     ) {
+    }
+
+    /**
+     * Get a boolean if the user has access to the challenge
+     * @param int $contentId
+     */
+    public function hasAccess(int $contentId): bool
+    {
+        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($contentId, user()->id);
+        return $userProgress &&  ($userProgress->is_active || !$userProgress->is_locked);
     }
 
     /**
@@ -95,7 +104,7 @@ class ChallengesService
     }
 
     // Return known dummy account ids to populate the user array in case there are no existing users
-    private function getFillerAccountIds() : array
+    private function getFillerAccountIds(): array
     {
         //
         return [4,5,7,8,136,145,5814,6747,6885,28224,75158,87011,96326,102905,149628,149629,149630,149632,149641,150243,150244,150245,150246,150247,150250,150259,150270,150378,150447,150458,150466,150474,150475,150478,150481,151112,151155,151917,152472,153715,154064,154138,154713,155577,155762,156169,156171,164416,164418,164681,166859,166904,166906,166907,166951,173259,245201,272444,274569,293043,298176,298348,314690,318009,321592,328363,340756,343979,344840,347345,349001,349574,350636,356084,360053,360551,361772,365658,388242,388344,389536,389914,391264,392696,393357,393449,394753,396653,397568,397822,398008,401282,402454,402486,403844,404255,406398,407824,412338,414874];
@@ -116,7 +125,7 @@ class ChallengesService
      *      total: int
      *  }>
      */
-    public function getEnrolledUsersMetadata(int $contentId, ?int $count=3)
+    public function getEnrolledUsersMetadata(int $contentId, ?int $count = 3)
     {
         $enrolledUsersAndCount = $this->getEnrolledUsers($contentId, $count);
         $enrolledUsers = $enrolledUsersAndCount['users'];
@@ -188,7 +197,7 @@ class ChallengesService
         $isLocked = true,
         $challenge = null,
     ): ChallengeUserProgress|null {
-        if(!$challenge) {
+        if (!$challenge) {
             $challenge = $this->getChallengeById($challengeId);
         }
         if (!$challenge) {
@@ -202,7 +211,8 @@ class ChallengesService
             isChallengeLocked: $isLocked
         );
         $restDays = ChallengeUserProgress::calculateDefaultRestDays($challenge);
-        $challengeUserProgress = ChallengeUserProgress::updateOrCreate([
+        $challengeUserProgress = ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $challengeId,
             'user_id' => $userId,
         ],
@@ -213,7 +223,8 @@ class ChallengesService
                 'lessons_meta_data' => $lessonMetaData,
                 'is_active' => $isLocked,
                 'is_solo' => $isSolo,
-            ]);
+            ]
+        );
         return $challengeUserProgress;
     }
 
@@ -227,7 +238,7 @@ class ChallengesService
     public function getCurrentLessonData(int $contentId, int $userId, bool $isLesson = true, $lessonDocument = null, $challenge = null): ?array
     {
         if ($isLesson) {
-            if(!$lessonDocument || !$challenge) {
+            if (!$lessonDocument || !$challenge) {
                 $lessonDocument = $this->sanityGateway->getChallengeChildAndParentData($contentId);
                 $challenge = $lessonDocument['parent'];
             }
@@ -257,7 +268,7 @@ class ChallengesService
                 }
             }
             $challengeFieldsToCopyToLesson = ['dark_mode_logo_url', 'light_mode_logo_url', 'logo_image_url', 'title', 'slug', 'instructor'];
-            foreach($challengeFieldsToCopyToLesson as $toCopy) {
+            foreach ($challengeFieldsToCopyToLesson as $toCopy) {
                 $lessonDocument["challenge_$toCopy"] = $challenge[$toCopy] ?? null;
             }
 
@@ -332,25 +343,36 @@ class ChallengesService
 
                 $isLocked = $challengeUserProgress->is_locked;
                 $isCompleted = $lessonDatum['completed'];
-            } else  {
+            } else {
                 $unlockDate = $lesson['published_on'];
                 $isLocked = true;
                 $userId = user()?->id ?? $challengeUserProgress->user_id;
                 $isCompleted = $this->contentUserProgress::isCompletedByUser($lesson['id'], $userId);
             }
 
-            $unlockDate = Carbon::parse($unlockDate)->startOfDay();
+            // For solo challenges, always assume unlock dates are stored in the users local timezone, even if it changes over time.
+            if ($challengeUserProgress?->is_solo ?? false) {
+                $unlockDate = Carbon::parse($unlockDate)->startOfDay();
 
-            // we must compare based on day without letting Carbon account for timezones
-            $unlockDateForComparison = Carbon::createFromFormat('Y-m-d', $unlockDate->toDateString())
-                ->startOfDay();
-            // comparing 00:00:00 dates does weird things
-            $todayForComparison = Carbon::createFromFormat(
-                'Y-m-d',
-                Carbon::today(UserTimezoneService::getUsersCurrentTimezone())->toDateString()
-            )->startOfDay()->addSecond();
+                // we must compare based on day without letting Carbon account for timezones
+                $unlockDateForComparison = Carbon::createFromFormat('Y-m-d', $unlockDate->toDateString())
+                    ->startOfDay();
+                // comparing 00:00:00 dates does weird things
+                $todayForComparison = Carbon::createFromFormat(
+                    'Y-m-d',
+                    Carbon::today(UserTimezoneService::getUsersCurrentTimezone())->toDateString()
+                )->startOfDay()->addSecond();
+                // TODO Rob Adrian Caleb, do we lock the lessons if previous lessons haven't been completed
+                // this was vaguely discussed in this thread: https://musoraworkspace.slack.com/archives/C0723ESKW49/p1733173597489469
+                $shouldLessonBeLocked = $isLocked && $unlockDateForComparison->greaterThanOrEqualTo($todayForComparison);
+            } else {
+                // For community challenges, unlock dates are stored in PST so we must convert it to UTC and check
+                // against now.
+                $shouldLessonBeLocked = Carbon::parse($unlockDate, 'America/Vancouver')->greaterThanOrEqualTo(Carbon::now());
 
-            $shouldLessonBeLocked = $isLocked && $unlockDateForComparison->greaterThanOrEqualTo($todayForComparison);
+                // now convert the unlock time to the users local timezone
+                $unlockDate = Carbon::parse(Carbon::parse($unlockDate, 'America/Vancouver')->timezone(UserTimezoneService::getUsersCurrentTimezone())->toDateTimeString());
+            }
 
             $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
             $lessons[$index]['unlock_date'] = $unlockDate->toISOString();
@@ -545,11 +567,11 @@ class ChallengesService
         $index = array_search($lessonId, Arr::pluck($allLessons, 'id')); // index in the lesson array
         $nextLesson = null;
         $previousLesson = null;
-        foreach($allLessons as $testLessonIndex => $testLesson) {
+        foreach ($allLessons as $testLessonIndex => $testLesson) {
             if ($testLessonIndex < $index && ChallengeUserProgress::isCurriculumSanityLesson($testLesson)) {
-               $previousLesson = $testLesson;
+                $previousLesson = $testLesson;
             }
-            if($testLessonIndex > $index && ChallengeUserProgress::isCurriculumSanityLesson($testLesson)) {
+            if ($testLessonIndex > $index && ChallengeUserProgress::isCurriculumSanityLesson($testLesson)) {
                 $nextLesson = $testLesson;
                 break;
             }
@@ -578,7 +600,7 @@ class ChallengesService
      * @param $brand
      * @return array | null
      */
-    public function getEnrollmentPageData($slug, $brand) : array | null
+    public function getEnrollmentPageData($slug, $brand): array | null
     {
         return $this->sanityGateway->getChallengeEnrollmentPageData($slug, $brand);
     }
@@ -614,7 +636,9 @@ class ChallengesService
         if (!$userProgress) {
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
             // User has directly accessed a lesson and clicked complete.
-            if (!$userProgress) return ['show_modal' => false];
+            if (!$userProgress) {
+                return ['show_modal' => false];
+            }
         }
         $wasChallengeCompleted = $userProgress->areAllLessonsCompleted();
         $secondsPracticed = $this->mediaPlaybackService->getSecondsWatchedSince(
@@ -630,7 +654,7 @@ class ChallengesService
         );
         $isChallengeCompleted = $userProgress->areAllLessonsCompleted();
 
-        $lessonData = $this->getCurrentLessonData($lessonId, $userId, isLesson: true, lessonDocument: $lessonDocument,challenge: $challenge);
+        $lessonData = $this->getCurrentLessonData($lessonId, $userId, isLesson: true, lessonDocument: $lessonDocument, challenge: $challenge);
         $active = true;
         $motivationalText = [];
 
@@ -712,7 +736,7 @@ class ChallengesService
         $this->unlockChallenge($userProgress->content_id, $userProgress->user_id);
     }
 
-    public function unlockChallenge($id, $userId) : ChallengeUserProgress|null
+    public function unlockChallenge($id, $userId): ChallengeUserProgress|null
     {
         return $this->startChallenge(
             $id,
@@ -776,7 +800,7 @@ class ChallengesService
      * @return bool
      * @throws \Exception
      */
-    public function hideCompletedBanner(int $challengeId, int $userId) : bool
+    public function hideCompletedBanner(int $challengeId, int $userId): bool
     {
         $progress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
         if (is_null($progress?->last_completed_date)) {
@@ -817,7 +841,7 @@ class ChallengesService
         $this->updateCustomerIONotifications($challengeId, $user, $key);
     }
 
-    public function enableNotificationsForSoloChallengeAndClearProcessFlag(ChallengeUserProgress $userProgress) : void
+    public function enableNotificationsForSoloChallengeAndClearProcessFlag(ChallengeUserProgress $userProgress): void
     {
         if (!$userProgress->solo_notification_to_be_processed) {
             return;

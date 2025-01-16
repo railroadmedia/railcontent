@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 [placeholder]:focus::-webkit-input-placeholder {
   color: transparent;
@@ -89,7 +90,7 @@ form :-moz-placeholder {
   padding: 0;
 
   &:hover {
-    background: lighten($guitareoGreen, 10%);
+    background: color.adjust($guitareoGreen, $lightness: 10%);
   }
 
   &.outline {
@@ -346,11 +347,11 @@ form :-moz-placeholder {
       opacity: 0.9;
 
       .access-button {
-        background-color: lighten($guitareoGreen, 10%);
+        background-color: color.adjust($guitareoGreen, $lightness: 10%);
         text-decoration: none !important;
 
         &.blue {
-          background-color: lighten(#408beb, 10%);
+          background-color: color.adjust(#408beb, $lightness: 10%);
         }
       }
     }
@@ -507,7 +508,7 @@ a.download-button {
   }
 
   &:hover {
-    background-color: lighten(#000, 10%);
+    background-color: color.adjust(#000, $lightness: 10%);
     text-decoration: none;
   }
 
@@ -553,8 +554,8 @@ a.download-button {
     }
 
     &:hover {
-      background-color: lighten($guitareoGreen, 10%);
-      border-color: lighten($guitareoGreen, 10%);
+      background-color: color.adjust($guitareoGreen, $lightness: 10%);
+      border-color: color.adjust($guitareoGreen, $lightness: 10%);
     }
 
     &:after {
@@ -567,7 +568,7 @@ a.download-button {
       color: $guitareoGreen;
 
       &:hover {
-        background-color: lighten($guitareoGreen, 10%);
+        background-color: color.adjust($guitareoGreen, $lightness: 10%);
         color: #FFF;
       }
 

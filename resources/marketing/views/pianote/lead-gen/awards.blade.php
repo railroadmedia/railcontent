@@ -165,6 +165,19 @@
 @section('global-body')
     @include('pianote.sales.partials._nav')
 
+    <section class="text-white px-6 py-16" style="background: linear-gradient(180deg, #102B46 0%, #0D182A 100%);">
+        <div class="container mx-auto max-w-4xl">
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-6">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/lead-gen/awards/awards-logo.webp"
+                        alt="Drumeo Awards" class="mx-auto h-24 md:h-28">
+                </div>
+
+                <h1 class="text-2xl md:text-4xl font-extrabold mb-8 leading-tight">2024 Voting is now open!</h1>
+                <a href="/blog/2024-awards" class="join smaller bg-pianote">Vote Now &raquo;</a>
+            </div>
+        </div>
+    </section>
     <header class="text-white py-8 sm:py-14 lg:py-16 px-4" style="background:
     linear-gradient(to bottom, #150305, #3B0D0A, #431118,
     #120300, #370D07);">

@@ -294,7 +294,15 @@ class SanityStudioCMSController extends BaseController
                     }
                     $child->setParentId($content->id, 1);
                     $child->setParentContentData([$content]);
-                    $content->setChildId($childId, ($index + 1));
+                    if($content->parent_content_data ) {
+                        $childParentContentData = json_decode($child->parent_content_data);
+                        $parentContentData =  json_decode($content->parent_content_data);
+                        foreach($parentContentData as $parentContentDatum) {
+                            array_push($childParentContentData, $parentContentDatum);
+                        }
+                        $child->parent_content_data = json_encode($childParentContentData);
+                    }
+		    $content->setChildId($childId, ($index + 1));
                     $this->decorateContent($child, $urlDecorator);
                     $child->save();
                     $updatedContents[] = ['railcontent_id'=> $child->id, 'web_url_path'=> $child->web_url_path, 'parent_content_data'=> $child->parent_content_data];
@@ -302,6 +310,7 @@ class SanityStudioCMSController extends BaseController
             }
             if($request->has('parent_id')){
                     $content->setParentId($request->get('parent_id'), 1);
+                    $content->parent_content_data = json_encode($request->get('parent_content_data'));
                 }
             $this->decorateContent($content, $urlDecorator);
             $content->save();

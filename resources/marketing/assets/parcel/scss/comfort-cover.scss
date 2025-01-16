@@ -1,4 +1,6 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
+
 
 h1, h2, h3, h4, h5, h6, p, li {
   font-family: $opensans;
@@ -441,11 +443,11 @@ a.text-yellow:hover {
       transition: all .5s;
 
       &:hover {
-        background: lighten(#1b3750, 10%);
-        color: lighten(#657281, 10%);
+        background: color.adjust(#1b3750, $lightness: 10%);
+        color: color.adjust(#657281, $lightness: 10%);
 
         &:after {
-          background: lighten(#1b3750, 10%);
+          background: color.adjust(#1b3750, $lightness: 10%);
         }
       }
 

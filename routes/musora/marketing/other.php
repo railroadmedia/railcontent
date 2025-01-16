@@ -81,6 +81,14 @@ Route::domain('{musoraDomain}')
         Route::get('history', [MarketingController::class, 'history']);
         Route::get('{youtube}', [MarketingController::class, 'youtube'])->where('youtube', '(?i)youtube');
         Route::get('youtube/free-resources', [MarketingController::class, 'freeResources']);
+        Route::get('30-day-drummer', [MarketingController::class, 'challengeSample30DD']);
+        Route::get('30-day-drummer/unlocked', [MarketingController::class, 'challengeSample30DDUnlock']);
+        Route::get('new-piano-players', [MarketingController::class, 'challengeSampleNPPSH']);
+        Route::get('new-piano-players/unlocked', [MarketingController::class, 'challengeSampleNPPSHUnlock']);
+        Route::get('better-strumming', [MarketingController::class, 'challengeSampleBS']);
+        Route::get('better-strumming/unlocked', [MarketingController::class, 'challengeSampleBSUnlock']);
+        Route::get('everyday-improv', [MarketingController::class, 'challengeSampleEI']);
+        Route::get('everyday-improv/unlocked', [MarketingController::class, 'challengeSampleEIUnlock']);
         Route::get('lifetime', [MarketingController::class, 'lifetimeDeal']);
         // Route::get('extend', [MarketingController::class, 'extend']);
 

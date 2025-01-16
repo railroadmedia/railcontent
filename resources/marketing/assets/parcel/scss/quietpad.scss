@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 h1, h2, h3, h4, h5, h6, p, li {
   font-family: $opensans;
@@ -896,13 +897,13 @@ a.text-yellow:hover {
         &:hover,
         &:nth-child(even):hover {
           td:nth-child(2) {
-            background-color: lighten($drumeoBlue, 2%);
+            background-color: color.adjust($drumeoBlue, $lightness: 2%);
           }
 
           td:nth-child(3),
           td:nth-child(4),
           td:nth-child(5) {
-            background-color: lighten($musoraBlack, 2%);
+            background-color: color.adjust($musoraBlack, $lightness: 2%);
           }
         }
 
@@ -1021,7 +1022,7 @@ a.text-yellow:hover {
           }
 
           &:nth-child(2) {
-            background: darken($drumeoBlue, 5%);
+            background: color.adjust($drumeoBlue, $lightness: -5%);
           }
 
           &:nth-child(3),

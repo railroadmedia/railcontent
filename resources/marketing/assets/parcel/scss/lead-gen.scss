@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 [placeholder]:focus::-webkit-input-placeholder {
   color: transparent;
@@ -238,7 +239,7 @@ form :-moz-placeholder {
         padding: 0;
 
         &:hover {
-          background: lighten($drumeoBlue, 10%);
+      background: color.adjust($drumeoBlue, $lightness: 10%);
         }
       }
     }
@@ -484,6 +485,7 @@ form :-moz-placeholder {
           text-overflow: ellipsis;
           display: -webkit-box;
           -webkit-line-clamp: 2;
+          line-clamp: 2;
           -webkit-box-orient: vertical;
           @include tablet {
             font-size: 16px;
@@ -691,7 +693,7 @@ form :-moz-placeholder {
           padding: 0;
 
           &:hover {
-            background: lighten($drumeoBlue, 10%);
+        background: color.adjust($drumeoBlue, $lightness: 10%);
           }
         }
       }
@@ -797,6 +799,7 @@ form :-moz-placeholder {
       margin: 10px auto 0;
       display: -webkit-box;
       -webkit-line-clamp: 2;
+      line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
       font: 600 12px/12px $opensans;

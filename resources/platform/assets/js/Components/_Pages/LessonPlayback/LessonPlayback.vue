@@ -123,7 +123,7 @@
                 :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`">
                 <!-- Chapters -->
                 <VideoChapters v-if="videoData?.chapters?.length && (isWorkout || isChallengePart)" :chapters="videoData.chapters"
-                    @open-slice="openSlice" @seek-to-chapter="seekToChapter" />
+                    @open-slice="openSlice" @seek-to-chapter="seekToChapter" :soundslice-slug="videoData?.soundslice_slug" />
 
                 <!-- Assignments -->
                 <div v-if="videoData?.assignments?.length > 0 && !isWorkout"
@@ -276,7 +276,7 @@ const state = reactive({
 });
 
 const showPracticeButton = computed(() => {
-    return !!videoData.value?.soundslice_slug;
+    return videoData.value?.soundslice_slug;
 });
 
 const showInfoButton = computed(() => {
