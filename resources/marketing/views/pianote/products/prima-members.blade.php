@@ -10,12 +10,8 @@
 
     <meta name="description" content="Everything you need to start playing the piano. ">
     <meta property="og:description" content="Everything you need to start playing the piano. ">
-    @php
-            $shareImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prima/share-image.jpg';
-              $orderUrl = '#customize-anchor';
-    @endphp
 
-    <meta property="og:image" content="{{ $shareImage }}">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prima/share-image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -242,8 +238,8 @@
                 <h6 class="leading-tight mt-1 mb-7 sm:mb-10"><em>Free worldwide shipping.</em></h6>
 
                 <div class="w-full max-w-xl mx-auto">
-                    <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500"
-                        href="{{ $orderUrl }}"
+                    <a class="w-full sm:w-5/12 join smaller anchor-slide text-white bg-pianote my-2 sm:m-2 hover:bg-red-500"
+                        href="#customize-anchor"
                     >START PLAYING</a>
                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
                         @click="trailer = true;">
