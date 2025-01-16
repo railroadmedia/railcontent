@@ -61,8 +61,8 @@
             </div>
         </div>
         <transition name="slide-down-fade">
-            <div v-if="accordionActive && thisAssignment != null" v-show="!accordionLoading" class="flex flex-column">
-                <div v-show="description.length > 0" class="flex flex-row tw-pb-6">
+            <div v-if="accordionActive" v-show="!accordionLoading" class="flex flex-column">
+                <div v-show="description && description.length > 0" class="flex flex-row tw-pb-6">
                     <div class="body tw-text-[#00101D] dark:tw-text-white tw-text-[13px] sm:tw-text-base" v-html="description">
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-column pa-2 sm-3 hide-xs-only" :class="imageTypeSpacerClass"></div>
+                    <div class="flex flex-column pa-2 sm-3 hide-xs-only"></div>
                     <!--Spacer-->
                 </div>
             </div>
@@ -223,6 +223,10 @@ export default {
             type: [Number, String],
             default: () => 0,
         },
+        assignment: {
+            type: Object,
+            default: () => {}
+        }
     },
     watch: {
         forceOpen: function (newVal, __oldVal) {
@@ -241,11 +245,6 @@ export default {
             hasBeenPlayed: false,
             accordionActive: false,
             accordionLoading: false,
-            thisAssignment: {
-                id: 0,
-                sheet_music_image_url: [],
-                soundslice_slug: '',
-            },
             isRequesting: false,
             isComplete: this.completed,
             ssEventTimeout: null,
@@ -286,15 +285,11 @@ export default {
         },
 
         $_sheet_music_pages() {
-            if (Array.isArray(this.thisAssignment.sheet_music_image_url)) {
-                return this.thisAssignment.sheet_music_image_url;
-            }
-
-            return this.thisAssignment.sheet_music_image_url ? [this.thisAssignment.sheet_music_image_url] : [];
+            return this.assignment.sheet_music_image_url || [];
         },
 
         $_soundslice_slug() {
-            return this.thisAssignment.soundslice_slug || '';
+            return  this.assignment.soundslice_slug || '';
         },
 
         formattedTimecode() {
@@ -305,14 +300,6 @@ export default {
             }
 
             return duration.toFormat('h:mm:ss');
-        },
-
-        imageTypeSpacerClass() {
-            return {
-                'sm-9': this.thisAssignment.sheet_music_image_type === 'quarter-width',
-                'sm-6': this.thisAssignment.sheet_music_image_type === 'half-width',
-                'sm-3': this.thisAssignment.sheet_music_image_type === 'full-width' || this.thisAssignment.sheet_music_image_type == null,
-            };
         },
 
         carouselWidth: {
@@ -363,24 +350,13 @@ export default {
         },
 
         openAssignment() {
-            if (this.thisAssignment.id === 0) {
-                this.accordionLoading = true;
-                // CHANGE THIS TO USE THE NEW CONTENT SERVICE
-                ContentService.getContentById(this.id)
-                    .then((response) => {
-                        if (response) {
-                            this.thisAssignment = Utils.flattenContent(response.data.data)[0];
+            this.accordionLoading = true;
 
-                            this.accordionActive = !this.accordionActive;
+            setTimeout(() => {
+                this.accordionLoading = false;
+            }, 250);
 
-                            setTimeout(() => {
-                                this.accordionLoading = false;
-                            }, 250);
-                        }
-                    });
-            } else {
-                this.accordionActive = !this.accordionActive;
-            }
+            this.accordionActive = !this.accordionActive;
 
             Helpscout.hideWidget();
             Intercom.hideWidget();
@@ -455,8 +431,6 @@ export default {
                     }
                 });
             } else {
-                console.log('is not complete');
-
                 this.isComplete = !this.isComplete;
 
                 window.recalculateProgress(true, false, this.brand);

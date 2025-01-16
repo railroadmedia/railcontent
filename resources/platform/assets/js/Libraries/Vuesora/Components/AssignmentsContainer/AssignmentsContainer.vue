@@ -21,6 +21,7 @@
                     v-on:force-prev="forceIndex = forceIndex - 1"
                     v-on:force-next="forceIndex = forceIndex + 1"
                     v-on:force-current="forceIndex = index"
+                    :assignment="assignment"
                 />
             </div>
         </div>
