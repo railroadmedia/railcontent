@@ -66,6 +66,7 @@
         'noSubHeader' => true,
         'noTrailer' => true,
         'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/header.mp4',
+        'videoM' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/header-m.mp4',
         'header' => 'SAVE <u style="text-decoration-color: #f61a30;">$300</u> COMPARED TO<br class="hidden sm:inline"> A MONTHLY MEMBERSHIP',
         'pointOne' => 'Song Breakdowns',
         'pointTwo' => 'Unlimited Piano Lessons',
