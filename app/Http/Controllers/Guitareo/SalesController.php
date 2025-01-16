@@ -83,8 +83,10 @@ class SalesController extends BaseController
     {
         return view('guitareo.sales.pages.lifetime', ['theme' => 'guitareo', 'upgradeVersion' => true]);
     }
-
-
+    public function save300()
+    {
+        return view('guitareo.sales.save-300', ['theme' => 'guitareo']);
+    }
     public function welcome()
     {
         return view('guitareo.sales.pages.welcome-1');

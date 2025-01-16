@@ -5,12 +5,12 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Rejoin {{ ucfirst($theme) }} and save on your membership.</title>
-    <meta property="og:title" content="Rejoin {{ ucfirst($theme) }} and save on your membership.">
-    <meta property="og:url" content="https://www.drumeo.com/welcome-back-discount">
+    <title>Save on your lessons and spend more time drumming.</title>
+    <meta property="og:title" content="Save on your lessons and spend more time drumming.">
+    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    <meta name="description" content="Save $60/year + 2 bonuses worth $254!">
-    <meta property="og:description" content="Save $60/year + 2 bonuses worth $254!">
+    <meta name="description" content="Save $300 compared to a monthly membership!">
+    <meta property="og:description" content="Save $300 compared to a monthly membership!">
 
     <meta property="twitter:image" content="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/twitter-image.webp">
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/share-image-drumeo.webp">
@@ -21,48 +21,6 @@
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <style>
-        .tool:after, .tool:before {
-            position: absolute;
-            transform: translate(-50%, 0);
-            height: auto;
-            max-height: 0;
-            visibility: hidden;
-            opacity: 0;
-            transition: all .3s;
-            overflow: hidden;
-            font-size: 14px;
-        }
-        .tool:before {
-            z-index: 100;
-            content: "";
-            bottom: 23px;
-            left: 50%;
-            border-right: 7px transparent solid;
-            border-left: 7px transparent solid;
-            border-top: 7px solid #fff;
-        }
-        .tool:after {
-            padding: 5px 8px;
-            content: attr(tip);
-            font-size: 14px;
-            text-align: left;
-            color: #000;
-            width: 220px;
-            border-radius: 8px;
-            background: #fff;
-            box-shadow: 0 0 15px #000;
-            bottom: 30px;
-            left: -300%;
-        }
-        .tool:hover, .tool:active, .tool:focus {
-            z-index: 100;
-        }
-        .tool:hover:after, .tool:hover:before, .tool:active:after, .tool:active:before, .tool:focus:after, .tool:focus:before {
-            max-height: 1000px;
-            visibility: visible;
-            opacity: 1;
-            display: block;
-        }
         .splide__pagination__page.is-active {
             background: #01050F;
             transform: none !important;
@@ -149,35 +107,35 @@
     @php
         $gridItems = [
         [
-            "image" => "marketing/drumeo/membership/homepage/2025/reason-01.webp",
-            "imageM" => "marketing/drumeo/membership/homepage/2025/reason-01-m.webp",
+            "image" => "marketing/drumeo/membership/ascension/unlimited.webp",
+            "imageM" => "marketing/drumeo/membership/ascension/unlimited-m.webp",
             "title" => "Save On Your First Year",
             "desc" => "Since you’re already a member, this deal is just for you.",
         ],
         [
             "big" => true,
-            "image" => "marketing/drumeo/membership/homepage/2025/reason-04.webp",
-            "imageM" => "marketing/drumeo/membership/homepage/2025/reason-04-m.webp",
+            "image" => "marketing/drumeo/membership/ascension/be-first-to-know.webp",
+            "imageM" => "marketing/drumeo/membership/ascension/be-first-to-know-m.webp",
             "title" => "Be First To Know",
             "desc" => "Get free access to all our latest drum challenges.",
         ],
         [
             "big" => true,
-            "image" => "marketing/drumeo/membership/homepage/2025/reason-02.webp",
-            "imageM" => "marketing/drumeo/membership/homepage/2025/reason-02-m.webp",
+            "image" => "marketing/drumeo/membership/ascension/lifetime-bonuses.webp",
+            "imageM" => "marketing/drumeo/membership/ascension/lifetime-bonuses-m.webp",
             "title" => "Lifetime Bonuses",
             "desc" => "Keep two of our most popular challenges forever.",
         ],
         [
-            "image" => "marketing/drumeo/membership/homepage/2025/reason-03.webp",
-            "imageM" => "marketing/drumeo/membership/homepage/2025/reason-03-m.webp",
+            "image" => "marketing/drumeo/membership/ascension/24-7-support.webp",
+            "imageM" => "marketing/drumeo/membership/ascension/24-7-support-m.webp",
             "title" => "24/7 Personal Support",
             "desc" => "Chat with our mentors & community for help on any topic.",
         ],
         [
             "full" => true,
-            'image' => 'marketing/drumeo/membership/homepage/2025/reason-05.webp',
-            'imageM' => 'marketing/drumeo/membership/homepage/2025/reason-05-m.webp',
+            'image' => 'marketing/drumeo/membership/ascension/learn-new.webp',
+            'imageM' => 'marketing/drumeo/membership/ascension/learn-new-m.webp',
             'title' => 'Learn New Instruments',
             'desc' => 'Taking a break from drums? Try Piano, Guitar, or Singing lessons anytime.',
         ],
@@ -225,9 +183,9 @@
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'marketing/drumeo/membership/homepage/2024/guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
-        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
+        'desc' => 'More than anything we want to make sure you have a POSITIVE experience developing new skills and gaining <br class="hidden lg:block"> confidence with Drumeo. Which is why you’ll have 90 days risk-free to try everything and make sure you love it.',
     ])
-
+    <div id="customize-anchor"></div>
     <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
         style="background: linear-gradient(to bottom, #1D4689 0%, #0C1524 100%);">
         <div class="container mx-auto relative z-50  max-w-3xl ">
@@ -236,7 +194,7 @@
                 Your Drumeo Membership.</h1>
             <h5 class="leading-tight my-3 sm:my-4 text-musora">
                 <strong>Annual Membership</strong> +<br class="sm:hidden"> 2 Bonuses Worth $254</h5>
-            <img class="h-36 sm:h-56 my-4 sm:my-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/annual2.png">
+            <img class="h-36 sm:h-56 my-4 sm:my-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/membership/ascension/order.webp">
 
 
             <div class="promo-footer text-center">
@@ -320,24 +278,6 @@
     </section>
 
 
-    @include('_partials.components.video-modal',[
-        'name' => 'demoVid',
-        'video' => '1017241160',
-        'vimeo' => true,
-    ])
-    @include('_partials.components.video-modal',[
-        'name' => 'trailer',
-        'video' => '898623255',
-        'vimeo' => true,
-    ])
-    @foreach ($drumeo['packs'] as $packModal)
-        @include('_partials.components.video-modal', [
-            'name' => $packModal['name'],
-            'video' => $packModal['vimeoId'],
-            'vimeo' => true,
-        ])
-    @endforeach
-
     @include("drumeo.sales.partials._footer", [
         "minimal" => true
     ])
@@ -347,7 +287,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
 
-    <script type="application/javascript">
+    {{-- <script type="application/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             var stickyBar = document.querySelector('.promo-banner');
             if (!stickyBar) return;
@@ -366,5 +306,5 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 @endsection
