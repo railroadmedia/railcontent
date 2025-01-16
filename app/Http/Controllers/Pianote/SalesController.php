@@ -537,11 +537,10 @@ class SalesController extends BaseController
             'theme' => 'pianote',
         ]);
     }
-    public function primaLTM()
+    public function primaMember()
     {
-        return view('pianote.products.prima', [
+        return view('pianote.products.prima-members', [
             'theme' => 'pianote',
-            'lifetime' => true,
         ]);
     }
     public function primaUlt()
