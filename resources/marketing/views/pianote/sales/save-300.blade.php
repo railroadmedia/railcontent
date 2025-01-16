@@ -191,7 +191,7 @@
     
     @include('musora.sales.components.guarantee-section', [
             'badge' => 'marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp',
-            'header' => '<strong>Test-drive your lessons for 90 days.</strong><br>Zero risk.',
+            'header' => '<strong>Happy Student Guarantee</strong><br>Test-drive your lessons for 90 days. Zero risk.',
             'desc' => 'More than anything we want to make sure you have a POSITIVE experience developing new skills and gaining <br class="hidden lg:block"> confidence with Pianote. Which is why you’ll have 90 days risk-free to try everything again and make sure you love it.',
     ])
 
