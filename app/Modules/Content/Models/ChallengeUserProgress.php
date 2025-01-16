@@ -201,6 +201,34 @@ class ChallengeUserProgress extends Model
                         $currentStreak++;
                         $bestStreak = max($bestStreak, $currentStreak);
                     }
+
+                    // otherwise if it's a community challenge, if a student uses a rest day for a given lesson they can
+                    // then complete it at community time in the future and still get their streak increased
+                    if (!($this->is_solo ?? false) && $completedAt) {
+                        $currentStreak++;
+                        $bestStreak = max($bestStreak, $currentStreak);
+                        continue;
+                    }
+
+                    // otherwise if its a community challenge and they used a rest day for a missed lesson but have not yet
+                    // completed it, it should not break their streak but still increase their missed lesson count
+                    if (!($this->is_solo ?? false) && !$completedAt) {
+                        $missedLessons++;
+                        continue;
+                    }
+                }
+
+                // for community challenges, if this lesson is missed and it's in the past, only break the streak if
+                // they don't have enough rest days to cover it if they were to complete the missed lesson in the future
+                // and use up a rest day
+                if (!($this->is_solo ?? false)) {
+                    if (!$lesson['completed']) {
+                        $missedLessons++;
+                    }
+
+                    if ($missedLessons <= ($this->current_rest_days - $totalRestDaysUsed)) {
+                        continue;
+                    }
                 }
 
                 // If the lesson is not completed and is a past lesson, and did not use a rest day, consider it missed.
@@ -431,13 +459,13 @@ class ChallengeUserProgress extends Model
             );
         }
         if ($challengeUserCollection->isNotEmpty()) {
-            return self::shiftUnlockDaysIfRestDayUsed($challengeUserCollection->first());
+            return self::updateRestDaysAndShiftUnlockDaysIfRestDayUsed($challengeUserCollection->first());
         }
 
         return null;
     }
 
-    public static function shiftUnlockDaysIfRestDayUsed(?ChallengeUserProgress $challengeUserProgress): ?ChallengeUserProgress
+    public static function updateRestDaysAndShiftUnlockDaysIfRestDayUsed(?ChallengeUserProgress $challengeUserProgress): ?ChallengeUserProgress
     {
         if (!$challengeUserProgress) {
             return null;
@@ -496,18 +524,32 @@ class ChallengeUserProgress extends Model
                 continue;
             }
 
+            // (solo challenges only)
             // If the lesson is not completed on the unlock date and there are rest days available, use a rest day.
             // Only use a rest day if this lesson's unlock date is the nearest to the current time compared to all
             // other lessons where self::isCurriculumMetadataLesson($lesson) is true.
             // A rest day cannot be used retroactively beyond the most recently passed lesson.
-            if (!$lesson['completed'] &&
+            if (($challengeUserProgress->is_solo ?? false) &&
+                !$lesson['completed'] &&
                 !$completedAt?->isSameDay($unlockDate) &&
                 !empty($lessonClosestToNowEligibleForRestDay) &&
                 $lessonClosestToNowEligibleForRestDay['content_id'] === $lesson['content_id'] &&
-                $remainingRestDays > 0) {
+                $remainingRestDays > 0
+            ) {
                 $remainingRestDays--;
                 $totalShiftDays++;
-                $lesson['rest_day_used'] = true; // Explicitly mark that a rest day was used for this lesson
+                $lessonsMetaData[$index]['rest_day_used'] = true; // Explicitly mark that a rest day was used for this lesson
+            }
+
+            // for community challenges, missed lessons can only trigger the usage of a rest day once they are completed
+            if (!($challengeUserProgress->is_solo ?? false) &&
+                $lesson['completed'] &&
+                !$completedAt?->isSameDay($unlockDate) &&
+                $remainingRestDays > 0
+            ) {
+                $remainingRestDays--;
+                $totalShiftDays++;
+                $lessonsMetaData[$index]['rest_day_used'] = true; // Explicitly mark that a rest day was used for this lesson
             }
 
             // Shift the unlock date for this lesson and all future lessons
@@ -520,11 +562,10 @@ class ChallengeUserProgress extends Model
                 $newShiftDays = $totalShiftDays - $daysAlreadyShifted;
 
                 if ($newShiftDays > 0) {
-                    // TODO Jan 8th Adrian Caleb Rob this needs to be patched to handle edge cases. this is a stopgap until Friday
-                    if ($challengeUserProgress->is_solo) {
+                    if (($challengeUserProgress->is_solo ?? false)) {
                         $lessonToShift['unlock_date'] = $currentUnlockDate->addDays($newShiftDays)->toISOString();
+                        $lessonToShift['days_shifted'] = $totalShiftDays; // Update the total shift days for this lesson
                     }
-                    $lessonToShift['days_shifted'] = $totalShiftDays; // Update the total shift days for this lesson
                 }
             }
         }
