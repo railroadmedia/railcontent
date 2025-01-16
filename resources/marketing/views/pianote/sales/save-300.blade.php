@@ -6,7 +6,7 @@
 
 @section('global-head')
   <title>Save On Your Lessons and Spend More Time Playing.</title>
-    <meta property="og:title" content="Save On Your Lessons & Spend More Time Playing.">
+    <meta property="og:title" content="Save On Your Lessons and Spend More Time Playing.">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     <meta name="description" content="Save $300 compared to a monthly membership!">
@@ -122,7 +122,7 @@
         [
             "big" => true,
             "image" => "marketing/pianote/membership/ascension/be-first-to-know.webp",
-            "imageM" => "marketing/drumeo/membership/ascension/be-first-to-know-m.webp",
+            "imageM" => "marketing/pianote/membership/ascension/be-first-to-know-m.webp",
             "title" => "Be First To Know",
             "desc" => "Get free access to all our latest drum challenges.",
         ],
@@ -295,7 +295,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
 
-    <script type="application/javascript">
+    {{-- <script type="application/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             var stickyBar = document.querySelector('.promo-banner');
             if (!stickyBar) return;
@@ -314,5 +314,5 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 @endsection

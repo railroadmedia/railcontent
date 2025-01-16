@@ -85,7 +85,7 @@ class SalesController extends BaseController
     }
     public function save300()
     {
-        return view('guitareo.sales.save-300', ['theme' => 'guitareo']);
+        return view('guitareo.sales.save-300', ['theme' => 'guitareo', 'promoPage' => 'true', 'promoVersion' => 'true' ]);
     }
     public function welcome()
     {

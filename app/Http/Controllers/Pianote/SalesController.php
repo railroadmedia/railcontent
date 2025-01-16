@@ -85,7 +85,7 @@ class SalesController extends BaseController
     }
     public function save300()
     {
-        return view('pianote.sales.save-300', ['theme' => 'pianote']);
+        return view('pianote.sales.save-300', ['theme' => 'pianote', 'promoPage' => 'true', 'promoVersion' => 'true' ]);
     }
     public function welcomeBackDiscount()
     {
