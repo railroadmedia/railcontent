@@ -122,6 +122,7 @@ class SanityGateway
                     "title":assignment_title,
                 },
                 soundslice_slug,
+                xp,
                 "resources": resource[]{resource_name, _key, "resource_url": coalesce("https://d3fzm1tzeyr5n3.cloudfront.net"+string::split(resource_aws.asset->fileURL,"https://s3.us-east-1.amazonaws.com/musora-web-platform")[1], resource_url )},
             }',
             'product_id',
