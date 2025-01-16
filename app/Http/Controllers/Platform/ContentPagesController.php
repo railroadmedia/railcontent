@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Platform;
 
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\ContentUserWatchPositionDecorator;
@@ -1467,26 +1466,55 @@ class ContentPagesController extends BaseController
         $defaultPageSize = $filter ? 20 : 10;
         $pageSize = $request->get('limit', $defaultPageSize);
         $page = $request->get('page', 1);
+        $sections = match(strtolower($filter)) {
+            'songs', 'song' => [RecommenderSection::Song],
+            // everything but songs
+            'lessons', 'lesson' => array_filter(RecommenderSection::cases(), function ($section) { return $section != RecommenderSection::Song;}),
+            default => [],
+        };
+        if (!$sections) {
+            $groupBySections = [
+                'Songs You Might Like' => [RecommenderSection::Song],
+                'Lessons You Might Like' => array_filter(RecommenderSection::cases(), function ($section) { return $section != RecommenderSection::Song;})
+            ];
+        } else {
+            $groupBySections = [];
+        }
 
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['recommended'] ?? [];
+
         if (!\user()->hasSongsAccess($brand)) {
             $catalogueMeta['tabs'] = array_values(
                 array_filter($catalogueMeta['tabs'], function ($tab) {
                     return $tab['name'] != 'Songs';
                 })
             );
+            $groupBySections =
+                array_filter(
+                    $groupBySections,
+                    function ($key) {
+                        return $key != 'Songs You Might Like';
+                    },
+                    ARRAY_FILTER_USE_KEY
+                );
+
+            $sections = array_values(
+                array_filter($sections, function ($section) {
+                    return $section->name != 'Song';
+                })
+            );
         }
 
         $listLessons = $this->contentService->getRecommendedContent(
+            user()->id,
             $brand,
-            $filter,
+            sections: $sections,
             pageSize:$pageSize,
             page:$page,
-            groupByForLessonsPage: true,
+            groupByForLessonsPage: $groupBySections
         );
 
         $adminMessage = null;
-        $forYouExperiment = FeatureFlagging::accessible('for-you-experiment', user());
         return view('content.catalogue', [
             "catalogueType" => '',
             "adminMessage" => $adminMessage,
@@ -1500,10 +1528,9 @@ class ContentPagesController extends BaseController
             "totalResults" => $listLessons['total_results'],
             "breadcrumbs" => [
                 [
-                    "title" => $forYouExperiment ? "For You" : "Inspired By Your Activity",
+                    "title" => "Inspired By Your Activity",
                 ]
             ],
-            "forYouExperiment" => $forYouExperiment,
         ]);
     }
 

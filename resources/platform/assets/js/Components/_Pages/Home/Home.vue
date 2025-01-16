@@ -47,14 +47,10 @@
             <!-- Explore section -->
             <ExploreSection v-if="exploreTasks.length" :exploreTasks="exploreTasks" />
 
-            <!-- Recommended section (Current) -->
-            <MiniCatalogueSection v-if="!forYouExperiment && recommendedContent.data.length" title="Inspired By Your Activity"
+            <!-- Recommended section -->
+            <MiniCatalogueSection v-if="recommendedContent.data.length" title="Inspired By Your Activity"
                 seeAllAriaLabel="See All Content" :seeAllUrl="recommendedContentUrl"
                 :preLoadedContent="recommendedContent.data" trackingSection="recommended" />
-
-
-            <!-- Recommended section (New) -->
-            <RecommendedSection v-if="forYouExperiment" :recommendedContent="recommendedContent" :recommendedContentUrl="recommendedContentUrl" />
 
             <!-- Workouts section - REMOVING -->
             <!-- <MiniCatalogueSection
@@ -187,7 +183,6 @@
     import DashboardSection from '@collections/DashboardCard/DashboardSection.vue';
     import StatsSection from '@collections/StatsSection/StatsSection.vue';
     import ListSection from '@collections/ListSection/ListSection.vue';
-    import RecommendedSection from '@components/_Collections/RecommendedSection/RecommendedSection.vue';
 
     //Pinia Stores
     const playlistsStore = usePlaylistsStore();
@@ -195,7 +190,7 @@
     const platformStore = usePlatformStore();
     const { brand, userId, token, showOnboardingBanner, userHas30Days, userFirstName, userDisplayName } = storeToRefs(userStore);
     const { isLoading } = storeToRefs(platformStore);
-    const { playlists } = storeToRefs(playlistsStore); 
+    const { playlists } = storeToRefs(playlistsStore);
 
     const props = defineProps({
         // String props
@@ -233,7 +228,6 @@
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
         userMetrics: { type: Object, default: () => ({}) },
         isFirstAccess: { type: Boolean, default: false },
-        forYouExperiment: { type: Boolean, default: false },
     });
 
     const welcomeMessage = computed(() => {
@@ -243,9 +237,6 @@
 
         return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome back, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Let's get practicing!</div>`
     })
-
-    //Refs
-    const data = ref(null);
 
     //Computed
     const hasCompleteYourAccountTask = computed(() => {
@@ -277,6 +268,9 @@
     const packDataObject = computed(() => {
         return { data: [...props.packData] };
     })
+
+    //Refs
+    const data = ref(null);
 
     //Methods
     const openPlaylistModal = () => {

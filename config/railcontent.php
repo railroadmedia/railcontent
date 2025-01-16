@@ -1098,8 +1098,8 @@ return [
                 ],
             ],
             'recommended' => [
-                'name' => 'For You',
-                'shortname' => 'For You',
+                'name' => 'Inspired By Your Activity',
+                'shortname' => 'Inspired By Your Activity',
                 'icon' => 'fas fa-star',
                 'description' => "",
                 'allowableFilters' => [],
@@ -1578,8 +1578,8 @@ return [
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
             'recommended' => [
-                'name' => 'For You',
-                'shortname' => 'For You',
+                'name' => 'Inspired By Your Activity',
+                'shortname' => 'Inspired By Your Activity',
                 'icon' => 'fas fa-star',
                 'description' => "",
                 'allowableFilters' => [],
@@ -1607,13 +1607,6 @@ return [
                         'is_required_field' => true,
                         'use_recommended_endpoint' => true,
                         'value' => ['filter,lesson']
-                    ],
-                    [
-                        'name' => 'Workouts',
-                        'short_name' => 'WORKOUTS',
-                        'is_required_field' => true,
-                        'use_recommended_endpoint' => true,
-                        'value' => ['filter,workout']
                     ],
                 ],
             ],
@@ -1914,8 +1907,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
             ],
             'recommended' => [
-                'name' => 'For You',
-                'shortname' => 'For You',
+                'name' => 'Inspired By Your Activity',
+                'shortname' => 'Inspired By Your Activity',
                 'icon' => 'fas fa-star',
                 'description' => "",
                 'allowableFilters' => [],
@@ -1943,13 +1936,6 @@ return [
                         'is_required_field' => true,
                         'use_recommended_endpoint' => true,
                         'value' => ['filter,lesson']
-                    ],
-                    [
-                        'name' => 'Workouts',
-                        'short_name' => 'WORKOUTS',
-                        'is_required_field' => true,
-                        'use_recommended_endpoint' => true,
-                        'value' => ['filter,workout']
                     ],
                 ],
             ],
@@ -2298,8 +2284,8 @@ return [
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
             'recommended' => [
-                'name' => 'For You',
-                'shortname' => 'For You',
+                'name' => 'Inspired By Your Activity',
+                'shortname' => 'Inspired By Your Activity',
                 'icon' => 'fas fa-star',
                 'description' => "",
                 'allowableFilters' => [],
@@ -2327,13 +2313,6 @@ return [
                         'is_required_field' => true,
                         'use_recommended_endpoint' => true,
                         'value' => ['filter,lesson']
-                    ],
-                    [
-                        'name' => 'Workouts',
-                        'short_name' => 'WORKOUTS',
-                        'is_required_field' => true,
-                        'use_recommended_endpoint' => true,
-                        'value' => ['filter,workout']
                     ],
                 ]
             ],
