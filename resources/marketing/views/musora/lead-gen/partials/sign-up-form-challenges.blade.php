@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         window.dataLayer.push({
                             'event': "gtm.formSubmit",
                             'formId': formId,
-                            'success': true
+                            'formSuccess': true
                         });
                             form.classList.add('hidden');
 
