@@ -5,7 +5,7 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Prima @if(!empty($ultimate)) Ultimate Bundle @elseif(!empty($lifetime)) Keyboard @else Bundle @endif | Pianote</title>
+    <title>Prima Keyboard Bundle | Pianote</title>
     <meta property="og:title" content="Prima | Pianote">
 
     <meta name="description" content="Everything you need to start playing the piano. ">
@@ -72,8 +72,7 @@
         .prima-piano-next svg {
             fill: #F61A30;
         }
-    </style>
-    <style>
+
         table.comparison.eardrums tr td:nth-child(1) {
             width: 1%;
             font-weight: 700;
@@ -82,7 +81,7 @@
 
         table.comparison.eardrums tr td:nth-child(2) {
             color: white;
-            background: linear-gradient(to right, #D14037, #8A230F) !important;
+            background: linear-gradient(to right, #F61A30, #900F1C) !important;
             font-weight:600;
         }
 
@@ -93,17 +92,17 @@
 
         }
         table.comparison.eardrums tr:nth-child(1) td:nth-child(2) {
-            background: linear-gradient(to right, #D14037, #8A230F) !important;
+            background: linear-gradient(to right, #F61A30, #900F1C) !important;
         }
 
         table.comparison.eardrums tr td:nth-child(1) {
-            width: 20%;
+            width: 30%;
         }
         table.comparison.eardrums tr td:nth-child(2),
         table.comparison.eardrums tr td:nth-child(3),
         table.comparison.eardrums tr td:nth-child(4),
         table.comparison.eardrums tr td:nth-child(5) {
-            width: 20%;
+            width: 35%;
         }
 
         table.comparison.eardrums tr td:nth-child(1),
@@ -145,7 +144,6 @@
             color: black;
             padding: 15px 7px;
             font-size: 12px;
-            text-transform: capitalize;
         }
 
         table.comparison.eardrums tr:last-child td {
@@ -153,6 +151,16 @@
         }
 
         @media (min-width: 768px) {
+            table.comparison.eardrums tr td:nth-child(1) {
+                width: 20%;
+            }
+            table.comparison.eardrums tr td:nth-child(2),
+            table.comparison.eardrums tr td:nth-child(3),
+            table.comparison.eardrums tr td:nth-child(4),
+            table.comparison.eardrums tr td:nth-child(5) {
+                width: 20%;
+            }
+
             table.comparison.eardrums tr td {
                 font-size: 16px;
             }
@@ -268,7 +276,7 @@
 
             <div class="flex-shrink-0 w-full sm:w-1/3 lg:w-5/12 flex flex-wrap justify-center items-center md:py-6">
                 <h2 class="leading-tight mb-2 inline-block sm:hidden"><strong>Your <span class="text-pianote">perfect</span> first piano.</strong></h2>
-                <p class="mb-6 inline-block sm:hidden">Choosing your first piano can be overwhelming. So we’ve made it simple.</p>
+                <p class="mb-6 inline-block sm:hidden">Choosing your first piano can be <br class="sm:hidden">overwhelming. So we’ve made it simple.</p>
                 <img
                     src="https://d21q7xesnoiieh.cloudfront.net/1100x0/filters:quality(95)/marketing/pianote/products/prima/v2/playing-keyboard.jpg"
                     alt="Laptop Preview"
@@ -342,10 +350,11 @@
         </div>
     </section>
 
+    <div id="compare" class="anchor"></div>
     <section class="py-12 lg:py-20 px-4 sm:px-6 lg:px-10 text-center text-white" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/prima/v2/chart-bg.jpg');" x-data="{ tableClass: 'roland' }">
         <div class="container mx-auto max-w-6xl">
-            <h2 class="leading-tight">How does the <strong>Pianote Prima</strong> stack up?</h2>
-            <p class="leading-tight mb-12 mt-3 sm:mt-5 sm:mb-12">Compare the Pianote Prima to other popular beginner pianos.</p>
+            <h2 class="leading-tight">How does the <strong>Pianote<br class="sm:hidden"> Prima</strong> stack up?</h2>
+            <p class="leading-tight mb-12 mt-3 sm:mt-5 sm:mb-12">Compare the Pianote Prima to other<br class="sm:hidden"> popular beginner pianos.</p>
             <div class="relative">
                 <p class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower pt-2"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <div class="overflow-hidden rounded-xl">
@@ -354,21 +363,22 @@
                         <tr style="background-color:transparent!important;">
                             <td></td>
                             <td>
-                                Pianote Prima
+                                Pianote <br class="inline lg:hidden">
+                                <img class="h-8 sm:h-8" src="https://d21q7xesnoiieh.cloudfront.net/200x0/filters:quality(95)/marketing/pianote/products/prima/Logo.webp">
                             </td>
                             <td @click="tableClass = 'yamaha'">
-                                Roland FP-10
+                                Roland <br class="inline lg:hidden">FP-10
                             </td>
                             <td @click="tableClass = 'casio'">
-                                Yamaha P-45
+                                Yamaha <br class="inline lg:hidden"> P-45
                             </td>
                             <td @click="tableClass = 'roland'">
-                                Casio CDP-S160
+                                Casio <br class="inline lg:hidden">CDP-S160
                             </td>
                         </tr>
                         <tr>
                             <td>88-Key Weighted Action</td>
-                            <td>Progressive Hammer Action</td>
+                            <td>Progressive<br class="hidden sm:inline"> Hammer Action</td>
                             <td>PHA-4 Action</td>
                             <td>Graded Hammer Action</td>
                             <td>Scaled Hammer Action II</td>
@@ -396,7 +406,7 @@
                         </tr>
                         <tr>
                             <td>Universal Power Cord</td>
-                            <td>Yes, with Adapters Included</td>
+                            <td>Yes + Adapters</td>
                             <td>No</td>
                             <td>No</td>
                             <td>No</td>
@@ -410,10 +420,10 @@
                         </tr>
                         <tr>
                             <td>Connectivity</td>
-                            <td>Bluetooth, USB MIDI, Stereo Headphones</td>
-                            <td>USB MIDI, Single Headphone Jack</td>
-                            <td>USB MIDI, Single Headphone Jack</td>
-                            <td>USB MIDI, Single Headphone Jack</td>
+                            <td>Bluetooth, USB MIDI,<br class="hidden lg:inline"> Stereo Headphones</td>
+                            <td>USB MIDI, Single<br class="hidden sm:inline"> Headphone Jack</td>
+                            <td>USB MIDI, Single<br class="hidden sm:inline"> Headphone Jack</td>
+                            <td>USB MIDI, Single<br class="hidden sm:inline"> Headphone Jack</td>
                         </tr>
                         <tr>
                             <td></td>
@@ -441,10 +451,10 @@
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20  relative">
             <div class="container mx-auto z-10 relative max-w-5xl">
                 <h2 class="leading-tight"><strong>Complete the setup.</strong></h2>
-                <p class="leading-tight my-5">Add the essential practice tools you need for the ultimate home practice space.</p>
+                <p class="leading-tight my-5">Add the essential practice tools you need <br class="sm:hidden">for the ultimate home practice space.</p>
                 <img class="w-full max-w-5xl rounded-xl px-2" src="https://d21q7xesnoiieh.cloudfront.net/1200x0/filters:quality(95)/marketing/pianote/products/prima/setup-01.webp">
                 <div class="flex flex-wrap text-left pt-4">
-                    <div class="w-full sm:w-1/2 px-2">
+                    <div class="w-full sm:w-1/2 px-2 mb-4 sm:mb-0">
                         <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/setup-02.webp">
                         <h6 class="pt-4"><strong>The Prima Keyboard Stand</strong></h6>
                         <p class="lg:pr-6">This double braced "X" style keyboard stand is lightweight but very strong.<br><br>Adjusting this stand to the perfect height is easy, thanks to the trigger style latch- you can do it with a single finger!</p>
@@ -455,20 +465,6 @@
                         <p class="lg:pr-6">This compact heavy duty bench is comfortable, adjustable and portable.<br><br>It folds flat for storage or transport, and is height adjustable to help you find that perfect position for practice and performance!</p>
                     </div>
                 </div>
-                @if (!empty($ultimate))
-                <div class="flex flex-wrap text-left">
-                    <div class="w-full sm:w-1/2 px-2 pt-4">
-                        <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/setup-04.webp">
-                        <h6 class="pt-4"><strong>The Pianote Metronome</strong></h6>
-                        <p class="lg:pr-6">Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.<br><br>It’s the most important practice tool you’ll ever have. Work on your tempo, rhythm, and speed with a metronome you can trust.</p>
-                    </div>
-                    <div class="w-full sm:w-1/2 px-2 pt-4">
-                        <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/setup-05.webp">
-                        <h6 class="pt-4"><strong>The Music Theory Poster Bundle</strong></h6>
-                        <p class="lg:pr-6">Connecting what you see on a page to the keys can feel like a giant leap.<br><br>That’s why we’ve made it easy with 6 beautiful full-color posters highlighting the essential theory you need to play the songs you love.</p>
-                    </div>
-                </div>
-                @endif
             </div>
         </section>
 
@@ -476,10 +472,10 @@
     style="background:linear-gradient(to bottom, #F61A30, #900F1C);">
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight"><strong>Peace of mind - guaranteed.</strong></h2>
-            <p class="leading-tight mt-2 mb-5 sm:mb-7">Your piano includes a 2-year parts warranty for your Prima.</p>
+            <p class="leading-tight mt-2 mb-5 sm:mb-7">Your piano includes a 2-year<br class="sm:hidden"> parts warranty for your Prima.</p>
             <picture>
                 <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1270x0/filters:quality(95)/marketing/pianote/products/prima/warranty.webp">
-                <img class="transition-opacity opacity-0 h-20 sm:h-36" alt="icon" loading="lazy"
+                <img class="transition-opacity opacity-0 h-32 sm:h-36" alt="icon" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/products/prima/warranty.webp">
             </picture>
@@ -491,16 +487,17 @@
         <div class="container mx-auto relative z-10 max-w-6xl">
             <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8 lifetime-card">
                 @include('drumeo.products.partials._order-card', [
+                    'isPrima' => true,
                     'customStrike' => true,
                     'threeWide' => true,
                     'header' => 'The Pianote PRIMA',
                     'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/prima/order-01.webp',
-                    'imageHeight' => 'h-24 lg:h-16 px-4',
+                    'imageHeight' => 'h-24 lg:h-24 py-5',
                     'fullPrice' => "$599",
                     'price' => "$449",
                     'specialText' => 'Save $150.<br> FREE worldwide shipping.',
                     'cta' => 'BUY NOW',
-                    'link' => '/ecommerce/add-to-cart?products[prima-keyboard]=1',
+                    'link' => '/ecommerce/add-to-cart?products[prima-keyboard]=1&promo-code=prima-shipping,prima-member-discount&locked=true',
                     'bonuses' => [
                         '<i class="fas fa-check text-pianote mr-1"></i> The Pianote Prima',
                         '<i class="fas fa-check text-pianote mr-1"></i> 88-key Progressive Lever Hammer Action',
@@ -515,6 +512,7 @@
                     ],
                 ])
                 @include('drumeo.products.partials._order-card', [
+                    'isPrima' => true,
                     'highlightBorder' => true,
                     'customStrike' => true,
                     'threeWide' => true,
@@ -522,13 +520,13 @@
                    'firstOnMobile' => true,
                    'header' => 'Add a Bench & Stand',
                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/prima/order-02.webp',
-                   'imageHeight' => 'h-24 lg:h-16',
+                   'imageHeight' => 'h-24 lg:h-24',
                     'fullPrice' => "$749",
                     'price' => "$549",
                     'specialText' => 'Save $200.<br> FREE worldwide shipping.',
                    'cta' => 'BUY NOW',
                    'highlightBorder' => true,
-                   'link' => '/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1',
+                   'link' => '/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1&promo-code=prima-shipping,prima-member-discount,stand-member-discount&locked=true',
                     'bonuses' => [
                     '<i class="fas fa-check text-pianote mr-1"></i> The Pianote Prima',
                     '<i class="fas fa-check text-pianote mr-1"></i> 88-key Progressive Lever Hammer Action',
@@ -545,17 +543,18 @@
                 ],
                ])
                 @include('drumeo.products.partials._order-card', [
+                    'isPrima' => true,
                     'customStrike' => true,
                     'threeWide' => true,
                    'firstOnMobile' => true,
-                   'header' => 'get it ALL',
+                   'header' => 'Get it ALL',
                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/prima/v2/all-bundle.png',
-                   'imageHeight' => 'h-24 lg:h-16',
+                   'imageHeight' => 'h-24 lg:h-24',
                     'fullPrice' => "$848",
-                    'price' => "$649",
-                    'specialText' => 'Save $199.<br> FREE worldwide shipping.',
+                    'price' => "$648",
+                    'specialText' => 'Save $200.<br> FREE worldwide shipping.',
                    'cta' => 'BUY NOW',
-                   'link' => '/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1&products[pianote-headphones-2024]=1',
+                   'link' => '/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1&products[pianote-headphones-2024]=1&promo-code=prima-shipping,prima-member-discount,stand-member-discount&locked=true',
                     'bonuses' => [
                     '<i class="fas fa-check text-pianote mr-1"></i> The Pianote Prima',
                     '<i class="fas fa-check text-pianote mr-1"></i> 88-key Progressive Lever Hammer Action',
@@ -573,7 +572,7 @@
                 ],
                ])
             </div>
-            <p class="leading-tight">Already have a piano? <a href="/ecommerce/add-to-cart?products[piano-bench]=1"><u>Grab the Stand & Bench for just $109 (Free worldwide shipping).</u></a></p>
+            <p class="leading-tight">Already have a piano? <a href="/ecommerce/add-to-cart?products[piano-bench]=1&promo-code=prima-shipping,stand-discount"><u>Grab the Stand & Bench for just $109 (Free worldwide shipping).</u></a></p>
         </div>
     </section>
 
