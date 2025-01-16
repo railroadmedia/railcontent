@@ -278,7 +278,7 @@
                     $cards = [
                         [
                             'header' => 'Lifetime Access to 30 Days To <br class="hidden lg:block"/> Better Strumming ',
-                            'price' => '$127',
+                            'price' => '$97',
                             'badge_text' => 'COURSE ONLY',
                             'badge_class' => 'border-black',
                             'subheader' => 'One time payment.',
