@@ -206,21 +206,23 @@ const breadcrumbs = [
 
 onBeforeMount(() => {
     const fetchData = async () => {
-        const [startedIds, completedIds, badges, startedChallenges] = await Promise.all([
-            fetchContentInProgress('all', brand.value),
-            fetchCompletedContent('all', brand.value),
-            fetchUserBadges(brand.value),
-            fetchChallengeUserActiveChallenges(brand.value),
-        ]);
+        if(props.isCurrentUsersProfile){
+            const [startedIds, completedIds, badges, startedChallenges] = await Promise.all([
+                fetchContentInProgress('all', brand.value),
+                fetchCompletedContent('all', brand.value),
+                fetchUserBadges(brand.value),
+                fetchChallengeUserActiveChallenges(brand.value),
+            ]);
 
-        const lessons = await fetchByRailContentIds([...startedIds.started, ...completedIds.completed]);
-        const started = lessons.filter(lesson => startedIds.started.includes(lesson.id)).slice(0, 20);
-        const completed = lessons.filter(lesson => completedIds.completed.includes(lesson.id)).slice(0, 20);
-        awards.value = badges;
-        challenges.value = startedChallenges;
+            const lessons = await fetchByRailContentIds([...startedIds.started, ...completedIds.completed]);
+            const started = lessons.filter(lesson => startedIds.started.includes(lesson.id)).slice(0, 20);
+            const completed = lessons.filter(lesson => completedIds.completed.includes(lesson.id)).slice(0, 20);
+            awards.value = badges;
+            challenges.value = startedChallenges;
 
-        startedContents.value = started;
-        completedContents.value = completed;
+            startedContents.value = started;
+            completedContents.value = completed;
+        }
 
         platformStore.setLoadingState(false);
     }
