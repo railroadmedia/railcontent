@@ -75,6 +75,7 @@
     lessonType: String,
     sessionToken: String,
     showInProgress: Boolean,
+    forYouExperiment: Boolean,
   });
 
   const collectionStore = useCollectionStore();
@@ -98,13 +99,6 @@
     }
     return recommended;
   });
-
-  const recommendationLinks = {
-    drumeo: 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083',
-    pianote: 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612',
-    guitareo: 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772',
-    singeo: 'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
-  };
 
   const tabData = computed(() => {
       return getTabData(props.catalogueType, metaData.value?.shortname || metaData.value?.name);
@@ -135,7 +129,7 @@
       const startedIds = await fetchContentInProgress(contentType.value, brand.value, { limit: 20 });
       const lessons = await fetchByRailContentIds(startedIds.started);
 
-      headerData.value = getHeaderData(metaData.value, brand.value, props.askQuestionRecipient, props.emailLogoLink, contentType.value)
+      headerData.value = getHeaderData(metaData.value, brand.value, props.askQuestionRecipient, props.emailLogoLink, contentType.value, props.forYouExperiment)
       
       // Set the continue section with started workouts
       continueSection.value = lessons;

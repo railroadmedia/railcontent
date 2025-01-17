@@ -10409,16 +10409,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v4.0.4",
+            "version": "v4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "11a85b2eb4deec21afc0d04cef8afcf6d1e4b63b"
+                "reference": "859c44cc01713884145e87059aadd505d771e243"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/11a85b2eb4deec21afc0d04cef8afcf6d1e4b63b",
-                "reference": "11a85b2eb4deec21afc0d04cef8afcf6d1e4b63b",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/859c44cc01713884145e87059aadd505d771e243",
+                "reference": "859c44cc01713884145e87059aadd505d771e243",
                 "shasum": ""
             },
             "require": {
@@ -10447,9 +10447,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v4.0.4"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v4.0.5"
             },
-            "time": "2025-01-14T08:42:50+00:00"
+            "time": "2025-01-15T23:34:31+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10625,16 +10625,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v3.0.18",
+            "version": "v3.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "3db669090f90af2c12564451eee4d52178b6f50a"
+                "reference": "67188db1c98f2b8093bedf4b62586e0a7f9f23f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/3db669090f90af2c12564451eee4d52178b6f50a",
-                "reference": "3db669090f90af2c12564451eee4d52178b6f50a",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/67188db1c98f2b8093bedf4b62586e0a7f9f23f2",
+                "reference": "67188db1c98f2b8093bedf4b62586e0a7f9f23f2",
                 "shasum": ""
             },
             "require": {
@@ -10685,9 +10685,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v3.0.18"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v3.0.19"
             },
-            "time": "2024-12-16T18:59:59+00:00"
+            "time": "2025-01-15T23:31:58+00:00"
         },
         {
             "name": "railroad/railforums",

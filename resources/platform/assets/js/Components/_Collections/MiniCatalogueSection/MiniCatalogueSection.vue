@@ -18,6 +18,7 @@
                     </div>
                 </div>
             </div>
+            <slot name="tabs" :resetPagination="resetPagination"></slot>
             <div>
                 <transition appear name="fade">
                     <ChallengeCarousel v-if="isChallengeCarousel" :pre-loaded-content="data" :page-type="pageType" @remove-challenge="removeItem" @re-fetch-carousel="reFetchData" />
@@ -183,5 +184,5 @@ watch(
     },
 )
 
-const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, setOriginal, removeItem, reFetchData } = useCarouselEvents(props.preLoadedContent, data, page, cardNum);
+const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, setOriginal, removeItem, reFetchData, resetPagination } = useCarouselEvents(props.preLoadedContent, data, page, cardNum);
 </script>
