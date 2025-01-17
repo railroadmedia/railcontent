@@ -5896,13 +5896,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prop-types@npm:*":
-  version: 15.7.14
-  resolution: "@types/prop-types@npm:15.7.14"
-  checksum: 10c0/1ec775160bfab90b67a782d735952158c7e702ca4502968aa82565bd8e452c2de8601c8dfe349733073c31179116cf7340710160d3836aa8a1ef76d1532893b1
-  languageName: node
-  linkType: hard
-
 "@types/qs@npm:*, @types/qs@npm:^6.9.5":
   version: 6.9.18
   resolution: "@types/qs@npm:6.9.18"
@@ -5925,12 +5918,11 @@ __metadata:
   linkType: hard
 
 "@types/react@npm:>=16":
-  version: 18.3.18
-  resolution: "@types/react@npm:18.3.18"
+  version: 19.0.7
+  resolution: "@types/react@npm:19.0.7"
   dependencies:
-    "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10c0/8fb2b00672072135d0858dc9db07873ea107cc238b6228aaa2a9afd1ef7a64a7074078250db38afbeb19064be8ea6af5eac32d404efdd5f45e093cc4829d87f8
+  checksum: 10c0/818e546fa03a2a65ac2652fc472891ac96684211e8967bc25e1da6a8a09e2301ad972b1b038d128f8b4cbbd7691f6f57fee274db568169e9b6b01556abbb5bee
   languageName: node
   linkType: hard
 
@@ -10620,9 +10612,9 @@ __metadata:
   linkType: hard
 
 "flow-parser@npm:0.*":
-  version: 0.259.0
-  resolution: "flow-parser@npm:0.259.0"
-  checksum: 10c0/c48333d699d99c5849bde19a4053a378f21cda908ea3da28ee36c8eca52e52beee23610366a7b2349085192d91d30b0c0adbce483cb11f4f5387213129338c11
+  version: 0.259.1
+  resolution: "flow-parser@npm:0.259.1"
+  checksum: 10c0/d9b4bcc512621f7560bd8604a2e4fa7e13d1fdcc9f9965e5c714daf005fa54c39a85a2434913b3cb4053d03685decb7674c3f5854122ae3cfe691003f9332ead
   languageName: node
   linkType: hard
 
@@ -14779,16 +14771,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"musora-content-services@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "musora-content-services@npm:1.2.1"
+"musora-content-services@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "musora-content-services@npm:1.2.2"
   dependencies:
     "@babel/preset-env": "npm:^7.25.3"
     "@sanity/client": "npm:^5.4.2"
     babel-jest: "npm:^29.7.0"
     docdash: "npm:^2.0.2"
     groqd: "npm:^0.15.12"
-  checksum: 10c0/e9bfd52fe0af9231a5c970f3295a88f0b98282ae3aefb3ea0c68b749fafbdd8b5322925fbbac6640ae3f6961ec38ea55daebd5c94f846a81a7a54ca28f3d7e09
+  checksum: 10c0/62a303425ff91347a586eddff22df5a471b90c86490daf0e5b8baf57e075b545761bdc6a44429b874a8b77193709e0ddbcd2e9817d835934d9a11a97a3c62f45
   languageName: node
   linkType: hard
 
@@ -17675,7 +17667,7 @@ __metadata:
     mitt: "npm:^3.0.0"
     moment: "npm:^2.30.1"
     moment-timezone: "npm:^0.5.46"
-    musora-content-services: "npm:^1.2.1"
+    musora-content-services: "npm:^1.2.2"
     mux.js: "npm:^5.5.1"
     normalize.css: "npm:^8.0.1"
     noty: "npm:^3.2.0-beta-deprecated"
