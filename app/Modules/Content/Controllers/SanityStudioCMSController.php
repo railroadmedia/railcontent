@@ -242,21 +242,43 @@ class SanityStudioCMSController extends BaseController
     {
         $urlDecorator = app()->make(UrlDecorator::class);
 
+
+
         if ($request->get('_type') === 'permission') {
             $query = \App\Modules\Content\Models\Permission::query();
+
+            //request
+            //request('',500 songs,pianote,permission_500songsin5days)
+
+            //existing permission in Sanity_db
+            //request(55,500 songs,guitareo,permission_500songsin5days)
+
+            //new $permission
+            //permission(, 500 songs, )
+
+
+
+            //check for existing permission based on railcontent_id
             if($request->has('railcontent_id')) {
                 $permission = $query->where('id', '=', $request->get('railcontent_id'))->first();
-                    }else{
-                $permission = $query->where('name', '=', $request->get('name'))->first();
             }
+            //check for existing permission based on name AND brand
+            else{
+                $permission = $query->where('name', '=', $request->get('name'))
+                    ->where('brand', '=', $request->get('brand'))
+                    ->first();
+            }
+            //create new permission if specified queried permission in Sanity db doesn't exist
             if (!$permission) {
                 $permission = new \App\Modules\Content\Models\Permission();
             }
+            //set methods/attributes of existing permission
             $permission->name = $request->get('name');
             $permission->brand = $request->get('brand');
             $permission->sanity_ref = str_replace('drafts.','',$request->get('_id'));
-            $permission->save();
-            return ['railcontent_id'=> $permission->id];
+            $permission->save();    //save permission as a row in Sanity db
+            return ['railcontent_id'=> $permission->id];    //return railcontent_id as permission id attribute
+
         } else {
             $updatedContents = [];
             $lessonType = $this->getLessonType($request->get('_type'));
