@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
   font-weight: 900;
@@ -401,7 +402,7 @@ img {
         right: 0;
         border-radius: 7px;
         overflow: hidden;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 30%, transparentize($drumeoBlue, 0.4) 100%);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 30%, color.adjust($drumeoBlue, $alpha: 0.4) 100%);
       }
     }
 
@@ -1381,7 +1382,7 @@ img {
             margin: 0 auto;
 
             &:hover {
-              background: lighten(#000, 10%);
+              background: color.adjust(#000, $lightness: 10%);
             }
           }
 

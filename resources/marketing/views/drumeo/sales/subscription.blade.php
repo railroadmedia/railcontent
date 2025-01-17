@@ -283,8 +283,7 @@
         $gridItems = $drumeo['gridItems'];
     @endphp
     @include('musora.sales.components.reason-cards-five-section', [
-        'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
-        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum featuring many of the world’s best teachers. ',
+        'subHeader' => true,
         'full' => true,
     ])
 
@@ -331,7 +330,7 @@
     @elseif(!empty($promoVersion))
         <section style="background:linear-gradient(30deg, #0a3761, #0c1526);">
             <div class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
-                :style="`background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/2024/order-bg-tile-2.webp') center center/160px;`""        
+                :style="`background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/2024/order-bg-tile-2.webp') center center/160px;`">
                 <div class="container mx-auto max-w-5xl">
                     <div x-data="{lazyLoad: false}">
                         @php

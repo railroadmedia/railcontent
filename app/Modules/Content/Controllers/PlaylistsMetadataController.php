@@ -554,7 +554,7 @@ class PlaylistsMetadataController extends Controller
         }
 
         // Check if the user has access to the playlist
-        if (!$playlistItem->playlist || ($playlistItem->playlist->user_id !== $user->id)) {
+        if (!$playlistItem->playlist || ($playlistItem->playlist->user_id !== $user->id && $playlistItem->playlist->private == true)) {
             return response()->json([
                                         'success' => false,
                                         'error' => 'You don’t have access to items from this playlist'

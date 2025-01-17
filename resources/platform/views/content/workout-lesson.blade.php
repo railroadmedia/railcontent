@@ -1,7 +1,7 @@
 @extends('partials.layout', ['forceHideSidebar' => false, 'trackingSectionName' => 'Workouts'])
 
 @section('meta')
-    <title>{{ $lessonContent->fetch('fields.title') }} | Musora</title>
+    <title>{{ $lessonContent['title'] }} | Musora</title>
 @endsection
 
 @section('inject-components')

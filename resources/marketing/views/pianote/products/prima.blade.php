@@ -5,7 +5,7 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Prima @if(!empty($ultimate)) Ultimate Bundle @elseif(!empty($lifetime)) Keyboard @else Bundle @endif | Pianote</title>
+    <title>Prima @if(!empty($ultimate)) Ultimate Bundle @else Bundle @endif | Pianote</title>
     <meta property="og:title" content="Prima | Pianote">
 
     <meta name="description" content="Everything you need to start playing the piano. ">
@@ -80,13 +80,6 @@
         .prima-piano-next svg {
             fill: #F61A30;
         }
-        .lifetime-card a {
-            border-color: #0C1524 !important;
-            border-width: 1px !important;
-        }
-         .lifetime-card p {
-           text-align: center !important;
-        }
     </style>
 @stop
 
@@ -110,13 +103,6 @@
             "name" => "Prima Keyboard",
             "fullPrice" => 1642,
             "price" => 799,
-            "noBreadcrumb" => true
-        ])
-    @elseif(!empty($lifetime))
-        @include('_partials.components.shop.promo-banner-2', [
-            "name" => "Prima Keyboard",
-            "fullPrice" => 599,
-            "price" => 599,
             "noBreadcrumb" => true
         ])
     @else
@@ -150,15 +136,6 @@
                     </p>
                     <h3 class="leading-tight mt-6 mb-4 sm:mb-6">
                         Only <s class="opacity-50">$1642</s> <strong>$799</strong>
-                    </h3>
-                @elseif(!empty($lifetime))
-                    <img class="h-6 md:h-10 my-2 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/Logo.webp">
-                    <h2 class="relative w-auto inline-block leading-tight">
-                        <strong><u style="text-decoration-color: #F61A30;">Everything you need</u></strong> to <br class="block sm:hidden">
-                        start <br class="hidden sm:inline">playing the piano.
-                    </h2>
-                    <h3 class="leading-tight mt-6 mb-4 sm:mb-6">
-                        Only <strong>$599</strong>
                     </h3>
                 @else
                      <img class="h-6 md:h-10 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/keyboard-bundle-logo.svg">
@@ -376,7 +353,7 @@
         </div>
     </section> --}}
 
-    <section class="bg-[#12193F] text-white py-12 lg:py-20 px-4 sm:px-6 lg:px-10 text-center hidden @if(!empty($lifetime)) hidden @endif">
+    <section class="bg-[#12193F] text-white py-12 lg:py-20 px-4 sm:px-6 lg:px-10 text-center hidden">
         <img class="h-12 sm:h-16 md:h-24 inline mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/1300x0/marketing/pianote/products/prima/headline.webp">
 
         <p class="text-lg py-2 md:py-4">
@@ -401,7 +378,7 @@
         </div>
     </section>
 
-    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative @if(!empty($lifetime)) hidden @endif"style="background: #F1EFED; color:#000;">
+    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background: #F1EFED; color:#000;">
             <h2 class="leading-tight"><strong>Your new Pianote Prima <span class="hidden sm:inline">piano </span></strong></h2>
             <h3 class="leading-tight mt-1 mb-5 lg:mb-8">comes with unlimited piano lessons from <img src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/pianote-logo.svg" alt="pianote logo" class="h-6 md:h-8"></h3>
             <div class="container mx-auto z-10 relative max-w-3xl">
@@ -464,7 +441,7 @@
             </div>
     </section>
 
-    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20  relative @if(empty($lifetime) && empty($ultimate)) hidden @endif">
+    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20  relative @if(empty($ultimate)) hidden @endif">
             <div class="container mx-auto z-10 relative max-w-5xl">
                 <h2 class="leading-tight"><strong>Complete the setup.</strong></h2>
                 <p class="leading-tight my-5">Add the essential practice tools you need for the ultimate home practice space.</p>
@@ -502,7 +479,7 @@
         $videoTargetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
     @endphp
 
-    <section class=" @if(!empty($ultimate)) pb-8 sm:pb-16 lg:pb-20 @else py-8 sm:py-16 lg:py-20 @endif px-4 sm:px-6 @if(!empty($lifetime)) hidden @endif">
+    <section class=" @if(!empty($ultimate)) pb-8 sm:pb-16 lg:pb-20 @else py-8 sm:py-16 lg:py-20 @endif px-4 sm:px-6">
     <div class="container mx-auto max-w-5xl">
             <div class="space-y-4 md:space-y-8">
                 @foreach($bonusVideos as $pack)
@@ -546,82 +523,17 @@
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight"><strong>Peace of mind - guaranteed.</strong></h2>
             <p class="leading-tight mt-2 mb-5 sm:mb-7">Your piano includes a 90-day guarantee from Pianote + a 2-year parts warranty for your Prima.</p>
-            @if(!empty($lifetime))
-                <picture>
-                    <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1270x0/filters:quality(95)/marketing/pianote/products/prima/warranty.webp">
-                    <img class="transition-opacity opacity-0 h-20 sm:h-36" alt="icon" loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/products/prima/warranty.webp">
-                </picture>
-            @else
                 <picture>
                     <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1270x0/filters:quality(95)/marketing/pianote/products/prima/bundle/warranty.webp">
                     <img class="transition-opacity opacity-0 h-16 sm:h-36" alt="icon" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/warranty.webp">
                 </picture>
-            @endif
         </div>
     </section>
 
     <div id="customize-anchor" class="anchor"></div>
-    @if(!empty($lifetime))
-        <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16" style="background-color:#F4F8FB;">
-            <div class="container mx-auto relative z-10 max-w-3xl">
-                <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8 lifetime-card">
-                        @include('drumeo.products.partials._order-card', [
-                            'header' => 'The Pianote PRIMA',
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/prima/order-01.webp',
-                            'imageHeight' => 'h-24 lg:h-28 px-4',
-                            'fullPrice' => "$599",
-                            'price' => "$599",
-                            'specialText' => 'Free Shipping in the USA<br>*Discounted rates elsewhere',
-                            'cta' => 'BUY NOW',
-                            'highlightBorder' => true,
-                            'link' => '/ecommerce/add-to-cart?products[prima-keyboard]=1',
-                            'bonuses' => [
-                                '<i class="fas fa-check text-pianote mr-1"></i> The Pianote Prima',
-                                '<i class="fas fa-check text-pianote mr-1"></i> 88-key Progressive Lever Hammer Action',
-                                '<i class="fas fa-check text-pianote mr-1"></i> Stereo Speakers',
-                                '<i class="fas fa-check text-pianote mr-1"></i> Double Headphone Jack',
-                                '<i class="fas fa-check text-pianote mr-1"></i> Bluetooth Connectivity',
-                                '<i class="fas fa-check text-pianote mr-1"></i> 4 Built-in Metronomes',
-                                '<i class="fas fa-check text-pianote mr-1"></i> 238 Built-in Sounds',
-                                '<i class="fas fa-check text-pianote mr-1"></i> True Piano Sustain Pedal',
-                                '<i class="fas fa-check text-pianote mr-1"></i> Music Stand Included',
-                                '<i class="fas fa-check text-pianote mr-1"></i> USB MIDI and Audio In/Out',
-                            ],
-                        ])
-                        @include('drumeo.products.partials._order-card', [
-                           'firstOnMobile' => true,
-                           'header' => 'Add a Bench & Stand',
-                           'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/prima/order-02.webp',
-                           'imageHeight' => 'h-24 lg:h-28',
-                           'price' => '$750',
-                           'specialText' => 'Free Shipping in the USA <br>*Discounted rates elsewhere',
-                           'cta' => 'BUY NOW',
-                           'highlightBorder' => true,
-                           'link' => '/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1',
-                            'bonuses' => [
-                            '<i class="fas fa-check text-pianote mr-1"></i> The Pianote Prima',
-                            '<i class="fas fa-check text-pianote mr-1"></i> Prima Keyboard Stand',
-                            '<i class="fas fa-check text-pianote mr-1"></i> Prima Piano Bench',
-                            '<i class="fas fa-check text-pianote mr-1"></i> 88-key Progressive Lever Hammer Action',
-                            '<i class="fas fa-check text-pianote mr-1"></i> Stereo Speakers',
-                            '<i class="fas fa-check text-pianote mr-1"></i> Double Headphone Jack',
-                            '<i class="fas fa-check text-pianote mr-1"></i> Bluetooth Connectivity',
-                            '<i class="fas fa-check text-pianote mr-1"></i> 4 Built-in Metronomes',
-                            '<i class="fas fa-check text-pianote mr-1"></i> 238 Built-in Sounds',
-                            '<i class="fas fa-check text-pianote mr-1"></i> True Piano Sustain Pedal',
-                            '<i class="fas fa-check text-pianote mr-1"></i> Music Stand Included',
-                            '<i class="fas fa-check text-pianote mr-1"></i> USB MIDI and Audio In/Out',
-                        ],
-                       ])
-                    </div>
-            </div>
-        </section>
-    @else
-        <section class="px-3 sm:px-0 text-center relative z-50 overflow-hidden"
+    <section class="px-3 sm:px-0 text-center relative z-50 overflow-hidden"
             @if(!empty($ultimate)) style="background: #000; color:#fff" @endif style="background: #F1EFED; color:#000;" >
             <div class="container max-w-6xl mx-auto relative z-50">
                 <div class="flex flex-wrap sm:flex-nowrap items-center px-4 sm:px-6 py-10 md:py-16 lg:py-20">
@@ -667,7 +579,6 @@
                 </div>
             </div>
         </section>
-    @endif
 
     <section class="text-center px-4 sm:px-6 py-10"
         @if(!empty($ultimate))

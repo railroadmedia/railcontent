@@ -26,6 +26,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/trial/more-time', [SalesController::class, 'promoMT']);
         Route::get('/trial/one-dollar', [SalesController::class, 'promoOD']);
         Route::get('/welcome-offer', [SalesController::class, 'promoWO']);
+        Route::get('/save-300', [SalesController::class, 'save300']);
         Route::get('/welcome-back-discount', [SalesController::class, 'welcomeBackDiscount']);
         Route::get('/student-only', [SalesController::class, 'promo']);
         Route::get('/choose-plan', [SalesController::class, 'choosePlan']);

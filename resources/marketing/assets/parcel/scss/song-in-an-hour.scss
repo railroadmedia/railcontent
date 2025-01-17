@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
   font-weight: 900;
@@ -187,7 +188,7 @@ a.tw-rounded-full.social-bubble {
 
   &:hover {
     color: #fff;
-    background: lighten($guitareoGreen, 10%);
+    background: color.adjust($guitareoGreen, $lightness: 10%);
   }
 
 }
@@ -205,7 +206,7 @@ a.tw-rounded-full.social-bubble {
   background: linear-gradient(180deg, #ffd500, #ffb400);
 
   &:hover {
-    background: linear-gradient(180deg, lighten(#ffd500, 10%), lighten(#ffb400, 10%));
+    background: linear-gradient(180deg, color.adjust(#ffd500, $lightness: 10%), color.adjust(#ffb400, $lightness: 10%));
   }
 }
 
@@ -335,8 +336,8 @@ a.tw-rounded-full.social-bubble {
   padding: 11px 0;
 
   &:hover {
-    background: lighten(#ffb100, 10%);
-    border-color: lighten(#ffb100, 10%);
+    background: color.adjust(#ffb100, $lightness: 10%);
+    border-color: color.adjust(#ffb100, $lightness: 10%);
     color: #000718;
   }
   &.complete,
@@ -351,7 +352,7 @@ a.tw-rounded-full.social-bubble {
     color: #ffb100;
 
     &:hover {
-      background: lighten(#ffb100, 10%);
+      background: color.adjust(#ffb100, $lightness: 10%);
       color: #000718;
     }
 
@@ -470,8 +471,8 @@ a.tw-rounded-full.social-bubble {
     padding: 11px 0;
 
     &:hover {
-      background: lighten(#ffb100, 10%);
-      border-color: lighten(#ffb100, 10%);
+      background: color.adjust(#ffb100, $lightness: 10%);
+      border-color: color.adjust(#ffb100, $lightness: 10%);
     }
   }
 }

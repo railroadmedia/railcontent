@@ -60,7 +60,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
 
         const patchChildDocument = async (childId, updates) => {
             const document =  await fetchDocument(`*[railcontent_id == ${childId}]{  _type, _id, railcontent_id, title, brand }`);
-            if (!document) {
+            if (!document || !document[0]) {
                 console.error(`No matching document found for railcontent_id: ${childId}`);
                 return;
             }
@@ -102,7 +102,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                 // Process parent document if applicable
                 let parentContentId = null;
                 if (draftCopy.parent_type) {
-                    const parentDocument = await fetchDocument(`*["${props.id}" in child[]._ref]{ "slug": slug.current, _type, _id, railcontent_id, "parent": {
+                    const parentDocument = await fetchDocument(`*["${props.id}" in child[]._ref && _type == "${draftCopy.parent_type}" ]{ "slug": slug.current, _type, _id, railcontent_id, "parent": {
                         railcontent_id,
                         "slug":slug.current,
                         _type,
@@ -113,7 +113,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                                 railcontent_id, "slug":slug.current, _type, _id
                             }[0]
                         }[0]
-                    } }[0]`);
+                    } }| order(_updatedAt desc)[0]`);
                     if (parentDocument) {
                         parentContentId = parentDocument.railcontent_id;
                         const parentsArray = [];

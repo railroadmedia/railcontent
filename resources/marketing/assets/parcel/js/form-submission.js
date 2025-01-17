@@ -89,6 +89,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 axios.post(form.action, formData)
                     .then(response => {
                         if (response.status === 201) {
+                            
+                            window.dataLayer = window.dataLayer || [];
+                            window.dataLayer.push({
+                                'event': "gtm.formSubmit",
+                                'formId': formId,
+                                'formSuccess': true,
+                                'selectedItems': Array.from(form.querySelectorAll('.instrument-checkbox:checked'))
+                                    .map(cb => cb.value)
+                                    .join(', ') || 'None Selected'
+                            });
                             //console.log('Form submitted', response);
                             form.reset();
                             if (pending) pending.classList.add('hidden');

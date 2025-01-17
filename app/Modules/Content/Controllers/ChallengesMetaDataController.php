@@ -30,7 +30,7 @@ class ChallengesMetaDataController extends Controller
     public function enrollmentPage(Request $request, $slug, $purchased = false): View
     {
         $enrollmentPageData = $this->challengesService->getEnrollmentPageData($slug, brand());
-        if (!$enrollmentPageData) {
+        if (!$enrollmentPageData || $enrollmentPageData['need_access']) {
             abort(404);
         }
         $challengeId = $enrollmentPageData['id'];

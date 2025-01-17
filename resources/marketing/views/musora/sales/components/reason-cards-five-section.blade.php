@@ -1,10 +1,18 @@
 <div id="method" class="anchor"></div>
 <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 relative bg-white"
-@if(!empty($bgColor)) style="background:{{ $bgColor }};" @endif>
+@if(!empty($bgColor)) style="background:{{ $bgColor }}!important;" @endif>
     <div class="container max-w-5xl mx-auto">
-        <h2 class="leading-tight"><strong><span class="border-2 border-{{ $theme }} rounded-full px-3 sm:px-4 py-1 inline-block">@if(!empty($full)) 5 @else 6 @endif</span> reasons why you’ll <br class="inline sm:hidden">love learning here.</strong></h2>
-        <p class="mt-2 sm:mt-3 mb-6 sm:mb-10">Level up your skills with the lessons, teachers, and<br class="hidden sm:inline lg:hidden">  practice tools <strong class="font-black">trusted by <span class="text-{{ $theme }}">{{ number_format(Prices::$students) }}</span> active students</strong>. </p>
-        <div class="flex flex-wrap text-left">
+        <h2 class="leading-tight"><strong>
+            @if(!empty($header))
+                    {!!  $header  !!}
+                @else
+                    <span class="border-2 border-{{ $theme }} rounded-full px-3 sm:px-4 py-1 inline-block">@if(!empty($full)) 5 @else 6 @endif</span> reasons why you’ll <br class="inline sm:hidden">love learning here.
+                @endif
+            </strong></h2>
+        @if(!empty($subHeader))
+            <p class="mt-2 sm:mt-3">Level up your skills with the lessons, teachers, and<br class="hidden sm:inline lg:hidden">  practice tools <strong class="font-black">trusted by <span class="text-{{ $theme }}">{{ number_format(Prices::$students) }}</span> active students</strong>. </p>
+        @endif
+        <div class="flex flex-wrap text-left mt-6 sm:mt-10">
             <div class="flex flex-wrap items-start justify-center text-left w-full sm:w-1/2">
                 @foreach ($gridItems as $key => $gridItem)
                     @if($key < 2)
@@ -32,7 +40,7 @@
 {{--                                <h5 class="rounded-full border-2 border-{{ $theme }} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>@if($theme == 'musora'){{ $key + 2 }}@else{{ $key + 1 }}@endif</strong></h5>--}}
                                 <div {{--class="pl-3"--}}>
                                     <h5 class="leading-tight"><strong>{{ $gridItem['title'] }}</strong></h5>
-                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{{ $gridItem['desc'] }}</p>
+                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{!! $gridItem['desc'] !!}</p>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +76,7 @@
 {{--                                    <h5 class="rounded-full border-2 border-{{ $theme }} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>@if($theme == 'musora'){{ $key + 2 }}@else{{ $key + 1 }}@endif</strong></h5>--}}
                                     <div {{--class="pl-3"--}}>
                                         <h5 class="leading-tight"><strong>{{ $gridItem['title'] }}</strong></h5>
-                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{{ $gridItem['desc'] }}</p>
+                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{!! $gridItem['desc'] !!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +110,7 @@
 {{--                                    <h5 class="rounded-full border-2 border-{{ $theme }} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>7</strong></h5>--}}
                                     <div {{--class="pl-3"--}}>
                                         <h5 class="leading-tight"><strong>{{ $gridItem['title'] }}</strong></h5>
-                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{{ $gridItem['desc'] }}</p>
+                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{!! $gridItem['desc'] !!}</p>
                                     </div>
                                 </div>
                             </div>

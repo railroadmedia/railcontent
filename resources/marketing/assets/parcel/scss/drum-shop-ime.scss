@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 .no-padding {
   padding-left: 0;
@@ -75,7 +76,7 @@ body {
   }
 
   &:hover, &:active, &:focus {
-    background: lighten($meGreen, 10%);
+    background: color.adjust($meGreen, $lightness: 10%);
   }
 }
 
