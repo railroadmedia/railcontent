@@ -43,6 +43,7 @@ enum ChallengeUserProgressStatus: string
  * @property integer $current_rest_days
  * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, seconds_practiced, unlock_date, completed_at
  * @property Carbon $start_date
+ * @property Carbon $enroll_date
  * @property Carbon $last_completed_date
  * @property integer $completed_time_practiced
  * @property integer $completed_best_streak
@@ -58,6 +59,7 @@ class ChallengeUserProgress extends Model
         return [
             'lessons_meta_data' => 'array',
             'start_date' => 'datetime',
+            'enroll_date' => 'datetime',
             'last_completed_date' => 'datetime',
         ];
     }
@@ -680,16 +682,13 @@ class ChallengeUserProgress extends Model
             if ($hasStreakIncreased) {
                 if ($totalLessons >= 10) {
                     if ($totalLessons == 10 || $totalLessons == 30) {
-                        // OR if every 5 days. remove elesif
-                        // $totalLessons == 10 || $totalLessons >= 20)
                         $isMilestoneStreak = ($currentStreak % 5 == 0);
                     } elseif (20 <= $totalLessons && $totalLessons <= 29) {
-                        // if lessons / 4 days
-                        $isMilestoneStreak = $totalLessons == $currentStreak || ceil(
+                        $isMilestoneStreak = $totalLessons == $currentStreak || round(
                                 $totalLessons / 4
                             ) == $currentStreak;
                     } else {
-                        $isMilestoneStreak = $totalLessons == $currentStreak || ceil(
+                        $isMilestoneStreak = $totalLessons == $currentStreak || round(
                             $totalLessons / 2
                         ) == $currentStreak;
                     }

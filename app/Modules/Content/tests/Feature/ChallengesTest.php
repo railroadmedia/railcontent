@@ -2139,6 +2139,60 @@ class ChallengesTest extends TestCase
         }
     }
 
+    public function test_milestones_for_length_22(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData('challenge-22-lessons.json', 'challenge-child-22-lessons.json');
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+        $userProgress = $challengesService->startChallenge(
+            $this->challengeId,
+            $userId,
+            startDate: Carbon::now()->startOfDay()->toISOString()
+        );
+
+        foreach ($userProgress->lessons_meta_data as $index => $lesson_meta_datum) {
+            $lessonCompletedProgress = $challengesService->completeLessonAndGetCurrentProgressResults(
+                $lesson_meta_datum['content_id'],
+                $userId
+            );
+            $lessonNumber = $index + 1;
+            $this->assertTrue($lessonCompletedProgress['show_modal']);
+            if ($lessonNumber == 22) {
+                $this->assertEquals('complete', $lessonCompletedProgress['milestone']);
+                $this->assertStringContainsString("You've completed ", $lessonCompletedProgress['motivational_title']);
+                $this->assertEmpty($lessonCompletedProgress['motivational_subtext']);
+                $this->assertNotNull($lessonCompletedProgress['lottie_url']);
+            } elseif (in_array($lessonNumber, [6,11,17])) {
+                $this->assertEquals($lessonNumber, $lessonCompletedProgress['milestone']);
+                $this->assertEquals(
+                    "You're on a {$lessonNumber} Day Streak!",
+                    $lessonCompletedProgress['motivational_title']
+                );
+                $this->assertEquals(
+                    "You've earned an additional freeze token!",
+                    $lessonCompletedProgress['motivational_subtext']
+                );
+                $this->assertNotNull($lessonCompletedProgress['lottie_url']);
+            } else {
+                $this->assertNull($lessonCompletedProgress['milestone']);
+                $this->assertEquals("You're done for the day!", $lessonCompletedProgress['motivational_title']);
+                $this->assertEquals(
+                    "Return tomorrow to maintain your streak!",
+                    $lessonCompletedProgress['motivational_subtext']
+                );
+                $this->assertNull($lessonCompletedProgress['lottie_url']);
+            }
+            $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+            $currentStreakData = $userProgress->getStreakCurrentData();
+            $this->assertEquals($lessonNumber, $currentStreakData['current']);
+            $this->assertEquals($lessonNumber, $currentStreakData['best']);
+            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->travel(1)->days();
+        }
+    }
+
     public function test_complete_lesson_for_unlocked_user(): void
     {
         $userId = user()->id;

@@ -223,6 +223,7 @@ class ChallengesService
                 'lessons_meta_data' => $lessonMetaData,
                 'is_active' => $isLocked,
                 'is_solo' => $isSolo,
+                'enroll_date' => Carbon::now()->toISOString(),
             ]
         );
         return $challengeUserProgress;
