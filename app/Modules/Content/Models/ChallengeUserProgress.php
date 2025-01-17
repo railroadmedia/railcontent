@@ -669,7 +669,8 @@ class ChallengeUserProgress extends Model
              * 30-day challenge - every 5 days
              * 10-day challenge - one at 5 days
              * 1-9  day challenge - none, other than completion
-             * 11-29 day challenges - Every Days / 2 - Integer only (default integer behaviour for rounding purposes)
+             * 10-19 day challenges - Every Days / 2 - Integer only (default integer behaviour for rounding purposes)
+             * 20-29 day - Every Days / 4 - Integer only  (default integer behaviour for rounding purposes)
              * Example: 29 / 2 = 15. Day 15 milestone & completion milestone
              * Every milestone is +1 rest day
              */
@@ -679,7 +680,14 @@ class ChallengeUserProgress extends Model
             if ($hasStreakIncreased) {
                 if ($totalLessons >= 10) {
                     if ($totalLessons == 10 || $totalLessons == 30) {
+                        // OR if every 5 days. remove elesif
+                        // $totalLessons == 10 || $totalLessons >= 20)
                         $isMilestoneStreak = ($currentStreak % 5 == 0);
+                    } elseif (20 <= $totalLessons && $totalLessons <= 29) {
+                        // if lessons / 4 days
+                        $isMilestoneStreak = $totalLessons == $currentStreak || ceil(
+                                $totalLessons / 4
+                            ) == $currentStreak;
                     } else {
                         $isMilestoneStreak = $totalLessons == $currentStreak || ceil(
                             $totalLessons / 2
