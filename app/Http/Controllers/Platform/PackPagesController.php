@@ -637,7 +637,7 @@ class PackPagesController extends Controller
         $lesson['assignments'] = $lessonAssignments;
 
         $userAccessLevel = user()->access_level;
-
+        $lesson['title'] = $lesson['title'] ?? $lesson->fetch('fields.title') ?? '';
         return view('content.lesson', [
             "parentType" => 'semester-pack',
             "lessonType" => 'semester-pack-lesson',
