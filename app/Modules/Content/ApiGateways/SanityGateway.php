@@ -10,14 +10,17 @@ use Sanity\Client as SanityClient;
 class SanityGateway
 {
     private const SHEET_MUSIC_QUERY = "
-        assignment_sheet_music_image[]{
-            _type == 'Image' => {
-              'url': asset->url
-            },
-            _type == 'URL' => {
-              url
-            }
-        }.url
+       [
+            ...assignment_sheet_music_image_new[]{
+              _type == 'Image' => {
+                'url': asset->url
+              },
+              _type == 'URL' => {
+                url
+              }
+            }.url,
+  	  assignment_sheet_music_image
+          ]
     ";
 
     private array $defaultFields = [
