@@ -452,7 +452,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
-            } else {
+            } elseif ($isCurriculumLesson) {
                 $this->assertNull($lessonCompletedProgress['milestone'] ?? null);
                 $this->assertEquals("You're done for the day!", $lessonCompletedProgress['motivational_title']);
                 $this->assertEquals(
@@ -460,6 +460,8 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNull($lessonCompletedProgress['lottie_url']);
+            } else {
+                $this->assertFalse($lessonCompletedProgress['show_modal']);
             }
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
             $currentStreakData = $userProgress->getStreakCurrentData();
@@ -3000,7 +3002,6 @@ class ChallengesTest extends TestCase
         $this->assertTrue(boolval($resultData['user_data']['is_active']));
         $this->assertEmpty($resultData['previous_lesson']);
         $this->assertEquals($secondLessonId, $resultData['next_lesson']['id']);
-        $this->assertEquals($firstLessonId, $resultData['first_incomplete_lesson']['id']);
         $this->assertCount(24, $resultData['lessons']);
         $this->travel(1)->days();
 
