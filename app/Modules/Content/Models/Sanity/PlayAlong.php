@@ -8,9 +8,9 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
-use App\Modules\Content\Models\Sanity\Structure\Validation\Max;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
+use Modules\Content\Models\Sanity\Structure\AssignmentSheetImageField;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListArrayElement;
@@ -36,7 +36,8 @@ class PlayAlong extends ParentTemplate
             fields: [new Field(FieldType::String, 'assignment_title', validation: [new Required()]),
                         new Field(FieldType::String, 'assignment_soundslice'),
                         new Field(FieldType::String, 'assignment_description'),
-                        new Field(FieldType::Array, 'assignment_sheet_music_image', title:'Assignment sheet music image:', of: new ListArrayElement()),
+                        new Field(FieldType::Array, 'assignment_sheet_music_image', title:'OLD Assignment sheet music image(imported):', readOnly: "true", of: new ListArrayElement()),
+                        new AssignmentSheetImageField(),
                         new Field(FieldType::Number, 'assignment_timecode', description: 'Time in seconds'),
                         new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
                     ]
@@ -56,20 +57,19 @@ class PlayAlong extends ParentTemplate
                             previewItem: new ListItemPreview('height', 'width'),
                         ), ),
                     ],
-
         );
         $childReference = new Reference([['type' => 'play-along-part']]);
 
         $this->addFields(
             [
                 new Field(FieldType::Object, 'video', hidden: "({document}) => (document?.brand == 'guitareo')", fields: $video->fields, group: $detailsGroup),
-                new Field(FieldType::Number, 'length_in_seconds',  hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
+                new Field(FieldType::Number, 'length_in_seconds', hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
 
-                new Field(FieldType::Array, 'child', 'Lessons',  hidden: "({document}) => (document?.brand != 'guitareo')", of: $childReference, group:$detailsGroup),
+                new Field(FieldType::Array, 'child', 'Lessons', hidden: "({document}) => (document?.brand != 'guitareo')", of: $childReference, group:$detailsGroup),
 
                 new Field(FieldType::Number, 'bpm', 'BPM', hidden: "({document}) => (document?.brand == 'guitareo')", validation: [new Min(0)], group:$detailsGroup),
 
-                new Field(FieldType::URL, 'mp3_no_drums_no_click_url',  hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
+                new Field(FieldType::URL, 'mp3_no_drums_no_click_url', hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
                 new Field(FieldType::URL, 'mp3_yes_drums_no_click_url', hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
                 new Field(FieldType::URL, 'mp3_no_drums_yes_click_url', hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
                 new Field(FieldType::URL, 'mp3_yes_drums_yes_click_url', hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
