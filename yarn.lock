@@ -14779,16 +14779,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"musora-content-services@railroadmedia/musora-content-services#feature/TP-366-sheet-music-image-url":
-  version: 1.2.2
-  resolution: "musora-content-services@https://github.com/railroadmedia/musora-content-services.git#commit=8561209387359be3c886ed374b2f587b8d77344b"
+"musora-content-services@npm:^1.2.4":
+  version: 1.2.4
+  resolution: "musora-content-services@npm:1.2.4"
   dependencies:
     "@babel/preset-env": "npm:^7.25.3"
     "@sanity/client": "npm:^5.4.2"
     babel-jest: "npm:^29.7.0"
     docdash: "npm:^2.0.2"
     groqd: "npm:^0.15.12"
-  checksum: 10c0/e4d9211dfb71e3d343393386460c2eeb0a62831b8628105646248fd1faa6d70542efb98fa03ccbdf1aabc1d09f225ebe742adb21a777ffed87f96bf6146b8d0a
+  checksum: 10c0/f410530289741f16536831e38556d178b6f519b64bc21b95c53143b4ce810510086cae212e9207fdf08bd3fbb0b8549687457e3a1ac060f57f259af1b1aaddd7
   languageName: node
   linkType: hard
 
@@ -17675,7 +17675,7 @@ __metadata:
     mitt: "npm:^3.0.0"
     moment: "npm:^2.30.1"
     moment-timezone: "npm:^0.5.46"
-    musora-content-services: "railroadmedia/musora-content-services#feature/TP-366-sheet-music-image-url"
+    musora-content-services: "npm:^1.2.4"
     mux.js: "npm:^5.5.1"
     normalize.css: "npm:^8.0.1"
     noty: "npm:^3.2.0-beta-deprecated"
