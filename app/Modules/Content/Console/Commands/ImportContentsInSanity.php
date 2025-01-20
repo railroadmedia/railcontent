@@ -646,11 +646,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 } elseif ($hierarchy->child->type == 'assignment') {
                     unset($songs['child_count']);
                     $songs['assignments_total_xp'] = $songs['assignments_total_xp'] + 25;
-                    $assignmentSheetMusicImage = collect($hierarchy->child->data->where('key', '=', 'sheet_music_image_url')->pluck('value')->toArray())
-                        ->map(fn ($url) => [
-                            '_type' => FieldType::URL->name,
-                            'url' => $url
-                        ])->toArray();
+                    $assignmentSheetMusicImage = $hierarchy->child->data->where('key', '=', 'sheet_music_image_url')->pluck('value')->toArray();
                     $timecode = $hierarchy->child->data->where('key', '=', 'timecode')->first()['value'] ?? null;
                     $songs["assignment"][] = [
                         'assignment_title'             => $hierarchy->child->title,
