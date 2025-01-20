@@ -51,9 +51,10 @@
                     <UserMetric v-for="(metric, index) in metrics" :metric="metric" :index="index" :key="`user metric ${index}`" />
                 </div>
             </section>
-
+ 
             <!-- Challenge Carousel -->
             <MiniCatalogueSection
+                v-if="isCurrentUsersProfile"
                 title="Challenges"
                 :see-all-url="`/${brand}/challenges`"
                 seeAllAriaLabel="See All Challenges"
@@ -64,6 +65,7 @@
 
             <!-- Challenge Awards -->
             <MiniCatalogueSection
+                v-if="isCurrentUsersProfile"
                 title="My Awards"
                 catalogue-type="challengeAward"
                 section-id="myawards"
@@ -72,6 +74,7 @@
 
             <!-- Completed Lessons -->
             <MiniCatalogueSection
+                v-if="isCurrentUsersProfile"
                 title="Completed Lessons"
                 :see-all-url="`/${brand}/lesson-history/completed`"
                 seeAllAriaLabel="See All Completed Lessons"
@@ -80,6 +83,7 @@
 
             <!-- Started Lessons -->
             <MiniCatalogueSection
+                v-if="isCurrentUsersProfile"
                 title="Started Lessons"
                 :see-all-url="`/${brand}/lesson-history/in-progress`"
                 seeAllAriaLabel="See All Started Lessons"
@@ -206,21 +210,23 @@ const breadcrumbs = [
 
 onBeforeMount(() => {
     const fetchData = async () => {
-        const [startedIds, completedIds, badges, startedChallenges] = await Promise.all([
-            fetchContentInProgress('all', brand.value),
-            fetchCompletedContent('all', brand.value),
-            fetchUserBadges(brand.value),
-            fetchChallengeUserActiveChallenges(brand.value),
-        ]);
+        if(props.isCurrentUsersProfile){
+            const [startedIds, completedIds, badges, startedChallenges] = await Promise.all([
+                fetchContentInProgress('all', brand.value),
+                fetchCompletedContent('all', brand.value),
+                fetchUserBadges(brand.value),
+                fetchChallengeUserActiveChallenges(brand.value),
+            ]);
 
-        const lessons = await fetchByRailContentIds([...startedIds.started, ...completedIds.completed]);
-        const started = lessons.filter(lesson => startedIds.started.includes(lesson.id)).slice(0, 20);
-        const completed = lessons.filter(lesson => completedIds.completed.includes(lesson.id)).slice(0, 20);
-        awards.value = badges;
-        challenges.value = startedChallenges;
+            const lessons = await fetchByRailContentIds([...startedIds.started, ...completedIds.completed]);
+            const started = lessons.filter(lesson => startedIds.started.includes(lesson.id)).slice(0, 20);
+            const completed = lessons.filter(lesson => completedIds.completed.includes(lesson.id)).slice(0, 20);
+            awards.value = badges;
+            challenges.value = startedChallenges;
 
-        startedContents.value = started;
-        completedContents.value = completed;
+            startedContents.value = started;
+            completedContents.value = completed;
+        }
 
         platformStore.setLoadingState(false);
     }

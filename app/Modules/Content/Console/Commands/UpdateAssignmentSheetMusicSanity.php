@@ -28,24 +28,23 @@ class UpdateAssignmentSheetMusicSanity extends \Illuminate\Console\Command
         $documents = $sanityGateway->sanity->fetch($query);
         $sanityData = [];
 
-        foreach($documents as $document){
+        foreach ($documents as $document) {
             $assignments = [];
-        foreach ($document['assignment'] as $assignment){
-            $assignmentSheetMusicImage = collect($assignment['assignment_sheet_music_image'])
-                ->map(fn ($url)  => (!is_array($url)) ? [
-                    '_type' => FieldType::URL->name,
-                    'url' => $url,
-                    '_key' => $this->generateRandomKey(16)
-                ] : $url)->toArray();
-            $assignment['assignment_sheet_music_image'] = $assignmentSheetMusicImage;
-            $timecode = $assignment['assignment_timecode'] ?? null;
+            foreach ($document['assignment'] as $assignment) {
+                $assignmentSheetMusicImage = collect($assignment['assignment_sheet_music_image'])
+                    ->map(fn ($url) => (!is_array($url)) ? [
+                        '_type' => FieldType::URL->name,
+                        'url' => $url,
+                        '_key' => $this->generateRandomKey(16)
+                    ] : $url)->toArray();
+                $assignment['assignment_sheet_music_image'] = $assignmentSheetMusicImage;
+                $timecode = $assignment['assignment_timecode'] ?? null;
 
-            if($timecode)
-            {
-                $assignment['assignment_timecode'] = ($assignment['assignment_timecode'] == '' || is_null(['assignment_timecode']))? null : (int)($assignment['assignment_timecode']);
+                if ($timecode) {
+                    $assignment['assignment_timecode'] = ($assignment['assignment_timecode'] == '' || is_null(['assignment_timecode'])) ? null : (int)($assignment['assignment_timecode']);
+                }
+                $assignments[] = $assignment;
             }
-            $assignments[] = $assignment;
-        }
 
             $sanityData[$document['_id']] = [
                 'assignment' => $assignments,
@@ -55,7 +54,7 @@ class UpdateAssignmentSheetMusicSanity extends \Illuminate\Console\Command
         }
 
         $sanityPatchesChunked = array_chunk($sanityData, 10, true);
-        foreach($sanityPatchesChunked as $sanityPatchChunked) {
+        foreach ($sanityPatchesChunked as $sanityPatchChunked) {
             $sanityGateway->patchSetMany($sanityPatchChunked);
         }
 
@@ -63,7 +62,8 @@ class UpdateAssignmentSheetMusicSanity extends \Illuminate\Console\Command
     }
 
 
-    function generateRandomKey($length = 16) {
+    public function generateRandomKey($length = 16)
+    {
         return bin2hex(random_bytes($length));
     }
 
