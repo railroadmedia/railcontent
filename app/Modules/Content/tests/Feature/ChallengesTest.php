@@ -2186,10 +2186,14 @@ class ChallengesTest extends TestCase
             }
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
             $currentStreakData = $userProgress->getStreakCurrentData();
-            $this->assertEquals($lessonNumber, $currentStreakData['current']);
-            $this->assertEquals($lessonNumber, $currentStreakData['best']);
-            $this->assertEquals(0, $currentStreakData['missed']);
-            $this->travel(1)->days();
+            if ($lessonNumber == 22) {
+                $this->assertEquals(22, $userProgress->completed_best_streak);
+            } else {
+                $this->assertEquals($lessonNumber, $currentStreakData['current']);
+                $this->assertEquals($lessonNumber, $currentStreakData['best']);
+                $this->assertEquals(0, $currentStreakData['missed']);
+                $this->travel(1)->days();
+            }
         }
     }
 

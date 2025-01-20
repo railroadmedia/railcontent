@@ -684,9 +684,12 @@ class ChallengeUserProgress extends Model
                     if ($totalLessons == 10 || $totalLessons == 30) {
                         $isMilestoneStreak = ($currentStreak % 5 == 0);
                     } elseif (20 <= $totalLessons && $totalLessons <= 29) {
-                        $isMilestoneStreak = $totalLessons == $currentStreak || round(
-                                $totalLessons / 4
-                            ) == $currentStreak;
+                        $oneQuarter = $totalLessons / 4;
+                        $milestones = [];
+                        foreach ([1,2,3,4] as $m) {
+                            $milestones[] = round($m * $oneQuarter);
+                        }
+                        $isMilestoneStreak = in_array($currentStreak, $milestones);
                     } else {
                         $isMilestoneStreak = $totalLessons == $currentStreak || round(
                             $totalLessons / 2
