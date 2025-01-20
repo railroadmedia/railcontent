@@ -7,6 +7,7 @@ use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\CustomerIO\Services\CustomerIoService as LegacyCustomerIoService;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
+use App\Modules\UserManagementSystem\Jobs\SyncOnboardingBrands;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
@@ -83,6 +84,8 @@ class CustomerIoService
                     ->addSeconds(30)
             )
         );
+
+        SyncOnboardingBrands::dispatch($user->id, $brand);
     }
 
     public function syncCancellationDataFromRecharge(
