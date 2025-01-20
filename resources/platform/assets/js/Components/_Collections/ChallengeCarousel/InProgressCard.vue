@@ -9,7 +9,7 @@
                 </button>
                 <!-- Dropdown -->
                 <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg tw-py-2">
-                    <li><a :href="challenge.web_url_path" class="tw-text-black dark:tw-text-white tw-text-sm tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-block tw-w-full tw-text-left">View Details</a></li>
+                    <li><a :href="challenge.web_url_path" class="tw-text-black dark:tw-text-white tw-text-sm tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-block tw-w-full tw-text-left">View Lessons</a></li>
                     <li v-if="isSoloChallenge && progressPercent === 0"><button @click="openNotificationModal" class="tw-text-sm tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-w-full tw-text-left">Change Start Date</button></li>
                     <li><button class="tw-text-sm tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]" @click="openLeaveModal">Leave {{ challengeTitle }}</button></li>
                 </ul>
