@@ -9,6 +9,18 @@ use Sanity\Client as SanityClient;
 
 class SanityGateway
 {
+    private const SHEET_MUSIC_QUERY = "
+      coalesce(assignment_sheet_music_image_new[]{
+              _type == 'Image' => {
+                'url': asset->url
+              },
+              _type == 'URL' => {
+                url
+              }
+            }.url,
+            assignment_sheet_music_image)
+    ";
+
     private array $defaultFields = [
         "'sanity_id' : _id",
         "'id': railcontent_id",
@@ -116,7 +128,7 @@ class SanityGateway
                     "id": railcontent_id,
                     "soundslice_slug": assignment_soundslice,
                     "title": assignment_title,
-                    "sheet_music_image_url": assignment_sheet_music_image,
+                    "sheet_music_image_url": '.self::SHEET_MUSIC_QUERY.',
                     "timecode": assignment_timecode,
                     "description": assignment_description,
                     "title":assignment_title,
@@ -160,7 +172,7 @@ class SanityGateway
                 'id': railcontent_id,
                 'soundslice_slug': assignment_soundslice,
                 'title': assignment_title,
-                'sheet_music_image_url': assignment_sheet_music_image,
+                'sheet_music_image_url': ".self::SHEET_MUSIC_QUERY.",
                 'timecode': assignment_timecode,
                 'description': assignment_description,
                 'title':assignment_title,
@@ -472,7 +484,7 @@ class SanityGateway
                 },
   assignment[railcontent_id in  [{$idsString}]]{assignment_soundslice,
          assignment_title,
-         assignment_sheet_music_image,
+         'sheet_music_image_url': ".self::SHEET_MUSIC_QUERY.",
          assignment_timecode,
          assignment_description,
          railcontent_id}
@@ -508,7 +520,7 @@ class SanityGateway
                     'difficulty_string' => $document['difficulty_string'],
                     'published_on' => $document['published_on'],
                     'railcontent_id' => $assignment['railcontent_id'],
-                    'sheet_music_image_url' => $assignment['assignment_sheet_music_image'] ?? [],
+                    'sheet_music_image_url' => $assignment['sheet_music_image_url'] ?? [],
                     'timecode' => $assignment['assignment_timecode'] ?? null,
                     'description' => $assignment['assignment_description'] ?? null,
                     'soundslice_slug' => $assignment['assignment_soundslice'] ?? null,
