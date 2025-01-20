@@ -35,7 +35,10 @@ class SalesController extends BaseController
     {
         return view('singeo.sales.subscription', ['theme' => 'singeo', 'promoVersion' => 'true']);
     }
-
+    public function save300()
+    {
+        return view('singeo.sales.save-300', ['theme' => 'singeo', 'promoPage' => 'true', 'promoVersion' => 'true']);
+    }
     public function welcomeBackDiscount()
     {
         return view('singeo.sales.welcome-back-discount', ['theme' => 'singeo']);

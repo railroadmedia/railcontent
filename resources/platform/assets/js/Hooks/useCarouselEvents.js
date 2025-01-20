@@ -64,6 +64,11 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
         getPageData();
     }
 
+    const resetPagination = () => {
+        page.value = 1;
+        getPageData();
+    }
+
     const resetProgress = (contentId) => {
         window.showconfirmationmodal({
             title: 'Hold your horses… This will reset your progress, are you sure about this?',
@@ -94,6 +99,7 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
         nextPage,
         prevPage,
         resetProgress,
+        resetPagination,
         removeItem,
         reFetchData,
     }

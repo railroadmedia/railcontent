@@ -26,6 +26,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/trial/more-time', [SalesController::class, 'promoMT']);
         Route::get('/trial/one-dollar', [SalesController::class, 'promoOD']);
         Route::get('/welcome-offer', [SalesController::class, 'promoWO']);
+        Route::get('/save-300', [SalesController::class, 'save300']);
         Route::get('/welcome-back-discount', [SalesController::class, 'welcomeBackDiscount']);
         Route::get('/student-only', [SalesController::class, 'promo']);
         Route::get('/choose-plan', [SalesController::class, 'choosePlan']);
@@ -65,7 +66,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/coaches', [SalesController::class, 'coaches']);
         Route::get('/cookie', [SalesController::class, 'cookie']);
         Route::get('/lifetime', [SalesController::class, 'lifetime']);
-                Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
+        Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount']);
         Route::get('/lisa-recommends', [SalesController::class, 'lisarecommends']);
         Route::get('/method', [SalesController::class, 'method']);
         Route::get('/privacy', [SalesController::class, 'privacy']);

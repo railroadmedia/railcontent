@@ -49,13 +49,22 @@
                 'buttonText' => "GET STARTED",
 
                 // first deal
-                'firstDeal'=> "Drumeo Only",
-                'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/drumeo/promos/march/order-membership.webp',
+                'firstDeal'=> "Digital New Year Bundle",
+                'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/670x0/filters:quality(95)/marketing/drumeo/promos/january/ny-collage-digital.webp',
                 'firstImageHeight' => 'h-24 sm:h-28',
                 'firstDealPrice' => 180,
-                'firstDealDiscount' => 240,
-                'firstDealSub' => "Save 25% on your first year.<br> No physical bonuses",
+                'firstDealDiscount' => 875,
+                'firstDealSub' => "Save 25% on your first year +<br>  get 5 digital bonuses.",
                 "firstDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-double-bass]=1&products[30-day-independence]=1&products[30-day-jazz]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&promo-code=welcome-back,NYD25&locked=true",
+                'firstExtraBonuses' => [
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Drummer ($127 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Independence ($127 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Double Bass ($127 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Jazz ($127 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Chops ($127 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> No shipping, No VAT required',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 90-Day Guarantee',
+            ],
 
                 // second deal
                 'topBadge' => "BEST DEAL",
@@ -67,13 +76,15 @@
                 'secondDealDiscount' => 966.95,
                 "secondDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-new-years-bundle]=1&promo-code=NYPHD25,new-year,ny-member-shipping&locked=true",
                 'secondExtraBonuses' => [
-                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> P4 Practice Pad ($79 value)',
-                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> Drumeo Vater Drumsticks ($12.95 value)',
                     '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Drummer ($127 value)',
                     '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Independence ($127 value)',
                     '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Double Bass ($127 value)',
                     '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Jazz ($127 value)',
                     '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> 30-Day Chops ($127 value)',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> <span class="text-drumeo">P4 Practice Pad ($79 value)</span>',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong class="text-drumeo">BONUS</strong> <span class="text-drumeo">Drumeo Vater Drumsticks ($12.95 value)</span>',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Free shipping in the U.S. and Canada',
+                    '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 90-Day Guarantee',
             ],
         ])
                 <p class="text-sm mb-7">

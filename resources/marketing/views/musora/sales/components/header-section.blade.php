@@ -3,19 +3,27 @@
     @if(!empty($bubbles))
     background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);
     @else
-    background:#000;color:#fff;"
+    background:#000;color:#fff;
     @endif
     "
 >
     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
-        <h4 class="relative w-auto inline-block mb-4 lg:mb-6 font-black font-lexend leading-none uppercase">
-            NEW YEAR. <span class="text-{{ $theme }}">NO EXCUSES.</span>
-        </h4><br>
+        @if(empty($noSubHeader))
+            <h4 class="relative w-auto inline-block mb-4 lg:mb-6 font-black font-lexend leading-none uppercase">
+                NEW YEAR. <span class="text-{{ $theme }}">NO EXCUSES.</span>
+            </h4><br>
+        @endif
         <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
             {!! $header !!}
         </h1>
+        @if(!empty($ascension))
+                <br>
+                <h5 class="relative w-auto inline-block mb-4 lg:mb-6 font-black font-lexend leading-none uppercase">
+                    Enjoy all the same lessons for less.
+                </h5>
+        @endif
         @if(!empty($pointOne))
-            <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
+            <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7 uppercase">
                 <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
                 <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
                 <br class="lg:hidden">
@@ -39,9 +47,9 @@
                 @if(!empty($cta))
                     {!! $cta !!}
                 @elseif(!empty($newYears))
-                    Save 20% &raquo;
+                    Save 20% <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @elseif(!empty($promoVersion) && empty($trialVersion))
-                    SEE YOUR DEAL &raquo;
+                    SEE YOUR DEAL <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @elseif(!empty($month))
                     30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @else
@@ -95,8 +103,8 @@
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: hsl(218deg 50% 5% / 70%);"></div>
         @if(!empty($video))
             @if(!empty($videoM))
-                <video class="sm:hidden block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $video }}"></video>
-                <video class="hidden sm:block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $videoM }}"></video>
+                <video class="sm:hidden block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $videoM }}"></video>
+                <video class="hidden sm:block object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $video }}"></video>
             @else
                 <video class="object-cover w-full relative z-0 h-full" type="video/mp4" autoplay loop playsinline muted src="{{ $video }}"></video>
             @endif

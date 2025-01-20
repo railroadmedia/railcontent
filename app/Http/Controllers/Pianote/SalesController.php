@@ -83,6 +83,10 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.one-dollar', ['theme' => 'pianote', 'month' => true]);
     }
+    public function save300()
+    {
+        return view('pianote.sales.save-300', ['theme' => 'pianote', 'promoPage' => 'true', 'promoVersion' => 'true' ]);
+    }
     public function welcomeBackDiscount()
     {
         return view('pianote.sales.welcome-back-discount', ['theme' => 'pianote']);
@@ -537,11 +541,10 @@ class SalesController extends BaseController
             'theme' => 'pianote',
         ]);
     }
-    public function primaLTM()
+    public function primaMember()
     {
-        return view('pianote.products.prima', [
+        return view('pianote.products.prima-members', [
             'theme' => 'pianote',
-            'lifetime' => true,
         ]);
     }
     public function primaUlt()

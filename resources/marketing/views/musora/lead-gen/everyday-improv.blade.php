@@ -319,7 +319,7 @@
                     $cards = [
                         [
                             'header' => 'Lifetime Access to Everyday Improv',
-                            'price' => '$127',
+                            'price' => '$97',
                             'badge_text' => 'COURSE ONLY',
                             'badge_class' => 'border-black',
                             'subheader' => 'One time payment.',

@@ -8,12 +8,14 @@
 ])
 @section('body-data')
     x-data ='{
-    soundslice : false,
-    waitlist: false,
+    demoVid : false,
     trailer : false,
     lazyLoad: false,
     videoLoaded: false,
     keyTrailer : false,
+    @foreach($drumeo['packs'] as $modalData)
+        {{ $modalData['name'] }}: false,
+    @endforeach
     }'
 @endsection
 

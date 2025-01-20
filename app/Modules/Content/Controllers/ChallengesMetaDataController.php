@@ -30,7 +30,7 @@ class ChallengesMetaDataController extends Controller
     public function enrollmentPage(Request $request, $slug, $purchased = false): View
     {
         $enrollmentPageData = $this->challengesService->getEnrollmentPageData($slug, brand());
-        if (!$enrollmentPageData) {
+        if (!$enrollmentPageData || $enrollmentPageData['need_access']) {
             abort(404);
         }
         $challengeId = $enrollmentPageData['id'];
@@ -63,7 +63,7 @@ class ChallengesMetaDataController extends Controller
         if ($hasCompletedChallenge) {
             $enrollmentPageData['last_completion_date'] = $lastCompletionDate;
         }
-        if(!is_null($enrollmentPageData['cohort_start_date']) && !is_null($enrollmentPageData['cohort_end_date'])){
+        if (!is_null($enrollmentPageData['cohort_start_date']) && !is_null($enrollmentPageData['cohort_end_date'])) {
             $enrollmentPageData['duration_text'] = $this->challengesService->getDurationText(Carbon::parse($enrollmentPageData['cohort_start_date']), Carbon::parse($enrollmentPageData['cohort_end_date']));
         }
         $view = false && $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
@@ -347,7 +347,9 @@ class ChallengesMetaDataController extends Controller
     public function notificationsSoloReminders(int $id): JsonResponse
     {
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, user()->id);
-        if (!$userProgress) return self::NotFoundErrorResponse($id);
+        if (!$userProgress) {
+            return self::NotFoundErrorResponse($id);
+        }
         $userProgress->solo_notification_to_be_processed = 1;
         $userProgress->save();
         return response()->json();
