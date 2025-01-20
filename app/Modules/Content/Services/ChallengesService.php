@@ -315,7 +315,7 @@ class ChallengesService
         $curriculumDay = 0;
         $previousCurriculumLesson = null;
 
-        $challengeUserProgress = ChallengeUserProgress::updateRestDaysAndShiftUnlockDaysIfRestDayUsed($challengeUserProgress);
+        $challengeUserProgress = ChallengeUserProgress::updateRestDaysIfRestDayUsed($challengeUserProgress);
 
         foreach ($lessons as $index => $lesson) {
             $lessons[$index]['is_first_lesson'] = $index == 0;
@@ -731,9 +731,9 @@ class ChallengesService
         $userProgress->completed_best_streak = $bestStreak;
         $userProgress->last_completed_date = $today->toISOString();
         $userProgress->is_active = false;
+        $userProgress->is_locked = false;
         $userProgress->hide_completed_banner = false;
         $userProgress->save();
-        $this->unlockChallenge($userProgress->content_id, $userProgress->user_id);
     }
 
     public function unlockChallenge($id, $userId): ChallengeUserProgress|null

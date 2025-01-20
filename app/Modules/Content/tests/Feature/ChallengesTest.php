@@ -147,7 +147,7 @@ class ChallengesTest extends TestCase
                 'start_date' => Carbon::now()->addDays(2)->toISOString()]
         );
         $active = ChallengeUserProgress::query()->currentlyActive()->get();
-        $this->assertCount(2, $active);
+        $this->assertCount(3, $active);
     }
 
     public function test_enroll(): void
@@ -477,678 +477,12 @@ class ChallengesTest extends TestCase
         $this->assertEquals(10, $userProgress->completed_best_streak);
     }
 
-    public function test_rest_days_do_not_require_completion_of_previous_day_and_future_unlock_dates_shift(): void
-    {
-        $userId = user()->id;
-        $this->mockChallengeAndLessonDataData('challenge-10-lessons.json', 'challenge-child-10-lessons.json');
-        $challengesService = app()->make(ChallengesService::class);
-        $this->travelTo(now()->startOfDay());
-        $this->travel(100)->minutes();
-
-        $startDateCarbon = Carbon::parse("2024-12-01 04:00:00");
-
-        // Start the challenge
-        // Users get 1 free rest day when started if the challenge is 10 days or more
-        $userProgress = $challengesService->startChallenge(
-            $this->challengeId,
-            $userId,
-            startDate: $startDateCarbon->toISOString()
-        );
-
-        $usedRestDays = 0;
-        $currentDay = $startDateCarbon->copy()->addHours(3);
-
-        // Simulate completing lessons
-        for ($currentLessonNumberToBeCompleted = 1; $currentLessonNumberToBeCompleted <= count($userProgress->lessons_meta_data); $currentLessonNumberToBeCompleted++) {
-            Carbon::setTestNow($currentDay);
-
-            $currentLessonMetaData = $userProgress->lessons_meta_data[$currentLessonNumberToBeCompleted - 1];
-
-            // Complete the first day on start date (+1 to streak)
-            if ($currentLessonNumberToBeCompleted == 1) {
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
-            }
-
-            // They miss the second day, should use up a rest_dat and push the unlock days of all future lessons 1 day
-            if ($currentLessonNumberToBeCompleted == 2 && $currentDay->isSameDay(Carbon::parse("2024-12-02"))) {
-                $this->assertTrue(Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay($currentDay));
-
-                // subtract the current lesson number since the following day they still need to complete this lesson
-                $currentLessonNumberToBeCompleted--;
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
-            }
-
-            // now the following day, on Dec 3rd, rest day is consumed and unlock schedule should shift forward 1 day
-            if ($currentLessonNumberToBeCompleted == 2 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-03"))) {
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assert that the 2nd lessons unlock day is moved ahead to the 3rd (today in this test)
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[2 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-03"))
-                );
-                // same for following days
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[3 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-04"))
-                );
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[4 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-05"))
-                );
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[10 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-11"))
-                );
-
-                // Assert streak was not broken, but it shouldn't increase
-                $this->assertEquals([
-                    'best' => 1,
-                    'current' => 1,
-                    'missed' => 0,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // if they don't complete lesson 2 and it's the following day, their streak should break, they missed a day
-            if ($currentLessonNumberToBeCompleted == 3) {
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertTrue(
-                    Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay(Carbon::parse("2024-12-04"))
-                );
-                // double check
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[4 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-05"))
-                );
-
-                $this->assertEquals([
-                    'best' => 1,
-                    'current' => 0,
-                    'missed' => 1,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // now if the day after, they complete the current unlocked day, their streak should start again
-            if ($currentLessonNumberToBeCompleted == 4) {
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertTrue(
-                    Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay(Carbon::parse("2024-12-05"))
-                );
-
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => 1,
-                    'current' => 1,
-                    'missed' => 2,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // they complete the challenge on schedule
-            if ($currentLessonNumberToBeCompleted >= 5) {
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => $currentLessonNumberToBeCompleted-3,
-                    'current' => $currentLessonNumberToBeCompleted-3,
-                    'missed' => 2,
-                    'remaining_rest_days' => $currentLessonNumberToBeCompleted >= 8 ? 1 : 0, // they earned another rest day after a 5-day streak
-                ], $currentStreakData);
-            }
-
-            $currentDay->addDay();
-        }
-    }
-
-    public function test_all_rest_days_used_unlock_dates_shift(): void
-    {
-        $userId = user()->id;
-        $this->mockChallengeAndLessonDataData('challenge-10-lessons.json', 'challenge-child-10-lessons.json');
-        $challengesService = app()->make(ChallengesService::class);
-        $this->travelTo(now()->startOfDay());
-        $this->travel(100)->minutes();
-
-        $startDateCarbon = Carbon::parse("2024-12-01 04:00:00");
-
-        // Start the challenge
-        // Users get 1 free rest day when started if the challenge is 10 days or more
-        $userProgress = $challengesService->startChallenge(
-            $this->challengeId,
-            $userId,
-            startDate: $startDateCarbon->toISOString()
-        );
-
-        $usedRestDays = 0;
-        $currentDay = $startDateCarbon->copy()->addHours(3);
-
-        // Simulate completing lessons
-        for ($currentLessonNumberToBeCompleted = 1; $currentLessonNumberToBeCompleted <= count($userProgress->lessons_meta_data); $currentLessonNumberToBeCompleted++) {
-            Carbon::setTestNow($currentDay);
-
-            $currentLessonMetaData = $userProgress->lessons_meta_data[$currentLessonNumberToBeCompleted - 1];
-
-            // Complete the first day on start date (+1 to streak)
-            if ($currentLessonNumberToBeCompleted == 1) {
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
-            }
-
-            // They miss the second day, should use up a rest_dat and push the unlock days of all future lessons 1 day
-            if ($currentLessonNumberToBeCompleted == 2 && $currentDay->isSameDay(Carbon::parse("2024-12-02"))) {
-                $this->assertTrue(Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay($currentDay));
-
-                // subtract the current lesson number since the following day they still need to complete this lesson
-                $currentLessonNumberToBeCompleted--;
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
-            }
-
-            // now the following day, on Dec 3rd, rest day is consumed and unlock schedule should shift forward 1 day
-            if ($currentLessonNumberToBeCompleted == 2 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-03"))) {
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assert that the 2nd lessons unlock day is moved ahead to the 3rd (today in this test)
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[2 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-03"))
-                );
-                // same for following days
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[3 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-04"))
-                );
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[4 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-05"))
-                );
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[10 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-11"))
-                );
-
-
-                // Assert streak was not broken, but it shouldn't increase
-                $this->assertEquals([
-                    'best' => 1,
-                    'current' => 1,
-                    'missed' => 0,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // if they don't complete lesson 2 and it's the following day, their streak should break, they missed a day
-            if ($currentLessonNumberToBeCompleted == 3) {
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertTrue(
-                    Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay(Carbon::parse("2024-12-04"))
-                );
-                // double check
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[4 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-05"))
-                );
-
-                $this->assertEquals([
-                    'best' => 1,
-                    'current' => 0,
-                    'missed' => 1,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // now if the day after, they complete the current unlocked day, their streak should start again
-            if ($currentLessonNumberToBeCompleted == 4) {
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertTrue(
-                    Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay(Carbon::parse("2024-12-05"))
-                );
-
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => 1,
-                    'current' => 1,
-                    'missed' => 2,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // they complete the challenge on schedule
-            if ($currentLessonNumberToBeCompleted >= 5 && $currentLessonNumberToBeCompleted < 9) {
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => $currentLessonNumberToBeCompleted-3,
-                    'current' => $currentLessonNumberToBeCompleted-3,
-                    'missed' => 2,
-                    'remaining_rest_days' => $currentLessonNumberToBeCompleted >= 8 ? 1 : 0, // they earned another rest day after a 5-day streak
-                ], $currentStreakData);
-            }
-
-            // They miss lesson 9, which should use up their last rest day
-            if ($currentLessonNumberToBeCompleted == 9 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-10"))) {
-                $this->assertTrue(Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay($currentDay));
-
-                // subtract the current lesson number since the following day they still need to complete this lesson
-                $currentLessonNumberToBeCompleted--;
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assertions for streak behavior
-                $this->assertEquals([
-                    'best' => $currentLessonNumberToBeCompleted-3,
-                    'current' => $currentLessonNumberToBeCompleted-3,
-                    'missed' => 2,
-                    'remaining_rest_days' => 1, // they earned another rest day after a 5-day streak
-                ], $currentStreakData);
-            }
-
-            // now the following day, on Dec 3rd, rest day is consumed and unlock schedule should shift forward 1 day
-            // they also complete the day to keep going
-            if ($currentLessonNumberToBeCompleted == 9 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-11"))) {
-
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assert that the 9th lessons unlock day is moved ahead to dec 11th (today in this test)
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[9-1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-11"))
-                );
-                // same for following days
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[10 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-12"))
-                );
-
-                // Assert streak was not broken, but it shouldn't increase
-                $this->assertEquals([
-                    'best' => 6,
-                    'current' => 6,
-                    'missed' => 2,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // students completes the last day on time, maintaining streak
-            if ($currentLessonNumberToBeCompleted == 10 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-12"))) {
-
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assert streak was not broken, but it shouldn't increase
-                $this->assertEquals([
-                    'best' => 7,
-                    'current' => 7,
-                    'missed' => 2,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            $currentDay->addDay();
-        }
-    }
-
-    public function test_all_rest_days_used_unlock_dates_shift_and_rest_day_count_is_accurate(): void
-    {
-        $userId = user()->id;
-        $this->mockChallengeAndLessonDataData('challenge-10-lessons.json', 'challenge-child-10-lessons.json');
-        $challengesService = app()->make(ChallengesService::class);
-        $this->travelTo(now()->startOfDay());
-        $this->travel(100)->minutes();
-
-        $startDateCarbon = Carbon::parse("2024-12-01 04:00:00");
-
-        // Start the challenge
-        // Users get 1 free rest day when started if the challenge is 10 days or more
-        $userProgress = $challengesService->startChallenge(
-            $this->challengeId,
-            $userId,
-            startDate: $startDateCarbon->toISOString()
-        );
-
-        $usedRestDays = 0;
-        $currentDay = $startDateCarbon->copy()->addHours(3);
-
-        // Simulate completing lessons
-        for ($currentLessonNumberToBeCompleted = 1; $currentLessonNumberToBeCompleted <= count($userProgress->lessons_meta_data); $currentLessonNumberToBeCompleted++) {
-            Carbon::setTestNow($currentDay);
-
-            $currentLessonMetaData = $userProgress->lessons_meta_data[$currentLessonNumberToBeCompleted - 1];
-
-            // Complete the first day on start date (+1 to streak)
-            if ($currentLessonNumberToBeCompleted == 1) {
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
-            }
-
-            // They miss the second day, should use up a rest_dat and push the unlock days of all future lessons 1 day
-            if ($currentLessonNumberToBeCompleted == 2 && $currentDay->isSameDay(Carbon::parse("2024-12-02"))) {
-                $this->assertTrue(Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay($currentDay));
-
-                // subtract the current lesson number since the following day they still need to complete this lesson
-                $currentLessonNumberToBeCompleted--;
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
-            }
-
-            // now the following day, on Dec 3rd, rest day is consumed and unlock schedule should shift forward 1 day
-            if ($currentLessonNumberToBeCompleted == 2 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-03"))) {
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assert that the 2nd lessons unlock day is moved ahead to the 3rd (today in this test)
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[2 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-03"))
-                );
-                // same for following days
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[3 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-04"))
-                );
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[4 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-05"))
-                );
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[10 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-11"))
-                );
-
-                // Assert streak was not broken, but it shouldn't increase
-                $this->assertEquals([
-                    'best' => 1,
-                    'current' => 1,
-                    'missed' => 0,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // if they don't complete lesson 2 and it's the following day, their streak should break, they missed a day
-            if ($currentLessonNumberToBeCompleted == 3) {
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertTrue(
-                    Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay(Carbon::parse("2024-12-04"))
-                );
-                // double check
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[4 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-05"))
-                );
-
-                $this->assertEquals([
-                    'best' => 1,
-                    'current' => 0,
-                    'missed' => 1,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // now if the day after, they complete the current unlocked day, their streak should start again
-            if ($currentLessonNumberToBeCompleted == 4) {
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertTrue(
-                    Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay(Carbon::parse("2024-12-05"))
-                );
-
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => 1,
-                    'current' => 1,
-                    'missed' => 2,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // they complete the challenge on schedule
-            if ($currentLessonNumberToBeCompleted >= 5 && $currentLessonNumberToBeCompleted < 9) {
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => $currentLessonNumberToBeCompleted-3,
-                    'current' => $currentLessonNumberToBeCompleted-3,
-                    'missed' => 2,
-                    'remaining_rest_days' => $currentLessonNumberToBeCompleted >= 8 ? 1 : 0, // they earned another rest day after a 5-day streak
-                ], $currentStreakData);
-            }
-
-            // They miss lesson 9, which should use up their last rest day
-            if ($currentLessonNumberToBeCompleted == 9 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-10"))) {
-                $this->assertTrue(Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay($currentDay));
-
-                // subtract the current lesson number since the following day they still need to complete this lesson
-                $currentLessonNumberToBeCompleted--;
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assertions for streak behavior
-                $this->assertEquals([
-                    'best' => $currentLessonNumberToBeCompleted-3,
-                    'current' => $currentLessonNumberToBeCompleted-3,
-                    'missed' => 2,
-                    'remaining_rest_days' => 1, // they earned another rest day after a 5-day streak
-                ], $currentStreakData);
-            }
-
-            // now the following day, on Dec 3rd, rest day is consumed and unlock schedule should shift forward 1 day
-            // they also complete the day to keep going
-            if ($currentLessonNumberToBeCompleted == 9 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-11"))) {
-
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assert that the 9th lessons unlock day is moved ahead to dec 11th (today in this test)
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[9-1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-11"))
-                );
-                // same for following days
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[10 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-12"))
-                );
-
-                // Assert streak was not broken, but it shouldn't increase
-                $this->assertEquals([
-                    'best' => 6,
-                    'current' => 6,
-                    'missed' => 2,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // students completes the last day on time, maintaining streak
-            if ($currentLessonNumberToBeCompleted == 10 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-12"))) {
-
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assert streak was not broken, but it shouldn't increase
-                $this->assertEquals([
-                    'best' => 7,
-                    'current' => 7,
-                    'missed' => 2,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            $currentDay->addDay();
-        }
-    }
-
-    public function test_community_challenge_all_rest_days_used_unlock_dates_not_shift_and_rest_day_count_is_accurate(): void
+    public function test_solo_challenge_all_rest_days_used_unlock_dates_not_shift_and_rest_day_count_is_accurate(): void
     {
         $userId = user()->id;
         $this->mockChallengeAndLessonDataData(
             'challenge-10-lessons.json',
-            'challenge-child-10-lessons.json',
-            ['is_solo' => false]
+            'challenge-child-10-lessons.json'
         );
         /**
          * @var $challengesService ChallengesService
@@ -1163,11 +497,9 @@ class ChallengesTest extends TestCase
         // Users get 1 free rest day when started if the challenge is 10 days or more
         $userProgress = $challengesService->startChallenge(
             $this->challengeId,
-            $userId,
-            null  // start date must be null for community challenges to be treated as a community challenge
+            $userId
         );
 
-        $usedRestDays = 0;
         $currentDay = $startDateCarbon->copy()->addHours(3);
 
         // Simulate completing lessons
@@ -1305,8 +637,8 @@ class ChallengesTest extends TestCase
                 ], $currentStreakData);
             }
 
-            // they complete the challenge on schedule
-            if ($currentLessonNumberToBeCompleted >= 5 && $currentLessonNumberToBeCompleted < 9) {
+            // they complete the rest of the challenge on schedule
+            if ($currentLessonNumberToBeCompleted >= 5 && $currentLessonNumberToBeCompleted <= 9) {
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
                     $currentLessonMetaData['content_id'],
                     $userId
@@ -1317,20 +649,26 @@ class ChallengesTest extends TestCase
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
                 $this->assertEquals([
-                    'best' => $currentLessonNumberToBeCompleted-3,
-                    'current' => $currentLessonNumberToBeCompleted-3,
-                    'missed' => 2,
-                    'remaining_rest_days' => $currentLessonNumberToBeCompleted >= 8 ? 1 : 0, // they earned another rest day after a 5-day streak
+                    'best' => $currentLessonNumberToBeCompleted,
+                    'current' => $currentLessonNumberToBeCompleted,
+                    'missed' => 0,
+                    'remaining_rest_days' => $currentLessonNumberToBeCompleted >= 5 ? 1 : 0, // they earned another rest day after a 5-day streak
                 ], $currentStreakData);
             }
 
             // They miss lesson 9, which should use up their last rest day
-            if ($currentLessonNumberToBeCompleted == 9 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-10"))) {
-                $this->assertTrue(Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay($currentDay));
+            if ($currentLessonNumberToBeCompleted == 10 &&
+                $currentDay->isSameDay(Carbon::parse("2024-01-06"))) {
 
-                // subtract the current lesson number since the following day they still need to complete this lesson
-                $currentLessonNumberToBeCompleted--;
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $this->assertEquals(
+                    Carbon::parse($currentLessonMetaData['unlock_date'])->toDateString(),
+                    $currentDay->toDateString()
+                );
 
                 // Get the streak data
                 $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
@@ -1338,66 +676,10 @@ class ChallengesTest extends TestCase
 
                 // Assertions for streak behavior
                 $this->assertEquals([
-                    'best' => $currentLessonNumberToBeCompleted-3,
-                    'current' => $currentLessonNumberToBeCompleted-3,
-                    'missed' => 2,
-                    'remaining_rest_days' => 1, // they earned another rest day after a 5-day streak
-                ], $currentStreakData);
-            }
-
-            // now the following day, on Dec 3rd, rest day is consumed and unlock schedule should shift forward 1 day
-            // they also complete the day to keep going
-            if ($currentLessonNumberToBeCompleted == 9 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-11"))) {
-
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assert that the 9th lessons unlock day is moved ahead to dec 11th (today in this test)
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[9-1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-11"))
-                );
-                // same for following days
-                $this->assertTrue(
-                    Carbon::parse($userProgress->lessons_meta_data[10 - 1]['unlock_date'])
-                        ->isSameDay(Carbon::parse("2024-12-12"))
-                );
-
-                // Assert streak was not broken, but it shouldn't increase
-                $this->assertEquals([
-                    'best' => 6,
-                    'current' => 6,
-                    'missed' => 2,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // students completes the last day on time, maintaining streak
-            if ($currentLessonNumberToBeCompleted == 10 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-12"))) {
-
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                // Get the streak data
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                // Assert streak was not broken, but it shouldn't increase
-                $this->assertEquals([
-                    'best' => 7,
-                    'current' => 7,
-                    'missed' => 2,
-                    'remaining_rest_days' => 0,
+                    'best' => 10,
+                    'current' => 10,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2, // they earned another rest day after a 5-day streak
                 ], $currentStreakData);
             }
 
@@ -1405,26 +687,29 @@ class ChallengesTest extends TestCase
         }
     }
 
-    public function test_all_rest_days_used_unlock_dates_shift_with_bonus_day_gaps(): void
+    public function test_solo_challenge_rest_days_used_days_after_unlock_and_rest_day_count_is_accurate(): void
     {
         $userId = user()->id;
-        // There are 14 total contents, 2 of which are bonus days (lesson 8 and 9
-        $this->mockChallengeAndLessonDataData('challenge-10-lessons-with-unlock-and-bonus.json', 'challenge-child-10-lessons-with-unlock-and-bonus.json');
+        $this->mockChallengeAndLessonDataData(
+            'challenge-10-lessons.json',
+            'challenge-child-10-lessons.json'
+        );
+        /**
+         * @var $challengesService ChallengesService
+         */
         $challengesService = app()->make(ChallengesService::class);
         $this->travelTo(now()->startOfDay());
         $this->travel(100)->minutes();
 
-        $startDateCarbon = Carbon::parse("2024-12-01 04:00:00");
+        $startDateCarbon = Carbon::parse("2023-12-28 12:00:00");
 
         // Start the challenge
         // Users get 1 free rest day when started if the challenge is 10 days or more
         $userProgress = $challengesService->startChallenge(
             $this->challengeId,
-            $userId,
-            startDate: $startDateCarbon->startOfDay()->toISOString()
+            $userId
         );
 
-        $usedRestDays = 0;
         $currentDay = $startDateCarbon->copy()->addHours(3);
 
         // Simulate completing lessons
@@ -1433,8 +718,211 @@ class ChallengesTest extends TestCase
 
             $currentLessonMetaData = $userProgress->lessons_meta_data[$currentLessonNumberToBeCompleted - 1];
 
-            // Complete the first content on first day on start date (always unlocked, do not count toward streak)
-            if ($currentLessonNumberToBeCompleted == 1) {
+            // Complete the first day on start date (+1 to streak)
+            if ($currentLessonNumberToBeCompleted == 1 && $currentDay->isSameDay(Carbon::parse("2023-12-28"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assertions for streak behavior
+                $this->assertEquals(1, $currentStreakData['best']);
+                $this->assertEquals(1, $currentStreakData['current']);
+                $this->assertEquals(0, $currentStreakData['missed']);
+                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+            }
+
+            // They miss the second day
+            if ($currentLessonNumberToBeCompleted == 2 && $currentDay->isSameDay(Carbon::parse("2023-12-29"))) {
+                $this->assertTrue(Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay($currentDay));
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assertions for streak behavior
+                $this->assertEquals(1, $currentStreakData['best']);
+                $this->assertEquals(1, $currentStreakData['current']);
+                $this->assertEquals(0, $currentStreakData['missed']);
+                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+            }
+
+            // now the following day, on Dec 3rd they complete that days lesson but NOT the missed day
+            if ($currentLessonNumberToBeCompleted == 3 && $currentDay->isSameDay(Carbon::parse("2023-12-30"))) {
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assert that the future lessons are not rescheduled unlike solo challenges
+                $this->assertEquals(
+                    Carbon::parse($userProgress->lessons_meta_data[2 - 1]['unlock_date'])->toDateString(),
+                    "2023-12-29"
+                );
+                // same for following days
+                $this->assertEquals(
+                    Carbon::parse($userProgress->lessons_meta_data[3 - 1]['unlock_date'])->toDateString(),
+                    "2023-12-30"
+                );
+                $this->assertEquals(
+                    Carbon::parse($userProgress->lessons_meta_data[10 - 1]['unlock_date'])->toDateString(),
+                    "2024-01-06"
+                );
+
+                // Assert streak was not broken, but it shouldn't increase
+                $this->assertEquals([
+                    'best' => 1,
+                    'current' => 1,
+                    'missed' => 1,
+                    'remaining_rest_days' => 1,
+                ], $currentStreakData);
+
+                // complete todays lesson (+1 streak since they have rest day coverage)
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $userProgress->lessons_meta_data[3 - 1]['content_id'],
+                    $userId
+                );
+
+                // Get the streak data, their missed days should now be 0 since a rest day was used
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 2,
+                    'current' => 2,
+                    'missed' => 1,
+                    'remaining_rest_days' => 1,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 4 && $currentDay->isSameDay(Carbon::parse("2023-12-31"))) {
+
+                // now they complete the missing lesson (+1 streak since a rest day was used)
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $userProgress->lessons_meta_data[2 - 1]['content_id'],
+                    $userId
+                );
+
+                // Get the streak data, their missed days should now be 0 since a rest day was used
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 3,
+                    'current' => 3,
+                    'missed' => 0,
+                    'remaining_rest_days' => 0,
+                ], $currentStreakData);
+
+                // also complete todays lesson
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals(
+                    Carbon::parse($currentLessonMetaData['unlock_date'])->toDateString(),
+                    "2023-12-31"
+                );
+
+                $this->assertEquals([
+                    'best' => 4,
+                    'current' => 4,
+                    'missed' => 0,
+                    'remaining_rest_days' => 0,
+                ], $currentStreakData);
+            }
+
+            // they complete the rest of the challenge on schedule
+            if ($currentLessonNumberToBeCompleted >= 5 && $currentLessonNumberToBeCompleted <= 9) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => $currentLessonNumberToBeCompleted,
+                    'current' => $currentLessonNumberToBeCompleted,
+                    'missed' => 0,
+                    'remaining_rest_days' => $currentLessonNumberToBeCompleted >= 5 ? 1 : 0, // they earned another rest day after a 5-day streak
+                ], $currentStreakData);
+            }
+
+            // They miss lesson 9, which should use up their last rest day
+            if ($currentLessonNumberToBeCompleted == 10 &&
+                $currentDay->isSameDay(Carbon::parse("2024-01-06"))) {
+
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $this->assertEquals(
+                    Carbon::parse($currentLessonMetaData['unlock_date'])->toDateString(),
+                    $currentDay->toDateString()
+                );
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assertions for streak behavior
+                $this->assertEquals([
+                    'best' => 10,
+                    'current' => 10,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2, // they earned another rest day after a 5-day streak
+                ], $currentStreakData);
+            }
+
+            $currentDay->addDay();
+        }
+    }
+
+    public function test_solo_challenge_streak_data_with_bonus_days_no_rest_days_used(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData(
+            'challenge-10-lessons-with-unlock-and-bonus.json',
+            'challenge-child-10-lessons-with-unlock-and-bonus.json'
+        );
+        /**
+         * @var $challengesService ChallengesService
+         */
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+
+        $startDateCarbon = Carbon::parse("2023-12-28 12:00:00");
+
+        // Start the challenge
+        // Users get 1 free rest day when started if the challenge is 10 days or more
+        $userProgress = $challengesService->startChallenge(
+            $this->challengeId,
+            $userId
+        );
+
+        $currentDay = $startDateCarbon->copy()->addHours(3);
+
+        // Simulate completing lessons
+        for ($currentLessonNumberToBeCompleted = 1; $currentLessonNumberToBeCompleted <= count($userProgress->lessons_meta_data); $currentLessonNumberToBeCompleted++) {
+            Carbon::setTestNow($currentDay);
+
+            $currentLessonMetaData = $userProgress->lessons_meta_data[$currentLessonNumberToBeCompleted - 1];
+
+            // First day is a bonus lesson
+            if ($currentLessonNumberToBeCompleted == 1 && $currentDay->isSameDay(Carbon::parse("2023-12-28"))) {
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
                     $currentLessonMetaData['content_id'],
                     $userId
@@ -1450,12 +938,11 @@ class ChallengesTest extends TestCase
                 $this->assertEquals(0, $currentStreakData['missed']);
                 $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
 
-                // don't add a day to the counter
-                continue;
+                $currentDay->subDay();
             }
 
-            // Complete the second content on first day on start date (always unlocked, do not count toward streak)
-            if ($currentLessonNumberToBeCompleted == 2) {
+            // Second day is bonus that unlocks on the same day as 1
+            if ($currentLessonNumberToBeCompleted == 2 && $currentDay->isSameDay(Carbon::parse("2023-12-28"))) {
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
                     $currentLessonMetaData['content_id'],
                     $userId
@@ -1471,18 +958,18 @@ class ChallengesTest extends TestCase
                 $this->assertEquals(0, $currentStreakData['missed']);
                 $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
 
-                // don't add a day to the counter
-                continue;
+                $currentDay->subDay();
             }
 
-            // they complete the first actual lesson day on the day it unlocks (on the starting day), streak increases
-            if ($currentLessonNumberToBeCompleted == 3) {
+            // first curriculum lesson is completed
+            if ($currentLessonNumberToBeCompleted == 3 && $currentDay->isSameDay(Carbon::parse("2023-12-28"))) {
 
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
+                    $userProgress->lessons_meta_data[3 - 1]['content_id'],
                     $userId
                 );
 
+                // Get the streak data, their missed days should now be 0 since a rest day was used
                 $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
@@ -1494,8 +981,7 @@ class ChallengesTest extends TestCase
                 ], $currentStreakData);
             }
 
-            // they complete the next (2) actual lesson day on the day it unlocks, streak increases
-            if ($currentLessonNumberToBeCompleted == 4) {
+            if ($currentLessonNumberToBeCompleted == 4 && $currentDay->isSameDay(Carbon::parse("2023-12-29"))) {
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
                     $currentLessonMetaData['content_id'],
                     $userId
@@ -1512,52 +998,7 @@ class ChallengesTest extends TestCase
                 ], $currentStreakData);
             }
 
-            // they miss the 5th lesson schedule for Dec 3rd, and use up a rest day, streak data unchanged
-            if ($currentLessonNumberToBeCompleted == 5 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-03"))) {
-
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => 2,
-                    'current' => 2,
-                    'missed' => 0,
-                    'remaining_rest_days' => 1,
-                ], $currentStreakData);
-
-                // Make sure we loop back to this lesson tomorrow in this test
-                $currentLessonNumberToBeCompleted--;
-            }
-
-            // they return the following day, the rest days should be used up and the 5th lessons unlock date
-            // should be pushed forward a day. All future days should also be shifted forward a day
-            if ($currentLessonNumberToBeCompleted == 5 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-04"))) {
-
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => 2,
-                    'current' => 2,
-                    'missed' => 0,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-
-                // Assert this lessons unlock date has been pushed forward a day
-                $this->assertEquals(
-                    Carbon::parse($userProgress->lessons_meta_data[5 - 1]['unlock_date'])->toDateString(),
-                    "2024-12-04"
-                );
-
-                // Assert the lesson after this one has been rescheduled
-                $this->assertEquals(
-                    Carbon::parse($userProgress->lessons_meta_data[6 - 1]['unlock_date'])->toDateString(),
-                    "2024-12-05"
-                );
-
-                // They complete it today
+            if ($currentLessonNumberToBeCompleted == 5 && $currentDay->isSameDay(Carbon::parse("2023-12-30"))) {
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
                     $currentLessonMetaData['content_id'],
                     $userId
@@ -1570,12 +1011,11 @@ class ChallengesTest extends TestCase
                     'best' => 3,
                     'current' => 3,
                     'missed' => 0,
-                    'remaining_rest_days' => 0,
+                    'remaining_rest_days' => 1,
                 ], $currentStreakData);
             }
 
-            // they complete the 6th lesson on time (4th regular lesson)
-            if ($currentLessonNumberToBeCompleted == 6) {
+            if ($currentLessonNumberToBeCompleted == 6 && $currentDay->isSameDay(Carbon::parse("2023-12-31"))) {
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
                     $currentLessonMetaData['content_id'],
                     $userId
@@ -1588,12 +1028,11 @@ class ChallengesTest extends TestCase
                     'best' => 4,
                     'current' => 4,
                     'missed' => 0,
-                    'remaining_rest_days' => 0,
+                    'remaining_rest_days' => 1,
                 ], $currentStreakData);
             }
 
-            // they complete the 7th lesson on time (5th regular lesson), they earn another rest day (5 day-streak)
-            if ($currentLessonNumberToBeCompleted == 7) {
+            if ($currentLessonNumberToBeCompleted == 7 && $currentDay->isSameDay(Carbon::parse("2024-01-01"))) {
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
                     $currentLessonMetaData['content_id'],
                     $userId
@@ -1606,12 +1045,12 @@ class ChallengesTest extends TestCase
                     'best' => 5,
                     'current' => 5,
                     'missed' => 0,
-                    'remaining_rest_days' => 1,
+                    'remaining_rest_days' => 2,
                 ], $currentStreakData);
             }
 
-            // they complete the 8th lesson on time, but its a bonus lesson so they dont get anything
-            if ($currentLessonNumberToBeCompleted == 8) {
+            // bonus day, no streak
+            if ($currentLessonNumberToBeCompleted == 8 && $currentDay->isSameDay(Carbon::parse("2024-01-02"))) {
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
                     $currentLessonMetaData['content_id'],
                     $userId
@@ -1624,12 +1063,12 @@ class ChallengesTest extends TestCase
                     'best' => 5,
                     'current' => 5,
                     'missed' => 0,
-                    'remaining_rest_days' => 1,
+                    'remaining_rest_days' => 2,
                 ], $currentStreakData);
             }
 
-            // they complete the 9th lesson on time, but its a bonus lesson so they dont get anything
-            if ($currentLessonNumberToBeCompleted == 9) {
+            // bonus day, no streak
+            if ($currentLessonNumberToBeCompleted == 9 && $currentDay->isSameDay(Carbon::parse("2024-01-03"))) {
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
                     $currentLessonMetaData['content_id'],
                     $userId
@@ -1642,12 +1081,11 @@ class ChallengesTest extends TestCase
                     'best' => 5,
                     'current' => 5,
                     'missed' => 0,
-                    'remaining_rest_days' => 1,
+                    'remaining_rest_days' => 2,
                 ], $currentStreakData);
             }
 
-            // they complete the 10th lesson on time (6th regular lesson)
-            if ($currentLessonNumberToBeCompleted == 10) {
+            if ($currentLessonNumberToBeCompleted == 10 && $currentDay->isSameDay(Carbon::parse("2024-01-04"))) {
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
                     $currentLessonMetaData['content_id'],
                     $userId
@@ -1660,13 +1098,285 @@ class ChallengesTest extends TestCase
                     'best' => 6,
                     'current' => 6,
                     'missed' => 0,
+                    'remaining_rest_days' => 2,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 11 && $currentDay->isSameDay(Carbon::parse("2024-01-05"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 7,
+                    'current' => 7,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 12 && $currentDay->isSameDay(Carbon::parse("2024-01-06"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 8,
+                    'current' => 8,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 13 && $currentDay->isSameDay(Carbon::parse("2024-01-07"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 9,
+                    'current' => 9,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 14 && $currentDay->isSameDay(Carbon::parse("2024-01-08"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 10,
+                    'current' => 10,
+                    'missed' => 0,
+                    'remaining_rest_days' => 3,
+                ], $currentStreakData);
+            }
+
+            $currentDay->addDay();
+        }
+    }
+
+    public function test_community_challenge_streak_data_with_bonus_days_no_rest_days_used(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData(
+            'challenge-10-lessons-with-unlock-and-bonus.json',
+            'challenge-child-10-lessons-with-unlock-and-bonus.json',
+            ['is_solo' => false]
+        );
+        /**
+         * @var $challengesService ChallengesService
+         */
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+
+        $startDateCarbon = Carbon::parse("2023-12-28 12:00:00");
+
+        // Start the challenge
+        // Users get 1 free rest day when started if the challenge is 10 days or more
+        $userProgress = $challengesService->startChallenge(
+            $this->challengeId,
+            $userId,
+            null
+        );
+
+        $currentDay = $startDateCarbon->copy()->addHours(3);
+
+        // Simulate completing lessons
+        for ($currentLessonNumberToBeCompleted = 1; $currentLessonNumberToBeCompleted <= count($userProgress->lessons_meta_data); $currentLessonNumberToBeCompleted++) {
+            Carbon::setTestNow($currentDay);
+
+            $currentLessonMetaData = $userProgress->lessons_meta_data[$currentLessonNumberToBeCompleted - 1];
+
+            // First day is a bonus lesson
+            if ($currentLessonNumberToBeCompleted == 1 && $currentDay->isSameDay(Carbon::parse("2023-12-28"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assertions for streak behavior
+                $this->assertEquals(0, $currentStreakData['best']);
+                $this->assertEquals(0, $currentStreakData['current']);
+                $this->assertEquals(0, $currentStreakData['missed']);
+                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+
+                $currentDay->subDay();
+            }
+
+            // Second day is bonus that unlocks on the same day as 1
+            if ($currentLessonNumberToBeCompleted == 2 && $currentDay->isSameDay(Carbon::parse("2023-12-28"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assertions for streak behavior
+                $this->assertEquals(0, $currentStreakData['best']);
+                $this->assertEquals(0, $currentStreakData['current']);
+                $this->assertEquals(0, $currentStreakData['missed']);
+                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+
+                $currentDay->subDay();
+            }
+
+            // first curriculum lesson is completed
+            if ($currentLessonNumberToBeCompleted == 3 && $currentDay->isSameDay(Carbon::parse("2023-12-28"))) {
+
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $userProgress->lessons_meta_data[3 - 1]['content_id'],
+                    $userId
+                );
+
+                // Get the streak data, their missed days should now be 0 since a rest day was used
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 1,
+                    'current' => 1,
+                    'missed' => 0,
                     'remaining_rest_days' => 1,
                 ], $currentStreakData);
             }
 
-            // they miss the 11th lesson (7th regular lesson), and use up their last rest day
-            if ($currentLessonNumberToBeCompleted == 11 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-10"))) {
+            if ($currentLessonNumberToBeCompleted == 4 && $currentDay->isSameDay(Carbon::parse("2023-12-29"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 2,
+                    'current' => 2,
+                    'missed' => 0,
+                    'remaining_rest_days' => 1,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 5 && $currentDay->isSameDay(Carbon::parse("2023-12-30"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 3,
+                    'current' => 3,
+                    'missed' => 0,
+                    'remaining_rest_days' => 1,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 6 && $currentDay->isSameDay(Carbon::parse("2023-12-31"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 4,
+                    'current' => 4,
+                    'missed' => 0,
+                    'remaining_rest_days' => 1,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 7 && $currentDay->isSameDay(Carbon::parse("2024-01-01"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 5,
+                    'current' => 5,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2,
+                ], $currentStreakData);
+            }
+
+            // bonus day, no streak
+            if ($currentLessonNumberToBeCompleted == 8 && $currentDay->isSameDay(Carbon::parse("2024-01-02"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 5,
+                    'current' => 5,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2,
+                ], $currentStreakData);
+            }
+
+            // bonus day, no streak
+            if ($currentLessonNumberToBeCompleted == 9 && $currentDay->isSameDay(Carbon::parse("2024-01-03"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 5,
+                    'current' => 5,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 10 && $currentDay->isSameDay(Carbon::parse("2024-01-04"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
                 $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
@@ -1674,144 +1384,492 @@ class ChallengesTest extends TestCase
                     'best' => 6,
                     'current' => 6,
                     'missed' => 0,
-                    'remaining_rest_days' => 1,
+                    'remaining_rest_days' => 2,
                 ], $currentStreakData);
+            }
 
-                // Make sure we loop back to this lesson tomorrow in this test
+            if ($currentLessonNumberToBeCompleted == 11 && $currentDay->isSameDay(Carbon::parse("2024-01-05"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 7,
+                    'current' => 7,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 12 && $currentDay->isSameDay(Carbon::parse("2024-01-06"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 8,
+                    'current' => 8,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 13 && $currentDay->isSameDay(Carbon::parse("2024-01-07"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 9,
+                    'current' => 9,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 14 && $currentDay->isSameDay(Carbon::parse("2024-01-08"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 10,
+                    'current' => 10,
+                    'missed' => 0,
+                    'remaining_rest_days' => 3,
+                ], $currentStreakData);
+            }
+
+            $currentDay->addDay();
+        }
+    }
+
+    public function test_community_challenge_all_rest_days_used_unlock_dates_not_shift_and_rest_day_count_is_accurate(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData(
+            'challenge-10-lessons.json',
+            'challenge-child-10-lessons.json',
+            ['is_solo' => false]
+        );
+        /**
+         * @var $challengesService ChallengesService
+         */
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+
+        $startDateCarbon = Carbon::parse("2023-12-28 12:00:00");
+
+        // Start the challenge
+        // Users get 1 free rest day when started if the challenge is 10 days or more
+        $userProgress = $challengesService->startChallenge(
+            $this->challengeId,
+            $userId,
+            null  // start date must be null for community challenges to be treated as a community challenge
+        );
+
+        $currentDay = $startDateCarbon->copy()->addHours(3);
+
+        // Simulate completing lessons
+        for ($currentLessonNumberToBeCompleted = 1; $currentLessonNumberToBeCompleted <= count($userProgress->lessons_meta_data); $currentLessonNumberToBeCompleted++) {
+            Carbon::setTestNow($currentDay);
+
+            $currentLessonMetaData = $userProgress->lessons_meta_data[$currentLessonNumberToBeCompleted - 1];
+
+            // Complete the first day on start date (+1 to streak)
+            if ($currentLessonNumberToBeCompleted == 1 && $currentDay->isSameDay(Carbon::parse("2023-12-28"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assertions for streak behavior
+                $this->assertEquals(1, $currentStreakData['best']);
+                $this->assertEquals(1, $currentStreakData['current']);
+                $this->assertEquals(0, $currentStreakData['missed']);
+                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+            }
+
+            // They miss the second day, should use up a rest_dat and push the unlock days of all future lessons 1 day
+            if ($currentLessonNumberToBeCompleted == 2 && $currentDay->isSameDay(Carbon::parse("2023-12-29"))) {
+                $this->assertTrue(Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay($currentDay));
+
+                // subtract the current lesson number since the following day they still need to complete this lesson
                 $currentLessonNumberToBeCompleted--;
-            }
 
-            // they return the following day, the rest days should be used up and the 11th lessons unlock date
-            // should be pushed forward a day. All future days should also be shifted forward a day
-            if ($currentLessonNumberToBeCompleted == 11 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-11"))) {
-
+                // Get the streak data
                 $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
-                $this->assertEquals([
-                    'best' => 6,
-                    'current' => 6,
-                    'missed' => 0,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                // Assertions for streak behavior
+                $this->assertEquals(1, $currentStreakData['best']);
+                $this->assertEquals(1, $currentStreakData['current']);
+                $this->assertEquals(0, $currentStreakData['missed']);
+                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+            }
 
-                // Assert this lessons unlock date has been pushed forward a day
+            // now the following day, on Dec 3rd, rest day is consumed and schedule does NOT shift
+            // also, they complete the missing lesson and current lesson for today and get an additional streak of +2
+            if ($currentLessonNumberToBeCompleted == 2 &&
+                $currentDay->isSameDay(Carbon::parse("2023-12-30"))) {
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assert that the future lessons are not rescheduled unlike solo challenges
                 $this->assertEquals(
-                    Carbon::parse($userProgress->lessons_meta_data[11 - 1]['unlock_date'])->toDateString(),
-                    "2024-12-11"
+                    Carbon::parse($userProgress->lessons_meta_data[2 - 1]['unlock_date'])->toDateString(),
+                    "2023-12-29"
                 );
-
-                // Assert the lesson after this one has been rescheduled
+                // same for following days
                 $this->assertEquals(
-                    Carbon::parse($userProgress->lessons_meta_data[12 - 1]['unlock_date'])->toDateString(),
-                    "2024-12-12"
+                    Carbon::parse($userProgress->lessons_meta_data[3 - 1]['unlock_date'])->toDateString(),
+                    "2023-12-30"
+                );
+                $this->assertEquals(
+                    Carbon::parse($userProgress->lessons_meta_data[10 - 1]['unlock_date'])->toDateString(),
+                    "2024-01-06"
                 );
 
-                // They complete it today, the day it was reschedule to, which maintains their streak
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
+                // Assert streak was not broken, but it shouldn't increase
                 $this->assertEquals([
-                    'best' => 7,
-                    'current' => 7,
-                    'missed' => 0,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // they miss the 12th lesson (8th regular lesson), and they have no rest days left, its a missed day
-            if ($currentLessonNumberToBeCompleted == 12 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-12"))) {
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => 7,
-                    'current' => 7,
-                    'missed' => 0,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // they return the following day and it triggers a missed day and streak reset
-            if ($currentLessonNumberToBeCompleted == 13 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-13"))) {
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => 7,
-                    'current' => 0,
-                    'missed' => 1,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-
-                // They complete the current lesson today, previous one says missed
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
-                    $userId
-                );
-
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => 7,
+                    'best' => 1,
                     'current' => 1,
                     'missed' => 1,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-            }
-
-            // on the last day, they complete that day on time and go back and complete their missed lesson
-            if ($currentLessonNumberToBeCompleted == 14 &&
-                $currentDay->isSameDay(Carbon::parse("2024-12-14"))) {
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => 7,
-                    'current' => 1,
-                    'missed' => 1,
-                    'remaining_rest_days' => 0,
+                    'remaining_rest_days' => 1,
                 ], $currentStreakData);
 
-                // They complete the current lesson today
+                // complete the missing lesson (+1 streak since a rest day was used)
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $currentLessonMetaData['content_id'],
+                    $userProgress->lessons_meta_data[2 - 1]['content_id'],
                     $userId
                 );
 
+                // Get the streak data, their missed days should now be 0 since a rest day was used
                 $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
                 $this->assertEquals([
-                    'best' => 7,
-                    'current' => 2,
-                    'missed' => 1,
-                    'remaining_rest_days' => 0,
-                ], $currentStreakData);
-
-                // They complete the lesson they missed 2 days ago, decrease their missed lesson count, do not add a streak
-                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
-                    $userProgress->lessons_meta_data[12 - 1]['content_id'],
-                    $userId
-                );
-
-                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
-                $currentStreakData = $userProgress->getStreakCurrentData();
-
-                $this->assertEquals([
-                    'best' => 7,
+                    'best' => 2,
                     'current' => 2,
                     'missed' => 0,
                     'remaining_rest_days' => 0,
+                ], $currentStreakData);
+
+                // complete the missing lesson (+1 streak since a rest day was used)
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $userProgress->lessons_meta_data[3 - 1]['content_id'],
+                    $userId
+                );
+
+                // Get the streak data, their missed days should now be 0 since a rest day was used
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 3,
+                    'current' => 3,
+                    'missed' => 0,
+                    'remaining_rest_days' => 0,
+                ], $currentStreakData);
+
+                $currentLessonNumberToBeCompleted++;
+            }
+
+            if ($currentLessonNumberToBeCompleted == 4 &&
+                $currentDay->isSameDay(Carbon::parse("2023-12-31"))) {
+
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals(
+                    Carbon::parse($currentLessonMetaData['unlock_date'])->toDateString(),
+                    "2023-12-31"
+                );
+
+                $this->assertEquals([
+                    'best' => 4,
+                    'current' => 4,
+                    'missed' => 0,
+                    'remaining_rest_days' => 0,
+                ], $currentStreakData);
+            }
+
+            // they complete the rest of the challenge on schedule
+            if ($currentLessonNumberToBeCompleted >= 5 && $currentLessonNumberToBeCompleted <= 9) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => $currentLessonNumberToBeCompleted,
+                    'current' => $currentLessonNumberToBeCompleted,
+                    'missed' => 0,
+                    'remaining_rest_days' => $currentLessonNumberToBeCompleted >= 5 ? 1 : 0, // they earned another rest day after a 5-day streak
+                ], $currentStreakData);
+            }
+
+            // They miss lesson 9, which should use up their last rest day
+            if ($currentLessonNumberToBeCompleted == 10 &&
+                $currentDay->isSameDay(Carbon::parse("2024-01-06"))) {
+
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $this->assertEquals(
+                    Carbon::parse($currentLessonMetaData['unlock_date'])->toDateString(),
+                    $currentDay->toDateString()
+                );
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assertions for streak behavior
+                $this->assertEquals([
+                    'best' => 10,
+                    'current' => 10,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2, // they earned another rest day after a 5-day streak
+                ], $currentStreakData);
+            }
+
+            $currentDay->addDay();
+        }
+    }
+
+    public function test_community_challenge_rest_days_used_days_after_unlock_and_rest_day_count_is_accurate(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData(
+            'challenge-10-lessons.json',
+            'challenge-child-10-lessons.json',
+            ['is_solo' => false]
+        );
+        /**
+         * @var $challengesService ChallengesService
+         */
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+
+        $startDateCarbon = Carbon::parse("2023-12-28 12:00:00");
+
+        // Start the challenge
+        // Users get 1 free rest day when started if the challenge is 10 days or more
+        $userProgress = $challengesService->startChallenge(
+            $this->challengeId,
+            $userId,
+            null  // start date must be null for community challenges to be treated as a community challenge
+        );
+
+        $currentDay = $startDateCarbon->copy()->addHours(3);
+
+        // Simulate completing lessons
+        for ($currentLessonNumberToBeCompleted = 1; $currentLessonNumberToBeCompleted <= count($userProgress->lessons_meta_data); $currentLessonNumberToBeCompleted++) {
+            Carbon::setTestNow($currentDay);
+
+            $currentLessonMetaData = $userProgress->lessons_meta_data[$currentLessonNumberToBeCompleted - 1];
+
+            // Complete the first day on start date (+1 to streak)
+            if ($currentLessonNumberToBeCompleted == 1 && $currentDay->isSameDay(Carbon::parse("2023-12-28"))) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assertions for streak behavior
+                $this->assertEquals(1, $currentStreakData['best']);
+                $this->assertEquals(1, $currentStreakData['current']);
+                $this->assertEquals(0, $currentStreakData['missed']);
+                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+            }
+
+            // They miss the second day
+            if ($currentLessonNumberToBeCompleted == 2 && $currentDay->isSameDay(Carbon::parse("2023-12-29"))) {
+                $this->assertTrue(Carbon::parse($currentLessonMetaData['unlock_date'])->isSameDay($currentDay));
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assertions for streak behavior
+                $this->assertEquals(1, $currentStreakData['best']);
+                $this->assertEquals(1, $currentStreakData['current']);
+                $this->assertEquals(0, $currentStreakData['missed']);
+                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+            }
+
+            // now the following day, on Dec 3rd they complete that days lesson but NOT the missed day
+            if ($currentLessonNumberToBeCompleted == 3 && $currentDay->isSameDay(Carbon::parse("2023-12-30"))) {
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assert that the future lessons are not rescheduled unlike solo challenges
+                $this->assertEquals(
+                    Carbon::parse($userProgress->lessons_meta_data[2 - 1]['unlock_date'])->toDateString(),
+                    "2023-12-29"
+                );
+                // same for following days
+                $this->assertEquals(
+                    Carbon::parse($userProgress->lessons_meta_data[3 - 1]['unlock_date'])->toDateString(),
+                    "2023-12-30"
+                );
+                $this->assertEquals(
+                    Carbon::parse($userProgress->lessons_meta_data[10 - 1]['unlock_date'])->toDateString(),
+                    "2024-01-06"
+                );
+
+                // Assert streak was not broken, but it shouldn't increase
+                $this->assertEquals([
+                    'best' => 1,
+                    'current' => 1,
+                    'missed' => 1,
+                    'remaining_rest_days' => 1,
+                ], $currentStreakData);
+
+                // complete todays lesson (+1 streak since they have rest day coverage)
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $userProgress->lessons_meta_data[3 - 1]['content_id'],
+                    $userId
+                );
+
+                // Get the streak data, their missed days should now be 0 since a rest day was used
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 2,
+                    'current' => 2,
+                    'missed' => 1,
+                    'remaining_rest_days' => 1,
+                ], $currentStreakData);
+            }
+
+            if ($currentLessonNumberToBeCompleted == 4 && $currentDay->isSameDay(Carbon::parse("2023-12-31"))) {
+
+                // now they complete the missing lesson (+1 streak since a rest day was used)
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $userProgress->lessons_meta_data[2 - 1]['content_id'],
+                    $userId
+                );
+
+                // Get the streak data, their missed days should now be 0 since a rest day was used
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 3,
+                    'current' => 3,
+                    'missed' => 0,
+                    'remaining_rest_days' => 0,
+                ], $currentStreakData);
+
+                // also complete todays lesson
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals(
+                    Carbon::parse($currentLessonMetaData['unlock_date'])->toDateString(),
+                    "2023-12-31"
+                );
+
+                $this->assertEquals([
+                    'best' => 4,
+                    'current' => 4,
+                    'missed' => 0,
+                    'remaining_rest_days' => 0,
+                ], $currentStreakData);
+            }
+
+            // they complete the rest of the challenge on schedule
+            if ($currentLessonNumberToBeCompleted >= 5 && $currentLessonNumberToBeCompleted <= 9) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => $currentLessonNumberToBeCompleted,
+                    'current' => $currentLessonNumberToBeCompleted,
+                    'missed' => 0,
+                    'remaining_rest_days' => $currentLessonNumberToBeCompleted >= 5 ? 1 : 0, // they earned another rest day after a 5-day streak
+                ], $currentStreakData);
+            }
+
+            // They miss lesson 9, which should use up their last rest day
+            if ($currentLessonNumberToBeCompleted == 10 &&
+                $currentDay->isSameDay(Carbon::parse("2024-01-06"))) {
+
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $this->assertEquals(
+                    Carbon::parse($currentLessonMetaData['unlock_date'])->toDateString(),
+                    $currentDay->toDateString()
+                );
+
+                // Get the streak data
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                // Assertions for streak behavior
+                $this->assertEquals([
+                    'best' => 10,
+                    'current' => 10,
+                    'missed' => 0,
+                    'remaining_rest_days' => 2, // they earned another rest day after a 5-day streak
                 ], $currentStreakData);
             }
 
