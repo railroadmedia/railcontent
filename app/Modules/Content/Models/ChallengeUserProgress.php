@@ -43,6 +43,7 @@ enum ChallengeUserProgressStatus: string
  * @property integer $current_rest_days
  * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, seconds_practiced, unlock_date, completed_at
  * @property Carbon $start_date
+ * @property Carbon $enroll_date
  * @property Carbon $last_completed_date
  * @property integer $completed_time_practiced
  * @property integer $completed_best_streak
@@ -58,6 +59,7 @@ class ChallengeUserProgress extends Model
         return [
             'lessons_meta_data' => 'array',
             'start_date' => 'datetime',
+            'enroll_date' => 'datetime',
             'last_completed_date' => 'datetime',
         ];
     }
@@ -651,7 +653,8 @@ class ChallengeUserProgress extends Model
              * 30-day challenge - every 5 days
              * 10-day challenge - one at 5 days
              * 1-9  day challenge - none, other than completion
-             * 11-29 day challenges - Every Days / 2 - Integer only (default integer behaviour for rounding purposes)
+             * 10-19 day challenges - Every Days / 2 - Integer only (default integer behaviour for rounding purposes)
+             * 20-29 day - Every Days / 4 - Integer only  (default integer behaviour for rounding purposes)
              * Example: 29 / 2 = 15. Day 15 milestone & completion milestone
              * Every milestone is +1 rest day
              */
@@ -662,8 +665,15 @@ class ChallengeUserProgress extends Model
                 if ($totalLessons >= 10) {
                     if ($totalLessons == 10 || $totalLessons == 30) {
                         $isMilestoneStreak = ($currentStreak % 5 == 0);
+                    } elseif (20 <= $totalLessons && $totalLessons <= 29) {
+                        $oneQuarter = $totalLessons / 4;
+                        $milestones = [];
+                        foreach ([1,2,3,4] as $m) {
+                            $milestones[] = round($m * $oneQuarter);
+                        }
+                        $isMilestoneStreak = in_array($currentStreak, $milestones);
                     } else {
-                        $isMilestoneStreak = $totalLessons == $currentStreak || ceil(
+                        $isMilestoneStreak = $totalLessons == $currentStreak || round(
                             $totalLessons / 2
                         ) == $currentStreak;
                     }
