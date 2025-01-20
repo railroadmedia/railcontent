@@ -51,9 +51,10 @@
                     <UserMetric v-for="(metric, index) in metrics" :metric="metric" :index="index" :key="`user metric ${index}`" />
                 </div>
             </section>
-
+ 
             <!-- Challenge Carousel -->
             <MiniCatalogueSection
+                v-if="isCurrentUsersProfile"
                 title="Challenges"
                 :see-all-url="`/${brand}/challenges`"
                 seeAllAriaLabel="See All Challenges"
@@ -64,6 +65,7 @@
 
             <!-- Challenge Awards -->
             <MiniCatalogueSection
+                v-if="isCurrentUsersProfile"
                 title="My Awards"
                 catalogue-type="challengeAward"
                 section-id="myawards"
@@ -72,6 +74,7 @@
 
             <!-- Completed Lessons -->
             <MiniCatalogueSection
+                v-if="isCurrentUsersProfile"
                 title="Completed Lessons"
                 :see-all-url="`/${brand}/lesson-history/completed`"
                 seeAllAriaLabel="See All Completed Lessons"
@@ -80,6 +83,7 @@
 
             <!-- Started Lessons -->
             <MiniCatalogueSection
+                v-if="isCurrentUsersProfile"
                 title="Started Lessons"
                 :see-all-url="`/${brand}/lesson-history/in-progress`"
                 seeAllAriaLabel="See All Started Lessons"
