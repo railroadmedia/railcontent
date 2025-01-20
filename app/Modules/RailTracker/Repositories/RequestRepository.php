@@ -164,7 +164,7 @@ class RequestRepository extends TrackerRepositoryBase
         $isMySql = $this->databaseManager->connection($dbConnectionName)->getDriverName() == 'mysql';
 
         // --------- Part 1: linked data ---------
-//        Log::info("Railtracker Part 1: linked data");
+        //        Log::info("Railtracker Part 1: linked data");
 
         $builder = new BulkInsertOrUpdateBuilder(
             $this->databaseManager->connection($dbConnectionName),
@@ -193,8 +193,8 @@ class RequestRepository extends TrackerRepositoryBase
                 }
             }
 
-//            Log::info("Railtracker linked data to insert: ");
-//            Log::info(var_export($dataToInsert, true));
+            //            Log::info("Railtracker linked data to insert: ");
+            //            Log::info(var_export($dataToInsert, true));
 
             if (empty($dataToInsert)) {
                 continue;
@@ -248,7 +248,7 @@ class RequestRepository extends TrackerRepositoryBase
         }
 
         // --------- Part 2: populate requests table ---------
-//        Log::info("Railtracker Part 2: linked data");
+        //        Log::info("Railtracker Part 2: linked data");
 
         $bulkInsertData = [];
 
@@ -266,8 +266,8 @@ class RequestRepository extends TrackerRepositoryBase
                 continue;
             }
 
-//            Log::info("Railtracker request data to insert: ");
-//            Log::info(var_export($chunkOfBulkInsertData, true));
+            //            Log::info("Railtracker request data to insert: ");
+            //            Log::info(var_export($chunkOfBulkInsertData, true));
 
             try {
                 if ($isMySql) {
@@ -284,7 +284,7 @@ class RequestRepository extends TrackerRepositoryBase
         $uuids = array_column($chunkOfBulkInsertData ?? [], 'uuid');
 
         // because we cant' get created rows from insert, it seems
-//        Log::info("Railtracker Part 3: presumablyCreatedRows");
+        //        Log::info("Railtracker Part 3: presumablyCreatedRows");
 
         $presumablyCreatedRows = $builder
             ->from($table)

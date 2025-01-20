@@ -17,8 +17,11 @@ class AssignmentSheetImageField extends Field
     public function __construct(
         public Group|array|null $group = null,
     ) {
-        parent::__construct(FieldType::Array, 'assignment_sheet_music_image_new',  group: $this->group,
-                 of:[
+        parent::__construct(
+            FieldType::Array,
+            'assignment_sheet_music_image_new',
+            group: $this->group,
+            of:[
                             [
                                 'type' => FieldType::Image,
                                 'name' => 'Image'
@@ -34,7 +37,8 @@ class AssignmentSheetImageField extends Field
                                     ]
                                 ]
                             ]
-    ]);
+    ]
+        );
     }
 
 }

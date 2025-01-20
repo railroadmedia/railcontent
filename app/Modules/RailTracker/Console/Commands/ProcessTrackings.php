@@ -114,7 +114,7 @@ class ProcessTrackings extends Command
 
         while ($redisIterator !== 0) {
             if ($maxRequestsToProcess !== null && $processedRequestsCount >= $maxRequestsToProcess) {
-//                $this->info("Reached max requests limit of $maxRequestsToProcess");
+                //                $this->info("Reached max requests limit of $maxRequestsToProcess");
                 return;
             }
 
@@ -133,14 +133,14 @@ class ProcessTrackings extends Command
                     ]
                 );
 
-                $redisIterator = $scanResult ? (integer)$scanResult[0] : 0;
+                $redisIterator = $scanResult ? (int)$scanResult[0] : 0;
                 $keys = $scanResult ? $scanResult[1] : null;
 
                 if (empty($keys)) {
                     continue;
                 }
 
-//                $this->info("ProcessTrackings: Found redis keys " . count($keys));
+                //                $this->info("ProcessTrackings: Found redis keys " . count($keys));
 
                 $valuesThisChunk = new Collection();
 
@@ -153,7 +153,7 @@ class ProcessTrackings extends Command
                     }
                 }
 
-//                $this->info("ProcessTrackings: Processing redis values " . $valuesThisChunk->count());
+                //                $this->info("ProcessTrackings: Processing redis values " . $valuesThisChunk->count());
 
                 //$this->info('Starting to process ' . count($keys) . ' items.');
 
@@ -176,19 +176,19 @@ class ProcessTrackings extends Command
             }
         }
 
-//        $this->info("$instance:$this->name # requests success: $successfulRequestsCount");
+        //        $this->info("$instance:$this->name # requests success: $successfulRequestsCount");
         if ($exceptionsTrackedCount > 0) {
             $this->info(
-//                "$instance:$this->name # requests failed: $exceptionsTrackedCount"
+                //                "$instance:$this->name # requests failed: $exceptionsTrackedCount"
             );
         }
 
         $diff = microtime(true) - $timeStart;
         $sec = number_format((float)$diff, 3, '.', '');
         if ($timedout) {
-//            $this->info("$instance:$this->name Timeout ($sec s)");
+            //            $this->info("$instance:$this->name Timeout ($sec s)");
         } else {
-//            $this->info("$instance:$this->name Finished ($sec s)");
+            //            $this->info("$instance:$this->name Finished ($sec s)");
         }
     }
 
@@ -215,11 +215,11 @@ class ProcessTrackings extends Command
 
         $this->requestRepository->removeDuplicateVOs($requestVOs);
 
-//        $this->info("ProcessTrackings: Request VOs created.");
+        //        $this->info("ProcessTrackings: Request VOs created.");
 
         $requestVOs = $this->getAndAttachGeoIpData($requestVOs);
 
-//        $this->info("ProcessTrackings: GEO IP data added.");
+        //        $this->info("ProcessTrackings: GEO IP data added.");
 
         foreach ($objectsFromCache as $item) {
             $type = get_class($item);
@@ -266,11 +266,11 @@ class ProcessTrackings extends Command
 
         $recordsInDatabase = $this->requestRepository->storeRequests($requestVOs);
 
-//        $this->info("ProcessTrackings: Rows stored.");
+        //        $this->info("ProcessTrackings: Rows stored.");
 
         $this->updateUsersAnonymousRequests($recordsInDatabase);
 
-//        $this->info("ProcessTrackings: Adding user data to eligible anon requests");
+        //        $this->info("ProcessTrackings: Adding user data to eligible anon requests");
 
         return [
             'requestsCount' => count($recordsInDatabase),
@@ -388,7 +388,7 @@ class ProcessTrackings extends Command
         // split VOs into those with ipData available from previous requests and those for which we have to query the API
 
         [$requestVOsNotRequiringApiCall, $requestVOsRequiringApiQuery] = $requestVOs->partition(
-        // if return true, value will be passed to param 1, if false then passed to param 2
+            // if return true, value will be passed to param 1, if false then passed to param 2
             function ($requestVO) use ($matchingRequests) {
                 $matchingRequestsForIpAddress = $this->requestRecordMatchingIp($requestVO, $matchingRequests);
 
