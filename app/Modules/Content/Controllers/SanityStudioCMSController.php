@@ -86,6 +86,7 @@ use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PermissionService;
 use App\Decorators\Content\UrlDecorator;
+use function PHPUnit\Framework\logicalAnd;
 
 class SanityStudioCMSController extends BaseController
 {
@@ -247,32 +248,20 @@ class SanityStudioCMSController extends BaseController
         if ($request->get('_type') === 'permission') {
             $query = \App\Modules\Content\Models\Permission::query();
 
-            //request
-            //request('',500 songs,pianote,permission_500songsin5days)
+            //set permission based on railcontent_id || (name && brand)
+            $permission = $query
+                ->where('id', '=', $request->get('permission_id'))
+                ->orWhere(function ($builder) use ($request) {
+                    $builder->where('name', '=', $request->get('name'))
+                        ->where('brand', '=', $request->get('brand'));
+                })
+                ->first();
 
-            //existing permission in Sanity_db
-            //request(55,500 songs,guitareo,permission_500songsin5days)
-
-            //new $permission
-            //permission(, 500 songs, )
-
-
-
-            //check for existing permission based on railcontent_id
-            if($request->has('railcontent_id')) {
-                $permission = $query->where('id', '=', $request->get('railcontent_id'))->first();
-            }
-            //check for existing permission based on name AND brand
-            else{
-                $permission = $query->where('name', '=', $request->get('name'))
-                    ->where('brand', '=', $request->get('brand'))
-                    ->first();
-            }
             //create new permission if specified queried permission in Sanity db doesn't exist
             if (!$permission) {
                 $permission = new \App\Modules\Content\Models\Permission();
             }
-            //set methods/attributes of existing permission
+            //set attributes of existing permission
             $permission->name = $request->get('name');
             $permission->brand = $request->get('brand');
             $permission->sanity_ref = str_replace('drafts.','',$request->get('_id'));
