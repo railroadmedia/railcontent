@@ -9,6 +9,7 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoDeleteUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\User;
 
 class UserService
@@ -85,6 +86,7 @@ class UserService
 
     public function deleteUser($user)
     {
+        $oldUser = clone ($user);
         $user->fill([
                         'email' => 'musora+deleted_'.
                             Carbon::now()
@@ -127,6 +129,7 @@ class UserService
                 ->toDateTimeString();
 
         $user->save();
+        event(new UserUpdated($user, $oldUser));
 
         //delete Revenuecat user
         dispatch_sync(new RevenuecatDeleteUser($user));
