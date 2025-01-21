@@ -34,20 +34,13 @@ class RechargeDeleteUser implements ShouldQueue
             $rechargeCustomer = \Arr::first($rechargeGateway
                                                 ->getCustomer($user->shopify_id)
                                                 ->get('customers'));
-            //Cancel subscriptions first
-            $subscriptions = $rechargeGateway->getSubscriptions($user->shopify_id);
-            $reason = 'Deleted user';
-            $subscriptions->each(function ($subscription) use ($reason) {
-                if ($subscription->status == RechargeSubscriptionStatusEnum::Active->value) {
-                    $this->recharge->cancelSubscription($subscription, $reason);
-                }
-            });
             if ($rechargeCustomer) {
                 try {
                     $rechargeGateway->deleteCustomer(
                         $rechargeCustomer->id
                     );
                 } catch (\Exception $e) {
+                    Log::error("Failed to delete Recharge user ".$user->id);
                     Log::error($e->getMessage());
                 }
 

@@ -645,6 +645,7 @@ class RechargeGateway
         try {
             $this->call('DELETE', '/customers/' . $rechargeCustomerId);
         } catch (Exception $e) {
+            Log::error("Failed to delete recharge user $rechargeCustomerId");
             Log::error($e);
         }
     }
