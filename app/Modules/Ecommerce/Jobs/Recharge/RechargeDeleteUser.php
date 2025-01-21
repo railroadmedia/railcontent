@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Jobs\Recharge;
 
+use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -31,9 +32,16 @@ class RechargeDeleteUser implements ShouldQueue
         $user = $this->user;
         if ($user && $user->shopify_id) {
             $rechargeCustomer = \Arr::first($rechargeGateway
-                ->getCustomer($user->shopify_id)
-                ->get('customers'));
-
+                                                ->getCustomer($user->shopify_id)
+                                                ->get('customers'));
+            //Cancel subscriptions first
+            $subscriptions = $rechargeGateway->getSubscriptions($user->shopify_id);
+            $reason = 'Deleted user';
+            $subscriptions->each(function ($subscription) use ($reason) {
+                if ($subscription->status == RechargeSubscriptionStatusEnum::Active->value) {
+                    $this->recharge->cancelSubscription($subscription, $reason);
+                }
+            });
             if ($rechargeCustomer) {
                 try {
                     $rechargeGateway->deleteCustomer(
@@ -44,6 +52,6 @@ class RechargeDeleteUser implements ShouldQueue
                 }
 
             }
-            }
+        }
     }
 }
