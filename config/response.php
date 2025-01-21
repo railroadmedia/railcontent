@@ -2552,6 +2552,7 @@ return [
             'explore_tasks',
             'is_first_access',
             'brand_minutes_practiced',
+            'show_admin_toggle',
         ],
 
         'quick-tips' => [
@@ -5781,6 +5782,7 @@ return [
             'explore_tasks',
             'is_first_access',
             'brand_minutes_practiced',
+            'show_admin_toggle',
         ],
         'quick-tips' => [
             'id',
