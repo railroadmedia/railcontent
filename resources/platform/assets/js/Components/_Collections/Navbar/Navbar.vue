@@ -1,13 +1,15 @@
 <script setup>
-import {ref} from "vue"
+import { ref } from "vue"
 import { SearchIcon } from "@heroicons/vue/solid";
-import { bgColor } from "@constants/brands"
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@stores/user';
+import { usePlatformStore } from "@stores/platform";
+
+import SearchModal from "../SearchModal/SearchModal.vue";
 import HamburguerButton from "./HamburguerButton.vue";
 import BrandSelector from "./BrandSelector.vue";
 import UserIcon from "./UserIcon.vue";
-import SearchModal from "../SearchModal/SearchModal.vue"
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@stores/user';
+import MuToggle from '@units/FormInputs/MuToggle.vue';
 
 const props = defineProps({
   isSidebarHidden: Boolean,
@@ -36,8 +38,7 @@ const toggleSearchModal = (val) => {
   showSearchModal.value = val;
 }
 const userStore = useUserStore();
-const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand } = storeToRefs(userStore)
-
+const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand } = storeToRefs(userStore);
 </script>
 
 <template>
@@ -103,6 +104,11 @@ const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl,
       >
         <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-[#00101D] dark:tw-text-white" />
       </button>
+
+      <div class="tw-flex tw-flex-col tw-items-center">
+          <div class="dark:tw-text-white tw-text-xs tw-mb-1">Admin</div>
+          <MuToggle id="is_admin_view" name="is_admin_view" />
+      </div>
 
       <!-- Invite a Friend -->
       <a v-if="isUserAMember"
