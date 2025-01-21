@@ -3,7 +3,7 @@
     RE add captions
     fix tracking for videos
 */
-import {computed, onMounted, reactive, ref} from 'vue';
+import {computed, onMounted, reactive, ref, watch} from 'vue';
 import { usePlaylistsStore } from '@stores/playlists';
 import PlaybackCue from '@collections/Playlists/PlaybackCue.vue';
 import ContentUnavailable from '@collections/Playlists/ContentUnavailable.vue';
@@ -271,6 +271,10 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    playlist: {
+        type: Object,
+        default: {}
+    },
 });
 
 const state = reactive({
@@ -291,6 +295,7 @@ const likeData = ref({
 })
 const lastWatchedPositionInSeconds = ref(0);
 const isContentCompleted = ref(false);
+const callbackRef = ref(null);
     //ref(props.playlistItems.data[props.playlistItemPosition - 1].completed);
 
 let hasBeenPlayed = false;
@@ -418,6 +423,15 @@ const handleVideoEnd = () => {
     contentStatusCompleted(props.contentId);
 };
 
+const handlePlaylistItemShare = (callback) => {
+    if (playlistsStore.activePlaylist.private) {
+        window.openplaylistmodal({ modalType: 'share', data: props.playlist });
+        callbackRef.value = callback;
+    } else {
+        callback();
+    }
+};
+
 const openSlice = (title, index, startAt, loop) => {soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
     chapterEndTime.value = props.totalDuration;
@@ -468,7 +482,15 @@ const likeContent = () => {
 
 onMounted(() => {
     platformStore.setLoadingState(false);
+    playlistsStore.setActivePlaylist(props.playlist);
 })
+
+watch(() => playlistsStore.activePlaylist.private, (newVal) => {
+    if(!newVal && callbackRef.value){
+        callbackRef.value();
+        callbackRef.value = null;
+    }
+});
 </script>
 
 <template>
@@ -541,7 +563,7 @@ onMounted(() => {
                 </div>
                 <!-- Video Resources -->
                 <div class="tw-mb-4">
-                    <VideoResources :difficulty="difficulty" :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
+                    <VideoResources @on-playlist-item-share="handlePlaylistItemShare" :is-playlist-playback="true" :difficulty="difficulty" :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
                         :thumbnail-url="thumbnailUrl" :description="description" :instructors="contentInstructors"
                         :parent-title="parentTitle" :is-liked="likeData?.isLiked" :like-count="likeData?.likeCount" :is-completed="isContentCompleted" :content-id="contentId"
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
