@@ -11,7 +11,7 @@
       class="tw-flex tw-font-normal tw-text-sm sm:tw-pr-6 tw-mb-6"
     >
       <div>
-        <div
+        <a
           class="
             tw-relative
             tw-w-14
@@ -26,9 +26,8 @@
             tw-p-0
             tw-m-0
           "
-          :style="
-            'background-image:url( ' + getCoachImage(instructor) + ' );'
-          "
+          :style="'background-image:url( ' + getCoachImage(instructor) + ' );'"
+          :href="instructor.web_url_path"
         >
           <div
             v-if="instructor.name !== 'Students Of Guitareo'"
@@ -51,11 +50,8 @@
               />
             </svg>
           </div>
-          <div
-            v-on:click="goToCoachProfile(instructor.web_url_path)"
-            class="tw-w-full tw-h-full tw-absolute tw-rounded-full tw-cursor-pointer tw-border-solid tw-border-yellow-500 tw-border-2"
-          ></div>
-        </div>
+          <div class="tw-w-full tw-h-full tw-absolute tw-rounded-full tw-cursor-pointer tw-border-solid tw-border-yellow-500 tw-border-2"></div>
+        </a>
       </div>
       <div
         class="
@@ -69,7 +65,7 @@
           tw-shrink-0
         "
       >
-        <h4 v-on:click="goToCoachProfile(instructor.web_url_path)" class="tw-cursor-pointer tw-z-10">
+        <a class="tw-cursor-pointer tw-z-10" :href="instructor.web_url_path">
           <span class="tw-text-xs sm:tw-text-base tw-font-normal tw-mr-1">
             {{ instructor.name.split(" ")[0] }}
           </span>
@@ -81,7 +77,7 @@
           >
             {{ instructor.name.split(" ")[2] }}
           </span>
-        </h4>
+        </a>
         <!-- Subscribe CTA -->
         <div v-if="instructor.name !== 'Students Of Guitareo'">
           <button
