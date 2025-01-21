@@ -6,13 +6,13 @@
                     :lesson-thumbnail="lessonThumbnail"
                     :lesson-title="lessonTitle"
                     :lesson-id="lessonId"
-                    :theme-color="brand"
                     :brand="brand"
-                    :timecode="assignment.data.find((t) => t.key === 'timecode') ? assignment.data.find((t) => t.key === 'timecode').value : 0"
+                    :timecode="assignment.timecode ? assignment.timecode : 0"
                     :id="assignment.id"
                     :title="assignment.title"
                     :soundslice-slug="assignment.soundslice_slug"
                     :completed="assignment.completed"
+                    :description="assignment.description"
                     :user-id="userId"
                     :position="index"
                     :force-open="forceIndex === index"
@@ -21,8 +21,8 @@
                     v-on:force-prev="forceIndex = forceIndex - 1"
                     v-on:force-next="forceIndex = forceIndex + 1"
                     v-on:force-current="forceIndex = index"
-                >
-                </ContentAssignment>
+                    :assignment="assignment"
+                />
             </div>
         </div>
         <div class="tw-flex tw-flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] ph-1">
@@ -30,7 +30,7 @@
                 <h3 class="tw-font-bebas-neue tw-text-base tw-uppercase tw-font-normal tw-text-center">Completion Bonus</h3>
                 <span class="heading tw-text-center tw-text-[30px]">
             <i class="fas fa-trophy tw-text-2xl"></i>
-             {{ lessonData.xp_bonus || 0 }} XP
+             {{ lessonData.xp || 0 }} XP
         </span>
             </div>
         </div>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import ContentAssignment from '../ContentAssignment/ContentAssignment';
+import ContentAssignment from '@vuesora/Components/ContentAssignment/ContentAssignment.vue';
 
 export default {
     name: 'AssignmentsContainer',
@@ -73,15 +73,24 @@ export default {
     computed: {
         //Thumbnail
         lessonThumbnail() {
-            const thumbnail = this.lessonData['data'].find(data => data.key === 'thumbnail_url');
-            return thumbnail && thumbnail.value;
+            if( this.lessonData.thumbnail_url ) {
+                return this.lessonData.thumbnail_url;
+            } else {
+                const thumbnail = this.lessonData['thumbnail'] ?? this.lessonData['data'].find(data => data.key === 'thumbnail_url') ?? '';
+                return thumbnail && thumbnail.value;
+            }
+
         },
         lessonTitle() {
-            const title = this.lessonData['fields'].find(data => data.key === 'title');
-            return title.value;
+            if( this.lessonData.title) {
+                return this.lessonData.title
+            } else {
+                const title = this.lessonData['title'] ?? this.lessonData['fields'].find(data => data.key === 'title') ?? '';
+                return title.value;
+            }
         },
         lessonId() {
-            return this.lessonData['id'];
+            return this.lessonData.id ? this.lessonData.id : this.lessonData['id'];
         },
     }
 

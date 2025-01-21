@@ -12,7 +12,7 @@ class UrlDecorator extends ModeDecoratorBase
      * @param Collection|ContentEntity[] $contents
      * @return array|Collection
      */
-    public function decorate(Collection $contents)
+    public function decorate(Collection|\Illuminate\Support\Collection $contents)
     {
         if ($contents->isEmpty()) {
             return $contents;
@@ -25,7 +25,7 @@ class UrlDecorator extends ModeDecoratorBase
              */
 
             $contentTypeToURLSlugMap = array_flip(PrimaryURLSlugToContentTypeMap::$map);
-            $contentParentData = $content->getParentContentData();
+            $contentParentData = json_decode($content['parent_content_data'] ?? '') ?? [];
 
             if(count($contentParentData) == 1 && $contentParentData[0]->type == 'edge-pack') {
                 $contentParentData = [];
@@ -37,15 +37,6 @@ class UrlDecorator extends ModeDecoratorBase
                     $content->fetch(
                         'fields.instructor.1.slug'
                     ),
-                    $content['slug'],
-                    $content['id'],
-                ]);
-            }
-
-            if ($content['type'] == 'challenge') {
-                $contents[$contentIndex]['url'] = url()->route('platform.workout.challenge', [
-                    'brand' => $content['brand'],
-                     'challenges',
                     $content['slug'],
                     $content['id'],
                 ]);
@@ -66,6 +57,7 @@ class UrlDecorator extends ModeDecoratorBase
             if ($content['type'] == 'song-tutorial' ||
                 $content['type'] == 'quick-tips' ||
                 $content['type'] == 'student-review' ||
+                $content['type'] == 'challenge' ||
                 (count($contentParentData) == 0 && !empty($contentTypeToURLSlugMap[$content['type']]))) {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.first-level', [
                     'brand' => $content['brand'],
@@ -74,15 +66,6 @@ class UrlDecorator extends ModeDecoratorBase
                     $content['id'],
                 ]);
                 // second-level types
-            } elseif (count($contentParentData) == 1 && $content['type'] == 'challenge-part') {
-                $contents[$contentIndex]['url'] = url()->route('platform.workout.challenge.workout', [
-                    'brand' => $content['brand'],
-                    "challenges",
-                    $contentParentData[0]->slug,
-                    $contentParentData[0]->id,
-                    $content['slug'],
-                    $content['id'],
-                ]);
             } elseif (count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type])) {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.second-level', [
                     'brand' => $content['brand'],

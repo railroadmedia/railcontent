@@ -14,37 +14,49 @@ class NavigationService
             return [];
         }
         $shopName = brand() == 'drumeo' ? 'drumshop' : 'shop';
-        if ($user->isPackOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
-            return [
-                [ // section
+        if ($user->isPackOrChallengeOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
+            $section1 = [[
+                'name' => 'Home',
+                'path' => '/'.brand(),
+                'icon' => 'home',
+            ]];
+            if ($user->isChallengeOnlyOwner()) {
+                $section1[] =
                     [
-                        'name' => 'Home',
-                        'path' => '/'.brand(),
-                        'icon' => 'home',
-                    ],
-                    [
-                        'name' => 'Shop',
-                        'path' => get_legacy_brand_base_url().'/'.$shopName,
-                        'icon' => 'cart',
-                    ]
-                ],
-                [ // section
+                        'name' => 'Challenges',
+                        'path' => '/'.brand().'/challenge',
+                        'icon' => 'challenges',
+                    ];
+            }
+            $section1[] =
+                [
+                    'name' => 'Shop',
+                    'path' => get_legacy_brand_base_url().'/'.$shopName,
+                    'icon' => 'cart',
+                ];
+            $menu = [$section1];
+
+            if ($user->isPackOnlyOwner()) {
+                $menu[] = [ // section
                     [
                         'name' => 'Packs',
                         'path' => '/'.brand().'/packs',
                         'icon' => 'box',
                     ],
-                ],
-                [ // section
+                ];
+            }
+
+            $menu[] =    [ // section
                     [
                         'name' => 'Forums',
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
 
-                ],
-            ];
+                ];
+            return $menu;
         }
+
 
         $methodurl = match(brand()) {
             'drumeo' => 'drumeo-method/241247',
@@ -70,13 +82,18 @@ class NavigationService
                 'icon' => 'headphones',
             ],
             [
-                'name' => 'Workouts',
-                'path' => '/'.brand().'/workouts',
-                'icon' => 'workouts',
+                'name' => 'Challenges',
+                'path' => '/'.brand().'/challenge',
+                'icon' => 'challenges',
             ],
         ];
 
         $commonContentSection = [
+            [
+                'name' => 'Workouts',
+                'path' => '/'.brand().'/workouts',
+                'icon' => 'workouts',
+            ],
             [
                 'name' => 'Packs',
                 'path' => '/'.brand().'/packs',
@@ -203,11 +220,6 @@ class NavigationService
                         'icon' => 'electric-guitar',
                     ],
                     [
-                        'name' => '500 Songs',
-                        'path' => '/'.brand().'/packs/500-songs-in-5-days/233612/introduction/233941',
-                        'icon' => '500-songs',
-                    ],
-                    [
                         'name' => 'Chords',
                         'path' => '/'.brand().'/courses/chord-resources/391634',
                         'icon' => 'guitar-tabs',
@@ -257,10 +269,7 @@ class NavigationService
         return [];
     }
 
-    /**
-     * @return string
-     */
-    public static function getSidebarSectionsJson()
+    public static function getSidebarSectionsJson(): string
     {
         return json_encode(self::getSidebarSections());
     }
@@ -268,7 +277,7 @@ class NavigationService
     /**
      * @return string[]
      */
-    public static function getUserDropDownLinks()
+    public static function getUserDropDownLinks(): array
     {
         if (empty(user())) {
             return [];
@@ -286,10 +295,7 @@ class NavigationService
         ];
     }
 
-    /**
-     * @return string
-     */
-    public static function getUserDropDownLinksJson()
+    public static function getUserDropDownLinksJson(): string
     {
         return json_encode(self::getUserDropDownLinks());
     }

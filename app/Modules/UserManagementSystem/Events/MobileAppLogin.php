@@ -17,8 +17,6 @@ class MobileAppLogin
 
     /**
      * Create a new event instance.
-     *
-     * @param User $user
      */
     public function __construct(User $user, $firebaseToken = null, $platform = null)
     {
@@ -27,25 +25,16 @@ class MobileAppLogin
         $this->platform = $platform;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @return string
-     */
     public function getFirebaseToken(): ?string
     {
         return $this->firebaseToken;
     }
 
-    /**
-     * @return string
-     */
     public function getPlatform(): ?string
     {
         return $this->platform;

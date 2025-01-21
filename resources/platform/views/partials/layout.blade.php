@@ -70,6 +70,15 @@
 
         @yield('styles')
         {!! \App\Analytics\Tracker::headBottom() !!}
+
+        <script>
+            window.Laravel = {
+                sanityProjectId: @json(config('app.sanity_project_id')),
+                sanityApiToken: @json(config('app.sanity_api_token')),
+                sanityDataset: @json(config('app.sanity_dataset')),
+                mcsDebug: @json(config('app.mcs_debug'))
+            };
+        </script>
     </head>
 
     <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative" @yield('body-data')>
@@ -93,17 +102,16 @@
                     :vue-router="false"
                     brand="{{ $brand }}"
                     :user="{{ json_encode($userData) }}"
-                    :user-completed-account="{{ json_encode($showCompleteYourAccountButton) }}"
+                    :show-onboarding-banner="{{ json_encode($showCompleteYourAccountButton) }}"
                     csrf_token="{{ csrf_token() }}"
                     :journey-section="{{ json_encode($journeySection) }}"
+                    tinymce-path="{{ mix('platform/js/tinymce/tinymce.min.js') }}"
                 >
                     <page-container
                         :is-mobile-app-web-view="{{ json_encode($isMobileAppWebView) }}"
                         :is-live="{{ json_encode(isLive()) }}"
                         :is-onboarding="{{ json_encode($isOnboarding) }}"
                         search-url=""
-                        :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
-                        :most-recent-playlists="{{ json_encode($mostRecentPlaylists) }}" {{-- Preloaded Content --}}
                         @if(!empty( $hasUnreadNotifications ))
                             :has-notifications="{{ json_encode($hasUnreadNotifications) }}"
                         @endif
@@ -137,6 +145,9 @@
         <script type="application/javascript">
             window.sidebarNavigationLinks = {!! $sidebarNavigationSectionsJson ?? '' !!};
             window.userNavigationDropdownLinks = {!! $userNavigationDropdownLinksJson ?? '' !!};
+            window.railcontentConfig = {};
+            window.railcontentConfig.token = "{{ csrf_token() }}";
+            window.railcontentConfig.userId = "{{  json_encode($userData['id']) }}";
         </script>
 
         {{-- Customer.io --}}
@@ -154,6 +165,7 @@
                 'email' => !empty(user()) ? user()->email : null,
                 'brand' => $brand,
                 'mobileAppWebView' => true,
+                'hideInMobile' => $hideHelpscoutInMobile ?? false,
             ])
         @endif
 
@@ -175,8 +187,6 @@
                         });
                 })('d376ea71-ab19-48c3-6a31-cbff42c1e64d');
         </script>
-
-
 
         {!! \App\Analytics\Tracker::bodyBottom() !!}
     </body>

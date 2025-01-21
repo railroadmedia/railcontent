@@ -50,7 +50,7 @@
     <div class="overflow-hidden px-3 py-5 sm:py-10 lg:py-14">
         <div class="container mx-auto max-w-3xl clearfix">
             <div class="text-center sm:px-3">
-                <img class="h-8 sm:h-10" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/logo.svg">
+                <img class="h-8 sm:h-10" src="https://www.musora.com/cdn-cgi/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/logo.svg">
                 <h3 class="mt-4 leading-tight"><strong>
                         Congratulations! Your free lessons <br class="hidden sm:inline">
                         will be landing in your inbox soon!</strong></h3>
@@ -144,7 +144,7 @@
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
                                     <i class="fa-light {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-pianote"></i>
-{{--                                                                        <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
+{{--                                                                        <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
                                     <p class="mb-1 sm:my-2"><strong>{!!$songItem['title']!!}</strong></p>
@@ -240,7 +240,7 @@
                     <div class=" inline-block relative w-full group" style="padding-bottom: 33%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/cas-order-promo.png);"></div>
+                                <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/cas-order-promo.png);"></div>
                             </div>
                         </div>
                     </div>
@@ -254,7 +254,7 @@
                 <p class="leading-tight opacity-70 text-sm"><em>Then billed at $240 per year. Save 33%.</em></p>
                 <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[piano-chords-and-scales-guide]=1&promo-code=trial-book&redirect=/order&locked=true">CLICK HERE TO GET STARTED</a>
             </div>
-            <a class="inline-block text-pianote mt-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true"><p class="leading-tight"><strong><u>Or start a Monthly Plan for<br class="sm:hidden"> $30/month (no bonuses)</u></strong></p></a>
+            <a class="inline-block text-pianote mt-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true"><p class="leading-tight"><strong><u>Or start a Monthly Plan for<br class="sm:hidden"> ${{ Prices::$plusSubscriptionMonthly }}/month (no bonuses)</u></strong></p></a>
             <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
         </div>
     </section>

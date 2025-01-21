@@ -1,4 +1,4 @@
-@import "../_variables";
+@use "../variables" as *;
 
 .no-padding {
   padding-left: 0;

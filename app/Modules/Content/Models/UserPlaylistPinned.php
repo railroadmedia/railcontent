@@ -18,5 +18,7 @@ class UserPlaylistPinned extends Model
 {
     protected $table = 'railcontent_pinned_playlists';
     public $timestamps = false;
+    protected $fillable = ['user_id', 'playlist_id','brand','created_at'];
+
 
 }

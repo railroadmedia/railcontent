@@ -55,7 +55,7 @@
             <i @click="trailerOne = true;" class="fas fa-play play-button autoplay-video"></i>
             <h1>The ultimate guide to playing<br>
                 <strong>electronic dance music</strong> on the drums.</h1>
-            <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>
+{{--            <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>--}}
             <p>@if(floatval($productPrices['electrify-your-drumming']->price) > floatval($productPrices['electrify-your-drumming']->discounted_price))
                     <strong>ONLY <s>${{ floatval($productPrices['electrify-your-drumming']->price) }}</s>
                         @if(number_format(floatval($productPrices['electrify-your-drumming']->discounted_price), 2) == intval(floatval($productPrices['electrify-your-drumming']->discounted_price)))
@@ -79,9 +79,9 @@
         'vimeo' => true,
     ])
         @slot('button')
-            <div class="text-center bg-white rounded-b-xl py-4">
-                <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>
-            </div>
+{{--            <div class="text-center bg-white rounded-b-xl py-4">--}}
+{{--                <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>--}}
+{{--            </div>--}}
         @endslot
     @endcomponent
 
@@ -426,7 +426,7 @@
                 <img class="guarantee-badge show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee badge">
                 <div class="text-wrap medium-text-left">
                     <h2><strong>90-Day Money-Back Guarantee</strong></h2>
-                    <p><strong>We love our students.</strong> And we always want you to have an amazing experience on the drums. So to make sure you LOVE your drum lessons, Electrify Your Drumming is backed by a 100% money-back guarantee. If you don’t love the lessons, just contact us within 90-days and contact support for a full refund.</p>
+                    <p><strong>We love our students.</strong> And we always want you to have an amazing experience on the drums. So to make sure you LOVE your drum lessons, Electrify Your Drumming is backed by a 100% money-back guarantee. If you don’t love the lessons, just contact us within 90 days and contact support for a full refund.</p>
                 </div>
             </div>
         </div>
@@ -440,7 +440,7 @@
             <h2 class="columns">The ultimate guide to playing<br>
                 <strong>electronic dance music</strong> on the drums.</h2>
 
-            <div class="columns"><a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a></div>
+{{--            <div class="columns"><a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a></div>--}}
 
             <h4 class="columns uppercase">
                 @if(floatval($productPrices['electrify-your-drumming']->price) > floatval($productPrices['electrify-your-drumming']->discounted_price))

@@ -7,6 +7,7 @@ use Exception;
 use App\Modules\Referral\Exceptions\ReferralException;
 use App\Modules\Referral\Exceptions\SaasquatchException;
 use App\Modules\Referral\Models\Referrer;
+use Modules\UserManagementSystem\Models\User;
 use Throwable;
 
 class ReferralService
@@ -18,8 +19,6 @@ class ReferralService
 
     /**
      * ReferralService constructor.
-     *
-     * @param  SaasquatchService  $saasquatchService
      */
     public function __construct(SaasquatchService $saasquatchService)
     {
@@ -31,21 +30,13 @@ class ReferralService
         return config('referral.referrals_per_user');
     }
 
-    /**
-     * @param  Referrer  $referrer
-     *
-     * @return bool
-     */
     public function canRefer(Referrer $referrer): bool
     {
         return $referrer->referrals_performed < $this->getReferralsPerUser();
     }
 
     /**
-     * @param  int  $userId
-     * @param  string  $referralProgramId
      *
-     * @return Referrer
      *
      * @throws Exception
      */
@@ -65,12 +56,6 @@ class ReferralService
         return $referrer;
     }
 
-    /**
-     * @param  int  $userId
-     * @param  string  $referralProgramId
-     * @param  string $brand
-     * @return Referrer
-     */
     public function getOrCreateReferrer(int $userId, string $referralProgramId, string $brand): Referrer
     {
         $referrer = $this->getReferrer($userId, $referralProgramId, $brand);
@@ -82,8 +67,6 @@ class ReferralService
     }
 
     /**
-     * @param  int  $userId
-     * @return Referrer
      * @throws ReferralException
      * @throws SaasquatchException
      * @throws Throwable
@@ -107,5 +90,26 @@ class ReferralService
         $referrer->saveOrFail();
 
         return $referrer;
+    }
+
+    /**
+     * Validate if an email exists and has an active membership.
+     *
+     * @param string $email
+     * @return array
+     */
+    public function validateEmail(string $email): array
+    {
+        $dateThreshold = Carbon::now()->subDays(120);
+
+        $user = User::where('email', $email)->select(['membership_expiration_date'])->first();
+
+        $exists = $user !== null;
+        $active = $exists && $user->membership_expiration_date > $dateThreshold;
+
+        return [
+            'exists' => $exists,
+            'active' => $active,
+        ];
     }
 }

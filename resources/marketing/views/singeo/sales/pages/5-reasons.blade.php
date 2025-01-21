@@ -60,41 +60,41 @@
         ])
         <section class="text-center px-5 sm:px-8 pt-4 pb-10 sm:pt-7 sm:pb-14 lg:py-20">
             <div class="container max-w-3xl mx-auto">
-                <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/header.png">
+                <img src="https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/header.png">
                 <h2 class="leading-tight my-4 sm:my-6"><strong>5 Reasons Why Singeo Is Better Than<br class="hidden sm:inline"> In-Person Singing Lessons.</strong></h2>
                 <h6 class="text-left leading-normal mb-10 sm:mb-14">Imagine being able to sing ANY song you want. Leading the choir rather than following it. Or even just singing a lullaby for your kids and actually sounding good.
                     <br><br>All because you found the singing lessons that are right for you, your voice and the unique challenges you were facing… And because you didn’t waste your money and time with in-person signing lessons.</h6>
 
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center mb-10">
-                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/1-bang.jpg">
+                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/1-bang.jpg">
                     <div class="sm:pl-10 mt-3 sm:mt-0 sm:text-left">
                         <h5 class="leading-normal mb-2"><strong>1. Get more bang for your buck:</strong></h5>
                         <p class="leading-relaxed">Traditional singing lessons can be very expensive - up to $80+/session - especially when considering the cost of travel and the rate of instructors. Singeo provides complete instruction, on-demand practice tools, real coaches, and a vibrant community, all for a fraction of the cost of in-person lessons.</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center mb-10">
-                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/2-feedback.jpg">
+                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/2-feedback.jpg">
                     <div class="sm:pl-10 mt-3 sm:mt-0 sm:text-left">
                         <h5 class="leading-normal mb-2"><strong>2. Unlimited personal feedback:</strong></h5>
                         <p class="leading-relaxed">With Singeo you’ll get the personal feedback and support you need to get results faster. Your growth isn’t limited to someone else’s schedule. Get on-demand access to mentors, reviews & live lessons with real vocal coaches to overcome the challenges unique to you and your voice.</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center mb-10">
-                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/3-access.jpg">
+                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/3-access.jpg">
                     <div class="sm:pl-10 mt-3 sm:mt-0 sm:text-left">
                         <h5 class="leading-normal mb-2"><strong>3. Access whenever, wherever:</strong></h5>
                         <p class="leading-relaxed">Forget about commuting or adjusting to someone else's schedule. With Singeo, you can access top-quality singing lessons anytime, anywhere. Whether you're on the road, at home, between kid’s karate lessons or even on a lunch break, Singeo is there for you.</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center mb-10">
-                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/4-lost.jpg">
+                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/4-lost.jpg">
                     <div class="sm:pl-10 mt-3 sm:mt-0 sm:text-left">
                         <h5 class="leading-normal mb-2"><strong>4. You’ll never feel lost:</strong></h5>
                         <p class="leading-relaxed">Singeo offers a comprehensive 10-level curriculum. Everything from basic singing techniques to advanced skills that will help you grow and evolve as a singer. You'll never have to wonder where to go next in your journey to singing mastery.</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/5-trained.jpg">
+                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/5-trained.jpg">
                     <div class="sm:pl-10 mt-3 sm:mt-0 sm:text-left">
                         <h5 class="leading-normal mb-2"><strong>5. Be trained by the best:</strong></h5>
                         <p class="leading-relaxed">In-person lessons usually limit you to whatever teachers are available in your area. But with Singeo, you’ll get access to world-class teachers and Grammy-Winning coaches to teach you specialized skills, styles and techniques.</p>
@@ -177,22 +177,17 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-     @include('musora.sales.components.card-selection-section', [
-            "headline" => 'Get 7-Day FREE<br class="inline sm:hidden"> Access to Singeo.',
-            "noSelector" => true,
-            "plusLogo" => "https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-plus-logo-light.svg",
-            "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-            "songs" => "300+ popular songs.",
-            "firstPoint" => "Unlimited singing lessons.",
-            "thirdPoint" => "Direct access to vocal coaches.",
-            "fifthPoint" => "Lesson access for guitar, piano, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[singeo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
-        ])
-        @include('musora.sales.components.trial-explanation', [
-            'instrument' => 'singing',
+        @include('musora.sales.components.order-section-collage', [
+        'old' => true,
+        'headerLight' => true,
+        'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
+        'header' => '<strong>Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.</strong>',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
+        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
+                'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
+
         ])
 
     @include('_partials.components.video-modal',[

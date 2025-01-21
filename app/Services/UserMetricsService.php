@@ -20,8 +20,6 @@ class UserMetricsService
 
     /**
      * UserMetricsService constructor.
-     *
-     * @param  DatabaseManager  $databaseManager
      */
     public function __construct(DatabaseManager $databaseManager)
     {
@@ -49,10 +47,8 @@ class UserMetricsService
 
     /**
      * @param $userId
-     *
-     * @return int
      */
-    private function getDaysAsMember($userId)
+    private function getDaysAsMember($userId): int
     {
         return 100; // todo: fix after ecom
         $usersProducts = $this->userProductService->getAllUsersProducts((int)$userId);
@@ -118,10 +114,8 @@ class UserMetricsService
 
     /**
      * @param $userId
-     *
-     * @return int
      */
-    private function getTotalForumLikes($userId)
+    private function getTotalForumLikes($userId): int
     {
         return $this->databaseManager->connection(config('railforums.database_connection_name'))
             ->table('forum_posts')
@@ -132,10 +126,8 @@ class UserMetricsService
 
     /**
      * @param $userId
-     *
-     * @return int
      */
-    private function getTotalCommentLikes($userId)
+    private function getTotalCommentLikes($userId): int
     {
         return $this->databaseManager->connection(config('railcontent.database_connection_name'))
             ->table('railcontent_comments')
@@ -148,10 +140,8 @@ class UserMetricsService
 
     /**
      * @param $userId
-     *
-     * @return integer
      */
-    public function getTotalMinutesPracticed($userId, $assignmentTypeIds = [])
+    public function getTotalMinutesPracticed($userId, $assignmentTypeIds = []): int
     {
         if(empty($assignmentTypeIds)) {
             $assignmentTypeIds =

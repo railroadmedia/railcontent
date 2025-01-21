@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>{{ $pack->fetch('fields.title') }} | Musora</title>
+    <title>{{ $pack['title'] }} | Musora</title>
 @endsection
 
 @php
@@ -84,12 +84,8 @@
     } elseif($parentContent->fetch('type') === 'challenge'){
         $breadcrumbs = [
             [
-                "title" => 'Workouts',
-                "url" => url()->route('platform.workouts'),
-            ],
-            [
                 "title" => 'Challenges',
-                "url" => url()->route('platform.workouts.challenges'),
+                "url" => url()->route('platform.content-type-catalog', ['challenge']),
             ],
             [
                  "title" => $parentContent->fetch('fields.title'),

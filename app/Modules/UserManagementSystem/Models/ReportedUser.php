@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,12 +39,12 @@ class ReportedUser extends Model
     protected $fillable = ['user_id', 'reporter_id','created_on'];
     public $timestamps = false;
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function reporter()
+    public function reporter(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reporter_id');
     }

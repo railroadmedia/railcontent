@@ -134,20 +134,24 @@
                         <div class="px-5 sm:px-0">
                             <img class="h-20 sm:h-36" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/header-collage.png">
                             <h1 class="rotater-text my-4 lg:my-5"><strong>We want you back <3.</strong></h1>
-                            <h6 class="leading-normal mb-4 sm:mb-2">Rejoin Drumeo and save 50% on your first year back. <br>
-                                <strong class="text-musora"><em>Only available until May 31st.
-
-{{--                                                        <span x-cloak x-data="timer()" x-init="countdown()">--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
-{{--                                                                 </span>--}}
-{{--                                        left!--}}
-                                    </em></strong></h6>
-                            <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10 mx-auto sm:max-w-xs">
-{{--                                <a class="w-full join green smaller mb-2 anchor-slide" href="#customize-anchor">SEE YOUR DEAL &raquo;</a>--}}
+                            <h6 class="leading-normal">Rejoin Drumeo and save 50% on your first year back. <br>
+                                <strong class="text-musora"><em>Only available until September 30th.<br>
+                                    <span x-cloak x-data="timer()" x-init="countdown()">
+                                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                         <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                                     </span>
+                                    left!</em></strong></h6>
+                            <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 mx-auto sm:max-w-xs">
+{{--                                @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 6, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                                    <span class="w-full join smaller sold-out mb-2">Opens September 12th</span>--}}
+{{--                                @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 1, 8, 0, 0, 'America/Vancouver'))--}}
+{{--                                    <a class="w-full join green smaller mb-2" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&locked=true&promo-code=restart">SEE YOUR DEAL &raquo;</a>--}}
+{{--                                @else--}}
+{{--                                    <span class="w-full join smaller sold-out mb-2">this offer has now ended</span>--}}
+{{--                                @endif--}}
                                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
                                     <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #383bc8;color: #ffac00;"></i>
@@ -194,7 +198,7 @@
                         @foreach ($features as $key => $feature)
                             <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 my-2 sm:mb-0">
                                 <img
-                                    src="https://www.musora.com/musora-cdn/image/{{ $feature['image'] }}"
+                                    src="https://www.musora.com/cdn-cgi/image/quality=95/{{ $feature['image'] }}"
                                     class="h-5 sm:h-7 mb-2 mr-4 sm:mr-0 transition-opacity opacity-0"
                                     alt="feature image{{$key+1}}"
                                     loading="lazy"
@@ -261,35 +265,35 @@
         <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-center px-3 lg:px-5">
             <div class="mx-auto md:max-w-3xl lg:max-w-4xl grid grid-cols-1 sm:grid-cols-3 gap-6 px-4 lg:px-0 mb-10">
                 <div class="max-w-xs mx-auto">
-                    <img class="rounded-xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John_Stamos.jpg" alt="John Stamos" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                    <img class="rounded-xl lazyload" data-src="https://www.musora.com/cdn-cgi/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John_Stamos.jpg" alt="John Stamos" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                     <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                         “Playing drums is my favorite thing I get to do and I learn so much from all of these super pros on Drumeo.”
                     </p>
                     <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px; " href="https://www.instagram.com/reel/CeTtxCLpo7m/?utm_source=ig_web_copy_link&utm_campaign=2022-06-05_Drumeo_Mainlist_Celebrity-Drummers&utm_medium=email&utm_source=customer.io">As shared on Instagram</a>
                     <p class="font-inter mt-4 sm:mt-6">
-                        <img class="h-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=220,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John--Stamos.svg" alt="John Stamos"> <br>
+                        <img class="h-10 lazyload" data-src="https://www.musora.com/cdn-cgi/image/width=220,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John--Stamos.svg" alt="John Stamos"> <br>
                         <i class="text-sm">Actor, Musician, Singer</i>
                     </p>
                 </div>
                 <div class="max-w-xs mx-auto">
-                    <img class="rounded-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben_Stiller.jpg" alt="Ben Stiller" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                    <img class="rounded-md lazyload" data-src="https://www.musora.com/cdn-cgi/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben_Stiller.jpg" alt="Ben Stiller" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                     <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                         “It’s an app that teaches you drums and has songs you can play along with, different teachers, and sheet music. It’s really good.”
                     </p>
                     <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px;" href="https://youtube.com/shorts/frOYuDmEO2s?feature=share">As shared on "The Howard Stern Show"</a>
                     <p class="font-inter mt-4 sm:mt-6">
-                        <img class="h-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben--Stiller.svg" alt="Ben Stiller"> <br>
+                        <img class="h-10 lazyload" data-src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben--Stiller.svg" alt="Ben Stiller"> <br>
                         <i class="text-sm">Actor, Comedian, Producer</i>
                     </p>
                 </div>
                 <div class="max-w-xs mx-auto">
-                    <img class="rounded-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr_Cech.jpg" alt="Petr_Cech" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                    <img class="rounded-md lazyload" data-src="https://www.musora.com/cdn-cgi/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr_Cech.jpg" alt="Petr_Cech" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                     <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                         “Drumeo is the easiest way for me to learn the drums, because I can learn anything I want, whenever it works best for me!”
                     </p>
                     <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px; " href="https://www.drumeo.com/beat/petr-cech/">As shared on Drumeo.com</a>
                     <p class="font-inter mt-4 sm:mt-6">
-                        <img class="h-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=170,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr--Cech.svg" alt="Petr Cech"> <br>
+                        <img class="h-10 lazyload" data-src="https://www.musora.com/cdn-cgi/image/width=170,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr--Cech.svg" alt="Petr Cech"> <br>
                         <i class="text-sm">Record-Setting Goalkeeper, Chelsea FC</i>
                     </p>
                 </div>
@@ -312,7 +316,7 @@
                         <div class=" inline-block relative w-full group" style="padding-bottom: 62%;perspective: 1000px;">
                             <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                                 <div class="  front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/membership-badge.png);"></div>
+                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/membership-badge.png);"></div>
                                 </div>
                             </div>
                         </div>
@@ -325,24 +329,28 @@
                         <i class="fas fa-check text-musora mr-1 ml-3"></i>Legendary teachers<br class="sm:hidden">
                         <i class="fas fa-check text-musora mr-1 ml-3"></i>Step-by-step courses<br class="sm:hidden">
                         <i class="fas fa-check text-musora mr-1 ml-3"></i>Playalongs in every style</p>
-                    <h5 class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until May 31st.
-{{--                                <span x-cloak x-data="timer()" x-init="countdown()">--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
-{{--                                                                 </span>--}}
-{{--                                left!--}}
+                    <h5 class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until September 30th.<br>
+                                <span x-cloak x-data="timer()" x-init="countdown()">
+                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                                                                 </span>
+                                left!
                             </em></strong></h5>
 
                     <h3 class="leading-tight mb-1"><strong>Only</strong> <s class="opacity-50">$240</s> <strong>$120</strong></h3>
                     <p class="leading-tight text-sm mb-5"><em>Renews at $240 after your first year.</em></p>
                 </div>
 
-
-                <a class="join sold-out" >THIS OFFER HAS NOW ENDED</a>
-{{--                <a class="join green" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&locked=true&promo-code=restart">GET Started »</a>--}}
+{{--                @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 6, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                    <span class="join sold-out">Opens September 12th</span>--}}
+{{--                @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 1, 8, 0, 0, 'America/Vancouver'))--}}
+{{--                    <a class="join green" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&locked=true&promo-code=restart">GET Started »</a>--}}
+{{--                @else--}}
+{{--                    <span class="join sold-out">this offer has now ended</span>--}}
+{{--                @endif--}}
             </div>
         </section>
 
@@ -355,7 +363,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
         @include('_partials.components.countdown',[
-        'countdownDate' => '2024-06-01 00:00:00',
+        'countdownDate' => '2024-10-01 00:00:00',
         'promoVersion' => false
         ])
 @stop

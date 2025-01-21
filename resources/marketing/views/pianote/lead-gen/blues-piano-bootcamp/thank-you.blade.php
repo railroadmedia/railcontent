@@ -50,7 +50,7 @@
     <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background-color:#000a1e;">
         <div class="container mx-auto max-w-3xl clearfix">
             <div class="text-center sm:px-3">
-                <img class="h-14 sm:h-20" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/blues-piano-bootcamp-logo-white.png">
+                <img class="h-14 sm:h-20" src="https://www.musora.com/cdn-cgi/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/blues-piano-bootcamp-logo-white.png">
                 <h3 class="mt-4 leading-tight"><strong>
                         Congratulations! Your free lessons <br class="hidden sm:inline">
                         will be landing in your inbox soon!</strong></h3>
@@ -142,7 +142,7 @@
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
                                     <i class="fa-light {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-pianote"></i>
-{{--                                                                        <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
+{{--                                                                        <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
                                     <p class="mb-1 sm:my-2"><strong>{!!$songItem['title']!!}</strong></p>

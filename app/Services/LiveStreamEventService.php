@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
+use App\Decorators\Content\ContentLikesDecorator;
 use App\Http\Controllers\Content\LiveController;
 use App\Maps\ContentTypes;
 use Carbon\Carbon;
@@ -10,12 +11,10 @@ use Exception;
 use Google_Client;
 use Google_Service_YouTube;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
-use Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Decorators\ModeDecoratorBase;
-use App\Decorators\Content\ContentLikesDecorator;
 
 class LiveStreamEventService
 {
@@ -84,7 +83,7 @@ class LiveStreamEventService
                     strtotime($b->fetch('fields.live_event_start_time'));
             }
         )
-            ->slice(0, 10)
+            ->slice(0, 50)
             ->values();
 
         // calculate if there is a current event and the previous/next events
@@ -109,7 +108,7 @@ class LiveStreamEventService
             }
         }
 
-        // if there are multiple events withing the time frame we need to figure out which one is closest
+        // if there are multiple events within the time frame we need to figure out which one is closest
         foreach ($eventsWithinTimeFrame as $eventWithinTimeFrame) {
             $startTimeUtc = Carbon::parse($eventWithinTimeFrame->fetch('fields.live_event_start_time'));
             $endTimeUtc = Carbon::parse($eventWithinTimeFrame->fetch('fields.live_event_end_time'));
@@ -160,9 +159,8 @@ class LiveStreamEventService
 
     /**
      * @param false $withBuffer
-     * @return bool
      */
-    public function currentlyLive($withBuffer = false)
+    public function currentlyLive(bool $withBuffer = false): bool
     {
         $liveEvent = $this->getCurrentOrNextLiveEvent();
 
@@ -195,10 +193,8 @@ class LiveStreamEventService
      * oauth client creds. If you need a new refresh token you have to generate one using the oauth playground.
      * Each brand uses its own refresh token. https://developers.google.com/oauthplayground/
      * https://www.youtube.com/watch?v=EpikwQWR3tQ
-     *
-     * @return null|string
      */
-    public function getCurrentOrNextYoutubeEventId($brand = null)
+    public function getCurrentOrNextYoutubeEventId($brand = null): ?string
     {
         // temp hack because of api limit
         //        return 'WY14xLIeBbc';

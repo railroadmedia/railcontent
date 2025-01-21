@@ -21,6 +21,7 @@ import PlayerRanges from './_PlayerRanges.vue';
 import Intercom from '../../assets/js/Services/intercom';
 import Helpscout from '../../assets/js/Services/helpscout';
 import useEventHandlers from './useEventHandlers.js';
+import userJourney from '@services/userJourney';
 
 const props = defineProps({
     contentType: {
@@ -140,7 +141,7 @@ const props = defineProps({
 });
 
 //Investigate other events
-const emit = defineEmits(['onVideoEnd', 'play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state']);
+const emit = defineEmits(['onVideoEnd', 'onUpdateCurrentTime', 'play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state']);
 
 // Non reactive vars
 let shakaPlayer = null;
@@ -242,7 +243,7 @@ defineExpose({
     hasBeenPlayed,
     currentPlaybackRate,
     hasRetriedSource,
-    pauseVideo
+    pauseVideo,
 });
 
 //watchers
@@ -460,6 +461,14 @@ function playPauseViaControlWrap(event) {
 function seek(time) {
     mediaElement.value.pause();
     const seekTime = Number(time) > 0 ? Math.round(Number(time)) : 0;
+    
+    /*
+    TODO: Implement seek tracking when Data Team is ready
+    if (hasBeenPlayed.value) {
+        const seekingPayload = { ...getTrackingPayload(), position_seconds: Math.round(currentTime.value), seek_position_seconds: Math.round(seekTime) };
+        userJourney.trackVideo({ payload: seekingPayload, type: 'seekStarted' });
+    }
+    */
 
     currentTime.value = seekTime;
 
@@ -1067,7 +1076,7 @@ const currentTimeInSeconds = computed({
         return currentTime.value;
     },
 });
-  
+
 const endCallback = () => {
     const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
     const isInPlaybackMode = window.location.href.includes('playlist-item');
@@ -1101,7 +1110,8 @@ const {
     mediaElementEventHandlers,
     chromeCastEventHandlers,
     keyboardEventHandlers,
-    keyboardEventHandlersShift
+    keyboardEventHandlersShift,
+    getTrackingPayload,
 } = useEventHandlers({
     loading,
     mediaElement,
@@ -1340,4 +1350,3 @@ const {
             :ranges="Object.keys(ranges)" @setRange="setRange"></PlayerRanges>
     </div>
 </template>
-../../assets/js/Services/content.js./player-utils.js./chromecast.js../../assets/js/Services/intercom.js../../assets/js/Services/helpscout.js../../assets/js/Services/content.js./player-utils.js./chromecast.js../../assets/js/Services/intercom.js../../assets/js/Services/helpscout.js../../assets/js/Services/content.js../../assets/js/Services/intercom.js../../assets/js/Services/helpscout.js../../assets/js/Services/content.js./player-utils.js./chromecast.js../../assets/js/Services/intercom.js../../assets/js/Services/helpscout.js

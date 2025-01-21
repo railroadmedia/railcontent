@@ -22,17 +22,6 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         return !empty($user) && $user->isAdmin();
     }
 
-    /**
-     * @param int $userId
-     * @param Carbon|null $membershipExpirationDate
-     * @param Carbon|null $membershipStartDate
-     * @param bool $isLifetimeMember
-     * @param string $accessLevel
-     * @param bool $isPackOwner
-     * @param string|null $membershipLevel
-     * @param bool $isDrumeoLifetimeMember
-     * @return bool
-     */
     public function saveMembershipData(
         int $userId,
         ?Carbon $membershipExpirationDate,

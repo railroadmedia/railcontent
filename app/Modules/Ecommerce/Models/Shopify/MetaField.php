@@ -28,9 +28,6 @@ class MetaField
 
     /**
      * Structure the MetaField's values into an array for Shopify
-     *
-     * @param  MetaField  $metaField
-     * @return array
      */
     public static function getStructureForShopify(self $metaField): array
     {
@@ -44,9 +41,6 @@ class MetaField
 
     /**
      * Structure the MetafieldResource from Shopify into an array of applicable MetaField values
-     *
-     * @param  MetafieldResource  $metafieldResource
-     * @return array
      */
     public static function getStructureFromShopify(MetafieldResource $metafieldResource): array
     {

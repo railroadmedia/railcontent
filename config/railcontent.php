@@ -67,6 +67,7 @@ return [
         'song-tutorial-children',
         'workout',
         'challenge-part',
+        'odd-times'
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -271,11 +272,9 @@ return [
     ],
 
     'all_routes_middleware' => [
-        \App\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\VerifyCsrfToken::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
         \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
@@ -283,11 +282,9 @@ return [
     ],
 
     'user_routes_middleware' => [
-        \App\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\VerifyCsrfToken::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
         \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
@@ -349,8 +346,6 @@ return [
             \App\Decorators\Content\SemesterPackDecorator::class,
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
             //            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
-
-            \App\Decorators\Content\ChallengeDecorator::class,
 
             \App\Decorators\Content\PlaylistItemDecorator::class,
 
@@ -997,7 +992,7 @@ return [
                 'sortBy' => 'sort',
             ],
             'backstage-secrets' => [
-                'thumbnailUrl' => 'https://www.musora.com/musora-cdn/image/width=500,height=500,quality=95,fit=cover/https://d1923uyy6spedc.cloudfront.net/RushDoc-Neil-02.jpg',
+                'thumbnailUrl' => 'https://www.musora.com/cdn-cgi/image/width=500,height=500,quality=95,fit=cover/https://d1923uyy6spedc.cloudfront.net/RushDoc-Neil-02.jpg',
                 'name' => 'Backstage Secrets',
                 'shortname' => 'Episodes',
                 'icon' => 'icon-shows',
@@ -1103,8 +1098,8 @@ return [
                 ],
             ],
             'recommended' => [
-                'name' => 'Inspired By Your Activity',
-                'shortname' => 'Inspired By Your Activity',
+                'name' => 'For You',
+                'shortname' => 'For You',
                 'icon' => 'fas fa-star',
                 'description' => "",
                 'allowableFilters' => [],
@@ -1132,6 +1127,13 @@ return [
                         'is_required_field' => true,
                         'use_recommended_endpoint' => true,
                         'value' => ['filter,lesson']
+                    ],
+                    [
+                        'name' => 'Workouts',
+                        'short_name' => 'WORKOUTS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,workout']
                     ],
                 ]
             ],
@@ -1162,6 +1164,14 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+            ],
+            'odd-times' => [
+                'thumbnailUrl' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/1bf6fc7a-d1a5-4934-d322-b9f6da454000/public',
+                'name' => 'Odd Times With Aaron Edgar',
+                'shortname' => 'Episodes',
+                'icon' => 'icon-shows',
+                'allowableFilters' => [],
+                'sortBy' => 'sort',
             ],
         ],
         'pianote' => [
@@ -1568,8 +1578,8 @@ return [
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
             'recommended' => [
-                'name' => 'Inspired By Your Activity',
-                'shortname' => 'Inspired By Your Activity',
+                'name' => 'For You',
+                'shortname' => 'For You',
                 'icon' => 'fas fa-star',
                 'description' => "",
                 'allowableFilters' => [],
@@ -1597,6 +1607,13 @@ return [
                         'is_required_field' => true,
                         'use_recommended_endpoint' => true,
                         'value' => ['filter,lesson']
+                    ],
+                    [
+                        'name' => 'Workouts',
+                        'short_name' => 'WORKOUTS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,workout']
                     ],
                 ],
             ],
@@ -1897,8 +1914,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
             ],
             'recommended' => [
-                'name' => 'Inspired By Your Activity',
-                'shortname' => 'Inspired By Your Activity',
+                'name' => 'For You',
+                'shortname' => 'For You',
                 'icon' => 'fas fa-star',
                 'description' => "",
                 'allowableFilters' => [],
@@ -1926,6 +1943,13 @@ return [
                         'is_required_field' => true,
                         'use_recommended_endpoint' => true,
                         'value' => ['filter,lesson']
+                    ],
+                    [
+                        'name' => 'Workouts',
+                        'short_name' => 'WORKOUTS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,workout']
                     ],
                 ],
             ],
@@ -2274,8 +2298,8 @@ return [
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
             'recommended' => [
-                'name' => 'Inspired By Your Activity',
-                'shortname' => 'Inspired By Your Activity',
+                'name' => 'For You',
+                'shortname' => 'For You',
                 'icon' => 'fas fa-star',
                 'description' => "",
                 'allowableFilters' => [],
@@ -2303,6 +2327,13 @@ return [
                         'is_required_field' => true,
                         'use_recommended_endpoint' => true,
                         'value' => ['filter,lesson']
+                    ],
+                    [
+                        'name' => 'Workouts',
+                        'short_name' => 'WORKOUTS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,workout']
                     ],
                 ]
             ],
@@ -2345,6 +2376,7 @@ return [
      */
     'showTypes' => [
         'drumeo' => [
+            'odd-times',
             'drum-fest-international-2022',
             'spotlight',
             'the-history-of-electronic-drums',
@@ -2489,7 +2521,6 @@ return [
         'challenge-part',
     ],
     'homeInProgressContentTypes' => [
-        'course',
         'play-along',
         'coach-stream',
         'song',
@@ -2499,7 +2530,6 @@ return [
         'rudiment',
         'unit',
         'unit-part',
-        'course',
         'course-part',
         'song',
         'song-part',
@@ -2514,7 +2544,6 @@ return [
         'song-tutorial',
         'song-tutorial-children',
         'workout',
-        'challenge-part',
     ],
     'dashboardInProgressContentTypes' => [
         'course',
@@ -2778,6 +2807,8 @@ return [
         'archived_on' => 'archived_on',
         'instrument' => 'instrument',
         'instrumentless' => 'instrumentless',
+        'quarter_published' => 'quarter_published',
+        'quarter_removed' => 'quarter_removed',
     ],
     'content_hierarchy' => [
         'drumeo' => [
@@ -3056,7 +3087,7 @@ return [
     'playlist_items_limit' => 300,
     'search_in_playlist_items_name' => false,
 
-    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105,106,107,109,110,112],
+    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105,106,107,109,110,112,113,115,116,117],
     'difficulty_map' =>
         [
             '1' => 'Introductory',

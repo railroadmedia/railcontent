@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong, td strong {
     font-weight: 900;
@@ -156,7 +157,7 @@ img {
 
         &:hover,
         &:focus {
-            background: lighten($coachesOrange, 10%);
+            background: color.adjust($coachesOrange, $lightness: 10%);
             color: #000;
         }
     }
@@ -174,7 +175,7 @@ img {
 
         &:hover,
         &:focus {
-            background: lighten($promoColor, 10%);
+            background: color.adjust($promoColor, $lightness: 10%);
         }
     }
 
@@ -236,6 +237,17 @@ img {
             &:hover,
             &:focus {
                 background: $coachesOrange;
+                color: #fff;
+            }
+        }
+
+        &.musora {
+            border-color: $muGold;
+            color: $muGold;
+
+            &:hover,
+            &:focus {
+                background: $muGold;
                 color: #fff;
             }
         }
@@ -646,14 +658,14 @@ img {
         tr {
             &:hover,
             &:nth-child(even):hover {
-                background-color: lighten(#000a1e, 2%);
+                background-color: color.adjust(#000a1e, $lightness: 2%);
 
                 td:nth-child(2) {
-                    background-color: lighten($drumeoBlue, 2%);
+                    background-color: color.adjust($drumeoBlue, $lightness: 2%);
                 }
 
                 td:nth-child(3), td:nth-child(4) {
-                    background-color: lighten(#051124, 2%);
+                    background-color: color.adjust(#051124, $lightness: 2%);
                 }
 
             }
@@ -731,11 +743,11 @@ img {
                 }
 
                 &:nth-child(2) {
-                    background: darken($drumeoBlue, 5%);
+                    background: color.adjust($drumeoBlue, $lightness: -5%);
                 }
 
                 &:nth-child(3), &:nth-child(4) {
-                    background: darken(#051124, 2%);
+                    background: color.adjust(#051124, $lightness: -2%);
                 }
 
             }
@@ -921,7 +933,7 @@ img {
         &:focus {
             opacity: 1;
             color: $drumeoBlue;
-            background: lighten(#0c1017, 10%);
+            background: color.adjust(#0c1017, $lightness: 10%);
         }
 
         &.slick-next:before,

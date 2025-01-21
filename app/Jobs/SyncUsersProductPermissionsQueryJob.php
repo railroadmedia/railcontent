@@ -22,16 +22,13 @@ class SyncUsersProductPermissionsQueryJob implements ShouldQueue
 
     private array $userIdsToSync;
 
-    /**
-     * @param array $userIdsToSync
-     */
     public function __construct(array $userIdsToSync)
     {
         $this->userIdsToSync = $userIdsToSync;
     }
 
 
-    public function handle(UserProductToUserContentPermissionListener $userProductToUserContentPermissionListener)
+    public function handle(UserProductToUserContentPermissionListener $userProductToUserContentPermissionListener): void
     {
         Log::info(
             'SyncUsersProductPermissionsQueryJob ID: ' . $this->job->getJobId() .

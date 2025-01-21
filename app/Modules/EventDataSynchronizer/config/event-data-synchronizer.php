@@ -43,6 +43,13 @@ return [
         'singeo' => 'singeo_members_area_activity_'
     ],
 
+    'customer_io_allowed_primary_brands' => [
+        'drumeo',
+        'pianote',
+        'guitareo',
+        'singeo',
+    ],
+
     'customer_io_pack_skus_to_sync_ownership' => [
         '30-day-drummer',
         '30-day-drummer-2',

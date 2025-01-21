@@ -26,13 +26,10 @@ class LogOutWhenNeededTest extends UserManagementSystemTestCase
 
     /**
      * Create a new user, setting their needs_logout attribute as required.
-     *
-     * @param  bool  $needsLogout
-     * @return User
      */
     private function createUser(bool $needsLogout): User
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([

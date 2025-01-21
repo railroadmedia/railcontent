@@ -119,7 +119,7 @@ onBeforeMount(()=> {
 <template>
     <section>
         <div class="tw-h-[42px] tw-flex tw-items-center tw-w-full">
-            <a :href="`/${brand}/playlists`" :title="[isSidebarCollapsed ? 'Playlists' : '']"
+            <a :href="`/${brand}/playlists`" :title="[isSidebarCollapsed ? 'My Playlists' : '']"
                 class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 tw-w-full tw-group"
                 :class="[isActivePath ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']">
                 <musora-icon icon-name="playlist" class="tw-w-[24px] tw-mx-4" />
@@ -166,12 +166,12 @@ onBeforeMount(()=> {
                     </li>
                 </ul>
                 <!-- Skeleton Loader -->
-                <div v-if="playlistsStore.loadingPlaylists" class="tw-flex-col tw-w-full tw-animate-pulse">
+                <div v-if="playlistsStore.loadingSidebarPlaylists" class="tw-flex-col tw-w-full tw-animate-pulse">
                     <div v-for="n in 5" :key="n" class="dark:tw-bg-[#102230] tw-bg-[#F5F5F6] tw-h-[32px] tw-mx-[25px] tw-mb-1 tw-border-rounded"></div>
                 </div>
 
                 <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden"
-                    v-if="formattedUnpinnedPlaylists.length > 0 && !playlistsStore.loadingPlaylists">
+                    v-if="formattedUnpinnedPlaylists.length > 0 && !playlistsStore.loadingSidebarPlaylists">
                     <p class="tw-text-[#3f3f46] dark:tw-text-[#9EC0DC] tw-text-xs tw-pl-[24px] tw-font-bold tw-mt-2 tw-uppercase">Most Recent</p>
                     <!-- Loop through User Unpinned Playlists -->
                     <li class="tw-group tw-w-full tw-flex tw-items-center    tw-overflow-hidden dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
@@ -199,7 +199,7 @@ onBeforeMount(()=> {
                     </li>
                 </ul>
                 <!-- Skeleton Loader -->
-                <div v-if="playlistsStore.loadingPlaylists" class="tw-flex-col tw-w-full tw-animate-pulse">
+                <div v-if="playlistsStore.loadingSidebarPlaylists" class="tw-flex-col tw-w-full tw-animate-pulse">
                     <div v-for="n in 5" :key="n" class="dark:tw-bg-[#102230] tw-bg-[#F5F5F6] tw-h-[32px] tw-mx-[25px] tw-mb-1 tw-border-rounded"></div>
                 </div>
 

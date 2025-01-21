@@ -5,12 +5,12 @@
             <div class="w-full overflow-hidden rounded-lg relative bg-cover bg-top border border-gray-300"
                 style="padding-bottom: 100%;
                 @if(!empty($bundle['thumbnail']))
-                    background-image:url('https://www.musora.com/musora-cdn/image/width=520,quality=95/{{ $bundle['thumbnail'] }}');
+                    background-image:url('https://www.musora.com/cdn-cgi/image/width=520,quality=95/{{ $bundle['thumbnail'] }}');
                 @endif
                 ">
                 @if(!empty($bundle['thumbnail_logo']))
                     <div class="z-20 absolute bottom-0 left-0 right-0 px-4 py-3 text-center">
-                        <img class="w-auto h-auto" style="max-height:55px;" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $bundle['thumbnail_logo'] }}"
+                        <img class="w-auto h-auto" style="max-height:55px;" src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/{{ $bundle['thumbnail_logo'] }}"
                             alt="logo" >
                     </div>
                     <div class="inset-0 absolute z-10" style="background:linear-gradient(to bottom, transparent 66%, rgba(0,0,0,0.75));"></div>

@@ -26,8 +26,6 @@ class PasswordController extends Controller
 
     /**
      * CookieController constructor.
-     *
-     * @param Hasher $hasher
      */
     public function __construct(Hasher $hasher)
     {
@@ -44,7 +42,6 @@ class PasswordController extends Controller
      * @bodyParam current_password required
      * @bodyParam new_password required
      *
-     * @param Request $request
      * @throws ValidationException
      */
     public function update(Request $request)

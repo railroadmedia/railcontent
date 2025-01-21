@@ -2,50 +2,38 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Validation\Rule;
-use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Carbon\Carbon;
 use Illuminate\Contracts\Hashing\Hasher;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Notifications\AnonymousNotifiable;
+use Modules\UserManagementSystem\Events\EmailChangeRequest;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\EmailChange;
 use Modules\UserManagementSystem\Models\User;
-use Modules\UserManagementSystem\Events\EmailChangeRequest;
-use Modules\UserManagementSystem\Notifications\EmailChange as EmailChangeNotification;
 
 class EmailChangeController extends Controller
 {
     use ValidatesRequests;
 
     /**
-     * @var Hasher
-     */
-    private $hasher;
-
-    /**
      * EmailChangeController constructor.
-     *
-     * @param Hasher $hasher
      */
-    public function __construct(
-        Hasher $hasher,
-    ) {
-        $this->hasher = $hasher;
+    public function __construct(private Hasher $hasher)
+    {
     }
 
     /**
      * Perform an email change request action.
-     *
-     * @param Request $request
-     * @return RedirectResponse
      */
-    public function request(Request $request)
+    public function request(Request $request): RedirectResponse|JsonResponse
     {
         $isJson = request()->expectsJson();
         try {
@@ -139,21 +127,19 @@ class EmailChangeController extends Controller
 
         return $request->has('redirect') ?
             redirect()
-                ->away($request->get('redirect'))
-                ->with($message) :
+            ->away($request->get('redirect'))
+            ->with($message) :
             redirect()
-                ->back()
-                ->with($message);
+            ->back()
+            ->with($message);
     }
 
     /**
      * Perform an email change confirmation action.
      * @bodyParam code required
-     * @param Request $request
-     * @return RedirectResponse
      * @throws ValidationException
      */
-    public function confirm(Request $request)
+    public function confirm(Request $request): RedirectResponse
     {
         try {
             $validationRules = ['code' => 'bail|required|string'];
@@ -184,22 +170,23 @@ class EmailChangeController extends Controller
             return redirect()->back()->withErrors(['error-message' => 'Token is invalid']);
         }
 
-        if (Carbon::parse(
-            $emailChange->updated_at
+        if (
+            Carbon::parse(
+                $emailChange->updated_at
                     ->format('Y-m-d H:i:s')
-        ) <
+            ) <
             Carbon::now()
-                ->subHours(config('user_management_system.email_change_token_ttl'))) {
+            ->subHours(config('user_management_system.email_change_token_ttl'))
+        ) {
             // todo: error message does not appear
             return redirect()
                 ->back()
                 ->withErrors(['error-message' => 'Your email reset code has expired.']);
-
         }
 
         $user = User::find($emailChange->user_id);
 
-        $oldUser = clone($user);
+        $oldUser = clone ($user);
 
         $user->email = $emailChange->email;
         $user->save();
@@ -215,36 +202,29 @@ class EmailChangeController extends Controller
 
         return $request->has('redirect_to') ?
             redirect()
-                ->away($request->get('redirect'))
-                ->with($message) :
+            ->away($request->get('redirect'))
+            ->with($message) :
             redirect()
-                ->to(
-                    route('platform.profile.settings.login-credentials', [
-                        'userId' => $user->id,
-                        'brand' => $emailChange->brand
-                    ])
-                )
-                ->with($message);
+            ->to(
+                route('platform.profile.settings.login-credentials', [
+                    'userId' => $user->id,
+                    'brand' => $emailChange->brand
+                ])
+            )
+            ->with($message);
     }
 
     /**
      * Generates a token
      * Similar with Illuminate\Auth\Passwords\DatabaseTokenRepository::createNewToken
-     *
-     * @param string $hash
-     * @return string
      */
     public function createNewToken(
-        $hash
-    ) {
+        string $hash
+    ): string {
         return hash_hmac('sha256', Str::random(40), $hash);
     }
 
-    /**
-     * @param $token
-     * @param $email
-     */
-    public function sendEmailChangeNotification($token, $email)
+    public function sendEmailChangeNotification($token, $email): void
     {
         $class = config('user_management_system.email_change_notification_class');
         (new AnonymousNotifiable())->route(config('user_management_system.email_change_notification_channel'), $email)

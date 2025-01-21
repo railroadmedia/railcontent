@@ -23,7 +23,7 @@ class MigrateIntoRevenuecat extends Command
         RevenueCatApiGateway $revenueCatGateway,
         SubscriptionService $subscriptionService,
         UserProductService $userProductService
-    ) {
+    ): void {
         //               $user = User::query()->where('id', 597285)->first();
         //              // dd($user);
         //                $res = $revenueCatGateway->sendRequest(

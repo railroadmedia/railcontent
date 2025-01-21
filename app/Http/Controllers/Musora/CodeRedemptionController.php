@@ -148,11 +148,86 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
+    public function renderNewAccountGuitarcenterRedeemPage(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'guitarcenter' => true,
+            'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function renderExistingAccountGuitarcenterRedeemPage(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => false,
+            'guitarcenter' => true,
+            'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
     public function renderExistingAccountRedeemPage(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => false,
             'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function headrushRedeemNewGuitareo(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page-headrush', [
+            'newAccount' => true,
+            'theme' => 'guitareo',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function headrushRedeemExistingGuitareo(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page-headrush', [
+            'newAccount' => false,
+            'theme' => 'guitareo',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function renderNewAccountRedeemPageR1000(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'theme' => 'musora',
+            'rockin1000' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function renderExistingAccountRedeemPageR1000(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => false,
+            'theme' => 'musora',
+            'rockin1000' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function spotifyRedeemNewMusora(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'theme' => 'musora',
+            'spotify' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function spotifyRedeemExistingMusora(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => false,
+            'theme' => 'musora',
+            'spotify' => true,
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }
@@ -200,25 +275,6 @@ class CodeRedemptionController extends BaseController
     public function sweetwaterRedeemExistingMusora()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'musora']);
-    }
-
-    public function spotifyRedeemNewMusora(Request $request)
-    {
-        return view('musora.pages.redeem.redeem-page', [
-            'newAccount' => true,
-            'theme' => 'musora',
-            'spotify' => true,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
-    }
-    public function spotifyRedeemExistingMusora(Request $request)
-    {
-        return view('musora.pages.redeem.redeem-page', [
-            'newAccount' => false,
-            'theme' => 'musora',
-            'spotify' => true,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
     }
 
     public function roland()

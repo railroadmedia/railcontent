@@ -18,7 +18,7 @@
                         <input id="catalogueSearch" v-model="searchTermInterface" ref="searchInput" type="text"
                             name="search" autocomplete="off" placeholder="Search..."
                             class="no-label dark:placeholder:tw-text-white tw-bg-white dark:tw-bg-transparent tw-py-0 tw-h-[45px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
-                            @keydown.enter="submitSearch($event)">
+                            @keydown="submitSearch($event)">
                     </div>
 
                     <button class="tw-btn-primary tw-btn-circle tw-flex-shrink-0 tw-w-[45px] tw-h-[45px] tw-mb-0"
@@ -39,6 +39,7 @@
 </template>
 <script>
 import CatalogueFilter from './_CatalogueFilter.vue';
+import { debounce } from 'lodash';
 
 export default {
     name: 'CatalogueSearch',
@@ -98,6 +99,7 @@ export default {
     data() {
         return {
             search_term: this.searchTerm,
+            debouncedSearch: null, // Holds the debounced function
         };
     },
     computed: {
@@ -140,16 +142,28 @@ export default {
             });
         },
 
-        submitSearch(e) {
+        submitSearchImmediate() {
+            // The actual search submission
             this.$emit('searchChange', {
                 term: this.searchTermInterface,
             });
-            //only blur the input on mobile (up to Tailwind sm breakpoint)
+        },
+        submitSearch(e) {
+            this.debouncedSearch();
+            // Blur input on mobile if necessary
             let isMobile = window.matchMedia('(max-width: 639px)');
             if (isMobile.matches) {
-                e.target.blur()
+                e.target.blur();
             }
         },
+    },
+    mounted() {
+        // Create the debounced function when the component is mounted
+        this.debouncedSearch = debounce(this.submitSearchImmediate, 300);
+    },
+    beforeDestroy() {
+        // Cancel the debounced function when the component is destroyed
+        this.debouncedSearch.cancel();
     },
 };
 </script>

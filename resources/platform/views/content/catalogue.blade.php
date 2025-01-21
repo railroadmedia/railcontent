@@ -7,7 +7,8 @@
 @php
     $askQuestionRecipient = config('mailora.' . $brand . '.ask-question-recipient');
     $emailLogoLink = config('mailora.' . $brand . '.logo-link');
-    if (isset($startedLessons)) {   
+    $isNewReleases = ucfirst($catalogueMeta['name']) === 'New Releases';
+    if (isset($startedLessons)) {
         $decodedStartedLessons = json_decode($startedLessons);
         $formattedStartedLessons = json_encode(isset($decodedStartedLessons) && isset($decodedStartedLessons->data) ? $decodedStartedLessons->data : []);
     }
@@ -15,22 +16,17 @@
 
 @section('content')
     <div id="app">
-        <catalogue
-            :has-started-lessons="{{ json_encode($hasStartedLessons) }}"
-            :lesson-type="{{ json_encode($lessonType) }}"
-            :brand="{{ json_encode($brand) }}"
-            :catalogue-meta="{{ json_encode($catalogueMeta) }}"
-            :started-lessons="{{ $hasStartedLessons ? $formattedStartedLessons : '[]' }}"
-            :breadcrumbs="{{ json_encode($breadcrumbs) }}"
-            :list-lessons="{{ $listLessons }}"
-            :session-token="{{ json_encode(railtracker_session_token()) }}"
-            ask-question-recipient="{{ $askQuestionRecipient }}"
-            email-logo-link="{{ $emailLogoLink }}"
-            :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
-            :statuses="{{ json_encode($statuses ?? ['published']) }}"
-            :is-all-content="{{ json_encode($isAllContent ?? false) }}"
-            :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType) ) }}"
-            :show-in-progress="{{ json_encode($hasStartedLessons && $lessonType !== 'routine') }}"
-        ></catalogue>
+            <catalogue
+                {{-- :catalogue-meta="{{ json_encode($catalogueMeta) }}" --}}
+                :is-new-releases="{{ json_encode($isNewReleases) }}"
+                catalogue-type="{{ $catalogueType }}"
+                :lesson-type="{{ json_encode($lessonType) }}"
+                :breadcrumbs="{{ json_encode($breadcrumbs) }}"
+                :session-token="{{ json_encode(railtracker_session_token()) }}"
+                ask-question-recipient="{{ $askQuestionRecipient }}"
+                email-logo-link="{{ $emailLogoLink }}"
+                :show-in-progress="{{ json_encode($hasStartedLessons && $lessonType !== 'routine') }}"
+                :for-you-experiment="{{  json_encode(isset($forYouExperiment) ? $forYouExperiment : false) }}"
+            ></catalogue>
     </div>
 @endsection

@@ -11,7 +11,7 @@ class MigrateMinutesWatchedPoints extends Command
 {
     protected $signature = 'MigrateMinutesWatchedPoints {n}';
 
-    public function handle()
+    public function handle(): void
     {
         $n = $this->argument("n");
         $jobs = [];

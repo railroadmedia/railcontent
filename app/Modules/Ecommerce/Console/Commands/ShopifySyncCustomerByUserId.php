@@ -10,7 +10,7 @@ class ShopifySyncCustomerByUserId extends Command
 {
     protected $signature = 'ecommerce:ShopifySyncCustomerByUserId {id}';
 
-    public function handle(ShopifySyncService $shopifySyncService)
+    public function handle(ShopifySyncService $shopifySyncService): void
     {
         $id = $this->argument('id');
         $user = User::query()->find($id);

@@ -1,10 +1,10 @@
 <template>
-    <div class="tw-animate-pulse tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-full tw-shrink-0 tw-mr-3 lg:tw-mr-0" :class="[
+    <div class="tw-animate-pulse tw-snap-center tw-flex tw-flex-col tw-group tw-w-full tw-shrink-0 tw-mr-3 lg:tw-mr-0" :class="[
         { 'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': isSingleRow },
     ]">
         <div class="tw-flex tw-flex-col">
             <!-- Thumbnail Image -->
-            <div class="tw-flex tw-flex-col tw-items-start tw-p-0 tw-isolate tw-h-[120px] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] tw-rounded-[8px] tw-w-full">
+            <div class="tw-flex tw-flex-col tw-items-start tw-p-0 tw-isolate tw-aspect-video tw-bg-[#F2F2F2] dark:tw-bg-[#002039] tw-rounded-[8px] tw-w-full">
             </div>
             <!-- Text Section -->
             <div class="tw-flex tw-flex-col tw-w-full tw-ml-0">

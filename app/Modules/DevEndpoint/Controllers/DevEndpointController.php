@@ -2,27 +2,36 @@
 
 namespace App\Modules\DevEndpoint\Controllers;
 
-use App\Jobs\UpdatePermissionsJob;
-use App\Modules\Content\Models\Content;
-use App\Modules\Content\Models\UserPermission;
-use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
-use App\Modules\Ecommerce\Services\SubscriptionService;
-use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
+use Algolia\AlgoliaSearch\Api\SearchClient;
+use App\Models\Cohort;
+use App\Models\CohortDropdown;
+use App\Models\CohortList;
+use App\Modules\Content\ApiGateways\SanityGateway;
+use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\Content\Resources\Algolia\SearchParameters;
+use App\Modules\Content\Services\AlgoliaSearchService;
+use App\Modules\Content\Services\ChallengesService;
+use App\Modules\Content\Services\V1\CarouselServiceV1;
+use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
+use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
+use App\Modules\UserManagementSystem\Services\UserService;
 use Google\Exception;
-use http\Exception\InvalidArgumentException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
+use Modules\Content\Console\Commands\ChallengesV2UpdateWebUrlPath;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\APIEndPoint;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
+use Railroad\Railcontent\Services\RailcontentV2DataSyncingService;
 use Railroad\Railcontent\Services\RecommendationService;
-use Railroad\Railcontent\Services\UserPermissionsService;
 
 class DevEndpointController extends Controller
 {
@@ -37,258 +46,178 @@ class DevEndpointController extends Controller
         private PermissionService $permissionService,
         private ContentPermissionService $contentPermissionService,
         private ContentPermissionRepository $contentPermissionRepository,
-        private UserPermissionsService $userPermissionsService,
-        private SubscriptionService $subscriptionService,
-        private UserAccessPermissionsService $userAccessPermissionsService,
+        private ChallengesService $challengesService,
+        private CustomerIoSyncService $customerIoSyncService,
+        private UserService $userService,
+        private SanityGateway $sanityGateway,
+        private RailcontentV2DataSyncingService $dataSyncingService,
+        private CarouselServiceV1 $carouselServiceV1,
     ) {
     }
 
+
     public function handleRequest(Request $request, $arg1 = null)
     {
-        $userId = $request->query('userid', false);
-        if ($userId) {
-            return $this->setUserToBasic($userId, $request->query('interval', null));
+        if ($arg1 == 'challenges') {
+            return $this->handleChallengesEndpoints($request);
         }
-        if ($arg1) {
-            return $this->updatePermissions($arg1);
-        }
-
-        $results = [
-            'drumeo' => $this->recommendationService->getFilteredRecommendations($arg1, 'drumeo'),
-            'singeo' => $this->recommendationService->getFilteredRecommendations($arg1, 'singeo'),
-            'pianote' => $this->recommendationService->getFilteredRecommendations($arg1, 'pianote'),
-            'guitareo' => $this->recommendationService->getFilteredRecommendations($arg1, 'guitareo'),
-        ];
-        dd($results);
-        return $this->recommendationService->getFilteredRecommendations(1111, 'pianote', RecommenderSection::Course);
-        $this->testRandomization();
-        dd("hello from the playground");
+        return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
     }
 
-
-    private function setUserToBasic($userID, $interval=null)
+    private function deleteThingsFromSanity($queryString)
     {
-        $user = User::whereId($userID)->first();
-        #$a = $user->subscriptionIntervalType();
-        #$accessPermissions = $this->userAccessPermissionsService->getUserAccessPermissionsByUser($user);
-        #$subscriptions = $this->subscriptionService->syncSubscriptionData($accessPermissions);
-        if (!$user) {
-            throw new InvalidArgumentException("cant find user $userID");
-        }
-        UserPermission::query()->where([['user_id', '=', $userID], ['permission_id', '!=', UserAccessPermissionsCollection::MusoraBasicMembershipPermission] ])->delete();
-        $user->is_lifetime_member = 0;
-        $user->is_drumeo_lifetime_member = 0;
-        $user->access_level = 'member';
-        $user->permission_level = null;
-        $user->membership_level = 'basic';
-        if (in_array($interval, [null, 'year', 'month', 'day'])) {
-            $user->recharge_interval = $interval;
-        } else {
-            return "Interval needs to be null, month, year, or day not $interval";
-        }
-        $user->save();
-        return "Updated User $userID";
+        $temp = "_type == 'onboarding-content-card'";
+        $query = ["query" => "*[$queryString]"];
+        $this->sanityGateway->sanity->delete($query);
     }
 
-    private function testUserIDs()
+    private function runArtisanCommand()
     {
-        $ids = [522299, 718337, 609588, 349181, 298826];
-        $results = [];
-        $minID = 723817;
-        $maxID = 724827;
-        for ($id = $minID; $id <= $maxID; $id++){
-            $user = User::whereId($id)->first();
-            if ($user) {
-                $results[$id]['subMethod'] = $user->getSubscriptionMethod();
-                $results[$id]['isBasic'] = $user->isABasicMember();
-            }
-        }
-        return $results;
+        //return 'We did not run anything but you can use this to debug commands';
+        \Artisan::call('sanity:import-content', [
+            'destination' => 'development',
+            'type' => 'onboarding-card',
+        ]);
+        return '';
     }
 
-    private function updatePermissions($contentID)
+    private function handleChallengesEndpoints($request): string
     {
-        $content = Content::whereId($contentID)->first();
-        if (!$content) {
-            throw new InvalidArgumentException("Invalid ContentID $contentID");
-        }
-        $currentPermissions = $this->contentPermissionRepository->getByContentIdsOrTypes([$contentID], []);
-        foreach($currentPermissions as $currentPermission) {
-            $this->contentPermissionRepository->dissociate($contentID, null, $currentPermission);
-        }
-        $this->contentPermissionService->create($contentID, null, UserAccessPermissionsCollection::MusoraPlusMembershipPermission, 'musora');
-        return "Permissions updated for $contentID";
-	}
-
-    private function saveJson()
-    {
-        $permissionsLookup = ['all_content_ids' => []];
-        $permissionsLookup = $this->updatePermissionsLookup('Songs Band Takedown Script Sheets - Gate Content.tsv', 5, $permissionsLookup);
-        $permissionsLookup = $this->updatePermissionsLookup('Songs Band Takedown Script Sheets - Special Permissions.tsv', 6, $permissionsLookup);
-        $permissionsLookup['all_content_ids'] = array_unique($permissionsLookup['all_content_ids']);
-        foreach($permissionsLookup as $permissionID => $contentIds) {
-            $permissionsLookup[$permissionID] = array_unique($contentIds);
-        }
-        $directory = 'resources/';
-        $fileName = 'permissions.json';
-        $outputFilePath = storage_path($fileName);
-        if (file_exists($outputFilePath)) {
-            unlink($outputFilePath);
-        }
-        $data = json_encode($permissionsLookup);
-        file_put_contents($outputFilePath, $data);
-        return $permissionsLookup;
-    }
-
-    private function updatePermissionsLookup($input, $permissionsColumn, $permissionsLookup)
-    {
-        $duplicateIds = [];
-        $contentIdColumn = 0;
-        $firstRow = true;
-        $filePath = storage_path($input);
-        if (($handle = fopen($filePath, "r")) !== false) {
-            while (($data = fgetcsv($handle, 1000, "\t")) !== false) {
-                if ($firstRow) {
-                    $firstRow = false;
-                    continue;
+        $action = $request->get('action');
+        $userId = $request->get('user_id', user()?->id ?? 631736); // adrian@musora.com
+        $challengeId = $request->get(
+            'challenge_id',
+            402199
+        ); // https://web-staging-one.musora.com/admin/studio/publishing/structure/challenge;challenge_402199
+        switch ($action) {
+            case ('prep'):
+                $this->prepChallengeData($challengeId, $request->get('start_date', null));
+                return "Prepped Challenge Data $challengeId";
+            case ('complete'):
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+                $this->challengesService->completeChallenge($userProgress);
+                return "Completed Challenge $challengeId for user $userId";
+            case('move_days'):
+                $numDays = $request->get('num_days', 1);
+                $progress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+                if (!$progress) {
+                    return "Invalid challenge Id and user_id combination. Please enroll your user in the challenge first :D with /challenges/enroll/challenge_id or /challenges/set_start_date/challenge_id&start_date=YYYYMMDD which can be set to the past";
                 }
+                $startDate = Carbon::parse($progress->start_date);
+                $newStartDate = $startDate->subDays($numDays);
+                $challenge = $this->challengesService->getChallengeById($challengeId);
 
-                $contentId = $data[$contentIdColumn];
-                $permissionIds = $data[$permissionsColumn];
-                if (!$contentId || !$permissionIds) {
-                    continue;
-                }
-                $permissionsLookup['all_content_ids'][] = $contentId;
-                $permissionIds = explode(';', $permissionIds);
-                foreach($permissionIds as $permissionId) {
-                    if (!isset($permissionsLookup[$permissionId])) {
-                        $permissionsLookup[$permissionId] = [];
+                $newLessonData = ChallengeUserProgress::defineLessonsMetaData($challenge, $newStartDate);
+                $originalProgress = $progress->lessons_meta_data;
+                foreach ($progress->lessons_meta_data as $index => $_) {
+                    $oCompletedDate = $originalProgress[$index]['completed_at'];
+                    if ($oCompletedDate) {
+                        $oCompletedDate = Carbon::parse($oCompletedDate);
+                        $newCompletedDate = $oCompletedDate->subDays($numDays);
+                        $originalProgress[$index]['completed_at'] = $newCompletedDate->toISOString();
                     }
-                    if (in_array($contentId, $permissionsLookup[$permissionId])) {
-                        if (!isset($duplicateIds[$contentId])) {
-                            $duplicateIds[$contentId] = [];
-                        }
-                        $duplicateIds[$contentId][] = $permissionId;
-                        \Log::info("Duplicate Content ID found $input content: $contentId permission: $permissionId");
-                    } else {
-                        $permissionsLookup[$permissionId][] = $contentId;
-                    }
+                    $originalProgress[$index]['unlock_date'] = $newLessonData[$index]['unlock_date'];
                 }
-            }
-            fclose($handle);
+                $progress->lessons_meta_data = $originalProgress;
+                $progress->start_date = $newStartDate->toISOString();
+                $progress->save();
+                $challengeName = $challenge['title'];
+                return "Start date for $challengeName for user: $userId moved to {$newStartDate->toISOString()}. Completed lessons and practice time maintained";
+            case('cohort'):
+                $cohortId = $request->get('cohort_id');
+                $cohort = Cohort::query()->where('id', $cohortId)->first();
+                $cohort->content_id = $challengeId;
+                $cohort->enrollment_end_date = Carbon::parse('20251111 23:00')->toISOString();
+                $cohort->save();
+                return "Cohort {$cohort->cohort_title} updated to point to $challengeId";
+            case('enroll'):
+                $this->challengesService->startChallenge($challengeId, $userId);
+                return "User $userId Enrolled in $challengeId";
+            case('clean'):
+                ChallengeUserProgress::truncate();
+                return "All challenge data cleared";
         }
-        $fileName = 'duplicates.json';
-        $outputFilePath = storage_path($fileName);
-        if (file_exists($outputFilePath)) {
-            unlink($outputFilePath);
-        }
-        $data = json_encode($duplicateIds);
-        file_put_contents($outputFilePath, $data);
-        return $permissionsLookup;
+        return '';
     }
 
-    private function processPermissions()
+    private function prepChallengeData($challengeId, $startdate = null)
     {
-        $contents = file_get_contents(storage_path('permissions.json'));
-        $permissionsLookup = json_decode($contents, true);
-        $this->deleteAllPermissions($permissionsLookup['all_content_ids']);
-        $entriesAdded = 0;
-        foreach($permissionsLookup as $permissionID => $contentIds) {
-            if ($permissionID == 'all_content_ids') {
-                continue;
-            }
-            $entriesAdded += count($contentIds);
-            dispatch(new UpdatePermissionsJob($contentIds, $permissionID));
-        }
-        // 128268 total rows when starting (SQL count(id))
-        // count at 13724 to remove (deleteAllPermissions)
-        // remaining count should be 114544 (and it was)
-        // entries added are 12573 ($entriesAdded)
-        // post values are: 127117 (SLQ count(id))
-        return $permissionsLookup;
-    }
-
-    private function deleteAllPermissions($contentIds)
-    {
-        $count = $this->musoraDB()->from('railcontent_content_permissions')
-            ->whereIn('content_id', $contentIds)
-            ->count();
-
-
-        $this->musoraDB()->from('railcontent_content_permissions')
-            ->whereIn('content_id', $contentIds)
-            ->delete();
-        return 0;
-    }
-
-    private function musoraDB()
-    {
-        return DB::connection(config('railcontent.database_connection_name'))->query();
-    }
-
-    private function testAPIEndpoints()
-    {
-        $inputs = array_map(function ($endpoint) {return $endpoint->value;}, APIEndPoint::cases());
-        $callback = function ($endpoint) {
-            $this->recommendationService->APIEndPoint = $endpoint;
-            $userIDs = [579297,648632, 149869, 150909, 152882];
-            $randomize = false;
-            $userID = $randomize ? $userIDs[0] : $userIDs[array_rand($userIDs, 1)];
-            return $this->recommendationService->getFilteredRecommendations($userID, "drumeo", RecommenderSection::Song);
-        };
-        $results = $this->timeEvent($callback, $inputs, 5, 1, );
-        return $results;
-    }
-
-    private function testingRecSysSections()
-    {
-        $inputSections = [
-            'two sections' => [RecommenderSection::Course, RecommenderSection::QuickTip],
-            'one sections' => [RecommenderSection::QuickTip],
-            'blank' => [],
+        $userIds = [
+            // "good" users
+            755987,
+            755984,
+            755976,
+            755957,
+            755953,
+            755945,
+            755932,
+            755919,
+            755916,
+            755904,
+            755886,
+            755880,
+            755877,
+            755866,
+            755848,
+            755827,
+            755824,
+            755820,
+            755808,
+            755807,
+            755799,
+            755787,
+            755786,
+            755782,
+            755764,
+            755675, // explicitly in block list
+            755745, // user with no profile picture
+            755406, // musora user
+            735658, //eli test user
+            631736, // me
         ];
-        $userID = 631736;
-        $brand = 'drumeo';
-        $callback = function ($sections) use ($userID, $brand) {
-            return $this->contentService->getRecommendedContent($userID, $brand, $sections);
-        };
-        $results = $this->timeEvent($callback, $inputSections, 1, 0);
-        return $results;
+        ChallengeUserProgress::truncate();
+        foreach ($userIds as $userId) {
+            $isUnlocked = $userId == 755976 || $userId == 755957;
+            $this->challengesService->startChallenge(
+                $challengeId,
+                $userId,
+                startDate: $startdate,
+                isLocked: !$isUnlocked
+            );
+        }
     }
 
-    private function testBulkRecommendation()
+    private function testSanity()
     {
-
-        $userIDs = [648632, 149869, 150909, 152882];
-        $brand = 'SINGEO';
-        $results = $this->recommendationService->getBulkFilterRecommendations($userIDs, $brand, RecommenderSection::Song);
-        dd($results);
+        $client = app()->make(SanityGateway::class);
+        return $client->getChildrenByRailcontentID(206303);
+        $documents = $client->getByRailContentIds([206303], includeParents: true);
+        return 'eehhh';
+        $songId = 'drafts.ae22572b-6219-4d8f-ba6e-aaa86c29036a'; // Head like a hole
+        $licenceId = 'drafts.044f865a-5e1d-4477-aa8a-7cc783acc903'; // Let it Be (test license
+        $publisherId = 'drafts.9b7840ff-a2ff-4a85-bab3-589d94bda677'; //Disney on development
+        $updatedDoc = $client->patchSetSingle('044f865a-5e1d-4477-aa8a-7cc783acc903', ['mlc' => 'new mlc2']);
+        $updatedDoc = $client->patchSetSingle($songId, ['popularity' => 200]);
+        $updatedDoc = $client->patchSetSingle($publisherId, ['name' => 'Disney2']);
+        $updatedDoc = $client->patchAppend($publisherId, 'child', [['name' => 'bananas']]);
+        $updatedDoc = $client->patchAppendReferences($songId, 'license', [$licenceId]);
+        $patches = [
+            $licenceId => ['mlc' => 'new aoesntuhmlc2'],
+            'drafts.854eb313-c415-4c87-82d0-6569dc15be3b' => ['name' => 'WBNAAAAAA'],
+        ];
+        $updatedDoc = $client->patchSetMany($patches);
+        return $updatedDoc;
     }
 
-    private function testingForRecommendationSystem()
-    {
-
-        $brand = 'drumeo';
-        $section = RecommenderSection::Song;
-        $ids = ['579297', '1114', '149628', '149643', '111'];
-        $callback = function ($id) use ($brand, $section) {
-            return $this->recommendationService->getFilteredRecommendations($id, $brand, $section);
-        };
-        $timeResults = $this->timeEvent($callback, $ids, 2, 1);
-        dd($timeResults);
-        $userID = 579297;
-        $results = $this->recommendationService->getFilteredRecommendations($userID, $brand, $section);
-        dd($results);
-    }
 
     // ----------------------------------- UTILITY FUNCTIONS ------------------------------------------
 
     private function timeEvent($callback, $inputs, $numAttempts = 1, $delay = 1, $transposeResults = true)
     {
         $timeResults = [];
-        foreach(array_keys($inputs) as $key) {
+        foreach (array_keys($inputs) as $key) {
             $input = $inputs[$key];
-            if($transposeResults) {
+            if ($transposeResults) {
                 $timeResults[$key] = [
                     'time' => [],
                     'result' => [],
@@ -296,7 +225,7 @@ class DevEndpointController extends Controller
             } else {
                 $timeResults[$key] = [];
             }
-            for($i = 0; $i < $numAttempts; $i++) {
+            for ($i = 0; $i < $numAttempts; $i++) {
                 $start = microtime(true);
                 try {
                     $result = $callback($input);
@@ -319,5 +248,15 @@ class DevEndpointController extends Controller
             }
         }
         return $timeResults;
+    }
+
+    private function saveSanityCall($id, $fileName, $type = null)
+    {
+        // Used like:
+
+        $fullPath = Storage::disk("content_test_resources")->path($fileName);
+        $result = $this->sanityGateway->getByRailContentId($id, $type);
+        $json = json_encode($result);
+        file_put_contents($fullPath, $json);
     }
 }

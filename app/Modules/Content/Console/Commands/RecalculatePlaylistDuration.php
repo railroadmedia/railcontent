@@ -11,7 +11,7 @@ class RecalculatePlaylistDuration extends Command
     protected $signature = 'RecalculatePlaylistDuration {playlistId}';
     protected $description = 'Recalculate playlist duration';
 
-    public function handle()
+    public function handle(): void
     {
         $playlistId = $this->argument('playlistId');
 

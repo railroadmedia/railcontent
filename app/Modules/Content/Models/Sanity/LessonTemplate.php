@@ -1,0 +1,200 @@
+<?php
+
+namespace App\Modules\Content\Models\Sanity;
+
+use App\Modules\Content\Models\Sanity\Enums\FieldType;
+use App\Modules\Content\Models\Sanity\Enums\VideoType;
+use App\Modules\Content\Models\Sanity\Structure\Field;
+use App\Modules\Content\Models\Sanity\Structure\Group;
+use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
+use App\Modules\Content\Models\Sanity\Structure\Reference;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Max;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
+use Modules\Content\Models\Sanity\Structure\AssignmentSheetImageField;
+use Modules\Content\Models\Sanity\Structure\Block;
+use Modules\Content\Models\Sanity\Structure\BrandField;
+use Modules\Content\Models\Sanity\Structure\ListArrayElement;
+use Modules\Content\Models\Sanity\Structure\ListObject;
+use Modules\Content\Models\Sanity\Structure\ParentTypeField;
+use Modules\Content\Models\Sanity\Structure\StatusField;
+
+/**
+ * Defines the schema structure for a Live Stream document type in Sanity.
+ *
+ * @property string       $type
+ * @property string       $name
+ * @property string       $title
+ * @property ?string      $icon
+ * @property array<Field> $fields
+ */
+abstract class LessonTemplate extends BaseSanityModel
+{
+    public function __construct(
+        public string $name,
+        public string $title,
+        public bool $withResources = true,
+        public bool $withLiveEvent = false,
+        public ?string $parentType = null,
+        public bool $isChallengeChild = false,
+        public bool $withAssignments = true,
+    ) {
+        $instructorReference = new Reference([['type' => 'instructor']]);
+        $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
+        $blockList = new Block();
+        $video               = new ListObject(
+            fields: [
+                        new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
+                        new Field(FieldType::String, 'external_id', inputComponent: 'VimeoVideoInput'),
+                        new Field(FieldType::String, 'hlsManifestUrl'),
+                        new Field(FieldType::String, 'video_poster_image_url'),
+                        new Field(FieldType::Array, 'video_playback_endpoints', title:'video_playback_endpoints', of: new ListObject(
+                            fields: [
+                                new Field(FieldType::String, 'vimeo_key'),
+                                new Field(FieldType::String, 'file'),
+                                new Field(FieldType::Number, 'height'),
+                                new Field(FieldType::Number, 'width')],
+                            previewItem: new ListItemPreview('height', 'width'),
+                        ), ),
+                    ],
+        );
+        $chapterList = new ListObject(
+            fields: [new Field(FieldType::String, 'chapter_description'),
+                        new Field(FieldType::Number, 'chapter_timecode', description: 'Time in seconds'),
+                        new Field(FieldType::Image, 'chapter_thumbnail_url')
+                        ],
+            previewItem: new ListItemPreview('chapter_description', 'chapter_timecode')
+        );
+        $parentContentData = new ListObject(
+            fields:[
+                       new Field(FieldType::Number, 'id'),
+                       new Field(FieldType::String, 'title', validation: [new Max(62)]),
+                       new Field(FieldType::String, 'slug'),
+                       new Field(FieldType::String, 'type'),
+                       new Field(FieldType::Number, 'position')],
+            previewItem: new ListItemPreview('slug', 'type')
+        );
+
+        $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
+        $genreReference = new Reference([['type' => 'genre']], options: ['aiAssist' => ['embeddingsIndex' => 'genre-index']]);
+        $theoryReference = new Reference([['type' => 'theory']], options: ['disableNew' => false]);
+        $lifestyleReference = new Reference([['type' => 'lifestyle']], options: ['disableNew' => false]);
+        $essentialReference = new Reference([['type' => 'essential']], options: ['disableNew' => false]);
+        $creativityReference = new Reference([['type' => 'creativity']], options: ['disableNew' => false]);
+
+        $detailsGroup = new Group('editorFields', 'Details', true);
+        $openAIGroup  = new Group('openAI', 'OpenAI');
+        $groups       = [
+            $detailsGroup,
+            $openAIGroup,
+        ];
+
+        $fields  = [
+            new Field(FieldType::String, 'title', group: $detailsGroup, validation: [new Required(), new Max(62)]),
+            new Field(
+                FieldType::Slug,
+                'slug',
+                options: ['source' => 'title', 'isUnique' => 'IsUniqueAcrossBrand'],
+                hidden:  "({document}) => !document?.title",
+                validation: [new Required()],
+                group:   $detailsGroup
+            ),
+            new BrandField($detailsGroup),
+            new StatusField($detailsGroup),
+            new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD '], group: $detailsGroup),
+            new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput', group: $detailsGroup),
+            new Field(FieldType::Array, 'instructor', 'Instructor', '', of: $instructorReference, group: $detailsGroup),
+            new Field(FieldType::Array, 'description', 'Description', of:$blockList, group:$detailsGroup),
+            new Field(
+                FieldType::Number,
+                'difficulty',
+                validation:     [new Min(0), new Max(10)],
+                inputComponent: 'DifficultyInput',
+                group: $detailsGroup
+            ),
+            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::Number, 'xp', 'XP', validation: [new Min(0)], group: $detailsGroup),
+            new Field(FieldType::Number, 'total_xp', 'Total XP', inputComponent: 'XpInput', readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
+];
+        if ($this->withLiveEvent) {
+            $fields = array_merge($fields, [
+                new Field(FieldType::String, 'live_event_youtube_id', 'Live Event Youtube ID (if set, this always overrides automatic embed)', group: $detailsGroup),
+                new Field(FieldType::Datetime, 'live_event_start_time', title: 'Live Event Start Time', options: ['dateformat' => 'YYYY-MM-DD '], group: $detailsGroup),
+                new Field(FieldType::Datetime, 'live_event_end_time', title: 'Live Event End Time', options: ['dateformat' => 'YYYY-MM-DD '], group: $detailsGroup),
+            ]);
+        }
+        $fields = array_merge($fields, [
+            new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference, group:$detailsGroup),
+            new Field(FieldType::Number, 'sort', 'Episode Number', validation: [new Min(0)], group: $detailsGroup),
+            new Field(FieldType::Array, 'essential', 'Essentials', '', of: $essentialReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'creativity', 'Creativity', '', of: $creativityReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'theory', 'Theory', '', of: $theoryReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'lifestyle', 'Lifestyle', '', of: $lifestyleReference, group:$detailsGroup),
+
+            new Field(FieldType::Object, 'video', fields: $video->fields, group: $detailsGroup),
+            new Field(FieldType::Number, 'length_in_seconds', group: $detailsGroup),
+            new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed', group:$detailsGroup),
+            new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list', group:$detailsGroup),
+            new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),
+            new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
+            new Field(FieldType::Array, 'chapter', 'Chapters', of: $chapterList, group:$detailsGroup)
+        ]);
+        if ($this->withAssignments) {
+            $assignmentsList = new ListObject(
+                fields: [new Field(FieldType::String, 'assignment_title', validation: [new Required()]),
+                            new Field(FieldType::String, 'assignment_soundslice'),
+                            new Field(FieldType::String, 'assignment_description'),
+                            new Field(FieldType::Array, 'assignment_sheet_music_image', title:'OLD Assignment sheet music image(imported):', readOnly: "true", of: new ListArrayElement()),
+                            new AssignmentSheetImageField(),
+                            new Field(FieldType::Number, 'assignment_timecode', description: 'Time in seconds'),
+                            new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
+                        ]
+            );
+            $fields = array_merge($fields, [
+                new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList, group:$detailsGroup)
+            ]);
+        }
+        if ($this->withResources) {
+            $resourceList = new ListObject(
+                fields: [new Field(FieldType::String, 'resource_name'),
+                            new Field(FieldType::URL, 'resource_url'),
+                            new Field(FieldType::AWSMedia, 'resource_aws', options: ['accept' => '*', 'storeOriginalFilename' => '*'])],
+            );
+            $fields = array_merge($fields, [
+                new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList, group:$detailsGroup)
+            ]);
+        }
+
+        $fields = array_merge($fields, [
+            new Field(FieldType::Date, 'quarter_removed', initialValue:null, group: $detailsGroup),
+            new Field(FieldType::Date, 'quarter_published', initialValue:null, group: $detailsGroup),
+            new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
+            new Field(FieldType::Number, 'popularity', 'Popularity', group: $detailsGroup),
+        ]);
+        if ($this->parentType) {
+            $fields = array_merge($fields, [new ParentTypeField($this->parentType, $detailsGroup)]);
+            $fields = array_merge($fields, [
+                new Field(FieldType::Array, 'parent_content_data', 'Parent Content Data', of: $parentContentData, group:$detailsGroup)
+            ]);
+        }
+        if ($this->isChallengeChild) {
+            $fields = array_merge($fields, [
+                new Field(FieldType::Boolean, 'is_always_unlocked_for_challenge', 'Is Always Unlocked', group: $detailsGroup),
+                new Field(FieldType::Boolean, 'is_bonus_content_for_challenge', 'Is Bonus Content', group: $detailsGroup),
+            ]);
+        }
+        $preview = new ListItemPreview('title', 'brand', 'thumbnail');
+        parent::__construct($this->name, $this->title, fields: $fields, preview: $preview, groups: $groups);
+    }
+
+    protected function addFields(array $fields): void
+    {
+        foreach ($fields as $field) {
+            $this->fields[] = $field;
+        }
+    }
+}

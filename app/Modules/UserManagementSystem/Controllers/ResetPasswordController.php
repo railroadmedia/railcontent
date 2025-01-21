@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -18,18 +19,15 @@ class ResetPasswordController extends Controller
 {
     use ValidatesRequests;
 
-    public function passwordResetForm(Request $request)
+    public function passwordResetForm(Request $request): View
     {
         return view('pages.reset', $request->all());
     }
 
     /**
      * Reset the given user's password.
-     *
-     * @param Request $request
-     * @return RedirectResponse
      */
-    public function resetPasswordWithToken(Request $request)
+    public function resetPasswordWithToken(Request $request): RedirectResponse
     {
         $isJson = request()->expectsJson();
 
@@ -135,10 +133,8 @@ class ResetPasswordController extends Controller
 
     /**
      * Get the broker to be used during password reset.
-     *
-     * @return PasswordBroker
      */
-    public function broker()
+    public function broker(): PasswordBroker
     {
         return Password::broker();
     }

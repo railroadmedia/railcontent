@@ -219,7 +219,7 @@
     @include("pianote.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Pianote BookBag",
         "fullPrice" => floatval($productPrices['pianote-book-bag']->price),
         "price" => $discountedPrice,
@@ -255,8 +255,7 @@
                     </div>
                     @if ($products['pianote-book-bag']->getStockAvailability() > 1 && !empty($products['pianote-book-bag']->getStockAvailability()))
                         <a class="w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500"
-                            href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
-                            @mouseout="move = false">Order Now</a>
+                            href="/ecommerce/add-to-cart?products[pianote-book-bag]=1">Order Now</a>
                     @else
                         <a class="join smaller sold-out">SOLD OUT</a>
                     @endif
@@ -500,7 +499,7 @@
         <div class="container mx-auto max-w-5xl">
             <h2 class="mb-16 md:mb-12 text-black font-playfair"><strong>See how the Pianote BookBag <br class="sm:hidden">  compares. </strong></h2>
             <div class="relative">
-                <p class="inline md:hidden leading-tight text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
+                <p class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower pt-2"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <table :class="{'earbuds': tableClass === 'earbuds', 'headphones': tableClass === 'headphones'}"  class="w-full mx-auto border-separate comparison eardrums earbuds">
                     <tbody style="background-color:transparent!important;">
                     <tr style="background-color:transparent!important;">
@@ -584,14 +583,19 @@
                             <h3 class="leading-tight mt-2">
 
                                 @if(!empty($membersVersion))
-                                    <span class="line-through" style="color: #879097; margin-right: 5px;"> $249 </span>
-                                    <strong>$149</strong>
+                                    <span class="line-through" style="color: #879097; margin-right: 5px;"> {{ floatval($productPrices['pianote-book-bag']->price) }} </span>
+                                    <strong>${{ $discountedPrice }}</strong>
                                 @else
-                                    <strong>$249</strong>
+                                     @if (floatval($productPrices['pianote-book-bag']->price) > $discountedPrice)
+                                        <s class="opacity-50">${{ floatval($productPrices['pianote-book-bag']->price) }}</s>
+                                        <strong>${{ $discountedPrice }}</strong>
+                                    @else
+                                        <strong>Only ${{ $discountedPrice }}</strong>
+                                    @endif
                                 @endif
                             </h3>
                             <p class="text-sm mb-5"><em>One-time payment.</em></p>
-                            <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] pianote" role="button" tabindex="0" aria-label="GET STARTED">GET STARTED</div>
+                            <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] pianote" role="button" tabindex="0" aria-label="GET STARTED">ORDER NOW</div>
                         </div>
                         <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">
                             <p class="text-left text-sm mb-1.5 leading-tight"><strong class="">Premium Oil-Tanned Leather</strong></p>

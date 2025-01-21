@@ -7,11 +7,7 @@ use Railroad\Railcontent\Support\Collection;
 
 class PianoteFoundationsLearningPathDecorator extends TypeDecoratorBase
 {
-    /**
-     * @param Collection $contents
-     * @return Collection
-     */
-    public function decorate(Collection $contents)
+    public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->where('type', 'learning-path')->where('slug', 'foundations-2019'); // todo: testing
 

@@ -31,8 +31,6 @@ class LogOutWhenNeeded
      * Check if the user needs to be logged out. If so, create a log entry for it, log them out,
      * and throw an AuthenticationException.
      *
-     * @param  User|null  $user
-     * @return void
      * @throws AuthenticationException
      */
     private function checkUser(?User $user): void

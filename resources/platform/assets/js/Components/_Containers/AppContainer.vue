@@ -8,7 +8,10 @@
 <script setup>
 import { watch, provide, onBeforeMount } from 'vue';
 import { useUserStore } from '@stores/user';
-import { toKebabCase } from '../../utils.js'; 
+import { usePlatformStore } from '@stores/platform'
+import { toKebabCase } from '../../utils.js';
+import { globalConfig } from "musora-content-services";
+import moment from 'moment-timezone';
 
 const props = defineProps({
   user: Object,
@@ -26,22 +29,34 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  userCompletedAccount: {
+  showOnboardingBanner: {
     type: Boolean,
     default: false,
+  },
+  tinymcePath: {
+    type: String,
   }
 
 });
 
 onBeforeMount(() => {
   provide('csrf_token', props.csrf_token);
+  globalConfig.localTimezoneString = moment.tz.guess();
 });
 const userStore = useUserStore();
+const platformStore = usePlatformStore();
 
 watch(
   () => props.user,
   (user) => {
     userStore.setUser(user);
+  },
+  { immediate: true }
+);
+watch(
+  () => props.tinymcePath,
+  (path) => {
+    platformStore.setTinymcePath(path);
   },
   { immediate: true }
 );
@@ -75,9 +90,9 @@ watch(
   { immediate: true }
 );
 watch(
-  () => props.userCompletedAccount,
-  (userCompletedAccount) => {
-    userStore.setCompletedAccount(userCompletedAccount)
+  () => props.showOnboardingBanner,
+  (showOnboardingBanner) => {
+    userStore.setShowOnboardingBanner(showOnboardingBanner)
   },
   { immediate: true }
 )

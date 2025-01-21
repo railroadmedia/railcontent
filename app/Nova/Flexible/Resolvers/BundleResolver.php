@@ -8,14 +8,6 @@ use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
 class BundleResolver implements ResolverInterface
 {
-    /**
-     * get the field's value
-     *
-     * @param  mixed  $resource
-     * @param  string $attribute
-     * @param  Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
-     * @return Illuminate\Support\Collection
-     */
     public function get($resource, $attribute, $layouts)
     {
         $bundles = $resource->bundles()->get();
@@ -37,19 +29,11 @@ class BundleResolver implements ResolverInterface
 
     }
 
-    /**
-     * Set the field's value
-     *
-     * @param  mixed  $model
-     * @param  string $attribute
-     * @param  Illuminate\Support\Collection $groups
-     * @return string
-     */
-    public function set($model, $attribute, $groups)
+    public function set($resource, $attribute, $groups)
     {
-        $class = get_class($model);
+        $class = get_class($resource);
 
-        $class::saved(function ($model) use ($groups) {
+        $class::saved(function ($resource) use ($groups) {
             foreach($groups as $key => $group) {
                 //update
                 if(!is_null($group['id'])) {
@@ -85,7 +69,7 @@ class BundleResolver implements ResolverInterface
 
                     if(!is_null($product_id)) {
                         $addBundle = new Bundle();
-                        $addBundle->bundle_id = $model['id'];
+                        $addBundle->bundle_id = $resource['id'];
                         $addBundle->product_id = $product_id;
                         $addBundle->free_bonus = $group['free_bonus'];
                         $addBundle->lifetime_access = $group['lifetime_access'];
@@ -98,7 +82,7 @@ class BundleResolver implements ResolverInterface
             }
 
             if(isset($updatedIds)) {
-                Bundle::where('bundle_id', $model['id'])->whereNotIn('id', $updatedIds)->delete();
+                Bundle::where('bundle_id', $resource['id'])->whereNotIn('id', $updatedIds)->delete();
             }
         });
     }

@@ -8,9 +8,6 @@ trait UsesStorageForShopifySyncData
 {
     /**
      * Delete the given files from storage
-     *
-     * @param array $fileNames
-     * @return void
      */
     protected function deleteFiles(array $fileNames): void
     {
@@ -27,9 +24,6 @@ trait UsesStorageForShopifySyncData
 
     /**
      * Get the file from storage, using the provided file name
-     *
-     * @param string $fileName
-     * @return string|null
      */
     protected function getFile(string $fileName): ?string
     {

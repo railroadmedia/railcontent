@@ -1,13 +1,4 @@
-import ContentService from '@vuesora/assets/js/Services/content';
-
-const getValue = (obj, key) => {
-    const filtered = obj.filter((field) => {
-        if (field.key === key) {
-            return true;
-        }
-    })
-    return filtered.length ? filtered[0].value : '';
-}
+import { contentStatusReset } from 'musora-content-services';
 
 export default function useUserCatalogueEvents(props, context) {
     function progressReset(event) {
@@ -45,13 +36,13 @@ export default function useUserCatalogueEvents(props, context) {
             let thumbnail_url = '';
             let description = '';
             if (type === 'song') {
-                name = getValue(props.item.fields, 'title');
-                thumbnail_url = getValue(props.item.data, 'thumbnail_url');
-                description = getValue(props.item.fields, 'artist');
+                name = props.item.title;
+                thumbnail_url = props.item.thumbnail;
+                description = props.item.artist_name;
             } else {
-                name = getValue(props.item.fields, 'title');
-                thumbnail_url = getValue(props.item.data, 'thumbnail_url');
-                description = getValue(props.item.data, 'description');
+                name = props.item.title ?? '';
+                thumbnail_url = props.item.thumbnail ?? '';
+                description = '';
 
             }
             window.openplaylistmodal({
@@ -70,7 +61,7 @@ export default function useUserCatalogueEvents(props, context) {
     }
 
     function resetProgressEventHandler(payload) {
-        return ContentService.resetContentProgress(payload.content_id);
+        return contentStatusReset(payload.content_id);
     }
 
     function addEvent(payload) {

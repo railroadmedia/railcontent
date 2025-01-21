@@ -38,7 +38,7 @@
                         </template>
                     </div>
                     <div class="tw-font-extrabold tw-text-lg lg:tw-text-[22px] tw-mb-1">
-                        ${{ price }} {{ interval }}
+                        {{ price }} {{ interval }}
                     </div>
                     <div v-if="intervalDesc" class="tw-italic tw-text-sm tw-mb-8">
                         {{ intervalDesc }}
@@ -140,12 +140,13 @@ const isYearly = computed(() => {
 
 const price = computed(() => {
     if(isMonthly.value) {
-        return 5;
+        return "$5";
     } else if(isYearly.value) {
-        return 20;
+        return "$20";
     } else if(isLifetimeMember.value){
-        return 40;
+        return "$40";
     }
+    return "";
 })
 
 const interval = computed(() => {
@@ -167,7 +168,7 @@ const intervalDesc = computed(() => {
 })
 
 const consentText = computed(() => {
-    if(isMonthly.value) return 'By choosing "Pay Monthly," I understand that my next renewal will be $30 for Musora+ with Songs.';
+    if(isMonthly.value) return 'By choosing "Pay Monthly," I understand that my next renewal will be $40 for Musora+ with Songs.';
 })
 
 const upgradeNow = async() => {

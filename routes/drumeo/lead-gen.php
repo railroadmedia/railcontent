@@ -31,6 +31,10 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         ]);
     });
     Route::get('/double-bass-101', [LeadGenController::class, 'doubleBass101']);
+    Route::get('/jazz-drumming-101', [LeadGenController::class, 'jazzDrumming101']);
+    Route::get('/better-doubles-in-10-days', [LeadGenController::class, 'betterDoubles']);
+    Route::get('/blue-man', [LeadGenController::class, 'blueMan']);
+    Route::get('/phil-collins', [LeadGenController::class, 'philcollins']);
     Route::get('/free-playalongs', [LeadGenController::class, 'freePlayalongs']);
     Route::get('/metal-playalongs', [LeadGenController::class, 'metalPlayalongs']);
     Route::get('/grooves-of-john-bonham', [LeadGenController::class, 'johnGrooves']);
@@ -41,6 +45,8 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/rock-drumming-masterclass/testimonials', [LeadGenController::class, 'rockDrumming']);
     Route::get('/subdivision-challenge', [LeadGenController::class, 'subdivision']);
     Route::get('/sucherman-sound', [LeadGenController::class, 'sucherman']);
+    Route::get('/groove-coordination', [LeadGenController::class, 'grooveCoordination']);
+
     Route::group(['prefix' => '/ultimate-toolbox'], function () {
         Route::get('/{page?}', LeadGenController::class . '@toolbox')->whereIn('page', [
             null, 'catalogue'
@@ -90,5 +96,6 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/win/', [LeadGenController::class, 'win']);
     Route::get('/weekly-email/', [LeadGenController::class, 'weeklyEmail']);
     Route::get('/weeklyemail/', [LeadGenController::class, 'weeklyMail']);
+    Route::get('/the-playlist', [LeadGenController::class, 'thePlaylist']);
     Route::get('/{leadgenSlug?}', LeadGenController::class.'@leadgen')->where('leadgenSlug', '(.*)');
 });

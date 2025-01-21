@@ -41,7 +41,6 @@ class CustomerIoSendTransactionalEmail extends CustomerIoBaseJob
     }
 
     /**
-     * @param  CustomerIoService  $customerIoService
      * @throws \Throwable
      */
     public function handle(
@@ -61,8 +60,6 @@ class CustomerIoSendTransactionalEmail extends CustomerIoBaseJob
 
     /**
      * The job failed to process.
-     *
-     * @param  Throwable  $exception
      */
     public function failed(Throwable $exception)
     {

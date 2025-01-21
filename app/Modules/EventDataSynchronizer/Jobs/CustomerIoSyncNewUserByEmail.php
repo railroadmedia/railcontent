@@ -24,11 +24,6 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
     }
 
     /**
-     * @param CustomerIoService $customerIoService
-     * @param CustomerIoSyncService $customerIoSyncService
-     * @param UserService $userService
-     * @param EventTrackingCustomerIoService $eventTrackingCustomerIoService
-     * @param UserAccessPermissionsService $userAccessPermissionsService
      * @throws Throwable
      */
     public function handle(
@@ -83,8 +78,6 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
 
     /**
      * The job failed to process.
-     *
-     * @param Throwable $exception
      */
     public function failed(Throwable $exception): void
     {

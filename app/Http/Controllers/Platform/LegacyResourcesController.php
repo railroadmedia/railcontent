@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use App\Maps\ContentTypes;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -29,42 +30,42 @@ class LegacyResourcesController extends Controller
         $this->fullTextSearchService = $fullTextSearchService;
     }
 
-    public function show()
+    public function show(): View
     {
         $sections = [
             [
                 "url" => url()->route('platform.legacy-resources.archive'),
-                "icon" => "icon-archive",
+                "icon" => "fa-solid fa-box-archive",
                 "title" => "Archives",
                 "download" => false,
             ],
             [
                 "url" => 'http://drumeosecure.s3.amazonaws.com/tools-resources/00-drum-notation-resources/the-drumeo-notation-key.pdf',
-                "icon" => "icon-notation-key",
+                "icon" => "fa-solid fa-bell",
                 "title" => "Notation Key",
                 "download" => true,
             ],
             [
                 "url" => 'http://drumeosecure.s3.amazonaws.com/tools-resources/00-drum-notation-resources/blank-notation.pdf',
-                "icon" => "icon-blank-staff",
+                "icon" => "fa-sharp fa-solid fa-list-music",
                 "title" => "Blank Staff",
                 "download" => true,
             ],
             [
                 "url" => url()->route('platform.legacy-resources.dictionary'),
-                "icon" => "icon-dictionary-drum-terms",
+                "icon" => "fa-sharp fa-solid fa-book",
                 "title" => "Dictionary of Terms",
                 "download" => false,
             ],
             [
                 "url" => 'http://drumeosecure.s3.amazonaws.com/tools-resources/00-drum-notation-resources/blank-chart.pdf',
-                "icon" => "icon-blank-song",
+                "icon" => "fa-sharp fa-regular fa-list-music",
                 "title" => "Blank Song Chart",
                 "download" => true,
             ],
             [
                 "url" => url()->route('platform.legacy-resources.loops'),
-                "icon" => "icon-loops",
+                "icon" => "fa-sharp fa-solid fa-music",
                 "title" => "Loops",
                 "download" => false,
             ],
@@ -78,7 +79,7 @@ class LegacyResourcesController extends Controller
     /*
         * Pass search string as value of "term" query string param to get search instead.
         */
-    public function archive(Request $request)
+    public function archive(Request $request): View
     {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 20);
@@ -109,7 +110,7 @@ class LegacyResourcesController extends Controller
         return $results;
     }
 
-    public function loops()
+    public function loops(): View
     {
         $bassLoops = [
             "3/4 Jazz" => [

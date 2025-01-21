@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use League\Fractal\TransformerAbstract;
 use Modules\UserManagementSystem\Models\FirebaseToken;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railnotifications\Contracts\UserProviderInterface;
@@ -56,10 +57,7 @@ class RailnotificationsUserProvider implements UserProviderInterface
         return true;
     }
 
-    /**
-     * @return TransformerAbstract
-     */
-    public function getUserTransformer()
+    public function getUserTransformer(): TransformerAbstract
     {
         return new UserTransformer();
     }

@@ -13,28 +13,12 @@
     :href="renderLink && isReleased ? item.url : null"
      @click="openUpgradeModal"
   >
-
-    <!-- LESSON NUMBERS -->
-    <div v-if="showNumbers" class="
-        tw-flex
-        tw-flex-col
-        tw-text-[#00101D]
-        dark:tw-text-white
-        align-left
-        tw-justify-center
-        number-col
-        title
-        hide-xs-only
-      ">
-      {{ lesson_number }}
-    </div>
-
     <!-- THUMBNAIL COLUMN -->
     <div v-if="!showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0"
       :class="[thumbnailColumnClass, themeColor]">
       <div class="thumb-wrap corners-10">
         <div class="thumb-img corners-10 thumb-wrap corners-10 bg-grey-2 dark:tw-bg-[#081825]" :class="thumbnailType">
-          <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${contentModel.list.thumbnail}`" alt="Lesson Thumbnail"
+          <img :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${contentModel.list.thumbnail}`" alt="Lesson Thumbnail"
             class="tw-transition-opacity tw-duration-500" loading="lazy"
             :class="contentModel.list.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'" @load="contentModel.list.imageLoaded = true" />
 
@@ -154,7 +138,7 @@
       </div>
     </template>
 
-    <!-- ONLY SHOW TYPE ON SEARCHES -->
+    <!-- ONLY SHOW ON SEARCHES -->
     <template v-if="is_search">
       <div v-if="mappedData.column_data && mappedData.column_data.length"
           class="
@@ -169,7 +153,7 @@
       >
         {{ mappedData.column_data[0] }}
       </div>
-      <div v-if="item.type !== 'song'" class="
+      <div class="
           tw-hidden
           sm:tw-flex
           tw-flex-col
@@ -179,7 +163,7 @@
           tw-text-center
           tw-text-xs
         ">
-        {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
+        {{ mappedData.content_type }}
       </div>
       <div class="
           tw-hidden
@@ -269,6 +253,10 @@ export default {
       default: () => false,
     },
     isBranchPath: {
+      type: Boolean,
+      default: () => false,
+    },
+    is_search: {
       type: Boolean,
       default: () => false,
     },

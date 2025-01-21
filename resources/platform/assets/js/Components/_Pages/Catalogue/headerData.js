@@ -1,4 +1,4 @@
-export function getHeaderData(catalogueMeta, brand, askQuestionRecipient, emailLogoLink, lessonType) {
+export function getHeaderData(catalogueMeta, brand, askQuestionRecipient, emailLogoLink, lessonType, forYouExperiment) {
     const descriptions = {
       drumeo: "Tackle your next drumming goal with bite-sized courses from many of the world's best drummers.",
       pianote: "Tackle your next piano goal with bite-sized courses from many of the world's best pianists.",
@@ -207,6 +207,12 @@ export function getHeaderData(catalogueMeta, brand, askQuestionRecipient, emailL
         title: 'Archives',
         iconName: 'archives',
       },
+      'Legacy Archives': {
+        type: 'archives',
+        title: 'Legacy Archives',
+        iconName: 'archives',
+        description: 'Legacy Resources are lessons or tools that are no longer added to or supported. Rather than remove them from the site completely you can access them here.'
+      },
       'New Content': {
         type: 'newcontent',
         title: 'New Content',
@@ -234,12 +240,18 @@ export function getHeaderData(catalogueMeta, brand, askQuestionRecipient, emailL
         iconName: 'recommendation',
         description: "Here's a list of items we think you'd be interested in! New content will be available twice a week, taking into account your activity and the preferences of other students with similar interests.",
       },
+      'ForYouExperiment': {
+        type: 'recommended',
+        title: 'For You',
+        iconName: 'recommendation',
+        description: "Here's a list of items we think you'd be interested in! New content will be available twice a week, taking into account your activity and the preferences of other students with similar interests.",
+      },
     };
 
     if (lessonType === 'Recommendation') {
-      return catalogueTypes[lessonType];
+      return forYouExperiment ? catalogueTypes['ForYouExperiment'] : catalogueTypes[lessonType];
     }
-  
+    
     return catalogueTypes[catalogueMeta.name] || {
       type: 'generic',
       title: catalogueMeta.name,

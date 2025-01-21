@@ -43,7 +43,7 @@ class SyncExistingHelpScout extends Command
         HelpScoutSyncService $helpScoutSyncService,
         HelpScoutService $helpScoutService,
         UserService $userService
-    ) {
+    ): void {
         $currentPage = null;
 
         $railhelpscoutConnection = $databaseManager->connection(config('railhelpscout.database_connection_name'));

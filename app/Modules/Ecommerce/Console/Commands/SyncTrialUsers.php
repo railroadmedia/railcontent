@@ -9,7 +9,7 @@ class SyncTrialUsers extends Command
 {
     protected $signature = 'ecommerce:SyncTrialUsers {startIndex=0} {endIndex=-1}';
 
-    public function handle(UserService $userService)
+    public function handle(UserService $userService): void
     {
         $startIndex = $this->argument('startIndex');
         $endIndex = $this->argument('endIndex');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Ecommerce\Tests\Unit\Jobs\RevenueCat;
+namespace App\Modules\Ecommerce\tests\Unit\Jobs\RevenueCat;
 
 use App\Modules\Ecommerce\Jobs\RevenueCat\SubscriptionExpiredEventTrackingJob;
 use App\Modules\Ecommerce\Models\Product;
@@ -14,7 +14,7 @@ class SubscriptionExpiredEventTrackingJobTest extends TestCase
 {
     use CreatesReflectionProperty;
 
-    public function test_subscription_expired()
+    public function test_subscription_expired(): void
     {
         $userCreated = User::factory()->create(['membership_expiration_date' => now()->subMonthsNoOverflow(2)]);
         $revenueCatProductId = 'drumeo_app_1_year_member';

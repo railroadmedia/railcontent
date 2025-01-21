@@ -67,6 +67,21 @@ return [
         // NOTE: brand changes dynamically based on the current domain
         'brand' => 'musora',
         'musora' => [
+            'Today in Music History' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                ],
+            ],
             'The Playlist - Musora Newsletter' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string',
@@ -79,6 +94,42 @@ return [
                 ],
                 'attributes' => [
                     'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
+            'Cymbal Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_cymbal-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'email' => 'Email'
+                ],
+            ],
+            'Phobia Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_phobia-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'email' => 'Email'
+                ],
+            ],
+            'WVH gear Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_wvh-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
                     'email' => 'Email'
                 ],
             ],
@@ -99,8 +150,120 @@ return [
                     'preferred_instrument' => 'Preferred Instrument'
                 ],
             ],
+            'Youtube Resources' => [
+                'custom_attributes' => [
+                    'preferred_instrument' => 'nullable|string',
+                ],
+                'events' => [
+                    'musora_prospect_youtube-resources',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'email' => 'Email',
+                    'preferred_instrument' => 'Preferred Instrument'
+                ],
+            ],
+            'Musora Referral' => [
+                'custom_attributes' => [],
+                'events' => [
+                    '30day-trial-referral',
+                ],
+                'custom_event_attributes' => [
+                    'referrer' => 'required|string',
+                    'brand' => 'required|string',
+                ],
+                'accounts_to_sync' => [
+                    'musora',
+                ],
+                'attributes' => [
+                    'email' => 'Email',
+                    'brand' => 'Brand',
+                    'timestamp' => 'Timestamp',
+                ],
+            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'musora_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                    'musora',
+                ],
+            ],
+            '30D Drummer Sample' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'musora_prospect_30d-drummer-sample',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                ],
+            ],
+            'New Piano Players Sample' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'musora_prospect_new-piano-players-sample',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                ],
+            ],
+            'Better Strumming Sample' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'musora_prospect_better-strumming-sample',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                ],
+            ],
+            'Everyday Improv Sample' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'musora_prospect_everyday-improv-sample',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                ],
+            ],
         ],
         'drumeo' => [
+            'The Playlist - Musora Newsletter' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+            ],
             'Kristinas Top 25' => [
                 'custom_attributes' => [],
                 'events' => [
@@ -171,6 +334,24 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'drumeo',
+                ],
+            ],
+            'Jazz Drumming 101' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_jazz-drumming-101',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Better Doubles In 10 Days' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_better-doubles',
+                ],
+                'accounts_to_sync' => [
+                    'musora',
                 ],
             ],
             'Getting Started On The Drums' => [
@@ -323,6 +504,45 @@ return [
                     'email' => 'Email'
                 ],
             ],
+            'Yamaha Giveaway nov24' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'drumeo_prospect_drumset-giveaway-nov-2024',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
+            'Cymbal Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_cymbal-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'email' => 'Email'
+                ],
+            ],
+            'Phobia Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_phobia-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'email' => 'Email'
+                ],
+            ],
             'Drumeo Giveaway Rafflepress' => [
                 'custom_attributes' => [],
                 'events' => [
@@ -386,8 +606,45 @@ return [
                     'drumeo',
                 ],
             ],
+            'Groove Coordination' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_groove-coordination',
+                ],
+                'accounts_to_sync' => [
+                    'musora',
+                ],
+            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                    'musora',
+                ],
+            ],
         ],
         'pianote' => [
+            'Passing Chords PDF' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'pianote_prospect_passing-chords',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            '5 Pentatonic Licks PDF' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'pianote_prospect_pentatonic-licks',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Metronome Notice' => [
                 'custom_attributes' => [],
                 'events' => [
@@ -404,6 +661,21 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+            ],
+            'Technique Essentials' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_technique-essentials',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Chord Hacks' => [
@@ -452,6 +724,21 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+            ],
+            'Getting Started On The Piano V3' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_getting-started-v3',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Sight Reading Made Simple' => [
@@ -656,12 +943,33 @@ return [
                 ],
             ],
             'FP30 Giveaway' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
                 'events' => [
                     'pianote_prospect_giveaway-2023',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
+            'Casio Privia Giveaway' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_casio-privia-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Pianote Awards Giveaway' => [
@@ -680,6 +988,21 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+            ],
+            'Prima Giveaway' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_prima-giveaway-nov2024',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             '7 Days To Sight Reading' => [
@@ -794,6 +1117,46 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'pianote_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                    'musora',
+                ],
+            ],
+            'Digital Christmas Songbook' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_digital_christmas_songbook',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
+            'Chords Progressions Digital Book' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_chords_progressions_digital_book',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
         ],
@@ -924,6 +1287,16 @@ return [
                     'guitareo',
                 ],
             ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'guitareo_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                    'musora',
+                ],
+            ],
         ],
         'singeo' => [
             'Improve Any Voice' => [
@@ -1016,6 +1389,35 @@ return [
                     'singeo',
                 ],
             ],
+            'Everyday Improv Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'singeo_prospect_everyday-improv-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'singeo_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                    'musora',
+                ],
+            ],
         ],
+    ],
+    'subscription_topics' => [
+        'drumeo_membership_perks' => env('DRUMEO_PERKS_SUBSCRIPTION_TOPIC', 'topic_3'),
+        'drumeo_lesson_events' => env('DRUMEO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_2'),
+        'pianote_membership_perks' => env('PIANOTE_PERKS_SUBSCRIPTION_TOPIC', 'topic_10'),
+        'pianote_lesson_events' => env('PIANOTE_LESSONS_SUBSCRIPTION_TOPIC', 'topic_9'),
+        'guitareo_membership_perks' => env('GUITAREO_PERKS_SUBSCRIPTION_TOPIC', 'topic_11'),
+        'guitareo_lesson_events' => env('GUITAREO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_13'),
+        'singeo_membership_perks' => env('SINGEO_PERKS_SUBSCRIPTION_TOPIC', 'topic_12'),
+        'singeo_lesson_events' => env('SINGEO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_14'),
     ]
 ];

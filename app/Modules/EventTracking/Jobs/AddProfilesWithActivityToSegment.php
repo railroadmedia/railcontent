@@ -10,7 +10,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
 class AddProfilesWithActivityToSegment implements ShouldQueue
@@ -25,7 +24,7 @@ class AddProfilesWithActivityToSegment implements ShouldQueue
         private readonly int $segmentId,
         private readonly Carbon $startDate,
         private readonly array $accountConfig,
-        private readonly array $customerIds
+        private readonly array $customerEmails
     ) {
     }
 
@@ -33,7 +32,7 @@ class AddProfilesWithActivityToSegment implements ShouldQueue
     {
         Log::info(
             'Adding ' . count(
-                $this->customerIds
+                $this->customerEmails
             ) . ' profiles to segment ' . $this->segmentId . ' for workspace ' . $this->workspaceName
         );
 
@@ -42,7 +41,7 @@ class AddProfilesWithActivityToSegment implements ShouldQueue
                 $this->accountConfig['site_id'],
                 $this->accountConfig['track_api_key'],
                 $this->segmentId,
-                $this->customerIds,
+                $this->customerEmails,
             );
         } catch (Exception $e) {
             Log::error($e->getMessage());

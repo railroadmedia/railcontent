@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import PlaylistService from '../Services/playlists';
+import {fetchUserPlaylists, fetchPlaylist, fetchPinnedPlaylists} from "musora-content-services";
 
 export const usePlaylistsStore = defineStore({
   id: 'Playlists',
@@ -15,7 +16,8 @@ export const usePlaylistsStore = defineStore({
       },
       playerExpanded: false,
       pageHasPlaylistCatalog: false,
-      loadingPlaylists: false,
+      loadingPlaylists: true,
+      loadingSidebarPlaylists: true,
       loadingLessons: false,
       sortingPlaylist: false,
       loadingPinnedPlaylists: false,
@@ -71,21 +73,22 @@ export const usePlaylistsStore = defineStore({
     },
     async getPlaylists(payload, token) {
       try {
-        const response = await PlaylistService.getCurrentUserPlaylists(payload, token);
-        this.loadingPlaylists = false;
-        this.playlists = await response.data.data;
-        this.playlistsQuantity = await response.data.meta.totalResults;
-        this.filterOptions = await response.data.meta.filterOptions;
+        const response = await fetchUserPlaylists(payload.brand, payload);
+        this.playlists = await response.data;
+        this.playlistsQuantity = await response.meta.totalResults;
+        this.filterOptions = await response.meta.filterOptions;
       } catch {
         console.log('there was an error with your request');
         //hard reload?
+      } finally {
+        this.loadingPlaylists = false;
       }
     },
     async getPlaylist(payload, token) {
       try {
-          const response = await PlaylistService.getPlaylist(payload, token);
+          const response = await fetchPlaylist(payload.playlist_id);
           this.loadingPlaylists = false;
-          this.activePlaylist = response.data.data[0];
+          this.activePlaylist = response.data;
       } catch {
           console.log('there was an error with your request');
           //hard reload?
@@ -101,11 +104,12 @@ export const usePlaylistsStore = defineStore({
         //hard reload?
       }
     },
-    async getSidebarPlaylists(payload, token) {
+    async getSidebarPlaylists(payload) {
       try {
-          const response = await PlaylistService.getCurrentUserPlaylists(payload, token);
+          const response = await fetchUserPlaylists(payload.brand, payload);
           this.loadingPlaylists = false;
-          this.sidebarPlaylists = await response.data.data;
+          this.loadingSidebarPlaylists = false;
+          this.sidebarPlaylists = await response.data;
       } catch {
           console.log('there was an error with your request');
       }

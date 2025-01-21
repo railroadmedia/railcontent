@@ -6,6 +6,7 @@ use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Events\AccessCodeClaimed;
 use App\Modules\Ecommerce\Models\AccessCode;
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\UserManagementSystem\Jobs\SyncOnboardingBrands;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Doctrine\ORM\Exception\ORMException;
@@ -67,7 +68,10 @@ class AccessCodeService
 
         if ($accessCode->is_claimed) {
             // Can't claim a code that's already claimed
-            throw new Exception("Access code already claimed");
+            if ($accessCode->claimer_id === $user->id) {
+                throw new Exception("This code has already been redeemed to your account");
+            }
+            throw new Exception("This code has already been redeemed");
         }
 
         $productIds = $this->getAccessCodeProducts($accessCode);
@@ -86,7 +90,15 @@ class AccessCodeService
         $accessCode->updated_at = Carbon::now();
         $accessCode->save();
 
+        $user->primary_brand = in_array($accessCode->brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))
+            ? $accessCode->brand
+            : $user->primary_brand;
+
+        $user->save();
+
         event(new AccessCodeClaimed($accessCode, $user, $context));
+
+        SyncOnboardingBrands::dispatchAfterResponse($user->id, $accessCode->brand);
 
         Log::info('Access code claimed', [
             'access_code' => $accessCode->code,

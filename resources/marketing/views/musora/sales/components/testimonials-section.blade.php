@@ -3,7 +3,7 @@
     @isset($bgColor)
         style="background: {{ $bgColor }};"
     @else
-        style="background:linear-gradient(to bottom, #fff, #F6F8FC);"
+        style="background:#F6F8FC;"
     @endisset
     x-data="{
         @foreach($testimonials as $testimonial)
@@ -12,22 +12,24 @@
     }">
 
     <div class="container mx-auto max-w-6xl mb-12">
-        <h2 class="font-lexend uppercase leading-none"><strong>
+        <h2 class="leading-tight mb-2 sm:mb-3"><strong>
                 @if($theme != 'musora')
-                    Trusted by<br class="hidden sm:inline"> {!! $header !!} everywhere.
+                    Trusted by {!! $header !!} everywhere.
                 @else
                     {!! $header !!}
                 @endif
             </strong></h2>
-        <img alt="star ratings" class="h-11 my-3 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
+
         <p class="mx-auto mb-7">
-            Rated 4.8/5 based on <strong class="font-black">
+            <img alt="star ratings" class="h-5 sm:mr-2 inline-block align-middle opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/182x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
+            <br class="sm:hidden">
+            Rated 4.8/5 based on
                 @if($theme == 'drumeo')
-                    {{ number_format(1958) }}
+                    {{ number_format(2023) }}
                 @else
                     {{ number_format(Prices::$reviews) }}
                 @endif
-                student reviews.</strong>
+                student reviews.
             <a role="link" aria-label="Link to shopperapproved" class="inline-block" target="_blank"
                 @if($theme == 'drumeo')
                     href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738"
@@ -85,12 +87,7 @@
                         @foreach ($testimonials as $index => $testimonial)
                                 <li class="splide__slide flex px-1">
                                     <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg"
-                                    @if($index % 2 == 0 && isset($bgSplide))
-                                        style="background: {{ $bgSplide }};"
-                                    @else
-                                        style="background-color:#0C1524;"
-                                    @endif
-                                       >
+                                        style="background-color:#0C1524;">
                                         <picture class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center relative h-56 sm:h-80 lg:h-[32rem]"
                                             @if(!empty($testimonial['video']))
                                                 x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"

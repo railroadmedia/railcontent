@@ -83,6 +83,7 @@ class AuthenticationController extends Controller
             $request->validate([
                 'email' => 'required|email|exists:usora_users,email',
                 'password' => 'required|string',
+                'redirect_to' => 'nullable|string',
             ]);
         } catch (ValidationException $e) {
             return response()->json([
@@ -103,10 +104,16 @@ class AuthenticationController extends Controller
             auth()->login($user, $remember);
 
             $this->authenticated($user, $password);
+            // don't just use $request->get with the default value, because an empty string could still come through
+            if ($request->filled('redirect_to')) {
+                $redirectTo = $request->get('redirect_to');
+            } else {
+                $redirectTo = '/' . brand();
+            }
 
             return response()->json([
                 'message' => 'success',
-                'redirect_to' => $request->get('redirect_to', '/' . brand()),
+                'redirect_to' => $redirectTo,
             ]);
         }
 
@@ -119,11 +126,10 @@ class AuthenticationController extends Controller
      * Old web log in flow
      ******************************************************************************************************************/
     /**
-     * @param  Request  $request
      * @return JsonResponse|RedirectResponse
      * @throws AuthenticationException
      */
-    public function loginCookie(Request $request)
+    public function loginCookie(Request $request): RedirectResponse
     {
         try {
             $validationRules = [
@@ -178,10 +184,9 @@ class AuthenticationController extends Controller
             );
     }
     /**
-     * @param Request $request
      * @return JsonResponse|RedirectResponse
      */
-    public function loginGeneratedKey(Request $request)
+    public function loginGeneratedKey(Request $request): RedirectResponse
     {
         // auth logic is not inside middleware AuthenticateViaKeyIfAvailable
 
@@ -199,11 +204,7 @@ class AuthenticationController extends Controller
             );
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function checkForAuthThenRedirectBackWithAuthKey(Request $request)
+    public function checkForAuthThenRedirectBackWithAuthKey(Request $request): RedirectResponse
     {
         $redirectToUrl = strtok($request->get('redirect_to'), '?');
 
@@ -223,11 +224,10 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * @param  Request  $request
      * @return JsonResponse|RedirectResponse
      * @throws AuthenticationException
      */
-    public function loginToken(Request $request)
+    public function loginToken(Request $request): JsonResponse
     {
         try {
             $validationRules = [
@@ -271,9 +271,9 @@ class AuthenticationController extends Controller
 
             $token = $user->createToken($request->get('device_name'));
             $user->withAccessToken($token);
-            $user['login_as_users'] = user()->hasRole('login_as_users');
 
             $attributes = $user->toArray();
+            $attributes['login_as_users'] = user()->hasRole('login_as_users');
             $toRemove = ['shopify_id'];
             $attributes = array_diff_key($attributes, array_flip($toRemove));
             return response()->json(['token' => $token->plainTextToken, 'user' => $attributes]);
@@ -287,11 +287,7 @@ class AuthenticationController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function logoutCookie(Request $request)
+    public function logoutCookie(Request $request): RedirectResponse
     {
         $user = auth()->user();
 
@@ -304,11 +300,7 @@ class AuthenticationController extends Controller
             redirect()->to(config('usora.login_page_path'));
     }
 
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function logoutToken(Request $request)
+    public function logoutToken(Request $request): JsonResponse
     {
         $user = auth()->user();
 
@@ -326,11 +318,9 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $userId
-     * @return RedirectResponse
      */
-    public function loginAsUser(Request $request, $userId)
+    public function loginAsUser(Request $request, $userId): RedirectResponse|JsonResponse
     {
         $this->authorize('login_as_users');
 
@@ -355,8 +345,6 @@ class AuthenticationController extends Controller
      * The user has been authenticated.
      *
      * @param  Request  $request
-     * @param  User  $user
-     * @return void
      * @throws AuthenticationException
      */
     private function authenticated(User $user, string $password): void

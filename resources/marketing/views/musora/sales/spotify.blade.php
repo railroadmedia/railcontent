@@ -42,7 +42,7 @@
                         Only
                         <span x-cloak x-data="timer()" x-init="countdown()">
                              <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                              <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
                              <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
                              <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
@@ -77,11 +77,13 @@
 
 @section('final')
     @include('musora.sales.components.order-section-collage', [
+        'old' => true,
     'emailSignup' => true,
     'logo' => 'marketing/musora/membership/redeem/musora-spotify-logo-white.svg',
     'subHeader' => 'LEARN YOUR FAVORITE SONGS FOR FREE.',
     'headerLight' => true,
     'header' => '<strong>30 days of FREE music lessons.</strong><br> Enter your email to get your access<br> code and start your free lessons.',
+    'headerLight' => true,
     'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> No credit card required.</li>
     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> No recurring billing.</li>
     <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> Awesome music lessons.</li>',

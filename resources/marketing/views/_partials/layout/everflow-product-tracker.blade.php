@@ -1,4 +1,4 @@
-<script type='text/javascript' src='https://www.mcqn3fgtrk.com/scripts/sdk/everflow.js'></script>
+<script type='text/javascript' src='https://ef-proxy.musora.com/scripts/sdk/everflow.js'></script>
 <script type='text/javascript'>
     const addToCartText = 'add-to-cart';
     const advertiserId = "{{ $advertiserId }}";

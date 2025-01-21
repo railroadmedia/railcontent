@@ -73,7 +73,6 @@ class AddEventCalendarEventVO
      * @param $liveEventStartTime
      * @param $liveStreamFeedType
      * @param $description
-     * @return void
      */
     public function setInternalData(
         $brand,
@@ -85,7 +84,7 @@ class AddEventCalendarEventVO
         $liveEventEndTime,
         $liveStreamFeedType,
         $description
-    ) {
+    ): void {
         $this->internalBrand = $brand;
         $this->internalTypeOrSlug = $typeOrSlug;
         $this->internalId = $id;
@@ -229,14 +228,11 @@ class AddEventCalendarEventVO
 
             $addEventDescriptionPrepend = 'Click this link to access the live stream: <br> ' . $liveUrl;
 
-            $addEventDescriptionAppend = 'Can\'t make it to the live stream? No problem! You can find it in our ' .
-                'archives 2-3 business days after the event through this link: <br> ' . $url;
-
             if (empty($this->internalDescription)) {
-                return $addEventDescriptionPrepend . ' <br><br> ' . $addEventDescriptionAppend;
+                return $addEventDescriptionPrepend;
             }
 
-            return $addEventDescriptionPrepend . ' <br> ' . $this->internalDescription . ' <br> ' . $addEventDescriptionAppend;
+            return $addEventDescriptionPrepend . ' <br> ' . $this->internalDescription;
         }
 
         if (empty($this->internalDescription)) {
@@ -247,7 +243,6 @@ class AddEventCalendarEventVO
     }
 
     /**
-     * @return Carbon
      * @throws \Exception
      */
     public function getStartTimeToSync(): Carbon
@@ -263,10 +258,9 @@ class AddEventCalendarEventVO
     }
 
     /**
-     * @return Carbon
      * @throws \Exception
      */
-    public function getEndTimeToSync()
+    public function getEndTimeToSync(): Carbon
     {
         if (($this->internalLiveEventEndTime != 'Invalid date') && !empty($this->internalLiveEventEndTime)) {
             return Carbon::parse($this->internalLiveEventEndTime);

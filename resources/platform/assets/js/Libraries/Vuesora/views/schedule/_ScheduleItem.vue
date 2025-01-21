@@ -3,61 +3,57 @@
         class="flex tw-w-full flex-row tw-items-center scheduled tw-px-0 pa-1 tw-border-t tw-border-[#E4E4E7] dark:tw-border-[#223457]"
         :class="month"
     >
-            <!-- <div class="month-col body bg-grey-2 dark:tw-text-white tw-text-[#00101D]">
-                {{ month }}
-            </div> -->
 
-            <div class="tw-flex tw-flex-col tw-justify-center tw-w-[116px] md:tw-w-[143px] tw-shrink-0">
-                <div class="thumb-wrap corners-10">
-                    <div
-                        class="thumb-img corners-10 widescreen text-center"
-                        :style="`background-image: url( ${ item.original_thumbnail_url } )`"
-                    >
-                        <div class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
-                            <p class="tw-text-xs text-white font-bold">
-                                {{ day }},
-                                <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber }}</span>
-                            </p>
-                            <p class="tw-text-xs text-white">
-                                {{ time }}
-                            </p>
-                        </div>
+        <div class="tw-flex tw-flex-col tw-justify-center tw-w-[116px] md:tw-w-[143px] tw-shrink-0">
+            <div class="thumb-wrap corners-10">
+                <div class="thumb-img corners-10 bg-grey-2 dark:tw-bg-[#081825] widescreen text-center">
+                    <img
+                        class="tw-transition-opacity tw-opacity-0 tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-top"
+                        :src="`https://www.musora.com/cdn-cgi/image/width=280,height=280,quality=95/${item.image}`"
+                        loading="lazy"
+                        @load="$event.target.classList.remove('tw-opacity-0')"
+                        :alt="`${item.title} thumbnail`"
+                    />
+
+                    <div class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                        <p class="tw-text-xs text-white font-bold">
+                            {{ day }},
+                            <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber }}</span>
+                        </p>
+                        <p class="tw-text-xs text-white">
+                            {{ time }}
+                        </p>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="tw-mr-auto tw-flex tw-w-full tw-flex-col xl:tw-flex-row xl:tw-justify-center">
-                <!-- Schedule Item Title -->
-                <div class="tw-flex tw-flex-col tw-justify-center ph-1 title-column overflow tw-mr-auto tw-mb-1 xl:tw-mb-0">
-                    <p class="tw-text-sm uppercase text-truncate tw-text-[#52525A] dark:tw-text-[#9EC0DC]">
-                        {{ mappedData.color_title }}
-                    </p>
-                    <p class="tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title">
-                        {{ mappedData.black_title }}
-                    </p>
-                </div>
-                <!-- Schedule Item Data -->
-                <div class="ph-1 tw-hidden sm:tw-flex">
-                    <div class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs hide-sm-down xl:tw-text-center">
-                        {{ releaseType }}
-                    </div>
-                    <div v-for="(item, i) in mappedData.column_data"
-                        :key="i"
-                        class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-center"
-                    >
-                        {{ item }}
-                    </div>
-                    <!-- Difficulty Label -->
-                    <DifficultyLabel v-if="mappedData.difficulty" class="basic-col dark:tw-text-[#9EC0DC] tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
-                </div>
+        <div class="tw-mr-auto tw-flex tw-w-full tw-flex-col xl:tw-flex-row xl:tw-justify-center">
+            <div class="tw-flex tw-flex-col tw-justify-center ph-1 title-column overflow tw-mr-auto tw-mb-1 xl:tw-mb-0">
+                <p class="tw-text-sm uppercase text-truncate tw-text-[#52525A] dark:tw-text-[#9EC0DC]">
+                    {{ item.type }}
+                </p>
+                <p class="tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title">
+                    {{ item.title }}
+                </p>
             </div>
 
-        <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
+            <div class="ph-1 tw-hidden sm:tw-flex">
+                <div class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs hide-sm-down xl:tw-text-center">
+                    {{ releaseType }}
+                </div>
+                <div class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-center">
+                    {{ item.artist_name }}
+                </div>
+                <DifficultyLabel v-if="item.difficulty" class="basic-col dark:tw-text-[#9EC0DC] tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+            </div>
+        </div>
+
         <div class="tw-flex tw-h-full tw-flex-col icon-col tw-justify-center">
             <div class="body tw-h-full tw-inline-flex tw-items-center tw-text-[#52525A] dark:tw-text-[#9EC0DC]"
-                    tabindex="0"
-                    title="Add to Playlist"
-                    @click.stop.prevent="addToList"
+                tabindex="0"
+                title="Add to Playlist"
+                @click.stop.prevent="addToList"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -81,103 +77,68 @@
         </div>
     </div>
 </template>
-<script>
-import ContentHelpers from "../../assets/js/helper-functions/content.js";
+
+<script setup>
+import { computed, onUnmounted, onBeforeMount, ref } from 'vue';
 import { DateTime } from 'luxon';
+import ContentHelpers from "../../assets/js/helper-functions/content.js";
 import ContentModel from '../../assets/js/models/_model.js';
-import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
-import ThemeClasses from '../../mixins/ThemeClasses';
-import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel'
+import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
+import { storeToRefs } from "pinia";
+import { useUserStore } from "@stores/user";
 
-export default {
-    name: 'ScheduleItem',
-    mixins: [UserCatalogueEvents, ThemeClasses],
-    components: {
-        DifficultyLabel,
+
+//Pinia
+const userStore = useUserStore();
+const { userTimezone } = storeToRefs(userStore);
+
+const props = defineProps({
+    item: {
+        type: Object,
+        required: true,
     },
-    props: {
-        item: {
-            type: Object,
-        },
-        timezone: {
-            type: String,
-        },
-    },
-    data() {
-        return {
-            mappedData: this.getContentModel(),
-        };
-    },
-    computed: {
+});
 
-        time_to_display() {
-            // time_to_display method should display live_event_start_time_in_timezone or published_on_in_timezone if exists
-            return this.item.live_event_start_time_in_timezone ? this.item.live_event_start_time_in_timezone : this.item.published_on_in_timezone;
-        },
+const mappedData = getContentModel();
 
-        formatted_time() {
-            return this.time_to_display;
-        },
+const time_to_display = computed(() => props.item.published_on);
+const formatted_time = computed(() => time_to_display.value);
+const month = computed(() => formatDate(formatted_time.value, 'LLL'));
+const day = computed(() => formatDate(formatted_time.value, 'ccc'));
+const dayNumber = computed(() => formatDate(formatted_time.value, 'd'));
+const yearNumber = computed(() => formatDate(formatted_time.value, 'yy'));
+const time = computed(() => formatDate(formatted_time.value, 'h:mm a'));
+const releaseType = computed(() => props.item.status === 'scheduled' ? 'Live Broadcast' : 'Lesson Release');
 
-        month() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('LLL');
-        },
+function formatDate(isoDate, formatString) {
+    return DateTime.fromISO(isoDate, { zone: 'utc' })
+        .setZone(userTimezone.value)
+        .toFormat(formatString);
+}
 
-        day() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('ccc');
-        },
+function getContentModel() {
+    const shows = ContentHelpers.shows();
+    let type = props.item.type;
 
-        dayNumber() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('d');
-        },
+    if (shows.includes(type)) {
+        type = 'show';
+    }
 
-        yearNumber() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('yy');
-        },
+    const model = new ContentModel(type, {
+        brand: props.item.brand,
+        post: props.item,
+    });
 
-        time() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('h:mm a');
-        },
+    const difficultyValue = props.item.difficulty;
+    model.schedule.difficulty = difficultyValue;
 
-        releaseType() {
-            if (this.item.status === 'scheduled') {
-                return 'Live Broadcast';
-            }
+    return model.schedule;
+}
 
-            return 'Lesson Release';
-        },
+onBeforeMount(() => {
+    //getRegionParam();
+    //console.log('timezone', userTimezone.value)
+    //console.log('published_on', props.item.published_on);
+});
 
-        is_added() {
-            return this.item.is_added_to_primary_playlist;
-        },
-    },
-    beforeDestroy() {
-        this.mappedData = null;
-    },
-    methods: {
-
-        getContentModel () {
-            const shows = ContentHelpers.shows();
-            let type = this.contentTypeOverride || this.item.type;
-
-            if (shows.indexOf(type) !== -1) {
-                type = 'show';
-            }
-
-            const model = new ContentModel(type, {
-                brand: this.brand,
-                post: this.item,
-            });
-
-            const difficultyValue = model.post.fields.find(field => field.key === 'difficulty').value;
-            model.schedule.difficulty = difficultyValue;
-
-            const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
-            const filteredColumnData = model.schedule.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
-            model.schedule.column_data = filteredColumnData
-
-            return model.schedule;
-        },
-    },
-};
 </script>

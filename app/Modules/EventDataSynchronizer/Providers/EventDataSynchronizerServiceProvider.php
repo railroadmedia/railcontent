@@ -42,12 +42,13 @@ use Railroad\Railcontent\Events\UserContentsProgressReset;
 use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 use Railroad\Railforums\Events\PostCreated;
 use Railroad\Railforums\Events\ThreadCreated;
-use Railroad\Railtracker\Events\MediaPlaybackTracked;
+use App\Modules\RailTracker\Events\MediaPlaybackTracked;
 use App\Modules\Referral\Events\ReferralClaimed;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use App\Modules\Referral\Events\EmailInvite;
+use Railroad\Usora\Events\User\UserUpdated as UsoraUserUpdated;
 
 class EventDataSynchronizerServiceProvider extends EventServiceProvider
 {
@@ -62,8 +63,11 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             HelpScoutEventListener::class . '@handleUserCreated',
         ],
         UserUpdated::class => [
-            CustomerIoSyncEventListener::class . '@handleUserUpdated',
-            HelpScoutEventListener::class . '@handleUserUpdated',
+            [CustomerIoSyncEventListener::class, 'handleUserUpdated'],
+            [HelpScoutEventListener::class, 'handleUserUpdated'],
+        ],
+        UsoraUserUpdated::class => [
+            [CustomerIoSyncEventListener::class, 'handleUserUpdated'],
         ],
         UserAccessPermissionsUpdated::class => [
             CustomerIoSyncEventListener::class . '@handleUserAccessPermissionsUpdated',
@@ -102,7 +106,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             CustomerIoSyncEventListener::class . '@handleFirstActivityPerDay',
         ],
         UTMLinks::class => [
-//            CustomerIoSyncEventListener::class . '@handleUTMLinks',
+            //            CustomerIoSyncEventListener::class . '@handleUTMLinks',
         ],
         MobileAppLogin::class => [
             CustomerIoSyncEventListener::class . '@handleMobileAppLogin',
@@ -141,10 +145,8 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
 
     /**
      * Bootstrap the application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
 
@@ -176,10 +178,8 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         parent::register();
     }

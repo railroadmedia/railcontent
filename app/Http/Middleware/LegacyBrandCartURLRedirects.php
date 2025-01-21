@@ -2,21 +2,17 @@
 
 namespace App\Http\Middleware;
 
+use Symfony\Component\HttpFoundation\Response;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class LegacyBrandCartURLRedirects
 {
-    /**
-     * @param Request $request
-     * @param Closure $next
-     * @return mixed
-     */
     public function handle(
         Request $request,
         Closure $next
-    ) {
+    ): Response {
         $parse = parse_url(\Request::getRequestUri());
         $parse['path'] = $parse['path'] ?? '';
         $parse['query'] = $parse['query'] ?? '';

@@ -2,6 +2,7 @@
 
 namespace App\Modules\MusoraCenter\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use App\Modules\MusoraCenter\Services\UrlHelperService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -38,7 +39,7 @@ class ContentRedirectController extends Controller
         $this->urlHelperService = $urlHelperService;
     }
 
-    public function redirectToId(Request $request, $id)
+    public function redirectToId(Request $request, $id): RedirectResponse
     {
         ContentRepository::$availableContentStatues = false;
         ContentRepository::$pullFutureContent = true;

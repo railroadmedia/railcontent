@@ -30,10 +30,8 @@ class PlaylistsSeeder extends Seeder
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $contents = [
             'drumeo' => [313436, 374878, 23731, 23722, 23687],
@@ -48,9 +46,9 @@ class PlaylistsSeeder extends Seeder
                                                             'user_id' => $userId,
                                                             'type' => 'user-playlist',
                                                             'brand' => $brand,
-                                                            'name' => $this->faker->word,
-                                                            'description' => $this->faker->paragraph,
-                                                            'thumbnail_url' => $this->faker->imageUrl,
+                                                            'name' => $this->faker->word(),
+                                                            'description' => $this->faker->paragraph(),
+                                                            'thumbnail_url' => $this->faker->imageUrl(),
                                                             'category' => 'Jazz',
                                                             'private' => true,
                                                             'created_at' => Carbon::now()

@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-items-center">
-        <div class="tw-w-1.5 tw-h-1.5 tw-rounded-full tw-inline-block tw-mr-1.5" :class="difficultyClass" />
+        <div v-if="!hideDot" class="tw-w-1.5 tw-h-1.5 tw-rounded-full tw-inline-block tw-mr-1.5" :class="difficultyClass" />
         <span>
             {{ formattedDifficulty }}
         </span>
@@ -12,7 +12,7 @@ import { computed } from 'vue';
 
 const props = defineProps({
     difficultyValue: {
-        type: String,
+        type: [String, Number],
         required: true
     },
     textCase: {
@@ -21,6 +21,10 @@ const props = defineProps({
         validator: (value) => {
             return ['uppercase', 'lowercase', 'capitalize', 'none'].includes(value);
         }
+    },
+    hideDot: {
+        type: Boolean,
+        default: false,
     }
 });
 
@@ -57,6 +61,7 @@ const difficultyText = computed(() => {
             case 'beginner':
             case 'intermediate':
             case 'advanced':
+            case 'expert':
                 return difficulty;
             default:
                 return 'all';

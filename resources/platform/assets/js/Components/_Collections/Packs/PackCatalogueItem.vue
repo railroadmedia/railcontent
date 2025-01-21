@@ -6,7 +6,7 @@
             <!-- Thumbnail -->
             <img
                 class="tw-transition-opacity tw-opacity-0 tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-top"
-                :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${thumbnail}`"
+                :src="`https://www.musora.com/cdn-cgi/image/width=280,height=280,quality=95/${pack.thumbnail}`"
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
                 :alt="`${title} thumbnail`"
@@ -14,9 +14,10 @@
             <!-- Logo -->
             <div :class="`tw-absolute tw-w-full tw-p-[10px] tw-pt-[30px] tw-flex tw-justify-center`" style="background:linear-gradient(to bottom, transparent 0%, #000 100%);" :style="`bottom: ${hasStarted ? '6px' : '0'}`">
                 <img
+                    v-if="pack.logo_image_url != null"
                     class="tw-max-h-[70px] sm:tw-max-h-[40px]"
                     :class="`${logoStyle ? logoStyle : 'lg:tw-max-h-[50px] xl:tw-max-h-[70px]'}`"
-                    :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${logo}`"
+                    :src="`https://www.musora.com/cdn-cgi/image/width=280,height=280,quality=95/${pack.logo_image_url}`"
                     loading="lazy"
                     onload="this.classList.remove('tw-opacity-0')"
                     :alt="`${title} logo`"
@@ -108,9 +109,9 @@
                     class="tw-flex tw-items-center tw-mt-3 sm:tw-mt-0"
                 >
                     <!-- Action button  -->
-                    <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-mb-0 tw-flex-grow action" :class="progressButtonColor">
-                        <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> {{ progressText }}
-
+                    <a v-if="!noAccess && packURL" :href="packURL" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-mb-0 tw-flex-grow action" :class="progressButtonColor">
+                        <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> 
+                        {{ progressText }}
                     </a>
                     <button
                         v-if="progressText === 'Completed'"
@@ -127,10 +128,11 @@
 <script setup>
 import {storeToRefs} from "pinia/dist/pinia";
 import { useUserStore } from '@stores/user';
-import { computed, ref } from "vue";
+import { computed, ref, onBeforeMount } from "vue";
 import { DateTime } from 'luxon';
 import { useResetProgress } from "@hooks/useResetProgress";
 import { usePlatformStore } from "../../../Stores/platform";
+import { getProgressPercentage } from "musora-content-services";
 
 const userStore = useUserStore();
 const { brand, isAdmin } = storeToRefs(userStore);
@@ -152,38 +154,23 @@ const noAccess = computed(() => {
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
 const isReleased = computed(() => {
-    if(isAdmin.value) return true;
-
-    return DateTime.fromSQL(props.pack.published_on_in_timezone).toISO() < DateTime.now().toISO();
+    if (isAdmin.value) return true;
+    return DateTime.fromISO(props.pack.published_on).toISO() < DateTime.now().toISO();
 })
 
 const releaseDate = computed(() => {
-    return DateTime.fromSQL(props.pack.published_on_in_timezone).toFormat('LLL d/yy');
-})
-
-const thumbnail = computed(() => {
-    const url = props.pack.data && props.pack.data.find((d) => d.key === 'thumbnail_url');
-    return url && url.value;
-})
-
-const logo = computed(() => {
-    const url = props.pack.data && props.pack.data.find((d) => d.key === 'logo_image_url');
-    return url && url.value;
+    return DateTime.fromISO(props.pack.published_on).toFormat('LLL d/yy');
 })
 
 const title = computed(() => {
-    const text = props.pack.data && props.pack.fields.find((d) => d.key === 'title');
-    return text && text.value;
+    return props.pack.title;
 })
 
 const description = computed(() => {
-    const text = props.pack.data && props.pack.data.find((d) => d.key === 'description');
-    return text && text.value;
+    return props.pack.description;
 })
 
-const progressPercent = computed(() => {
-    return props.pack.progress_percent;
-})
+const progressPercent = ref(0);
 
 const hasStarted = computed(() => {
     return progressPercent.value > 0;
@@ -220,7 +207,7 @@ const packURL = computed(() => {
     } else if(showEnrollmentState.value){
         return props.pack.primary_cta_url;
     } else {
-        return props.pack.url;
+        return props.pack.web_url_path;
     }
 })
 
@@ -255,7 +242,7 @@ const addToPlaylist = () => {
         content_id: props.pack.id,
         type: props.pack.type,
         name: title.value,
-        thumbnail_url: thumbnail.value,
+        thumbnail_url: props.pack.thumbnail,
         description: description.value,
     }
 
@@ -280,5 +267,9 @@ const logoStyle = computed(() => {
     if(title.value.includes('Rock Drumming Masterclass') || title.value === 'New Drummers Start Here' || title.value.includes('Drum Technique Made Easy') || title.value.includes('Independence Made Easy') || title.value === 'The Ultimate Guide To Recording Drums' || title.value === 'De-Stupefy Your Left Hand' || title.value === '500 Songs In 5 Days' || title.value === 'Blues Guitar Blueprint' || title.value === 'Guitar Quest' || title.value === 'The Ultimate Guide To Recording Guitar'){
         return 'lg:tw-max-h-[40px]';
     }
+})
+
+onBeforeMount( () => {
+    getProgressPercentage(props.pack.id).then((result) => progressPercent.value = result);
 })
 </script>

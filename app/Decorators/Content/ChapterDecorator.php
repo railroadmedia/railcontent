@@ -24,8 +24,8 @@ class ChapterDecorator extends ModeDecoratorBase
                         $datum['value'];
                 }
             }
-            if($content['type'] == 'pack-bundle-lesson' && isset(($contents[$contentIndex]['chapters']))){
-                foreach($contents[$contentIndex]['chapters'] as $index=>$chapter){
+            if(isset(($contents[$contentIndex]['chapters']))) {
+                foreach($contents[$contentIndex]['chapters'] as $index => $chapter) {
                     // We've only uploaded 20 default images chapters to amazon
                     if($index <= 19) {
                         $position                                                             = $index + 1;

@@ -148,7 +148,7 @@
 
 <!-- Main -->
 @section('layout-body')
-    <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+    <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
             @if($theme == 'drumeo')
                 <style>
@@ -164,7 +164,7 @@
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Drumeo.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Drumeo Student through Sweetwater!<br class="hidden sm:inline">
                 Please enter the code that they provided you in the form below.</h6>
-                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
             @elseif($theme == 'pianote')
                 <style>
                 .apply {
@@ -179,7 +179,7 @@
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Pianote.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Pianote Student through Sweetwater!<br class="hidden sm:inline">
                 Please enter the code that they provided you in the form below.</h6>
-                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/pianote-spread.png') }}">
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/pianote-spread.png') }}">
             @elseif($theme == 'guitareo')
                 <style>
                 .apply {
@@ -194,7 +194,7 @@
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Guitareo.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Guitareo Student through Sweetwater!<br class="hidden sm:inline">
                 Please enter the code that they provided you in the form below.</h6>
-                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/guitareo-spread.png') }}">
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/guitareo-spread.png') }}">
             @elseif($theme == 'singeo')
                 <style>
                 .apply {
@@ -209,7 +209,7 @@
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Singeo.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Singeo Student through Sweetwater!<br class="hidden sm:inline">
                 Please enter the code that they provided you in the form below.</h6>
-                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/singeo-spread.png') }}">
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/singeo-spread.png') }}">
             @else
                 <style>
                 .apply {
@@ -222,7 +222,7 @@
                 </style>
                 <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/musora-sweetwater.svg') }}">
                 <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
-                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
             @endif
         </div>
     </div>
@@ -249,7 +249,11 @@
                     <p class="validation-error">{{ $error }}</p>
                 @endforeach
 
-                @include('musora.pages.redeem._redeem-form')
+                @include('musora.pages.redeem._redeem-form', [
+                    'existing' => false,
+                    'buttonText' => 'Get Started',
+                    'buttonColor' => 'bg-'.$brand.' text-white',
+                ])
              @else
                 <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                     <strong> <b>Not already a member?</b>
@@ -272,7 +276,9 @@
                 @endforeach
 
                 @include('musora.pages.redeem._redeem-form', [
-                    "existing" => true
+                    'existing' => true,
+                    'buttonText' => 'Get Started',
+                    'buttonColor' => 'bg-'.$brand.' text-white',
                 ])
              @endif
             <br>
@@ -288,21 +294,8 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.code-input').bind('paste', function (e) {
-                var value = e.originalEvent.clipboardData.getData('text');
-                value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
-                var chunks = value.match(new RegExp('.{1,4}', 'g'));
-                for (var i = 0; i < chunks.length; i++) {
-                    $('.code-input').eq(i).val(chunks[i]);
-                }
-            }).bind('input', function (e) {
-                if ($(this).val().length == 4) {
-                    $('.code-input').eq($(this).index('.code-input') + 1).focus();
-                }
-            });
-        });
-    </script>
+    @include('_partials.components.forms.redeem-form-script', [
+        'api' => empty($existing) ? get_musora_brand_base_url().'/ecommerce/access-codes/redeem' : URL::route('access-codes.form-claim'),
+        'existingMember' => !$newAccount,
+    ])
 @endsection

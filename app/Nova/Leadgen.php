@@ -45,17 +45,14 @@ class Leadgen extends Resource
 
     /**
      * Get the fields displayed by the resource.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @return array
      */
-    public function fields(NovaRequest $request)
+    public function fields(NovaRequest $request): array
     {
         $uuid  = Str::uuid();
 
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
+            BelongsTo::make('Brand', 'brand', \App\Nova\Brand::class)->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('title')->required()->rules('required'),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required()->rules('required'),
@@ -176,22 +173,16 @@ class Leadgen extends Resource
 
     /**
      * Get the cards available for the request.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @return array
      */
-    public function cards(NovaRequest $request)
+    public function cards(NovaRequest $request): array
     {
         return [];
     }
 
     /**
      * Get the filters available for the resource.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @return array
      */
-    public function filters(NovaRequest $request)
+    public function filters(NovaRequest $request): array
     {
         return [
             new \App\Nova\Filters\Brand()
@@ -200,22 +191,16 @@ class Leadgen extends Resource
 
     /**
      * Get the lenses available for the resource.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @return array
      */
-    public function lenses(NovaRequest $request)
+    public function lenses(NovaRequest $request): array
     {
         return [];
     }
 
     /**
      * Get the actions available for the resource.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @return array
      */
-    public function actions(NovaRequest $request)
+    public function actions(NovaRequest $request): array
     {
         return [];
     }

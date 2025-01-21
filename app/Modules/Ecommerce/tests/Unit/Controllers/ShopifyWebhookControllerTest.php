@@ -2,7 +2,9 @@
 
 namespace Modules\Ecommerce\tests\Unit\Controllers;
 
+use App\Jobs\WebhookJob;
 use App\Models\Webhook;
+use App\Modules\Ecommerce\Jobs\AssignPrimaryBrandJob;
 use App\Modules\Ecommerce\Jobs\Shopify\AddOrderTags;
 use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedEventTrackingJob;
 use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedUpdateLastTrialDataJob;
@@ -11,7 +13,6 @@ use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Tests\BaseTestCase;
 use Tests\TestCase;
 
 class ShopifyWebhookControllerTest extends TestCase
@@ -25,7 +26,7 @@ class ShopifyWebhookControllerTest extends TestCase
         parent::setUp();
     }
 
-    public function test_order_updated_dispatches_shopify_sync_customer_job_for_post_launch()
+    public function test_order_updated_dispatches_shopify_sync_customer_job_for_post_launch(): void
     {
         $path = Storage::disk("ecommerce_test_resources")->path("Shopify/requests/order/updated/first_physical_only.json");
         $json = json_decode(file_get_contents($path), true);
@@ -62,7 +63,7 @@ class ShopifyWebhookControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_order_updated_does_not_dispatch_shopify_sync_customer_job_for_imported_orders()
+    public function test_order_updated_does_not_dispatch_shopify_sync_customer_job_for_imported_orders(): void
     {
         $path = Storage::disk("ecommerce_test_resources")->path("Shopify/requests/order/updated/imported_order.json");
         $json = json_decode(file_get_contents($path), true);
@@ -100,7 +101,7 @@ class ShopifyWebhookControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_order_created_does_not_dispatch_shopify_sync_customer_job_for_imported_orders()
+    public function test_order_created_does_not_dispatch_shopify_sync_customer_job_for_imported_orders(): void
     {
         $path = Storage::disk("ecommerce_test_resources")->path("Shopify/requests/order/updated/imported_order.json");
         $json = json_decode(file_get_contents($path), true);
@@ -138,7 +139,7 @@ class ShopifyWebhookControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_order_created_dispatches_expected_jobs()
+    public function test_order_created_dispatches_expected_jobs(): void
     {
         $path = Storage::disk("ecommerce_test_resources")->path(
             "Shopify/requests/order/created/drumeo_membership.json"
@@ -147,7 +148,8 @@ class ShopifyWebhookControllerTest extends TestCase
         Bus::fake([
             AddOrderTags::class,
             OrderCreatedEventTrackingJob::class,
-            OrderCreatedUpdateLastTrialDataJob::class
+            OrderCreatedUpdateLastTrialDataJob::class,
+            AssignPrimaryBrandJob::class
             ]);
         $response = $this->postJson(
             route('shopify.webhook.order.create'),
@@ -166,7 +168,7 @@ class ShopifyWebhookControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_refund_created_dispatches_expected_jobs()
+    public function test_refund_created_dispatches_expected_jobs(): void
     {
         $path = Storage::disk("ecommerce_test_resources")->path(
             "Shopify/requests/refunds/refund.json"
@@ -190,7 +192,7 @@ class ShopifyWebhookControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_extract_webhookidentifier()
+    public function test_extract_webhookidentifier(): void
     {
         $path = Storage::disk("ecommerce_test_resources")->path(
             "Shopify/requests/order/created/drumeo_membership.json"
@@ -202,7 +204,7 @@ class ShopifyWebhookControllerTest extends TestCase
             [ 'source_id' => $id,
             ]
         );
-        Bus::fake();
+        Bus::fake(WebhookJob::class);
 
         $response = $this->postJson(
             route('shopify.webhook.order.create'),
@@ -216,7 +218,7 @@ class ShopifyWebhookControllerTest extends TestCase
         );
     }
 
-    public function test_create_generated_webhook_id()
+    public function test_create_generated_webhook_id(): void
     {
         $path = Storage::disk("ecommerce_test_resources")->path(
             "Shopify/requests/order/created/drumeo_membership.json"
@@ -225,7 +227,7 @@ class ShopifyWebhookControllerTest extends TestCase
         //unset both as the json is case sensative, but the webhook itself is not
         unset($json['headers']['X-Shopify-Webhook-Id']);
         unset($json['headers']['x-shopify-webhook-id']);
-        Bus::fake();
+        Bus::fake(WebhookJob::class);
         $preWebhooks = count(Webhook::where('source_id', 'like', 'generated%')->get());
         $response = $this->postJson(
             route('shopify.webhook.order.create'),

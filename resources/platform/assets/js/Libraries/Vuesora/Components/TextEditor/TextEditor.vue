@@ -3,14 +3,27 @@
          :class="{'tw-opacity-50 tw-pointer-events-none':disabled}" 
          v-if="renderTinyMCE"
     >
-        <ImageUploader v-if="showImageUploader" :skipCrop="true" :selfContained="true"
+        <ImageUploader 
+            v-if="showImageUploader" 
+            :skipCrop="true" 
+            :selfContained="true"
             uploadServiceRoute="/musora-api/v5/picture/upload-from-s3"
-            successMessage="Your image was successfully uploaded" fieldKey="forum_post_photo" cropType="square"
-            :selectedImage="selectedImage" :initialStep="initialUploaderStep" @uploadSuccess="handleUploadDone"
-            @uploadError="handleUploadError" @onUploaderClose="closeUploader" />
+            successMessage="Your image was successfully uploaded" 
+            fieldKey="forum_post_photo" 
+            cropType="square"
+            :selectedImage="selectedImage"
+            :initialStep="initialUploaderStep" 
+            @uploadSuccess="handleUploadDone"
+            @uploadError="handleUploadError" 
+            @onUploaderClose="closeUploader"
+        />
         <input v-model="contentInterface" type="hidden" :name="fieldKey">
-        <TinyEditor v-model="contentInterface" api-key="samk94ixqjb345m3tvofudoty51jv2qk1lk8q68vbeup3xbj"
-            :init="initObject" :placeholder="placeholder" />
+        <TinyEditor 
+            v-model="contentInterface"
+            :tinymce-script-src="tinymcePath"
+            :init="initObject" 
+            :placeholder="placeholder" 
+        />
     </div>
 </template>
 
@@ -18,6 +31,13 @@
 import { ref, computed, watch, nextTick, inject, onMounted } from 'vue';
 import TinyEditor from '@tinymce/tinymce-vue';
 import ImageUploader from '@collections/ImageUploader/ImageUploader.vue';
+import { usePlatformStore } from "@stores/platform";
+import {storeToRefs} from "pinia/dist/pinia";
+
+//Pinia Stores
+const platformStore = usePlatformStore();
+const { tinymcePath } = storeToRefs(platformStore);
+
 
 const props = defineProps({
     height: {
@@ -72,6 +92,7 @@ const computedToolbar = computed(() => {
 });
 
 const initObject = computed(() => ({
+    license_key: 'gpl',
     autoresize_min_height: props.height,
     body_class: `${isDarkModeSelected.value ? 'tw-dark' : ''}`,
     toolbar: computedToolbar.value,

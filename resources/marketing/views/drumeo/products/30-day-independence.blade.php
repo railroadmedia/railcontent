@@ -359,7 +359,7 @@
                         loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
                         style="width: 130%;transform: translate(-44%, -7%);"
-                        src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
+                        src="https://www.musora.com/cdn-cgi/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
                         alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 
@@ -380,7 +380,7 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg"
                                 alt="tiktok icon">
                             <h3 class="mt-2"><strong>4M</strong></h3>
                             <p class="uppercase opacity-70 text-sm">Followers</p>
@@ -388,7 +388,7 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg"
                                 alt="youtube icon">
                             <h3 class="mt-2"><strong>810M</strong></h3>
                             <p class="uppercase opacity-70 text-sm">views</p>
@@ -396,7 +396,7 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg"
                                 alt="insta icon">
                             <h3 class="mt-2"><strong>4M</strong></h3>
                             <p class="uppercase opacity-70 text-sm">followers</p>
@@ -499,7 +499,7 @@
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
-                src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png" alt="guarantee badge">
+                src="https://www.musora.com/cdn-cgi/image/width=410,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png" alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course, guaranteed.</strong></h2>
 
             <h6 class="leading-normal">30-Day Independence is a NEW way to learn the drums – and for less than a month of private lessons, you’ll enjoy frustration-free progress to improve your speed, control, and creativity.
@@ -523,7 +523,7 @@
     @include('drumeo.products.partials.evergreen._learn', [
         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp',
         'logoAlt' => '30 day Independence logo',
-        'title' => 'Improve your chops <br class="md:hidden"> in just 30 days.',
+        'title' => 'Improve your coordination <br class="md:hidden"> in just 30 days.',
         'points' => $points,
         'profileImageAlt' => 'student profile image',
         'mainImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/order-collage.webp',

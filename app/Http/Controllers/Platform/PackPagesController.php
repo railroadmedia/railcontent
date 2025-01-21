@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Platform;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\ContentLikesDecorator;
+use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Services\CohortService;
 use App\Services\PackService;
 use Illuminate\Contracts\View\Factory;
@@ -25,80 +26,21 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PackPagesController extends Controller
 {
-    /**
-     * @var ContentService
-     */
-    private $contentService;
-
-    /**
-     * @var UserContentProgressService
-     */
-    private $userContentProgressService;
-
-    /**
-     * @var ContentHierarchyService
-     */
-    private $contentHierarchyService;
-
-    /**
-     * @var VimeoVideoSourcesDecorator
-     */
-    private $vimeoVideoSourcesDecorator;
-
-    private LessonAssignmentDecorator $lessonAssignmentDecorator;
-    private PackService $packService;
-    private CohortService $cohortService;
-
     public function __construct(
-        ContentService $contentService,
-        UserContentProgressService $userContentProgressService,
-        ContentHierarchyService $contentHierarchyService,
-        VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
-        LessonAssignmentDecorator $lessonAssignmentDecorator,
-        PackService $packService,
-        CohortService $cohortService,
+        private ContentService $contentService,
+        private UserContentProgressService $userContentProgressService,
+        private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
+        private LessonAssignmentDecorator $lessonAssignmentDecorator,
+        private SanityGateway $sanityGateway,
     ) {
-        $this->contentService = $contentService;
-        $this->userContentProgressService = $userContentProgressService;
-        $this->contentHierarchyService = $contentHierarchyService;
-        $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
-        $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
-        $this->packService = $packService;
-        $this->cohortService = $cohortService;
     }
 
-    public function index(Request $request, $domain, $brand)
+    public function index(Request $request, $domain, $brand): View
     {
-        ContentRepository::$countFilterOptionItems = true;
-        ContentRepository::$catalogMetaAllowableFilters = config('railcontent.cataloguesMetadata')[brand()]['pack']['allowableFilters'] ?? [];
-
-        FiltersHelper::prepareFiltersFields();
-
-        if(user()->isPackOnlyOwner()) {
-            ContentRepository::$getEnrollmentContent = false;
-        }
-
-        $packs = $this->packService->getPacks(FiltersHelper::$includedFields, $request->get('sort', '-progress'));
-
-        if (user()->isALifetimeMember() && brand() == 'drumeo') {
-            foreach ($packs['results'] as $packIndex => $pack) {
-                // only lifetime drumeo members should have access to this pack 'lifetime-members-masterclass'
-                if ($pack['id'] == 353337) {
-                    unset($pack[$packIndex]);
-                }
-            }
-        }
-
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['pack'] ?? [];
-
-        return view('content.packs.packs-index', [
-            "packs" => $packs->toResponseRawJson(),
-            "catalogueMeta" => $catalogueMeta,
-        ]);
+        return view('content.packs.packs-index', []);
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @return Factory|RedirectResponse|View|NotFoundHttpException
      */
@@ -145,6 +87,7 @@ class PackPagesController extends Controller
         } else {
             $infoData["lessons"] = count($packBundles);
         }
+
         $infoData['xp'] = $pack->fetch('total_xp', 0);
 
         $backButton = [
@@ -158,18 +101,11 @@ class PackPagesController extends Controller
 
         return view('content.packs.pack-overview-bundles', [
             "pack" => $pack,
-            "parentContent" => $pack,
-            "childContent" => $childContent->toResponseRawJson(),
-            "infoData" => $infoData,
-            "backButton" => $backButton,
             "xpBonus" => $xpBonus,
-            "themeColor" => "pack",
-            "nextLessonUrl" => $pack->fetch('next_lesson_url'),
         ]);
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @return Factory|View|NotFoundHttpException
      */
@@ -181,7 +117,7 @@ class PackPagesController extends Controller
         $packId,
         $packBundleSlug,
         $packBundleId
-    ) {
+    ): View {
         ContentRepository::$pullFutureContent = true;
 
         Decorator::$typeDecoratorsEnabled = false;
@@ -284,11 +220,9 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @param $lessonSlug
      * @param $lessonId
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function packBundleLesson(
         Request $request,
@@ -300,7 +234,7 @@ class PackPagesController extends Controller
         $packBundleId,
         $packBundleLessonSlug,
         $packBundleLessonId
-    ) {
+    ): View {
         if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues = [
                 ContentService::STATUS_PUBLISHED,
@@ -311,7 +245,12 @@ class PackPagesController extends Controller
             ];
         } else {
             ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_UNLISTED,];
+                [
+                    ContentService::STATUS_PUBLISHED,
+                    ContentService::STATUS_ARCHIVED,
+                    ContentService::STATUS_SCHEDULED,
+                    ContentService::STATUS_UNLISTED,
+                ];
         }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
@@ -334,7 +273,7 @@ class PackPagesController extends Controller
 
         foreach ($parentChildren as $index => $parentChild) {
             if ($parentChild['id'] == $packBundleLessonId) {
-                $lesson = $parentChild;
+                $lesson = clone $parentChild;
             }
             if ($parentChild['status'] == ContentService::STATUS_UNLISTED && $parentChild['id'] != $packBundleLessonId) {
                 unset($parentChildren[$index]);
@@ -415,11 +354,9 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @param $lessonSlug
      * @param $lessonId
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function bundleLesson(
         Request $request,
@@ -427,7 +364,7 @@ class PackPagesController extends Controller
         $bundleSlug,
         $lessonSlug,
         $lessonId
-    ) {
+    ): View {
         if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues = [
                 ContentService::STATUS_PUBLISHED,
@@ -530,11 +467,9 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $id
-     * @return RedirectResponse
      */
-    public function start(Request $request, $id)
+    public function start(Request $request, $id): RedirectResponse
     {
         $learningPath = $this->contentService->getById($id);
 
@@ -553,11 +488,9 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function jumpToNextLesson(Request $request, $id)
+    public function jumpToNextLesson(Request $request, $id): RedirectResponse
     {
         $pack = $this->contentService->getById($id);
 
@@ -592,103 +525,13 @@ class PackPagesController extends Controller
         $packId,
         $semesterPackLessonSlug,
         $semesterPackLessonId
-    ) {
-        if (user()->isAdmin()) {
-            ContentRepository::$availableContentStatues = [
-                ContentService::STATUS_PUBLISHED,
-                ContentService::STATUS_ARCHIVED,
-                ContentService::STATUS_SCHEDULED,
-                ContentService::STATUS_DRAFT,
-                ContentService::STATUS_UNLISTED,
-            ];
-        } else {
-            ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED,ContentService::STATUS_UNLISTED];
-        }
-
-        Decorator::$typeDecoratorsEnabled = false;
-        ContentRepository::$pullFilterResultsOptionsAndCount = false;
-        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-
-        $pack =
-            $this->contentService->getBySlugAndType($packSlug, 'semester-pack')
-                ->first();
-
-        if (empty($pack)) {
+    ): View {
+        $lesson = $this->sanityGateway->getByRailContentId($semesterPackLessonId);
+        if (!$lesson) {
             throw new NotFoundHttpException();
         }
-
-        $parentChildren = $this->contentService->getByParentId($pack['id']);
-
-        foreach ($parentChildren as $parentChildIndex=>$parentChild) {
-            if ($parentChild['id'] == $semesterPackLessonId) {
-                $lesson = $parentChild;
-            }
-            if ($parentChild['status'] == ContentService::STATUS_UNLISTED && $parentChild['id'] != $semesterPackLessonId) {
-                unset($parentChildren[$parentChildIndex]);
-            }
-        }
-
-        if (empty($lesson)) {
-            throw new NotFoundHttpException();
-        }
-
-        $collectionForDecoration = new Collection();
-        $collectionForDecoration = $collectionForDecoration->merge([$pack]);
-        $collectionForDecoration = $collectionForDecoration->merge($parentChildren);
-
-        Decorator::$typeDecoratorsEnabled = true;
-        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
-        $collectionForDecoration = $collectionForDecoration->filter();
-
-        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
-
-        $nextChild = $parentChildren->getMatchOffset($lesson, 1);
-        $previousChild = $parentChildren->getMatchOffset($lesson, -1);
-
-        $lessonContent =
-            $this->vimeoVideoSourcesDecorator->decorate(new Collection([$lesson]))
-                ->first();
-
-        $parentChildrenTrimmed = [];
-        $matched = false;
-
-        foreach ($parentChildren as $parentChildIndex => $parentChild) {
-            if ((count($parentChildren) - $parentChildIndex) <= 10 && count($parentChildrenTrimmed) < 10) {
-                $parentChildrenTrimmed[] = $parentChild;
-            } elseif ($matched && count($parentChildrenTrimmed) < 10) {
-                $parentChildrenTrimmed[] = $parentChild;
-            }
-
-            if ($parentChild['id'] == $lessonContent['id']) {
-                $matched = true;
-            }
-        }
-
-        $lessonAssignments = $lesson['assignments'] ?? [];
-
-        $relatedLessons = (new ContentFilterResultsEntity(['results' => $parentChildrenTrimmed]))->toResponseRawJson();
-
-        $lesson['assignments'] = $lessonAssignments;
-
-        $userAccessLevel = user()->access_level;
-
         return view('content.lesson', [
-            "parentType" => 'semester-pack',
-            "lessonType" => 'semester-pack-lesson',
             "lessonContent" => $lesson,
-            "thisLessonJson" => content_to_json(clone $lesson),
-            "nextLessonJson" => content_to_json($nextChild),
-            "pack" => $pack,
-            "parent" => $pack,
-            "parentChildren" => $parentChildren,
-            "nextChild" => $nextChild,
-            "previousChild" => $previousChild,
-            "isLive" => false,
-            "relatedLessons" => $relatedLessons,
-            "showEmail" => false,
-            'showRelated' => true,
-            "userAccessLevel" => $userAccessLevel,
         ]);
     }
 }

@@ -32,7 +32,7 @@ class AuthenticatedOnlyTest extends UserManagementSystemTestCase
 
     public function test_successful_auth_web_request()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -57,7 +57,7 @@ class AuthenticatedOnlyTest extends UserManagementSystemTestCase
 
     public function test_successful_auth_json_request()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([

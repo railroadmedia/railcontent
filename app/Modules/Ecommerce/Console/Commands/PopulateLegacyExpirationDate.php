@@ -13,7 +13,7 @@ class PopulateLegacyExpirationDate extends Command
 {
     protected $signature = 'ecommerce:PopulateLegacyExpirationDate {--startId=0} {--endId=1000000}';
 
-    public function handle()
+    public function handle(): void
     {
         $startId = $this->option('startId');
         $endId = $this->option('endId');

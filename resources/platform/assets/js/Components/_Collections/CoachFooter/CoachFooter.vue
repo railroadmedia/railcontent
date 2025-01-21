@@ -1,5 +1,6 @@
 <template>
-    <div class="tw-relative tw-bg-black">
+    <SkeletonCoachFooter v-if="isLoading" />
+    <div v-else class="tw-relative tw-bg-black">
         <div class="tw-text-white">
             <div class="sm:tw-py-12 md:tw-py-12 lg:tw-py-16 tw-py-16 tw-px-14">
                 <div class="tw-flex tw-flex-col-reverse lg:tw-flex-row">
@@ -16,7 +17,7 @@
                         <div
                             class="tw-mx-auto tw-mb-6 lg:tw-mb-0 lg:tw-mx-0 lg:tw-mr-4 tw-rounded-full tw-relative tw-w-48 tw-h-48 tw-overflow-hidden tw-flex-shrink-0">
                             <img class="tw-w-48 tw-h-48 tw-rounded-full tw-border-4 tw-border-solid tw-border-yellow-500"
-                                 :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${headShot}`">
+                                 :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${headShot}`">
                             <!-- Badge -->
                             <div
                                 class="tw-bg-yellow-500 tw-absolute tw-w-full tw-h-6 tw-left-0 tw-bottom-0 tw-z-10 tw-flex tw-items-center tw-justify-center">
@@ -51,7 +52,10 @@
     </div>
 </template>
 <script setup>
-import {computed} from "vue";
+import { computed } from "vue";
+import { storeToRefs } from "pinia/dist/pinia";
+import { usePlatformStore } from "@stores/platform";
+import SkeletonCoachFooter from '@collections/SkeletonLoader/SkeletonCoachFooter';
 
 const props = defineProps({
     coachData: {
@@ -64,49 +68,34 @@ const props = defineProps({
     },
 })
 
+const platformStore = usePlatformStore();
+const { isLoading } = storeToRefs(platformStore);
+
 const firstName = computed(() => {
-    return props.fullName.split(' ')[0];
+    return props.fullName?.split(' ')[0];
 })
 
 const lastName = computed(() => {
-    return props.fullName.split(' ').slice(1).join(' ');
+    return props.fullName?.split(' ').slice(1).join(' ');
 })
 
 const focusText = computed(() => {
-    let focus = [];
-    props.coachData.fields?.map((o) => {
-        if(o.key === 'focus'){
-            focus.push(o.value);
-        }
-    })
-    return focus.join(', ');
+    return props.coachData?.focus?.join(', ');
 })
 
 const bio = computed(() => {
-    return props.coachData.data?.find((c) => c.key === 'long_bio')?.value;
+    return props.coachData?.long_bio;
 })
 
 const headShot = computed(() => {
-    return props.coachData.data?.find((c) => c.key === 'head_shot_picture_url')?.value;
+    return props.coachData?.head_shot_picture_url;
 })
 
 const bands = computed(() => {
-    let bands = [];
-    props.coachData.fields?.map((o) => {
-        if(o.key === 'bands'){
-            bands.push(o.value);
-        }
-    })
-    return bands.join('and ');
+    return props.coachData?.bands;
 })
 
 const endorsements = computed(() => {
-    let endorsements = [];
-    props.coachData.fields?.map((o) => {
-        if(o.key === 'endorsements'){
-            endorsements.push(o.value);
-        }
-    })
-    return endorsements.join(', ');
+    return props.coachData?.endorsements;
 })
 </script>

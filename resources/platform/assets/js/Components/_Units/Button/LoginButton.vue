@@ -26,8 +26,8 @@ const handleClick = (e) => {
 <template>
   <button
     :type="type"
-    class="tw-w-full"
-    :class="disabled ? 'tw-btn-secondary tw-text-[#445F74]' : 'tw-btn-primary tw-bg-white tw-text-[#00101D]'"
+    class="tw-w-full tw-h-[40px]"
+    :class="disabled ? 'tw-btn-secondary tw-text-[#445F74] tw-border-none tw-bg-[#081825] tw-text-[#445F74]' : 'tw-btn-primary tw-bg-white tw-text-[#00101D]'"
     dusk="submit-button"
     @click="handleClick"
   >

@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
+use Illuminate\Http\Response;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\EventTracking\Services\CustomerIoService;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
@@ -31,11 +32,7 @@ class OnboardingController extends Controller
         $this->middleware('deprecated:2023-10-16');
     }
 
-    /**
-     *
-     * @param Request $request
-     */
-    public function gears(Request $request)
+    public function gears(Request $request): Response
     {
         $request->validate(['data' => 'required']);
         $request->validate(['brand' => 'required']);
@@ -63,11 +60,7 @@ class OnboardingController extends Controller
         return response(json_encode(user()), 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
-    public function topics(Request $request)
+    public function topics(Request $request): Response
     {
         $request->validate([
             'brand' => 'required',
@@ -97,11 +90,7 @@ class OnboardingController extends Controller
         return response(json_encode(user()), 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
-    public function genres(Request $request)
+    public function genres(Request $request): Response
     {
         $request->validate([
             'brand' => 'required',
@@ -130,11 +119,7 @@ class OnboardingController extends Controller
         return response(json_encode(user()), 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
-    public function experience(Request $request)
+    public function experience(Request $request): Response
     {
         $request->validate([
             'experience_level' => 'integer|required|max:3',
@@ -166,10 +151,9 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @throws \Throwable
      */
-    public function goals(Request $request)
+    public function goals(Request $request): Response
     {
         $request->validate([
             'goals' => 'required',
@@ -201,11 +185,7 @@ class OnboardingController extends Controller
         return response(json_encode(user()), 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
-    public function getUserOnboardingInformation(Request $request)
+    public function getUserOnboardingInformation(Request $request): Response
     {
         try {
             $request->validate(['brand' => 'string|required']);
@@ -230,7 +210,7 @@ class OnboardingController extends Controller
         return response($response, 200);
     }
 
-    public function aboutStepCompleted(Request $request)
+    public function aboutStepCompleted(Request $request): Response
     {
         $request->validate([
             'skipped' => 'required'
@@ -245,11 +225,7 @@ class OnboardingController extends Controller
         return response(null, 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
-    public function skipAccountSetup(Request $request)
+    public function skipAccountSetup(Request $request): Response
     {
         $request->validate([
             'brand' => 'required',
@@ -275,10 +251,9 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @throws \Exception
      */
-    public function saveOnboardingHistoryForInstrument(Request $request)
+    public function saveOnboardingHistoryForInstrument(Request $request): Response
     {
         try {
             $request->validate(['instrument' => 'string|required|not-in:undefined']);
@@ -297,11 +272,7 @@ class OnboardingController extends Controller
         return response("History data for instrument has been saved.", 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
-    public function saveOnboardingHistoryForCoach(Request $request)
+    public function saveOnboardingHistoryForCoach(Request $request): Response
     {
         try {
             $request->validate(['coachName' => 'string|required|not-in:undefined']);

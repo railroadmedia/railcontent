@@ -14,7 +14,7 @@ class ShopifyCustomerSyncAll extends Command
 
     protected $description = 'Sync shopfiy order data into user access permissions table';
 
-    public function handle()
+    public function handle(): void
     {
         $startId = $this->argument('startId') ?? null;
         $endId = $this->argument('endId') ?? null;

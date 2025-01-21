@@ -1,5 +1,7 @@
 <template>
-    <div class="tw-my-[30px]">
+    <SkeletonActiveCoach v-if="isLoading" />
+
+    <div v-else class="tw-my-[30px]">
         <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
             <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-3">
                 Active Coaches
@@ -9,11 +11,11 @@
         <!-- Active Coaches -->
         <div class="tw-my-3">
             <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 xl:tw-grid-cols-4 2xl:tw-grid-cols-6 tw-gap-3">
-                <a v-for="coach in activeCoaches" :href="coach['url']"
+                <a v-for="coach in activeCoaches" :href="coach.web_url_path"
                    class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
 
                     <!-- Coach Image -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${cardImage(coach)}`"
+                    <img :src="`${cardImage(coach)}`"
                          class="tw-w-full tw-flex tw-object-top tw-object-cover tw-transition-opacity tw-opacity-0"
                          :alt="`${fullName(coach)} Card`"
                          loading="lazy"
@@ -54,6 +56,10 @@
     </div>
 </template>
 <script setup>
+import { storeToRefs } from "pinia/dist/pinia";
+import { usePlatformStore } from "@stores/platform";
+import SkeletonActiveCoach from '@collections/SkeletonLoader/SkeletonActiveCoach';
+
 const props = defineProps({
     activeCoaches: {
         type: Array,
@@ -61,8 +67,11 @@ const props = defineProps({
     }
 })
 
+const platformStore = usePlatformStore();
+const { isLoading } = storeToRefs(platformStore);
+
 const cardImage = (coach) => {
-    return `https://www.musora.com/musora-cdn/image/width=300,quality=95/${coach.data.find(c => c.key === 'coach_card_image').value}`
+    return `https://www.musora.com/cdn-cgi/image/width=300,quality=95/${coach.coach_card_image}`
 }
 
 const fullName = (coach) => {
@@ -78,6 +87,6 @@ const lastName = (coach) => {
 }
 
 const title = (coach) =>{
-    return coach.data.find(c => c.key === 'focus_text').value;
+    return coach.focus_text;
 }
 </script>

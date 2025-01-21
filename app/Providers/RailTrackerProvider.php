@@ -2,17 +2,14 @@
 
 namespace App\Providers;
 
+use App\Modules\RailTracker\Services\MediaPlaybackService;
 use Railroad\MusoraApi\Contracts\RailTrackerProviderInterface;
-use Railroad\Railtracker\Trackers\MediaPlaybackTracker;
 
 class RailTrackerProvider implements RailTrackerProviderInterface
 {
-    private MediaPlaybackTracker $mediaPlaybackTracker;
+    private MediaPlaybackService $mediaPlaybackTracker;
 
-    /**
-     * @param MediaPlaybackTracker $mediaPlaybackTracker
-     */
-    public function __construct(MediaPlaybackTracker $mediaPlaybackTracker)
+    public function __construct(MediaPlaybackService $mediaPlaybackTracker)
     {
         $this->mediaPlaybackTracker = $mediaPlaybackTracker;
     }

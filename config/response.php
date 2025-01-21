@@ -80,7 +80,9 @@ return [
             'challenge_state_text',
             'primary_cta_text',
             'challenge_state',
-            'need_access'
+            'need_access',
+            'quarter_published',
+            'quarter_removed',
         ],
 
         'instructor' => [
@@ -2523,6 +2525,7 @@ return [
             'isEdgeExpired',
             'edgeExpirationDate',
             'isPackOnlyOwner',
+            'isChallengeOnlyOwner',
             'isAppleAppSubscriber',
             'isGoogleAppSubscriber',
             'permission_level',
@@ -2542,7 +2545,13 @@ return [
             'branches',
             'features',
             'show_onboarding',
-            'last_used_brand'
+            'last_used_brand',
+            'active_permissions_ids',
+            'primary_brand',
+            'homepage_v2',
+            'explore_tasks',
+            'is_first_access',
+            'brand_minutes_practiced',
         ],
 
         'quick-tips' => [
@@ -3582,6 +3591,8 @@ return [
             'user_playlist_item_id',
             'user_playlist_item_position',
             'need_access',
+            'quarter_published',
+            'quarter_removed',
         ],
 
         'instructor' => [
@@ -5746,6 +5757,7 @@ return [
             'isEdgeExpired',
             'edgeExpirationDate',
             'isPackOnlyOwner',
+            'isChallengeOnlyOwner',
             'isAppleAppSubscriber',
             'isGoogleAppSubscriber',
             'permission_level',
@@ -5762,9 +5774,14 @@ return [
             'branches',
             'features',
             'show_onboarding',
-            'last_used_brand'
+            'last_used_brand',
+            'active_permissions_ids',
+            'primary_brand',
+            'homepage_v2',
+            'explore_tasks',
+            'is_first_access',
+            'brand_minutes_practiced',
         ],
-
         'quick-tips' => [
             'id',
             'type',

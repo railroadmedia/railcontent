@@ -93,7 +93,7 @@
     @include('singeo.sales.partials._nav', [
         "cartVersion" => true
     ])
-{{--    @include('_partials.components.shop.promo-banner', [--}}
+{{--    @include('_partials.components.shop.promo-banner-2', [--}}
 {{--    "name" => "Lifetime",--}}
 {{--    "fullPrice" => 1200,--}}
 {{--    "price" => 1200,--}}
@@ -208,7 +208,7 @@
                 <p class="leading-tight text-sm">One time payment.</p>
 {{--                <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>--}}
 {{--                <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>--}}
-                <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get 13 free Black Friday bonuses.</strong></h3>
+                <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get 13 free bonuses.</strong></h3>
             </div>
             <div style="font-size:0px">
                 @foreach($bonuses as $bonus)
@@ -240,7 +240,7 @@
                                     @if(!empty($bonus['badge']))
                                         <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                     @endif
-                                    <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }}');"></div>
+                                    <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/{{ $bonus['image'] }}');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -342,7 +342,4 @@
             });
         });
     </script>
-    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
-    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
-    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

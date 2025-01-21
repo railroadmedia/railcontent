@@ -28,7 +28,7 @@ abstract class Job implements ShouldQueue
         $this->instance = $instance;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $timeStart = microtime(true);
         Log::info("$this->instance:$this->name Processing");

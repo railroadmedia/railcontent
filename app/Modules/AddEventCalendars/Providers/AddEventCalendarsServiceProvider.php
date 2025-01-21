@@ -2,17 +2,19 @@
 
 namespace App\Modules\AddEventCalendars\Providers;
 
+use App\Modules\AddEventCalendars\Console\Commands\AddEventCalendarContentSync;
 use App\Modules\AddEventCalendars\Console\Commands\MusoraSync;
 use App\Modules\AddEventCalendars\Console\Commands\SyncCalendarData;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class AddEventCalendarsServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $this->commands([
             MusoraSync::class,
             SyncCalendarData::class,
+            AddEventCalendarContentSync::class
         ]);
 
         // publish config file

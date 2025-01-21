@@ -2,6 +2,7 @@
 
 namespace App\Modules\MusoraCenter\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -116,12 +117,12 @@ class MusoraCenterContentController extends Controller
         ],
     ];
 
-    public function index()
+    public function index(): View
     {
         return view('musora-center.content-management.index');
     }
 
-    public function brand(Request $request, $brand)
+    public function brand(Request $request, $brand): View
     {
         $request->validate(['brand' => 'in:' . implode(',', array_keys(self::$brandContentTypes))]);
 
@@ -134,7 +135,7 @@ class MusoraCenterContentController extends Controller
         );
     }
 
-    public function type(Request $request, $brand, $type)
+    public function type(Request $request, $brand, $type): View
     {
         $request->validate(
             [
@@ -153,7 +154,7 @@ class MusoraCenterContentController extends Controller
         );
     }
 
-    public function comments(Request $request, $brand)
+    public function comments(Request $request, $brand): View
     {
         $user = auth()->user();
 
@@ -210,7 +211,7 @@ class MusoraCenterContentController extends Controller
         );
     }
 
-    public function store(Request $request, $brand, $type)
+    public function store(Request $request, $brand, $type): View
     {
         $request->validate(
             [
@@ -229,7 +230,7 @@ class MusoraCenterContentController extends Controller
         );
     }
 
-    public function edit(Request $request, $brand, $type, $id)
+    public function edit(Request $request, $brand, $type, $id): View
     {
         $request->validate(
             [
@@ -249,7 +250,7 @@ class MusoraCenterContentController extends Controller
         );
     }
 
-    public function videos()
+    public function videos(): View
     {
         return view('musora-center.content-management.videos');
     }

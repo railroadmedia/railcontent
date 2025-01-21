@@ -96,9 +96,13 @@ class RevenueCatApiGateway
 
         // empty result means success for some reason...
         if (!empty($result->errors) || empty($result->subscriber)) {
+            $errorMessage = $result->message ?? 'Revoking the subscription was unsuccessful.';
+
             Log::debug(
                 'RevenueCat REVOKE API call failed: '.curl_error($ch).' - '.var_export($result, true)
             );
+            curl_close($ch);
+            return $errorMessage;
         }
 
         curl_close($ch);
@@ -113,8 +117,6 @@ class RevenueCatApiGateway
      * @param $platform
      * @param null $localPrice
      * @param null $currency
-     * @param string $app
-     * @return string
      */
     public function sendRequest(
         $receipt,
@@ -123,8 +125,8 @@ class RevenueCatApiGateway
         $platform,
         $localPrice = null,
         $currency = null,
-        $app = 'Musora'
-    ) {
+        string $app = 'Musora'
+    ): string {
         $client = new \GuzzleHttp\Client();
         $userId = $user->getId();
         $bod = [
@@ -167,21 +169,19 @@ class RevenueCatApiGateway
      * @param $platform
      * @param null $localPrice
      * @param null $currency
-     * @param string $app
      * @param null $userEmail
      * @param null $userId
-     * @return string
      */
     public function purchase(
         $receipt,
-        $productId = null,
+        $productId,
         $platform,
         $localPrice = null,
         $currency = null,
-        $app = 'Musora',
+        string $app = 'Musora',
         $userEmail = null,
         $userId = null
-    ) {
+    ): string {
         $client = new \GuzzleHttp\Client();
 
         $bod = [
@@ -224,10 +224,8 @@ class RevenueCatApiGateway
      * @param $userId
      * @param $attributes
      * @param $platform
-     * @param string $app
-     * @return string
      */
-    public function updateSubscriberAttribute($userId, $attributes, $platform, $app = 'Musora')
+    public function updateSubscriberAttribute($userId, $attributes, $platform, string $app = 'Musora'): string
     {
         $client = new \GuzzleHttp\Client();
         $att = [];

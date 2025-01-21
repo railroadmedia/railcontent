@@ -1,0 +1,50 @@
+<div class="w-full max-w-md px-1 sm:px-1.5 relative @if(!empty($threeWide)) sm:w-1/2 lg:w-1/3 @else sm:w-1/2 @endif @if(!empty($firstOnMobile)) sm:order-1 @endif">
+    @if(!empty($badge))
+        <p class="uppercase absolute top-0 left-1/2 whitespace-nowrap @if(!empty($isPrima)) -mt-5 px-4 md:px-8 @else -mt-3 @endif translate -translate-x-1/2 px-5 py-1 z-10 leading-tight text-xs @if(!empty($isPrima)) rounded-t-md @else rounded-full @endif @if(!empty($highlightBorder)) bg-{{ $theme }} @else bg-musora-black @endif text-white font-black">{!! $badge !!}</p>
+    @endif
+    <a href="{{$link}}" class="text-black overflow-hidden rounded-2xl inline-block w-full mx-auto mb-4 lg:mb-0 group
+    @if(!empty($isPrima) && !empty($highlightBorder))
+            border-4 border-{{ $theme }}
+        @elseif(!empty($isPrima))
+            border border-musora-black
+        @else
+            border-2 border-musora-black
+        @endif">
+        <div class="bg-white px-3 py-6 sm:py-7">
+            <h4 class="leading-tight mb-5"><strong>{!! $header !!}</strong></h4>
+            @if(!empty($subheader))<p class="text-sm -mt-3 mb-5"><em>{!! $subheader !!}</em></p>@endif
+            <img
+                class="{{$imageHeight}} rounded-md transition-opacity opacity-0"
+                src="{{ $image }}"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+                alt="card image"
+            >
+            <h4 class="leading-tight mt-2">
+                @if(!empty($fullPrice))
+                    @if($fullPrice > $price)
+                        @if(!empty($customStrike))
+                            <span class="relative inline-block leading-none">{{$fullPrice}}<img class="absolute z-10 inset-0 object-cover mt-1" src="https://d21q7xesnoiieh.cloudfront.net/110x0/filters:quality(95)/marketing/pianote/products/prima/v2/strike.png"></span>
+                        @else
+                            <s class="opacity-60 mr-1">{{$fullPrice}}</s>
+                        @endif
+                    @endif
+                @endif
+                <strong>{!! $price !!}</strong>
+            </h4>
+            @if(!empty($specialText)) <p class="text-sm mt-2 mb-5"><em>{!! $specialText !!}</em></p> @endif
+            <span class="join @if(!empty($highlightBorder)) {{ $theme }} @else musora-black @endif smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"
+                role="button" tabindex="0" aria-label="{{ $cta }}"> {{$cta}} </span>
+        </div>
+        @if(!empty($bonuses))
+            <div class="px-4 lg:px-6 pb-7 bg-white">
+                <div class="inline-block text-left mx-0">
+                    @foreach($bonuses as $bonus)
+                        <p class="text-xs inline-block text-left w-auto mx-0 leading-tight">{!! $bonus !!}</p><br>
+                    @endforeach
+
+                </div>
+            </div>
+        @endif
+    </a>
+</div>

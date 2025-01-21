@@ -6,7 +6,7 @@
         ],
         [
         "title" => "What makes Guitareo the perfect choice for someone who's never touched a guitar before?",
-        "desc" => 'For beginners, Guitareo stands out with its foundational lessons that cater specifically to those picking up a guitar for the first time. With lessons like "Getting Started on the Acoustic Guitar" and "Beginner Guitar Chords," you’ll find a nurturing environment that encourages and grows your natural talent.',
+        "desc" => 'For beginners, Guitareo stands out with its foundational lessons that cater specifically to those picking up a guitar for the first time. With lessons like "Getting Started on the Acoustic Guitar" and "Electric Guitarists Start Here", you’ll find a nurturing environment that encourages and grows your natural talent.',
         ],
         [
         "title" => "What's the first milestone I can look forward to with Guitareo?",
@@ -52,7 +52,6 @@
         <h2 class="font-extrabold mb-10 text-center">Frequently Asked Questions</h2>
         @foreach($faqs as $faq)
             @include('_partials.components.question-dropdown', [
-                'num' => '?',
                 "title" => $faq['title'],
                 "desc" => $faq['desc'],
             ])

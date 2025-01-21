@@ -114,7 +114,6 @@ class MusoraApiProductProvider implements ProductProviderInterface
 
     /**
      * @param $slug
-     * @return array
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getCohortTemplate($slug): array

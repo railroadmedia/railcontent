@@ -111,9 +111,6 @@ class ProfileSettingsPagesController extends BaseController
     private ShopifyAPIService $shopifyAPIService;
     private UserAccessPermissionsService $userAccessPermissionsService;
 
-    /**
-     * @param NotificationSettingsService $notificationSettingsService
-     */
     public function __construct(
         NotificationSettingsService $notificationSettingsService,
         UserSignaturesRepository $userSignaturesRepository,
@@ -155,13 +152,12 @@ class ProfileSettingsPagesController extends BaseController
     // ------------------------------------------ "top-level" public methods -------------------------------------------
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $userId
      * @return Application|Factory|View
      */
-    public function profile(Request $request, $domain, $brand, $userId)
+    public function profile(Request $request, $domain, $brand, $userId): \Illuminate\View\View
     {
         $userSignature = $this->userSignaturesRepository->getUserSignature();
         return view('account.settings.profile', [
@@ -172,13 +168,12 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $userId
      * @return Application|Factory|View
      */
-    public function loginCredentials(Request $request, $domain, $brand, $userId)
+    public function loginCredentials(Request $request, $domain, $brand, $userId): \Illuminate\View\View
     {
         $userSignature = $this->userSignaturesRepository->getUserSignature();
 
@@ -190,14 +185,13 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $userId
      * @return Application|Factory|View
      * @throws NonUniqueResultException
      */
-    public function notifications(Request $request, $domain, $brand, $userId)
+    public function notifications(Request $request, $domain, $brand, $userId): \Illuminate\View\View
     {
         $userSignature = [];
 
@@ -216,13 +210,12 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return Application|Factory|View
      * @throws Throwable
      * @throws ProductNotActiveException
      * @throws ProductNotFoundException
      */
-    public function payments(Request $request)
+    public function payments(Request $request): \Illuminate\View\View
     {
         $user = user();
 
@@ -239,7 +232,6 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $userId
@@ -248,7 +240,7 @@ class ProfileSettingsPagesController extends BaseController
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function showInvoiceForPayment(Request $request, $domain, $brand, $userId, $paymentId)
+    public function showInvoiceForPayment(Request $request, $domain, $brand, $userId, $paymentId): \Illuminate\View\View
     {
         $payment = $this->paymentRepository->find($paymentId);
 
@@ -292,13 +284,12 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @return Application|Factory|View
      * @throws ORMException
      */
-    public function account(Request $request, $domain, $brand)
+    public function account(Request $request, $domain, $brand): \Illuminate\View\View
     {
         $userId = auth()->id();
 
@@ -336,7 +327,6 @@ class ProfileSettingsPagesController extends BaseController
     // -------------------------- private method used by each "top-level" public method above --------------------------
 
     /**
-     * @param string $section
      * @return array|array[]
      */
     private function settingSections(string $section = 'profile')
@@ -387,17 +377,16 @@ class ProfileSettingsPagesController extends BaseController
      * @param $brand
      * @return Application|Factory|View
      */
-    public function cancelReasonForm($domain, $brand)
+    public function cancelReasonForm($domain, $brand): \Illuminate\View\View
     {
         return view('account.settings.cancel', ['brand' => $brand, 'domain' => $domain, 'userId' => user()->id]);
     }
 
     /**
-     * @return RedirectResponse
      * @throws ORMException
      * @throws Throwable
      */
-    public function resumePaused()
+    public function resumePaused(): RedirectResponse
     {
         // determine if paused
 
@@ -506,7 +495,6 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return Application|Factory|View|RedirectResponse
      */
     public function submitCancelReason(Request $request)
@@ -595,11 +583,7 @@ class ProfileSettingsPagesController extends BaseController
         return $this->returnRedirect(false);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function acceptPauseOffer(Request $request)
+    public function acceptPauseOffer(Request $request): RedirectResponse
     {
         $pauseLengthDays = (int)$request->get('pause-length');
 
@@ -705,11 +689,7 @@ class ProfileSettingsPagesController extends BaseController
         );
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function acceptStudentPlanOffer(Request $request)
+    public function acceptStudentPlanOffer(Request $request): RedirectResponse
     {
         try {
             $this->customerIoService->createOrUpdateCustomerByUserId(
@@ -729,11 +709,9 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
-     * @return RedirectResponse
      * @throws Throwable
      */
-    public function acceptSwitchToMonthly(Request $request)
+    public function acceptSwitchToMonthly(Request $request): RedirectResponse
     {
         // get subscription
         $ecommerceUser = $this->userProvider->getCurrentUser();
@@ -893,11 +871,7 @@ class ProfileSettingsPagesController extends BaseController
         );
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function acceptGratisAccess(Request $request)
+    public function acceptGratisAccess(Request $request): RedirectResponse
     {
         $ecommerceUser = $this->userProvider->getCurrentUser();
 
@@ -953,20 +927,12 @@ class ProfileSettingsPagesController extends BaseController
         return $this->returnRedirect(false);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function declineOfferProceedWithCancel(Request $request)
+    public function declineOfferProceedWithCancel(Request $request): RedirectResponse
     {
         return $this->cancel($request);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function sendHelpEmail(Request $request)
+    public function sendHelpEmail(Request $request): RedirectResponse
     {
         try {
             $helpIssue = $request->get('help-issue');
@@ -996,18 +962,14 @@ class ProfileSettingsPagesController extends BaseController
         return $this->returnRedirect(true, 'Your message was successfully sent to our team.');
     }
 
-    public function cancellationConfirmation(Request $request)
+    public function cancellationConfirmation(Request $request): \Illuminate\View\View
     {
         return view('account.settings.cancellation-confirmation');
     }
 
     // ---------------------------------- private methods supporting cancellation-ui -----------------------------------
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    private function cancel(Request $request)
+    private function cancel(Request $request): RedirectResponse
     {
         try {
             // ---------------------------------------------------------------------------------------------------------
@@ -1174,10 +1136,9 @@ class ProfileSettingsPagesController extends BaseController
 
     /**
      * @param $userId
-     * @return array
      * @throws ORMException
      */
-    private function subscriptionInfo($userId)
+    private function subscriptionInfo($userId): array
     {
         $userProducts = $this->userProductService->getAllUsersProducts($userId);
         $activeMembershipProducts = [];
@@ -1218,17 +1179,14 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param bool $success
      * @param null $msg
-     * @param string $route
-     * @return RedirectResponse
      */
     private function returnRedirect(
         bool $success = true,
         string $msg = null,
         string $route = 'platform.profile.settings.account',
         array $routeParams = []
-    ) {
+    ): RedirectResponse {
         if ($success) {
             $msg = Collect([$msg ?? self::$generalSuccessMessageToUser]);
             return redirect()->route($route, $routeParams)->with(['successes' => $msg]);
@@ -1240,7 +1198,6 @@ class ProfileSettingsPagesController extends BaseController
 
     /**
      * @param $subscriptionToUpdate
-     * @param string $carbonMethodName
      * @param string|int $carbonMethodParamValue
      * @return Subscription|boolean
      */

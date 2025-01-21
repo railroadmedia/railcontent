@@ -7,6 +7,7 @@ use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\CustomerIO\Services\CustomerIoService as LegacyCustomerIoService;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
+use App\Modules\UserManagementSystem\Jobs\SyncOnboardingBrands;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
@@ -64,6 +65,9 @@ class CustomerIoService
         $purchaseTimestamp = Carbon::createFromTimestampMs($event['purchased_at_ms'])->timestamp;
 
         $attributes = [];
+        if (in_array($brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))) {
+            $attributes['primary_brand'] = $brand;
+        }
         $attributes[$brand . '_membership_status'] = $subscriptionStatus;
         $attributes[$brand . '_membership_subscription_type'] = $product->subscription_interval_count . "_" . $product->subscription_interval_type;
         $attributes[$brand . '_membership_subscription_renewal-date'] = $expirationTimestamp;
@@ -80,6 +84,8 @@ class CustomerIoService
                     ->addSeconds(30)
             )
         );
+
+        SyncOnboardingBrands::dispatch($user->id, $brand);
     }
 
     public function syncCancellationDataFromRecharge(

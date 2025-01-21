@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong, td strong {
   font-weight: 900;
@@ -165,7 +166,7 @@ img {
 
     &:hover,
     &:focus {
-      background: lighten($coachesOrange, 10%);
+      background: color.adjust($coachesOrange, $lightness: 10%);
       color: #000;
     }
   }
@@ -186,7 +187,7 @@ img {
 
     &:hover,
     &:focus {
-      background: lighten($promoColor, 10%);
+      background: color.adjust($promoColor, $lightness: 10%);
     }
   }
 
@@ -732,14 +733,14 @@ img {
     tr {
       &:hover,
       &:nth-child(even):hover {
-        background-color: lighten(#000a1e, 2%);
+        background-color: color.adjust(#000a1e, $lightness: 2%);
 
         td:nth-child(2) {
-          background-color: lighten($guitareoGreen, 2%);
+          background-color: color.adjust($guitareoGreen, $lightness: 2%);
         }
 
         td:nth-child(3) {
-          background-color: lighten(#051124, 2%);
+          background-color: color.adjust(#051124, $lightness: 2%);
         }
 
       }
@@ -774,7 +775,7 @@ img {
         &:nth-child(2) {
           color: #fff;
           background-color: $guitareoGreen;
-          text-shadow: 3px 3px 0 darken($guitareoGreen, 5%);
+          text-shadow: 3px 3px 0 color.adjust($guitareoGreen, $lightness: -5%);
 
           i {
             font-size: 29px;
@@ -817,11 +818,11 @@ img {
         }
 
         &:nth-child(2) {
-          background: darken($guitareoGreen, 5%);
+          background: color.adjust($guitareoGreen, $lightness: -5%);
         }
 
         &:nth-child(3) {
-          background: darken(#051124, 2%);
+          background: color.adjust(#051124, $lightness: -2%);
         }
 
       }
@@ -1225,7 +1226,7 @@ img {
   &:focus {
     opacity: 1;
     color: $guitareoGreen;
-    background: lighten(#0c1017, 10%);
+    background: color.adjust(#0c1017, $lightness: 10%);
   }
 
   &.slick-next:before,

@@ -1,5 +1,5 @@
 <template>
-    <component v-for="(cta, index) in ctas" :key="index" :is="resolveComponent(cta.type)" v-bind="cta.props"
+    <component v-for="(cta, index) in ctas" :key="index" :is="resolveComponent(cta.type)" :lesson-data="lessonData" v-bind="cta.props"
         :inDropdown="inDropdown" />
 </template>
 
@@ -16,6 +16,8 @@ import VideoModalCta from './VideoModalCta.vue';
 import GoogleFormCta from './GoogleFormCta.vue';
 import PageHeaderPrimaryCta from '../PageHeaderPrimaryCta.vue';
 import CreatePlaylistCta from '../../Playlists/CreatePlaylistCta.vue';
+import UnlockChallengeCta from '@collections/PageHeader/Ctas/UnlockChallengeCta';
+import LockedChallengeCta from '@collections/PageHeader/Ctas/LockedChallengeCta';
 
 const componentMap = {
     AskAQuestionCta,
@@ -29,7 +31,9 @@ const componentMap = {
     VideoModalCta,
     GoogleFormCta,
     PageHeaderPrimaryCta,
-    CreatePlaylistCta
+    CreatePlaylistCta,
+    UnlockChallengeCta,
+    LockedChallengeCta,
 };
 
 const resolveComponent = (type) => componentMap[type];
@@ -42,6 +46,10 @@ const props = defineProps({
     inDropdown: {
         type: Boolean,
         default: false,
+    },
+    lessonData: {
+        type: Object,
+        default: () => {},
     },
 });
 </script>

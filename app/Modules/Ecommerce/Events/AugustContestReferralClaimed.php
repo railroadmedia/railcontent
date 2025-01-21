@@ -20,49 +20,31 @@ class AugustContestReferralClaimed
         $this->userId = $userId;
     }
 
-    /**
-     * @return Referrer
-     */
     public function getReferrer(): Referrer
     {
         return $this->referrer;
     }
 
-    /**
-     * @param Referrer $referrer
-     */
     public function setReferrer(Referrer $referrer): void
     {
         $this->referrer = $referrer;
     }
 
-    /**
-     * @return int
-     */
     public function getProductId(): int
     {
         return $this->productId;
     }
 
-    /**
-     * @param int $productId
-     */
     public function setProductId(int $productId): void
     {
         $this->productId = $productId;
     }
 
-    /**
-     * @return int
-     */
     public function getUserId(): int
     {
         return $this->userId;
     }
 
-    /**
-     * @param int $userId
-     */
     public function setUserId(int $userId): void
     {
         $this->userId = $userId;

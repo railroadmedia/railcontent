@@ -3,7 +3,7 @@
 namespace App\Modules\EventTracking\Providers;
 
 use App\Modules\EventTracking\Destinations\RudderDestination;
-use App\Providers\EventServiceProvider;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Avo;
 
 class EventTrackingServiceProvider extends EventServiceProvider
@@ -17,7 +17,7 @@ class EventTrackingServiceProvider extends EventServiceProvider
         parent::register();
 
         Avo::init_avo([
-            "env" => app()->isProduction() ? "prod" : "dev",
+            "env" => "prod",
             "logger" => logger(),
             "rudder_stack_instance" => new RudderDestination(),
         ]);

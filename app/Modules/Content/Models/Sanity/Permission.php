@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Modules\Content\Models\Sanity;
+
+use App\Modules\Content\Models\Sanity\Enums\FieldType;
+use App\Modules\Content\Models\Sanity\Structure\Field;
+use Modules\Content\Models\Sanity\Structure\BrandField;
+
+/**
+ * Defines the schema structure for a Permission document type in Sanity.
+ *
+ * @property string $type
+ * @property string $name
+ * @property string $title
+ * @property ?string $icon
+ * @property array<Field> $fields
+ */
+class Permission extends BaseSanityModel
+{
+    public function __construct()
+    {
+        $fields = [
+            new Field(FieldType::String, 'name'),
+            new BrandField(),
+            new Field(FieldType::Number, 'railcontent_id', 'Railcontent ID', readOnly: "true"),
+        ];
+        parent::__construct(self::getName(), 'Permission', $fields);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getName(): string
+    {
+        return 'permission';
+    }
+}

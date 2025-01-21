@@ -14,6 +14,6 @@ export default class LearningPathCourseContentModel extends ContentModel {
             this.postChildLessonCount,
             `${this.post.total_xp} xp`,
         ];
-        this.list.description = this.getPostDatum('description');
+        this.list.description = this.post.description;
     }
 }

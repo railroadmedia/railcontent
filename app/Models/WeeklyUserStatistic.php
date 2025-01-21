@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class WeeklyUserStatistic
- * 
+ *
  * @property int $id
  * @property Carbon $week
  * @property int $user_id
@@ -34,40 +34,43 @@ use Illuminate\Database\Eloquent\Model;
  */
 class WeeklyUserStatistic extends Model
 {
-	protected $table = 'weekly_user_statistics';
-	public $timestamps = false;
+    protected $table = 'weekly_user_statistics';
+    public $timestamps = false;
 
-	protected $casts = [
-		'week' => 'datetime',
-		'user_id' => 'int',
-		'count_of_content_starts_drumeo' => 'int',
-		'count_of_content_starts_pianote' => 'int',
-		'count_of_content_starts_guitareo' => 'int',
-		'count_of_content_starts_singeo' => 'int',
-		'count_of_content_starts_basseo' => 'int',
-		'count_of_content_starts_musora' => 'int',
-		'in_trial_period' => 'bool',
-		'active' => 'bool',
-		'expired' => 'bool',
-		'generated_at' => 'datetime'
-	];
+    protected $fillable = [
+        'week',
+        'user_id',
+        'last_used_brand',
+        'most_content_starts_brand',
+        'count_of_content_starts_drumeo',
+        'count_of_content_starts_pianote',
+        'count_of_content_starts_guitareo',
+        'count_of_content_starts_singeo',
+        'count_of_content_starts_basseo',
+        'count_of_content_starts_musora',
+        'access_type',
+        'access_frequency',
+        'in_trial_period',
+        'active',
+        'expired',
+        'generated_at'
+    ];
 
-	protected $fillable = [
-		'week',
-		'user_id',
-		'last_used_brand',
-		'most_content_starts_brand',
-		'count_of_content_starts_drumeo',
-		'count_of_content_starts_pianote',
-		'count_of_content_starts_guitareo',
-		'count_of_content_starts_singeo',
-		'count_of_content_starts_basseo',
-		'count_of_content_starts_musora',
-		'access_type',
-		'access_frequency',
-		'in_trial_period',
-		'active',
-		'expired',
-		'generated_at'
-	];
+    protected function casts(): array
+    {
+        return [
+            'week' => 'datetime',
+            'user_id' => 'int',
+            'count_of_content_starts_drumeo' => 'int',
+            'count_of_content_starts_pianote' => 'int',
+            'count_of_content_starts_guitareo' => 'int',
+            'count_of_content_starts_singeo' => 'int',
+            'count_of_content_starts_basseo' => 'int',
+            'count_of_content_starts_musora' => 'int',
+            'in_trial_period' => 'bool',
+            'active' => 'bool',
+            'expired' => 'bool',
+            'generated_at' => 'datetime'
+        ];
+    }
 }

@@ -29,7 +29,7 @@ class SyncUserTotalXp extends Command
      */
     public function handle(
         DatabaseManager $databaseManager
-    ) {
+    ): void {
         $this->info('Starting SyncUserTotalXp.');
 
         $sql = <<<'EOT'

@@ -4,10 +4,10 @@
     {!! \App\Analytics\Tracker::headTop() !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
-    @include('_partials.layout.favicons.'.$brand.'-favicons')
+    @include('_partials.layout.favicons.'.$theme.'-favicons')
 
     <meta name="robots" content="noindex">
-    <title>@yield('title') | {{ ucfirst($brand) }}</title>
+    <title>@yield('title') | {{ ucfirst($theme) }}</title>
 
     <base target="_parent">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">

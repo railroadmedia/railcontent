@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
@@ -11,40 +12,28 @@ use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\FirebaseToken;
+use Modules\UserManagementSystem\Services\ExploreTasksService;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
+use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Railroad\Railcontent\Services\CommentService;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
-    private CalendarService $calendarService;
-    private ContentService $contentService;
-    private RevenueCatService $revenueCatService;
-    private SubscriptionService $subscriptionService;
-    private UserService $userService;
-    private CommentService $commentService;
-    private PostRepository $postRepository;
-
     public function __construct(
-        CalendarService $calendarService,
-        ContentService $contentService,
-        RevenueCatService $revenueCatService,
-        SubscriptionService $subscriptionService,
-        UserService $userService,
-        CommentService $commentService,
-        PostRepository $postRepository
+        private CalendarService $calendarService,
+        private ContentService $contentService,
+        private RevenueCatService $revenueCatService,
+        private SubscriptionService $subscriptionService,
+        private UserService $userService,
+        private CommentService $commentService,
+        private PostRepository $postRepository,
+        private LearningPathsService $learningPathsService,
+        private ExploreTasksService $exploreTasksService
     ) {
-        $this->calendarService = $calendarService;
-        $this->contentService = $contentService;
-        $this->revenueCatService = $revenueCatService;
-        $this->subscriptionService = $subscriptionService;
-        $this->userService = $userService;
-        $this->commentService = $commentService;
-        $this->postRepository = $postRepository;
     }
 
     public function getCurrentUser(): ?User
@@ -79,6 +68,10 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         $userArray = array_merge($user->toArray(), $extraData, $featureArray);
 
+        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
+
+        $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
+
         return [
             'user' => $userArray,
             'subscriptionIntervalType' => $user->subscriptionIntervalType(),
@@ -86,6 +79,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'isEdgeExpired' => !$user->membership_expiration_date || $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
             'isPackOnlyOwner' => $user->isPackOnlyOwner(),
+            'isChallengeOnlyOwner' => $user->isChallengeOnlyOwner(),
             'isAppleAppSubscriber' => $isAppleAppSubscriber,
             'isGoogleAppSubscriber' => $isGoogleAppSubscriber,
             'membership_level' => $user->membership_level,
@@ -96,6 +90,13 @@ class MusoraApiUserProvider implements UserProviderInterface
             'is_enrolled_into_cohort' => $user->isEnrolledIntoCohort(),
             'subcription_date' => Carbon::parse($user->created_at)->format('Y/m/d H:i:s'),
             'last_used_brand' => $user->last_used_brand,
+            'active_permissions_ids' => $user->getActivePermissionsIds(),
+            'show_learning_paths_on_homepage' => $this->learningPathsService->showLearningPaths(brand()),
+            'show_new_learning_paths' => $this->learningPathsService->showNewLearningPaths(),
+            'homepage_v2' => $homepageV2,
+            'explore_tasks' => $userTasks,
+            'is_first_access' => user()->isFirstAccess(),
+            'brand_minutes_practiced' => $user->getBrandMinutesPracticed(),
         ];
     }
 
@@ -168,7 +169,9 @@ class MusoraApiUserProvider implements UserProviderInterface
             'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
             'completed_workouts' => $completedWorkouts,
             'branches' => $this->getAllBranchInformation(),
-            'features' => $this->getAccessibleFeatures()
+            'features' => $this->getAccessibleFeatures(),
+            'active_permissions_ids' => $user->getActivePermissionsIds(),
+            'primary_brand' => $user->primary_brand,
         ], $extraData);
     }
 
@@ -219,12 +222,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         return $this->getCurrentUser();
     }
 
-    /**
-     * @param string|null $iosToken
-     * @param string|null $androidToken
-     * @return User|null
-     */
-    public function setCurrentUserFirebaseTokens(?string $iosToken, ?string $androidToken)
+    public function setCurrentUserFirebaseTokens(?string $iosToken, ?string $androidToken): ?User
     {
         $firebaseToken = [
             'type' => ($iosToken) ? 'ios' : 'android',
@@ -240,8 +238,6 @@ class MusoraApiUserProvider implements UserProviderInterface
     }
 
     /**
-     * @param string $deviceType
-     * @param int $reviewCount
      * @return mixed|\Modules\UserManagementSystem\Models\User|null
      */
     public function setReviewDataForCurrentUser(string $deviceType, int $reviewCount)
@@ -346,18 +342,12 @@ class MusoraApiUserProvider implements UserProviderInterface
         return null;
     }
 
-    /**
-     * @return array
-     */
-    public function getAllBranchInformation()
+    public function getAllBranchInformation(): array
     {
         return FeatureFlagging::allBranches(user());
     }
 
-    /**
-     * @return array
-     */
-    public function getAccessibleFeatures()
+    public function getAccessibleFeatures(): array
     {
         return FeatureFlagging::allowedFeatures(user());
     }

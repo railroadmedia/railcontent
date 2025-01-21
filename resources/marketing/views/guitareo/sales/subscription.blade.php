@@ -122,10 +122,193 @@
             color:#fff!important;
         }
     </style>
+    <style>
+
+        [placeholder]:focus::-webkit-input-placeholder {
+            color:transparent
+        }
+
+        .ajax-form ::-webkit-input-placeholder, .ajax-form ::-moz-placeholder, .ajax-form :-ms-input-placeholder, .ajax-form :-moz-placeholder {
+            color:#777
+        }
+
+        .ajax-form {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        /*@media (min-width: 768px) {*/
+        /*    .ajax-form {*/
+        /*        margin: 0 auto 10px;*/
+        /*    }*/
+        /*}*/
+
+        .ajax-form input, .ajax-form button {
+            font: 400 18px/40px 'Open Sans', sans-serif;
+            height: 40px;
+            color: #999;
+            border-radius: 100px;
+            text-align: left;
+            padding: 2px 20px;
+            margin: 0 auto 5px;
+        }
+        /*.ajax-form input, .ajax-form button {*/
+        /*    font: 400 18px/50px 'Open Sans', sans-serif;*/
+        /*    height: 50px;*/
+        /*    color: #999;*/
+        /*    border-radius: 100px;*/
+        /*    text-align: left;*/
+        /*    padding: 7px 20px;*/
+        /*    margin: 0 auto 15px;*/
+        /*}*/
+        /*@media (min-width: 768px) {*/
+        /*    .ajax-form input, .ajax-form button {*/
+        /*        font-size: 22px;*/
+        /*        height: 65px;*/
+        /*        line-height: 65px;*/
+        /*    }*/
+        /*}*/
+        .ajax-form input[type="submit"],
+        .ajax-form button[type="submit"],
+        .ajax-form input button,
+        .ajax-form button button {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #fff;
+            background: #FFAE00;
+            text-transform: uppercase;
+            /*margin: 0 auto 15px;*/
+            display: block;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+            padding: 0;
+        }
+        .ajax-form input[type="submit"]:hover, .ajax-form button[type="submit"]:hover, .ajax-form input button:hover, .ajax-form button button:hover {
+            background:#ffb61a;
+        }
+        .disclaimer {
+            display: none;
+            margin: 0 auto;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .thank-you-box {
+            width:100%;
+            max-width:960px;
+            border-radius:5px;
+            height:auto;
+            max-height:0;
+            visibility:hidden;
+            opacity:0;
+            transition:all .4s ease-in;
+            display:block;
+            margin:0 auto;
+            background:#FFF;
+            text-align:center;
+            overflow:hidden;
+            color:#000
+        }
+
+        .thank-you-box.active {
+            max-height:1000px;
+            visibility:visible;
+            opacity:1;
+            padding:15px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box.active {
+                padding:20px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box.active {
+                padding:30px
+            }
+        }
+
+        .thank-you-box p {
+            font:400 15px/1.4em "Open Sans", sans-serif;
+            margin:0 auto
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p {
+                font-size:19px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box p {
+                font-size:23px
+            }
+        }
+
+        .thank-you-box p em {
+            line-height:1.4em;
+            max-width:550px;
+            display:inline-block;
+            font-size:12px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p em {
+                font-size:14px
+            }
+        }
+
+        .thank-you-box h2 {
+            font:700 30px/1em "Bebas Neue", sans-serif;
+            margin:15px auto;
+            text-transform:uppercase;
+            color:#FFAE00
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box h2 {
+                font-size:37px;
+                margin:20px auto
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box h2 {
+                font-size:44px
+            }
+        }
+
+        .thank-you-box .social-media a {
+            background:#000;
+            color:#fff;
+            border-radius:50%;
+            display:inline-block;
+            text-align:center;
+            margin:20px 3px 0;
+            width:50px;
+            height:50px;
+            line-height:50px;
+            font-size:26px
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box .social-media a {
+                width:70px;
+                height:70px;
+                line-height:70px;
+                font-size:35px;
+                margin:25px 10px 0
+            }
+        }
+    </style>
 @stop
 
 @section('body-data')
     x-data ='{
+        BFwaitlist : false,
         soundslice : false,
         trailer : false,
         lazyLoad : false,
@@ -164,6 +347,10 @@
 {{--                <a href="/shop/30-days-to-better-strumming" class="join white smaller text-guitareo">Learn More</a>--}}
 {{--            </div>--}}
 {{--        </section>--}}
+    @endif
+
+    @hasSection('top-bar')
+        @yield('top-bar')
     @endif
 
     @php
@@ -207,24 +394,10 @@
 
     @include('musora.sales.components.header-section', [
         'header' => 'THE <span class="text-guitareo">NEW WAY</span> TO<br> <span class="relative inline-block">LEARN GUITAR<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#00c9ac" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#00c9ac" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-        'desc' => 'Learn the guitar faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
-        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/header-thumb.webp',
-        'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/jan-thumb.webp',
-        'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/jan-thumb-m.webp',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => 'POPULAR SONGS',
-        'cta' => 'SEE YOUR DEAL &raquo',
-    ])
-
-    @php
-        $gridItems = $guitareo['gridItems'];
-    @endphp
-
-    @include('musora.sales.components.reason-cards-section', [
-        'header' => 'Your guitar goals<br class="inline sm:hidden"> start here.',
-        'desc' => 'Learn to play guitar online with a fluff-free curriculum that’ll<br class="hidden sm:inline">  take your skills from zero to guitar hero – with step-by-step<br class="hidden sm:inline">  lessons designed around playing songs faster. ',
     ])
 
     @php
@@ -245,13 +418,15 @@
 
 
     @php
-        $songItems = $guitareo['songItems'];
+        $gridItems = $guitareo['gridItems'];
     @endphp
 
-    @include('musora.sales.components.songs-section', [
-        'subheader' => 'Practice and sing 500+ popular songs with note-for-note sheet music and digital tools.',
-        'media' => 'guitareo/membership/homepage/2024/guitareo-songs.webp',
+    @include('musora.sales.components.reason-cards-section', [
+        'header' => 'Your guitar goals<br class="inline sm:hidden"> start here.',
+        'desc' => 'Learn to play guitar online with a fluff-free curriculum that’ll<br class="hidden sm:inline">  take your skills from zero to guitar hero – with step-by-step<br class="hidden sm:inline">  lessons designed around playing songs faster. ',
     ])
+
+
 
     @php
         $testimonials = $guitareo['testimonials'];
@@ -277,50 +452,9 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     @if(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "noSelector" => true,
-            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/guitareo-logo.webp",
-            "songs" => "500+ popular songs.",
-            "firstPoint" => "Unlimited guitar lessons.",
-            "thirdPoint" => "Direct access to real teachers.",
-            "fifthPoint" => "Lesson access for singing, piano, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[guitareo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[guitareo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
-        ])
-        @include('musora.sales.components.trial-explanation', [
-            'instrument' => 'guitar',
-        ])
-    @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'image' => 'marketing/guitareo/membership/homepage/2024/survival-kit-shop.webp',
-                    'title' => 'The Guitarist’s Survival Kit',
-                    'description' => 'Get the gear essentials to start sounding better on the guitar.',
-                    'price' => floatval($productPrices['guitarists-survival-kit']->price),
-                    'shipping' => 'true'
-                ],
-                [
-                    'image' => 'marketing/guitareo/membership/homepage/2024/gq.webp',
-                    'title' => 'GuitarQuest',
-                    'description' => 'Skip the boring stuff and start having fun! Your journey starts here.',
-                    'price' => floatval($productPrices['guitar-quest']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'marketing/guitareo/membership/homepage/2024/guitareo-annual-2w-card.webp',
-        'header' => 'Online guitar lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $286',
-        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702,special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
-        ])
-    @else
         @include('musora.sales.components.order-section-collage', [
+        'old' => true,
+            "orderUrl" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
         'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
         'header' => 'Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
@@ -329,7 +463,40 @@
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
         ])
-
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'guitar',
+        ])
+    @elseif(!empty($promoVersion))
+        @php
+            $bonuses = [
+                [
+                    'image' => 'marketing/guitareo/products/30-days-to-better-strumming/30DTBS-cart.jpg',
+                    'title' => '30 Days To Better Strumming',
+                    'description' => 'Strum with confidence in just 30 days.',
+                    'price' => 97,
+                    'shipping' => 'true'
+                ],
+            ]
+        @endphp
+        @include('musora.sales.components.order-section-bonuses', [
+        'topImage' => 'marketing/guitareo/membership/homepage/2024/guitareo-annual-2w-card.webp',
+        'header' => 'Online guitar lessons for all skill levels.',
+        'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $286',
+        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[30-days-to-better-strumming]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702,special',
+        ])
+    @else
+        @include('musora.sales.components.order-section-collage', [
+        'old' => true,
+        'headerLight' => true,
+        'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
+        'header' => '<strong>Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
+        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
+        'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
+        ])
     @endif
 
     @include('musora.sales.components.app-section', [
@@ -359,6 +526,19 @@
         @include("guitareo.sales.partials._footer")
     @endif
 
+    @if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    {{--    end of BF weekend--}}
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-02 00:00:00',
+        'promoVersion' => true
+    ])
+    @else
+    {{--    end of cyber monday--}}
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-03 00:00:00',
+        'promoVersion' => true
+    ])
+    @endif
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

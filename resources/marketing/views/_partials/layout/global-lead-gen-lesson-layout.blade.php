@@ -27,7 +27,7 @@
             <div class="text-center sm:px-3">
                 <div class="video-row relative mb-4 sm:mb-7">
                     @if(!is_null($prevLesson))
-                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -5%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/@php
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -5%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/cdn-cgi/image/width=800,quality=95/@php
                             if(str_contains($prevLesson->thumbnail, 'i.vimeocdn.com')){
                                   $prevLesson->thumbnail = preg_replace('/[?]mw[=][0-9]+[&]mh[=][0-9]+/', '.jpg', $prevLesson->thumbnail);
                                   if(preg_match('/[.]png|[.]jpg|[.]jpeg|[.]svg/', $prevLesson->thumbnail) !== 1){
@@ -43,7 +43,7 @@
                     </div>
 
                     @if(!is_null($nextLesson))
-                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 105%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/@php
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 105%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/cdn-cgi/image/width=800,quality=95/@php
                             if(str_contains($nextLesson->thumbnail, 'i.vimeocdn.com')){
                                   $nextLesson->thumbnail = preg_replace('/[?]mw[=][0-9]+[&]mh[=][0-9]+/', '.jpg', $nextLesson->thumbnail);
                                   if(preg_match('/[.]png|[.]jpg|[.]jpeg|[.]svg/', $nextLesson->thumbnail) !== 1){
@@ -128,7 +128,15 @@
                                 $resourceName = 'zipURL';
                             }
                         @endphp
-
+                        @if($leadgen->slug == 'technique-essentials/lessons')
+                            @include('_partials.components.leadgen-assignment', [
+                                "title" => $assignment->title,
+                                'subTitle' => $assignment->subtitle,
+                                $resourceName => $assignment->src,
+                                'soundslice' => $assignment->soundslice,
+                                'num' => $key+1,
+                            ])
+                        @else
                         @include('_partials.components.leadgen-assignment-resources', [
                             "title" => $assignment->title,
                             'subTitle' => $assignment->subtitle,
@@ -136,6 +144,7 @@
                             'soundslice' => $assignment->soundslice,
                             'num' => $key+1,
                         ])
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -216,7 +225,7 @@
                         <a href="{{ $lesson['url'] }}" class="@yield('lesson-tile-width') px-2 md:px-3 mb-5 md:mb-7">
                             <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md">
                                 <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="transform: translate(-50%, -50%);"></i>
-                                <div class="@hasSection('lesson-tile-aspect') @yield('lesson-tile-aspect') @else aspect-16:9 @endif w-full bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $lesson['image'] }}"></div>
+                                <div class="@hasSection('lesson-tile-aspect') @yield('lesson-tile-aspect') @else aspect-16:9 @endif w-full bg-cover bg-center lazyload" data-bg="https://www.musora.com/cdn-cgi/image/width=500,quality=95/{{ $lesson['image'] }}"></div>
                             </div>
                             <h5 class="mt-3 mb-1"><strong>{{ $lesson['title'] }}</strong></h5>
                             @if(!empty($lesson['artist']))
@@ -237,6 +246,31 @@
             'img' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons.png',
             'mobileImg' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons-m.png',
             'customLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[piano-chords-and-scales-guide]=1&promo-code=trial-book&redirect=/order&locked=true',
+        ])
+    @endif
+
+     @if($theme === 'pianote' && $leadgen->slug == 'technique-essentials/lessons')
+        @include('drumeo.lead-gen.partials._learn-more', [
+            'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/sign-up-bg.webp',
+            'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/marketing/pianote/lead-gen/technique-essentials/30DTBT-logo-light.webp',
+            'header' => 'What would happen if you learned piano from <br class="hidden md:block"> <strong>the best keyboardist in the world?</strong>',
+            'subheader' => 'Improve your piano technique with 30 days of guided lessons from Jordan Rudess.',
+            'btnLink' => '/shop/30-days-to-better-technique',
+            'btnText' => 'LEARN MORE',
+            'logoStyle' => 'h-24 md:h-36',
+        ])
+    @endif
+
+    @if($theme === 'pianote' && $leadgen->slug == 'getting-started-on-the-piano/lessons')
+        @include('pianote.lead-gen.partials._getting-started', [
+            'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/CTA-bg.webp',
+            'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png',
+            'header' => 'You\'ve started your piano journey<br>',
+            'subheader' => 'Now take the next step',
+            'text'=> '<strong>Get a free 30-day trial to the Pianote membership</strong> and enjoy access to<br class="hidden sm:block">unlimited piano lessons, guided practices, personalized feedback, and more.',
+            'btnLink' => '/trial-month',
+            'btnText' => 'START YOUR FREE TRIAL',
+            'logoStyle' => 'h-7 md:h-8',
         ])
     @endif
 

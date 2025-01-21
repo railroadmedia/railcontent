@@ -8,11 +8,7 @@ class MultiPartParentDecorator extends TypeDecoratorBase
 {
     public static $off = false;
 
-    /**
-     * @param Collection $contents
-     * @return Collection
-     */
-    public function decorate(Collection $contents)
+    public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->whereIn('type', ['course', 'song', 'unit', 'learning-path-course']);
 

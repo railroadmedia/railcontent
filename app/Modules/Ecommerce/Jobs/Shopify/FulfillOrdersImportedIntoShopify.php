@@ -71,9 +71,6 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
     /**
      * Execute the job
      *
-     * @param  Shopify  $shopify
-     * @param  ShopifySyncService  $shopifySyncService
-     * @return void
      * @throws Exception
      */
     public function handle(
@@ -145,8 +142,6 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
     /**
      * Get the applicable order data from Shopify
      *
-     * @param  string|null  $endCursor
-     * @return Collection
      * @throws Exception
      */
     private function getOrderData(?string $endCursor): Collection
@@ -198,9 +193,6 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
 
     /**
      * Check that the given FulfillOrdersImportedIntoShopifyOrderData's noted ecommerce order exists, and log if not
-     *
-     * @param  FulfillOrdersImportedIntoShopifyOrderData  $orderData
-     * @return bool
      */
     private function filterShopifyOrdersWithEcommerceOrder(FulfillOrdersImportedIntoShopifyOrderData $orderData): bool
     {
@@ -219,9 +211,6 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
 
     /**
      * Get the open Order Fulfillment Orders data for the given Shopify order.
-     *
-     * @param  FulfillOrdersImportedIntoShopifyOrderData  $orderData
-     * @return Collection
      */
     private function getOpenOrderFulfillmentOrders(FulfillOrdersImportedIntoShopifyOrderData $orderData): Collection
     {
@@ -276,7 +265,6 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
      * Complete the fulfillment for the Shopify order, without any additional data from our system.
      * This is used to fulfill orders that we have no fulfillment information for.
      *
-     * @param  array  $shopifyOrderFulfillmentOrderData
      *
      * @return array the IDs of the fulfillment(s) created
      */
@@ -329,9 +317,6 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
 
     /**
      * Get the fulfillment status for the given Order
-     *
-     * @param  string  $orderGid
-     * @return string
      */
     private function getOrderFulfillmentStatus(string $orderGid): string
     {
@@ -364,8 +349,6 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
      * Get all applicable fulfillments for the given order, and send the data to Shopify to have it create
      * a fulfillment with the information for our own fulfillments.
      *
-     * @param  FulfillOrdersImportedIntoShopifyOrderData  $shopifyOrderData
-     * @param  array  $shopifyOrderFulfillmentOrderData
      * @return array the IDs of the fulfillment(s) created
      */
     private function createShopifyFulfillmentForOrder(
@@ -511,8 +494,6 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
 
     /**
      * Print the results in a table.
-     *
-     * @return void
      */
     private function printResults(): void
     {
@@ -539,10 +520,6 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
 
     /**
      * Pad the given string so that it will fill a table column for our output
-     *
-     * @param  string  $string
-     * @param  bool  $isLong
-     * @return string
      */
     private function padForTable(string $string, bool $isLong = false): string
     {
@@ -551,10 +528,6 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
 
     /**
      * Mark all fulfillments as delivered
-     *
-     * @param  int  $shopifyOrderId
-     * @param  array  $fulfillmentIds
-     * @return void
      */
     private function markFulfillmentsAsDelivered(int $shopifyOrderId, array $fulfillmentIds): void
     {
@@ -616,8 +589,6 @@ class FulfillOrdersImportedIntoShopifyOrderData
 
     /**
      * Get the local ecommerce order for this Shopify order data
-     *
-     * @return Order|null
      */
     public function getEcommerceOrder(): ?Order
     {

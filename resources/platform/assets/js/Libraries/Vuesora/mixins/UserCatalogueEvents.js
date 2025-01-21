@@ -1,14 +1,5 @@
-import ContentService from '../assets/js/Services/content';
-import {useResetProgress} from "@hooks/useResetProgress";
-
-const getValue = (obj, key) => {
-    const filtered = obj.filter((field) => {
-        if (field.key === key) {
-            return true;
-        }
-    })
-    return filtered.length ? filtered[0].value : '';
-}
+import { contentStatusReset } from 'musora-content-services';
+import { useResetProgress } from "@hooks/useResetProgress";
 
 export default {
     methods: {
@@ -26,7 +17,7 @@ export default {
                                 type: e.currentTarget.getAttribute('data-content-type'),
                                 is_added: this.item.is_added_to_primary_playlist || false,
                             });
-                
+
                             window.shownotification({
                                 icon: 'check',
                                 text: 'Removed! The lesson has been removed from your list.'
@@ -36,22 +27,14 @@ export default {
                             console.log('Remove lesson cancelled');
                         }
                     }
-                });                
+                });
             } else {
                 const type = this.item.type ? this.item.type : e.currentTarget.getAttribute('data-content-type');
-                let name = '';
-                let thumbnail_url = '';
-                let description = '';
-                if (type === 'song') {
-                    name = getValue(this.item.fields, 'title');
-                    thumbnail_url = getValue(this.item.data, 'thumbnail_url');
-                    description = getValue(this.item.fields, 'artist');
-                } else {
-                    name = getValue(this.item.fields, 'title');
-                    thumbnail_url = getValue(this.item.data, 'thumbnail_url');
-                    description = getValue(this.item.data, 'description');
 
-                }
+                const name = this.item.title;
+                const thumbnail_url = this.item.image;
+                const description = this.item.artist_name;
+
                 this.emitAddToList({
                     content_id: this.item.id,
                     type,
@@ -86,17 +69,14 @@ export default {
         resetProgressEventHandler(payload) {
             const post_index = this.content.map(post => post.id).indexOf(payload.content_id);
 
-            ContentService.resetContentProgress(payload.content_id)
-                .then((response) => {
-                    if (response) {
-                        window.shownotification({
-                            icon: 'check',
-                            text: 'Ready to start again? Your progress has been reset.'
-                        });                        
+            contentStatusReset(payload.content_id)
+                .then(() => {
+                    window.shownotification({
+                        icon: 'check',
+                        text: 'Ready to start again? Your progress has been reset.'
+                    });
 
-                        this.content.splice(post_index, 1);
-                    }
-
+                    this.content.splice(post_index, 1);
 
                     payload.icon.classList.remove('fa-spin', 'fa-spinner');
                     payload.icon.classList.add('fa-undo');

@@ -5,8 +5,8 @@
     <meta property="og:title" content="Keep your membership + get 9 free bonuses.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    <meta name="description" content="You’ve spent 30-days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
-    <meta property="og:description" content="You’ve spent 30-days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
+    <meta name="description" content="You’ve spent 30 days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
+    <meta property="og:description" content="You’ve spent 30 days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
         <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
@@ -30,7 +30,7 @@
         ])
     <section class="content-section text-center" style="padding-bottom: 0;">
         <div class="container mx-auto">
-            <img class="h-7 md:h-10 lg:h-12 mb-2 md:mb-4" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
+            <img class="h-7 md:h-10 lg:h-12 mb-2 md:mb-4" src="https://www.musora.com/cdn-cgi/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
             <h1><strong>Keep Your Membership +  <br class="inline lg:hidden">Get 9 Free Bonuses.</strong></h1>
             <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative">
@@ -46,7 +46,7 @@
 
         <section class="content-section text-center px-6" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
             <div class="container mx-auto max-w-4xl">
-                <img class="h-28 md:h-32" src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png">
+                <img class="h-28 md:h-32" src="https://www.musora.com/cdn-cgi/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png">
 
                 <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Test-drive your lessons for 90 days.</strong><br>
                     Zero risk.</h3>
@@ -62,7 +62,19 @@
                     </div>
                     <div class="w-full sm:w-1/3 px-2">
                         <h5 class="text-drumeo border-drumeo border-2 rounded-full inline-block py-2 px-3 mb-1">3</h5>
-                        <h6 class="leading-normal">Change your mind?<br> Get a refund. <a class="tooltip cursor-pointer" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle"></i></a></h6>
+                        <h6 class="leading-normal relative">
+                            Change your mind?<br> Get a refund.
+                            <div class="ml-2 inline-block cursor-pointer group" aria-label="Refund Information">
+                                <i class="fas fa-info-circle"></i>
+                                <div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full hidden group-hover:block transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:max-h-[1000px] max-h-0"
+                                    style="    top: 0;">
+                                    <div class="absolute left-1/2 transform -translate-x-1/2 bottom-[-14px] border-[7px] border-transparent border-t-white"></div>
+                                    <div class="p-2 text-xs text-black bg-white rounded-lg shadow-xl" style="    width: 200px;">
+                                        If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)
+                                    </div>
+                                </div>
+                            </div>
+                        </h6>
                     </div>
                 </div>
             </div>
@@ -225,10 +237,7 @@
                     <p class="px-2"><strong>Your annual membership will start at the end of your 30-day trial. <br class="hidden md:inline">
                             So you’ll still get the full value of your one dollar purchase.</strong></p>
 
-                    <a class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[the-drummers-toolbox-book]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&bonuses[drum-technique-made-easy-pack]=1&bonuses[independence-made-easy-pack]=1&bonuses[four-weeks-to-better-drum-fills]=1&bonuses[learn-songs-faster-pack]=1&locked=true&promo-code=full-time">Keep My Membership &raquo;</a>
-
-                    <br><br class="inline-block md:hidden">
-                    <a class="monthly-alt" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
+                    <a class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[the-drummers-toolbox-book]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=UGD24">Keep My Membership &raquo;</a>
                 </div>
         </section>
         <section class="content-section text-center" style="background: #0c1429;">

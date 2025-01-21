@@ -23,7 +23,7 @@ class AccessCodeServiceTest extends TestCase
         $this->accessCodeService = $this->app->make(AccessCodeService::class);
     }
 
-    public function test_generate_access_code()
+    public function test_generate_access_code(): void
     {
         $product = Product::factory()->create();
 
@@ -38,11 +38,12 @@ class AccessCodeServiceTest extends TestCase
                 'source' => 'foo-bar'
             ]
         );
+
         $this->assertNotNull($accessCode->code);
         $this->assertFalse($accessCode->is_claimed);
     }
 
-    public function test_claim()
+    public function test_claim(): void
     {
         Queue::fake();//ignore customerIO jobs
 

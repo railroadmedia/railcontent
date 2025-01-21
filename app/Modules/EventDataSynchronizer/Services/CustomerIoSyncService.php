@@ -60,7 +60,8 @@ class CustomerIoSyncService
 
     public function getUsersMembershipAccessAttributes(User $user, mixed $brands): array
     {
-        $attributes = [];
+        $attributes = ['first_platform_access' => null];
+
         foreach ($brands as $brand) {
             $attributes += [
                 $brand . "_membership_access-expiration-date" => !empty($user->membership_expiration_date) ? Carbon::parse(
@@ -70,6 +71,17 @@ class CustomerIoSyncService
                 //$brand . '_membership_subscription_source_app-store' => $user->hasMobileMembership() ? "true" : "",
             ];
         }
+
+        // first_platform_access (membership), sync based on first membership permission ever granted
+        if (!empty($user->userAccessPermissions)) {
+            foreach ($user->userAccessPermissions->sortBy('start_time') as $userAccessPermission) {
+                if ($userAccessPermission->isMembershipPermission()) {
+                    $attributes['first_platform_access'] = Carbon::parse($userAccessPermission->start_time)->timestamp;
+                    break;
+                }
+            }
+        }
+
         return $attributes;
     }
 
@@ -77,10 +89,6 @@ class CustomerIoSyncService
     /**
      * Attribute list:
      * BRAND_subscribed_coaches => 'ID123_FNAME_LNAME, ID1234_FNAME2_LNAME2, etc'
-     *
-     * @param User $user
-     * @param array $brands
-     * @return array
      */
     public function getUsersContentFollowAttributes(User $user, array $brands = []): array
     {

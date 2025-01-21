@@ -16,7 +16,6 @@ class DrumeoMethodLearningPathDecorator extends TypeDecoratorBase
     public static $skip = false;
 
     /**
-     * @param Collection $contents
      * @return mixed|Collection
      */
     public function decorate(Collection $contents)
@@ -135,10 +134,7 @@ class DrumeoMethodLearningPathDecorator extends TypeDecoratorBase
         return $this->mergeDecorated($contents, $contentsOfType);
     }
 
-    /**
-     * @return ConnectionInterface
-     */
-    private function railcontentDB()
+    private function railcontentDB(): ConnectionInterface
     {
         return DB::connection(config('railcontent.database_connection_name'));
     }

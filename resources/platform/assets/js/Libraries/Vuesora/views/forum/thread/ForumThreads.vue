@@ -29,7 +29,7 @@
 import { computed } from "vue";
 import Breadcrumb from "@collections/Breadcrumb/Breadcrumb.vue";
 import PageHeader from "@collections/PageHeader/PageHeader.vue";
-import CollectionWrapper from "@collections/CollectionWrapper/CollectionWrapper.vue";
+import CollectionWrapper from "@collections/LegacyCollectionWrapper/CollectionWrapper.vue";
 
 const props = defineProps({
     discussionTitle: String,

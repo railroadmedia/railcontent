@@ -52,7 +52,6 @@ $userData = assembleUserAttributes(user());
                     <page-container
                         :is-live="{{ isLive() ? 'true':'false' }}"
                         search-url=""
-                        :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
                         @if(!empty( $hasUnreadNotifications ))
                             :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
                         @endif
@@ -66,7 +65,7 @@ $userData = assembleUserAttributes(user());
                         <template v-cloak v-slot="slotProps">
 
                             <div class="tw-relative tw-flex tw-flex-col tw-h-[calc(100vh-152px)] lg:tw-h-[calc(100vh-128px)]  tw-justify-center tw-items-center">
-                                <img src="https://www.musora.com/musora-cdn/image/width=1200,quality=95,fit=cover/https://d3fzm1tzeyr5n3.cloudfront.net/Rehearsal+Studio_deSaturated.png"
+                                <img src="https://www.musora.com/cdn-cgi/image/width=1200,quality=95,fit=cover/https://d3fzm1tzeyr5n3.cloudfront.net/Rehearsal+Studio_deSaturated.png"
                                     alt="Image of Musical instrument on a stage"
                                     class="tw-absolute tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
                                     onload="this.classList.remove('tw-opacity-0')"

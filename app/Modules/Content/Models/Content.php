@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Modules\Content\Builders\ContentBuilder;
 use App\Modules\Content\database\factories\ContentFactory;
 use Carbon\Carbon;
@@ -15,6 +16,7 @@ use Modules\Content\Models\ContentGears;
 use Modules\Content\Models\ContentLifestyle;
 use Modules\Content\Models\ContentTheory;
 use Modules\Content\Models\ContentTopic;
+use Railroad\Railcontent\Helpers\ContentHelper;
 
 /**
  * App\Modules\Content\Models\Content
@@ -209,6 +211,7 @@ class Content extends Model
         'genre' => 'string',
         'released' => 'string',
         'length_in_seconds' => 'integer',
+        'album' => 'string',
 
     ];
 
@@ -217,12 +220,12 @@ class Content extends Model
         return new ContentBuilder($query);
     }
 
-    public function fields()
+    public function fields(): HasMany
     {
         return $this->hasMany(ContentField::class, 'content_id');
     }
 
-    public function data()
+    public function data(): HasMany
     {
         return $this->hasMany(ContentData::class, 'content_id');
     }
@@ -521,7 +524,7 @@ class Content extends Model
     public function setParentId($value, $childPosition = 1)
     {
         $hierarhy =
-            ContentHierarchy::query()
+            ContentHierarchy::onWriteConnection()
                 ->where('parent_id', '=', $value)
                 ->where('child_id', '=', $this->id)
                 ->get();
@@ -754,10 +757,105 @@ class Content extends Model
         return $this->hasOne(ContentHierarchy::class, 'parent_id');
     }
 
+    public function children(): HasMany
+    {
+        return $this->hasMany(ContentHierarchy::class, 'parent_id');
+    }
+
     public function setLengthInSeconds($value)
     {
         if ($value) {
             $this->setField('length_in_seconds', $value);
         }
+    }
+
+    public function setAlbum($value)
+    {
+        if ($value) {
+            $this->setField('album', $value);
+        }
+    }
+
+    public function setAssignments($value)
+    {
+        if (is_array($value)) {
+            foreach ($value as $index => $assignmentData) {
+                if (isset($assignmentData['railcontent_id'])) {
+                    $assignment = Content::where('id', '=', $assignmentData['railcontent_id'])->get();
+                    if ($assignment->isEmpty()) {
+                        $assignment = new Content();
+                        $assignment->title = $assignmentData['assignment_title'];
+                        $assignment->type = 'assignment';
+                        $assignment->status = 'published';
+                        $assignment->slug       = ContentHelper::slugify($assignmentData['assignment_title']);
+                        $assignment->language   = 'en-US';
+                        $assignment->created_on = Carbon::now()->toDateTimeString();
+                        $assignment->brand      = $this->brand;
+                        $assignment->soundslice_slug = $assignmentData['assignment_soundslice'];
+
+                        $assignment->save();
+                        $assignment->setDescription($assignmentData['assignment_description']);
+                        $assignment->setParentId($this->id);
+                    }
+                } else {
+                    $assignment = new Content();
+                    $assignment->title = $assignmentData['assignment_title'];
+                    $assignment->type = 'assignment';
+                    $assignment->status = 'published';
+                    $assignment->slug       = ContentHelper::slugify($assignmentData['assignment_title']);
+                    $assignment->language   = 'en-US';
+                    $assignment->created_on = Carbon::now()->toDateTimeString();
+                    $assignment->brand      = $this->brand;
+                    $assignment->soundslice_slug = $assignmentData['assignment_soundslice']??null;
+                    $assignment->save();
+                    $value[$index]['railcontent_id'] = $assignment->id;
+                    $assignment->setParentId($this->id);
+                    $assignment->setDescription($assignmentData['assignment_description']??null);
+                }
+            }
+        }
+
+        return $value;
+    }
+
+    public function setChildId($value, $childPosition = 1)
+    {
+        $hierarhy =
+            ContentHierarchy::onWriteConnection()
+                ->where('parent_id', '=', $this->id)
+                ->where('child_id', '=', $value)
+                ->get();
+
+        if ($hierarhy->isEmpty()) {
+            $hierarhy = new ContentHierarchy();
+            $hierarhy->parent_id = $this->id;
+            $hierarhy->child_id = $value;
+            $hierarhy->child_position = $childPosition;
+            $hierarhy->created_on =
+                Carbon::now()
+                    ->toDateTimeString();
+            $hierarhy->save();
+        }
+    }
+
+    public function setParentContentData($parents)
+    {
+        $parentContentData = [];
+        foreach($parents as $parent) {
+            $parentContentData[] =
+                (object)[
+                    'id'       => $parent['id'],
+                    'slug'     => $parent['slug'],
+                    'type'     => $parent['type'],
+                    'position' => null,
+                ];
+        }
+
+        $this->parent_content_data = (json_encode($parentContentData));
+    }
+
+    public function setWebUrlPath($value)
+    {
+        $this->web_url_path = $value;
     }
 }

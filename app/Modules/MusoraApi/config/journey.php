@@ -53,6 +53,53 @@ return [
                 'recommended_content.*.id' => ['required', 'integer'],
                 'recommended_content.*.position' => ['required', 'integer'],
             ],
+            'video-started' => [
+                'brand' => ['required', 'string'],
+                'content_id' => ['required', 'integer'],
+                'position_seconds' => ['required', 'integer'],
+                'video_player' => ['required', 'string', 'in:soundslice,youtube,vimeo'],
+                'video_length_seconds' => ['required', 'integer'],
+                'soundslice_slug' => ['required_if:video_player,soundslice', 'string'],
+            ],
+            'video-resumed' => [
+                'brand' => ['required', 'string'],
+                'content_id' => ['required', 'integer'],
+                'position_seconds' => ['required', 'integer'],
+                'video_player' => ['required', 'string', 'in:soundslice,youtube,vimeo'],
+                'video_length_seconds' => ['required', 'integer'],
+                'soundslice_slug' => ['required_if:video_player,soundslice', 'string'],
+            ],
+            'video-playing' => [
+                'brand' => ['required', 'string'],
+                'content_id' => ['required', 'integer'],
+                'position_seconds' => ['required', 'integer'],
+                'video_player' => ['required', 'string', 'in:soundslice,youtube,vimeo'],
+                'video_length_seconds' => ['required', 'integer'],
+                'soundslice_slug' => ['required_if:video_player,soundslice', 'string'],
+            ],
+            'video-paused' => [
+                'brand' => ['required', 'string'],
+                'content_id' => ['required', 'integer'],
+                'position_seconds' => ['required', 'integer'],
+                'video_player' => ['required', 'string', 'in:soundslice,youtube,vimeo'],
+                'video_length_seconds' => ['required', 'integer'],
+                'soundslice_slug' => ['required_if:video_player,soundslice', 'string'],
+            ],
+            'video-completed' => [
+                'brand' => ['required', 'string'],
+                'content_id' => ['required', 'integer'],
+                'position_seconds' => ['required', 'integer'],
+                'video_player' => ['required', 'string', 'in:soundslice,youtube,vimeo'],
+                'video_length_seconds' => ['required', 'integer'],
+            ],
+            'content-liked' => [
+                'brand' => ['required', 'string'],
+                'content_id' => ['required', 'integer'],
+            ],
+            'content-unliked' => [
+                'brand' => ['required', 'string'],
+                'content_id' => ['required', 'integer'],
+            ],
         ]
     ],
 ];

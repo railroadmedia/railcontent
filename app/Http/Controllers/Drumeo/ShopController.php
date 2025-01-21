@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Drumeo;
 
+use Illuminate\View\View;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
@@ -33,6 +34,10 @@ class ShopController extends BaseController
             return $value->productType->name === 'Accessories';
         });
 
+        $gifts = $products->filter(function ($value, $key) {
+            return $value->productType->name === 'Gifts';
+        });
+
         $misc = $products->filter(function ($value, $key) {
             return $value->productType->name === 'Misc';
         });
@@ -47,7 +52,7 @@ class ShopController extends BaseController
 
         $featured = $products->whereIn('id', [100, 260, 95, 238]);
 
-        $thirtyDD = Product::whereHas('brand', fn ($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [217, 216, 214, 213, 212]);
+        $thirtyDD = Product::whereHas('brand', fn ($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [217, 216, 213, 212]);
 
         return view('drumeo.shop.shop', [
             'lessons' => $lessons,
@@ -80,7 +85,7 @@ class ShopController extends BaseController
         return view('drumeo.shop.product-layout', [ 'product' => $product, 'theme' => 'drumeo' ]);
     }
 
-    public function products(Request $request, $domain, $page = null)
+    public function products(Request $request, $domain, $page = null): View
     {
         return view('drumeo.products.'.$page, ['theme' => 'drumeo']);
 

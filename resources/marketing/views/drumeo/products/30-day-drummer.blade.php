@@ -292,7 +292,7 @@ $lessons = [
     ],
     [
         'title' => 'Play Your First Song!',
-        'description' => "In week 4, you'll learn to play your first song by assembling all the parts you've learned so far -- playing the verse, chorus, bridge, and finally the full track!"
+        'description' => "In week 4, you'll learn to play your first song by assembling all the parts you've learned so far – playing the verse, chorus, bridge, and finally the full track!"
     ],
 ];
 
@@ -369,9 +369,9 @@ $items = [
     <div class="container max-w-5xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
             <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
-                <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png" loading="lazy" onload="this.classList.remove('opacity-0')">
-                <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png" loading="lazy" onload="this.classList.remove('opacity-0')">
-                <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 130%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 130%;transform: translate(-44%, -7%);" src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
 
             <div class="text-white text-left z-10 sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 sm:max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
@@ -387,19 +387,19 @@ $items = [
                 </h6>
                 <div class="flex justify-between text-center mt-7 lg:mt-10">
                     <div class="">
-                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon" loading="lazy"
+                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon" loading="lazy"
                     onload="this.classList.remove('opacity-0')" >
                         <h3 class="mt-2"><strong>1.6M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">Followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy"
+                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy"
                     onload="this.classList.remove('opacity-0')" >
                         <h3 class="mt-2"><strong>19M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">views</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon" loading="lazy"
+                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon" loading="lazy"
                     onload="this.classList.remove('opacity-0')" >
                         <h3 class="mt-2"><strong>461k</strong></h3>
                         <p class="uppercase opacity-70 text-sm">followers</p>

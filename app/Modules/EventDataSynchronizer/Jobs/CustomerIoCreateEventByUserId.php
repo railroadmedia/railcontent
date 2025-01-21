@@ -5,8 +5,6 @@ namespace App\Modules\EventDataSynchronizer\Jobs;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Exception;
 use App\Modules\CustomerIO\Services\CustomerIoService;
-use Illuminate\Support\Facades\Log;
-use Modules\UserManagementSystem\Events\User\UserCreated;
 use Throwable;
 
 class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
@@ -45,20 +43,14 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
 
     /**
      * CustomerIoCreateEventByUserId constructor.
-     * @param integer $userId
-     * @param string $accountName
-     * @param string $eventName
-     * @param array $eventData
-     * @param string|null $eventType
-     * @param integer|null $eventTimestamp
      */
     public function __construct(
-        $userId,
-        $accountName,
-        $eventName,
-        $eventData = [],
-        $eventType = null,
-        $eventTimestamp = null
+        int $userId,
+        string $accountName,
+        string $eventName,
+        array $eventData = [],
+        ?string $eventType = null,
+        ?int $eventTimestamp = null
     ) {
         $this->userId = $userId;
         $this->accountName = $accountName;
@@ -69,7 +61,6 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
     }
 
     /**
-     * @param CustomerIoService $customerIoService
      * @throws \Throwable
      */
     public function handle(
@@ -101,7 +92,7 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
             }
 
             // events always sync to the brand specific workspace and the primary all synced workspace
-            if ($this->accountName !== $accountNameToSyncAllBrand) {
+            if ($this->accountName !== $accountNameToSyncAllBrand && $this->accountName !== 'musora_prospects') {
                 $customerIoService->createEventForUserId(
                     $user->id,
                     $accountNameToSyncAllBrand,
@@ -139,7 +130,6 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param Throwable $exception
      * @param $user
      */
     public function failed(Throwable $exception)

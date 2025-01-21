@@ -4,16 +4,19 @@ namespace App\Modules\Content\Services;
 
 use App\Models\Brand;
 use App\Models\TrialSection;
+use App\Modules\Content\ApiGateways\SanityGateway;
+use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Railroad\Railcontent\Services\ContentService;
 
 class LearningPathsService
 {
-    private ContentService $contentService;
-
     public function __construct(
-        ContentService $contentService
+        private ContentService $contentService,
+        private SanityGateway $sanityGateway,
     ) {
-        $this->contentService = $contentService;
+        ;
     }
 
     public function getLearningPaths()
@@ -38,7 +41,7 @@ class LearningPathsService
             if ($content['type'] == "learning-path") {
                 $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
                     $content['id'],
-                    auth()->id()
+                    Auth::id()
                 );
                 $section->ctaUrl = $nextContentForUser['url'];
             }
@@ -48,5 +51,51 @@ class LearningPathsService
         });
 
         return $learningPaths;
+    }
+
+    public function showLearningPaths(string $brand): bool
+    {
+        $hideSection = $brand . '_trial_section_hide';
+        if (user()->is_trial && !user()->$hideSection && user()->created_at->diffInDays(now()) <= 30) {
+            $hasExperienceLevels = count(
+                user()->onboardingExperience->filter(function ($item) use ($brand) {
+                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                })
+            ) > 0;
+
+            return ($hasExperienceLevels) ? true : false;
+        }
+        return false;
+    }
+
+    public function showNewLearningPaths(): bool
+    {
+        $user = user();
+        return Carbon::parse($user->created_at)->greaterThanOrEqualTo(Carbon::now()->subDays(30));
+    }
+
+    public function getNewLearningPaths(): array
+    {
+        $brand = brand();
+        if (!$this->showNewLearningPaths()) {
+            return [];
+        }
+
+        $user = user();
+        $experienceLevel = intval(
+            $user
+                ->onboardingExperience
+                ->where('brand', brand())
+                ->first()
+                ->experience_level ?? 0
+        );
+        $difficultyString = OnboardingSkillLevelEnum::tryFrom($experienceLevel)->name;
+        $document = $this->sanityGateway->getOnboardingCard($brand, $user->membership_level, $difficultyString, user()->isAdmin()) ?? [];
+
+        if (empty($document)) {
+            return [];
+        }
+
+        return $document['card'];
     }
 }

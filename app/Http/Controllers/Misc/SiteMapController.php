@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SiteMapController extends BaseController
 {
-    public function sitemap(Request $request)
+    public function sitemap(Request $request): \Illuminate\Http\Response
     {
         $domain = $this->getDomain($request);
         try {

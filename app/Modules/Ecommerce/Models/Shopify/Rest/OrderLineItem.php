@@ -14,6 +14,7 @@ class OrderLineItem
     public string $gid;
     public int $id;
     public ?int $variantId;
+    public ?int $productId;
     public string $sku;
     public ?Product $product = null;
     /** @var float $price the original price of the item */
@@ -23,6 +24,16 @@ class OrderLineItem
     public float $discount;
     /** @var float $totalPrice the total price of the item, after discount */
     public float $totalPrice;
+    public bool $taxable;
+    public int $grams;
+    public string $name;
+    public ?string $productTitle;
+    public ?string $variantTitle;
+    public string $vendor;
+    public int $fulfillableQuantity;
+    public string $fulfillmentService;
+    public bool $requiresShipping;
+
 
     public function __construct($shopifyLineItemData)
     {
@@ -34,15 +45,24 @@ class OrderLineItem
         $this->quantity = $shopifyLineItemData->quantity;
         $this->sku = $shopifyLineItemData->sku;
         $this->variantId = $shopifyLineItemData->variant_id;
+        $this->productId = $shopifyLineItemData->product_id;
         $this->product = Product::withTrashed()->firstWhere('sku', $this->sku);
         $this->totalPrice = ($this->price * $this->quantity) - $this->discount;
+        $this->grams = $shopifyLineItemData->grams;
+        $this->name = $shopifyLineItemData->name;
+        $this->productTitle = $shopifyLineItemData->title;
+        $this->variantTitle = $shopifyLineItemData->variant_title;
+        $this->fulfillableQuantity = $shopifyLineItemData->fulfillable_quantity;
+        $this->fulfillmentService = $shopifyLineItemData->fulfillment_service;
+        $this->requiresShipping = $shopifyLineItemData->requires_shipping;
+        $this->vendor = $shopifyLineItemData->vendor;
+        $this->taxable = $shopifyLineItemData->taxable;
     }
 
     /**
      * Calculate the discount applied to this order line item
      *
      * @param $shopifyLineItemData
-     * @return float
      */
     private function calculateDiscount($shopifyLineItemData): float
     {
@@ -57,8 +77,6 @@ class OrderLineItem
 
     /**
      * Get if this line item is for a trial
-     *
-     * @return bool
      */
     public function isTrial(): bool
     {
@@ -67,8 +85,6 @@ class OrderLineItem
 
     /**
      * Get if this line item is for a membership
-     *
-     * @return bool
      */
     public function isMembership(): bool
     {

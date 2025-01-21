@@ -33,7 +33,8 @@ class PrimaryURLSlugToContentTypeMap
         'gear-guides' => 'gear-guides',
         'performances' => 'performances',
         'in-rhythm' => 'in-rhythm',
-        'challenges' => 'challenges',
+        'challenges' => 'challenges', // Drumeo Show challenge type
+        'challenge' => 'challenge', //challengeV2 content type
         'on-the-road' => 'on-the-road',
         'diy-drum-experiments' => 'diy-drum-experiments',
         'rhythmic-adventures-of-captain-carson' => 'rhythmic-adventures-of-captain-carson',
@@ -52,5 +53,19 @@ class PrimaryURLSlugToContentTypeMap
         'song-tutorials' => 'song-tutorial',
         'drum-fest-international-2022' => 'drum-fest-international-2022',
         'workouts' => 'workout',
+        'odd-times'=>'odd-times',
+    ];
+
+    public static array $contentTypeToSanityTypeMapping = [
+        'boot-camps'             => 'boot-camp',
+        'backstage-secrets'      => 'backstage-secret',
+        'student-collaborations' => 'student-collaboration',
+        'podcasts'               => 'podcast',
+        'solos'                  => 'solo',
+        'gear-guides'            => 'gear-guide',
+        'performances'           => 'performance',
+        'diy-drum-experiments'   => 'diy-drum-experiment',
+        'tama-drums'             => 'tama',
+        'sonor-drums'            => 'sonor',
     ];
 }

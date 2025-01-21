@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,7 +37,7 @@ class EmailChange extends Model
     use HasFactory;
     protected $table = 'usora_email_changes';
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

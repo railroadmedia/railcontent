@@ -49,14 +49,14 @@ $testimonials = $drumeo['testimonialsShopVersion'];
                 @foreach ($testimonials as $testimonial)
                 <li class="splide__slide bg-white rounded-xl pb-6 px-8 mr-4 text-center">
                     <div class="-mt-10 mb-6">
-                        <img class="rounded-full w-[90px] h-[90px] object-cover" src="https://www.musora.com/musora-cdn/image/width=130,quality=95/{{ $testimonial['img'] }}" alt="{{ $testimonial['name'] }} avatar" />
+                        <img class="rounded-full w-[90px] h-[90px] object-cover" src="https://www.musora.com/cdn-cgi/image/width=130,quality=95/{{ $testimonial['img'] }}" alt="{{ $testimonial['name'] }} avatar" />
                     </div>
                     <h6 class="mb-1"> <strong>{{ $testimonial['name'] }}</strong> </h6>
                     <p><i>30-Day Drummer Student</i></p>
                     @if (isset($location))
                     <p><i>{{ $location }}</i></p>
                     @endif
-                    <img class="my-4" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg" alt="stars" />
+                    <img class="my-4" src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg" alt="stars" />
                     <p class="mb-6">“{!! $testimonial['comment'] !!}”</p>
                 </li>
                 @endforeach

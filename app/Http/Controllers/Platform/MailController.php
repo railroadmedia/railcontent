@@ -25,11 +25,7 @@ class MailController extends Controller
         //        $this->userPointsService = $userPointsService;
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function sendFromMember(Request $request)
+    public function sendFromMember(Request $request): RedirectResponse
     {
         $input = $request->all();
 

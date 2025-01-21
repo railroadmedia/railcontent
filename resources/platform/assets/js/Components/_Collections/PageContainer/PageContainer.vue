@@ -1,5 +1,5 @@
 <script setup>
-import { ref, provide, onBeforeMount, onMounted, onUnmounted, onUpdated } from "vue";
+import {ref, provide, onBeforeMount, onMounted, onUnmounted, onUpdated, watch, inject} from "vue";
 import { storeToRefs } from 'pinia';
 import { useNotificationStore } from '@stores/notification';
 import { useConfirmationStore } from '@stores/confirmation';
@@ -16,6 +16,8 @@ import Sidebar from "../Sidebar/Sidebar.vue";
 import Footer from "@collections/Footer/Footer.vue";
 import PlaylistsModal from "@collections/Playlists/Modals/PlaylistsModal.vue";
 import MembershipUpgradeModal from '../Modal/MembershipUpgradeModal';
+import {fetchAll, fetchCarouselCardData} from "musora-content-services";
+import {useUserStore} from "@stores/user";
 
 const props = defineProps({
   isMobileAppWebView: {
@@ -44,14 +46,6 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  playlists: {
-    type: Array,
-    default: [],
-  },
-  mostRecentPlaylists: {
-    type: Array,
-    default: []
-  },
   showRecommendation: {
     type: Boolean,
     default: false
@@ -63,6 +57,8 @@ const notification = useNotificationStore();
 const confirmation = useConfirmationStore();
 const playlistsStore = usePlaylistsStore();
 const platformStore = usePlatformStore();
+const userStore = useUserStore();
+const { brand, token } = storeToRefs(userStore);
 const { membershipUpgradeModal } = storeToRefs(platformStore);
 const { modalOpen: playlistModalProps } = storeToRefs(playlistsStore);
 
@@ -119,7 +115,7 @@ const onColorModeToggle = (val) => {
 
 //LifeCycle Methods
 
-onBeforeMount(() => {
+onBeforeMount(async() => {
   //Set Dark Mode Based on User Preferences
   if (localStorage.getItem("darkMode")) {
     isDarkModeSelected.value = JSON.parse(localStorage.getItem("darkMode"));
@@ -171,9 +167,16 @@ onBeforeMount(() => {
     pageContainerStore.isPlaylistModalOpen = true;
   };
 
-  // Initialize playlists pinia store
-  playlistsStore.updateSidebarPlaylists({ sidebarPlaylists: props.mostRecentPlaylists })
-  playlistsStore.update({ pinnedPlaylists: props.playlists });
+    await Promise.all([
+        await playlistsStore.getSidebarPlaylists({
+            brand: brand.value,
+            page: 1,
+            limit: 10,
+            term: '',
+            sort: 'most_recent',
+        }),
+        await playlistsStore.getPinnedPlaylists(brand.value, token)
+    ]);
 });
 
 const handleCloseConfirmationModal = () => {
@@ -209,9 +212,17 @@ const handleSubmit = () => {
   confirmation.reset();
 };
 
+watch(
+    () => isDarkModeSelected.value,
+    (newData) => {
+        platformStore.updateDarkMode(newData);
+    },
+)
+
 onMounted(() => {
   //Check if Mobile on Resize
   //   console.log('most recent ', props.mostRecentPlaylists)
+
   window.addEventListener("resize", onResize);
 })
 

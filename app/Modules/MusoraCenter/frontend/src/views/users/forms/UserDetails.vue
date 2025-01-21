@@ -12,9 +12,9 @@
             cols="12"
             class="pa-4 column text-center"
         >
-                <v-avatar size="150px" v-if="thisUser.id">
-                    <img :src="userAvatar">
-                </v-avatar>
+            <v-avatar size="150px" v-if="thisUser.id">
+                <img :src="userAvatar">
+            </v-avatar>
 
             <v-form
                 ref="userDetails"
@@ -35,7 +35,6 @@
                     :rules="emailRules"
                     required
                 ></v-text-field>
-
                 <div class="text-right">
                     <v-btn
                         :color="brandColor"
@@ -48,7 +47,7 @@
                 </div>
             </v-form>
 
-            <div class="text-right" style="margin-top: 25px;">
+            <div style="margin-top: 22px;padding-top:10px;border-top:1px solid rgb(118, 118, 118)">
                 <v-btn
                     color="error"
                     class="white--text"
@@ -57,6 +56,12 @@
                 >
                     Copy Log In As User URL
                 </v-btn>
+            </div>
+            <div style="margin-top: 10px;">
+                <a v-if="$_shopify_url" :href="$_shopify_url" target="_blank">Shopify Customer Profile</a>
+            </div>
+            <div style="margin-top: 10px;">
+                <a v-if="$_revenuecat_url" :href="$_revenuecat_url" target="_blank">RevenueCat Customer Profile</a>
             </div>
         </v-col>
     </v-card>
@@ -102,7 +107,18 @@ export default {
                 this.userEmail = value;
             },
         },
-
+        $_shopify_url: {
+            cache: false,
+            get() {
+                return this.thisUser.attributes.shopify_customer_url;
+            },
+        },
+        $_revenuecat_url: {
+            cache: false,
+            get() {
+                return this.thisUser.attributes.revenuecat_customer_url;
+            },
+        },
         userAvatar() {
             if (this.thisUser.id === 0) {
                 return 'https://ui-avatars.com/api/?name=...&size=500&bold=true&background=00b0ff&color=FFFFFF';
@@ -162,17 +178,17 @@ export default {
 
                         this.$root.$emit('formSuccess');
                     } else {
-                      let message = 'Oops something went wrong. User details not saved.';
+                        let message = 'Oops something went wrong. User details not saved.';
 
-                      if (error && error.errors[0] && error.errors[0].detail) {
-                        message = 'Error updating user: ' + error.errors[0].detail;
-                      }
+                        if (error && error.errors[0] && error.errors[0].detail) {
+                            message = 'Error updating user: ' + error.errors[0].detail;
+                        }
 
-                      this.$root.$emit('displayMessage', {
-                        text: message,
-                        color: 'error',
-                        timeout: 15000,
-                      });
+                        this.$root.$emit('displayMessage', {
+                            text: message,
+                            color: 'error',
+                            timeout: 15000,
+                        });
                     }
 
                     this.$root.$emit('pageLoaded');

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,7 +32,7 @@ class SearchIndex extends Model
     protected $table = 'railcontent_search_indexes_staging';
     public $timestamps = false;
 
-    public function content()
+    public function content(): BelongsTo
     {
         return $this->belongsTo(Content::class, 'content_id');
     }

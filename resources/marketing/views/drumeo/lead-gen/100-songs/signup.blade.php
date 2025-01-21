@@ -41,7 +41,7 @@
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
                 <img
                     class="h-5 sm:h-8 mr-1 sm:mr-2 inline-block align-middle transition-opacity opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
+                    src="https://www.musora.com/cdn-cgi/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
                     alt="logo"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -59,17 +59,17 @@
                 <div class="w-10/12 sm:w-1/2 {{--lg:w-7/12--}} sm:order-1 text-right sm:pl-4 lg:pl-0">
                     <div class="relative inline-block align-bottom z-10 w-1/3" style="max-width:190px;margin-right: -6%;">
                         <video class="absolute top-0 left-0 right-0 bottom-0 w-full p-1 rounded-2xl overflow-hidden" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/tom-sawyer.mp4" muted autoplay loop playsinline></video>
-                        <img src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/phone-background.png" alt="phone-background">
+                        <img src="https://www.musora.com/cdn-cgi/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/phone-background.png" alt="phone-background">
                     </div>
                     <div class="relative inline-block align-bottom z-0 w-2/3" style="max-width:420px">
                         <div class="absolute rounded-xl overflow-hidden bg-white bg-cover bg-center" style="top: 1.5%;left: 1.5%;right: 1.5%;bottom: 7%;background-image:url(https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/tablet-screen2.png);"></div>
-                        <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/tablet-background.png" alt="tablet-background">
+                        <img src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/tablet-background.png" alt="tablet-background">
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 {{--lg:w-5/12--}} mt-5 sm:mt-0 {{--lg:mt-14--}}">
                     <img
                         class="h-12 sm:h-16 lg:h-24 transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
+                        src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
                         alt="logo"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -79,16 +79,17 @@
                          music + handy playback tools for <s class="opacity-50">40</s> <strong class="text-coaches">100</strong><br>
                          of drumming’s biggest songs FREE.
                     </h6>
-                    <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">
-                        @include("drumeo.lead-gen.partials.sign-up-form", [
-                            "recaptchaKey" => $recaptchaKey,
-                            "formName" => '40 Songs',
-                            "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
-                            "buttonText" => "Get It Now ",
-                            "redirectURL" => "/100-songs/thank-you/",
-                            "stacked" => true
-                        ])
-                    </div>
+                    <span class="join sold-out smaller">Temporarily Closed</span>
+{{--                    <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">--}}
+{{--                        @include("drumeo.lead-gen.partials.sign-up-form", [--}}
+{{--                            "recaptchaKey" => $recaptchaKey,--}}
+{{--                            "formName" => '40 Songs',--}}
+{{--                            "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",--}}
+{{--                            "buttonText" => "Get It Now ",--}}
+{{--                            "redirectURL" => "/100-songs/thank-you/",--}}
+{{--                            "stacked" => true--}}
+{{--                        ])--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>
@@ -122,14 +123,14 @@
 {{--            <p class="leading-tight mt-2 sm:mt-3">You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat. <strong class="cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo »</u></strong></p>--}}
 
 {{--            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto">--}}
-{{--                <div style="padding-bottom: 62.4%; background-image: url(&quot;https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png&quot;);" class="mt-4 sm:mt-6 lg:mt-8 lg:mb-6 bg-cover bg-center lazyloaded" x-on:click="soundslice = true;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png"></div>--}}
+{{--                <div style="padding-bottom: 62.4%; background-image: url(&quot;https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png&quot;);" class="mt-4 sm:mt-6 lg:mt-8 lg:mb-6 bg-cover bg-center lazyloaded" x-on:click="soundslice = true;" data-bg="https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png"></div>--}}
 {{--            </div>--}}
 {{--            <div class="text-center w-full sm:w-auto mt-6 lg:mt-0 mx-auto mb-5">--}}
 {{--                <div class="flex flex-wrap">--}}
 {{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
 {{--                        <div class="flex sm:inline-block">--}}
 {{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
-{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg" class="h-6 sm:h-10">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg" class="h-6 sm:h-10">--}}
 {{--                            </div>--}}
 {{--                            <div class="text-left sm:text-center">--}}
 {{--                                <p class="mb-1 sm:my-2"><strong>{{ Prices::$drumeoSongs }}+ popular songs.</strong></p>--}}
@@ -140,7 +141,7 @@
 {{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
 {{--                        <div class="flex sm:inline-block">--}}
 {{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
-{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg" class="h-6 sm:h-10">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg" class="h-6 sm:h-10">--}}
 {{--                            </div>--}}
 {{--                            <div class="text-left sm:text-center">--}}
 {{--                                <p class="mb-1 sm:my-2"><strong>Find the perfect tempo.</strong></p>--}}
@@ -151,7 +152,7 @@
 {{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
 {{--                        <div class="flex sm:inline-block">--}}
 {{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
-{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/loop-icon.svg" class="h-6 sm:h-10">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/loop-icon.svg" class="h-6 sm:h-10">--}}
 {{--                            </div>--}}
 {{--                            <div class="text-left sm:text-center">--}}
 {{--                                <p class="mb-1 sm:my-2"><strong>Loop the trouble spots.</strong></p>--}}
@@ -162,7 +163,7 @@
 {{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
 {{--                        <div class="flex sm:inline-block">--}}
 {{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
-{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/no-drums-icon.svg" class="h-6 sm:h-10">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/no-drums-icon.svg" class="h-6 sm:h-10">--}}
 {{--                            </div>--}}
 {{--                            <div class="text-left sm:text-center">--}}
 {{--                                <p class="mb-1 sm:my-2"><strong>Remove the drums.</strong></p>--}}
@@ -173,7 +174,7 @@
 {{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
 {{--                        <div class="flex sm:inline-block">--}}
 {{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
-{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/play-it-right-icon.svg" class="h-6 sm:h-10">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/play-it-right-icon.svg" class="h-6 sm:h-10">--}}
 {{--                            </div>--}}
 {{--                            <div class="text-left sm:text-center">--}}
 {{--                                <p class="mb-1 sm:my-2"><strong>Play it right the first time.</strong></p>--}}
@@ -184,7 +185,7 @@
 {{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
 {{--                        <div class="flex sm:inline-block">--}}
 {{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
-{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices-icon.svg" class="h-6 sm:h-10">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices-icon.svg" class="h-6 sm:h-10">--}}
 {{--                            </div>--}}
 {{--                            <div class="text-left sm:text-center">--}}
 {{--                                <p class="mb-1 sm:my-2"><strong>Take your songs anywhere.</strong></p>--}}
@@ -208,7 +209,7 @@
             <div class="w-full px-2 md:px-3 text-center">
                 <img
                     class="h-12 sm:h-16 lg:h-28 transition-opacity opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
+                    src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
                     alt="logo"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -219,13 +220,14 @@
                     <em>Enter your email to grab note-for-note sheet music & handy play-along tools.</em>
                 </h5>
                 <div class="mx-auto" style="max-width:700px">
-                    @include("drumeo.lead-gen.partials.sign-up-form", [
-                        "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form2",
-                        "buttonText" => "Get It Now ",
-                        "formName" => '40 Songs',
-                        "redirectURL" => "/100-songs/thank-you/",
-                    ])
+                    <span class="join sold-out smaller">Temporarily Closed</span>
+{{--                    @include("drumeo.lead-gen.partials.sign-up-form", [--}}
+{{--                        "recaptchaKey" => $recaptchaKey,--}}
+{{--                        "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form2",--}}
+{{--                        "buttonText" => "Get It Now ",--}}
+{{--                        "formName" => '40 Songs',--}}
+{{--                        "redirectURL" => "/100-songs/thank-you/",--}}
+{{--                    ])--}}
                 </div>
             </div>
         </div>

@@ -15,6 +15,10 @@ const props = defineProps({
     initialSelection: {
         type: Object,
         default: {}
+    },
+    bigOption: {
+        type: Boolean,
+        default: false
     }
 })
 const emit = defineEmits(['onChangeSelection'])
@@ -44,6 +48,7 @@ function handleSelection(value) {
         <Pill
             v-for="option in options"
             :key="`${option.value.replace(/\s/g, '')}-pill${!!selectedValues[option.value] ? '__active' : ''}}`"
+            :bigOption="bigOption"
             :text="option.text"
             :value="option.value"
             :active="!!selectedValues[option.value]"

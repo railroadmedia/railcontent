@@ -23,10 +23,8 @@ class RepairBrokenAssignmentsJan2023 extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): void
     {
         $this->info('###### Starting RepairBrokenAssignmentsJan2023...  ######');
 

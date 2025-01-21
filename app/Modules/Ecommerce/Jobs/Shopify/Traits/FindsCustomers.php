@@ -10,9 +10,6 @@ trait FindsCustomers
 {
     /**
      * Get all customers with the same email address as the given user
-     *
-     * @param User $user
-     * @return Collection
      */
     protected function getCustomersForUser(User $user): Collection
     {
@@ -21,9 +18,6 @@ trait FindsCustomers
 
     /**
      * Get all customers with the given email address
-     *
-     * @param string $email
-     * @return Collection
      */
     protected function getCustomersForEmail(string $email): Collection
     {
@@ -34,7 +28,6 @@ trait FindsCustomers
      * Get all customers with the same email address as the given user or email address
      *
      * @param User|string $userOrEmail
-     * @return Collection
      */
     private function getCustomersForUserOrEmail(User|string $userOrEmail): Collection
     {
@@ -56,8 +49,6 @@ trait FindsCustomers
 
     /**
      * Check if this class uses masked email addresses
-     *
-     * @return bool
      */
     private function classUsesMaskedEmail(): bool
     {
@@ -66,8 +57,6 @@ trait FindsCustomers
 
     /**
      * Get this class's instance of the Customer Repository
-     *
-     * @return CustomerRepository
      */
     abstract protected function getCustomerRepository(): CustomerRepository;
 }

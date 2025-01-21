@@ -38,7 +38,6 @@ class SyncUsersToShopifyDispatcher extends Command
     /**
      * Execute the console command.
      *
-     * @return int
      * @throws Throwable
      */
     public function handle(): int
@@ -155,8 +154,6 @@ class SyncUsersToShopifyDispatcher extends Command
 
     /**
      * Get the date and time that this resource was last synced up to Shopify
-     *
-     * @return Carbon
      */
     protected function getDateTimeOfLastSync(): Carbon
     {
@@ -171,8 +168,6 @@ class SyncUsersToShopifyDispatcher extends Command
 
     /**
      * Get the optional override of when this entity was last synced to Shopify
-     *
-     * @return Carbon|null
      */
     protected function getLastSyncAtOverride(): null|Carbon
     {

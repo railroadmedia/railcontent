@@ -12,7 +12,7 @@ class ResyncContentIds extends Command
 
     public function handle(
         RailcontentV2DataSyncingService $rcService,
-    ) {
+    ): void {
         $ids = $this->argument('ids');
         $stringIDs = implode(', ', $ids);
         $this->info("start updating ids: $stringIDs");

@@ -17,10 +17,9 @@ class RoutingDecorator extends TypeDecoratorBase
     private static $parents = [];
 
     /**
-     * @param Collection $contents
      * @return mixed|Collection
      */
-    public function decorate($contents)
+    public function decorate(Collection $contents)
     {
         if (empty($contents)) {
             return $contents;

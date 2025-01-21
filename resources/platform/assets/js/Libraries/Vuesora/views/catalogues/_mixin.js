@@ -193,7 +193,6 @@ export default {
     },
 
     methods: {
-
         getContentModel() {
             const shows = ContentHelpers.shows();
             let type = this.contentTypeOverride || this.item.type;
@@ -205,6 +204,7 @@ export default {
             return new ContentModel(type, {
                 brand: this.brand,
                 post: this.item,
+                isSearch: this.is_search,
             });
         },
     },

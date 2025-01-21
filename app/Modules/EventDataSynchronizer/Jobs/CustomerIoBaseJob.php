@@ -4,7 +4,7 @@ namespace App\Modules\EventDataSynchronizer\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Throwable;
@@ -18,8 +18,6 @@ class CustomerIoBaseJob implements ShouldQueue
 
     /**
      * The job failed to process.
-     *
-     * @param  Throwable  $exception
      */
     public function failed(Throwable $exception)
     {

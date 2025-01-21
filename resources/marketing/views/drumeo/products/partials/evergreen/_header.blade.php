@@ -44,9 +44,11 @@
         </div>
 
         <div class="py-5 sm:py-6 relative">
-            <div class="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
-                <img src="{{ $bgImageLeft }}" alt="{{ $subtitle }}" class="h-56 lg:h-72" fetchpriority="hight">
-            </div>
+           @if (!empty($bgImageLeft))
+                <div class="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
+                    <img src="{{ $bgImageLeft }}" alt="{{ $subtitle }}" class="h-56 lg:h-72" fetchpriority="high">
+                </div>
+            @endif
 
             <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
                 x-on:click="trailer = true;" role="button">
@@ -93,9 +95,11 @@
                         src="{{ $mediaSource }}" alt="header image" fetchpriority="high" />
                 @endif
             </div>
-            <div class="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
-                <img src="{{ $bgImageRight }}" alt="{{ $subtitle }}" class="h-56 lg:h-72" fetchpriority="high">
-            </div>
+           @if (!empty($bgImageRight))
+                <div class="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
+                    <img src="{{ $bgImageRight }}" alt="{{ $subtitle }}" class="h-56 lg:h-72" fetchpriority="high">
+                </div>
+            @endif
         </div>
         <div class="flex w-full flex-col text-center items-center mt-6 sm:mt-5 lg:mt-10">
             <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">

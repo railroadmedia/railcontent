@@ -30,10 +30,8 @@ class RepairUserProgressOn30DD extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle(DatabaseManager $databaseManager)
+    public function handle(DatabaseManager $databaseManager): void
     {
         $this->info("RepairUserProgressOn30DD command starts now \n");
 

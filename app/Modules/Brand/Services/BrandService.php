@@ -12,11 +12,9 @@ class BrandService
     public static $currentBrand = null;
 
     /**
-     * @param User $user
      * @param $brand
-     * @return void
      */
-    public function setLastUsedBrand(User $user, Brand $brand)
+    public function setLastUsedBrand(User $user, Brand $brand): void
     {
         $brandString = $brand->value;
 
@@ -46,11 +44,7 @@ class BrandService
         }
     }
 
-    /**
-     * @param User|null $user
-     * @return string
-     */
-    public static function getLastUsedBrand(User $user = null)
+    public static function getLastUsedBrand(User $user = null): string|null
     {
         if (!empty(self::$currentBrand)) {
             return self::$currentBrand;
@@ -64,7 +58,11 @@ class BrandService
         $cookieValue = request()->cookie($cacheKey);
         $cacheValue = Cache::get($cacheKey);
         $databaseValue = $user->last_used_brand;
-        $default = 'drumeo'; // todo: this should go to onboarding
+        /**
+         * NOTE: use primary_brand unless it doesn´t exist. This will make sure pack-only users will
+         * be redirected to the correct brand.
+         */
+        $default = $user->primary_brand ?? 'drumeo';
 
         // check in cookie first
         if (!empty($cookieValue) && in_array($cookieValue, config('brands'))) {

@@ -3,7 +3,7 @@
     RE add captions
     fix tracking for videos
 */
-import {  computed, reactive, ref } from 'vue';
+import {computed, onMounted, reactive, ref} from 'vue';
 import { usePlaylistsStore } from '@stores/playlists';
 import PlaybackCue from '@collections/Playlists/PlaybackCue.vue';
 import ContentUnavailable from '@collections/Playlists/ContentUnavailable.vue';
@@ -14,6 +14,7 @@ import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import ContentInfo from '@collections/ContentInfo/ContentInfo.vue';
 import VideoChapters from '@collections/VideoChapters/VideoChapters.vue';
+import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
 import Comments from '@vuesora/views/comments/Comments.vue';
 import VideoMediaElement from '@vuesora/Components/MediaElement/MediaElement.vue';
 import VideoPlayer from '@vuesora/Components/VideoPlayer/VideoPlayer.vue';
@@ -23,6 +24,8 @@ import Intercom from '@vuesora/assets/js/Services/intercom';
 import Helpscout from '@vuesora/assets/js/Services/helpscout';
 import AssignmentsContainer from '@vuesora/Components/AssignmentsContainer/AssignmentsContainer.vue';
 import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
+import {usePlatformStore} from "@stores/platform";
+import { contentStatusCompleted } from 'musora-content-services';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -264,6 +267,10 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    videoType: {
+        type: String,
+        default: ''
+    },
 });
 
 const state = reactive({
@@ -272,19 +279,32 @@ const state = reactive({
 
 //---------Refs--------------//
 const openSoundslice = ref(false);
+const mediaElementVueInstance = ref(null);
 const chapterStartTime = ref(0);
 const chapterEndTime = ref(props.totalDuration);
 const soundsliceTitle = ref('');
 const startLooping = ref(false);
 const seekToTime = ref(0);
+const likeData = ref({
+    isLiked: props.isLiked,
+    likeCount: parseInt(props.likeCount)
+})
+const lastWatchedPositionInSeconds = ref(0);
+const isContentCompleted = ref(false);
+    //ref(props.playlistItems.data[props.playlistItemPosition - 1].completed);
 
+let hasBeenPlayed = false;
+let progressTracker;
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
+const platformStore = usePlatformStore();
 
 const handleGoToNext = () => {
     const isShuffleOn = localStorage.getItem("playbackShuffleOn") ? JSON.parse(localStorage.getItem("playbackShuffleOn")) : false;
     const isPlaylistRepeatOn = localStorage.getItem("isPlaybackPlaylistRepeatOn") ? JSON.parse(localStorage.getItem("isPlaybackPlaylistRepeatOn")) : false;
+
+    handleVideoEnd();
 
     if (isShuffleOn) {
         const randIndex = Math.floor(Math.random() * playlistsStore.lessons.length);
@@ -317,19 +337,6 @@ const showUpgradeCover = computed(() => {
     return activeItem.show_plus_upgrade_modal;
 })
 
-const formattedChapters = computed(() => {
-    if (props.videoChapters?.length) {
-        return props.videoChapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
-            return {
-                title: chapter_description,
-                thumbnail: chapter_thumbnail_url,
-                time: chapter_timecode
-            }
-        })
-    }
-    return [];
-});
-
 const unavailableType = computed(() => {
     if (!props.isReleased) {
         return 'unreleased';
@@ -349,25 +356,78 @@ const unavailableType = computed(() => {
     return null;
 });
 
-
-
 const showPracticeButton = computed(() => {
     return !!props.soundsliceSlug;
 });
 
 const showVideoChapters = computed(() => {
-    return formattedChapters.value.length && (props.lessonType === 'workout' || props.lessonType === 'challenge-part');
+    return props.videoChapters && props.videoChapters.length > 0  && (props.lessonType === 'workout' || props.lessonType === 'challenge-part');
 });
 
-//--------Methods---------------//
-const handleVideoPause = () => { }; //?
-const handleVideoPlay = () => { }; //?
+//Methods
+const handleVideoPlay = (payload) => {
+    if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
+        sendProgressTrackerEvent()
+    }
+    if (progressTracker == null) {
+        progressTracker = new ProgressTracker();
+        if (mediaElementVueInstance.value) {
+            attachVisibilityAndPagehideEvents();
+        }
+    }
+    hasBeenPlayed = true;
+    progressTracker.start();
+};
 
-const openSlice = (title, index, startAt, loop) => {
-    soundsliceTitle.value = title;
+const sendProgressTrackerEvent = () => {
+    if (progressTracker) {
+        progressTracker.send({
+            mediaType: 'video',
+            mediaCategory: props.videoType?.split('-')[0],
+            watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
+                || mediaElementVueInstance.value.currentTime,
+            totalDuration: mediaElementVueInstance.value.videoLength
+                || mediaElementVueInstance.value.totalDuration,
+            brand: brand.value,
+            contentId: mediaElementVueInstance.value.contentId
+        });
+    }
+};
+
+const updateCurrentTime = (time) => {
+    lastWatchedPositionInSeconds.value = Math.floor(time);
+}
+
+const attachVisibilityAndPagehideEvents = () => {
+    document.addEventListener('visibilitychange', () => {
+        sendProgressTrackerEvent();
+    });
+
+    window.addEventListener('pagehide', () => {
+        sendProgressTrackerEvent();
+    });
+};
+
+const handleVideoPause = () => {
+    progressTracker.stop();
+    sendProgressTrackerEvent();
+};
+
+const handleVideoEnd = () => {
+    sendProgressTrackerEvent();
+    contentStatusCompleted(props.contentId);
+};
+
+const openSlice = (title, index, startAt, loop) => {soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
-    chapterEndTime.value = formattedChapters.value.length === index ? props.totalDuration : formattedChapters.value[index].time;
+    chapterEndTime.value = props.totalDuration;
     startLooping.value = loop;
+
+    // TODO TEST LOOPS
+    if (loop) {
+        chapterEndTime.value =  props.videoChapters.length === index ? props.totalDuration : props.videoChapters[index]?.chapter_timecode;
+    }
+
     openSoundslice.value = true;
 };
 
@@ -377,7 +437,7 @@ const getBrandSpecificParams = () => {
         singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
         guitareo: '',
         pianote: '&show_chords=1'
-    }[brand]);
+    }[props.brand]);
 };
 
 const handleCloseSoundslice = () => {
@@ -391,6 +451,24 @@ const handleCloseSoundslice = () => {
 const seekToChapter = (time) => {
     seekToTime.value = time;
 };
+
+const completeContent = () => {
+    isContentCompleted.value = !isContentCompleted.value;
+}
+
+const likeContent = () => {
+    likeData.value.isLiked = !likeData.value.isLiked;
+
+    if (likeData.value.isLiked) {
+        likeData.value.likeCount += 1;
+    } else {
+        likeData.value.likeCount -= 1;
+    }
+}
+
+onMounted(() => {
+    platformStore.setLoadingState(false);
+})
 </script>
 
 <template>
@@ -419,8 +497,8 @@ const seekToChapter = (time) => {
                     <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine')"
                         class="tw-w-full tw-aspect-video tw-max-h-[90vh] tw-mb-4 tw-relative"
                         :class="{ 'tw-max-w-[1280px]': !playlistsStore.playerExpanded }">
-                        <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
-                            :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext" />
+                        <SoundSlice :key="`${Math.floor(chapterStartTime)}${Math.floor(chapterEndTime)}${startLooping ? 'loop' : 'noloop'}`" :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
+                            :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext" :soundslice-type="lessonType" />
                     </div>
                     <!-- Video Players -->
                     <div class="p-lg-only lean tw-relative">
@@ -429,7 +507,7 @@ const seekToChapter = (time) => {
                                 :start-second="startSecond" :end-second="endSecond" :seek-to-time="seekToTime"
                                 :total-duration="totalDuration" :video-length="videoLength" :progress-state="progressState"
                                 :content-id="contentId" :use-intersection-observer="true" :theme-color="brand"
-                                @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" />
+                                @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" @onUpdateCurrentTime="updateCurrentTime" />
                         </div>
                         <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'"
                             id="lessonVideoWrap">
@@ -440,7 +518,7 @@ const seekToChapter = (time) => {
                                     :current-second="currentSecond" :progress-state="progressState" :video-length="videoLength"
                                     :chapters="videoChapters" :user-id="userId" :like-count="likeCount" :is-liked="isLiked"
                                     :check-for-timecode="true" :seek-to-time="seekToTime" @playing="handleVideoPlay"
-                                    @pause="handleVideoPause" @ended="handleGoToNext">
+                                    @pause="handleVideoPause" @ended="handleGoToNext" @onUpdateCurrentTime="updateCurrentTime">
                                     <div :class="`widescreen title tw-text-${brand}`">
                                         <i class="fas fa-spinner fa-spin absolute-center"></i>
                                     </div>
@@ -454,7 +532,7 @@ const seekToChapter = (time) => {
                                     :current-second="currentSecond" :content-id="contentId" :user-id="userId"
                                     :video-id="vimeoVideoId" :video-length="videoLength" :total-duration="totalDuration"
                                     :cast-title="playlistItemTitle" :use-intersection-observer="true" @play="handleVideoPlay"
-                                    :seek-to-time="seekToTime" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
+                                    :seek-to-time="seekToTime" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" @onUpdateCurrentTime="updateCurrentTime">
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </VideoPlayer>
                             </transition>
@@ -465,21 +543,22 @@ const seekToChapter = (time) => {
                 <div class="tw-mb-4">
                     <VideoResources :difficulty="difficulty" :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
                         :thumbnail-url="thumbnailUrl" :description="description" :instructors="contentInstructors"
-                        :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
+                        :parent-title="parentTitle" :is-liked="likeData?.isLiked" :like-count="likeData?.likeCount" :is-completed="isContentCompleted" :content-id="contentId"
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
-                        :show-practice-button="showPracticeButton"
+                        :show-practice-button="showPracticeButton" :show-info-button="showInfoButton"
                         :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
-                        :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton"
+                        :lesson="playlistItems.data[props.playlistItemPosition - 1]"
                         :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail"
                         :report-user-name="userName" :artist="artist" :no-access="needAccess"
-                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)"
+                        @open-practice-soundslice="openSlice(videoResources.title, videoChapters.length, 0, false)"
+                        @on-like-content="likeContent" @on-complete-content="completeContent" :current-time-in-seconds="lastWatchedPositionInSeconds"
                     />
 
                     <!-- Info Section -->
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="contentChapters" :instructors="contentInstructors" />
 
-                    <VideoChapters v-if="!needAccess && showVideoChapters" :chapters="formattedChapters" @open-slice="openSlice"
+                    <VideoChapters v-if="!needAccess && showVideoChapters" :chapters="videoChapters" @open-slice="openSlice"
                         @seek-to-chapter="seekToChapter" />
 
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
@@ -521,7 +600,7 @@ const seekToChapter = (time) => {
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
                         <button class="tw-z-10" @click="state.assignmentCollapsed = !state.assignmentCollapsed">
-                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
+                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] sm:tw-h-[50px] tw-w-[35px] sm:tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
                                 :class="!state.assignmentCollapsed && 'tw-rotate-180'">
                                 <i class="fas fa-chevron-down"></i>
                             </div>
@@ -536,9 +615,11 @@ const seekToChapter = (time) => {
                 <!-- Comments Section -->
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full tw-mb-4">
                     <div class="tw-flex tw-flex-col tw-w-full">
-                        <Comments :collapsable="true" :theme-color="brand" :brand="brand" :content-id="contentId"
+                        <Comments
+                            :collapsable="true" :theme-color="brand" :brand="brand" :content-id="contentId" content-type="playlist"
                             :user-id="userId" :user-name="userName" :user-avatar="userAvatar" :user-xp="userXp"
-                            :user-access-level="userAccessLevel" profile-base-route="/profile/" :is-admin="false" />
+                            :user-access-level="userAccessLevel" profile-base-route="/profile/" :is-admin="false"
+                        />
                     </div>
                 </div>
             </div>
@@ -547,9 +628,9 @@ const seekToChapter = (time) => {
             <transition name="show-from-bottom">
                 <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
                     <SoundSlice :user-id="userId" :theme-color="brand"
-                        :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                        :soundslice-slug="soundsliceSlug" :contentId="contentId" :force-start-time="true"
-                        :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
+                        :additional-params="`${getBrandSpecificParams()}&layout=3`"
+                        :soundslice-slug="soundsliceSlug" :contentId="contentId"
+                        :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping" soundsliceType="chapter-practice">
                         <template v-slot:soundsliceControls>
                             <SoundSliceControls :title="soundsliceTitle || playlistItemTitle" :disable-next="true"
                                 :disable-prev="true" @onClose="handleCloseSoundslice" />

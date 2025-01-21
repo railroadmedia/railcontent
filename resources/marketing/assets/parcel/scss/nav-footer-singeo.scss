@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 body {
     font-family: $opensans;
@@ -81,7 +82,7 @@ a {
     &:hover,
     &:focus {
         color: #FFF;
-        background: lighten($singeoPurple, 10%);
+    background: color.adjust($singeoPurple, $lightness: 10%);
         box-shadow: 0 0 7px hsla(0, 0%, 0%, 0.35);
     }
 
@@ -90,7 +91,7 @@ a {
 
         &:hover,
         &:focus {
-            background: lighten($musoraBlack, 10%);
+            background: color.adjust($musoraBlack, $lightness: 10%);
         }
     }
 
@@ -99,7 +100,7 @@ a {
 
         &:hover,
         &:focus {
-            background: lighten(#777, 10%);
+            background: color.adjust(#777, $lightness: 10%);
         }
     }
 }
@@ -150,7 +151,6 @@ a {
         box-sizing: border-box;
         height: 100%;
         float: left;
-        font-size: 0;
         padding: 6px 5px 6px 0;
         @include tablet {
             padding: 15px 0;
@@ -182,7 +182,7 @@ a {
             }
 
             &:hover {
-                color: lighten($singeoPurple, 20%);
+                color: color.adjust($singeoPurple, $lightness: 20%);
             }
 
             &:first-child {
@@ -208,7 +208,6 @@ a {
         box-sizing: border-box;
         height: 100%;
         float: right;
-        font-size: 0;
         padding: 6px 5px 6px 0;
         @include tablet {
             padding: 8px 0;
@@ -546,7 +545,7 @@ a {
         }
 
         &:hover {
-            background: lighten($singeoPurple, 10%);
+        background: color.adjust($singeoPurple, $lightness: 10%);
         }
     }
 }
@@ -737,7 +736,7 @@ a {
             display: inline-block;
 
             &:hover {
-                color: lighten(#c5c5c6, 10%);
+                color: color.adjust(#c5c5c6, $lightness: 10%);
             }
         }
     }
@@ -756,7 +755,7 @@ a {
             display: inline-block;
 
             &:hover {
-                color: lighten(#879097, 10%);
+                color: color.adjust(#879097, $lightness: 10%);
             }
         }
 

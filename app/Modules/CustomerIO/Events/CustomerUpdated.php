@@ -18,9 +18,6 @@ class CustomerUpdated
 
     /**
      * CustomerUpdated constructor.
-     *
-     * @param  Customer  $oldCustomer
-     * @param  Customer  $newCustomer
      */
     public function __construct(Customer $oldCustomer, Customer $newCustomer)
     {

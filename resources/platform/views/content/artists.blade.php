@@ -5,10 +5,5 @@
 @endsection
 
 @section('content')
-    <artists
-        :artists="{{ json_encode($artists) }}"
-    >
-    </artists>
-
-
+    <artists></artists>
 @endsection

@@ -2,6 +2,9 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
+use App\Modules\Content\ApiGateways\SanityGateway;
+use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\Content\Services\ChallengesService;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
@@ -12,20 +15,14 @@ use Railroad\Railcontent\Services\ContentService;
 
 class UserMembershipFieldsService
 {
-    private ContentService $contentService;
-    private UserProviderInterface $userProvider;
 
     private $instructorsCache = null;
-    private UserAccessPermissionsService $userAccessPermissionsService;
 
     public function __construct(
-        ContentService $contentService,
-        UserProviderInterface $userProvider,
-        UserAccessPermissionsService $userAccessPermissionsService
+        private ContentService $contentService,
+        private UserProviderInterface $userProvider,
+        private UserAccessPermissionsService $userAccessPermissionsService,
     ) {
-        $this->contentService = $contentService;
-        $this->userProvider = $userProvider;
-        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     public function syncUserAccess(UserAccessPermissionsCollection $userAccessPermissions): bool
@@ -50,6 +47,7 @@ class UserMembershipFieldsService
         $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
         $isDrumeoLifetimeMember = $userAccessPermissions->getIsDrumeoLifetimeMember();
         $ownsPacks = $this->userAccessPermissionsService->getOwnsPacks($userAccessPermissions);
+        $ownsChallenges = $this->userAccessPermissionsService->getOwnsChallenges($userAccessPermissions);
 
         $membershipLevel = null;
         if ($user->isAdmin() ||
@@ -67,7 +65,8 @@ class UserMembershipFieldsService
             $isLifetimeMember,
             $isAMember,
             $membershipExpirationDate,
-            $ownsPacks
+            $ownsChallenges,
+            $ownsPacks,
         );
 
         return $this->saveMembershipData(
@@ -77,6 +76,7 @@ class UserMembershipFieldsService
             $isLifetimeMember,
             $accessLevel,
             $ownsPacks,
+            $ownsChallenges,
             $membershipLevel,
             $isDrumeoLifetimeMember
         );
@@ -89,6 +89,7 @@ class UserMembershipFieldsService
         bool $isLifetimeMember,
         string $accessLevel,
         bool $isPackOwner,
+        bool $isChallengeOwner,
         ?string $membershipLevel,
         bool $isDrumeoLifetimeMember
     ): bool {
@@ -110,6 +111,7 @@ class UserMembershipFieldsService
             $user->is_drumeo_lifetime_member = $isDrumeoLifetimeMember;
             $user->access_level = $accessLevel;
             $user->is_pack_owner = $isPackOwner;
+            $user->is_challenge_owner = $isChallengeOwner;
             $user->membership_level = $membershipLevel;
 
             $user->save();
@@ -139,11 +141,6 @@ class UserMembershipFieldsService
      * state of the users membership exactly.
      *
      * @param $userId
-     * @param bool $isLifetime
-     * @param bool $isAMember
-     * @param Carbon|null $membershipExpirationDate
-     * @param bool $ownsPacks
-     * @return string
      */
     public function getAccessLevelName(
         $userId,
@@ -151,6 +148,7 @@ class UserMembershipFieldsService
         bool $isAMember,
         ?Carbon $membershipExpirationDate,
         bool $ownsPacks,
+        bool $ownsChallenges,
         array $associatedCoaches = null
     ): string {
         if (empty($userId)) {
@@ -181,6 +179,10 @@ class UserMembershipFieldsService
             return 'pack';
         }
 
+        if ($ownsChallenges) {
+            return 'challenge';
+        }
+
         if (!empty($membershipExpirationDate) && $membershipExpirationDate < Carbon::now()) {
             return 'expired';
         }
@@ -190,7 +192,6 @@ class UserMembershipFieldsService
 
     /**
      * @param $userId
-     * @return bool
      */
     public function isHouseCoach($userId, array $associatedCoaches = null): bool
     {
@@ -206,7 +207,6 @@ class UserMembershipFieldsService
 
     /**
      * @param $userId
-     * @return bool
      */
     public function isCoach($userId, array $associatedCoaches = null): bool
     {
@@ -217,9 +217,6 @@ class UserMembershipFieldsService
         return !empty($associatedCoaches) && array_key_exists($userId, $associatedCoaches);
     }
 
-    /**
-     * @return array
-     */
     public function getCoaches(): array
     {
         $associatedUsers = [];
@@ -251,4 +248,5 @@ class UserMembershipFieldsService
 
         return $associatedUsers;
     }
+
 }

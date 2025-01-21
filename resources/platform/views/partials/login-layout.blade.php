@@ -31,7 +31,7 @@
     <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
         {!! \App\Analytics\Tracker::bodyTop() !!}
         {{-- Notifications Container --}}
-        <div id="notifications-container tw-dark"></div>
+        <div id="notifications-container"></div>
 
         <!-- Modal Container -->
         <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
@@ -53,6 +53,9 @@
 
         <!-- Scripts -->
         @yield('layout-scripts')
+        <script>
+            window.railcontentConfig = {}; 
+        </script>
         <script src="{{ mix('platform/js/manifest.js') }}"></script>
         <script src="{{ mix('platform/js/vendor.js') }}"></script>
         <script src="{{ mix('platform/js/app.js') }}"></script>

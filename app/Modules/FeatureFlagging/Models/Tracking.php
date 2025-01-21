@@ -2,6 +2,7 @@
 
 namespace App\Modules\FeatureFlagging\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -27,12 +28,12 @@ class Tracking extends Model
 {
     protected $table = 'features_tracking';
 
-    public function branch()
+    public function branch(): BelongsTo
     {
         return $this->belongsTo(Branch::class, 'branch_id');
     }
 
-    public function experiment()
+    public function experiment(): BelongsTo
     {
         return $this->belongsTo(Experiment::class, 'experiment_id');
     }

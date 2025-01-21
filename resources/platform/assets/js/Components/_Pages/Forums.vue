@@ -10,23 +10,19 @@
         ></PageHeader>
 
         <div
-            class="tw-mx-auto tw-w-full tw-max-w-[1703px] tw-px-4 tw-pb-14 tw-pt-8 dark:tw-text-white md:tw-px-8"
+            class="tw-pb-14 tw-mt-[14px] dark:tw-text-white"
         >
-            <div class="tw-my-3 tw-flex tw-flex-col">
-                <div class="tw-flex tw-flex-row">
-                    <ForumThreadsTable
-                        :onlyFollowed="true"
-                        :pinnedThreads="pinnedThreads"
-                        :threads="threads"
-                        :forums="forums"
-                        :threadCount="threadCount"
-                        :latestThreadsUrl="latestThreadsUrl"
-                        :searchJsonResultsEndpointUrl="
-                            searchJsonResultsEndpointUrl
-                        "
-                    />
-                </div>
-            </div>
+            <ForumThreadsTable
+                :onlyFollowed="true"
+                :pinnedThreads="pinnedThreads"
+                :threads="threads"
+                :forums="forums"
+                :threadCount="threadCount"
+                :latestThreadsUrl="latestThreadsUrl"
+                :searchJsonResultsEndpointUrl="
+                    searchJsonResultsEndpointUrl
+                "
+            />
         </div>
     </div>
 </template>

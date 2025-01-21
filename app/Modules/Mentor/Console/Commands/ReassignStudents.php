@@ -10,7 +10,7 @@ class ReassignStudents extends Command
     protected $signature = 'mentors:reassignRandom {mentorUserId} {nStudents} {toMentorUserId=0} {allStudents=0}';
     protected $description = 'Unassign n random students from the mentor provided. If you wish to reassign them to specific mentors adjust the max student capacities appropriately beforehand';
 
-    public function handle(MentorService $mentorService)
+    public function handle(MentorService $mentorService): void
     {
         $mentorUserId = $this->argument('mentorUserId');
         $nStudents = $this->argument('nStudents');

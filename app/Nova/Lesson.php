@@ -46,7 +46,7 @@ class Lesson extends Resource
 
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
+            BelongsTo::make('Brand', 'brand', \App\Nova\Brand::class)->sortable(),
             Hidden::make('product_type_id', 'product_type_id')->default(ProductType::where('name', '=', 'Lessons')->first()->id),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('Name')->required()->sortable(),

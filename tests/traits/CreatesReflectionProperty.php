@@ -11,9 +11,6 @@ trait CreatesReflectionProperty
     /**
      * Get the value for the non-public property of the trait-using job, so we can call it
      *
-     * @param  object  $object
-     * @param  string  $property
-     * @return ReflectionMethod
      * @throws ReflectionException
      */
     protected function getReflectionProperty(object $object, string $property): mixed

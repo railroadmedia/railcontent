@@ -53,6 +53,18 @@
             "annualLink" => "/ecommerce/add-to-cart?products[pianote-base-annual-recurring-7-day-trial-membership]=1&promo-code=annual-trial&redirect=/order&locked=true",
             "monthlyLink" => "/ecommerce/add-to-cart?products[pianote-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
         ])
+
+        @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 6, 0, 0, 0, 'America/Vancouver'))
+        @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 13, 8, 0, 0, 'America/Vancouver'))
+            <div class="bg-black text-white px-5 py-7 sm:py-10">
+                <h6 class="leading-tight text-center">
+
+                    No credit card? Email <u>support@pianote.com</u> to be manually <br class="hidden sm:inline">
+                    entered to start a trial for the Roland piano giveaway.
+                </h6>
+            </div>
+        @endif
+
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'piano',
         ])

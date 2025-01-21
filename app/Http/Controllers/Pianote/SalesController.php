@@ -27,13 +27,14 @@ class SalesController extends BaseController
 
     public function home()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', ]);
+        return view('pianote.sales.subscription', ['theme' => 'pianote' ]);
     }
 
     public function homeBF()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'bfVersion' => 'true']);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'bfVersion' => 'true', 'noEverflow' => true]);
     }
+
     public function homeMonth()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'month' => true]);
@@ -46,17 +47,49 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.restart', ['theme' => 'pianote']);
     }
-    public function ultimateLessons()
+    public function ultimatepractice()
     {
-        return view('pianote.sales.ultimate-lessons', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
+        return view('pianote.sales.ultimate-practice', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
+    }
+    public function beginner()
+    {
+        return view('pianote.sales.promo-beautiful-beginner-bundle', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
+    }
+    public function backToSchool()
+    {
+        return view('pianote.sales.back-to-school', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
+    }
+    public function monthly()
+    {
+        return view('pianote.sales.monthly', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
     }
     public function promoEG()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
     }
+    public function promoNY()
+    {
+        return view('pianote.sales.new-year', ['theme' => 'pianote', 'promoVersion' => 'true', 'newYears' => 'true']);
+    }
     public function promoWO()
     {
         return view('pianote.sales.welcome-offer', ['theme' => 'pianote', 'promoVersion' => 'true']);
+    }
+    public function promoMT()
+    {
+        return view('pianote.sales.more-time', ['theme' => 'pianote', 'month' => true]);
+    }
+    public function promoOD()
+    {
+        return view('pianote.sales.one-dollar', ['theme' => 'pianote', 'month' => true]);
+    }
+    public function save300()
+    {
+        return view('pianote.sales.save-300', ['theme' => 'pianote', 'promoPage' => 'true', 'promoVersion' => 'true' ]);
+    }
+    public function welcomeBackDiscount()
+    {
+        return view('pianote.sales.welcome-back-discount', ['theme' => 'pianote']);
     }
     public function trial()
     {
@@ -443,5 +476,118 @@ class SalesController extends BaseController
     public function readMusicBook()
     {
         return view('pianote.products.read-music-book', ['theme' => 'pianote']);
+    }
+
+    public function practiceKit()
+    {
+        return view('pianote.products.practice-kit', ['theme' => 'pianote']);
+    }
+    public function practicePlanner()
+    {
+        return view('pianote.products.practice-planner', ['theme' => 'pianote']);
+    }
+
+    public function easyChordsTrial()
+    {
+        return view('pianote.products.easy-chords-trial', ['theme' => 'pianote']);
+    }
+
+    public function yuletideshirtBundle()
+    {
+        return view('pianote.products.yuletide-shirt-bundle', ['theme' => 'pianote']);
+    }
+
+    public function yuletidesweaterBundle()
+    {
+        return view('pianote.products.yuletide-sweater-bundle', ['theme' => 'pianote']);
+    }
+
+    public function classicalPianoCollection()
+    {
+        $productId = 1044;
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('pianote.products.classical-piano-collection', [
+            'recaptchaKey' => config('recaptcha.key'),
+            'theme' => 'pianote',
+            'hasProduct' => $hasProduct,
+            'nPackOwners' => $nPackOwners,
+        ]);
+    }
+    public function classicalPianoCollectionMembership()
+    {
+        return view('pianote.sales.classical-piano-collection-membership', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function headphones()
+    {
+        return view('pianote.products.headphones', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function thirtyDayJazzPiano()
+    {
+        return view('pianote.products.30-day-jazz-piano', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function prima()
+    {
+        return view('pianote.products.prima', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function primaMember()
+    {
+        return view('pianote.products.prima-members', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function primaUlt()
+    {
+        return view('pianote.products.prima', [
+            'theme' => 'pianote',
+            'ultimate' => true,
+        ]);
+    }
+    public function pianoteDeal()
+    {
+        return view('pianote.products.pianote-deal', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function holidayBundle()
+    {
+        return view('pianote.products.holiday-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function bookBundle()
+    {
+        return view('pianote.products.book-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function giftBundle()
+    {
+        return view('pianote.products.gift-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function challengesBundle()
+    {
+        return view('pianote.products.challenges-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function bestBeginnerPianoBook()
+    {
+        return view('pianote.products.best-beginner-piano-book', [
+            'theme' => 'pianote',
+        ]);
     }
 }

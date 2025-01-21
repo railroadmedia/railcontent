@@ -18,10 +18,19 @@ class MarketingController extends BaseController
     {
         return view('musora.sales.trial', [
             'theme' => 'musora',
+            'commercialHeader' => true,
             'promoVersion' => true,
             'trialVersion' => true,
             'scrollToJoin' => true,
             'hideMenu' => true,
+        ]);
+    }
+    public function trialMonth()
+    {
+        return view('musora.sales.subscription', [
+            'theme' => 'musora',
+            'scrollToJoin' => true,
+            'month' => true,
         ]);
     }
     public function spotify()
@@ -59,6 +68,10 @@ class MarketingController extends BaseController
     {
         return view('musora.lead-gen.thank-you', ['theme' => 'musora']);
     }
+    public function thePlaylist()
+    {
+        return view('musora.lead-gen.the-playlist', ['theme' => 'musora', 'recaptchaKey' => config('recaptcha.key')]);
+    }
     public function moderators()
     {
         return view('musora.pages.moderators', ['theme' => 'musora']);
@@ -71,6 +84,10 @@ class MarketingController extends BaseController
     public function terms()
     {
         return view('musora.pages.terms');
+    }
+    public function guitarcenterTerms()
+    {
+        return view('musora.pages.redeem.guitarcenter-terms');
     }
 
     public function privacy()
@@ -127,6 +144,10 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.playlists', [ 'theme' => 'musora']);
     }
+    public function playlist()
+    {
+        return view('musora.lead-gen.playlist', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
 
     public function recitals()
     {
@@ -137,25 +158,29 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.gift-card');
     }
+    public function Egiftcard()
+    {
+        return view('musora.pages.electronic-gift-card');
+    }
     public function method()
     {
-        return view('musora.pages.method', [ 'theme' => 'musora', 'page' => 'method' ]);
+        return view('musora.sales.method', [ 'theme' => 'musora', 'page' => 'method' ]);
     }
     public function songs()
     {
-        return view('musora.pages.songs', [ 'theme' => 'musora', 'page' => 'songs' ]);
+        return view('musora.sales.songs', [ 'theme' => 'musora', 'page' => 'songs' ]);
     }
     public function community()
     {
-        return view('musora.pages.community', [ 'theme' => 'musora', ]);
+        return view('musora.sales.community', [ 'theme' => 'musora', ]);
     }
     public function choosePlan()
     {
-        return view('musora.pages.choose-plan', ['theme' => 'musora']);
+        return view('musora.sales.choose-plan', ['theme' => 'musora']);
     }
     public function choosePlanMonth(Request $request)
     {
-        return view('musora.pages.choose-plan', ['theme' => 'musora', 'month' => true, 'referralCode' => $request->get('referralCode')]);
+        return view('musora.sales.choose-plan', ['theme' => 'musora', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
     public function faster()
     {
@@ -164,5 +189,65 @@ class MarketingController extends BaseController
     public function app()
     {
         return view('musora.pages.app', [ 'theme' => 'musora', 'page' => 'app' ]);
+    }
+    public function freeMusicLessonsForLife()
+    {
+        return view('musora.lead-gen.free-music-lessons-for-life', [ 'theme' => 'musora'],  ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function everyDayMusician()
+    {
+        return view('musora.lead-gen.everyday-musician', [ 'theme' => 'musora']);
+    }
+    public function history()
+    {
+        return view('musora.lead-gen.history', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function youtube()
+    {
+        return view('musora.lead-gen.free-resources', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function freeResources()
+    {
+        return view('musora.lead-gen.free-resources', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSample30DD()
+    {
+        return view('musora.lead-gen.30-day-drummer', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSample30DDUnlock()
+    {
+        return view('musora.lead-gen.30-day-drummer', [ 'theme' => 'musora'], [ 'unlocked' => true], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleNPPSH()
+    {
+        return view('musora.lead-gen.new-piano-players', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleNPPSHUnlock()
+    {
+        return view('musora.lead-gen.new-piano-players', [ 'theme' => 'musora'], [ 'unlocked' => true], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleBS()
+    {
+        return view('musora.lead-gen.better-strumming', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleBSUnlock()
+    {
+        return view('musora.lead-gen.better-strumming', [ 'theme' => 'musora'], [ 'unlocked' => true], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleEI()
+    {
+        return view('musora.lead-gen.everyday-improv', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function challengeSampleEIUnlock()
+    {
+        return view('musora.lead-gen.everyday-improv', [ 'theme' => 'musora'], [ 'unlocked' => true], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function lifetimeDeal()
+    {
+        return view('musora.sales.lifetime', [ 'theme' => 'musora']);
+    }
+    public function extend()
+    {
+        return view('musora.pages.extend', [ 'theme' => 'musora']);
     }
 }

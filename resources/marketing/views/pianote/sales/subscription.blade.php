@@ -1,5 +1,6 @@
 @php
     require_once(resource_path('marketing/views/pianote/_partials/homepage-data.php'));
+    require_once(resource_path('marketing/views/pianote/_partials/bonus-data.php'));
 @endphp
 
 @extends('pianote._partials.global-layout')
@@ -15,11 +16,7 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        @if(request()->is('ultimate-lessons'))
-            <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/the-ultimate-lessons-share-image-new.jpg ">
-        @else
-            <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/share-image-pianote2.webp ">
-        @endif
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/share-image-pianote2.webp ">
     @endif
 
     @include('_partials.layout._fonts')
@@ -128,13 +125,14 @@
 
 @section('body-data')
     x-data ='{
-        soundslice : false,
-        workoutVid : false,
+        demoVid : false,
         trailer : false,
-        unbox : false,
         rolandTrailer : false,
         lazyLoad: false,
         videoLoaded: false,
+        @foreach($pianote['packs'] as $modalData)
+        {{ $modalData['name'] }}: false,
+        @endforeach
     }'
 @endsection
 
@@ -165,147 +163,138 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-
-{{--        <section class="text-center px-5 sm:px-6 py-6 sm:py-8 lg:py-10 text-black relative" style="background-color:#f3efee;">--}}
-{{--            <div class="container max-w-5xl mx-auto relative z-20">--}}
-{{--                <img class="h-16 sm:h-20 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp">--}}
-{{--                <h6 class="leading-tight mt-3 mb-1"><strong>Learn the language of music <br class="sm:hidden"> with daily guided workouts.</strong></h6>--}}
-{{--                <p class="leading-tight mb-4">Save your seat in the first-ever<br class="sm:hidden"> class starting on July 1st!</p>--}}
-{{--                <a href="/shop/read-music" class="join smaller">Learn More</a>--}}
-{{--            </div>--}}
-{{--            <picture>--}}
-{{--                <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp" type="image/webp">--}}
-{{--                <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp" type="image/webp">--}}
-{{--                <img class="absolute inset-0 w-full h-full object-cover z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp">--}}
-{{--            </picture>--}}
-{{--        </section>--}}
-    @endif
-    @if(!empty($bfVersion))
-    @include('_partials.layout.holiday.homepage-top-banner',[
-        'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header-bg.webp')",
-        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 90% -- EXTENDED UNTIL JULY 31ST!</strong>',
-        'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
-        'vimeo' => '885338636',
-        'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
-    ])
     @endif
 
-    @php
-        $bubbles =  [
-             [
-                 'src' => $bubble1,
-                 'classes' => 'h-10 sm:h-14 lg:h-16 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
-             ],
-             [
-                 'src' => $bubble2,
-                 'classes' => 'h-24 sm:h-28 lg:h-44 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
-             ],
-             [
-                 'src' => $bubble3,
-                 'classes' => 'h-32 sm:h-40 lg:h-52 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
-             ],
-             [
-                 'src' => $bubble4,
-                 'classes' => 'h-10 sm:h-12 lg:h-16 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
-             ],
-             [
-                 'src' => $bubble5,
-                 'classes' => 'h-10 sm:h-12 lg:h-16 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
-             ],
-             [
-                 'src' => $bubble6,
-                 'classes' => 'h-28 sm:h-32 lg:h-48 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
-             ],
-             [
-                 'src' => $bubble7,
-                 'classes' => 'h-28 sm:h-36 lg:h-52 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
-             ],
-             [
-                 'src' => $bubble8,
-                 'classes' => 'h-12 sm:h-14 lg:h-16 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
-             ]
-         ];
-          $features = $pianote['features'];
-          $slides = $pianote['slides'];
-    @endphp
+    @hasSection('top-bar')
+        @yield('top-bar')
+    @endif
 
     @if(empty($hideHeader) || !$hideHeader)
         @if(!empty($beginnerVersion))
             @include('musora.sales.components.header-section', [
+                'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/header2.mp4',
+                'videoM' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/header-m.mp4',
                 'header' => 'Online piano lessons<br> tailored for beginners.',
-                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> friendly teachers, and songs perfect for your skill level.',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/header-thumb2.webp',
-                'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/jan-thumb2.webp',
-                'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/jan-thumb-m2.webp',
                 'pointOne' => 'GREAT TEACHERS',
                 'pointTwo' => 'VIDEO LESSONS',
                 'pointThree' => 'FUN PRACTICE',
                 'pointFour' => 'POPULAR SONGS',
+                'featured' => [
+                    [
+                        'url' => 'https://www.musicradar.com/reviews/pianote-review',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/musicradar.svg',
+                    ],
+                    [
+                        'url' => 'https://www.nytimes.com/2023/12/07/arts/music/colette-maze-dead.html',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/nyt.svg',
+                    ],
+                    [
+                        'url' => 'https://www.pianistmagazine.com/blogs/a-closer-look-at-pianote/',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/pianist.svg',
+                    ],
+                    [
+                        'url' => 'https://americansongwriter.com/why-every-guitarist-needs-to-learn-piano/',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/as.webp',
+                    ],
+                ],
             ])
         @elseif(!empty($songsVersion))
             @include('musora.sales.components.header-section', [
+                'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/header.mp4',
                 'header' => 'Learn piano from real teachers.<br> Play your favorite songs.',
-                'desc' => ' Find and play the songs you love. Download, print, and<br class="hidden sm:inline">   play popular songs. Plus get flexible, fun lessons and<br class="hidden sm:inline">  unlimited personal support from real teachers.',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/header-thumb2.webp',
-                'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/jan-thumb2.webp',
-                'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/jan-thumb-m2.webp',
                 'pointOne' => 'GREAT TEACHERS',
                 'pointTwo' => 'VIDEO LESSONS',
                 'pointThree' => 'FUN PRACTICE',
                 'pointFour' => 'POPULAR SONGS',
+                'featured' => [
+                    [
+                        'url' => 'https://www.musicradar.com/reviews/pianote-review',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/musicradar.svg',
+                    ],
+                    [
+                        'url' => 'https://www.nytimes.com/2023/12/07/arts/music/colette-maze-dead.html',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/nyt.svg',
+                    ],
+                    [
+                        'url' => 'https://www.pianistmagazine.com/blogs/a-closer-look-at-pianote/',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/pianist.svg',
+                    ],
+                    [
+                        'url' => 'https://americansongwriter.com/best-online-piano-lessons/',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/as.webp',
+                    ],
+                ],
             ])
 
         @elseif(!empty($promoPage))
             @include('musora.sales.components.header-section', [
-                'boldText' => true,
-                'promoHeader' => true,
+                'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/header.mp4',
                 'header' => 'THE <span class="text-pianote">NEW WAY</span> TO<br> <span class="relative inline-block">LEARN PIANO<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/header-thumb2.webp',
-                'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/jan-thumb2.webp',
-                'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/jan-thumb-m2.webp',
-                'pointOne' => 'GREAT TEACHERS',
-                'pointTwo' => 'VIDEO LESSONS',
-                'pointThree' => 'FUN PRACTICE',
-                'pointFour' => 'POPULAR SONGS',
+                'featured' => [
+                    [
+                        'url' => 'https://www.musicradar.com/reviews/pianote-review',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/musicradar.svg',
+                    ],
+                    [
+                        'url' => 'https://www.nytimes.com/2023/12/07/arts/music/colette-maze-dead.html',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/nyt.svg',
+                    ],
+                    [
+                        'url' => 'https://www.pianistmagazine.com/blogs/a-closer-look-at-pianote/',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/pianist.svg',
+                    ],
+                    [
+                        'url' => 'https://americansongwriter.com/best-online-piano-lessons/',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/as.webp',
+                    ],
+                ],
             ])
         @else
             @include('musora.sales.components.header-section', [
-                'header' => 'Piano lessons for<br> <span class="relative inline-block">all skill levels<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
-                'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/header-thumb2.webp',
-                'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/jan-thumb2.webp',
-                'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/jan-thumb-m2.webp',
+                'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/header.mp4',
+                'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE PIANO<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #f61a30 " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #f61a30 " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
                 'pointOne' => 'GREAT TEACHERS',
                 'pointTwo' => 'VIDEO LESSONS',
                 'pointThree' => 'FUN PRACTICE',
                 'pointFour' => 'POPULAR SONGS',
+                'featured' => [
+                    [
+                        'url' => 'https://www.musicradar.com/reviews/pianote-review',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/musicradar.svg',
+                    ],
+                    [
+                        'url' => 'https://www.nytimes.com/2023/12/07/arts/music/colette-maze-dead.html',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/nyt.svg',
+                    ],
+                    [
+                        'url' => 'https://www.pianistmagazine.com/blogs/a-closer-look-at-pianote/',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/pianist.svg',
+                    ],
+                    [
+                        'url' => 'https://americansongwriter.com/best-online-piano-lessons/',
+                        'src' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2025/as.webp',
+                    ],
+                ],
             ])
         @endif
     @endif
-
 
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
 
-    @php
-        $gridItems = $pianote['gridItems'];
-    @endphp
-
-    @include('musora.sales.components.reason-cards-section', [
-        'header' => 'Your piano goals<br class="inline sm:hidden"> start here.',
-        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum and direct access to real teachers. ',
-    ])
-
-   @php
-        $buttons = $pianote['buttons'];
-        $courses = $pianote['courses'];
-    @endphp
-
-   @include('musora.sales.components.coaches-section', [
-        'header' => 'Real Teachers,  <br class="sm:hidden">Real Results.',
-        'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline lg:hidden"> courses + live events with special guests.'
+    @include('musora.sales.components.step-by-step-section', [
+        'wall' => 'marketing/pianote/membership/homepage/2025/course-wall.webp',
+        'wallM' => 'marketing/pianote/membership/homepage/2025/course-wall-m.webp',
+        'stepOne' => 'Chords. Technique. Blues. Or just getting started the right way.<br class="hidden sm:inline"> Choose the lessons that are right for you. Here are a few favorites:',
+        'packs' => $pianote['packs'],
+        'stepTwoBg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/membership/homepage/2025/pov-bg2.jpg',
+        'stepTwo' => 'It’s easy. Simply choose your course, press play, and play along with your instructor.<br class="hidden sm:inline-block"> It’s the best way to stay motivated, keep coming back to the keys, and get amazing results.',
+        'povM' => 'marketing/pianote/membership/homepage/2025/pov-m2.webp',
+        'pov' => 'marketing/pianote/membership/homepage/2025/pov2.webp',
+        'stepThree' => 'The most important part of learning piano is building a daily habit. Practice a little<br class="hidden sm:inline-block"> each day, and you’ll hear the results way sooner (and so will everyone around you!).',
+        'tabletM' => 'marketing/pianote/membership/homepage/2025/tablet-m2.png',
+        'tablet' => 'marketing/pianote/membership/homepage/2025/tablet2.png',
     ])
 
     @include('musora.sales.components.workouts-section', [
@@ -314,17 +303,13 @@
     ])
 
     @php
-        $songItems = $pianote['songItems'];
+        $gridItems = $pianote['gridItems'];
     @endphp
-
-    @include('musora.sales.components.songs-section', [
-        'subheader' => 'Practice and sing 500+ popular songs with note-for-note sheet music and digital tools.',
-        'media' => 'pianote/membership/homepage/2024/pianote-songs.webp',
+    @include('musora.sales.components.reason-cards-five-section', [
+        'subHeader' => true,
+        'full' => true,
     ])
 
-    @hasSection('promoDetails')
-        @yield('promoDetails')
-    @endif
     @php
         $testimonials = $pianote['testimonials'];
         $youtube = convertNumber(Prices::$pianoteYoutubeSubsc);
@@ -337,12 +322,13 @@
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
     ])
+
     @if(empty($trialVersion))
-    @include('musora.sales.components.guarantee-section', [
-        'badge' => 'marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp',
-        'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
-        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the piano.',
-    ])
+        @include('musora.sales.components.guarantee-section', [
+            'badge' => 'marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp',
+            'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
+            'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the piano.',
+        ])
     @endif
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
@@ -350,75 +336,64 @@
     @hasSection('final')
         @yield('final')
     @elseif(!empty($trialVersion))
-       @include('musora.sales.components.card-selection-section', [
-            "noSelector" => true,
-            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-plus-logo-light.svg",
-            "logo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-white.png",
-            "songs" => "500+ popular songs.",
-            "firstPoint" => "Unlimited piano lessons.",
-            "thirdPoint" => "Direct access to real teachers.",
-            "fifthPoint" => "Lesson access for singing, guitar, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[pianote-base-annual-recurring-7-day-trial-membership]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[pianote-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        @include('musora.sales.components.order-section-collage', [
+            "orderUrl" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",
+        'logo' => 'marketing/pianote/membership/homepage/2025/logo.webp',
+        'header' => '<strong>Unlimited piano lessons.<br>The world’s best teachers.  <br> 500+ popular songs.</strong>',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
+        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
+        'image' => 'marketing/pianote/membership/homepage/2025/collage.webp',
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'piano',
         ])
 
     @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'image' => 'marketing/pianote/membership/homepage/2024/bonus-chords-scales.webp',
-                    'title' => 'Chords & <br>Scales Book',
-                    'description' => 'Your encyclopedia of piano chords & scales.',
-                    'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                    'shipping' => 'true'
-                ],
-                [
-                'image' => 'marketing/pianote/membership/homepage/2024/piano-technique-made-easy.webp',
-                'title' => 'Piano Technique<br> Made Easy',
-                'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                'price' => floatval($productPrices['piano-technique-made-easy']->price),
-                ],
-                [
-                'image' => 'marketing/pianote/membership/homepage/2024/piano-riffs-and-fills.webp',
-                'title' => 'Piano Riffs<br> & Fills',
-                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
-                ],
-                [
-                    'image' => 'marketing/pianote/membership/homepage/2024/faster-fingers.webp',
-                    'title' => '',
-                    'description' => 'Boost your speed and confidence with this guided practice course.',
-                    'price' => floatval($productPrices['faster-fingers']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'marketing/pianote/membership/homepage/webp-format/pianote-annual-2w-card.webp',
-        'header' => 'Online piano lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
-        ])
+        <section style="background:linear-gradient(30deg, #0a3761, #0c1526);">
+        <div class="px-4 lg:px-8 py-10 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize relative overflow-hidden"
+                :style="`background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/2024/order-bg-tile-2.webp') center center/160px;`""
+                <div class="container mx-auto max-w-5xl">
+                    <div x-data="{lazyLoad: false}">
+                        @php
+                            $targetSkus = [
+                                'easy-chords',
+                                '30-day-blues-piano',
+                            ];
+                        @endphp
+                        <div id="customize-anchor"></div>
+                        @include('drumeo._partials.ny-order-section-bonuses', [
+                            'topImage' => 'marketing/pianote/membership/homepage/webp-format/pianote-annual-2w-card.webp',
+                            'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+                            'bundle' => 'holiday-pianote',
+                            'targetSkus' => $targetSkus,
+                            'maxWidth' => 'max-w-5xl',
+                            'ispromo' => "true",
+                            'promoHeader' => 'Online piano lessons for all skill levels.',
+                            'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
+                            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&redirect=/order&locked=true&promo-code=special,WBP24',
+                        ])
+                    </div>
+                </div>
+            </div>
+        <section>
     @else
         @include('musora.sales.components.order-section-collage', [
-        'logo' => 'marketing/pianote/membership/homepage/2024/pianote-logo-red.webp',
-        'header' => 'Unlimited piano lessons.<br>Guided practice sessions. <br> Direct access to real teachers.',
+        'headerLight' => true,
+        'logo' => 'marketing/pianote/membership/homepage/2025/logo.webp',
+        'header' => '<strong>Unlimited piano lessons.<br>The world’s best teachers.  <br> 500+ popular songs.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
-        'image' => 'marketing/pianote/membership/homepage/2023/pianote-collage.png',
+        'image' => 'marketing/pianote/membership/homepage/2025/collage.webp',
         ])
 
     @endif
 
     @include('musora.sales.components.app-section', [
-        'image' => 'marketing/pianote/membership/homepage/webp-format/devices.webp',
+        'image' => 'marketing/pianote/membership/homepage/2025/devices.webp',
         'appleUrl' => 'https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.drumeo',
     ])
@@ -426,13 +401,8 @@
     @include('pianote._partials.faq')
 
     @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
-        'video' => '4JGlc',
-        'soundslice' => true,
-    ])
-    @include('_partials.components.video-modal',[
-        'name' => 'workoutVid',
-        'video' => '886960702',
+        'name' => 'demoVid',
+        'video' => '802011057',
         'vimeo' => true,
     ])
     @include('_partials.components.video-modal',[
@@ -440,11 +410,13 @@
         'video' => '785314388',
         'vimeo' => true,
     ])
-    @include('_partials.components.video-modal',[
-        'name' => 'unbox',
-        'video' => '774408046',
-        'vimeo' => true,
-    ])
+    @foreach ($pianote['packs'] as $packModal)
+        @include('_partials.components.video-modal', [
+            'name' => $packModal['name'],
+            'video' => $packModal['vimeoId'],
+            'vimeo' => true,
+        ])
+    @endforeach
 
     @if(!empty($promoVersion))
         @include("pianote.sales.partials._footer", [
@@ -458,4 +430,24 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var stickyBar = document.querySelector('.promo-banner');
+            if (!stickyBar) return;
+
+            window.addEventListener('scroll', function () {
+                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+                if (window.scrollY > (unstickTrigger - 115)) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < stickTrigger - 115) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+                    stickyBar.classList.add('fixed', 'mt-0');
+                }
+            });
+        });
+    </script>
 @stop

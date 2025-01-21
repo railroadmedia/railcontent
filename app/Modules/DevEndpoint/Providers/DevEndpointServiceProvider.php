@@ -18,8 +18,6 @@ class DevEndpointServiceProvider extends ServiceProvider
 
     /**
      * UsoraServiceProvider constructor.
-     *
-     * @param Application $application
      */
     public function __construct(Application $application)
     {
@@ -28,8 +26,6 @@ class DevEndpointServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap the application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -50,8 +46,6 @@ class DevEndpointServiceProvider extends ServiceProvider
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
     public function register(): void
     {

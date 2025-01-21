@@ -19,7 +19,7 @@ class RechargeSubscriptionHelper
         int $frequency,
         Interval $interval,
     ): Collection {
-        $data = new class {
+        $data = new class () {
         };
         $data->id = fake()->randomNumber(6, true);
         $data->customer_id = $user->shopify_id;

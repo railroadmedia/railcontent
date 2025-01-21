@@ -21,9 +21,10 @@ class OrderFactory extends Factory
 
     public function definition(): array
     {
-        $productDue = fake()->randomFloat(2);
+        $productDue = round(fake()->randomFloat(2, 0, 10000), 2);
         $shippingDue = 0.00;
-        $taxesDue = ($productDue + $shippingDue) * $this->taxRate;
+        $taxesDue = round(($productDue + $shippingDue) * $this->taxRate, 2);
+
         return [
             'total_due' => $productDue + $shippingDue + $taxesDue,
             'product_due' => $productDue,

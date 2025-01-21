@@ -160,10 +160,10 @@ Route::domain('{musoraDomain}')
                         'student-collaborations',
                         'live-streams',
                         'solos',
+                        'challenges',
                         'gear-guides',
                         'performances',
                         'in-rhythm',
-                        'challenges',
                         'on-the-road',
                         'diy-drum-experiments',
                         'rhythmic-adventures-of-captain-carson',
@@ -177,60 +177,13 @@ Route::domain('{musoraDomain}')
                         'rudiments',
                         'song-tutorials',
                         'drum-fest-international-2022',
+                        'odd-times',
                     ])
                     ->name('platform.content-type-catalog');
 
-
                 Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.workouts');
-
-                Route::get('/{brand}/workouts/challenges', [WorkoutsPageController::class, 'showChallengesPage'])
-                    ->whereIn('brand', all_brands())
-                    ->name('platform.workouts.challenges');
-
-                Route::get(
-                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}',
-                    [ContentPagesController::class, 'firstLevel']
-                )
-                    ->whereIn('brand', all_brands())
-                    ->whereIn(
-                        'primaryPage',
-                        [
-
-                            'challenges',
-
-                        ]
-                    )
-                    ->name('platform.workout.challenge');
-
-
-
-
-                Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
-                    ->whereIn('brand', all_brands())
-                    ->name('platform.workouts');
-
-                Route::get('/{brand}/workouts/challenges', [WorkoutsPageController::class, 'showChallengesPage'])
-                    ->whereIn('brand', all_brands())
-                    ->name('platform.workouts.challenges');
-
-                Route::get(
-                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}',
-                    [ContentPagesController::class, 'firstLevel']
-                )
-                    ->whereIn('brand', all_brands())
-                    ->whereIn(
-                        'primaryPage',
-                        [
-
-                            'challenges',
-
-                        ]
-                    )
-                    ->name('platform.workout.challenge');
-
-
 
                 Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
                     ->whereIn('brand', ['drumeo'])
@@ -263,6 +216,19 @@ Route::domain('{musoraDomain}')
                 Route::get('/{brand}/schedule', [ContentPagesController::class, 'schedule'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.schedule');
+                Route::get('/{brand}/content-updates/coming-soon', [ContentPagesController::class, 'comingSoon'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates.coming-soon');
+                Route::get('/{brand}/content-updates/leaving', [ContentPagesController::class, 'leaving'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates.leaving');
+                Route::get('/{brand}/content-updates/returning', [ContentPagesController::class, 'returning'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates.returning');
+                Route::get('/{brand}/content-updates', [ContentPagesController::class, 'allContentUpdates'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates');
+
 
                 /*
                  * Specific Sub-Content Hierarchy Pages
@@ -284,14 +250,6 @@ Route::domain('{musoraDomain}')
                 Route::get('/{brand}/live-chat', [LivePageController::class, 'chat'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.live-chat');
-
-                Route::get(
-                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
-                    [ContentPagesController::class, 'secondLevel']
-                )
-                    ->whereIn('brand', all_brands())
-                    ->whereIn('primaryPage', ['challenges'])
-                    ->name('platform.workout.challenge.workout');
 
                 /*
                  * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
@@ -343,7 +301,8 @@ Route::domain('{musoraDomain}')
                             'play-alongs',
                             'song-tutorials',
                             'drum-fest-international-2022',
-                            'workouts'
+                            'workouts',
+                            'odd-times',
                         ]
                     )
                     ->name('platform.content.first-level');
@@ -353,7 +312,7 @@ Route::domain('{musoraDomain}')
                     [ContentPagesController::class, 'secondLevel']
                 )
                     ->whereIn('brand', all_brands())
-                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs','song-tutorials'])
+                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs','song-tutorials', 'challenges'])
                     ->name('platform.content.second-level');
 
                 Route::get(
@@ -371,6 +330,7 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->whereIn('primaryPage', ['method'])
                     ->name('platform.content.fourth-level');
+
 
                 /*
                  * Referral Pages
@@ -464,6 +424,28 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/search', [ContentPagesController::class, 'search'])
             ->whereIn('brand', all_brands())
             ->name('platform.search');
+
+        /*
+         * Challenges
+         */
+
+        Route::get('/{brand}/challenge', [ContentPagesController::class, 'challenge'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.challenges');
+
+        Route::get(
+            '/{brand}/challenge/{firstContentSlug}/{firstContentId}',
+            [ContentPagesController::class, 'challengeFirstLevel']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.challenge.first-level');
+
+        Route::get(
+            '/{brand}/challenge/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
+            [ContentPagesController::class, 'challengeSecondLevel']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.challenge.second-level');
 
         /*
          * Packs Sub-Content Hierarchy Pages
@@ -857,11 +839,17 @@ Route::domain('{musoraDomain}')
 Route::domain('{musoraDomain}')
     ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
     ->group(function () {
-        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
+        Route::get(
+            '/{brand}/referral/invite-a-friend',
+            [ReferralPagesController::class, 'inviteAFriend']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.invite-a-friend');
 
-        Route::get('/{brand}/profile/settings/account', [ProfileSettingsPagesController::class, 'account'])
+        Route::get(
+            '/{brand}/profile/settings/account',
+            [ProfileSettingsPagesController::class, 'account']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.account');
     });

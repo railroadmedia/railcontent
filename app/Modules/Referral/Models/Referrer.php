@@ -30,7 +30,10 @@ class Referrer extends Model
     protected $table = 'referral_referrers';
     protected $primaryKey = 'id';
 
-    protected $casts = [
-        'claimed_user_ids' => 'array'
-    ];
+    protected function casts(): array
+    {
+        return [
+            'claimed_user_ids' => 'array'
+        ];
+    }
 }

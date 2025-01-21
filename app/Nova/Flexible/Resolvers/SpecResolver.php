@@ -3,21 +3,10 @@
 namespace App\Nova\Flexible\Resolvers;
 
 use App\Models\Spec;
-use Laravel\Nova\Actions\Action;
 use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
-
-use function Symfony\Component\Translation\t;
 
 class SpecResolver implements ResolverInterface
 {
-    /**
-     * get the field's value
-     *
-     * @param  mixed  $resource
-     * @param  string $attribute
-     * @param  Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
-     * @return Illuminate\Support\Collection
-     */
     public function get($resource, $attribute, $layouts)
     {
         $specs = $resource->specs()->get();
@@ -37,19 +26,11 @@ class SpecResolver implements ResolverInterface
         })->filter();
     }
 
-    /**
-     * Set the field's value
-     *
-     * @param  mixed  $model
-     * @param  string $attribute
-     * @param  Illuminate\Support\Collection $groups
-     * @return string
-     */
-    public function set($model, $attribute, $groups)
+    public function set($resource, $attribute, $groups)
     {
-        $class = get_class($model);
+        $class = get_class($resource);
 
-        $class::saved(function ($model) use ($groups) {
+        $class::saved(function ($resource) use ($groups) {
             $specs = $groups->map(function ($group, $index) {
                 return [
                     'title' => $group->getAttributes()['title'],
@@ -78,7 +59,7 @@ class SpecResolver implements ResolverInterface
                         $updatedIds[] = $spec['id'];
                     } else {
                         $addSpec = new Spec();
-                        $addSpec->product_id = $model['id'];
+                        $addSpec->product_id = $resource['id'];
                         $addSpec->title = $spec['title'];
                         $addSpec->desc = $spec['desc'];
                         $addSpec->order_number = $spec['order_number'];
@@ -90,7 +71,7 @@ class SpecResolver implements ResolverInterface
             }
 
             if(isset($updatedIds)) {
-                $deleteIds = Spec::where('product_id', '=', $model['id'])
+                $deleteIds = Spec::where('product_id', '=', $resource['id'])
                     ->whereNotIn('id', $updatedIds)->select('id')->delete();
             }
         });

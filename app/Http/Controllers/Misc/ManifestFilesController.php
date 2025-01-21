@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Misc;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Illuminate\Support\Str;
@@ -14,7 +16,7 @@ class ManifestFilesController extends BaseController
         return file_get_contents(public_path('/favicons/drumeo/manifest.json'));
     }
 
-    public function rootManifestFile()
+    public function rootManifestFile(): RedirectResponse
     {
         if (Str::endsWith(request()->host(), 'drumeo.com')) {
             return redirect()->to('/favicons/drumeo/manifest.json');
@@ -34,14 +36,14 @@ class ManifestFilesController extends BaseController
         return file_get_contents(public_path('/favicons/' . $brand . '/site.webmanifest'));
     }
 
-    public function appleAssociationFile()
+    public function appleAssociationFile(): Response
     {
         $json = file_get_contents(base_path('apple-app-site-association'));
         return response($json, 200)
                 ->header('Content-Type', 'application/json');
     }
 
-    public function androidAssociationFile()
+    public function androidAssociationFile(): Response
     {
         $json = file_get_contents(base_path('assetlinks'));
         return response($json, 200)

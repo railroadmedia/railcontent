@@ -3,20 +3,9 @@
 namespace App\Modules\RailTracker\Services;
 
 use App\Modules\Tracker\Models\LastEngagedSeconds;
-use Exception;
-use Illuminate\Support\Facades\Log;
-use Railroad\Railcontent\Services\ContentService;
 
 class ContentEngagementService
 {
-    private ContentService $contentService;
-
-    public function __construct(
-        ContentService $contentService,
-    ) {
-        $this->contentService = $contentService;
-    }
-
     public function update(int $userId, int $contentId, int $currentSecond)
     {
         try {

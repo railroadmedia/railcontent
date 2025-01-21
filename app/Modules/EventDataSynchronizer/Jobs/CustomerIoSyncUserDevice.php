@@ -48,8 +48,6 @@ class CustomerIoSyncUserDevice extends CustomerIoBaseJob
     }
 
     /**
-     * @param CustomerIoService $customerIoService
-     * @param UserService $userService
      * @throws \Throwable
      */
     public function handle(
@@ -73,8 +71,6 @@ class CustomerIoSyncUserDevice extends CustomerIoBaseJob
 
     /**
      * The job failed to process.
-     *
-     * @param Throwable $exception
      */
     public function failed(Throwable $exception)
     {

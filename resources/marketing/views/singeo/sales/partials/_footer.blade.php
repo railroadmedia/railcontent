@@ -54,7 +54,7 @@
                 <a href="/shop/singing-starter-kit">Singing Starter Kit</a><br>
                 <a href="/shop/poster-vowels">Vowel Practice Poster</a><br>
                 <a href="/shop/shirt-retro">Singeo T-Shirt</a><br>
-                <a href="/shop/tumbler-doremi">Do-Ti-La-So Tumbler</a></p>
+                <a href="/shop/tumbler-doremi">Do-Re-Mi Tumbler</a></p>
         </div>
         <div class="footer-link-wrap">
             <h1>Other Sites</h1>
@@ -67,7 +67,7 @@
     @endif
     <div class="footer-bottom" @if(!empty($minimal)) style="border-top: 0;padding-top: 0;" @endif>
         <div class="container mx-auto">
-            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=280,quality=95/https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-white.png" alt="Singeo">
+            <img class="logo" src="https://www.musora.com/cdn-cgi/image/width=280,quality=95/https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-white.png" alt="Singeo">
             @if(empty($minimal))
                 <p><a href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
                     <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>
@@ -82,3 +82,6 @@
     </div>
 </footer>
 @include("singeo.lead-gen.partials.impact-email-sign-up-tracker")
+@if(empty($noEverflow))
+    @include("_partials.layout.everflow-product-tracker", ['advertiserId' => config('railanalytics.singeo.production.providers.everflow.brand_id')])
+@endif

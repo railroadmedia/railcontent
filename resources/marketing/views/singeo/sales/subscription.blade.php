@@ -119,10 +119,193 @@
             color:#fff!important;
         }
     </style>
+    <style>
+
+        [placeholder]:focus::-webkit-input-placeholder {
+            color:transparent
+        }
+
+        .ajax-form ::-webkit-input-placeholder, .ajax-form ::-moz-placeholder, .ajax-form :-ms-input-placeholder, .ajax-form :-moz-placeholder {
+            color:#777
+        }
+
+        .ajax-form {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        /*@media (min-width: 768px) {*/
+        /*    .ajax-form {*/
+        /*        margin: 0 auto 10px;*/
+        /*    }*/
+        /*}*/
+
+        .ajax-form input, .ajax-form button {
+            font: 400 18px/40px 'Open Sans', sans-serif;
+            height: 40px;
+            color: #999;
+            border-radius: 100px;
+            text-align: left;
+            padding: 2px 20px;
+            margin: 0 auto 5px;
+        }
+        /*.ajax-form input, .ajax-form button {*/
+        /*    font: 400 18px/50px 'Open Sans', sans-serif;*/
+        /*    height: 50px;*/
+        /*    color: #999;*/
+        /*    border-radius: 100px;*/
+        /*    text-align: left;*/
+        /*    padding: 7px 20px;*/
+        /*    margin: 0 auto 15px;*/
+        /*}*/
+        /*@media (min-width: 768px) {*/
+        /*    .ajax-form input, .ajax-form button {*/
+        /*        font-size: 22px;*/
+        /*        height: 65px;*/
+        /*        line-height: 65px;*/
+        /*    }*/
+        /*}*/
+        .ajax-form input[type="submit"],
+        .ajax-form button[type="submit"],
+        .ajax-form input button,
+        .ajax-form button button {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #fff;
+            background: #FFAE00;
+            text-transform: uppercase;
+            /*margin: 0 auto 15px;*/
+            display: block;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+            padding: 0;
+        }
+        .ajax-form input[type="submit"]:hover, .ajax-form button[type="submit"]:hover, .ajax-form input button:hover, .ajax-form button button:hover {
+            background:#ffb61a;
+        }
+        .disclaimer {
+            display: none;
+            margin: 0 auto;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .thank-you-box {
+            width:100%;
+            max-width:960px;
+            border-radius:5px;
+            height:auto;
+            max-height:0;
+            visibility:hidden;
+            opacity:0;
+            transition:all .4s ease-in;
+            display:block;
+            margin:0 auto;
+            background:#FFF;
+            text-align:center;
+            overflow:hidden;
+            color:#000
+        }
+
+        .thank-you-box.active {
+            max-height:1000px;
+            visibility:visible;
+            opacity:1;
+            padding:15px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box.active {
+                padding:20px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box.active {
+                padding:30px
+            }
+        }
+
+        .thank-you-box p {
+            font:400 15px/1.4em "Open Sans", sans-serif;
+            margin:0 auto
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p {
+                font-size:19px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box p {
+                font-size:23px
+            }
+        }
+
+        .thank-you-box p em {
+            line-height:1.4em;
+            max-width:550px;
+            display:inline-block;
+            font-size:12px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p em {
+                font-size:14px
+            }
+        }
+
+        .thank-you-box h2 {
+            font:700 30px/1em "Bebas Neue", sans-serif;
+            margin:15px auto;
+            text-transform:uppercase;
+            color:#FFAE00
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box h2 {
+                font-size:37px;
+                margin:20px auto
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box h2 {
+                font-size:44px
+            }
+        }
+
+        .thank-you-box .social-media a {
+            background:#000;
+            color:#fff;
+            border-radius:50%;
+            display:inline-block;
+            text-align:center;
+            margin:20px 3px 0;
+            width:50px;
+            height:50px;
+            line-height:50px;
+            font-size:26px
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box .social-media a {
+                width:70px;
+                height:70px;
+                line-height:70px;
+                font-size:35px;
+                margin:25px 10px 0
+            }
+        }
+    </style>
 @stop
 
 @section('body-data')
     x-data ='{
+        BFwaitlist : false,
         soundslice : false,
         trailer : false,
         lazyLoad: false,
@@ -153,40 +336,34 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
-
+    @hasSection('top-bar')
+        @yield('top-bar')
+    @endif
     @php
         $bubbles =  [
              [
                  'src' => $bubble1,
-                 'classes' => 'h-10 sm:h-14 lg:h-16 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
-             ],
-             [
-                 'src' => $bubble2,
                  'classes' => 'h-24 sm:h-28 lg:h-44 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
              ],
              [
-                 'src' => $bubble3,
+                 'src' => $bubble2,
                  'classes' => 'h-32 sm:h-40 lg:h-52 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
              ],
              [
+                 'src' => $bubble3,
+                 'classes' => 'h-16 sm:h-12 lg:h-16 top-[50%] sm:top-[50%] left-[8%] sm:left-[8%]',
+             ],
+             [
                  'src' => $bubble4,
-                 'classes' => 'h-10 sm:h-12 lg:h-16 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
-             ],
-             [
-                 'src' => $bubble5,
-                 'classes' => 'h-10 sm:h-12 lg:h-16 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
-             ],
-             [
-                 'src' => $bubble6,
                  'classes' => 'h-28 sm:h-32 lg:h-48 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
              ],
              [
-                 'src' => $bubble7,
+                 'src' => $bubble5,
                  'classes' => 'h-28 sm:h-36 lg:h-52 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
              ],
              [
-                 'src' => $bubble8,
-                 'classes' => 'h-12 sm:h-14 lg:h-16 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
+                 'src' => $bubble6,
+                 'classes' => 'h-16 sm:h-16 lg:h-20 top-[53%] sm:top-[53%] left-[99%] sm:left-[92%]',
              ]
          ];
           $features = $singeo['features'];
@@ -196,10 +373,6 @@
     @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
             'header' => 'Singing lessons that <br> fit <span class="relative inline-block"> your schedule<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path></svg></span>. ',
-            'desc' => 'Learn to sing from home, anytime, with bite-sized <br class="hidden sm:inline"> video lessons and unlimited personal support. ',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/header-thumb2.webp',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb.webp',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb-m.webp',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
@@ -208,10 +381,6 @@
     @else
         @include('musora.sales.components.header-section', [
             'header' => 'THE <span class="text-singeo">NEW WAY</span> TO<br> <span class="relative inline-block">SING BETTER<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#8300e9" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-            'desc' => 'Improve your vocal range, strength, and control with<br class="hidden sm:inline"> step-by-step lessons and unlimited personal support.',
-            'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/header-thumb2.webp',
-            'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb.webp',
-            'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/jan-thumb-m.webp',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
@@ -221,16 +390,6 @@
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
-
-    @php
-        $gridItems = $singeo['gridItems'];
-    @endphp
-
-
-    @include('musora.sales.components.reason-cards-section', [
-        'header' => 'Your singing goals start here.',
-        'desc' => 'An organized curriculum to help you understand your voice, how it functions, how to strengthen it, and sing with confidence.',
-    ])
 
     @php
         $buttons = $singeo['buttons'];
@@ -249,13 +408,15 @@
     ])
 
     @php
-        $songItems = $singeo['songItems'];
+        $gridItems = $singeo['gridItems'];
     @endphp
 
-    @include('musora.sales.components.songs-section', [
-        'subheader' => 'Practice and sing 300+ popular songs with note-for-note sheet music and digital tools.',
-        'media' => 'singeo/membership/homepage/2024/singeo-songs.webp',
+
+    @include('musora.sales.components.reason-cards-section', [
+        'header' => 'Your singing goals start here.',
+        'desc' => 'An organized curriculum to help you understand your voice, how it functions, how to strengthen it, and sing with confidence.',
     ])
+
 
     @php
         $testimonials = $singeo['testimonials'];
@@ -283,18 +444,16 @@
     <div id="order" class="anchor"></div>
 
     @if(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "noSelector" => true,
-            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-plus-logo-light.svg",
-            "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-            "songs" => "300+ popular songs.",
-            "firstPoint" => "Unlimited singing lessons.",
-            "thirdPoint" => "Direct access to vocal coaches.",
-            "fifthPoint" => "Lesson access for guitar, piano, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[singeo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        @include('musora.sales.components.order-section-collage', [
+        "orderUrl" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+        'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
+        'header' => 'Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
+        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
+                'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
+
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'singing',
@@ -316,17 +475,17 @@
         'header' => 'Online singing lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 1 bonus<br class="inline sm:hidden"> worth $19',
         'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&locked=true&redirect=/order&promo-code=FREE-W-ANNUAL-6702,special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'headerLight' => true,
         'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
-        'header' => 'Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.',
+        'header' => '<strong>Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
-                'image' => 'marketing/singeo/membership/homepage/2024/singeo-splash.webp',
+                'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
 
         ])
     @endif
@@ -356,6 +515,20 @@
         ])
     @else
         @include("singeo.sales.partials._footer")
+    @endif
+
+     @if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    {{--    end of BF weekend--}}
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-02 00:00:00',
+        'promoVersion' => true
+    ])
+    @else
+        {{--    end of cyber monday--}}
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2024-12-03 00:00:00',
+            'promoVersion' => true
+        ])
     @endif
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

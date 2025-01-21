@@ -1,16 +1,16 @@
 <template>
   <div class="tw-flex tw-items-center">
     <template v-if="iconName">
-      <i v-if="isFontAswesome" class="fas tw-hidden sm:tw-block tw-text-3xl dark:tw-text-white tw-mr-2"
+      <i v-if="isFontAwesome" class="fas tw-hidden sm:tw-block tw-text-3xl dark:tw-text-white tw-mr-2"
         :class="iconName"></i>
       <musora-icon v-else :icon-name="iconName"
         class="tw-hidden sm:tw-block tw-w-[35px] tw-h-[35px] dark:tw-text-white tw-mr-2" />
     </template>
     <template v-else-if="heroImg">
       <div class="tw-flex-none tw-w-[80px] sm:tw-w-[150px] sm:tw-max-w-[150px] tw-flex tw-flex-col tw-mr-5">
-        <UserAvatar 
+        <UserAvatar
           v-if="pageType === 'settings'"
-          :access-level="userAccessLevel" 
+          :access-level="userAccessLevel"
           :avatar-image="heroImg"
         />
         <div v-else :class="heroImgClasses ?? 'square'">
@@ -20,8 +20,7 @@
     </template>
 
     <div class="tw-flex tw-flex-col tw-self-stretch tw-mr-1 tw-w-full">
-      <div class="tw-h-full tw-flex tw-flex-col tw-items-start" :class="[!hasCtas ? 'tw-justify-center' : !additionalImgSrc ? 'tw-justify-end' : ''
-      ]">
+      <div class="tw-h-full tw-flex tw-flex-col tw-items-start" :class="[!hasCtas ? 'tw-justify-center' : !additionalImgSrc ? 'tw-justify-end' : '']">
         <div class="tw-flex">
           <template v-if="additionalImgSrc">
             <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] md:tw-h-[86px]">
@@ -33,6 +32,7 @@
               {{ title }}
             </span>
           </template>
+
           <div class="tw-ml-[5px]">
             <!-- Modal for Mobile -->
             <div class="sm:tw-hidden tw-self-start" v-if="$slots['header-description']">
@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "@collections/Modal/ModalRenderer";
 import Tooltip from "@collections/Tooltip/Tooltip";
@@ -91,7 +91,7 @@ import { useUserStore } from "@stores/user";
 
 //Pinia
 const userStore = useUserStore();
-const { userAccessLevel } = storeToRefs(userStore);   
+const { userAccessLevel } = storeToRefs(userStore);
 
 const props = defineProps({
   pageType: String,
@@ -99,21 +99,22 @@ const props = defineProps({
   heroImg: String,
   heroImgClasses: String,
   title: String,
-  infoData: Array,
+  infoData: [Array, Object],
   additionalImgSrc: String,
   secondaryCtaText: String,
   hasCtas: Boolean,
 })
 
 const isModalOpen = ref(false);
+
+const isFontAwesome = computed(() => props.iconName && props.iconName.startsWith('fa-'));
+
 const closeModal = () => {
   isModalOpen.value = false;
 };
 const openModal = () => {
   isModalOpen.value = true;
 };
-
-const isFontAswesome = props.iconName && props.iconName.startsWith('fa-');
 
 </script>
 <style lang="scss" scoped>

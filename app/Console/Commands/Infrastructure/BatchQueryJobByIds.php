@@ -27,7 +27,7 @@ abstract class BatchQueryJobByIds extends BatchQueryJob
         $this->ids = $this->getQuery()->skip($skip)->take($take)->pluck('id')->toArray();
     }
 
-    public function handle()
+    public function handle(): void
     {
         if ($this->batch()?->cancelled()) {
             return;

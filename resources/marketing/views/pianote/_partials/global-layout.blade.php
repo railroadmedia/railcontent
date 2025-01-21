@@ -26,10 +26,19 @@
 
 @yield('global-body')
 
+@if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    {{--    end of BF weekend--}}
     @include('_partials.components.countdown',[
-        'countdownDate' => '2024-08-01 00:00:00',
+        'countdownDate' => '2024-12-02 00:00:00',
         'promoVersion' => true
     ])
+@else
+    {{--    end of cyber monday--}}
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-03 00:00:00',
+        'promoVersion' => true
+    ])
+@endif
 
 <script type="text/javascript" src="{{ asset('/marketing/js/pre-form-submit-facebook-lead.js') }}"></script>
 

@@ -64,7 +64,7 @@
 
 @section('layout-body')
 
-   @include('_partials.components.shop.promo-banner-3', [
+   @include('_partials.components.shop.promo-banner-2', [
         "noBreadcrumb" => true,
         "name" => "The 5-For-3 Bundle",
         "fullPrice" => 1200,
@@ -105,7 +105,7 @@ $promoLink2 = '/ecommerce/add-to-cart?products[pianote_access_5-years-3-payments
             </div>
             <div class="relative w-full rounded-full h-16 mx-auto flex space-between items-center beg-adv-bar" style="background-color: #61043A;">
                 <div class="h-full flex items-center flex-wrap relative rounded-l-full" style="background:linear-gradient(to right, #61043A, #F61A30);">
-                    <h4 class="uppercase leading-none w-full"><img class="h-7 sm:h-8" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png" alt="Drumeo logo"></h4>
+                    <h4 class="uppercase leading-none w-full"><img class="h-7 sm:h-8" src="https://www.musora.com/cdn-cgi/image/quality=95,width=250,metadata=none/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png" alt="Drumeo logo"></h4>
                     <h2 class="absolute right-0 text-white rounded-full px-6 py-3.5 -mr-7 mt-1" style="background-color:#61043A;"><i class="fa-solid fa-dollar-sign text-4xl"></i></h2>
                 </div>
                 <p class="uppercase leading-none my-0 mx-auto text-white"><strong>2 YEARS</strong><br class="sm:hidden"> FOR FREE</p>
@@ -156,11 +156,6 @@ $promoLink2 = '/ecommerce/add-to-cart?products[pianote_access_5-years-3-payments
 @section('layout-footer')
     @include('pianote.sales.partials._footer')
 @endsection
-
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2024-08-01 00:00:00',
-        'promoVersion' => true
-    ])
 
 @section('layout-scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

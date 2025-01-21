@@ -11,12 +11,30 @@ Route::domain('{guitareoDomain}')
         Route::get('/trial-month', [SalesController::class, 'homeMonth']);
         Route::get('/lp', [SalesController::class, 'promo']);
         Route::get('/student-only', [SalesController::class, 'promo']);
+        Route::get('/save-300', [SalesController::class, 'save300']);
+        Route::get('/welcome-back-discount', [SalesController::class, 'welcomeBackDiscount']);
         Route::get('/choose-plan', [SalesController::class, 'choosePlan']);
+        Route::get('/choose-plan-strumming', [SalesController::class, 'choosePlanStrumming']);
         Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
 
         Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
         Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth']);
-        Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
+        Route::group(
+            ['prefix' => 'affiliate' ],
+            function () {
+                Route::get('/{page?}', SalesController::class . '@affiliates')
+                    ->whereIn('page', [
+                        'asobergirlsguide',
+                        'andrew-clarke',
+                        'cole-rolland',
+                        'guitar-tuner',
+                        'guitarworld',
+                        'musician-wave',
+                        'musicradar',
+                        'the-guitar-geek',
+                    ]);
+            }
+        );
 
         Route::get('/cookie', [SalesController::class, 'cookie']);
         Route::get('/terms', [SalesController::class, 'terms']);

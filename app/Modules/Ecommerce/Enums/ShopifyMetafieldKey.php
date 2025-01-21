@@ -24,5 +24,8 @@ enum ShopifyMetafieldKey: string
 
     case AddressRegion = 'address_region';
     case AddressCountry = 'address_country';
+    case ProductLength = 'product_length';
+    case ProductWidth = 'product_width';
+    case ProductHeight = 'product_height';
     case Views = 'views';
 }

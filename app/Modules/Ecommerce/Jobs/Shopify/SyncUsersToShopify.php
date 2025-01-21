@@ -89,12 +89,6 @@ class SyncUsersToShopify implements ShouldQueue
 
     /**
      * Execute the job
-     *
-     * @param  Shopify  $shopify
-     * @param  CustomerRepository  $customerRepository
-     * @param  AddressRepository  $addressRepository
-     * @param  EcommerceEntityManager  $entityManager
-     * @return void
      */
     public function handle(
         Shopify $shopify,
@@ -129,9 +123,6 @@ class SyncUsersToShopify implements ShouldQueue
 
     /**
      * Get all the users that need to be synced, and perform the sync action on each one
-     *
-     * @param  int  $batchSize
-     * @return void
      */
     private function loopUsersSync(int $batchSize): void
     {
@@ -218,12 +209,6 @@ class SyncUsersToShopify implements ShouldQueue
 
     /**
      * Sync the user up to Shopify
-     *
-     * @param  User  $user
-     * @param  bool  $fresh
-     * @param  bool  $simulate
-     * @param  int|null  $simulatedShopifyId
-     * @return void
      */
     private function syncUser(User $user, bool $fresh, bool $simulate, ?int $simulatedShopifyId): void
     {
@@ -343,7 +328,6 @@ class SyncUsersToShopify implements ShouldQueue
      * Compare our data for the given user, and its addresses if necessary, against the data in Shopify,
      * to identify if we need to sync up our changes or not.
      *
-     * @param  User  $user
      * @param  Collection<Customer>  $userCustomers
      * @return bool whether the user has updates that Shopify needs
      * @throws Exception
@@ -382,10 +366,6 @@ class SyncUsersToShopify implements ShouldQueue
      *
      * DEV NOTE: we don't bother looking at the user's customers because our system doesn't allow for
      * new Customers to be made after a User already exists with the same email address.
-     *
-     * @param  User  $user
-     * @param  bool  $isCreating
-     * @return array
      */
     private function createCustomerDataForUser(User $user, bool $isCreating): array
     {
@@ -426,13 +406,6 @@ class SyncUsersToShopify implements ShouldQueue
     /**
      * Send the data to Shopify to create or update a customer. Allowing up to 2 attempts, so that we can retry
      * after certain validation failures.
-     *
-     * @param  User  $user
-     * @param  array  $postData
-     * @param  bool  $isCreating
-     * @param  Collection  $alreadySyncedUserCustomers
-     * @param  int  $attemptNumber
-     * @return CustomerResource|null
      */
     private function sendDataToShopify(
         User $user,
@@ -544,9 +517,7 @@ class SyncUsersToShopify implements ShouldQueue
     /**
      * Get all addresses for this user and its customers, then format it to meet Shopify's expectation
      *
-     * @param  User  $user
      * @param  Collection<Customer>  $customers
-     * @return Collection
      */
     private function createAddressesDataForUser(User $user, Collection $customers): Collection
     {
@@ -573,7 +544,6 @@ class SyncUsersToShopify implements ShouldQueue
      * for the customer in Shopify. If we have any changes, or any new addresses, format those to
      * meet Shopify's expectations.
      *
-     * @param  User  $user
      * @param  Collection<Customer>  $userCustomers
      * @return Collection formatted data for addresses to update
      */

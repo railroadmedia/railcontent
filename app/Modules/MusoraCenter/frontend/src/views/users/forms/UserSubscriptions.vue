@@ -971,7 +971,7 @@ export default {
                                 this.cancelForm();
 
                                 this.$root.$emit('displayMessage', {
-                                    text: 'Subscription successfuly edited',
+                                    text: 'Subscription successfully edited',
                                     color: 'success',
                                 });
                             } else {
@@ -998,7 +998,7 @@ export default {
                     .then((response) => {
                         if (response) {
                             this.$root.$emit('displayMessage', {
-                                text: 'Subscription successfuly canceled',
+                                text: 'Subscription successfully canceled',
                                 color: 'success',
                             });
 
@@ -1036,7 +1036,7 @@ export default {
                             this.cancelForm();
 
                             this.$root.$emit('displayMessage', {
-                                text: 'Subscription successfuly renewed!',
+                                text: 'Subscription successfully renewed!',
                                 color: 'success',
                             });
                         } else {

@@ -36,11 +36,7 @@ class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
                 $this->brand = $entity['brand'];
                 $entity[$entityIndex]['data'] = $this->decorateContentEntity($entity)['data'];
             } elseif ($entity instanceof CommentEntity) {
-                ContentRepository::$bypassPermissions = true;
-                $content = $this->contentService->getById($entity['content_id']);
-                $this->brand = $content['brand'] ?? '';
                 $this->id = $entity['id'];
-
                 $decoratedEntity = $this->decorateCommentEntity($entity);
                 $entity[$entityIndex]['comment'] = $decoratedEntity['comment'];
                 $entity[$entityIndex]['replies'] = $decoratedEntity['replies'] ?? [];
@@ -133,9 +129,10 @@ class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
                 continue;
             }
 
-            $oldRequest = \Request::create($url);
-
-            if (!in_array($oldRequest->getHttpHost(), [
+            // we only need to format the URL if it's one of our domains
+            $parsedUrl = parse_url($url);
+            $host = $parsedUrl['host'] ?? null;
+            if (!in_array($host, [
                 'www.drumeo.com',
                 'www.pianote.com',
                 'www.singeo.com',
@@ -147,6 +144,8 @@ class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
             ])) {
                 continue;
             }
+
+            $oldRequest = \Request::create($url);
             if (!empty($oldRequest->segments())) {
                 $segments = $this->formatNewUrl($oldRequest->segments(), $url);
                 $urls[$match] = $segments;

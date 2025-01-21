@@ -2550,7 +2550,7 @@ class SyncUsersToCIO extends Command
         "joost_muller@hotmail.com",
     ];
 
-    public function handle()
+    public function handle(): void
     {
         //        $this->info('Users found: ' . User::query()->where('created_at', '>', '2023-11-01')->count());
         //

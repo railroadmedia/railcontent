@@ -20,11 +20,6 @@ class UserListPagesController extends BaseController
     private ContentService $contentService;
     private UserContentProgressRepository $userContentRepository;
 
-    /**
-     * @param UserPlaylistsService $userPlaylistsService
-     * @param ContentService $contentService
-     * @param UserContentProgressRepository $userContentProgressRepository
-     */
     public function __construct(
         UserPlaylistsService $userPlaylistsService,
         ContentService $contentService,
@@ -108,124 +103,11 @@ class UserListPagesController extends BaseController
 
     public function inProgress(Request $request, $domain, $brand)
     {
-        ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED];
-
-        ContentRepository::$pullFutureContent = true;
-        ContentRepository::$catalogMetaAllowableFilters = config('railcontent.cataloguesMetadata')[brand()]['in-progress']['allowableFilters'];
-        ContentRepository::$countFilterOptionItems = true;
-
-        if (!empty($request->get('type'))) {
-            $contentTypes = [$request->get('type')];
-        } else {
-            $contentTypes = ContentTypes::userListContentTypes();
-        }
-
-        $state = UserContentProgressService::STATE_COMPLETED;
-        if(!$request->has('tabs') || $request->get('tabs')[0] == 'inProgress') {
-            $state = UserContentProgressService::STATE_STARTED;
-        }
-        $listLessons = $this->contentService->getFiltered(
-            $request->get('page', 1),
-            $request->get('limit', 10),
-            '-progress',
-            $contentTypes,
-            $request->get('slug_hierarchy', []),
-            $request->get('required_parent_ids', []),
-            $request->get('irequired_fields', []),
-            $request->get('included_fields', []),
-            $request->get('required_user_states', [$state]),
-            $request->get('included_user_states', []),
-            true,
-            false,
-            true,
-            false,
-            false,
-            false
-        );
-
-        $allowedTypes = ContentTypes::userListContentTypes();
-
-        usort($allowedTypes, function ($a, $b) {
-            return strcmp($a, $b);
-        });
-
-        $currentUser = [
-            "avatar" => user()->profile_picture_url,
-            "xp" => user()->totalXp(),
-            "access_level" => user()->access_level,
-            "xp_rank" => user()->getXpRank(),
-        ];
-        ContentRepository::$catalogMetaAllowableFilters = [];
-
-        return view('account.lesson-history', [
-            "listLessons" => $listLessons->toResponseRawJson(),
-            "allowedTypes" => $allowedTypes,
-            "resetProgress" => true,
-            'currentUser' => $currentUser,
-        ]);
+        return view('account.lesson-history');
     }
 
     public function completed(Request $request, $domain, $brand)
     {
-        ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED];
-
-        ContentRepository::$pullFutureContent = true;
-
-        if (!empty($request->get('type'))) {
-            $contentTypes = [$request->get('type')];
-        } else {
-            $contentTypes = ContentTypes::userListContentTypes();
-        }
-        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-
-        $noResultsMessage =
-            'You haven\'t completed any lessons of that type yet, once you complete a lesson of this type it will show up here for you to access later.';
-        $completedProgressRows = $this->userContentRepository->getForUserStateContentTypes(
-            auth()->id(),
-            $contentTypes,
-            UserContentProgressService::STATE_COMPLETED,
-            'updated_on',
-            'desc',
-            $request->get('limit', 20),
-            ($request->get('page', 1) - 1) * $request->get('limit', 20)
-        );
-        $lessons = $this->contentService->getByIds(array_column($completedProgressRows, 'content_id'));
-
-        $totalResults = $this->contentService->countByTypesUserProgressState(
-            $contentTypes,
-            auth()->id(),
-            UserContentProgressService::STATE_COMPLETED,
-        );
-
-        $listLessons =
-            (new ContentFilterResultsEntity(
-                ['results' => $lessons, 'total_results' => $totalResults]
-            ))->toResponseRawJson();
-
-        $initialPage = $request->get('page', 1);
-
-        $allowedTypes = ContentTypes::userListContentTypes();
-
-        usort($allowedTypes, function ($a, $b) {
-            return strcmp($a, $b);
-        });
-
-        $currentUser = [
-            "avatar" => user()->profile_picture_url,
-            "xp" => user()->totalXp(),
-            "access_level" => user()->access_level,
-            "xp_rank" => user()->getXpRank(),
-        ];
-
-        return view('account.lesson-history', [
-            "listLessons" => $listLessons,
-            "allowedTypes" => $allowedTypes,
-            "resetProgress" => true,
-            "initialPage" => $initialPage,
-            'currentUser' => $currentUser,
-            "noResultsMessage" => $noResultsMessage,
-        ]);
+        return view('account.lesson-history');
     }
 }

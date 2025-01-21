@@ -6,19 +6,17 @@ use App\Http\Controllers\Drumeo\SalesController;
 Route::domain('{drumeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-        Route::get('/referral-join', [
-            'as' => 'referral.invite-a-friend-landing',
-            'uses' => \App\Http\Controllers\Musora\ReferralJoinController::class . '@join',
-        ]);
+        Route::get('/referral-join', \App\Http\Controllers\Musora\ReferralJoinController::class . '@join')->name('referral.invite-a-friend-landing');
         Route::get('/', [SalesController::class, 'homeBF']);
         Route::get('/ultimate-bundle', [SalesController::class, 'homeBF']);
         Route::get('/lp', [SalesController::class, 'promoEG']);
+        Route::get('/new-year', [SalesController::class, 'promoNY']);
         Route::get('/beginner', [SalesController::class, 'promo']);
         Route::get('/student-only', [SalesController::class, 'promo']);
         Route::get('/choose-plan', [SalesController::class, 'choosePlan']);
         Route::get('/upgrade-offer', [SalesController::class, 'salesUpgrade']);
         Route::get('/lifetime', [SalesController::class, 'salesLifetime']);
-        //    Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
+        Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount']);
         Route::get('/anniversary', [SalesController::class, 'promoEG']);
         Route::get('/vdf', [SalesController::class, 'choosePlanVDF']);
         Route::get('/restart', [SalesController::class, 'restart']);
@@ -37,7 +35,7 @@ Route::domain('{drumeoDomain}')
         Route::get('/song-demo/', [SalesController::class, 'songDemo']);
         Route::get('/tom-sawyer/', [SalesController::class, 'tomSawyer']);
         Route::get('/drumfest', [SalesController::class, 'drumFest']);
-        Route::get('/awards/', [SalesController::class, 'awards']);
+        Route::get('/awards/previous-winners', [SalesController::class, 'awards']);
         Route::get('/sonor/', [SalesController::class, 'sonor']);
 
         Route::get('/alesis', [SalesController::class, 'alesisNitro']);
@@ -50,10 +48,17 @@ Route::domain('{drumeoDomain}')
         Route::get('/alesis-strata-core/existing', [SalesController::class, 'alesisStrataCoreExisting']);
         Route::get('/alesis-nitro-pro', [SalesController::class, 'alesisNitroPro']);
         Route::get('/alesis-nitro-pro/existing', [SalesController::class, 'alesisNitroProExisting']);
+        Route::get('/yamaha-ead10', [SalesController::class, 'yamaha']);
+        Route::get('/yamaha-ead10/existing', [SalesController::class, 'yamahaExisting']);
 
         Route::get('/june', [SalesController::class, 'trial']);
         Route::get('/trial-key', [SalesController::class, 'trialKey']);
-        Route::get('/practice-anywhere', [SalesController::class, 'practiceAnywhere']);
+        // Route::get('/practice-anywhere', [SalesController::class, 'practiceAnywhere']);
+        // Route::get('/back-to-school', [SalesController::class, 'backToSchool']);
+        Route::get('/guitarcenter', [SalesController::class, 'guitarcenter']);
+        Route::get('/GuitarCenter', [SalesController::class, 'guitarcenter']);
+        Route::get('/save-300', [SalesController::class, 'save300']);
+        Route::get('/welcome-back-discount', [SalesController::class, 'welcomeBackDiscount']);
         Route::get('/trial', [SalesController::class, 'trial']);
         Route::get('/trial2', [SalesController::class, 'trial']);
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner']);
@@ -68,6 +73,7 @@ Route::domain('{drumeoDomain}')
                 'bestbook-trial',
                 'coaches-quiz',
                 'earthworks',
+                'blue-man-trial',
                 'melodics',
                 'new-drummers-trial',
                 'power-pack',
@@ -92,8 +98,7 @@ Route::domain('{drumeoDomain}')
 
 
         Route::get('/estepario', [SalesController::class, 'estepario']);
-        Route::group(
-            ['prefix' => 'a' ],
+        Route::prefix('a')->group(
             function () {
                 Route::get('/{page?}', SalesController::class . '@a')
                     ->whereIn('page', [
@@ -119,8 +124,7 @@ Route::domain('{drumeoDomain}')
                     ]);
             }
         );
-        Route::group(
-            ['prefix' => 'ambassador' ],
+        Route::prefix('ambassador')->group(
             function () {
                 Route::get('/{page?}', SalesController::class . '@ambassador')
                     ->whereIn('page', [
@@ -128,21 +132,26 @@ Route::domain('{drumeoDomain}')
                     ]);
             }
         );
-        Route::group(
-            ['prefix' => 'affiliate' ],
+        Route::prefix('affiliate')->group(
             function () {
                 Route::get('/{page?}', SalesController::class . '@affiliates')
                     ->whereIn('page', [
                         '66samus',
                         'adriendrums',
                         'alejandrosifuentes',
+                        'apartment-drummer',
                         'andrewrooney',
+                        'arthur-dubois',
                         'asobergirlsguide',
                         'bhcollective',
+                        'blaine-stillman',
                         'brandonscott',
+                        'brett-clur',
                         'bryanforcedrums',
                         'cooperdrummer',
+                        'dany-kufner',
                         'davidcola',
+                        'dorothea-taylor',
                         'drumhelper',
                         'drummingreview',
                         'drumninja',
@@ -162,7 +171,15 @@ Route::domain('{drumeoDomain}')
                         'tobines',
                         'worshipdrummer',
                         'wyattstav',
-                        'zackgrooves'
+                        'zackgrooves',
+                        'electric-drum-advisor',
+                        'music-production-zone',
+                        'musician-wave',
+                        'izzy-lamberti',
+                        'john-miles-brockman',
+                        'musicradar',
+                        'rock-angel',
+                        'sun-fyre',
                     ]);
             }
         );

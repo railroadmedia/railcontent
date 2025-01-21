@@ -247,7 +247,7 @@
                 <span>
                 ONLY AVAILABLE FOR
                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                    <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
@@ -307,30 +307,30 @@
             <p class="text-center mb-6">You’ll have one year of unlimited drum lessons, including:</p>
             <div class="md:grid md:grid-cols-3 md:gap-4">
                 <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#071023;">
-                    <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-method.jpg');"></div>
+                    <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-method.jpg');"></div>
                     <div class=" px-3 lg:px-4 py-5 lg:py-7 text-center">
                         <i class="text-4xl align-middle icon-drumeo-method text-drumeo"></i>
-                        <img class="h-5 ml-2 imgfilter-method" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">
+                        <img class="h-5 ml-2 imgfilter-method" src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">
                         <p class="mt-2">
                             Step-by-step lessons for the next stage of your drumming.
                         </p>
                     </div>
                 </div>
                 <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#071023;">
-                    <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-songs2.jpg');"></div>
+                    <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-songs2.jpg');"></div>
                     <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
                         <i class="text-4xl align-middle icon-songs text-songs"></i>
-                        <img class="h-5 ml-2 imgfilter-songs" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
+                        <img class="h-5 ml-2 imgfilter-songs" src="https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
                         <p class="mt-2">
                             Easy access to famous drum songs with play-along tools.
                         </p>
                     </div>
                 </div>
                 <div class="relative rounded-xl overflow-hidden" style="background-color:#071023;">
-                    <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches2.jpg');"></div>
+                    <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches2.jpg');"></div>
                     <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
-                        <img class="h-8 icon imgfilter-coaches" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">
-                        <img class="h-5 ml-2 imgfilter-coaches" src="https://www.musora.com/musora-cdn/image/quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">
+                        <img class="h-8 icon imgfilter-coaches" src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">
+                        <img class="h-5 ml-2 imgfilter-coaches" src="https://www.musora.com/cdn-cgi/image/quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">
                         <p class="mt-2">
                             Personalized support for ALL your drumming questions.
                         </p>
@@ -379,35 +379,35 @@
     <section class="py-6 md:py-10" style="background-color:#F1F7FE;">
         <div class="mx-auto md:max-w-3xl lg:max-w-4xl grid grid-cols-1 sm:grid-cols-3 gap-6 px-4 lg:px-0">
             <div class="max-w-xs mx-auto">
-                <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John_Stamos.jpg" alt="John Stamos" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                <img class="rounded-xl" src="https://www.musora.com/cdn-cgi/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John_Stamos.jpg" alt="John Stamos" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                 <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                     “Playing drums is my favorite thing I get to do and I learn so much from all of these super pros on Drumeo.”
                 </p>
                 <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px; " href="https://www.instagram.com/reel/CeTtxCLpo7m/?utm_source=ig_web_copy_link&utm_campaign=2022-06-05_Drumeo_Mainlist_Celebrity-Drummers&utm_medium=email&utm_source=customer.io">As shared on Instagram</a>
                 <p class="font-inter mt-4 sm:mt-6">
-                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=220,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John--Stamos.svg" alt="John Stamos"> <br>
+                    <img class="h-10" src="https://www.musora.com/cdn-cgi/image/width=220,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John--Stamos.svg" alt="John Stamos"> <br>
                     <i class="text-sm">Actor, Musician, Singer</i>
                 </p>
             </div>
             <div class="max-w-xs mx-auto">
-                <img class="rounded-md" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben_Stiller.jpg" alt="Ben Stiller" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                <img class="rounded-md" src="https://www.musora.com/cdn-cgi/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben_Stiller.jpg" alt="Ben Stiller" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                 <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                     “It’s an app that teaches you drums and has songs you can play along with, different teachers, and sheet music. It’s really good.”
                 </p>
                 <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px;" href="https://youtube.com/shorts/frOYuDmEO2s?feature=share">As shared on "The Howard Stern Show"</a>
                 <p class="font-inter mt-4 sm:mt-6">
-                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben--Stiller.svg" alt="Ben Stiller"> <br>
+                    <img class="h-10" src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben--Stiller.svg" alt="Ben Stiller"> <br>
                     <i class="text-sm">Actor, Comedian, Producer</i>
                 </p>
             </div>
             <div class="max-w-xs mx-auto">
-                <img class="rounded-md" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr_Cech.jpg" alt="Petr_Cech" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                <img class="rounded-md" src="https://www.musora.com/cdn-cgi/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr_Cech.jpg" alt="Petr_Cech" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                 <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                     “Drumeo is the easiest way for me to learn the drums, because I can learn anything I want, whenever it works best for me!”
                 </p>
                 <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px; " href="https://www.drumeo.com/beat/petr-cech/">As shared on Drumeo.com</a>
                 <p class="font-inter mt-4 sm:mt-6">
-                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=170,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr--Cech.svg" alt="Petr Cech"> <br>
+                    <img class="h-10" src="https://www.musora.com/cdn-cgi/image/width=170,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr--Cech.svg" alt="Petr Cech"> <br>
                     <i class="text-sm">Record-Setting Goalkeeper, Chelsea FC</i>
                 </p>
             </div>
@@ -430,17 +430,17 @@
                         ],
         ]
     @endphp
-    @include('musora.sales.components.order-section-bonuses', [
-    'bgColor' => 'background:linear-gradient(to bottom, #01050F 66%, #07132C);',
-    'subHeader' => '<strong><span class="text-musora">SAVE 40%</span> ON YOUR DRUMEO MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 2 FREE BONUSES.',
-    'theme' => 'drumeo',
-        'firstYearPrice' => '143',
-        'CTA' => 'CLAIM YOUR OFFER',
-    'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
-    'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&locked=true&promo-code=ultimate-technique',
-    'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
-    ])
+{{--    @include('musora.sales.components.order-section-bonuses', [--}}
+{{--    'bgColor' => 'background:linear-gradient(to bottom, #01050F 66%, #07132C);',--}}
+{{--    'subHeader' => '<strong><span class="text-musora">SAVE 40%</span> ON YOUR DRUMEO MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 2 FREE BONUSES.',--}}
+{{--    'theme' => 'drumeo',--}}
+{{--        'firstYearPrice' => '143',--}}
+{{--        'CTA' => 'CLAIM YOUR OFFER',--}}
+{{--    'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',--}}
+{{--    'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',--}}
+{{--    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&locked=true&promo-code=ultimate-technique',--}}
+{{--    'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',--}}
+{{--    ])--}}
 
     <div id="customize-section" class="anchor"></div>
 

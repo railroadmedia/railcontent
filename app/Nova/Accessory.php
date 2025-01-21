@@ -46,7 +46,7 @@ class Accessory extends Resource
 
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
+            BelongsTo::make('Brand', 'brand', \App\Nova\Brand::class)->sortable(),
             Hidden::make('prodcut_type_id', 'product_type_id')->default(ProductType::where('name', 'Accessories')->first()->id),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('Name')->required()->sortable(),

@@ -4,14 +4,13 @@ namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Models\Product;
-use Modules\UserManagementSystem\Models\User;
 use Signifly\Shopify\Shopify;
 
 class ShopifySyncIds extends Command
 {
     protected $signature = 'ecommerce:ShopifySyncIDs {startPageIndex=0}';
 
-    public function handle(Shopify $shopify)
+    public function handle(Shopify $shopify): void
     {
         $this->withExecutionTime(function () use ($shopify) {
             $startPageIndex = intval($this->argument('startPageIndex'));
@@ -43,38 +42,39 @@ class ShopifySyncIds extends Command
                 }
             }
 
+            // NOTE: commenting to only sync products in beta-testing for system test
 
-            $pages = $shopify->paginateCustomers(
-                [
-                    'limit' => 250,
-                ]
-            );
-            $i = 1;
-
-            foreach ($pages as $page) {
-                $this->info('Page ' . $i);
-                if ($i >= $startPageIndex) {
-                    foreach ($page as $customer) {
-                        $this->info($customer->id);
-                        try {
-                            $shopify->getCustomerMetafields($customer->id)->each(
-                                function ($metafield) use ($shopify, $customer) {
-                                    if ($metafield->key == '_id') {
-                                        $user = User::query()->find($metafield->value) ?? null;
-                                        if ($user) {
-                                            $user->shopify_id = $customer->id;
-                                            $user->saveWithoutUpdatedAt();
-                                        }
-                                    }
-                                }
-                            );
-                        } catch (\Exception $e) {
-                            $this->error($e->getMessage());
-                        }
-                    }
-                }
-                $i++;
-            }
+            // $pages = $shopify->paginateCustomers(
+            //     [
+            //         'limit' => 250,
+            //     ]
+            // );
+            // $i = 1;
+            //
+            // foreach ($pages as $page) {
+            //     $this->info('Page ' . $i);
+            //     if ($i >= $startPageIndex) {
+            //         foreach ($page as $customer) {
+            //             $this->info($customer->id);
+            //             try {
+            //                 $shopify->getCustomerMetafields($customer->id)->each(
+            //                     function ($metafield) use ($shopify, $customer) {
+            //                         if ($metafield->key == '_id') {
+            //                             $user = User::query()->find($metafield->value) ?? null;
+            //                             if ($user) {
+            //                                 $user->shopify_id = $customer->id;
+            //                                 $user->saveWithoutUpdatedAt();
+            //                             }
+            //                         }
+            //                     }
+            //                 );
+            //             } catch (\Exception $e) {
+            //                 $this->error($e->getMessage());
+            //             }
+            //         }
+            //     }
+            //     $i++;
+            // }
         });
     }
 }

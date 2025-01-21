@@ -1,5 +1,6 @@
 <template>
-  <div :class="`tw-flex tw-w-full tw-mx-auto tw-pt-5 md:tw-pt-[25px] ${classOverride}`">
+  <SkeletonBreadcrumbs v-if="isLoading" />
+  <div v-else :class="`tw-flex tw-w-full tw-mx-auto tw-pt-5 md:tw-pt-[25px] ${classOverride}`">
     <!-- Mobile -->
     <div v-if="penultimateBreadcrumb && penultimateBreadcrumb.url" class="tw-flex lg:tw-hidden tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-uppercase tw-text-[12px]">
       <a class="tw-flex tw-items-center tw-text-sm tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-no-underline"
@@ -9,7 +10,7 @@
       </a>
     </div>
     <!-- Desktop -->
-    <div class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-hidden lg:tw-flex tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden tw-uppercase tw-text-[14px] tw-leading-[21px]">
+    <div class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-hidden lg:tw-flex lg:tw-flex-wrap tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden tw-uppercase tw-text-[14px] tw-leading-[21px]">
       <a :href="`/${brand}`" class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] dark:hover:tw-text-white hover:tw-text-black tw-font-normal tw-text-[14px] tw-leading-[21px] tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
         HOME
       </a>
@@ -30,6 +31,7 @@
   import { computed } from 'vue';
   import { storeToRefs } from 'pinia';
   import { useUserStore } from '../../../Stores/user';
+  import SkeletonBreadcrumbs from '../SkeletonLoader/SkeletonBreadcrumbs.vue';
 
   const userStore = useUserStore();
   const { brand } = storeToRefs(userStore);
@@ -42,7 +44,11 @@
     classOverride: {
       type: String,
       default: '',
-    }
+    },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
   });
 
   const penultimateBreadcrumb = computed(() => {

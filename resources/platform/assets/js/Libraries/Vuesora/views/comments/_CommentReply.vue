@@ -1,12 +1,12 @@
 <template>
-    <div class="tw-flex tw-flex-row comment-post pv mv-1 dark:tw-text-white tw-ml-[-70px] sm:tw-ml-[-60] md:tw-ml-0 tw-group/reply"
+    <div class="tw-flex tw-flex-row comment-post pv mv-1 dark:tw-text-white -tw-ml-[28px] sm:-tw-ml-[70px] sm:tw-ml-[-60] md:tw-ml-0 tw-group/reply"
         v-on:mouseleave="showDropdown = false;">
-        <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px]">
+        <div class="tw-flex tw-flex-col avatar-column tw-max-w-[33px] sm:tw-max-w-[75px] tw-mr-[6px] sm:tw-mr-[15px]">
             <div v-if="hasPublicProfiles" class="user-avatar smaller" :class="[avatarClassObject, brand]">
                 <a :href="profileRoute" target="_blank" class="tw-no-underline">
                     <!-- User Avatar -->
                     <img :src="comment.user['fields.profile_picture_image_url']" loading="lazy"
-                        class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                        class="tw-rounded-full tw-transition-opacity tw-duration-500 tw-border-[1px] sm:tw-border-[3px]"
                         :class="comment.user.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
                         @load="comment.user.imageLoaded = true">
                 </a>
@@ -19,29 +19,29 @@
                 @load="comment.user.imageLoaded = true">
 
             <p v-if="showUserExp"
-                class="tw-uppercase tw-text-center tw-mt-[10px] tw-font-bebas-neue tw-font-bold tw-text-[18px] tw-leading-none">
+                class="tw-hidden sm:tw-block tw-uppercase tw-text-center tw-mt-[10px] tw-font-bebas-neue tw-font-bold tw-text-[18px] tw-leading-none">
                 {{ userExpRank }}
             </p>
             <p v-if="showUserExp"
-                class="tw-uppercase tw-text-center tw-mt-[5px] tw-font-bebas-neue tw-font-bold tw-text-[16px] dark:tw-text-[#9EC0DC] tw-leading-none">
+                class="tw-hidden sm:tw-block tw-uppercase tw-text-center tw-mt-[5px] tw-font-bebas-neue tw-font-bold tw-text-[16px] dark:tw-text-[#9EC0DC] tw-leading-none">
                 {{ userExpValue }} XP
             </p>
         </div>
         <div class="tw-flex tw-flex-col tw-flex-grow">
-            <div class="tw-flex tw-flex-row tw-items-center tw-mb-1 comment-meta">
+            <div class="tw-flex tw-flex-row tw-items-center sm:tw-mb-1 comment-meta">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
                     <h2 class="tw-flex break-words tw-leading-0 tw-items-end">
                         <a v-if="hasPublicProfiles" :href="profileRoute" target="_blank"
-                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0 hover:tw-underline hover:tw-underline-offset-2">
+                            class="tw-font-bold tw-text-[#00101D] tw-text-[13px] sm:tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0 hover:tw-underline hover:tw-underline-offset-2">
                             {{ comment.user.display_name }}
                         </a>
                         <span v-else
-                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0">
+                            class="tw-font-bold tw-text-[#00101D] tw-text-[13px] sm:tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0">
                             {{ comment.user.display_name }}
                         </span>
 
                         <span
-                            class="tw-font-normal tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[16px] tw-ml-[9px] tw-leading-0">
+                            class="tw-font-normal tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[13px] sm:tw-text-[16px] tw-ml-[9px] tw-leading-0">
                             {{ dateString }}
                         </span>
                     </h2>
@@ -50,7 +50,7 @@
                 <div class="tw-flex tw-flex-col align-h-right tw-justify-center tw-grow-0">
                     <div class="tw-flex tw-flex-row">
                         <button v-if="(isUsersPost || isCurrentUserAdmin)"
-                            class="tw-inline-flex tw-items-center tw-justify-center tw-text-sm no-decoration tw-cursor-pointer tw-mr-1 tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-h-[32px] tw-w-[32px]"
+                            class="tw-inline-flex tw-items-center tw-justify-center tw-text-sm no-decoration tw-cursor-pointer tw-mr-1 tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-h-[19.5px] sm:tw-h-[24px] tw-w-[19.5px] sm:tw-w-[24px]"
                             @click="deleteComment">
                             <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]" />
                         </button>
@@ -58,8 +58,8 @@
                 </div>
             </div>
 
-            <div class="tw-flex tw-flex-row body tw-mb-2">
-                <div class="tw-flex tw-flex-col post-body tw-flex-grow tw-forum-post" v-html="comment.comment">
+            <div class="tw-flex tw-flex-row body sm:tw-mb-2">
+                <div class="tw-flex tw-flex-col post-body tw-flex-grow tw-forum-post tw-text-[13px] sm:tw-text-base" v-html="comment.comment">
                 </div>
             </div>
 

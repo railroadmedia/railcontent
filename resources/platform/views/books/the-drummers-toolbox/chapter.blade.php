@@ -200,7 +200,7 @@ if(!empty($user)){
         </div>
     </div>
 
-    @if(empty($user) || (!empty($user) && !$user->isAMember() && $user->isPackOnlyOwner()))
+    @if(empty($user) || (!empty($user) && !$user->isAMember() && $user->isPackOrChallengeOnlyOwner()))
         <div class="container fluid bg-grey-2 pt-3 relative">
             <div class="container">
                 <div class="flex flex-row align-v-center flex-wrap">
@@ -209,7 +209,7 @@ if(!empty($user)){
                         <p class="body mb-2">
                             @if($isDigital)
                                 @if(!empty($user))
-                                    @if(!$user->isAMember() && $user->isPackOnlyOwner())
+                                    @if(!$user->isAMember() && $user->isPackOrChallengeOnlyOwner())
                                         <br><br>
                                         To access all of the Drumeo resources, simply create your free Drumeo
                                         account by clicking the “Redeem” button below. You can find your redemption code

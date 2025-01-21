@@ -14,7 +14,7 @@ class ShopifySyncOrdersSince extends Command
                             {startDate : The ISO 8601 date time for all Shopify orders to get where the updated_at at or after. e.g. 2023-10-13T17:00:25+00:00}
                             {--endDate= : (Optional) The ISO 8601 date time for all Shopify orders to get where the updated_at at or before. e.g. 2023-10-13T17:30:14+00:00}';
 
-    public function handle(ShopifyGateway $shopifyGateway)
+    public function handle(ShopifyGateway $shopifyGateway): void
     {
         $startDate = Carbon::parse($this->argument('startDate'));
         $endDate = $this->option("endDate") ? Carbon::parse($this->option('endDate')) : Carbon::now();

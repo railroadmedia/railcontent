@@ -26,18 +26,12 @@ class UserEvent
         $this->eventType = $eventType;
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getEventType()
+    public function getEventType(): string
     {
         return $this->eventType;
     }

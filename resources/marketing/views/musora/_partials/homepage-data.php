@@ -179,25 +179,22 @@ $musora = [
                     "image" => "marketing/musora/membership/homepage/2024/packs/Beautiful-Harmonies.webp",
                 ],
                 [
-                    "image" => "marketing/musora/membership/homepage/2024/packs/Defining-Yourself.webp",
-                ],
-                [
                     "image" => "marketing/musora/membership/homepage/2024/packs/Find-Your-True-Voice.webp",
                 ],
                 [
                     "image" => "marketing/musora/membership/homepage/2024/packs/Hit-The-High-Notes.webp",
                 ],
                 [
-                    "image" => "marketing/musora/membership/homepage/2024/packs/Singing-With-Soul.webp",
-                ],
-                [
-                    "image" => "marketing/musora/membership/homepage/2024/packs/Songwriting-For-Singers.webp",
-                ],
-                [
-                    "image" => "marketing/musora/membership/homepage/2024/packs/The-Power-Of-Movement.webp",
-                ],
-                [
                     "image" => "marketing/musora/membership/homepage/2024/packs/The-Science.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/5DVE.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Develop-Your-High-Range.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Vocal-Endurance.webp",
                 ],
             ]
         ],
@@ -422,29 +419,9 @@ $musora = [
                     'instructor' => 'Sheléa',
                 ],
                 [
-                    'img' => 'marketing/musora/membership/homepage/2024/coaches/The-power-of-movement.webp',
-                    'title' => 'The Power<br> of Movement',
-                    'instructor' => 'Chris Johnson',
-                ],
-                [
-                    'img' => 'marketing/musora/membership/homepage/2024/coaches/singing-with-soul.webp',
-                    'title' => 'Singing<br> With Soul',
-                    'instructor' => 'Tony Lindsay',
-                ],
-                [
-                    'img' => 'marketing/musora/membership/homepage/2024/coaches/define-your-singing.webp',
-                    'title' => 'Define Your<br> Singing',
-                    'instructor' => 'Cate Canning',
-                ],
-                [
                     'img' => 'marketing/musora/membership/homepage/2024/coaches/the-science-of-singing-better.webp',
                     'title' => 'The Science<br> of Singing Better',
                     'instructor' => 'Darcy D',
-                ],
-                [
-                    'img' => 'marketing/musora/membership/homepage/2024/coaches/songwriting-for-singers.webp',
-                    'title' => 'Songwriting <br>For Singers',
-                    'instructor' => 'Hailey Benedict',
                 ],
                 [
                     'img' => 'marketing/musora/membership/homepage/2024/coaches/hit-the-high-notes.webp',

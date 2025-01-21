@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Musora;
 
+use Illuminate\View\View;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
@@ -63,7 +64,7 @@ class ProductPagesController extends BaseController
         ]);
     }
 
-    public function productAlt(Request $request)
+    public function productAlt(Request $request): View
     {
         $product = Product::where('slug', 'Musora-'.$request->slug)->firstOrFail();
 
@@ -115,7 +116,7 @@ class ProductPagesController extends BaseController
         }
     }
 
-    public function product($brand, $slug)
+    public function product($brand, $slug): View
     {
         $product = Product::where('slug', ucfirst($brand).'-'.$slug)->firstOrFail();
 

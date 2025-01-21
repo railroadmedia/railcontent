@@ -352,12 +352,12 @@
     <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="quietkick" class="h-16 sm:h-24" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png"><br>
+                <img alt="quietkick" class="h-16 sm:h-24" src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png"><br>
                 <h6 class="leading-tight my-3">Protect your ears + <br class="sm:hidden">play your favorite songs.</h6>
                 <h2 class="leading-tight">
                     @if(floatval($productPrices['drumeo-eardrums-black']->price) > floatval($productPrices['drumeo-eardrums-black']->discounted_price))
                         <s class="opacity-50">${{ floatval($productPrices['drumeo-eardrums-black']->price) }}</s>
-                        <strong>${{ floatval($productPrices['drumeo-eardrums-black']->discounted_price) }}</strong>
+                        <strong>${{ number_format(floatval($productPrices['drumeo-eardrums-black']->discounted_price), 2) }}</strong>
                         <em class="text-musora text-sm">(Save {{ round(100 - (100 * (floatval($productPrices['drumeo-eardrums-black']->discounted_price) / floatval($productPrices['drumeo-eardrums-black']->price)))) }}%)</em>
                     @else
                         <strong>${{ floatval($productPrices['drumeo-eardrums-black']->discounted_price) }}</strong>
@@ -367,7 +367,7 @@
                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     <div class="sm:w-5/12 join smaller outline sm:hidden inline-block"   @click="trailerM = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
-                        <a class="w-5/12 join smaller blue anchor-slide" href="#customize-anchor">Order Now</a>
+                        <a class="w-5/12 join smaller blue" href="/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1">Order Now</a>
                     @else
                         <a class="join smaller sold-out" @click="waitlistModal = true;">JOIN WAITLIST</a>
                     @endif
@@ -479,7 +479,7 @@
                     <img class="h-auto w-full sm:w-auto sm:h-56 lg:h-72 sm:order-1 rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/features-01b.webp">
                     <div class="sm:px-6 lg:px-10">
                         <h4 class="leading-tight my-2"><strong>Catch every detail.</strong></h4>
-                        <p>Triple driver headphones (that means 3 tiny speakers) give you a full range of sound -- from low kick drums to high cymbal shots.</p>
+                        <p>Triple driver headphones (that means 3 tiny speakers) give you a full range of sound – from low kick drums to high cymbal shots.</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center mb-7 sm:mb-10">
@@ -533,7 +533,7 @@
                     <h6 class="leading-normal">“I have really small ears and I am REALLY picky about sound.”</h6>
                     {{--                    <p class="my-4 sm:my-6">I have to say I was doubtful. I have some more expensive in-ear monitors and I have really small ears and I am REALLY picky about sound. I was 100% blown away – deep rich bass response, nice clear mids and highs and amazing fit, and best of all no ear fatigue! I was also pleasantly surprised at the nice compact package that fits into a pocket or purse to take with me and keep things all in one place. Lots of selection for ear tips and a nice cleaner all part of the package for an amazing price.  If I had listened to the sound alone I would have expected them to cost a lot more than they do. I use mine every day and recommend them to everyone I talk to!</p>--}}
                     <div class="flex items-center border-t-2 mt-5 pt-3" style="border-color:#B3D9FF;">
-                        <img class="rounded-full h-10" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dzryyo1we6bm3.cloudfront.net/avatars/360053_1646349286211-1646349288-360053.jpg" alt="Joy B">
+                        <img class="rounded-full h-10" src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dzryyo1we6bm3.cloudfront.net/avatars/360053_1646349286211-1646349288-360053.jpg" alt="Joy B">
                         <p class="leading-none mx-0 pl-4"><strong>Joy B</strong><br>
                             <span>Toronto</span>
                         </p>
@@ -543,7 +543,7 @@
                     <h6 class="leading-normal">“No more harsh-sounding headphones for drumming.”</h6>
                     {{--                    <p class="my-4 sm:my-6">I’ve been rocking EarDrums and like them. It’s great to have a lot of low end without having the bass or kick drum get muddy. They are very comfortable and I enjoy them. No more harsh-sounding headphones for drumming – and no more guessing where the bassist is going! I also like the high-end roll-off – this prevents listening fatigue AND protects your hearing if you like to listen loudly. </p>--}}
                     <div class="flex items-center border-t-2 mt-5 pt-3" style="border-color:#B3D9FF;">
-                        <img class="rounded-full h-10" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dzryyo1we6bm3.cloudfront.net/avatars/398228_1648758391036-1648758395-398228.jpg" alt="Lauri V">
+                        <img class="rounded-full h-10" src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dzryyo1we6bm3.cloudfront.net/avatars/398228_1648758391036-1648758395-398228.jpg" alt="Lauri V">
                         <p class="leading-none mx-0 pl-4"><strong>Lauri V.</strong><br>
                             <span>Finland</span>
                         </p>
@@ -553,7 +553,7 @@
                     <h6 class="leading-normal">“Definitely felt the Drumeo in-ears are a step up.”</h6>
                     {{--                    <p class="my-4 sm:my-6">I used these in a show the other night for the first time and really enjoyed them! Definitely felt the Drumeo in-ears are a step up from the KZ Pro 10s. The sound quality is competitive with KZs, but Drumeo in-ears are much more comfortable to me.</p>--}}
                     <div class="flex items-center border-t-2 mt-5 pt-3" style="border-color:#B3D9FF;">
-                        <img class="rounded-full h-10" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dzryyo1we6bm3.cloudfront.net/avatars/IMG_3193.jpg" alt="David G">
+                        <img class="rounded-full h-10" src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dzryyo1we6bm3.cloudfront.net/avatars/IMG_3193.jpg" alt="David G">
                         <p class="leading-none mx-0 pl-4"><strong>David G</strong><br>
                             <span>Mississippi</span>
                         </p>
@@ -563,7 +563,7 @@
                     <h6 class="leading-normal">“The isolation tips do a good job of cutting sound while still comfy.”</h6>
                     {{--                    <p class="my-4 sm:my-6">I love these things! Great sound and a good selection of tips for various needs/uses. The isolation tips do a good job of cutting sound while still comfy. Not only great for drum monitoring but all around music enjoyment.</p>--}}
                     <div class="flex items-center border-t-2 mt-5 pt-3" style="border-color:#B3D9FF;">
-                        <img class="rounded-full h-10" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Rick_profile.jpg" alt="Rick">
+                        <img class="rounded-full h-10" src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Rick_profile.jpg" alt="Rick">
                         <p class="leading-none mx-0 pl-4"><strong>Rick</strong><br>
                             <span>Oregon</span>
                         </p>
@@ -598,15 +598,15 @@
     </section>
     <section class="content-section text-center comparison px-1 lg:px-3" style="background:linear-gradient(to bottom, #272e41, #02050e);" x-data="{ tableClass: 'earbuds' }">
         <div class="container mx-auto max-w-5xl">
-            <h2 class="mb-16 md:mb-12 "><strong>The difference<br class="sm:hidden"> you can <img class="h-12 sm:h-20 align-bottom" src="https://www.musora.com/musora-cdn/image/width=320,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/hear.png" alt="Hear text"></strong></h2>
+            <h2 class="mb-16 md:mb-12 "><strong>The difference<br class="sm:hidden"> you can <img class="h-12 sm:h-20 align-bottom" src="https://www.musora.com/cdn-cgi/image/width=320,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/hear.png" alt="Hear text"></strong></h2>
             <div class="relative">
-                <p class="inline md:hidden leading-tight text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
+                <p class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower pt-2"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <table :class="{'earbuds': tableClass === 'earbuds', 'headphones': tableClass === 'headphones'}" class="w-full mx-auto border-separate comparison eardrums earbuds">
                     <tbody style="background-color:transparent!important;">
                     <tr style="background-color:transparent!important;">
                         <td></td>
                         <td class="rounded-t-xl">
-                            <img class="h-5 md:h-12 filter saturate-0 brightness-200"  src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png" alt="logo-white">
+                            <img class="h-5 md:h-12 filter saturate-0 brightness-200"  src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png" alt="logo-white">
                         </td>
                         <td class="leading-none rounded-t-xl" @click="tableClass = 'headphones'">Standard<br> Earbuds</td>
                         <td class="leading-none rounded-t-xl" @click="tableClass = 'earbuds'">Standard<br> Headphones</td>
@@ -721,24 +721,24 @@
             </div>
         </div>
     </section>
-    <section class="pt-10 sm:px-6 sm:py-16 lg:py-20">
-        <div class="container mx-auto max-w-3xl">
-            <div class="flex flex-wrap sm:flex-nowrap">
-                <div class="px-6 sm:pr-0 sm:pl-7 lg:pl-14 mb-7 sm:mb-0 sm:order-1">
-                    <img class="h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/drumeo-icon.svg">
-                    <h3 class="leading-tight my-4"><strong>30 Days Of Free Drum Lessons With Your EarDrums. </strong></h3>
-                    <p class="leading-normal">Play your favorite songs, study with your favorite teachers, and find your next breakthrough on the drums.
-                        <br><br>
-                        Your Drumeo EarDrums include 30 days of unlimited drum lessons. You’ll have sheet music for famous drum songs, step-by-step lessons with award-winning drummers, and playalongs in every style and tempo.
-                    </p>
-                </div>
-                <picture class="w-full sm:w-auto h-auto sm:h-96">
-                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">
-                    <img class="sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x700/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">
-                </picture>
-            </div>
-        </div>
-    </section>
+{{--    <section class="pt-10 sm:px-6 sm:py-16 lg:py-20">--}}
+{{--        <div class="container mx-auto max-w-3xl">--}}
+{{--            <div class="flex flex-wrap sm:flex-nowrap">--}}
+{{--                <div class="px-6 sm:pr-0 sm:pl-7 lg:pl-14 mb-7 sm:mb-0 sm:order-1">--}}
+{{--                    <img class="h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/drumeo-icon.svg">--}}
+{{--                    <h3 class="leading-tight my-4"><strong>30 Days Of Free Drum Lessons With Your EarDrums. </strong></h3>--}}
+{{--                    <p class="leading-normal">Play your favorite songs, study with your favorite teachers, and find your next breakthrough on the drums.--}}
+{{--                        <br><br>--}}
+{{--                        Your Drumeo EarDrums include 30 days of unlimited drum lessons. You’ll have sheet music for famous drum songs, step-by-step lessons with award-winning drummers, and playalongs in every style and tempo.--}}
+{{--                    </p>--}}
+{{--                </div>--}}
+{{--                <picture class="w-full sm:w-auto h-auto sm:h-96">--}}
+{{--                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">--}}
+{{--                    <img class="sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x700/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">--}}
+{{--                </picture>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
     <div id="customize-anchor" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16" style="background-color:#F4F8FB;">
@@ -746,50 +746,51 @@
             <img alt="quietkick logo" class="h-16 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/logo-black.png"><br>
             <h6 class="leading-tight mt-4 mb-2">Protect your ears +<br class="sm:hidden"> play your favorite songs.</h6>
             @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
-                @include('drumeo.products.partials._promo-cards', [
-                    'firstBadge' => 'SAVE 34%',
-                    'firstDeal' => 'Drumeo<br> EarDrums',
-                    'firstDealImage' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
-                    'firstImageHeight' => 'h-28 lg:h-32',
-                    'firstDealDiscount' => 149,
-                    'firstDealPrice' => 99,
-                    'firstDealSub' => 'Just the IEMs',
-                    'firstDealLink' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
-                    'firstButtonText' => 'SELECT',
-                    'firstDealExtra' => "One-time payment.",
-                    'whiteBg' => 'false',
-                    'firstExtraBonuses' => [
-                        '<strong>1 Pair of EarDrum IEMs</strong>',
-                        '<strong>30 Days Of Drumeo</strong>',
-                        'Single-layer Silicone Eartips (S/M/L)',
-                        'Triple-layer Silicone Eartips (S/M/L)',
-                        'Memory Foam Eartips (S/M/L)',
-                        'Drumeo Miniature Road Case',
-                        '2 Black Braided Cables',
-                        'Cleaning Brush',
-                        'Clothing Clip',
-                        '¼” Adapter',
-                    ],
-
-                    'secondBadge' => 'LAUNCH SPECIAL',
-                    'secondDeal' => 'EarDrums + 1 Year<br> Drumeo Membership',
-                    'secondDealImage' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',
-                    'secondImageHeight' => 'h-28 lg:h-32',
-                    'secondDealPrice' => 'Free EarDrums',
-                    'secondDealExtra' => "with annual Membership of $240/yr.",
-                    'secondButtonText' => 'SELECT',
-                    'secondDealLink' =>
-                        '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&promo-code=eardrums-shipping&locked=true',
-                    'secondExtraBonuses' => [
-                        '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
-                        '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',
-                        'Step-by-Step Lessons',
-                        'Song Breakdowns',
-                        'Personalized Support',
-                    ],
-                ])
+                <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8">
+{{--                    @include('drumeo.products.partials._order-card', [--}}
+{{--                        'firstOnMobile' => true,--}}
+{{--                        'highlightBorder' => true,--}}
+{{--                        'badge' => 'BEST DEAL',--}}
+{{--                        'header' => 'EarDrums + 1 Year<br> Drumeo Membership',--}}
+{{--                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',--}}
+{{--                        'imageHeight' => 'h-28 lg:h-32',--}}
+{{--                        'price' => 'Free EarDrums',--}}
+{{--                        'specialText' => "with annual Membership of $240/yr.",--}}
+{{--                        'cta' => 'SELECT',--}}
+{{--                        'link' =>--}}
+{{--                            '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&locked=true',--}}
+{{--                        'bonuses' => [--}}
+{{--                            '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',--}}
+{{--                            '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',--}}
+{{--                            'Step-by-Step Lessons',--}}
+{{--                            'Song Breakdowns',--}}
+{{--                            'Personalized Support',--}}
+{{--                        ],--}}
+{{--                    ])--}}
+                    @include('drumeo.products.partials._order-card', [
+                        'header' => 'Drumeo<br> EarDrums',
+                        'image' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
+                        'imageHeight' => 'h-28 lg:h-32',
+                        'fullPrice' => '$' . floatval($productPrices['drumeo-eardrums-black']->price),
+                        'price' => '$' . floatval($productPrices['drumeo-eardrums-black']->discounted_price),
+                        'specialText' => 'Just the IEMs',
+                        'link' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1',
+                        'cta' => 'SELECT',
+                        'specialText' => "One-time payment.",
+                        'bonuses' => [
+                            '<strong>1 Pair of EarDrum IEMs</strong>',
+                            'Single-layer Silicone Eartips (S/M/L)',
+                            'Triple-layer Silicone Eartips (S/M/L)',
+                            'Memory Foam Eartips (S/M/L)',
+                            'Drumeo Miniature Road Case',
+                            '2 Black Braided Cables',
+                            'Cleaning Brush',
+                            'Clothing Clip',
+                            '¼” Adapter',
+                        ],
+                    ])
+                </div>
             @else
                 <a class="join sold-out my-7"  @click="waitlistModal = true;">JOIN WAITLIST</a>
             @endif

@@ -11,7 +11,7 @@ class UpdateExistingAccessCodesWithThomannSource extends Command
 
     protected $description = 'Fill in the source for the given csv batch with thomann-11-2022';
 
-    public function handle()
+    public function handle(): void
     {
         $this->info('###### Starting UpdateExistingAccessCodesWithThomannSource comand....  ######');
 

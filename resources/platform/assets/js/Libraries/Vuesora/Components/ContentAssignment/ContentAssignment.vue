@@ -34,8 +34,10 @@
                 </div>
             </div>
             <div class="flex flex-column tw-ml-auto complete-column tw-items-start">
-                <div class="flex flex-row md:tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full">
-
+                <div
+                    class="flex-row md:tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full"
+                    :class="soundsliceSlug ? 'tw-grid tw-grid-cols-2 tw-gap-2 sm:tw-gap-0 sm:tw-flex' : 'tw-flex'"
+                >
                     <button id="open-exercise-button" v-if="soundsliceSlug"
                         class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] tw-mb-2 md:tw-mb-0 md:tw-mr-2 tw-w-full md:tw-w-[250px]"
                         @click="openExercise">
@@ -43,7 +45,7 @@
                     </button>
 
                     <button class="tw-w-full md:tw-w-[250px] md:tw-mr-2 tw-mb-2 md:tw-mb-0"
-                        :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`"
+                        :class="isComplete ? `tw-btn-primary tw-bg-[#00101D] dark:tw-bg-white tw-text-white dark:tw-text-[#00101D]` : `tw-btn-secondary tw-text-[#00101D] dark:tw-text-white`"
                         :disabled="isRequesting" @click.stop="markAsComplete">
                         <i class="fas fa-check mr-1"></i>
                         {{ isComplete ? 'Completed' : 'Complete' }}
@@ -59,9 +61,9 @@
             </div>
         </div>
         <transition name="slide-down-fade">
-            <div v-if="accordionActive && thisAssignment != null" v-show="!accordionLoading" class="flex flex-column">
-                <div v-show="$_description.length > 0" class="flex flex-row tw-pb-6">
-                    <div class="body tw-text-[#00101D] dark:tw-text-white" v-html="$_description">
+            <div v-if="accordionActive" v-show="!accordionLoading" class="flex flex-column">
+                <div v-show="description && description.length > 0" class="flex flex-row tw-pb-6">
+                    <div class="body tw-text-[#00101D] dark:tw-text-white tw-text-[13px] sm:tw-text-base" v-html="description">
                     </div>
                 </div>
                 <div v-show="$_totalPages > 0" class="flex flex-row tw-pb-6">
@@ -102,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-column pa-2 sm-3 hide-xs-only" :class="imageTypeSpacerClass"></div>
+                    <div class="flex flex-column pa-2 sm-3 hide-xs-only"></div>
                     <!--Spacer-->
                 </div>
             </div>
@@ -110,9 +112,9 @@
 
         <transition name="show-from-bottom">
             <div v-if="open" id="practiceOverlay" class="bg-white">
-                <SoundSlice :user-id="userId" :theme-color="themeColor" :additional-params="additionalParams"
-                    :soundslice-slug="soundsliceSlug" :content-id="lessonId" :loading="loading"
-                    @onLoad="loading = false" @onPlay="handlePlay" @onPause="handlePause">
+                <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalParams"
+                    :soundslice-slug="soundsliceSlug" :content-id="id" :loading="loading"
+                    @onLoad="loading = false" @onPlay="handlePlay" @onPause="handlePause" soundsliceType="assignment">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="title" :disable-next="disableNext" :disable-prev="disablePrev"
                             @onGoToPrevious="goToPrevious" @onGoToNext="goToNext" @onClose="closeExercise" />
@@ -125,14 +127,14 @@
 
 <script>
 import { Duration } from 'luxon';
+import { bgColor, textColor } from "@constants/brands";
 import ContentService from '../../assets/js/Services/content';
 import Utils from '../../assets/js/classes/utils';
-import ProgressTracker from '../../assets/js/classes/progress-tracker';
 import Intercom from "../../assets/js/Services/intercom"
 import Helpscout from "../../assets/js/Services/helpscout"
-import { bgColor, textColor } from "@constants/brands";
 import SoundSlice from '@collections/SoundSlice/SoundSlice.vue'
 import SoundSliceControls from '@collections/SoundSlice/SoundSliceControls.vue';
+import { getProgressPercentage, assignmentStatusCompleted, assignmentStatusReset } from 'musora-content-services';
 
 export default {
     name: 'ContentAssignment',
@@ -154,10 +156,6 @@ export default {
             default: () => 0,
         },
         brand: {
-            type: String,
-            default: () => 'drumeo',
-        },
-        themeColor: {
             type: String,
             default: () => 'drumeo',
         },
@@ -225,6 +223,10 @@ export default {
             type: [Number, String],
             default: () => 0,
         },
+        assignment: {
+            type: Object,
+            default: () => {}
+        }
     },
     watch: {
         forceOpen: function (newVal, __oldVal) {
@@ -235,8 +237,6 @@ export default {
     },
     data() {
         return {
-            progressTracker: null,
-            progressTrackerEventListener: null,
             currentPage: 1,
             totalPages: this.pages.length || 0,
             open: false,
@@ -245,12 +245,6 @@ export default {
             hasBeenPlayed: false,
             accordionActive: false,
             accordionLoading: false,
-            thisAssignment: {
-                id: 0,
-                sheet_music_image_url: [],
-                soundslice_slug: '',
-                description: '',
-            },
             isRequesting: false,
             isComplete: this.completed,
             ssEventTimeout: null,
@@ -291,19 +285,11 @@ export default {
         },
 
         $_sheet_music_pages() {
-            if (Array.isArray(this.thisAssignment.sheet_music_image_url)) {
-                return this.thisAssignment.sheet_music_image_url;
-            }
-
-            return this.thisAssignment.sheet_music_image_url ? [this.thisAssignment.sheet_music_image_url] : [];
+            return this.assignment.sheet_music_image_url || [];
         },
 
         $_soundslice_slug() {
-            return this.thisAssignment.soundslice_slug || '';
-        },
-
-        $_description() {
-            return this.thisAssignment.description || '';
+            return  this.assignment.soundslice_slug || '';
         },
 
         formattedTimecode() {
@@ -314,14 +300,6 @@ export default {
             }
 
             return duration.toFormat('h:mm:ss');
-        },
-
-        imageTypeSpacerClass() {
-            return {
-                'sm-9': this.thisAssignment.sheet_music_image_type === 'quarter-width',
-                'sm-6': this.thisAssignment.sheet_music_image_type === 'half-width',
-                'sm-3': this.thisAssignment.sheet_music_image_type === 'full-width' || this.thisAssignment.sheet_music_image_type == null,
-            };
         },
 
         carouselWidth: {
@@ -349,6 +327,15 @@ export default {
         window.addEventListener('requesting-completion', this.setIsRequesting);
         window.removeEventListener('lesson-complete', this.syncCompleteState);
     },
+    beforeMount() {
+        //Get completed state
+        getProgressPercentage(this.id).then( value => {
+            this.isComplete = value === 100;
+            //console.log('progress', value === 100)
+        }).catch( error => {
+            console.log('error getting assignment progress', error)
+        })
+    },
     methods: {
         addToPlaylist(data) {
             window.openplaylistmodal({ modalType: 'addItem', brand: this.brand, content: data });
@@ -363,24 +350,13 @@ export default {
         },
 
         openAssignment() {
-            if (this.thisAssignment.id === 0) {
-                this.accordionLoading = true;
+            this.accordionLoading = true;
 
-                ContentService.getContentById(this.id)
-                    .then((response) => {
-                        if (response) {
-                            this.thisAssignment = Utils.flattenContent(response.data.data)[0];
+            setTimeout(() => {
+                this.accordionLoading = false;
+            }, 250);
 
-                            this.accordionActive = !this.accordionActive;
-
-                            setTimeout(() => {
-                                this.accordionLoading = false;
-                            }, 250);
-                        }
-                    });
-            } else {
-                this.accordionActive = !this.accordionActive;
-            }
+            this.accordionActive = !this.accordionActive;
 
             Helpscout.hideWidget();
             Intercom.hideWidget();
@@ -390,8 +366,6 @@ export default {
             this.$emit('force-current');
             this.open = true;
             document.body.classList.add('no-scroll', 'dim-sidebar');
-
-            this.progressTracker = new ProgressTracker();
 
             Helpscout.hideWidget();
             Intercom.hideWidget();
@@ -412,16 +386,6 @@ export default {
             this.open = false;
             document.body.classList.remove('no-scroll', 'dim-sidebar');
 
-            this.progressTracker.sendAsync({
-                mediaId: this.id,
-                mediaType: 'assignment',
-                mediaCategory: 'soundslice',
-            });
-
-            this.progressTracker = null;
-
-            window.removeEventListener('unload', () => this.sendProgressTracking);
-
             Helpscout.showWidget();
             Intercom.showWidget();
         },
@@ -440,9 +404,9 @@ export default {
                         submit: () => {
                             this.isComplete = !this.isComplete;
 
-                            window.recalculateProgress(false, false, this.themeColor);
+                            window.recalculateProgress(false, false, this.brand);
 
-                            ContentService.resetContentProgress(vm.id)
+                            assignmentStatusReset(this.id, this.lessonId)
                                 .then((resolved) => {
                                     if (resolved) {
                                         element.classList.add('remove-request-complete');
@@ -469,9 +433,10 @@ export default {
             } else {
                 this.isComplete = !this.isComplete;
 
-                window.recalculateProgress(true, false, this.themeColor);
+                window.recalculateProgress(true, false, this.brand);
 
-                ContentService.markContentAsComplete(vm.id)
+
+                assignmentStatusCompleted(this.id, this.lessonId)
                     .then((resolved) => {
                         if (resolved) {
                             element.classList.add('add-request-complete');
@@ -498,31 +463,14 @@ export default {
             this.isRequesting = false;
         },
 
-        sendProgressTracking() {
-            this.progressTracker.send({
-                mediaId: this.id,
-                mediaType: 'assignment',
-                mediaCategory: 'soundslice',
-            });
-        },
-
         handlePlay() {
             if (!this.hasBeenPlayed) {
                 this.hasBeenPlayed = true;
-                ContentService.markContentAsStarted(this.id);
-            }
-
-            this.progressTracker.start();
-
-            if (!this.progressTrackerEventListener) {
-                this.progressTrackerEventListener = true;
-
-                window.addEventListener('unload', this.sendProgressTracking);
             }
         },
 
         handlePause() {
-            this.progressTracker.stop();
+            //console.log('tracker stop');
         },
     },
 };

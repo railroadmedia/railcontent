@@ -28,7 +28,6 @@
         <MusoraIcon v-if="musoraIconName && iconPositionOverride === 'right'" :icon-name="musoraIconName"
             :class="iconClass" />
         <i v-else-if="faIconClass && iconPositionOverride === 'right'" class="fas" :class="[faIconClass, iconClass]"></i>
-
         <slot />
     </button>
 </template>
@@ -64,6 +63,8 @@ const props = defineProps({
 });
 
 const buttonStyle = computed(() => {
+    if(props.inDropdown) return;
+
     return props.isPrimary ?
         'tw-btn-primary tw-bg-[#000C17] tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-text-center tw-m-0 md:tw-px-10 lg:tw-px-[30px] md:tw-inline-block tw-px-6 hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white'
         : 'tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-mb-0 tw-p-0 tw-min-h-0 hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17]';
@@ -122,7 +123,7 @@ const buttonConditionalClasses = computed(() => {
             if (!props.inDropdown) {
                 classes.push('tw-px-6 tw-py-1')
             }
-            classes.push('tw-w-auto tw-h-auto md:tw-h-[40px]');
+            classes.push('tw-w-auto tw-h-[35px] md:tw-h-[40px]');
 
         }
     }
@@ -140,7 +141,7 @@ const buttonConditionalClasses = computed(() => {
 
 // set rounded to none and hover border to none if in dropdown. set bg on hover to alternate with text while considering dark mode
 const inDropdownClasses = computed(() => {
-    return props.inDropdown ? 'tw-text-sm tw-leading-normal tw-font-normal font-family-open-sans tw-capitalize tw-px-4 tw-py-3 tw-justify-start tw-w-full tw-rounded-none tw-border-none tw-bg-[#000C17] tw-text-white dark:tw-text-[#000C17] hover:tw-bg-white hover:tw-text-[#000C17] hover:dark:tw-text-[#000C17]' : '';
+    return props.inDropdown ? 'tw-text-sm tw-leading-normal tw-capitalize tw-px-4 tw-py-3 tw-justify-start tw-w-full tw-rounded-none tw-border-none dark:tw-text-white tw-font-open-sans dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-left' : '';
 });
 
 const emit = defineEmits(['click']);

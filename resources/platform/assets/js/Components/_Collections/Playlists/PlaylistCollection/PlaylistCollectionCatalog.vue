@@ -5,7 +5,7 @@
         <section
             v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm && !state.categories"
             class="tw-w-full tw-flex dark:tw-text-white tw-justify-center tw-flex-col"
-            :class="miniCatalog ? 'tw-mt-1 tw-px-4 lg:tw-px-0 tw-items-start' : 'tw-mt-[58px] tw-items-center'"
+            :class="miniCatalog ? 'tw-mt-1 tw-items-start' : 'tw-mt-[58px] tw-items-center'"
         >
             <musora-icon v-if="!miniCatalog" icon-name="playlist" width="57" height="57" class="tw-mb-2" />
             <h1 class=" tw-font-bold tw-text-center tw-mb-2"
@@ -63,9 +63,9 @@
                     :listElement="listElement" :isListView="state.isListView" :token="token" :brand="brand" :index="i" />
             </section>
             <section v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView" class="tw-w-full tw-block tw-no-scrollbar tw-pt-4 tw--mt-4 tw-overflow-x-auto lg:tw-overflow-x-visible">
-                <div class="PlaylistMiniCatalogContainer tw-px-4 lg:tw-px-0 tw-w-full tw-gap-[6px] tw-relative tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-6 lg:tw-grid-cols-5 2xl:tw-grid-cols-6 xl:tw-gap-[12px] 2xl:tw-gap-[16px] tw-min-w-max lg:tw-min-w-full tw-pt-4 tw--mt-4 tw-overflow-x-auto lg:tw-overflow-x-visible">
+                <div class="PlaylistMiniCatalogContainer tw-w-full tw-gap-[6px] tw-relative tw-grid tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-6 lg:tw-grid-cols-5 2xl:tw-grid-cols-6 xl:tw-gap-[12px] 2xl:tw-gap-[16px] tw-min-w-max lg:tw-min-w-full tw-pt-4 tw--mt-4 tw-overflow-x-auto lg:tw-overflow-x-visible">
                     <!-- Mini Catalog -->
-                    <playlist-collection-card v-for="(listElement, i) in playlistsStore.playlists" :key="listElement.id"
+                    <playlist-collection-card v-for="(listElement, i) in playlists" :key="listElement.id"
                         :listElement="listElement" :isListView="false" :isMiniCatalog="true" :token="token" :index="i"
                         :brand="brand" :trackingSection="trackingSection" />
                 </div>
@@ -101,12 +101,12 @@
                 </template>
             </div>
         </div>
-
     </main>
 </template>
 
 <script setup>
 import { onBeforeMount, onMounted, onUpdated, watch, inject, reactive, computed } from 'vue';
+import { usePlatformStore } from '@stores/platform';
 import { usePlaylistsStore } from '@stores/playlists';
 import PlaylistCollectionControls from './PlaylistCollectionControls.vue';
 import PlaylistCollectionCard from './PlaylistCollectionCard.vue';
@@ -119,6 +119,7 @@ const token = inject('csrf_token');
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
+const platformStore = usePlatformStore();
 const userStore = useUserStore();
 
 const { brand } = storeToRefs(userStore)
@@ -138,12 +139,16 @@ const props = defineProps({
         default: false,
     },
     filterOptions: {
-        type: [Object, Array],
+        type: [Object],
         default: null
     },
     trackingSection: {
         type: String,
         default: ''
+    },
+    miniViewCardNum: {
+        type: Number,
+        default: 1
     }
 })
 
@@ -182,9 +187,7 @@ const toggleListView = () => {
 //---------Lifecycle Methods---------//
 
 onMounted(()=> {
-    if(props.miniCatalog || props.playlistCount <= 10 && props.playlists.length <= 10) {
-        playlistsStore.playlists = props.playlists;
-    } else {
+    if(!props.miniCatalog) {
         const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
         });
@@ -198,7 +201,10 @@ onMounted(()=> {
                 term: state.searchTerm,
                 sort: state.sortValue,
                 categories: state.categories ? [state.categories] : [],
-            }, token);
+            }, token).then(() => {
+                playlistsStore.loadingPlaylists = false;
+                platformStore.setLoadingState(false);
+            });
     }
     //For Create Modal to reload Playlists
     playlistsStore.pageHasPlaylistCatalog = true;

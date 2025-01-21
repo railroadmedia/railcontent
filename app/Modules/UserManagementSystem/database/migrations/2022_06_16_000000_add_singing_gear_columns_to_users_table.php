@@ -4,14 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSingingGearColumnsToUsersTable extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->string('singing_since_year')->nullable()->index();
@@ -22,10 +19,8 @@ class AddSingingGearColumnsToUsersTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->dropColumn('singing_since_year');
@@ -35,4 +30,4 @@ class AddSingingGearColumnsToUsersTable extends Migration
         });
     }
 
-}
+};

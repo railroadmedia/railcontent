@@ -11,7 +11,7 @@ class UserMembershipSyncCustom extends Command
     protected $signature = 'user:MembershipSyncCustom
     ';
 
-    public function handle()
+    public function handle(): void
     {
         $this->runBatchQuery(
             function (int $skip, int $take) {

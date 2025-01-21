@@ -53,8 +53,6 @@ class SyncProductsStockToShopify implements ShouldQueue
     /**
      * Execute the job
      *
-     * @param  Shopify  $shopify
-     * @return void
      * @throws Exception
      */
     public function handle(

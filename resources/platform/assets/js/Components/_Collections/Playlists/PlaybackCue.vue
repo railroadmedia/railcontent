@@ -4,6 +4,7 @@ import PlaylistService from '@services/playlists.js';
 import PlaylistCard from './Playlist/PlaylistCard.vue';
 import { usePlaylistsStore } from '@stores/playlists';
 import { usePageContainerStore } from '@stores/pageContainer';
+import {fetchPlaylistItems} from 'musora-content-services';
 import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue'
 
 //Inject
@@ -219,10 +220,10 @@ onMounted(() => {
 
     //Get Lessons
     isLoading.value = true;
-    PlaylistService.getPlaylistLessons(payload, token).then(response => {
+    fetchPlaylistItems(props.playlistId).then(response => {
         isLoading.value = false;
-        if (response.data.results.length) {
-            playlistsStore.lessons = response.data.results;
+        if (response.length) {
+            playlistsStore.lessons = response;
             nextTick(() => {
                 const cueScrollContainer = document.getElementById('cue-scroll-container');
                 // cueScrollContainer.scrollTop = 90 * 20;

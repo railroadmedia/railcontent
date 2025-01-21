@@ -38,8 +38,9 @@ class HelpScoutUser extends Model
     use HasFactory;
 
     protected $table = 'helpscout_users';
-
     protected $primaryKey = 'user_id';
+    public $incrementing = false;
+    protected $guarded = [];
 
     protected static function newFactory(): HelpScoutUserFactory
     {

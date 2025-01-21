@@ -10,7 +10,7 @@ use Modules\UserManagementSystem\Models\User;
 
 class CmsPlaylistLikesPinsSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $maxUserId = User::query()->max("id");
 

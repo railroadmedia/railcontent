@@ -38,10 +38,9 @@ class GenerateAccessCodes extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
      * @throws NonUniqueResultException
      */
-    public function handle(ProductService $productService)
+    public function handle(ProductService $productService): int
     {
         $source = $this->getSource();
 
@@ -52,6 +51,7 @@ class GenerateAccessCodes extends Command
         $emails = [
             'alexandre@musora.com',
             'caleb@drumeo.com',
+            'robert@musora.com'
         ];
 
         $accessCodes = [];

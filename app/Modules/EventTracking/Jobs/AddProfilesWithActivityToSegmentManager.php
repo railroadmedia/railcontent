@@ -11,7 +11,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
 class AddProfilesWithActivityToSegmentManager implements ShouldQueue
@@ -46,18 +45,18 @@ class AddProfilesWithActivityToSegmentManager implements ShouldQueue
                 100,
                 $this->nextCursor ?? 'start'
             );
-            $next = $response->next;
+            $next = $response['next'];
 
-            $ids = collect($response->activities ?? [])
+            $emails = collect($response['activities'] ?? [])
                 ->filter(function ($activity) {
                     $timestamp = Carbon::createFromTimestamp($activity->timestamp);
                     return $timestamp->gte($this->startDate);
                 })
-                ->pluck('customer_identifiers.id')
+                ->pluck('customer_identifiers.email')
                 ->unique()
                 ->toArray();
 
-            if (empty($ids)) {
+            if (empty($emails)) {
                 Log::info(
                     'No profiles found for activity type ' . $this->activityType . ' and segment ' . $this->segmentId . ' for workspace ' . $this->workspaceName
                 );
@@ -70,7 +69,7 @@ class AddProfilesWithActivityToSegmentManager implements ShouldQueue
                     $this->segmentId,
                     $this->startDate,
                     $this->accountConfigData,
-                    $ids
+                    $emails
                 )
             );
 

@@ -9,9 +9,6 @@ const ASSET_URL = process.env.NODE_ENV === "production" ? (process.env.ASSET_URL
  |--------------------------------------------------------------------------
  |
  | Mix provides a clean, fluent API for defining some Webpack build steps
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Managemen
  | for your Laravel applications. By default, we are compiling the CSS
  | file for the application as well as bundling up all the JS files.
  |
@@ -40,6 +37,7 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
         {},
         [tailwindcss('./resources/marketing/marketing.tailwind.config.js')]
     )
+    .copyDirectory('resources/platform/assets/js/Libraries/tinymce', 'public/platform/js/tinymce')
     .options({
         processCssUrls: false,
     })
@@ -60,8 +58,11 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
             },
             plugins: [
                 new webpack.DefinePlugin({
-                    "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
-                })
+                    "process.env.ASSET_PATH": JSON.stringify(ASSET_URL),
+                    "__VUE_PROD_DEVTOOLS__": JSON.stringify(false),
+                    "__VUE_OPTIONS_API__": JSON.stringify(true),
+                    "__VUE_PROD_HYDRATION_MISMATCH_DETAILS__": JSON.stringify(false)
+                }),
             ],
             resolve: {
                 alias: {
@@ -79,8 +80,7 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
                     '@vuesora': path.resolve(__dirname, './assets/js/Libraries/Vuesora'),
                 }
             }
-        };
+        }
     });
-    
 
 module.exports = mix;

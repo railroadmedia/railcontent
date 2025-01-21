@@ -28,7 +28,7 @@ class HelpScoutIndex extends Command
      *
      * @throws Throwable
      */
-    public function handle(HelpScoutService $helpScoutService)
+    public function handle(HelpScoutService $helpScoutService): void
     {
         try {
             $page = $helpScoutService->getCustomersPage();

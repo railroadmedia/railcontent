@@ -22,7 +22,7 @@ class CheckPurchasesMigratedIntoRevenuecat extends Command
         RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
         UserProductService $userProductService
-    ) {
+    ): void {
         $brand = $this->argument('brand');
         $type = $this->argument('type') ?? 'apple_subscription';
         $users = [];

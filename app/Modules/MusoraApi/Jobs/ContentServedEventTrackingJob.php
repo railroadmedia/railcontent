@@ -2,17 +2,19 @@
 
 namespace App\Modules\MusoraApi\Jobs;
 
-use App\Jobs\BaseJob;
-use App\Modules\EventTracking\Avo\AvoHelper;
 use Avo;
-use Log;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Models\Content;
 use Railroad\Railcontent\Services\RecommendationService;
 
-class ContentServedEventTrackingJob extends BaseJob
+class ContentServedEventTrackingJob implements ShouldQueue
 {
-    public function __construct(private array $props, private User $user)
+    use Dispatchable;
+
+    public function __construct(private array $props, private User $user, private array $avoDefaultProps = [])
     {
     }
 
@@ -52,13 +54,13 @@ class ContentServedEventTrackingJob extends BaseJob
         }
 
         Avo::recommended_content_served(
-            AvoHelper::defaultEventProperties(
+            array_merge(
                 [
                     'brand' => $this->props['brand'] ?? null,
                     'navigation_section' => $this->props['navigation_section'],
                     'recommended_content' => $recommended_content,
                 ],
-                $this->user
+                $this->avoDefaultProps
             )
         );
     }

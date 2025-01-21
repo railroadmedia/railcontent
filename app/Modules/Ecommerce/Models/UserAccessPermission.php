@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Modules\Content\Models\Permission;
 use App\Modules\Ecommerce\database\factories\UserAccessPermissionsFactory;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
@@ -9,6 +10,7 @@ use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\UserManagementSystem\Models\User;
 
 /**
@@ -29,6 +31,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property bool $manually_revoked
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property Permission $permission
  */
 class UserAccessPermission extends Model
 {
@@ -43,7 +46,7 @@ class UserAccessPermission extends Model
         return UserAccessPermissionsFactory::new();
     }
 
-    public function permission()
+    public function permission(): BelongsTo
     {
         return $this->belongsTo(Permission::class);
     }
@@ -51,6 +54,11 @@ class UserAccessPermission extends Model
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function product(): HasOne
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
 
     public function getExpirationDate(): Carbon
@@ -125,5 +133,20 @@ class UserAccessPermission extends Model
             default:
                 return 'Unknown';
         }
+    }
+
+    public function isMembershipPermission(): bool
+    {
+        $basicMembershipPermissionIds = [1, 52, 73, 77, 91, 78, 88, 89, 90];
+        $plusMembershipPermissionIds = [92];
+        $lifetimeMembershipPermissionIds = [78, 88, 89, 90];
+
+        $allMembershipPermissionIds = array_merge(
+            $basicMembershipPermissionIds,
+            $plusMembershipPermissionIds,
+            $lifetimeMembershipPermissionIds
+        );
+
+        return in_array($this->permission_id, $allMembershipPermissionIds);
     }
 }

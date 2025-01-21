@@ -33,10 +33,8 @@ class SeedUserProgress extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $userID = $this->ask('What is the user ID?');
         $workoutID = $this->ask('What is the workout ID?');

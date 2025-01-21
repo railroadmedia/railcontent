@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Misc;
 
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\BaseController;
 use App\Modules\Brand\Services\BrandService;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -17,8 +18,6 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
 
     /**
      * RedirectToUPController constructor.
-     *
-     * @param ContentService $contentService
      */
     public function __construct(
         ContentService $contentService
@@ -261,7 +260,7 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
         $segment6 = null,
         $segment7 = null,
         $segment8 = null
-    ) {
+    ): RedirectResponse {
         $userId = null;
         $authParams = null;
 
@@ -713,7 +712,7 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
         $segment6 = null,
         $segment7 = null,
         $segment8 = null
-    ) {
+    ): RedirectResponse {
         $userId = null;
         $authParams = null;
 

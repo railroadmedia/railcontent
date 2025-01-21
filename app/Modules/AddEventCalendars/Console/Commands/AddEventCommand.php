@@ -44,7 +44,6 @@ class AddEventCommand extends Command
     // =================================================================================================================
 
     /**
-     * @return bool
      * @uses createAllCalendarsForBrand
      * @uses createBrandOverviewCalendar
      * @uses emptyCalendarsForBrand
@@ -80,9 +79,6 @@ class AddEventCommand extends Command
     // 2. ACTIONS ======================================================================================================
     // =================================================================================================================
 
-    /**
-     * @return void
-     */
     private function createAllCalendarsForBrand(): void
     {
         $this->info('createAllCalendarsForBrand for ' . $this->brand);
@@ -145,8 +141,6 @@ class AddEventCommand extends Command
 
     /**
      * Create a brand-overview calendar for a brand
-     *
-     * @return void
      */
     private function createBrandOverviewCalendar(): void
     {
@@ -174,8 +168,6 @@ class AddEventCommand extends Command
 
     /**
      * Empties calendars for a brand
-     *
-     * @return void
      */
     private function emptyCalendarsForBrand(): void
     {
@@ -255,10 +247,7 @@ class AddEventCommand extends Command
         return true;
     }
 
-    /**
-     * @return void
-     */
-    private function getInfo()
+    private function getInfo(): void
     {
         try {
             $calendars = $this->addEventService->getCalendars();
@@ -317,10 +306,7 @@ class AddEventCommand extends Command
         $this->info('--------------------------------------------------------------------------------------');
     }
 
-    /**
-     * @return void
-     */
-    private function listEventsInCalendar()
+    private function listEventsInCalendar(): void
     {
         $calendars = [];
         $events = [];
@@ -422,10 +408,7 @@ class AddEventCommand extends Command
         $this->info('--------------------------------------------------------------------------------------');
     }
 
-    /**
-     * @return void
-     */
-    private function deleteAllCalendars()
+    private function deleteAllCalendars(): void
     {
         dd('manually disabled for safety reasons');
 
@@ -628,9 +611,6 @@ class AddEventCommand extends Command
     // 3. CALENDAR-ID-GETTING ACTIONS AND THEIR HELPERS ================================================================
     // =================================================================================================================
 
-    /**
-     * @return void
-     */
     private function getCalendarIdsForMusora(): void
     {
         $calendarsByNiceName = $this->getCalendarsKeyedByNiceNames();
@@ -652,9 +632,6 @@ class AddEventCommand extends Command
         $this->info('-----------------------------------------------------------------------------------------');
     }
 
-    /**
-     * @return void
-     */
     private function getCalendarIdsForBrandSite(): void
     {
         $calendarsByNiceName = $this->getCalendarsKeyedByNiceNames();
@@ -788,7 +765,6 @@ class AddEventCommand extends Command
 
     /**
      * @param $calendarsByNiceName
-     * @return void
      */
     private function printTypeSpecific($calendarsByNiceName): void
     {
@@ -809,9 +785,6 @@ class AddEventCommand extends Command
         $this->info("],");
     }
 
-    /**
-     * @return array
-     */
     private function getCalendarsKeyedByNiceNames(): array
     {
         foreach ($this->addEventService->calendars as $calendar) {
@@ -835,10 +808,6 @@ class AddEventCommand extends Command
     // 4. HELPER METHODS ===============================================================================================
     // =================================================================================================================
 
-    /**
-     * @param string $additionalMessage
-     * @return void
-     */
     private function confirmNotInSandbox(string $additionalMessage = ''): void
     {
         $lastFourCharOfToken = substr(config('addevent.api-token'), -4);
@@ -866,7 +835,6 @@ class AddEventCommand extends Command
     }
 
     /**
-     * @return void
      * @throws Exception
      */
     private function setBrandAndContentType(): void
@@ -895,9 +863,6 @@ class AddEventCommand extends Command
         $this->brand = $brand;
     }
 
-    /**
-     * @return string
-     */
     private function getAction(): string
     {
         $options = self::$ACTIONS;
@@ -942,7 +907,6 @@ class AddEventCommand extends Command
     /**
      * @param $calendar
      * @param $string
-     * @return bool
      */
     private function doesCalendarTitleStartWithPassedString($calendar, $string): bool
     {
@@ -953,9 +917,8 @@ class AddEventCommand extends Command
 
     /**
      * @param $msgStart
-     * @return void
      */
-    private function hardNo($msgStart)
+    private function hardNo($msgStart): void
     {
         $this->info('');
         $this->info(

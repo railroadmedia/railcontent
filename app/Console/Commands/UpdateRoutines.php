@@ -175,10 +175,8 @@ class UpdateRoutines extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info('Starting UpdateRoutines.');
         Log::info('Starting UpdateRoutines.');
@@ -349,12 +347,7 @@ class UpdateRoutines extends Command
         return true;
     }
 
-    /**
-     * @param array $attributes
-     * @param array $values
-     * @return object
-     */
-    private function updateOrInsertAndGetFirst($table, array $attributes, array $values = [])
+    private function updateOrInsertAndGetFirst($table, array $attributes, array $values = []): object
     {
         $this->musoraDB()
             ->from($table)
@@ -364,11 +357,9 @@ class UpdateRoutines extends Command
     }
 
     /**
-     * @param array $attributes
      * @param array $values
-     * @return object
      */
-    private function getFirst($table, array $attributes)
+    private function getFirst($table, array $attributes): object
     {
         return $this->musoraDB()
             ->from($table)

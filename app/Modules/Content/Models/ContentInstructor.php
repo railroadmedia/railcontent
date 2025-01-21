@@ -41,4 +41,9 @@ class ContentInstructor extends Content
     {
         return ContentInstructorFactory::new();
     }
+
+    public function instructor()
+    {
+        return $this->belongsTo(Content::class, 'instructor_id');
+    }
 }

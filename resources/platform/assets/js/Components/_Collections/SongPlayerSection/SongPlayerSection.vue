@@ -1,12 +1,12 @@
 <template>
     <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow tw-w-full">
-        <div v-if="!isLoading" class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4">
+        <div v-if="!isLoading && !initialDataFetched && !isUserDataLoading" class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4">
             <div class="tw-flex tw-flex-col song-album-cover sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-shrink-0 tw-items-center tw-justify-center tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px]  2xl:tw-w-screen tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031] tw-relative">
                     <MembershipUpgradeSongCover v-if="noAccess" :thumbnail-url="thumbnailUrl" />
                     <template v-else>
                         <!-- Song Image Background -->
-                        <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${thumbnailUrl}`"
+                        <img :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${thumbnailUrl}`"
                             class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0 tw-blur-sm"
                             loading="lazy"
                             onload="this.classList.remove('tw-opacity-0')"
@@ -27,6 +27,8 @@
                             </button>
                         </div>
                     </template>
+                    <!-- Draft Label -->
+                    <DraftLabel v-if="showDraft" />
                 </div>
             </div>
             <!-- Song Details -->
@@ -63,11 +65,11 @@
                             :class="`tw-h-[50px] ${lessonProgressRef === '100' ? `tw-bg-${brand} tw-text-white dark:tw-bg-${brand} dark:tw-text-white tw-btn-primary` : 'tw-text-[#00101D] tw-box-border tw-leading-none tw-btn-secondary dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10'}`"
                             data-tooltip="Mark Lesson as Complete" :data-content-id="contentId"
                             @click="markSongAsComplete">
-                            <span v-if="lessonProgressRef !== '100'">
+                            <span v-if="lessonProgressRef !== 100">
                                 <i class="fas fa-check tw-mr-2 tw-text-base"></i>
                                 Mark as Complete
                             </span>
-                            <span v-if="lessonProgressRef === '100'">
+                            <span v-if="lessonProgressRef === 100">
                                 <i class="fas fa-check tw-mr-2 tw-text-base"></i>
                                 Completed
                             </span>
@@ -96,7 +98,30 @@
 
         <!-- Else Show Skeleton Loader -->
         <div v-else>
-
+            <section class="tw-mb-1 tw-animate-pulse tw-flex tw-flex-col sm:tw-flex-row tw-py-4">
+                <div class="tw-flex tw-flex-col sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
+                    <!-- Thumb Skeleton -->
+                    <div class="tw-flex tw-flex-shrink-0 tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px] 2xl:tw-w-screen tw-rounded-[10px] tw-bg-ui-skeleton"></div>
+                </div>
+                <div class="tw-flex flex-column tw-w-full">
+                    <!-- Title Skeletons -->
+                    <div class="tw-h-[32px] tw-flex tw-w-1/2 tw-rounded-full tw-bg-ui-skeleton"></div>
+                    <div class="tw-h-[28px] tw-mt-[.625rem] tw-mb-3 tw-flex tw-w-1/3 tw-rounded-full tw-bg-ui-skeleton"></div>
+                    <!-- Button Skeletons -->
+                    <div class="tw-flex tw-flex-col 3xl:tw-flex-row">
+                        <div class="tw-h-[50px] tw-min-w-[170px] tw-flex tw-rounded-full tw-bg-ui-skeleton tw-mb-3 3xl:tw-mb-0 3xl:tw-mr-3"></div>
+                        <div v-if="hasInstrumentless" class="tw-h-[50px] tw-min-w-[170px] tw-flex tw-rounded-full tw-bg-ui-skeleton tw-mb-3 3xl:tw-mb-0 3xl:tw-mr-3"></div>
+                        <div class="tw-h-[50px] tw-min-w-[145px] tw-flex tw-rounded-full tw-bg-ui-skeleton"></div>
+                    </div>
+                    <!-- Pill Buttons -->
+                    <div class="tw-flex tw-flex-wrap tw-items-start tw-my-2">
+                        <div class="tw-w-[52px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-ui-skeleton"></div>
+                        <div class="tw-w-[65px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-ui-skeleton"></div>
+                        <div class="tw-w-[65px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-ui-skeleton"></div>
+                        <div class="tw-w-[34px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-ui-skeleton"></div>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <!-- Soundslice Modals -->
@@ -105,8 +130,9 @@
                 <SoundSlice
                     :user-id="userId"
                     :theme-color="brand"
+                    soundslice-type="song"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=2`"
-                    :soundslice-slug="soundsliceObject.soundsliceSlug"
+                    :soundslice-slug="soundsliceObject.soundslice_slug"
                     :contentId="contentId"
                 >
                     <template v-slot:soundsliceControls>
@@ -126,7 +152,8 @@
                     :user-id="userId"
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="soundsliceObject.soundsliceSlug"
+                    :soundslice-slug="soundsliceObject.soundslice_slug"
+                    soundslice-type="song"
                     :contentId="contentId"
                 >
                     <template v-slot:soundsliceControls>
@@ -143,14 +170,15 @@
     </div>
 </template>
 <script setup>
-import { ref, onBeforeMount} from 'vue';
+import { ref, watch, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@stores/user';
 import ContentLessonActionButtons from '@vuesora/Components/VideoResources/ContentLessonActionButtons.vue';
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
-import ContentService from "@vuesora/assets/js/Services/content";
 import MembershipUpgradeSongCover from '../MembershipUpgradeSongCover/MembershipUpgradeSongCover';
+import DraftLabel from '@units/DraftLabel/DraftLabel';
+import { getProgressPercentage, contentStatusCompleted, contentStatusReset } from 'musora-content-services';
 
 const userStore = useUserStore();
 const { brand, userId, userEmail, userDisplayName } = storeToRefs(userStore);
@@ -163,20 +191,36 @@ const props = defineProps({
     songTitle: String,
     songArtist: String,
     songAlbum: String,
-    songMeta: String,
-    isLiked: Boolean,
+    genre: Array,
     isAdded: Boolean,
     assignments: Array,
     hasInstrumentless: Boolean,
-    lessonProgress: [Number, String],
-    likeCount: [Number, String],
     reportLogo: String,
     noAccess: Boolean,
+    showDraft: {
+        type: Boolean,
+        default: false,
+    },
 });
 
-const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
+const likeCount = ref(0);
+const isLiked = ref(false);
+const soundsliceObject = ref(props.assignments?.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);
-const lessonProgressRef = ref(props.lessonProgress);
+const lessonProgressRef = ref(0);
+const initialDataFetched = ref(false);
+const isUserDataLoading = ref(false);
+
+const songMeta = computed(() => {
+    if (!props.genre || props.genre.length === 0) {
+        return '';
+    }
+    const uniqueGenres = [...new Set(props.genre)];
+    if (uniqueGenres.length === 1) {
+        return uniqueGenres[0];
+    }
+    return uniqueGenres?.join(', ');
+});
 
 const openInstrumentless = () => {
     openSoundslice.value = 'instrumentless';
@@ -187,24 +231,22 @@ const openFull = () => {
 };
 
 const markSongAsComplete = () => {
-    if (lessonProgressRef.value === '100') {
+    if (lessonProgressRef.value === 100) {
         window.showconfirmationmodal({
             title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
             subtitle: 'This cannot be undone.',
             callbacks: {
                 submit: () => {
                     lessonProgressRef.value = null;
-                    ContentService.resetContentProgress(props.contentId)
-                        .then((resolved) => {
-                            if (resolved) {
-                                window.shownotification({
-                                    icon: 'check',
-                                    text: `Removed! Your progress has been reset.`
-                                })
-                                lessonProgressRef.value = null;
-                            }
+                    contentStatusReset(props.contentId)
+                        .then(() => {
+                            window.shownotification({
+                                icon: 'check',
+                                text: `Removed! Your progress has been reset.`
+                            })
+                            lessonProgressRef.value = null;
                         }).catch(() => {
-                            lessonProgressRef.value = '100';
+                            lessonProgressRef.value = 100;
                             window.shownotification({
                                 icon: 'error',
                                 text: 'Woops! Something wrong happened, please try again later.'
@@ -214,13 +256,13 @@ const markSongAsComplete = () => {
             },
         });
     } else {
-        lessonProgressRef.value = '100';
-        ContentService.markContentAsComplete(props.contentId).then(() => {
+        lessonProgressRef.value = 100;
+        contentStatusCompleted(props.contentId).then(() => {
             window.shownotification({
                 icon: 'check',
                 text: `You completed this song!`
             })
-            lessonProgressRef.value = '100';
+            lessonProgressRef.value = 100;
         }).catch(() => {
             lessonProgressRef.value = null;
             window.shownotification({
@@ -257,4 +299,32 @@ const handleCloseSoundslice = () => {
     Helpscout.showWidget();
     Intercom.showWidget();
 };
+
+const fetchInitialData = async () => {
+    isUserDataLoading.value = true;
+    try {
+        // Get Progress Percentage
+        lessonProgressRef.value = await getProgressPercentage(props.contentId);
+
+        // Fetch Song Data
+        const response = await fetch(`/content/${props.contentId}/user_data/${userId.value}`);
+        const value = await response.json();
+        likeCount.value = value?.likeCount;
+        isLiked.value = value?.isLiked;
+        isUserDataLoading.value = false;
+    } catch (error) {
+        console.error('Error fetching song data:', error);
+        isUserDataLoading.value = false;
+    }
+};
+
+watch(
+    () => props.contentId,
+    (newContentId) => {
+        if (newContentId) {
+            fetchInitialData();
+        }
+    },
+    { immediate: true }
+);
 </script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\Http\Response;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Railroad\Railnotifications\Services\NotificationService;
@@ -10,15 +11,12 @@ class NotificationPagesController extends BaseController
 {
     private NotificationService $notificationService;
 
-    /**
-     * @param  NotificationService  $notificationService
-     */
     public function __construct(NotificationService $notificationService)
     {
         $this->notificationService = $notificationService;
     }
 
-    public function index(Request $request, $brand)
+    public function index(Request $request, $brand): Response
     {
         $page = intval($request->get('page', 1));
         $amountPerPage = 20;

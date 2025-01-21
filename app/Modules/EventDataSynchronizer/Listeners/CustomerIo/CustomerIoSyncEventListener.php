@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Collections\OrderCollection;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
@@ -13,6 +14,7 @@ use App\Modules\Ecommerce\Models\Recharge\Subscription as RechargeSubscription;
 use App\Modules\Ecommerce\Models\Shopify\Order;
 use App\Modules\Ecommerce\Models\Shopify\OrderLineItem;
 use App\Modules\Ecommerce\Services\ProductService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use App\Modules\EventDataSynchronizer\Events\UTMLinks;
@@ -46,22 +48,11 @@ use Railroad\Railforums\Repositories\ThreadRepository;
 use Railroad\Railforums\Services\ConfigService;
 use App\Modules\Referral\Events\EmailInvite;
 use App\Modules\Referral\Events\ReferralClaimed;
+use Railroad\Usora\Events\User\UserUpdated as UsoraUserUpdated;
 use Throwable;
 
 class CustomerIoSyncEventListener
 {
-    private UserService $userService;
-
-    private CommentRepository $commentRepository;
-
-    private ThreadRepository $threadRepository;
-
-    private PostRepository $postRepository;
-
-    private CategoryRepository $categoryRepository;
-
-    private ContentService $contentService;
-
     /**
      * @var bool
      */
@@ -70,24 +61,18 @@ class CustomerIoSyncEventListener
      * @var array
      */
     public static $alreadyQueuedUserIds = [];
-    private ProductService $productService;
 
     public function __construct(
-        UserService $userService,
-        CommentRepository $commentRepository,
-        CategoryRepository $categoryRepository,
-        ThreadRepository $threadRepository,
-        PostRepository $postRepository,
-        ContentService $contentService,
-        ProductService $productService
+        private UserService $userService,
+        private CommentRepository $commentRepository,
+        private CategoryRepository $categoryRepository,
+        private ThreadRepository $threadRepository,
+        private PostRepository $postRepository,
+        private ContentService $contentService,
+        private ProductService $productService,
+        private CustomerIoService $customerIoService,
+        private UserAccessPermissionsService $userAccessPermissionsService
     ) {
-        $this->userService = $userService;
-        $this->commentRepository = $commentRepository;
-        $this->categoryRepository = $categoryRepository;
-        $this->threadRepository = $threadRepository;
-        $this->postRepository = $postRepository;
-        $this->contentService = $contentService;
-        $this->productService = $productService;
     }
 
     /**
@@ -126,19 +111,38 @@ class CustomerIoSyncEventListener
     /**
      * @param UserUpdated $userUpdated
      */
-    public function handleUserUpdated(UserUpdated $userUpdated)
+    public function handleUserUpdated(UsoraUserUpdated|UserUpdated $userUpdated)
     {
         if (self::$disable) {
             return;
         }
 
         try {
-            $user = $this->userService->getByIdOrNull($userUpdated->getNewUser()->id);
+            if ($userUpdated instanceof UsoraUserUpdated) {
+                $newEmail = $userUpdated->getNewUser()->getEmail();
+                $oldEmail = $userUpdated->getOldUser()->getEmail();
+                // UsoraUserUpdated's User models are Railroad\Usora\Entities type, so get the
+                // Modules\UserManagementSystem\Models version, so we can interact with it the same way
+                $user = User::find($userUpdated->getNewUser()->getId());
+            } else {
+                $newEmail = $userUpdated->getNewUser()->email;
+                $oldEmail = $userUpdated->getOldUser()->email;
+                $user = $userUpdated->getNewUser();
+            }
 
-            if (!empty($user) && !in_array(
-                $userUpdated->getNewUser()->id,
-                self::$alreadyQueuedUserIds
-            )) {
+
+            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
+                if ($newEmail !== $oldEmail) {
+                    /**
+                     * NOTE: As page views are tracked in Customer.io, this event needs to be handled synchronously to avoid conflicts
+                     * in Customer.io profiles. That's why it doesn't dispatch an event
+                     */
+                    Log::info('handling email updated: ' . $user->id);
+                    $this->customerIoService->handleUserEmailChanged(
+                        oldEmail: $oldEmail,
+                        newEmail: $newEmail
+                    );
+                }
                 dispatch(
                     (new CustomerIoSyncUserByUserId($user))->delay(
                         Carbon::now()
@@ -713,8 +717,8 @@ class CustomerIoSyncEventListener
         $accessCode = $accessCodeClaimed->getAccessCode();
         $brand = $accessCode->brand;
 
-        dispatch(
-            (new CustomerIoCreateEventByUserId(
+        dispatchWithDelay(
+            new CustomerIoCreateEventByUserId(
                 $accessCodeClaimed->getUser()->id,
                 $brand,
                 'musora_membership_non_recurring_access_added',
@@ -731,11 +735,13 @@ class CustomerIoSyncEventListener
                 ],
                 null,
                 Carbon::now()->timestamp
-            ))->delay(
-                Carbon::now()
-                    ->addSeconds(3)
-            )
+            ),
+            3
         );
+
+        if (in_array($accessCode->brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))) {
+            dispatchWithDelay(new CustomerIoSyncUserByUserId($accessCodeClaimed->getUser(), ['primary_brand' => $brand]), 3);
+        }
     }
 
     // CMT-77 August Referral Contest

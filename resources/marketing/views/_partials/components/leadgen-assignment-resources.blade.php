@@ -61,7 +61,7 @@ class="assignment-row border-gray-100 border-b-2 py-4 sm:px-3 @if(!empty($defaul
                 >
                     <p>
                         Your browser does not support PDFs.
-                        <a href="{{ $pdfURL }}">Download the PDF</a>
+                        <a href="{{ $pdfURL }}" class="underline text-{{$theme}}" target="_blank">Download the PDF</a>
                         .
                     </p>
                 </object>

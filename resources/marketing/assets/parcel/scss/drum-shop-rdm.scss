@@ -1,4 +1,5 @@
-@import "../_variables";
+@use "../variables" as *;
+@use "sass:color";
 
 .no-padding {
   padding-left: 0;
@@ -111,7 +112,8 @@ body {
     &:hover {
       -webkit-transform: translate(-50%, -50%) scale(1.1, 1.1);
       transform: translate(-50%, -50%) scale(1.1, 1.1);
-      background: lighten($drumeoBlue, 5%);
+      background: color.adjust($drumeoBlue, $lightness: 5%);
+
     }
   }
   @include desktop {

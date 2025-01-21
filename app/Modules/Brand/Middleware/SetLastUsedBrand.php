@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Str;
-use Railroad\Railtracker\Services\ConfigService;
+use App\Modules\RailTracker\Services\ConfigService;
 
 use function user;
 
@@ -24,11 +24,9 @@ class SetLastUsedBrand
     /**
      * NOTE: this must be set to run AFTER all auth middleware.
      *
-     * @param Request $request
-     * @param Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         // web requests
         if (!empty(user()) && in_array($request->segment(1), config('brands'))) {

@@ -2,10 +2,13 @@
 
 namespace App\Modules\Content\tests\Feature;
 
+use App\Maps\ContentTypes;
+use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
+use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
 
@@ -20,18 +23,18 @@ class ContentMetadataTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    public function test_liked_content_missing_user_id_uses_authenticated_user()
+    public function test_liked_content_missing_user_id_uses_authenticated_user(): void
     {
         $content = Content::factory()->create();
         $this->likeContent($content);
         $response = $this->getJson(
-            route('content.is_liked_by_user', ['content' => $content->id]),
+            route('content.is_liked_by_user', ['content_ids' => [$content->id]]),
         );
         $response->assertOk();
         $response->assertJson([$content->id => true]);
     }
 
-    public function test_liked_content_non_existent_user_returns_error()
+    public function test_liked_content_non_existent_user_returns_error(): void
     {
         $content = Content::factory()->create();
         // get the highest user ID and add to it, to make an ID that won't exist
@@ -44,13 +47,13 @@ class ContentMetadataTest extends TestCase
         $this->assertDatabaseMissing(User::class, ['id' => $maxId]);
 
         $response = $this->getJson(
-            route('content.is_liked_by_user', ['content' => $content, 'user' => $maxId]),
+            route('content.is_liked_by_user', ['user' => $maxId, 'content_ids' => [$content->id]]),
         );
         $response->assertStatus(500);
         $this->assertStringContainsString('No query results for model', $response->getContent());
     }
 
-    public function test_liked_content_non_existent_content_returns_error()
+    public function test_liked_content_non_existent_content_returns_error(): void
     {
         // get the highest content and add to it, to make an ID that won't exist
         $maxContent = Content::orderByDesc('id')->first();
@@ -61,18 +64,18 @@ class ContentMetadataTest extends TestCase
         $noContent?->delete();
         $this->assertDatabaseMissing(Content::class, ['id' => $maxId]);
         $response = $this->getJson(
-            route('content.is_liked_by_user', ['content' => $maxId, 'user' => $this->user->id]),
+            route('content.is_liked_by_user', ['user' => $this->user->id, 'content_ids' => [$maxId]]),
         );
         $response->assertStatus(500);
-        $this->assertStringContainsString('No query results for model', $response->getContent());
+        $this->assertStringContainsString('The selected content_ids.0 is invalid', $response->getContent());
     }
 
-    public function test_liked_content_user_has_liked_content_returns_true()
+    public function test_liked_content_user_has_liked_content_returns_true(): void
     {
         $content = Content::factory()->create();
         $this->likeContent($content);
         $response = $this->getJson(
-            route('content.is_liked_by_user', ['content' => $content->id, 'user' => $this->user->id]),
+            route('content.is_liked_by_user', ['user' => $this->user->id, 'content_ids' => [$content->id]]),
         );
         $response->assertOk();
         $expectedJson = [$content->id => true];
@@ -80,23 +83,23 @@ class ContentMetadataTest extends TestCase
         $response->assertJson($expectedJson);
     }
 
-    public function test_liked_content_user_has_not_liked_content_returns_false()
+    public function test_liked_content_user_has_not_liked_content_returns_false(): void
     {
         $content = Content::factory()->create();
         $response = $this->getJson(
-            route('content.is_liked_by_user', ['content' => $content->id, 'user' => $this->user->id]),
+            route('content.is_liked_by_user', ['user' => $this->user->id, 'content_ids' => [$content->id]]),
         );
         $response->assertOk();
         $expectedJson = [$content->id => false];
         $response->assertJson($expectedJson);
     }
 
-    public function test_liked_content_user_has_unliked_content_returns_false()
+    public function test_liked_content_user_has_unliked_content_returns_false(): void
     {
         $content = Content::factory()->create();
         $like = $this->likeContent($content);
         $response = $this->getJson(
-            route('content.is_liked_by_user', ['content' => $content->id, 'user' => $this->user->id]),
+            route('content.is_liked_by_user', ['user' => $this->user->id, 'content_ids' => [$content->id]]),
         );
         $response->assertOk();
         $expectedJson = [$content->id => true];
@@ -104,10 +107,29 @@ class ContentMetadataTest extends TestCase
 
         $like->delete();
         $response = $this->getJson(
-            route('content.is_liked_by_user', ['content' => $content->id, 'user' => $this->user->id]),
+            route('content.is_liked_by_user', ['user' => $this->user->id, 'content_ids' => [$content->id]]),
         );
         $response->assertOk();
         $expectedJson = [$content->id => false];
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_liked_content_user_returns_correct_value_for_multiple_contents(): void
+    {
+        $likedContent1 = Content::factory()->create();
+        $notLikedContent = Content::factory()->create();
+        $likedContent2 = Content::factory()->create();
+        $this->likeContent($likedContent1);
+        $this->likeContent($likedContent2);
+        $response = $this->getJson(
+            route('content.is_liked_by_user', ['user' => $this->user->id, 'content_ids' => [$likedContent1->id, $notLikedContent->id, $likedContent2->id]]),
+        );
+        $response->assertOk();
+        $expectedJson = [
+            $likedContent1->id => true,
+            $notLikedContent->id => false,
+            $likedContent2->id => true
+        ];
         $response->assertJson($expectedJson);
     }
 
@@ -120,77 +142,375 @@ class ContentMetadataTest extends TestCase
         return $like;
     }
 
-    public function test_content_user_progress_returns_not_started_when_user_has_not_started()
+    public function test_content_user_progress_returns_not_started_when_user_has_not_started(): void
     {
         $content = Content::factory()->create();
         $response = $this->getJson(
-            route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
+            route('content.user_progress', ['user' => $this->user->id, 'content_ids' => [$content->id]]),
         );
         $response->assertOk();
         $expectedJson = [$content->id => ['state' => ProgressState::NotStarted->value, 'percent' => 0]];
         $response->assertJson($expectedJson);
     }
 
-    public function test_content_user_progress_returns_not_started_when_no_content_progress_created()
+    public function test_content_user_progress_returns_not_started_when_no_content_progress_created(): void
     {
         $content = Content::factory()->create();
         $response = $this->getJson(
-            route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
+            route('content.user_progress', ['user' => $this->user->id, 'content_ids' => [$content->id]]),
         );
         $response->assertOk();
         $expectedJson = [$content->id => ['state' => ProgressState::NotStarted->value, 'percent' => 0]];
         $response->assertJson($expectedJson);
     }
 
-    public function test_content_user_progress_returns_started_when_user_has_not_completed()
+    public function test_content_user_progress_returns_started_when_user_has_not_completed(): void
     {
         $content = Content::factory()->create();
         $progress = $this->createContentProgress($content, false);
         $progress->progress_percent = 25;
         $progress->save();
         $response = $this->getJson(
-            route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
+            route('content.user_progress', ['user' => $this->user->id, 'content_ids' => [$content->id]]),
         );
         $response->assertOk();
         $expectedJson = [$content->id => ['state' => ProgressState::Started->value, 'percent' => 25]];
         $response->assertJson($expectedJson);
     }
 
-    public function test_content_user_progress_returns_completed_when_user_has_completed()
+    public function test_content_user_progress_returns_completed_when_user_has_completed(): void
     {
         $content = Content::factory()->create();
         $this->createContentProgress($content, true);
         $response = $this->getJson(
-            route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
+            route('content.user_progress', ['user' => $this->user->id, 'content_ids' => [$content->id]]),
         );
         $response->assertOk();
         $expectedJson = [$content->id => ['state' => ProgressState::Completed->value, 'percent' => 100]];
         $response->assertJson($expectedJson);
     }
 
-    public function test_content_user_progress_uses_session_user_when_not_provided()
+    public function test_content_user_progress_uses_session_user_when_not_provided(): void
     {
         $content = Content::factory()->create();
         $this->createContentProgress($content, true);
         $response = $this->getJson(
-            route('content.user_progress', ['content' => $content->id]),
+            route('content.user_progress', ['content_ids' => [$content->id]]),
         );
         $response->assertOk();
         $expectedJson = [$content->id => ['state' => ProgressState::Completed->value, 'percent' => 100]];
         $response->assertJson($expectedJson);
     }
 
-    public function test_content_user_progress_returns_error_if_multiple_entries()
+    public function test_content_user_progress_returns_error_if_multiple_entries(): void
     {
         $content = Content::factory()->create();
         $this->createContentProgress($content, false);
         $this->createContentProgress($content, true);
         $response = $this->getJson(
-            route('content.user_progress', ['content' => $content->id]),
+            route('content.user_progress', ['content_ids' => [$content->id]]),
         );
         $response->assertNotFound();
         $expectedJson = ['error' => "Multiple ContentUserProgress found for Content {$content->id} and User {$this->user->id}"];
         $response->assertJson($expectedJson);
+    }
+
+    public function test_content_user_progress_returns_correct_value_for_multiple_contents(): void
+    {
+        $startedContent = Content::factory()->create();
+        $progress = $this->createContentProgress($startedContent, false);
+        $progress->progress_percent = 25;
+        $progress->save();
+        $completedContent = Content::factory()->create();
+        $this->createContentProgress($completedContent, true);
+        $notStartedContent = Content::factory()->create();
+
+        $response = $this->getJson(
+            route('content.user_progress', ['user' => $this->user->id, 'content_ids' => [$startedContent->id, $completedContent->id, $notStartedContent->id]]),
+        );
+        $response->assertOk();
+        $expectedJson = [
+            $startedContent->id => ['state' => ProgressState::Started->value, 'percent' => 25],
+            $completedContent->id => ['state' => ProgressState::Completed->value, 'percent' => 100],
+            $notStartedContent->id => ['state' => ProgressState::NotStarted->value, 'percent' => 0]
+        ];
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_in_progress_content_returns_correct_value_for_songs(): void
+    {
+        Content::factory()->count(10)->create();
+        $incompleteContentIds = $this->createContentWithProgress(5, 2)->get(ProgressState::Started->value);
+        $this->createContentWithProgress(5, 2, type: 'workout');
+
+        $expectedJson = [
+            ProgressState::Started->value => $incompleteContentIds
+        ];
+
+        $response = $this->getJson(
+            route('content.in_progress', ['user' => $this->user->id, 'content_type' => 'song']),
+        );
+        $response->assertOk();
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_in_progress_content_returns_correct_value_for_songs_in_brand(): void
+    {
+        Content::factory(['brand' => Brand::Drumeo->value])->count(5)->create();
+        $this->createContentWithProgress(5, 2);
+        Content::factory(['brand' => Brand::Singeo->value])->count(3)->create();
+        $singeoContent = $this->createContentWithProgress(4, 6, Brand::Singeo);
+
+        $expectedJson = [
+            ProgressState::Started->value => $singeoContent->get(ProgressState::Started->value)
+        ];
+
+        $response = $this->getJson(
+            route('content.in_progress', ['content_type' => 'song', 'brand' => Brand::Singeo->value]),
+        );
+        $response->assertOk();
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_in_progress_content_returns_correct_value_for_all_homepage_content_types(): void
+    {
+        Content::factory()->count(10)->create();
+        foreach (ContentTypes::inProgressContentTypes() as $contentType) {
+            $this->createContentWithProgress(4, 1, type: $contentType);
+        }
+        Content::factory()->count(10)->create();
+        $incompleteContentIds = ContentUserProgress::where('user_id', $this->user->id)
+            ->where('state', ProgressState::Started->value)
+            ->pluck('content_id');
+        $expectedJson = [
+            ProgressState::Started->value => $incompleteContentIds->toArray()
+        ];
+
+        $response = $this->getJson(
+            route('content.in_progress', ['user' => $this->user->id]),
+        );
+        $response->assertOk();
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_in_progress_content_ignores_non_homepage_content_types(): void
+    {
+        Content::factory()->count(10)->create();
+        $validType = $this->faker->randomElement(ContentTypes::inProgressContentTypes());
+        $this->createContentWithProgress(10, 6, type: $validType);
+        $invalidType = 'learning-path';
+        $this->createContentWithProgress(4, 1, type: $invalidType);
+        $incompleteHomePageContentIds = ContentUserProgress::where('user_id', $this->user->id)
+            ->where('state', ProgressState::Started->value)
+            ->whereHas('content', function ($query) use ($validType) {
+                $query->where('type', $validType);
+            })
+            ->pluck('content_id');
+        $incompleteNonHomePageContentIds = ContentUserProgress::where('user_id', $this->user->id)
+            ->where('state', ProgressState::Started->value)
+            ->whereHas('content', function ($query) use ($invalidType) {
+                $query->where('type', $invalidType);
+            })
+            ->pluck('content_id');
+        $expectedJson = [
+            ProgressState::Started->value => $incompleteHomePageContentIds->toArray()
+        ];
+
+        $unexpectedJson = [
+            ProgressState::Started->value => $incompleteNonHomePageContentIds->toArray()
+        ];
+
+        $response = $this->getJson(
+            route('content.in_progress', ['user' => $this->user->id]),
+        );
+        $response->assertOk();
+        $response->assertJson($expectedJson);
+        $response->assertJsonMissing($unexpectedJson);
+    }
+
+    public function test_in_progress_content_returns_error_for_invalid_brand(): void
+    {
+        $response = $this->getJson(
+            route('content.in_progress', ['content_type' => 'song', 'brand' => 'foo-bar-baz']),
+        );
+        $response->assertStatus(500);
+        $this->assertStringContainsString('The selected brand is invalid', $response->getContent());
+    }
+
+    public function test_in_progress_content_uses_limit(): void
+    {
+        Content::factory()->count(10)->create();
+        $incompleteContentIds = $this->createContentWithProgress(25, 2)->get(ProgressState::Started->value);
+        $this->createContentWithProgress(5, 2, type: 'workout');
+        $limit = 5;
+        $limited = array_slice($incompleteContentIds, 0, $limit);
+        $expectedJson = [
+            ProgressState::Started->value => $limited
+        ];
+
+        $response = $this->getJson(
+            route('content.in_progress', ['user' => $this->user->id, 'content_type' => 'song', 'limit' => $limit]),
+        );
+        $response->assertOk();
+        // DEV NOTE: don't use assertJson because it checks the subset and doesn't guarantee only the limited response is there
+        $this->assertEquals($expectedJson, $response->json());
+    }
+
+    public function test_in_progress_content_using_page_requires_limit(): void
+    {
+        $page = 2;
+        $response = $this->getJson(
+            route('content.in_progress', ['user' => $this->user->id, 'content_type' => 'song', 'page' => $page]),
+        );
+
+        $response->assertStatus(500);
+        $this->assertStringContainsString('The limit field is required when page is present.', $response->getContent());
+    }
+
+    public function test_in_progress_content_uses_limit_and_page(): void
+    {
+        Content::factory()->count(10)->create();
+        $incompleteContentIds = $this->createContentWithProgress(25, 2)->get(ProgressState::Started->value);
+        $this->createContentWithProgress(5, 2, type: 'workout');
+        $limit = 5;
+        $page = 2;
+        $limited = array_slice($incompleteContentIds, $limit, $limit);
+        $expectedJson = [
+            ProgressState::Started->value => $limited
+        ];
+
+        $response = $this->getJson(
+            route('content.in_progress', ['user' => $this->user->id, 'content_type' => 'song', 'limit' => $limit, 'page' => $page]),
+        );
+        $response->assertOk();
+        // DEV NOTE: don't use assertJson because it checks the subset and doesn't guarantee only the limited response is there
+        $this->assertEquals($expectedJson, $response->json());
+    }
+
+
+    public function test_completed_content_returns_correct_value_for_songs(): void
+    {
+        Content::factory()->count(10)->create();
+        $completeContentIds = $this->createContentWithProgress(5, 2)->get(ProgressState::Completed->value);
+        $this->createContentWithProgress(5, 2, type: 'workout');
+
+        $expectedJson = [
+            ProgressState::Completed->value => $completeContentIds
+        ];
+
+        $response = $this->getJson(
+            route('content.completed', ['user' => $this->user->id, 'content_type' => 'song']),
+        );
+        $response->assertOk();
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_completed_content_returns_correct_value_for_songs_in_brand(): void
+    {
+        Content::factory(['brand' => Brand::Drumeo->value])->count(5)->create();
+        $this->createContentWithProgress(5, 2);
+        Content::factory(['brand' => Brand::Singeo->value])->count(3)->create();
+        $singeoContent = $this->createContentWithProgress(4, 6, Brand::Singeo);
+
+        $expectedJson = [
+            ProgressState::Completed->value => $singeoContent->get(ProgressState::Completed->value)
+        ];
+
+        $response = $this->getJson(
+            route('content.completed', ['content_type' => 'song', 'brand' => Brand::Singeo->value]),
+        );
+        $response->assertOk();
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_completed_content_returns_correct_value_for_all_homepage_content_types(): void
+    {
+        Content::factory()->count(10)->create();
+        foreach (ContentTypes::inProgressContentTypes() as $contentType) {
+            $this->createContentWithProgress(4, 1, type: $contentType);
+        }
+        $completeContentIds = ContentUserProgress::where('user_id', $this->user->id)
+            ->where('state', ProgressState::Completed->value)
+            ->pluck('content_id');
+        $expectedJson = [
+            ProgressState::Completed->value => $completeContentIds->toArray()
+        ];
+
+        $response = $this->getJson(
+            route('content.completed', ['user' => $this->user->id]),
+        );
+        $response->assertOk();
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_completed_content_returns_error_for_invalid_brand(): void
+    {
+        $response = $this->getJson(
+            route('content.completed', ['content_type' => 'song', 'brand' => 'foo-bar-baz']),
+        );
+        $response->assertStatus(500);
+        $this->assertStringContainsString('The selected brand is invalid', $response->getContent());
+    }
+
+    public function test_completed_content_uses_limit(): void
+    {
+        Content::factory()->count(10)->create();
+        $completeContentIds = $this->createContentWithProgress(5, 28)->get(ProgressState::Completed->value);
+        $this->createContentWithProgress(5, 2, type: 'workout');
+        $limit = 10;
+        $limited = array_slice($completeContentIds, 0, $limit);
+        $expectedJson = [
+            ProgressState::Completed->value => $limited
+        ];
+
+        $response = $this->getJson(
+            route('content.completed', ['user' => $this->user->id, 'content_type' => 'song', 'limit' => $limit]),
+        );
+        $response->assertOk();
+        // DEV NOTE: don't use assertJson because it checks the subset and doesn't guarantee only the limited response is there
+        $this->assertEquals($expectedJson, $response->json());
+    }
+
+    public function test_completed_content_uses_limit_and_page(): void
+    {
+        Content::factory()->count(10)->create();
+        $completeContentIds = $this->createContentWithProgress(5, 28)->get(ProgressState::Completed->value);
+        $this->createContentWithProgress(5, 2, type: 'workout');
+        $limit = 10;
+        $page = 2;
+        $limited = array_slice($completeContentIds, $limit, $limit);
+        $expectedJson = [
+            ProgressState::Completed->value => $limited
+        ];
+
+        $response = $this->getJson(
+            route('content.completed', ['user' => $this->user->id, 'content_type' => 'song', 'limit' => $limit, 'page' => $page]),
+        );
+        $response->assertOk();
+        // DEV NOTE: don't use assertJson because it checks the subset and doesn't guarantee only the limited response is there
+        $this->assertEquals($expectedJson, $response->json());
+    }
+
+    private function createContentWithProgress(int $startedCount = 0, int $completedCount = 0, ?Brand $brand = Brand::Drumeo, ?string $type = 'song'): Collection
+    {
+        $results = collect();
+        if ($startedCount) {
+            $startedContents = Content::factory(['brand' => $brand->value, 'type' => $type])->count($startedCount)->create();
+            $startedContents->each(function (Content $content) {
+                $progress = $this->createContentProgress($content, false);
+                $progress->progress_percent = 25;
+                $progress->save();
+            });
+            $results->put('started', $startedContents->pluck('id')->toArray());
+        }
+        if ($completedCount) {
+            $completedContents = Content::factory(['brand' => $brand->value, 'type' => $type])->count($completedCount)->create();
+            $completedContents->each(function (Content $content) {
+                $this->createContentProgress($content, true);
+            });
+            $results->put('completed', $completedContents->pluck('id')->toArray());
+        }
+        return $results;
     }
 
     private function createContentProgress(Content $content, bool $isCompleted): ContentUserProgress

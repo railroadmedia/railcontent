@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,7 @@ class PictureUploadController extends Controller
     }
 
 
-    public function uploadPhoto(Request $request)
+    public function uploadPhoto(Request $request): JsonResponse
     {
         ['fieldKey' => $fieldKey, 'file' => $file] = $request->validate([
             'fieldKey' => 'in:profile_picture_url,piano_gear_photo,guitar_gear_photo,drums_gear_photo,singing_gear_photo',
@@ -52,7 +53,7 @@ class PictureUploadController extends Controller
     // Since image uploads are pushed straight to S3 from our front end, we only need to copy the file out of the bucket
     // tmp folder to the location and filename we want.
     // See: https://docs.vapor.build/1.0/resources/storage.html#file-uploads
-    public function uploadPhotoFromS3FrontEnd(Request $request)
+    public function uploadPhotoFromS3FrontEnd(Request $request): JsonResponse
     {
         $request->validate(
             ['fieldKey' => 'in:profile_picture_url,piano_gear_photo,guitar_gear_photo,drums_gear_photo,singing_gear_photo']

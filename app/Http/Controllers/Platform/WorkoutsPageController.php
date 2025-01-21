@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Services\CarouselService;
-use Google\Service\Gmail\Filter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Railroad\Railcontent\Controllers\ContentJsonController;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Helpers\FiltersHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -19,10 +19,6 @@ class WorkoutsPageController extends BaseController
     private CarouselService $carouselService;
     private UserContentProgressService $userContentProgressService;
 
-    /**
-     * @param ContentService $contentService
-     * @param CarouselService $carouselService
-     */
     public function __construct(
         ContentService $contentService,
         CarouselService $carouselService,
@@ -42,10 +38,10 @@ class WorkoutsPageController extends BaseController
         ContentRepository::$countFilterOptionItems = true;
 
         FiltersHelper::prepareFiltersFields();
-
+        $defaultLimit = ContentJsonController::getDefaultLimit([$lessonType], $brand, $request->get('tabs', []), 10);
         $workouts = $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 10),
+            $request->get('limit', $defaultLimit),
             $request->get('sort', '-published_on'),
             [$lessonType],
             $request->get('slug_hierarchy', []),
@@ -59,7 +55,8 @@ class WorkoutsPageController extends BaseController
             true,
             false,
             false,
-            FiltersHelper::$groupBy
+            FiltersHelper::$groupBy,
+            $request->get('limit', $defaultLimit),
         );
 
         $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
@@ -68,7 +65,7 @@ class WorkoutsPageController extends BaseController
             'started',
             'updated_on',
             'desc',
-            4
+            20
         );
         $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
         $lessons->transform(function ($lesson) {
@@ -92,7 +89,7 @@ class WorkoutsPageController extends BaseController
                                     ]);
     }
 
-    public function showChallengesPage(Request $request, $domain, $brand)
+    public function showChallengesPage(Request $request, $domain, $brand): View
     {
         ContentRepository::$pullFutureContent = true;
         $lessonType = 'challenge';
@@ -101,10 +98,10 @@ class WorkoutsPageController extends BaseController
         ContentRepository::$countFilterOptionItems = true;
 
         FiltersHelper::prepareFiltersFields();
-
+        $defaultLimit = ContentJsonController::getDefaultLimit([$lessonType], brand(), $request->get('tabs', []), 20);
         $challenges = $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 10),
+            $request->get('limit', $defaultLimit),
             $request->get('sort', '-published_on'),
             [$lessonType],
             $request->get('slug_hierarchy', []),
@@ -131,7 +128,7 @@ class WorkoutsPageController extends BaseController
         ]);
     }
 
-    public function showWorkoutPage(Request $request, $domain, $brand, $slug, $id)
+    public function showWorkoutPage(Request $request, $domain, $brand, $slug, $id): View
     {
         $contentToRenderAsLesson = $this->contentService->getById($id);
         $relatedLessons = (new ContentFilterResultsEntity(['results' => []]))->toResponseRawJson();

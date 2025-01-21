@@ -2,7 +2,7 @@
     <div class="max-w-5xl mx-auto sm:flex items-center text-white px-4">
         <div class="flex-1 relative text-center sm:text-left">
             <div class="-ml-20 -mr-28 mt-10 mb-6 sm:hidden">
-                <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $mobileImg }}" alt="albums mobile" />
+                <img class="w-full" src="https://www.musora.com/cdn-cgi/image/width=800,quality=95/{{ $mobileImg }}" alt="albums mobile" />
             </div>
             <h3 class="font-extrabold">{{ $header }}</h3>
             <p class="uppercase text-musora tracking-widest py-3">{!! $subHeader !!}</p>
@@ -22,7 +22,7 @@
             </a>
         </div>
         <div class="flex-1 md:pl-10 g:pl-14 hidden sm:block">
-            <img class="-mt-10 -mb-10" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $img }}" alt="albums" />
+            <img class="-mt-10 -mb-10" src="https://www.musora.com/cdn-cgi/image/width=800,quality=95/{{ $img }}" alt="albums" />
         </div>
     </div>
 </section>
