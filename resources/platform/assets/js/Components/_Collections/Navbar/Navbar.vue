@@ -3,7 +3,6 @@ import { ref } from "vue"
 import { SearchIcon } from "@heroicons/vue/solid";
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@stores/user';
-import { usePlatformStore } from "@stores/platform";
 
 import SearchModal from "../SearchModal/SearchModal.vue";
 import HamburguerButton from "./HamburguerButton.vue";
@@ -38,7 +37,12 @@ const toggleSearchModal = (val) => {
   showSearchModal.value = val;
 }
 const userStore = useUserStore();
-const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand } = storeToRefs(userStore);
+const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand, showAdminToggle, useStudentView } = storeToRefs(userStore);
+
+const toggleAdminView = () => {
+    userStore().updateProfile({ use_student_view: !useStudentView.value });
+}
+
 </script>
 
 <template>
@@ -105,9 +109,9 @@ const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl,
         <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-[#00101D] dark:tw-text-white" />
       </button>
 
-      <div class="tw-flex tw-flex-col tw-items-center">
+      <div v-if="showAdminToggle" class="tw-flex tw-flex-col tw-items-center">
           <div class="dark:tw-text-white tw-text-xs tw-mb-1">Admin</div>
-          <MuToggle id="is_admin_view" name="is_admin_view" />
+          <MuToggle id="is_admin_view" name="is_admin_view" :value="useStudentView" @change="toggleAdminView" />
       </div>
 
       <!-- Invite a Friend -->
