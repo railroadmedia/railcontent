@@ -1,12 +1,14 @@
-import {ref, computed} from 'vue';
+import { ref, computed } from 'vue';
 import ContentHelpers from "@vuesora/assets/js/helper-functions/content.js";
 import ContentModel from '@vuesora/assets/js/models/_model.js';
-import {useUserStore} from "@stores/user.js";
-import {getProgressPercentage} from 'musora-content-services';
+import { useUserStore } from "@stores/user.js";
+import { getProgressPercentage } from 'musora-content-services';
 import { getDate, getDateFromIso } from "../utils";
+import {storeToRefs} from "pinia/dist/pinia";
 
 export default function useCatalogueItem(props) {
     const userStore = useUserStore();
+    const { useStudentView } = storeToRefs(userStore);
 
     const is_added = computed(() => props.item.is_added_to_primary_playlist);
 
@@ -20,7 +22,7 @@ export default function useCatalogueItem(props) {
     })
 
     const noAccess = computed(() => {
-        if (userStore.isAdmin) {
+        if (useStudentView.value) {
             return false;
         }
 
@@ -33,7 +35,7 @@ export default function useCatalogueItem(props) {
         const datePublishedOn = new Date(props.item.published_on).getTime();
         const dateQuarterPublishedOn = props.item.quarter_published ? new Date(props.item.quarter_published).getTime() : null;
 
-        if (userStore.isAdmin) {
+        if (useStudentView.value) {
             return true;
         }
 
@@ -79,7 +81,7 @@ export default function useCatalogueItem(props) {
         };
 
         //For locked challenges
-        if(props.item.is_locked && !userStore.isAdmin){
+        if(props.item.is_locked && useStudentView.value){
             return 'fa-lock';
         }
 
