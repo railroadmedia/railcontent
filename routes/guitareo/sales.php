@@ -11,6 +11,7 @@ Route::domain('{guitareoDomain}')
         Route::get('/trial-month', [SalesController::class, 'homeMonth']);
         Route::get('/lp', [SalesController::class, 'promo']);
         Route::get('/student-only', [SalesController::class, 'promo']);
+        Route::get('/save-300', [SalesController::class, 'save300']);
         Route::get('/welcome-back-discount', [SalesController::class, 'welcomeBackDiscount']);
         Route::get('/choose-plan', [SalesController::class, 'choosePlan']);
         Route::get('/choose-plan-strumming', [SalesController::class, 'choosePlanStrumming']);

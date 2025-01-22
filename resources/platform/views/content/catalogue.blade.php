@@ -26,6 +26,7 @@
                 ask-question-recipient="{{ $askQuestionRecipient }}"
                 email-logo-link="{{ $emailLogoLink }}"
                 :show-in-progress="{{ json_encode($hasStartedLessons && $lessonType !== 'routine') }}"
+                :for-you-experiment="{{  json_encode(isset($forYouExperiment) ? $forYouExperiment : false) }}"
             ></catalogue>
     </div>
 @endsection

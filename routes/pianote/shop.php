@@ -44,7 +44,7 @@ Route::domain('{pianoteDomain}')
                 Route::get('/practice-planner', [SalesController::class, 'practicePlanner']);
                 Route::get('/prestige-metronome', [SalesController::class, 'metronomePrestige']);
                 Route::get('/prima', [SalesController::class, 'prima']);
-                Route::get('/prima-ltm', [SalesController::class, 'primaLTM']);
+                Route::get('/prima-members', [SalesController::class, 'primaMember']);
                 Route::get('/prima-ultimate', [SalesController::class, 'primaUlt']);
                 Route::get('/read-music', [SalesController::class, 'readMusic']);
                 Route::get('/read-music-book', [SalesController::class, 'readMusicBook']);

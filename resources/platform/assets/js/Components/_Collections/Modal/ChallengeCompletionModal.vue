@@ -60,7 +60,7 @@
                                     <div class="tw-flex-grow">
                                         <div class="tw-font-extrabold">{{ restDay }}</div>
                                         <div class="tw-flex tw-items-center tw-justify-between">
-                                            Rest Days
+                                            Streak Saver
                                             <musora-icon icon-name="info" class="tw-ml-4 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                                         </div>
                                     </div>
@@ -74,7 +74,8 @@
                     </div>
                 </div>
                 <div v-if="!isChallengeCompleted" class="tw-flex tw-justify-center tw-w-full">
-                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-20" @click="handleCta">Complete {{ currentLessonShortTitle }}</MuButton>
+                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-20" :is-link="true" :href="`/${brand}`">Complete {{ currentLessonShortTitle }}</MuButton>
+                    <MuButton v-if="!isNextLessonLocked" variant="custom" class="tw-bg-[#00101D] tw-border tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#00101D] tw-px-20 tw-ml-5" :is-link="true" :href="completionData?.next_lesson?.url">Continue Next Lesson</MuButton>
                 </div>
             </div>
 
@@ -134,15 +135,16 @@
                             <div>
                                 <div class="tw-font-extrabold">{{ restDay }}</div>
                                 <div class="tw-flex tw-items-center">
-                                    Rest Days
+                                    Streak Saver
                                     <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div v-if="!isChallengeCompleted" class="tw-flex tw-justify-center tw-w-full">
-                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10" @click="handleCta">Complete {{ currentLessonShortTitle }}</MuButton>
+                <div v-if="!isChallengeCompleted" class="tw-flex tw-flex-col tw-w-full tw-px-2">
+                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10 tw-w-full" :is-link="true" :href="`/${brand}`">Complete {{ currentLessonShortTitle }}</MuButton>
+                    <MuButton v-if="!isNextLessonLocked" variant="custom" class="tw-bg-[#00101D] tw-border tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#00101D] tw-px-10 tw-mt-5 tw-w-full" :is-link="true" :href="completionData?.next_lesson?.url">Continue Next Lesson</MuButton>
                 </div>
             </div>
 
@@ -304,14 +306,6 @@ const openAwardModal = async() => {
 
     showAchievement.value = false;
     showAward.value = true;
-}
-
-const handleCta = () => {
-    if(isNextLessonLocked.value){
-        window.location.href = `/${brand.value}`;
-    } else {
-        window.location.href = props.completionData?.next_lesson?.url;
-    }
 }
 
 onMounted(() => {

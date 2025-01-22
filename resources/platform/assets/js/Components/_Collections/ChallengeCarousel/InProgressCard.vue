@@ -9,7 +9,7 @@
                 </button>
                 <!-- Dropdown -->
                 <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg tw-py-2">
-                    <li><a :href="challenge.web_url_path" class="tw-text-black dark:tw-text-white tw-text-sm tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-block tw-w-full tw-text-left">View Details</a></li>
+                    <li><a :href="challenge.web_url_path" class="tw-text-black dark:tw-text-white tw-text-sm tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-block tw-w-full tw-text-left">View Lessons</a></li>
                     <li v-if="isSoloChallenge && progressPercent === 0"><button @click="openNotificationModal" class="tw-text-sm tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-w-full tw-text-left">Change Start Date</button></li>
                     <li><button class="tw-text-sm tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]" @click="openLeaveModal">Leave {{ challengeTitle }}</button></li>
                 </ul>
@@ -19,10 +19,10 @@
         <!-- Left -->
         <div class="2xl:tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
             <!-- Challenge Logo -->
-            <img class="lg:tw-max-w-[180px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
-            <img class="lg:tw-max-w-[180px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
-            <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
-            <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url" class="tw-shrink-0 tw-text-sm 2xl:tw-text-base">
+            <img class="lg:tw-max-w-[200px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
+            <img class="lg:tw-max-w-[240px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
+            <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5">{{ actionText }}</div>
+            <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url" class="tw-shrink-0">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
                 {{ ctaObj?.text }}
             </MuButton>
@@ -62,7 +62,7 @@
                         <div class="tw-flex-grow">
                             <div class="tw-font-extrabold">{{ restDays }}</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
-                                Rest Days
+                                Streak Saver
                                 <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC] tw-hidden 2xl:tw-block"></musora-icon>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                 <div class="tw-grow">
                     <div class="tw-font-extrabold">{{ restDays }}</div>
                     <div class="tw-flex tw-items-center tw-justify-between tw-text-[11px]">
-                        Rest Days
+                        Streak Saver
                         <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                     </div>
                 </div>
@@ -215,15 +215,22 @@ const startDate = computed(() => {
 })
 
 const actionText = computed(() => {
-    if(hasMissedLessons.value){
-        return `You've missed ${missedLessons.value} lesson${missedLessons.value > 1 ? 's' : ''}.`;
-    } else if(!hasChallengeStarted.value){
+    if(!hasChallengeStarted.value){
         return `You're enrolled! Lessons begin ${startDate.value}`;
-    } else if(isNextLessonLocked.value){
-        return `${nextLessonFullName.value} unlocks in ${countdownString.value}`;
-    } else {
-        return `${nextLessonFullName.value} Unlocked!`;
     }
+
+    if(hasMissedLessons.value){
+        const lessonText = missedLessons.value > 1 ? 'lessons' : 'lesson';
+        const streakText = restDays.value > 0 ? 'maintain your' : 'start a new';
+        return `Complete ${missedLessons.value} ${lessonText} to ${streakText} streak!`;
+    }
+
+    if(isNextLessonLocked.value){
+        return `${nextLessonFullName.value} unlocks in ${countdownString.value}`;
+    }
+
+    return `${nextLessonFullName.value} Unlocked!`;
+
 })
 
 const showSquareThumbnail = computed(() => {
@@ -271,28 +278,41 @@ const missedLessons = computed(() => {
 })
 
 const ctaObj = computed(() => {
-    const obj = {};
+    if(hasMissedLessons.value){
+        return {
+            text: 'Catch up now',
+            url: props.challenge.next_lesson.web_url_path,
+            icon: 'fas fa-play tw-mt-0.5',
+            iconLocation: 'left',
+        }
+
+    }
 
     if(isNextLessonLocked.value){
         if(!hasChallengeStarted.value){
-            obj.text = 'View Challenge';
-            obj.url = props.challenge.web_url_path;
-            obj.icon = 'fa-solid fa-arrow-right-long';
-             obj.iconLocation = 'right';
+            return {
+                text: 'View Challenge',
+                url: props.challenge.web_url_path,
+                icon: 'fa-solid fa-arrow-right-long',
+                iconLocation: 'right',
+            }
+
         } else {
-            obj.text = `Repeat ${props.challenge.previous_completed_lesson?.short_name}`;
-            obj.url = props.challenge.previous_completed_lesson?.web_url_path;
-            obj.icon = 'fas fas fa-redo-alt';
-            obj.iconLocation = 'left';
+            return {
+                text: `Repeat ${props.challenge.previous_completed_lesson?.short_name}`,
+                url: props.challenge.previous_completed_lesson?.web_url_path,
+                icon: 'fas fas fa-redo-alt',
+                iconLocation: 'left',
+            }
         }
-    } else {
-        obj.text = `Start ${nextLessonShortName.value}`;
-        obj.url = props.challenge.next_lesson.web_url_path;
-        obj.icon = 'fas fa-play tw-mt-0.5';
-        obj.iconLocation = 'left';
     }
 
-    return obj;
+    return {
+        text: `Start ${nextLessonShortName.value}`,
+        url: props.challenge.next_lesson.web_url_path,
+        icon: 'fas fa-play tw-mt-0.5',
+        iconLocation: 'left',
+    }
 })
 
 const reFetchData = async () => {

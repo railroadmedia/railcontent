@@ -283,8 +283,7 @@
         $gridItems = $drumeo['gridItems'];
     @endphp
     @include('musora.sales.components.reason-cards-five-section', [
-        'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
-        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline">curriculum featuring many of the world’s best teachers. ',
+        'subHeader' => true,
         'full' => true,
     ])
 
