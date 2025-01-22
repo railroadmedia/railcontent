@@ -7,6 +7,7 @@ use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentField;
 use App\Modules\Content\Observers\ContentFieldObserver;
 use App\Modules\Content\Policies\ContentPolicy;
+use Exception;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,10 @@ class ContentServiceProvider extends ServiceProvider
             __DIR__ . '/../config/algolia.php',
             'algolia'
         );
+
+        if (config('content.dataset') == 'production' && !app()->isProduction()) {
+            throw new Exception("Cannot run sanity in production mode. This exception is thrown in ContentServiceProvider.php");
+        }
 
         // middleware is controlled in the route files
         Route::middleware([])
