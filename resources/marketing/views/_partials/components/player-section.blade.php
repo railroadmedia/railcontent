@@ -141,6 +141,7 @@
                                                         <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of 30-Day Drummer now. No payment info is required.</p>',
                                             'formName' => '30D Drummer Sample',
                                             'formId' => 'Musora - Engagement - Trigger - 30D Drummer Sample - WebForm',
+                                            'buttonColor' => 'bg-drumeo',
                                         ],
                                         'new-piano-players-start-here' => [
                                             'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png" alt="Logo" class="mx-auto mb-4 h-16">
@@ -148,6 +149,7 @@
                                                         <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of New Piano Players Start Here now. No payment info is required.</p>',
                                             'formName' => 'New Piano Players Sample',
                                             'formId' => 'Musora - Engagement - Trigger - New Piano Players Sample - WebForm',
+                                            'buttonColor' => 'bg-pianote',
                                         ],
                                         '30-days-to-better-strumming' => [
                                             'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-black.png" alt="Logo" class="mx-auto mb-4 h-16">
@@ -155,6 +157,7 @@
                                                         <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of 30 Days To Better Strumming now. No payment info is required.</p>',
                                             'formName' => 'Better Strumming Sample',
                                             'formId' => 'Musora - Engagement - Trigger - Better Strumming Sample - WebForm',
+                                            'buttonColor' => 'bg-guitareo',
                                         ],
                                         'everyday-improv' => [
                                         'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/enrollment/logo.webp" alt="Logo" class="mx-auto mb-4 h-16">
@@ -162,6 +165,7 @@
                                                     <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of Everyday Improv now. No payment info is required.</p>',
                                         'formName' => 'Everyday Improv Sample',
                                         'formId' => 'Musora - Engagement - Trigger - Everyday Improv Sample - WebForm',
+                                        'buttonColor' => 'bg-singeo',
                                     ],
                                     ];
                                 @endphp
@@ -184,6 +188,7 @@
                                             'noSocial' => true,
                                             "stacked" => true,
                                             'minimalForm' => true,
+                                            'buttonColor' => $forms[$slug]['buttonColor'],
                                         ])
                                     @endif
                                 </div>
