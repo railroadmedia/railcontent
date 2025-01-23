@@ -107,9 +107,10 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                         "slug":slug.current,
                         _type,
                         _id,
-                        "parent": *[^._id in child[]._ref]{
+                        parent_content_data,
+                        "parent": *[string::split(^._id, ".")[1] in child[]._ref || ^._id in child[]._ref]{
                             railcontent_id, "slug":slug.current, _type, _id,
-                            "parent": *[^._id in child[]._ref]{
+                            "parent": *[string::split(^._id, ".")[1] in child[]._ref || ^._id in child[]._ref]{
                                 railcontent_id, "slug":slug.current, _type, _id
                             }[0]
                         }[0]
@@ -128,6 +129,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                             currentParent = currentParent.parent || null;
                         }
                         patch.execute([{ set: { parent_content_data: parentsArray } }]);
+                        draftCopy.parent_content_data = parentsArray;
                     }
                 }
 
