@@ -175,7 +175,7 @@
                                             {!! $forms[$slug]['header'] !!}
                                         @endif
                                      <div class="w-full md:w-10/12 lg:w-9/12 pt-4 lg:pt-6 mx-auto">
-                                        @include('_partials.components.forms.sign-up-form', [
+                                        @include('drumeo.lead-gen.partials.sign-up-form', [
                                             "recaptchaKey" => config('recaptcha.key'),
                                             "formName" => $forms[$slug]['formName'],
                                             "formId" => $forms[$slug]['formId'],
@@ -183,8 +183,7 @@
                                             "nameInput" => "First Name",
                                             "inputText" => "Email Address",
                                             'header' => $forms[$slug]['header'],
-                                            'formClass' => 'max-w-md',
-                                            'redirectURL' => '/',
+                                            'redirectURL' => '/thank-you',
                                             'noSocial' => true,
                                             "stacked" => true,
                                             'minimalForm' => true,
