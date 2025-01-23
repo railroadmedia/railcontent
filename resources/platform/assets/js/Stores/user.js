@@ -197,6 +197,8 @@ export const useUserStore = defineStore({
             data.hasOwnProperty('singing_gear_mic_brands') && (this.user.singing_gear_mic_brands = data.singing_gear_mic_brands);
             // Video Settings
             data.hasOwnProperty('use_legacy_video_player') && (this.user.use_legacy_video_player = data.use_legacy_video_player);
+            // Student View
+            data.hasOwnProperty('use_student_view') && (this.user.use_student_view = data.use_student_view);
 
             window.shownotification({
                 icon: 'check',

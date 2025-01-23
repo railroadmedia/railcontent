@@ -41,8 +41,10 @@ const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl,
 
 const toggleAdminView = async () => {
     try {
-        const response = await userStore.updateProfile({ use_student_view: !useStudentView.value });
-        console.log('response:', response);
+        const newValue = !useStudentView.value;
+        const response = await userStore.updateProfile({ 
+            use_student_view: newValue 
+        });
         
         if (response?.status !== 200) {
             console.error('Failed');
