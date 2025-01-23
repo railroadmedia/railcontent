@@ -18,6 +18,7 @@ import PageHeaderPrimaryCta from '../PageHeaderPrimaryCta.vue';
 import CreatePlaylistCta from '../../Playlists/CreatePlaylistCta.vue';
 import UnlockChallengeCta from '@collections/PageHeader/Ctas/UnlockChallengeCta';
 import LockedChallengeCta from '@collections/PageHeader/Ctas/LockedChallengeCta';
+import LeaveChallengeCta from '@collections/PageHeader/Ctas/LeaveChallengeCta';
 
 const componentMap = {
     AskAQuestionCta,
@@ -34,6 +35,7 @@ const componentMap = {
     CreatePlaylistCta,
     UnlockChallengeCta,
     LockedChallengeCta,
+    LeaveChallengeCta,
 };
 
 const resolveComponent = (type) => componentMap[type];
