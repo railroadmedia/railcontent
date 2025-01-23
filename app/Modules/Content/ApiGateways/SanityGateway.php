@@ -391,11 +391,12 @@ class SanityGateway
 
     public function getChallengeOpenEnrollmentCards(string $brand, bool $isAdmin): array
     {
-        $cardStatusQuery = $isAdmin ? '' : '&& is_banner_draft != true';
-        $challengeFields = $this->getFieldsString('challenge');
-        $publishedOnString = $this->getPublishedFilter(false);
-        $now = now()->toISOString();
-        $enrollmentDateString = " && enrollment_start_time <= '$now' && '$now' <= enrollment_end_time";
+        $cardStatusQuery = $isAdmin ? '' : '&& is_banner_draft != true';    //checks if user is admin
+        $challengeFields = $this->getFieldsString('challenge'); //gets all default fields and challenge fields for content, into array
+        $publishedOnString = $this->getPublishedFilter(false);      //
+        $now = now()->toISOString();    //time
+        $enrollmentDateString = " && enrollment_start_time <= '$now' && '$now' <= enrollment_end_time"; //set up string for groq query
+        //create groq query. these parameters are entered into groq query, and $challengeFields is added in the projection
         $query = "*[_type == 'challenge'
             && brand == '$brand'
             $enrollmentDateString
@@ -404,8 +405,9 @@ class SanityGateway
             display_order,
             $challengeFields,
         }";
-        $results = $this->sanity->fetch($query);
-        $filtered = [];
+        $results = $this->sanity->fetch($query);    //get results of the Sanity groq query (all the filtered cards)
+        $filtered = []; //build empty array for function return when foreach is done
+        // todo: this post-filter function should be made a function for all these getChallenge__ functions to use (only used twice though so maybe that redundant)
         foreach ($results as $document) {
             $this->postProcessDocument($document);
             if (!$document['need_access']) { //filter out open enrollment challenges if they don't have access
@@ -624,42 +626,57 @@ class SanityGateway
         return $document;
     }
 
+    //getOnboardingCard takes in user's information (basic/plus, and skill level) for a given brand and returns a
+    //formatted string of the onboarding carousel information and the content cards that go with
     public function getOnboardingCard($brand, $access_level, $difficultyString, bool $isAdmin = false)
     {
         $id = strtolower("onboarding_content_card_" . $brand . '_' . $access_level . '_' . $difficultyString);
-        $fieldsString = $this->getFieldsString(null);
-        $query = "*[_id == '$id' && _type == 'onboarding-content-card']{
-                    description,
-                    access_level,
-                    brand,
-                    _id,
-                    experience_level,
-                    'card': card[]{
-                        is_draft,
-                        header,
-                        subheader,
-                        'squareImg': squareImg.asset->url,
-                        'wideImg': wideImg.asset->url,
-                        'bgImg': bgImg.asset->url,
-                        'logo': logo.asset->url,
-                        'content': content->{
-                          _type,
-                          'registration_url': '/' + brand + '/enrollment/' + slug.current,
-                          $fieldsString
-                        },
-                  },
-        } [0 ... 1]";
+        $fieldsString = $this->getFieldsString(null);   //get all default content fields
+        $adminCheck = $isAdmin ? '' : 'is_draft != true'; //sets a check if user is admin, for insertion in Groq query
+        //query finds the single matching onboarding card, projects its data, and filters out non-draft cards
+        $query = "*[_id == '$id'
+                    && _type == 'onboarding-content-card'
+                    ]{
+                        description,
+                        access_level,
+                        brand,
+                        _id,
+                        experience_level,
+
+                        'card': card['$adminCheck']
+                        {
+                            is_draft,
+                            header,
+                            subheader,
+                            'squareImg': squareImg.asset->url,
+                            'wideImg': wideImg.asset->url,
+                            'bgImg': bgImg.asset->url,
+                            'logo': logo.asset->url,
+                            'content': content->{
+                                _type,
+                                'registration_url': '/' + brand + '/enrollment/' + slug.current,
+                                $fieldsString
+                            }
+                        }
+                    } [0 ... 1]";
+
+        //use query to fetch onboarding card from Sanity db
         $document = $this->sanity->fetch($query)[0] ?? null;
+
+        //if no query, or no cards, then dont sort
         if (is_null($document) || is_null($document['card'])) {
             return $document;
         }
-        $formattedCards = [];
-        foreach ($document['card'] as $index => $content) {
-            if ($isAdmin || !$content['is_draft']) {
-                $formattedCards[] = $this->formatBannerCardParamaters($content);
-            }
+
+        $formattedCards = [];   //instance outside of loop
+        //format the data of each card
+        foreach ($document['card'] as $card) {
+
+            $formattedCards[] = $this->formatBannerCardParamaters($card);
+
         }
-        $document['card'] = $formattedCards;
+        $document['card'] = $formattedCards;    //put formatted cards back into cards column of
+
         return $document;
     }
 
