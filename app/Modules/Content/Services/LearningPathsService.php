@@ -77,14 +77,11 @@ class LearningPathsService
     public function getNewLearningPaths(): array
     {
         $brand = brand();
-
-        //if show is false, dont even get new learning paths
         if (!$this->showNewLearningPaths()) {
             return [];
         }
 
-        $user = user(); //get user
-        //get integer exp level for the user in the specified brand
+        $user = user();
         $experienceLevel = intval(
             $user
                 ->onboardingExperience
@@ -92,7 +89,7 @@ class LearningPathsService
                 ->first()
                 ->experience_level ?? 0
         );
-        $difficultyString = OnboardingSkillLevelEnum::tryFrom($experienceLevel)->name;  //gets user difficulty rating from exp
+        $difficultyString = OnboardingSkillLevelEnum::tryFrom($experienceLevel)->name;
         $document = $this->sanityGateway->getOnboardingCard($brand, $user->membership_level, $difficultyString, user()->isAdmin()) ?? [];
 
         if (empty($document)) {

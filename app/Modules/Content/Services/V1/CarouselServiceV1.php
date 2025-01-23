@@ -26,8 +26,8 @@ class CarouselServiceV1
 
     public function getCarouselCards(string $brand): array
     {
-        $user = user(); //get user id
-        $isAdmin = $user->isAdmin(); //check if user is admin
+        $user = user();
+        $isAdmin = $user->isAdmin();
 
         $onboardingCardData = $this->learningPathsService->getNewLearningPaths();
         $unfinishedOnboardingCards = [];
@@ -72,14 +72,16 @@ class CarouselServiceV1
             ->get();
 
         // Challenge with open enrollment (that the user is not a part of)
-        $railcontentIds = ChallengeUserProgress::query()
+        $inProgressAndCompleted = ChallengeUserProgress::query()
             ->where('user_id', $user->id)
             ->where(function (Builder $builder) {
                 return $builder->where('is_active', true)
                     ->orWhereNotNull('last_completed_date');
             })
             ->orderBy('start_date')
-            ->get()->pluck('content_id');
+            ->get();
+
+        $railcontentIds = $inProgressAndCompleted->pluck('content_id');
         $challengeRecommendations = collect($this->sanity->getChallengePromotionalBannerCards($brand, $isAdmin))
             ->filter(fn ($challenge) => !$railcontentIds->contains($challenge['id']));
         $allChallengeIds = [
@@ -91,14 +93,7 @@ class CarouselServiceV1
 
         $allChallengeMetaData = $this->challengesService->getChallengeMetaDataForUserProgress(
             $allChallengeIds,
-            ChallengeUserProgress::query()
-                ->where('user_id', $user->id)
-                ->where(function (Builder $builder) {
-                    return $builder->where('is_active', true)
-                        ->orWhereNotNull('last_completed_date');
-                })
-                ->orderBy('start_date')
-                ->get(),
+            $inProgressAndCompleted,
             returnChallengeData: true,
             brand: $brand
         );
