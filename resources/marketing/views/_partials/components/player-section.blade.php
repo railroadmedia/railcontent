@@ -141,6 +141,7 @@
                                                         <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of 30-Day Drummer now. No payment info is required.</p>',
                                             'formName' => '30D Drummer Sample',
                                             'formId' => 'Musora - Engagement - Trigger - 30D Drummer Sample - WebForm',
+                                            'buttonColor' => 'bg-drumeo',
                                         ],
                                         'new-piano-players-start-here' => [
                                             'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png" alt="Logo" class="mx-auto mb-4 h-16">
@@ -148,6 +149,7 @@
                                                         <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of New Piano Players Start Here now. No payment info is required.</p>',
                                             'formName' => 'New Piano Players Sample',
                                             'formId' => 'Musora - Engagement - Trigger - New Piano Players Sample - WebForm',
+                                            'buttonColor' => 'bg-pianote',
                                         ],
                                         '30-days-to-better-strumming' => [
                                             'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-black.png" alt="Logo" class="mx-auto mb-4 h-16">
@@ -155,6 +157,7 @@
                                                         <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of 30 Days To Better Strumming now. No payment info is required.</p>',
                                             'formName' => 'Better Strumming Sample',
                                             'formId' => 'Musora - Engagement - Trigger - Better Strumming Sample - WebForm',
+                                            'buttonColor' => 'bg-guitareo',
                                         ],
                                         'everyday-improv' => [
                                         'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/enrollment/logo.webp" alt="Logo" class="mx-auto mb-4 h-16">
@@ -162,22 +165,33 @@
                                                     <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of Everyday Improv now. No payment info is required.</p>',
                                         'formName' => 'Everyday Improv Sample',
                                         'formId' => 'Musora - Engagement - Trigger - Everyday Improv Sample - WebForm',
+                                        'buttonColor' => 'bg-singeo',
                                     ],
                                     ];
                                 @endphp
-
-                                @if(!empty($slug) && isset($forms[$slug]))
-                                    @include('musora.lead-gen.partials.sign-up-form-challenges', [
-                                        "recaptchaKey" => config('recaptcha.key'),
-                                        "formName" => $forms[$slug]['formName'],
-                                        "formId" => $forms[$slug]['formId'],
-                                        "buttonText" => "Get Access Now",
-                                        "nameInput" => "First Name",
-                                        "inputText" => "Email Address",
-                                        'header' => $forms[$slug]['header'],
-                                        'formClass' => 'max-w-md',
-                                    ])
-                                @endif
+                               
+                                    @if(!empty($slug) && isset($forms[$slug]))
+                                        @if(!empty($forms[$slug]['header']))
+                                            {!! $forms[$slug]['header'] !!}
+                                        @endif
+                                     <div class="w-full md:w-10/12 lg:w-9/12 pt-4 lg:pt-6 mx-auto">
+                                        @include('drumeo.lead-gen.partials.sign-up-form', [
+                                            "recaptchaKey" => config('recaptcha.key'),
+                                            "formName" => $forms[$slug]['formName'],
+                                            "formId" => $forms[$slug]['formId'],
+                                            "buttonText" => "Get Access Now",
+                                            "nameInput" => "First Name",
+                                            "inputText" => "Email Address",
+                                            'header' => $forms[$slug]['header'],
+                                            'redirectURL' => '/thank-you',
+                                            'noSocial' => true,
+                                            "stacked" => true,
+                                            'minimalForm' => true,
+                                            'buttonColor' => $forms[$slug]['buttonColor'],
+                                        ])
+                                    @endif
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
