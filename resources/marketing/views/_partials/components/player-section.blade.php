@@ -165,19 +165,29 @@
                                     ],
                                     ];
                                 @endphp
-
-                                @if(!empty($slug) && isset($forms[$slug]))
-                                    @include('musora.lead-gen.partials.sign-up-form-challenges', [
-                                        "recaptchaKey" => config('recaptcha.key'),
-                                        "formName" => $forms[$slug]['formName'],
-                                        "formId" => $forms[$slug]['formId'],
-                                        "buttonText" => "Get Access Now",
-                                        "nameInput" => "First Name",
-                                        "inputText" => "Email Address",
-                                        'header' => $forms[$slug]['header'],
-                                        'formClass' => 'max-w-md',
-                                    ])
-                                @endif
+                               
+                                    @if(!empty($slug) && isset($forms[$slug]))
+                                        @if(!empty($forms[$slug]['header']))
+                                            {!! $forms[$slug]['header'] !!}
+                                        @endif
+                                     <div class="w-full md:w-10/12 lg:w-9/12 pt-4 lg:pt-6 mx-auto">
+                                        @include('_partials.components.forms.sign-up-form', [
+                                            "recaptchaKey" => config('recaptcha.key'),
+                                            "formName" => $forms[$slug]['formName'],
+                                            "formId" => $forms[$slug]['formId'],
+                                            "buttonText" => "Get Access Now",
+                                            "nameInput" => "First Name",
+                                            "inputText" => "Email Address",
+                                            'header' => $forms[$slug]['header'],
+                                            'formClass' => 'max-w-md',
+                                            'redirectURL' => '/',
+                                            'noSocial' => true,
+                                            "stacked" => true,
+                                            'minimalForm' => true,
+                                        ])
+                                    @endif
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
