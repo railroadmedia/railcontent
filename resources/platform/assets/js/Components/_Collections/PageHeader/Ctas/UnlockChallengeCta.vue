@@ -1,13 +1,11 @@
 <template>
-    <div>
-        <PageHeaderCta
-            v-bind="$attrs"
-            text="Unlock Challenge"
-            showAllAlways
-            @click="handleOpen"
-        />
-        <ChallengeActionModal v-if="modalOpen" modal-type="unlock" @close-modal="handleClose" :content-id="contentId" :challenge="lessonData.challenge" />
-    </div>
+    <PageHeaderCta
+        v-bind="$attrs"
+        text="Unlock Challenge"
+        showAllAlways
+        @click="handleOpen"
+    />
+    <ChallengeActionModal v-if="modalOpen" modal-type="unlock" @close-modal="handleClose" :content-id="contentId" :challenge="lessonData.challenge" />
 </template>
 
 <script setup>
