@@ -263,7 +263,7 @@ return [
                     'musora_prospect_30d-drummer-sample',
                 ],
                 'accounts_to_sync' => [
-                    'druemo',
+                    'musora_prospects',
                 ],
                 'attributes' => [
                     'first_name' => 'First Name',
@@ -650,7 +650,7 @@ return [
                     'musora_prospect_new-piano-players-sample',
                 ],
                 'accounts_to_sync' => [
-                    'pianote',
+                    'musora_prospects',
                 ],
                 'attributes' => [
                     'first_name' => 'First Name',
@@ -1199,7 +1199,7 @@ return [
                     'musora_prospect_better-strumming-sample',
                 ],
                 'accounts_to_sync' => [
-                    'guidareo',
+                    'musora_prospects',
                 ],
                 'attributes' => [
                     'first_name' => 'First Name',
@@ -1352,7 +1352,7 @@ return [
                     'musora_prospect_everyday-improv-sample',
                 ],
                 'accounts_to_sync' => [
-                    'singeo',
+                    'musora_prospects',
                 ],
                 'attributes' => [
                     'first_name' => 'First Name',
