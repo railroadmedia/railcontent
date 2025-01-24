@@ -193,7 +193,7 @@ class ContentService
         if (!$user->hasSongsAccess($brand)) {
             $recommendations = array_filter(
                 $recommendations,
-                fn ($key) => $key != RecommenderSection::Song->name,
+                fn ($key) => $key != RecommenderSection::Song->value,
                 ARRAY_FILTER_USE_KEY
             );
         }
