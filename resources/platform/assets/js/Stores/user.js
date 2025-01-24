@@ -27,7 +27,7 @@ export const useUserStore = defineStore({
     isUserAMember: (state) => state.user?.is_a_member,
     isAdmin: (state) => state.user?.permission_level === 'administrator',
     showAdminToggle: (state) => state.user?.show_admin_toggle,
-    useStudentView: (state) => state.user?.use_student_view,
+    useStudentView: (state) => state.user?.use_student_view ? true : false,
     isFirstAccess: (state) => state.user?.first_access_at,
     isLifetimeMember: (state) => state.user?.is_lifetime_member,
     userMembershipLevel: (state) => state.user?.membership_level,

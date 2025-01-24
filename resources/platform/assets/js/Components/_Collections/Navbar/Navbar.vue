@@ -40,19 +40,20 @@ const userStore = useUserStore();
 const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand, showAdminToggle, useStudentView } = storeToRefs(userStore);
 
 const toggleAdminView = async () => {
-    try {
-        const newValue = !useStudentView.value;
-        const response = await userStore.updateProfile({ 
-            use_student_view: newValue 
-        });
-        
-        if (response?.status !== 200) {
-            console.error('Failed');
-        }
-    } catch (error) {
-        console.error('error:', error);
+  try {
+    const newValue = !useStudentView.value;
+    const response = await userStore.updateProfile({
+      use_student_view: newValue
+    });
+    if (response?.status === 200) {
+      window.location.reload();
+    } else {
+      console.error('Failed');
     }
-}
+  } catch (error) {
+    console.error('error:', error);
+  }
+};
 
 console.log('useStudentView', useStudentView.value);
 console.log('showAdminToggle', showAdminToggle.value);
@@ -123,7 +124,7 @@ console.log('showAdminToggle', showAdminToggle.value);
         <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-[#00101D] dark:tw-text-white" />
       </button>
 
-      <div class="tw-flex tw-flex-col tw-items-center">
+      <div v-if="showAdminToggle" class="tw-flex tw-flex-col tw-items-center">
           <div class="dark:tw-text-white tw-text-xs tw-mb-1">Admin</div>
           <MuToggle id="is_admin_view" name="is_admin_view" :value="useStudentView" @change="toggleAdminView" :brand="brand"/>
       </div>
