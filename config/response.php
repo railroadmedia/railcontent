@@ -2553,6 +2553,7 @@ return [
             'is_first_access',
             'brand_minutes_practiced',
             'show_admin_toggle',
+            'use_student_view',
         ],
 
         'quick-tips' => [
@@ -5783,6 +5784,7 @@ return [
             'is_first_access',
             'brand_minutes_practiced',
             'show_admin_toggle',
+            'use_student_view',
         ],
         'quick-tips' => [
             'id',
