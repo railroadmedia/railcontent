@@ -129,11 +129,8 @@ class ChallengesService
     {
         $enrolledUsersAndCount = $this->getEnrolledUsers($contentId, $count);
         $enrolledUsers = $enrolledUsersAndCount['users'];
-        // TODO https://musora.atlassian.net/browse/TCH-51
-        // Decorate these using a decorator (api resource) instead of raw
         $formattedUsers = $enrolledUsers->map(fn (User $user) => [
             'id' => $user->id,
-            'email' => $user->email,
             'display_name' => $user->display_name,
             'profile_picture_url' => $user->profile_picture_url,
         ]);
