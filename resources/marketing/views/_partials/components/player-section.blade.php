@@ -107,7 +107,7 @@
         </div>
     </div>
 
-@if (empty($unlocked))
+@if (empty($unlocked)) 
 <div id="sign-up-modal" class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" role="dialog" aria-modal="true">
         <div class="relative min-h-screen flex items-center justify-center px-4  @if(!empty($simpleModal))bg-black bg-opacity-80 @else bg-[#404040E5] bg-opacity-90 @endif"
             style="z-index: 1006;">
@@ -134,82 +134,51 @@
                         <div class="fixed inset-0"></div>
                         <div class="relative min-h-screen flex items-center justify-center p-4">
                             <div class="relative bg-white rounded-xl max-w-2xl w-full p-6 md:p-10 lg:p-16">
-                                         @if(!empty($slug))
-                                            @if($slug === '30-day-drummer')
-                                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/marketing/drumeo/products/30-day-drummer/30DayDrummerSeason3-Logo-10.png" alt="30 Day Drummer" class="mx-auto mb-4 w-32">
-                                                <h4 class="leading-none"><strong>Enter Your Email to Unlock <br>30-Day Drummer</strong></h4>
-                                                <p class="mt-2 lg:mt-3 text-xs pb-4">Get access to the first week of 30-Day Drummer now. No payment info is required.</p>
-                                                <div class="w-full md:w-8/12 lg:w-10/12 mx-auto">
-                                                @include('drumeo.lead-gen.partials.sign-up-form', [
-                                                    "recaptchaKey" => config('recaptcha.key'),
-                                                    'formName' => '30D Drummer Sample',
-                                                    'formId' => 'Musora - Engagement - Trigger - 30D Drummer Sample - WebForm',
-                                                    "buttonText" => "Get Access Now",
-                                                    "nameInput" => "First Name",
-                                                    "inputText" => "Email Address",
-                                                    "redirectURL" => "https://www.musora.com/thank-you",
-                                                    "stacked" => true,
-                                                    'minimalForm' => true,
-                                                    'buttonColor' => 'bg-drumeo',
-                                                ])
-                                                </div>
-                                            @elseif($slug === 'new-piano-players-start-here')
-                                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png" alt="Logo" class="mx-auto mb-4 h-16">
-                                                <h4 class="leading-none"><strong>Enter Your Email to Unlock <br> New Piano Players Start Here</strong></h4>
-                                                <p class="mt-2 lg:mt-3 text-xs pb-4">Get access to the first week of New Piano Players Start Here now. No payment info is required.</p>
-                                                <div class="w-full md:w-8/12 lg:w-10/12 mx-auto">
-                                                @include('drumeo.lead-gen.partials.sign-up-form', [
-                                                    "recaptchaKey" => config('recaptcha.key'),
-                                                    'formName' => 'New Piano Players Sample',
-                                                    'formId' => 'Musora - Engagement - Trigger - New Piano Players Sample - WebForm',
-                                                    "buttonText" => "Get Access Now",
-                                                    "nameInput" => "First Name",
-                                                    "inputText" => "Email Address",
-                                                    "redirectURL" => "https://www.musora.com/thank-you",
-                                                    "stacked" => true,
-                                                    'minimalForm' => true,
-                                                    'buttonColor' => 'bg-pianote',
-                                                ])
-                                                </div>
-                                            @elseif($slug === '30-days-to-better-strumming')
-                                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-black.png" alt="Logo" class="mx-auto mb-4 h-16">
-                                                <h4 class="leading-none"><strong>Enter Your Email to Unlock <br>30 Days To Better Strumming</strong></h4>
-                                                <p class="mt-2 lg:mt-3 text-xs pb-4">Get access to the first week of 30 Days To Better Strumming now. No payment info is required.</p>
-                                                <div class="w-full md:w-8/12 lg:w-10/12 mx-auto">
-                                                @include('drumeo.lead-gen.partials.sign-up-form', [
-                                                    "recaptchaKey" => config('recaptcha.key'),
-                                                    'formName' => 'Better Strumming Sample',
-                                                    'formId' => 'Musora - Engagement - Trigger - Better Strumming Sample - WebForm',
-                                                    "buttonText" => "Get Access Now",
-                                                    "nameInput" => "First Name",
-                                                    "inputText" => "Email Address",
-                                                    "redirectURL" => "https://www.musora.com/thank-you",
-                                                    "stacked" => true,
-                                                    'minimalForm' => true,
-                                                    'buttonColor' => 'bg-guitareo',
-                                                ])
-                                                </div>
-                                            @elseif($slug === 'everyday-improv')
-                                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/enrollment/logo.webp" alt="Logo" class="mx-auto mb-4 h-16">
-                                                <h4 class="leading-none"><strong>Enter Your Email to Unlock <br> 30 Days To Everyday Improv</strong></h4>
-                                                <p class="mt-2 lg:mt-3 text-xs pb-4">Get access to the first week of Everyday Improv now. No payment info is required.</p>
-                                                <div class="w-full md:w-8/12 lg:w-10/12 mx-auto">
-                                                @include('drumeo.lead-gen.partials.sign-up-form', [
-                                                     "recaptchaKey" => config('recaptcha.key'),
-                                                    "formName" => 'Everyday Improv Sample',
-                                                    "formId" => "Musora - Engagement - Trigger - The Playlist - Everyday Improv Sample - WebForm",
-                                                    "buttonText" => "Get Access Now",
-                                                    "nameInput" => "First Name",
-                                                    "inputText" => "Email Address",
-                                                    "redirectURL" => "https://www.musora.com/thank-you",
-                                                    "stacked" => true,
-                                                    'minimalForm' => true,
-                                                    'buttonColor' => 'bg-singeo',
-                                                ])
-                                                </div>
-                                            @endif
-                                        @endif
-                                    </div>
+                                @php
+                                    $forms = [
+                                        '30-day-drummer' => [
+                                            'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/marketing/drumeo/products/30-day-drummer/30DayDrummerSeason3-Logo-10.png" alt="30 Day Drummer" class="mx-auto mb-4 w-32">
+                                                        <h4 class="leading-none"><strong>Enter Your Email to Unlock </br>30-Day Drummer</strong></h4>
+                                                        <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of 30-Day Drummer now. No payment info is required.</p>',
+                                            'formName' => '30D Drummer Sample',
+                                            'formId' => 'Musora - Engagement - Trigger - 30D Drummer Sample - WebForm',
+                                        ],
+                                        'new-piano-players-start-here' => [
+                                            'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png" alt="Logo" class="mx-auto mb-4 h-16">
+                                                        <h4 class="leading-none"><strong>Enter Your Email to Unlock </br> New Piano Players Start Here</strong></h4>
+                                                        <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of New Piano Players Start Here now. No payment info is required.</p>',
+                                            'formName' => 'New Piano Players Sample',
+                                            'formId' => 'Musora - Engagement - Trigger - New Piano Players Sample - WebForm',
+                                        ],
+                                        '30-days-to-better-strumming' => [
+                                            'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-black.png" alt="Logo" class="mx-auto mb-4 h-16">
+                                                        <h4 class="leading-none"><strong>Enter Your Email to Unlock </br>30 Days To Better Strumming</strong></h4>
+                                                        <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of 30 Days To Better Strumming now. No payment info is required.</p>',
+                                            'formName' => 'Better Strumming Sample',
+                                            'formId' => 'Musora - Engagement - Trigger - Better Strumming Sample - WebForm',
+                                        ],
+                                        'everyday-improv' => [
+                                        'header' => '<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/enrollment/logo.webp" alt="Logo" class="mx-auto mb-4 h-16">
+                                                    <h4 class="leading-none"><strong>Enter Your Email to Unlock </br> 30 Days To Everyday Improv</strong></h4>
+                                                    <p class="mt-2 lg:mt-3 text-xs">Get access to the first week of Everyday Improv now. No payment info is required.</p>',
+                                        'formName' => 'Everyday Improv Sample',
+                                        'formId' => 'Musora - Engagement - Trigger - Everyday Improv Sample - WebForm',
+                                    ],
+                                    ];
+                                @endphp
+                               
+                                   @if(!empty($slug) && isset($forms[$slug]))
+                                    @include('musora.lead-gen.partials.sign-up-form-challenges', [
+                                        "recaptchaKey" => config('recaptcha.key'),
+                                        "formName" => $forms[$slug]['formName'],
+                                        "formId" => $forms[$slug]['formId'],
+                                        "buttonText" => "Get Access Now",
+                                        "nameInput" => "First Name",
+                                        "inputText" => "Email Address",
+                                        'header' => $forms[$slug]['header'],
+                                        'formClass' => 'max-w-md',
+                                    ])
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -217,7 +186,7 @@
             </div>
         </div>
     </div>
-@else
+@else 
     <div id="sign-up-modal" class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" role="dialog" aria-modal="true">
         <div class="relative min-h-screen flex items-center justify-center px-4 bg-black bg-opacity-80"
             style="z-index: 1006;">

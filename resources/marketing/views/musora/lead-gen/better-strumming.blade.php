@@ -16,7 +16,6 @@
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-guitareo.css') }}">
 
     <style>
         .join.outline.guitareo {
@@ -56,39 +55,6 @@
         .lessons-list::-webkit-scrollbar-thumb:hover {
             background-color: #bbb; /* Slightly lighter color on hover */
         }
-
-        .ajax-form input {
-        display: block;
-        width: 100%;
-        padding: 0.5rem 1rem; 
-        font-size: 1rem; 
-        line-height: 1.5;
-        color: #374151;
-        background-color: #ffffff; 
-        border: 1px solid #d1d5db; 
-        border-radius: 2rem; 
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); 
-        transition: border-color 0.2s, box-shadow 0.2s; 
-        }
-
-        .ajax-form input:focus {
-        outline: none;
-        border-color: #2563eb; 
-        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5); 
-        }
-
-        .ajax-form input::placeholder {
-        color: #9ca3af; 
-        opacity: 1;
-        }
-        .ajax-form button {
-        color: #ffffff;
-        }
-
-        .ajax-form button {
-        color: #ffffff !important;
-        }
-    
     </style>
 @endsection
 
