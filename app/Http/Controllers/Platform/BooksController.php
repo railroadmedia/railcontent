@@ -642,12 +642,9 @@ class BooksController extends Controller
 
         $idsToPull = ['28360', '20657', '23989', '23625', '8431', '24431', '14295', '11689', '23024', '24580'];
 
-        $listLessons = new ContentFilterResultsEntity(['results' => $this->contentService->getByIds($idsToPull)]);
-        $listLessons['total_results'] = 10;
-
         return view('books.best-beginner-drum-book.play-alongs', [
             "hasAccess" => $hasAccess,
-            "listLessons" => $listLessons->toResponseRawJson(),
+            "idsToPull" => $idsToPull,
         ]);
     }
 

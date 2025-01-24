@@ -193,10 +193,10 @@ class SalesController extends BaseController
         return view('pianote.products.faster-fingers', ['theme' => 'pianote']);
     }
 
-    public function worshippiano()
-    {
-        return view('pianote.products.worship-piano', ['theme' => 'pianote']);
-    }
+    // public function worshippiano()
+    // {
+    //     return view('pianote.products.worship-piano', ['theme' => 'pianote']);
+    // }
 
     public function pianotechniquemadeeasy()
     {

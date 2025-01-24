@@ -307,7 +307,7 @@ if (!function_exists('assembleUserAttributes')) {
 
         $userData = method_exists($userObject, 'toArray') ? $userObject->toArray() : [];
 
-        $methodsToCall = ['getDashboardUrl', 'isAMember', 'subscriptionIntervalType'];
+        $methodsToCall = ['getDashboardUrl', 'isAMember', 'subscriptionIntervalType', 'showAdminToggle'];
         foreach ($methodsToCall as $method) {
             if (method_exists($userObject, $method)) {
                 $key = Str::snake($method);

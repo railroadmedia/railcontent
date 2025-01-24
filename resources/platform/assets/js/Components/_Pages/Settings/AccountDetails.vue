@@ -79,17 +79,17 @@
                 Our video player may have compatibility issues with older devices and operating systems. We recommend
                 switching to our legacy video player if you are experiencing playback issues.
             </p>
-            <form class="tw-flex tw-flex-row tw-mt-3" id="legacy-form" @submit.prevent="submitUserForm">
+            <div class="tw-flex tw-flex-row tw-mt-3" id="legacy-form">
                 <MuToggle
                     :brand="brand"
-                    v-model="formData.use_legacy_video_player"
+                    :value="formData.use_legacy_video_player"
                     :disabled="formProcessing"
                     id="useLegacyPlayer"
                     input-label="Use legacy video player."
                     name="use_legacy_video_player"
                     @change="submitUserForm"
                 />
-            </form>
+            </div>
         </div>
 
         <!-- Delete Account UI -->
@@ -203,6 +203,10 @@ const initializeRecharge = async () => {
 const submitUserForm = async () => {
     formProcessing.value = true;
     try {
+        formData.value = {
+            ...formData.value,
+            use_legacy_video_player: !formData.value.use_legacy_video_player
+        };
         await userStore.updateProfile(formData.value);
         formProcessing.value = false;
         // Notify user of successful update

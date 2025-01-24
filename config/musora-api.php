@@ -1826,6 +1826,8 @@ return [
             'explore_tasks',
             'is_first_access',
             'brand_minutes_practiced',
+            'show_admin_toggle',
+            'use_student_view',
         ],
     ],
     'brand_logo_path_for_email' => [

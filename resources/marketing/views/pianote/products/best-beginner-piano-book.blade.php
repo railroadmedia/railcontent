@@ -204,7 +204,7 @@
                             ],
                             [
                                 'icon' => 'icons-01.svg',
-                                'text' => 'The difference between triads, 1st, and 2nd chord inversions (and <strong>when to use each one</strong>).'
+                                'text' => 'The <strong>3 steps to take</strong> when you\'re stuck to get through any hurdle.'
                             ]
                         ]
                     ]

@@ -46,9 +46,10 @@ if(!empty($user)){
                     content-endpoint="/railcontent/content"
                     theme-color="{{ $brand }}"
                     brand="{{ $brand }}"
-                    :pre-loaded-content="{{ $listLessons }}"
+                    :ids-to-pull="{{ json_encode($idsToPull) }}"
+                    :show-filters="{{ json_encode(false) }}"
+                    :show-pagination="{{ json_encode(false) }}"
                     :session-token="{{ json_encode(railtracker_session_token()) }}"
-                    :total-results="{{ json_encode(json_decode($listLessons)->meta->totalResults) }}"
                 ></play-alongs>
 
             </div>
