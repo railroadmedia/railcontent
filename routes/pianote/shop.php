@@ -52,7 +52,7 @@ Route::domain('{pianoteDomain}')
                 Route::get('/best-beginner-piano-book', [SalesController::class, 'bestBeginnerPianoBook']);
                 Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords']);
                 Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway']);
-                Route::get('/worship-piano', [SalesController::class, 'worshippiano']);
+                // Route::get('/worship-piano', [SalesController::class, 'worshippiano']);
                 Route::get('/yuletide-shirt-bundle', [SalesController::class, 'yuletideshirtBundle']);
                 Route::get('/yuletide-sweater-bundle', [SalesController::class, 'yuletidesweaterBundle']);
             }
