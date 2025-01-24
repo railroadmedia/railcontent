@@ -28,6 +28,7 @@ export const useUserStore = defineStore({
     isAdmin: (state) => state.user?.permission_level === 'administrator',
     isFirstAccess: (state) => state.user?.first_access_at,
     isLifetimeMember: (state) => state.user?.is_lifetime_member,
+    isDrumeoLifetimeMember: (state) => state.user?.is_drumeo_lifetime_member,
     userMembershipLevel: (state) => state.user?.membership_level,
     userMembershipExpiration: (state) => state.user?.membership_expiration_date,
     userDrumPhoto: (state) => state.user?.drums_gear_photo,
@@ -106,7 +107,13 @@ export const useUserStore = defineStore({
           return true;
         }
       }
-    }
+    },
+    userHasSongAccess: (getters) => {
+      return !!(
+        getters.userMembershipLevel === "plus" ||
+        (getters.isDrumeoLifetimeMember && getters.brand === "drumeo")
+      );
+    },
   },
   actions: {
     setUser (user) {
@@ -165,7 +172,7 @@ export const useUserStore = defineStore({
     async updateProfile(data) {
       try {
         const response = await updateUserProfile(this.token, this.userId, data);
-    
+
         if (response.status === 200) {
             // Update Pinia values if they exist
             data.hasOwnProperty('display_name') && (this.user.display_name = data.display_name);
@@ -195,12 +202,12 @@ export const useUserStore = defineStore({
             data.hasOwnProperty('singing_gear_mic_brands') && (this.user.singing_gear_mic_brands = data.singing_gear_mic_brands);
             // Video Settings
             data.hasOwnProperty('use_legacy_video_player') && (this.user.use_legacy_video_player = data.use_legacy_video_player);
-    
+
             window.shownotification({
                 icon: 'check',
                 text: 'Profile successfully updated!'
             });
-    
+
             return response;
         } else {
             console.log('error', response);
@@ -209,13 +216,13 @@ export const useUserStore = defineStore({
         // Parse and display the error message
         const errorMessage = error.response?.data?.errors?.['error-message'] || 'An unexpected error occurred.';
         console.error('ERROR', errorMessage);
-    
+
         window.shownotification({
             icon: 'error',
             text: errorMessage
         });
       }
-    
+
     },
 
     clearUserProfilePictureUrl() {

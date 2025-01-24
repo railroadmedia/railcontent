@@ -642,12 +642,9 @@ class BooksController extends Controller
 
         $idsToPull = ['28360', '20657', '23989', '23625', '8431', '24431', '14295', '11689', '23024', '24580'];
 
-        $listLessons = new ContentFilterResultsEntity(['results' => $this->contentService->getByIds($idsToPull)]);
-        $listLessons['total_results'] = 10;
-
         return view('books.best-beginner-drum-book.play-alongs', [
             "hasAccess" => $hasAccess,
-            "listLessons" => $listLessons->toResponseRawJson(),
+            "idsToPull" => $idsToPull,
         ]);
     }
 
@@ -751,20 +748,13 @@ class BooksController extends Controller
             $relatedLessons[] = $related_lesson;
         }
 
-        $playAlongs = new ContentFilterResultsEntity([
-            'results' => $this->contentService->getByIds(
-                $chapter['play_along_ids']
-            ),
-        ]);
-        $playAlongs['total_results'] = count($chapter['play_along_ids']);
-
         return view('books.the-drummers-toolbox.chapter', [
             "hasAccess" => $hasAccess,
             "chapterData" => $chapter,
             "chapterNumber" => $chapterNumber,
             "isDigital" => $isDigital,
             "relatedLessons" => $relatedLessons,
-            "playAlongs" => $playAlongs->toResponseRawJson(),
+            "playAlongsToPull" => $chapter['play_along_ids'],
             "user" => $user,
         ]);
     }

@@ -11,7 +11,7 @@
             </p>
             <p class="tw-mb-1">Or login with an existing account below.</p>
 
-            <form @submit.prevent="submitForm" :action="api" method="POST" novalidate="">
+            <form @submit.prevent="submitForm" method="POST" novalidate="">
                 <input type="hidden" name="_method" value="POST" class="has-input">
 
                 <!-- Hidden inputs -->
@@ -37,7 +37,7 @@
                         :class="isLoading ? 'tw-bg-[#B2D4F4] tw-text-black' : !isFormValid ? 'tw-bg-[#B91C1C] tw-text-white' : 'tw-bg-drumeo tw-text-white'"
                         type="submit"
                     >
-                        <span v-show="!isLoading && isFormValid">Click To Redeem</span>
+                        <span v-show="!isLoading && isFormValid">Login</span>
                         <span v-show="isLoading"><i class="fa-solid fa-spinner mr-1"></i> Loading</span>
                         <span v-show="!isFormValid"><i class="fa-solid fa-rotate-left mr-1"></i> Retry login</span>
                     </button>
@@ -48,14 +48,11 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import axios from "axios";
 import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "../Modal/ModalRenderer";
 
 const props = defineProps({
-    api: {
-        type: String,
-        default: ''
-    },
     isModalOpen: {
         type: Boolean,
         default: false
@@ -100,7 +97,17 @@ const submitForm = async (event) => {
     })
 
     if (isFormValid.value) {
-        form.submit();
+        axios.post('/user-management-system/login', {
+            email: form.email.value,
+            password: form.password.value,
+            redirect_to: window.location.href
+        }).then(() => {
+            window.location.reload();
+        }).catch(() => {
+            isLoading.value = false;
+            isFormValid.value = false;
+            errors.value.password = 'Invalid email or password.';
+        })
     }
 }
 </script>

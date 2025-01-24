@@ -196,15 +196,23 @@ class ChallengeUserProgress extends Model
                 if ($lesson['rest_day_used']) {
                     $totalRestDaysUsed++; // Track total rest days used
 
-                    // if they did complete the lesson when it was rescheduled to, increase their streak even if it was a rest day
-                    if ($completedAt && $completedAt->isSameDay($unlockDate)) {
+                    // for solo challenges: if they did complete the lesson when it was rescheduled to, increase their streak even if it was a rest day
+                    if (($this->is_solo ?? false) && $completedAt && $completedAt->isSameDay($unlockDate)) {
                         $currentStreak++;
                         $bestStreak = max($bestStreak, $currentStreak);
+                    }
+
+                    // for community challenge, when a rest day is used that lesson can be completed anytime
+                    if (!($this->is_solo ?? false) && $completedAt) {
+                        $currentStreak++;
+                        $bestStreak = max($bestStreak, $currentStreak);
+
+                        continue;
                     }
                 }
 
                 // If the lesson is not completed and is a past lesson, and did not use a rest day, consider it missed.
-                // If the lesson was completed, but it was at a later day than the unlock date, it should break the streak,
+                // If the lesson was completed, but it was at a later day than the unlock date, it should break the streak UNLESS its a community challenge,
                 // but it should not count as a missed day.
                 if ((!$lesson['completed'] && !$today->isSameDay($unlockDate)) ||
                     (!empty($lesson['completed']) && !$completedAt->isSameDay($unlockDate))) {
@@ -623,6 +631,7 @@ class ChallengeUserProgress extends Model
         $this->lessons_meta_data = [];
         $this->is_locked = true;
         $this->start_date = null;
+        $this->solo_notification_to_be_processed = 0;
         $this->save();
     }
 

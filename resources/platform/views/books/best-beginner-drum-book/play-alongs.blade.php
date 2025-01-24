@@ -44,11 +44,12 @@ if(!empty($user)){
                 <play-alongs
                     ref="playAlongsVueInstance"
                     content-endpoint="/railcontent/content"
-                    theme-color="{{ $brand }}"
-                    brand="{{ $brand }}"
-                    :pre-loaded-content="{{ $listLessons }}"
+                    theme-color="drumeo"
+                    brand="drumeo"
+                    :ids-to-pull="{{ json_encode($idsToPull) }}"
+                    :show-filters="{{ json_encode(false) }}"
+                    :show-pagination="{{ json_encode(false) }}"
                     :session-token="{{ json_encode(railtracker_session_token()) }}"
-                    :total-results="{{ json_encode(json_decode($listLessons)->meta->totalResults) }}"
                 ></play-alongs>
 
             </div>

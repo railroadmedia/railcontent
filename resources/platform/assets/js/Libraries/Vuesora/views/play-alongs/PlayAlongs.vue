@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-column grow play-alongs tw-pt-[20px]">
-        <CollectionFilterWrapper active-tab="All Play-Alongs" :multi-select-columns="filterOptions"
+        <CollectionFilterWrapper v-if="showFilters" active-tab="All Play-Alongs" :multi-select-columns="filterOptions"
             :search-term="searchTerm" :selected-filters="selectedFilters" :selected-sort="sort"
             :selected-progress="progress" :sort-options="sortOptions" :tab-options="tabOptions"
             @on-filter-change="handleFilterChange" @on-sort-change="handleContentSort"
@@ -81,7 +81,7 @@ import InputLabel from "@units/InputLabel/InputLabel.vue";
 import { bgColor, textColor } from "@constants/brands";
 import { useFilterValues } from "@hooks/useFilterValues";
 import { useUserStore } from '@stores/user.js';
-import { fetchAll, fetchPlayAlongsCount, contentStatusCompleted, contentStatusReset } from 'musora-content-services';
+import { fetchAll, fetchPlayAlongsCount, contentStatusCompleted, contentStatusReset, fetchByRailContentIds } from 'musora-content-services';
 import { usePlatformStore } from "@stores/platform";
 import { storeToRefs } from "pinia/dist/pinia";
 import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
@@ -115,9 +115,9 @@ export default {
             type: Boolean,
             default: () => false,
         },
-        preLoadedContent: {
+        idsToPull: {
             type: Object,
-            default: () => ({}),
+            default: () => null,
         },
         userPlaylistId: {
             type: [String, Number],
@@ -246,7 +246,11 @@ export default {
     async beforeMount() {
         const platformStore = usePlatformStore();
 
-        await this.getContent(false, false);
+        if (this.idsToPull) {
+            await this.getContentByIds(this.idsToPull);
+        } else {
+            await this.getContent(false, false);
+        }
         platformStore.setLoadingState(false);
     },
     mounted() {
@@ -310,6 +314,19 @@ export default {
                 payload
             })
         },
+
+        async getContentByIds(ids) {
+            const data = await fetchByRailContentIds(ids, 'play-along');
+            this.content = data.map(item => ({
+                ...item,
+                need_access: false,
+            }));
+
+            this.$nextTick(() => {
+                this.loading = false;
+            });
+        },
+
         async getContent(resetPlaylist, showLoading = true) {
             if (showLoading) this.loading = true;
 
@@ -797,14 +814,16 @@ export default {
             contentToComplete.completed = !contentToComplete.completed;
         },
         sendProgressTracking() {
-            this.progressTracker.send({
-                contentId: this.activeItem.id,
-                mediaType: 'practice',
-                mediaCategory: 'play-alongs',
-                watchPosition: this.currentTime,
-                totalDuration: this.totalDuration,
-                sessionToken: this.sessionToken,
-            });
+            if (this.trackProgress) {
+                this.progressTracker.send({
+                    contentId: this.activeItem.id,
+                    mediaType: 'practice',
+                    mediaCategory: 'play-alongs',
+                    watchPosition: this.currentTime,
+                    totalDuration: this.totalDuration,
+                    sessionToken: this.sessionToken,
+                });
+            }
         },
 
         updateTrackingListeners() {
