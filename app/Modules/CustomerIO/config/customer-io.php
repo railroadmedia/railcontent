@@ -270,6 +270,51 @@ return [
                     'email' => 'Email',
                 ],
             ],
+            'Everyday Improv Sample' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'musora_prospect_everyday-improv-sample',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                ],
+            ],
+            'Better Strumming Sample' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'musora_prospect_better-strumming-sample',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                ],
+            ],
+            'New Piano Players Sample' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'musora_prospect_new-piano-players-sample',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                ],
+            ],
             'The Playlist - Musora Newsletter' => [
                 'custom_attributes' => [],
                 'events' => [
@@ -642,21 +687,6 @@ return [
             ],
         ],
         'pianote' => [
-            'New Piano Players Sample' => [
-                'custom_attributes' => [
-                    'first_name' => 'nullable|string',
-                ],
-                'events' => [
-                    'musora_prospect_new-piano-players-sample',
-                ],
-                'accounts_to_sync' => [
-                    'musora_prospects',
-                ],
-                'attributes' => [
-                    'first_name' => 'First Name',
-                    'email' => 'Email',
-                ],
-            ],
             'Passing Chords PDF' => [
                 'custom_attributes' => [],
                 'events' => [
@@ -1191,21 +1221,6 @@ return [
             ],
         ],
         'guitareo' => [
-            'Better Strumming Sample' => [
-                'custom_attributes' => [
-                    'first_name' => 'nullable|string',
-                ],
-                'events' => [
-                    'musora_prospect_better-strumming-sample',
-                ],
-                'accounts_to_sync' => [
-                    'musora_prospects',
-                ],
-                'attributes' => [
-                    'first_name' => 'First Name',
-                    'email' => 'Email',
-                ],
-            ],
             'The Guitarists Toolbox' => [
                 'custom_attributes' => [],
                 'events' => [
@@ -1344,21 +1359,6 @@ return [
             ],
         ],
         'singeo' => [
-            'Everyday Improv Sample' => [
-                'custom_attributes' => [
-                    'first_name' => 'nullable|string',
-                ],
-                'events' => [
-                    'musora_prospect_everyday-improv-sample',
-                ],
-                'accounts_to_sync' => [
-                    'musora_prospects',
-                ],
-                'attributes' => [
-                    'first_name' => 'First Name',
-                    'email' => 'Email',
-                ],
-            ],
             'Improve Any Voice' => [
                 'custom_attributes' => [],
                 'events' => [

@@ -83,7 +83,7 @@
          class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" role="dialog" aria-modal="true">
         <div x-show="showVideoModal" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-80"
              style="z-index: 1005;" @click="showVideoModal = false; pauseVideo();"></div>
-    
+
         <div x-show="showVideoModal" x-transition class="relative min-h-screen flex items-center justify-center px-4"
              style="z-index: 1006;" @click="showVideoModal = false; pauseVideo();">
             <i class="fa-light fa-times fa-2x fixed top-16 right-2 cursor-pointer text-5xl z-150 text-white"
@@ -93,7 +93,7 @@
                     <div id="vimeo-player" class="absolute inset-0 w-full h-full"></div>
                 </div>
                 <a class="w-full sm:w-2/3 md:max-w-[320px] join smaller {{ $theme }} mt-4"
-                   x-show="showVideoModal" 
+                   x-show="showVideoModal"
                    @click="
                        @if (empty($unlocked) && empty($simpleModal))
                            unlock = true;
@@ -107,7 +107,7 @@
         </div>
     </div>
 
-@if (empty($unlocked)) 
+@if (empty($unlocked))
 <div id="sign-up-modal" class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" role="dialog" aria-modal="true">
         <div class="relative min-h-screen flex items-center justify-center px-4  @if(!empty($simpleModal))bg-black bg-opacity-80 @else bg-[#404040E5] bg-opacity-90 @endif"
             style="z-index: 1006;">
@@ -139,7 +139,7 @@
                                                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/marketing/drumeo/products/30-day-drummer/30DayDrummerSeason3-Logo-10.png" alt="30 Day Drummer" class="mx-auto mb-4 w-32">
                                                 <h4 class="leading-none"><strong>Enter Your Email to Unlock <br>30-Day Drummer</strong></h4>
                                                 <p class="mt-2 lg:mt-3 text-xs pb-4">Get access to the first week of 30-Day Drummer now. No payment info is required.</p>
-                                                <div class="w-full md:w-8/12 lg:w-10/12 mx-auto"> 
+                                                <div class="w-full md:w-8/12 lg:w-10/12 mx-auto">
                                                 @include('drumeo.lead-gen.partials.sign-up-form', [
                                                     "recaptchaKey" => config('recaptcha.key'),
                                                     'formName' => '30D Drummer Sample',
@@ -157,8 +157,8 @@
                                                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/new-piano-players/new-piano-players-logo.png" alt="Logo" class="mx-auto mb-4 h-16">
                                                 <h4 class="leading-none"><strong>Enter Your Email to Unlock <br> New Piano Players Start Here</strong></h4>
                                                 <p class="mt-2 lg:mt-3 text-xs pb-4">Get access to the first week of New Piano Players Start Here now. No payment info is required.</p>
-                                                <div class="w-full md:w-8/12 lg:w-10/12 mx-auto"> 
-                                                @include('pianote._partials.sign-up-form', [
+                                                <div class="w-full md:w-8/12 lg:w-10/12 mx-auto">
+                                                @include('drumeo.lead-gen.partials.sign-up-form', [
                                                     "recaptchaKey" => config('recaptcha.key'),
                                                     'formName' => 'New Piano Players Sample',
                                                     'formId' => 'Musora - Engagement - Trigger - New Piano Players Sample - WebForm',
@@ -175,8 +175,8 @@
                                                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-black.png" alt="Logo" class="mx-auto mb-4 h-16">
                                                 <h4 class="leading-none"><strong>Enter Your Email to Unlock <br>30 Days To Better Strumming</strong></h4>
                                                 <p class="mt-2 lg:mt-3 text-xs pb-4">Get access to the first week of 30 Days To Better Strumming now. No payment info is required.</p>
-                                                <div class="w-full md:w-8/12 lg:w-10/12 mx-auto"> 
-                                                @include('guitareo.lead-gen.partials.sign-up-form', [
+                                                <div class="w-full md:w-8/12 lg:w-10/12 mx-auto">
+                                                @include('drumeo.lead-gen.partials.sign-up-form', [
                                                     "recaptchaKey" => config('recaptcha.key'),
                                                     'formName' => 'Better Strumming Sample',
                                                     'formId' => 'Musora - Engagement - Trigger - Better Strumming Sample - WebForm',
@@ -194,7 +194,7 @@
                                                 <h4 class="leading-none"><strong>Enter Your Email to Unlock <br> 30 Days To Everyday Improv</strong></h4>
                                                 <p class="mt-2 lg:mt-3 text-xs pb-4">Get access to the first week of Everyday Improv now. No payment info is required.</p>
                                                 <div class="w-full md:w-8/12 lg:w-10/12 mx-auto">
-                                                @include('singeo._partials.sign-up-form', [
+                                                @include('drumeo.lead-gen.partials.sign-up-form', [
                                                      "recaptchaKey" => config('recaptcha.key'),
                                                     "formName" => 'Everyday Improv Sample',
                                                     "formId" => "Musora - Engagement - Trigger - The Playlist - Everyday Improv Sample - WebForm",
@@ -217,7 +217,7 @@
             </div>
         </div>
     </div>
-@else 
+@else
     <div id="sign-up-modal" class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" role="dialog" aria-modal="true">
         <div class="relative min-h-screen flex items-center justify-center px-4 bg-black bg-opacity-80"
             style="z-index: 1006;">
@@ -234,13 +234,13 @@
             </div>
         </div>
     </div>
-@endif 
+@endif
     <div class="lg:w-1/3 text-left">
         <div class="relative rounded-xl overflow-hidden border @if(!empty($lightMode)) border-gray-100 text-black @else border-gray-600 text-white @endif" style="height: 509px;">
             <div class="overflow-y-auto h-full lessons-list">
                 @foreach (collect($lessons) as $index => $lesson)
                     @php
-                        $isAccessible = !empty($lesson['free']) && ($index < $accessibleVideosCount);                    
+                        $isAccessible = !empty($lesson['free']) && ($index < $accessibleVideosCount);
                     @endphp
                     <div class="w-full flex items-center px-3 py-4 lg:px-2 cursor-pointer hover:opacity-80 transition-opacity"
                          style="background: {{ $index % 2 == 0 ? $aside_dark : $aside_light }};"
@@ -258,7 +258,7 @@
                         <div class="relative rounded-lg mr-4 lg:mr-1.5 flex-shrink-0">
                             @if(!empty($simpleModal))
                                 <img src="{{ $lesson['thumb'] }}" alt="{{ $lesson['title'] }}" class="h-20 w-auto object-cover rounded-lg">
-                            @else 
+                            @else
                                 <img src="{{ $lesson['thumb'] }}" alt="{{ $lesson['title'] }}" class="h-20 w-auto object-cover rounded-lg">
                                 @if (!isset($lesson['videoId']) || !$isAccessible)
                                     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
@@ -290,7 +290,7 @@
 <script src="https://player.vimeo.com/api/player.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-       
+
         const videoIds = @json(collect($lessons)->pluck('videoId')->filter()->all());
 
         let player;
@@ -391,7 +391,7 @@
         window.resetModal = resetModal;
         window.pauseVideo = pauseVideo;
         window.showSignUpModal = showSignUpModal;
-        
+
         if (!{{ !empty($unlocked) ? 'true' : 'false' }} && !{{ !empty($simpleModal) ? 'true' : 'false' }}) {
             showSignUpModal();
         }
