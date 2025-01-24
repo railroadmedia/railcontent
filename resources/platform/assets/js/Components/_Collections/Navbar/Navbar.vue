@@ -41,9 +41,9 @@ const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl,
 
 const toggleAdminView = async () => {
   try {
-    const newValue = !useStudentView.value;
+    const newValue = useStudentView.value;
     const response = await userStore.updateProfile({
-      use_student_view: newValue
+      use_student_view: !newValue
     });
     if (response?.status === 200) {
       window.location.reload();
@@ -54,10 +54,6 @@ const toggleAdminView = async () => {
     console.error('error:', error);
   }
 };
-
-console.log('useStudentView', useStudentView.value);
-console.log('showAdminToggle', showAdminToggle.value);
-
 </script>
 
 <template>
@@ -125,8 +121,8 @@ console.log('showAdminToggle', showAdminToggle.value);
       </button>
 
       <div v-if="showAdminToggle" class="tw-flex tw-flex-col tw-items-center">
-          <div class="dark:tw-text-white tw-text-xs tw-mb-1">Admin</div>
-          <MuToggle id="is_admin_view" name="is_admin_view" :value="useStudentView" @change="toggleAdminView" :brand="brand"/>
+          <div class="dark:tw-text-white tw-text-xs tw-mb-1">{{ useStudentView ? 'Student' : 'Admin' }}</div>
+          <MuToggle id="is_admin_view" name="is_admin_view" :value="!useStudentView" @change="toggleAdminView" :brand="brand"/>
       </div>
 
       <!-- Invite a Friend -->
