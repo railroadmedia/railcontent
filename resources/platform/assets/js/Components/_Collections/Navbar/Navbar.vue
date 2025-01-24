@@ -40,19 +40,12 @@ const userStore = useUserStore();
 const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand, showAdminToggle, useStudentView } = storeToRefs(userStore);
 
 const toggleAdminView = async () => {
-  try {
-    const newValue = useStudentView.value;
-    const response = await userStore.updateProfile({
-      use_student_view: !newValue
-    });
-    if (response?.status === 200) {
-      window.location.reload();
-    } else {
-      console.error('Failed');
-    }
-  } catch (error) {
-    console.error('error:', error);
-  }
+ try {
+   const { status } = await userStore.updateProfile({ use_student_view: !useStudentView.value });
+   if (status === 200) location.reload();
+ } catch (e) {
+   console.error(e);
+ }
 };
 </script>
 
