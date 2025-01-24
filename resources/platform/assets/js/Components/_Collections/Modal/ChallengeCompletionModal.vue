@@ -60,7 +60,7 @@
                                     <div class="tw-flex-grow">
                                         <div class="tw-font-extrabold">{{ restDay }}</div>
                                         <div class="tw-flex tw-items-center tw-justify-between">
-                                            Rest Days
+                                            Streak Saver
                                             <musora-icon icon-name="info" class="tw-ml-4 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
                             <div>
                                 <div class="tw-font-extrabold">{{ restDay }}</div>
                                 <div class="tw-flex tw-items-center">
-                                    Rest Days
+                                    Streak Saver
                                     <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                                 </div>
                             </div>

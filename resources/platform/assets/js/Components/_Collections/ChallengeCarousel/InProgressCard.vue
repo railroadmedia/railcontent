@@ -62,7 +62,7 @@
                         <div class="tw-flex-grow">
                             <div class="tw-font-extrabold">{{ restDays }}</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
-                                Rest Days
+                                Streak Saver
                                 <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC] tw-hidden 2xl:tw-block"></musora-icon>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                     <!-- Challenge Logos -->
                     <img class="tw-h-14 tw-w-[155px] tw-object-contain tw-object-center tw-mb-1 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" />
                     <img class="tw-h-14 tw-w-[155px] tw-object-contain tw-object-center tw-mb-1 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" />
-                    <div class="tw-text-sm tw-font-bold tw-max-w-[160px] tw-mt-2" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
+                    <div class="tw-text-sm tw-font-bold tw-max-w-[160px] tw-mt-2">{{ actionText }}</div>
                 </div>
             </div>
         </div>
@@ -138,7 +138,7 @@
                 <div class="tw-grow">
                     <div class="tw-font-extrabold">{{ restDays }}</div>
                     <div class="tw-flex tw-items-center tw-justify-between tw-text-[11px]">
-                        Rest Days
+                        Streak Saver
                         <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                     </div>
                 </div>

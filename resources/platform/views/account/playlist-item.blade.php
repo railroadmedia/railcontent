@@ -154,6 +154,7 @@
         report-recipient="{{ config('mailora.'. $brand . '.ask-question-recipient') }}"
         difficulty="{{ $lessonContent['difficulty'] ?? 0 }}"
         artist="{{ $lessonContent['artist_name'] ?? ''}}"
+        :playlist="{{ json_encode($playlist) }}"
     >
     </playlist-playback>
 @endsection

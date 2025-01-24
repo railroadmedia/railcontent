@@ -7,7 +7,7 @@
     </div>
     <PageHeaderDropdown v-if="displayDropdown" class="tw-hidden sm:tw-block" faIconClass="fa fa-ellipsis-h">
         <template v-slot:content>
-            <div class="dropdown-content tw-min-w-[210px] tw-py-2">
+            <div class="dropdown-content tw-min-w-[210px] tw-py-2 tw-flex tw-flex-col">
                 <CtaResolver v-bind="props" :ctas="dropdowns"  inDropdown />
             </div>
         </template>

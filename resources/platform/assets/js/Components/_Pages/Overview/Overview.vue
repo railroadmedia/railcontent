@@ -204,9 +204,9 @@ const OverviewChildData = computed( () => {
 
 const headerDropdown = computed(() => {
     if(isChallenge.value && !isUnlocked.value && isChallengeEnrolled.value && isChallengeSolo.value){
-        return dropdowns['challenges']['unlock'];
+        return dropdowns['challenges']['unlock'](header.value?.title);
     } else if(isChallenge.value && isUnlocked.value && isChallengeSolo.value){
-        return dropdowns['challenges']['unlocked'](data.value.lesson?.registration_url)
+        return dropdowns['challenges']['unlocked'](header.value?.title, data.value.lesson?.registration_url)
     }
 })
 
@@ -228,7 +228,7 @@ const breadcrumbsData = computed(() => {
     } else if (props.contentType === 'challenge-part') {
         return [{ title: 'Challenges', url: `/${brand.value}/challenge` }, { title: header.value?.title }];
     }
-    const middleBreadcrumbs = data.value?.breadcrumbs_data ? data.value?.breadcrumbs_data : []; 
+    const middleBreadcrumbs = data.value?.breadcrumbs_data ? data.value?.breadcrumbs_data : [];
     return [...middleBreadcrumbs, { title: header.value?.title }];
 })
 

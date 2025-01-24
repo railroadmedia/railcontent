@@ -1,15 +1,24 @@
 export const dropdowns = {
     challenges: {
-        unlock : [
-            {
-                props: {
-                    text: 'Unlock',
-                    modalType: 'unlock',
+        unlock : (title) => {
+            return [
+                {
+                    props: {
+                        text: 'Unlock',
+                        modalType: 'unlock',
+                    },
+                    type: 'UnlockChallengeCta'
                 },
-                type: 'UnlockChallengeCta'
-            }
-        ],
-        unlocked: (url) => {
+                {
+                    props: {
+                        text: `Leave ${title}`,
+                        modalType: 'leave',
+                    },
+                    type: 'LeaveChallengeCta'
+                },
+            ]
+        },
+        unlocked: (title, url) => {
             return [
                 {
                     props: {

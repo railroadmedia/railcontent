@@ -37,7 +37,7 @@
                         :class="isLoading ? 'tw-bg-[#B2D4F4] tw-text-black' : !isFormValid ? 'tw-bg-[#B91C1C] tw-text-white' : 'tw-bg-drumeo tw-text-white'"
                         type="submit"
                     >
-                        <span v-show="!isLoading && isFormValid">Click To Redeem</span>
+                        <span v-show="!isLoading && isFormValid">Login</span>
                         <span v-show="isLoading"><i class="fa-solid fa-spinner mr-1"></i> Loading</span>
                         <span v-show="!isFormValid"><i class="fa-solid fa-rotate-left mr-1"></i> Retry login</span>
                     </button>
@@ -48,6 +48,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import axios from "axios";
 import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "../Modal/ModalRenderer";
 
@@ -100,7 +101,17 @@ const submitForm = async (event) => {
     })
 
     if (isFormValid.value) {
-        form.submit();
+        axios.post('/user-management-system/login', {
+            email: form.email.value,
+            password: form.password.value,
+            redirect_to: '/drumeo/bestbook'
+        }).then(() => {
+            window.location.href = '/drumeo/bestbook';
+        }).catch(() => {
+            isLoading.value = false;
+            isFormValid.value = false;
+            errors.value.password = 'Invalid email or password.';
+        })
     }
 }
 </script>

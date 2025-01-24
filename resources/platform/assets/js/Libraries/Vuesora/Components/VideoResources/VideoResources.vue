@@ -305,6 +305,11 @@ export default {
             default: () => "drumeo",
         },
 
+        isPlaylistPlayback: {
+            type: Boolean,
+            default: () => false,
+        },
+
         difficulty: {
             type: [String, Number],
             default: () => "",
@@ -490,7 +495,16 @@ export default {
         openPracticeSoundslice() {
             this.$emit('openPracticeSoundslice');
         },
+        
         handleOpenModal() {
+            if (this.isPlaylistPlayback) {
+                this.$emit('onPlaylistItemShare', this.toggleShareModal);
+            } else {
+                this.toggleShareModal();
+            }
+        },
+
+        toggleShareModal() {
             this.showShareModal = !this.showShareModal;
         },
 

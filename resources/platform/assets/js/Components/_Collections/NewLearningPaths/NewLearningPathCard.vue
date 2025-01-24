@@ -1,6 +1,7 @@
 <template>
     <!-- DESKTOP -->
     <div class="tw-hidden xl:tw-flex tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-h-[295px] 4xl:tw-h-[330px] tw-mr-[10px] lg:tw-mr-0">
+        <DraftLabel v-if="isDraft" />
         <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-center tw-rounded-[18px]" :src="calculatedBgImg" :alt="`${title} background image`" />
         <div class="tw-flex tw-items-center tw-absolute tw-w-full tw-h-full tw-backdrop-blur-sm tw-p-[20px] lg:tw-p-[30px]"
             :style="{ background: 'linear-gradient(270deg, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.5) 45.09%, #000000 100%)' }">
@@ -91,6 +92,7 @@ import { ref, computed } from "vue";
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { useUserStore } from "@stores/user";
 import userJourney from "@services/userJourney";
+import DraftLabel from '@units/DraftLabel/DraftLabel';
 
 const userStore = useUserStore();
 
@@ -145,8 +147,13 @@ const props = defineProps({
     logo: {
         type: String,
         default: ''
+    },
+    isDraft: {
+        type: Boolean,
+        default: false
     }
 });
+
 
 const thumbnailImg = computed(() => {
     if (props.contentType === 'song') {

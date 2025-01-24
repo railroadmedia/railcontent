@@ -36,8 +36,8 @@ const info = {
         description: `Streaks make it easy to track how many days in a row you've completed a lesson for a specific Challenge. Bonus days won't affect your streak. Higher streaks will unlock special achievements!`
     },
     rest: {
-        title: '<img class="tw-mr-2 tw-w-6 tw-hidden dark:tw-inline-block" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" /> <img class="tw-mr-2 tw-w-6 tw-inline-block dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" /> Introducing Rest Days!',
-        description: 'Rest Days allow you to miss a few days of a Challenge without restarting your streak. You have a limited number of Rest Day tokens, and can gain more tokens as you progress through a Challenge. A rest day is used automatically when you miss a day.'
+        title: '<img class="tw-mr-2 tw-w-6 tw-hidden dark:tw-inline-block" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" /> <img class="tw-mr-2 tw-w-6 tw-inline-block dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" /> Introducing Streak Savers!',
+        description: 'Streak Savers allow you to miss a few days of a Challenge without restarting your streak. You have a limited number of Streak Savers, and can gain more them as you progress through a Challenge. A Streak Saver is used automatically when you complete a missed day.'
     }
 }
 </script>
