@@ -628,7 +628,7 @@ class SanityGateway
 
     //getOnboardingCard takes in user's information (basic/plus, and skill level) for a given brand and returns a
     //formatted string of the onboarding carousel information and the content cards that go with
-    public function getOnboardingCard($brand, $access_level, $difficultyString, bool $isAdmin = false)
+    public function getOnboangCard($brand, $access_level, $difficultyString, bool $isAdmin = false)
     {
         $id = strtolower("onboarding_content_card_" . $brand . '_' . $access_level . '_' . $difficultyString);
         $fieldsString = $this->getFieldsString(null);   //get all default content fields
@@ -643,7 +643,7 @@ class SanityGateway
                         _id,
                         experience_level,
 
-                        'card': card['$adminCheck']
+                        'card': card[$adminCheck]
                         {
                             is_draft,
                             header,
