@@ -141,19 +141,7 @@ class ContentService
         } else {
             $groupBySections = [];
         }
-        if(!$user->hasSongsAccess($brand)) {
-            $groupBySections =
-                array_filter($groupBySections, function ($key) {
-                    return $key != 'Songs You Might Like';
-                },
-                    ARRAY_FILTER_USE_KEY);
 
-            $sections = array_values(
-                array_filter($sections, function ($section) {
-                    return $section->name != 'Song';
-                })
-            );
-        }
         $useFastImplementation = config('railcontent.recsys.use_fast_implementation');
         $useCaching = config('railcontent.recsys.use_caching');
 
@@ -200,6 +188,14 @@ class ContentService
             }
         } else {
             $recommendations = $this->pullRecommendations($userId, $brand, $sections, $useFastImplementation);
+        }
+
+        if (!$user->hasSongsAccess($brand)) {
+            $recommendations = array_filter(
+                $recommendations,
+                fn ($key) => $key != RecommenderSection::Song->name,
+                ARRAY_FILTER_USE_KEY
+            );
         }
 
         $filteredBySectionRecommendations = $this->filterRecommendedSections($recommendations, $sections);
