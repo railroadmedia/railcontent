@@ -86,7 +86,6 @@ use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PermissionService;
 use App\Decorators\Content\UrlDecorator;
-use function PHPUnit\Framework\logicalAnd;
 
 class SanityStudioCMSController extends BaseController
 {
