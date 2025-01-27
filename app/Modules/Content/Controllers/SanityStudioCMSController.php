@@ -77,7 +77,7 @@ use App\Modules\Content\Models\Sanity\Venue;
 use App\Modules\Content\Models\Sanity\Workout;
 use App\Modules\Content\Models\Vimeo;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Content\Models\Sanity\BannerCard;
@@ -268,55 +268,68 @@ class SanityStudioCMSController extends BaseController
                 $content->setPermissions(collect($rcPermissions)->pluck('id')->toArray());
             }
 
-//            if($request->has('childrenArray')){
-//                $chilrens = $request->get('childrenArray');
-//                foreach ($chilrens as $index=>$children){
-//                    $childId = $children['railcontent_id'];
-//                    $sanityId = $children['_id'];
-//                    if(!$childId){
-//                        $child = new Content();
-//                        $child->type = $children['_type'];
-//                        $child->slug = $children['slug'];
-//                        $child->brand = $children['brand'];
-//                        $child->language   = 'en-US';
-//                        $child->created_on = Carbon::now()->toDateTimeString();
-//                        $child->status     = $children['status'];
-//                        $child->save();
-//                        $childId = $child->id;
-//                    }else{
-//                        //dd($children);
-//                        $childType = $this->getLessonType($children['_type']);
-//                        $child = Content::with('children')
-//                            ->where('id', '=', $childId)
-//                            ->where('type', '=', $childType)
-//                            ->first();
-//                        $children = $child->children;
-//                        $childrenWithGrandchildren = $children->map(function($childHierarchy) {
-//                            return                               $childHierarchy->child                           ;
-//                        });
-//                        $updatedContents = $this->updateHierarchy($childrenWithGrandchildren, [$child,$content], $urlDecorator, $updatedContents);
-//                    }
-//                    $child->setParentId($content->id, 1);
-//                    $child->setParentContentData([$content]);
-//                    if($content->parent_content_data ) {
-//                        $childParentContentData = json_decode($child->parent_content_data);
-//                        $parentContentData =  json_decode($content->parent_content_data);
-//                        foreach($parentContentData ?? [] as $parentContentDatum) {
-//                            array_push($childParentContentData, $parentContentDatum);
-//                        }
-//                        $child->parent_content_data = json_encode($childParentContentData);
-//                    }
-//		    $content->setChildId($childId, ($index + 1));
-//                    $this->decorateContent($child, $urlDecorator);
-//                    $child->save();
-//                    $updatedContents[] = ['railcontent_id'=> $child->id, 'web_url_path'=> $child->web_url_path, 'parent_content_data'=> $child->parent_content_data, '_id'=> $sanityId];
-//                }
-//            }
-            if($request->has('parent_id')){
-                    $content->setParentId($request->get('parent_id'), 1);
-                    $content->parent_content_data = json_encode($request->get('parent_content_data'));
+            if($request->has('childrenArray')){
+                $chilrens = $request->get('childrenArray');
+                foreach ($chilrens as $index=>$children){
+                    $childId = $children['railcontent_id'];
+                    $sanityId = $children['_id'];
+                    if(!$childId){
+                        $child = new Content();
+                        $child->type = $children['_type'];
+                        $child->slug = $children['slug'];
+                        $child->brand = $children['brand'];
+                        $child->language   = 'en-US';
+                        $child->created_on = Carbon::now()->toDateTimeString();
+                        $child->status     = $children['status'];
+                        $child->save();
+                        $childId = $child->id;
+                    }else{
+                        $childType = $this->getLessonType($children['_type']);
+                        $child = Content::query()
+                            ->where('id', '=', $childId)
+                            ->where('type', '=', $childType)
+                            ->first();
+                    }
+
+                    $childChildrens = collect($children['children'] ?? []);
+                    $child->setParentId($content->id, 1);
+                    $child->setParentContentData([$content]);
+                    $content->setChildId($childId, ($index + 1));
+                    if($content->parent_content_data ) {
+                        $childParentContentData = json_decode($child->parent_content_data);
+                        $parentContentData =  json_decode($content->parent_content_data);
+
+                        foreach($parentContentData ?? [] as $parentContentDatum) {
+                            array_push($childParentContentData, $parentContentDatum);
+                        }
+                        $child->parent_content_data = json_encode($childParentContentData);
+
+                    }
+
+                    $this->decorateContent($child, $urlDecorator);
+                    $updatedContents = $this->updateHierarchy($childChildrens, [$child,$content], $urlDecorator, $updatedContents);
+
+                    $child->save();
+                    $updatedContents[] = ['railcontent_id'=> $child->id, 'web_url_path'=> $child->web_url_path, 'parent_content_data'=> $child->parent_content_data, '_id'=> $sanityId];
                 }
-            $this->decorateContent($content, $urlDecorator);
+            }
+            $hasNullId = false;
+            if($request->has('parent_id')){
+                $parentContentData = $request->get('parent_content_data');
+                $hasNullId = is_array($parentContentData) && collect($parentContentData)->contains(function ($item) {
+                        return $item['id'] === null;
+                    });
+
+                    $content->parent_content_data = json_encode($parentContentData);
+                    if($request->get('parent_id')){
+                        $content->setParentId($request->get('parent_id'), 1);
+                    }
+
+                }
+
+            if (!$hasNullId) {
+                $this->decorateContent($content, $urlDecorator);
+            }
             $content->save();
             $results = ['railcontent_id'=> $content->id, 'web_url_path'=> $content->web_url_path, 'parent_content_data'=>$content->parent_content_data];
             if($assignments) {
@@ -434,23 +447,27 @@ class SanityStudioCMSController extends BaseController
         mixed $urlDecorator,
         array $updatedContents
     ): array {
-        foreach ($children as $childOfChild) {
+        foreach ($children as $index=>$childOfChildId) {
+            $childOfChild = Content::find($childOfChildId['railcontent_id']);
+            $childOfChild->setParentId(\Arr::last($parents)['id'], $index + 1);
             $childOfChild->setParentContentData($parents);
             $this->decorateContent($childOfChild, $urlDecorator);
             $childOfChild->save();
+
             $updatedContents[] = [
+                '_id' => $childOfChildId['_id'],
                 'railcontent_id' => $childOfChild->id,
                 'web_url_path' => $childOfChild->web_url_path,
                 'parent_content_data' => $childOfChild->parent_content_data
             ];
-            if($childOfChild->children) {
-                $children =$childOfChild->children;
-                $childrenWithGrandchildren = $children->map(function ($childHierarchy) {
-                    return $childHierarchy->child;
-                });
-                $parents = array_merge([$childOfChild], $parents);
-                $updatedContents = $this->updateHierarchy($childrenWithGrandchildren, $parents, $urlDecorator, $updatedContents);
-            }
+//            if($childOfChild->children) {
+//                $children =$childOfChild->children;
+//                $childrenWithGrandchildren = $children->map(function ($childHierarchy) {
+//                    return $childHierarchy->child;
+//                });
+//                $parents = array_merge([$childOfChild], $parents);
+//                $updatedContents = $this->updateHierarchy($childrenWithGrandchildren, $parents, $urlDecorator, $updatedContents);
+//            }
         }
         return $updatedContents;
     }
