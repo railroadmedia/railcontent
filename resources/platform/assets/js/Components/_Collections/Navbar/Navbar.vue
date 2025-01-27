@@ -114,7 +114,7 @@ const toggleAdminView = async () => {
       </button>
 
       <div v-if="showAdminToggle" class="tw-flex tw-flex-col tw-items-center">
-          <div class="dark:tw-text-white tw-text-xs tw-mb-1">{{ useStudentView ? 'Student' : 'Admin' }}</div>
+          <div class="dark:tw-text-white tw-text-xs tw-mb-1">Admin</div>
           <MuToggle id="is_admin_view" name="is_admin_view" :value="!useStudentView" @change="toggleAdminView" :brand="brand"/>
       </div>
 
