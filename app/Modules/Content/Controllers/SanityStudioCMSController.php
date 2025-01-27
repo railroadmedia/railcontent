@@ -460,14 +460,6 @@ class SanityStudioCMSController extends BaseController
                 'web_url_path' => $childOfChild->web_url_path,
                 'parent_content_data' => $childOfChild->parent_content_data
             ];
-//            if($childOfChild->children) {
-//                $children =$childOfChild->children;
-//                $childrenWithGrandchildren = $children->map(function ($childHierarchy) {
-//                    return $childHierarchy->child;
-//                });
-//                $parents = array_merge([$childOfChild], $parents);
-//                $updatedContents = $this->updateHierarchy($childrenWithGrandchildren, $parents, $urlDecorator, $updatedContents);
-//            }
         }
         return $updatedContents;
     }
