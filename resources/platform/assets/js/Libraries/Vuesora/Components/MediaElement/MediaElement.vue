@@ -83,6 +83,8 @@
                     :data-cast-poster="poster"
                     class="mejs__player"
                     playsinline
+                    @play="onPlay"
+                    @pause="onPause"
                 >
 
                     <source
@@ -208,7 +210,15 @@ export default {
         seekToTime: {
             type: [String, Number],
             default: 0
-        }
+        },
+        isChallenge: {
+            type: Boolean,
+            default: false,
+        },
+        isCompleted: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
@@ -227,9 +237,12 @@ export default {
                 'ended',
                 'volumechange',
                 'captionschange',
+                'completeChallenge'
             ],
             contextMenu: false,
             currentTimeInSeconds: 0,
+            hasCompleted: false,
+            videoInterval: null,
         };
     },
     computed: {
@@ -349,6 +362,19 @@ export default {
     },
 
     methods: {
+        onPlay(){
+            this.videoInterval = setInterval(() => {
+                if(this.isChallenge && !this.isCompleted && !this.hasCompleted && (this.currentTimeInSeconds >= Math.round(0.97 * this.videoLength))){
+                    this.hasCompleted = true;
+                    this.$emit('completeChallenge')
+                }
+            }, 1000)
+        },
+
+        onPause(){
+          clearInterval(this.videoInterval)
+        },
+
         //Fix icons to use proper svg paths
         updateSvgUseElements() {
             const useElements = this.$el.querySelectorAll('use');
@@ -359,6 +385,7 @@ export default {
                 }
             });
         },
+
         playVideo() {
             this.mediaElement.play();
         },
@@ -491,7 +518,6 @@ export default {
 
                         player.container.addEventListener('touchstart', () => {
                             player.showControls();
-
                             if (!player.paused) {
                                 player.startControlsTimer(player.options.controlsTimeoutMouseLeave);
                             }

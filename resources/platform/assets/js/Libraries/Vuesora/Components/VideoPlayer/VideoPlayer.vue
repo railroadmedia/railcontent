@@ -137,11 +137,21 @@ const props = defineProps({
     seekToTime: {
         type: [String, Number],
         default: 0
-    }
+    },
+
+    isChallenge: {
+        type: Boolean,
+        default: false
+    },
+
+    isCompleted: {
+        type: Boolean,
+        default: false
+    },
 });
 
 //Investigate other events
-const emit = defineEmits(['onVideoEnd', 'onUpdateCurrentTime', 'play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state']);
+const emit = defineEmits(['onVideoEnd', 'play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state', 'completeChallenge']);
 
 // Non reactive vars
 let shakaPlayer = null;
@@ -461,7 +471,7 @@ function playPauseViaControlWrap(event) {
 function seek(time) {
     mediaElement.value.pause();
     const seekTime = Number(time) > 0 ? Math.round(Number(time)) : 0;
-    
+
     /*
     TODO: Implement seek tracking when Data Team is ready
     if (hasBeenPlayed.value) {
@@ -1139,7 +1149,9 @@ const {
     setRate,
     emit,
     contentId: props.contentId,
-    progressState: currentProgress
+    progressState: currentProgress,
+    isChallenge: props.isChallenge,
+    isCompleted: props.isCompleted,
 })
 </script>
 
