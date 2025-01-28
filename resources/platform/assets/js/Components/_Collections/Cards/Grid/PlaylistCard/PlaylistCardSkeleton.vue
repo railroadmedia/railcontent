@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-animate-pulse tw-group tw-relative tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 tw-w-[221px] tw-min-w-[221px] lg:tw-w-auto lg:tw-min-w-0 lg:[&:nth-child(11)]:tw-hidden lg:[&:nth-child(12)]:tw-hidden 2xl:[&:nth-child(11)]:tw-grid 2xl:[&:nth-child(12)]:tw-grid">
+    <div class="tw-animate-pulse tw-group tw-relative tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 tw-w-[227px] lg:tw-w-1/5 2xl:tw-w-1/6 tw-shrink-0 tw-pr-[6px] xl:tw-pr-[12px] 2xl:tw-pr-[16px]">
         <!-- Thumbnail -->
         <div class="tw-relative tw-overflow-hidden tw-bg-ui-skeleton tw-aspect-square tw-row-span-5 tw-col-span-5 tw-rounded-lg tw-h-auto"></div>
         <!-- Text-->
