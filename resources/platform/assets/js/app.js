@@ -100,6 +100,7 @@ import PageHeader from '@collections/PageHeader/PageHeader'
 import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection';
 import DeleteAccountModal from '@collections/Modal/DeleteAccountModal';
 import NewMusoraIcon from '@collections/NewMusoraIcon/NewMusoraIcon';
+import RedeemLoginButtons from '@collections/RedeemLoginButtons/RedeemLoginButtons.vue';
 
 //Vuesora Assets
 import Forms from '@vuesora/assets/js/classes/forms';
@@ -260,6 +261,7 @@ app.component('AppContainer', AppContainer)
     .component('LeavingContentUpdates', LeavingContentUpdates)
     .component('NewMusoraIcon', NewMusoraIcon)
     .component('Challenges', Challenges)
+    .component('RedeemLoginButtons', RedeemLoginButtons)
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback" */

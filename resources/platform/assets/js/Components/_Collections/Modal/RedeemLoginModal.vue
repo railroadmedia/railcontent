@@ -11,7 +11,7 @@
             </p>
             <p class="tw-mb-1">Or login with an existing account below.</p>
 
-            <form @submit.prevent="submitForm" :action="api" method="POST" novalidate="">
+            <form @submit.prevent="submitForm" method="POST" novalidate="">
                 <input type="hidden" name="_method" value="POST" class="has-input">
 
                 <!-- Hidden inputs -->
@@ -53,10 +53,6 @@ import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "../Modal/ModalRenderer";
 
 const props = defineProps({
-    api: {
-        type: String,
-        default: ''
-    },
     isModalOpen: {
         type: Boolean,
         default: false
@@ -104,9 +100,9 @@ const submitForm = async (event) => {
         axios.post('/user-management-system/login', {
             email: form.email.value,
             password: form.password.value,
-            redirect_to: '/drumeo/bestbook'
+            redirect_to: window.location.href
         }).then(() => {
-            window.location.href = '/drumeo/bestbook';
+            window.location.reload();
         }).catch(() => {
             isLoading.value = false;
             isFormValid.value = false;

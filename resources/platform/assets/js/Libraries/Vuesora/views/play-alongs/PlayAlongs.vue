@@ -317,7 +317,10 @@ export default {
 
         async getContentByIds(ids) {
             const data = await fetchByRailContentIds(ids, 'play-along');
-            this.content = data;
+            this.content = data.map(item => ({
+                ...item,
+                need_access: false,
+            }));
 
             this.$nextTick(() => {
                 this.loading = false;
@@ -811,14 +814,16 @@ export default {
             contentToComplete.completed = !contentToComplete.completed;
         },
         sendProgressTracking() {
-            this.progressTracker.send({
-                contentId: this.activeItem.id,
-                mediaType: 'practice',
-                mediaCategory: 'play-alongs',
-                watchPosition: this.currentTime,
-                totalDuration: this.totalDuration,
-                sessionToken: this.sessionToken,
-            });
+            if (this.trackProgress) {
+                this.progressTracker.send({
+                    contentId: this.activeItem.id,
+                    mediaType: 'practice',
+                    mediaCategory: 'play-alongs',
+                    watchPosition: this.currentTime,
+                    totalDuration: this.totalDuration,
+                    sessionToken: this.sessionToken,
+                });
+            }
         },
 
         updateTrackingListeners() {
