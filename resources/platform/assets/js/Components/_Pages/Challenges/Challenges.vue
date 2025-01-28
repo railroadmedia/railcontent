@@ -15,6 +15,7 @@
                 catalogue-type="challenge-carousel"
                 page-type="challenge"
                 :preLoadedContent="carousels"
+                :auto-scroll="true"
             />
 
             <CollectionWrapper
@@ -37,6 +38,7 @@ import { fetchCarouselCardData } from 'musora-content-services';
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb';
 import PageHeader from '@collections/PageHeader/PageHeader';
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
+import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection';
 
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
