@@ -29,7 +29,7 @@
             <!-- Song Results -->
             <div :class="`dark:tw-text-white songs-catalogue-container ${startedContent?.data?.length ? 'tw-mt-[14px] lg:tw-mt-[6px]' : 'tw-mt-[30px]'}`">
                 <transition appear name="fade">
-                    <CollectionWrapper collectionType="song" :tab-options="tabData" :infinite-scroll="!membershipUpgradeModal.disableClose" />
+                    <CollectionWrapper collectionType="song" :tab-options="tabData" />
                 </transition>
             </div>
         </div>
@@ -74,10 +74,8 @@ const props = defineProps({
 });
 
 const collectionStore = useCollectionStore();
-const platformStore = usePlatformStore();
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
-const { membershipUpgradeModal } = storeToRefs(platformStore);
 
 const artistCount = ref(0);
 const isLoading = ref(false);
@@ -121,18 +119,14 @@ onBeforeMount(async() => {
             queryType: 'song',
         });
 
-        if (props.showUpgradeModal) {
-            platformStore.openMembershipUpgradeModal();
-            platformStore.disableCloseMembershipUpgradeModal();
-        } else {
-            // Fetch started content (in-progress lessons)
-            const startedIds = await fetchContentInProgress('song', brand.value);
-            const lessons = await fetchByRailContentIds(startedIds.started);
-            const startedLessons = lessons.filter(lesson => startedIds.started.includes(lesson.id));
+        // Fetch started content (in-progress lessons)
+        const startedIds = await fetchContentInProgress('song', brand.value);
+        const lessons = await fetchByRailContentIds(startedIds.started);
+        const startedLessons = lessons.filter(lesson => startedIds.started.includes(lesson.id));
 
-            // Set the continue section with started lessons
-            continueSection.value = startedLessons;
-        }
+        // Set the continue section with started lessons
+        continueSection.value = startedLessons;
+
     } catch (error) {
         console.error('Error in onBeforeMount:', error);
     } finally {

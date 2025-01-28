@@ -242,38 +242,48 @@ class SanityStudioCMSController extends BaseController
     {
         $urlDecorator = app()->make(UrlDecorator::class);
 
+
+
         if ($request->get('_type') === 'permission') {
             $query = \App\Modules\Content\Models\Permission::query();
-            if($request->has('railcontent_id')) {
-                $permission = $query->where('id', '=', $request->get('railcontent_id'))->first();
-                    }else{
-                $permission = $query->where('name', '=', $request->get('name'))->first();
-            }
+
+            //set permission based on railcontent_id || (name && brand)
+            $permission = $query
+                ->where('id', '=', $request->get('permission_id'))
+                ->orWhere(function ($builder) use ($request) {
+                    $builder->where('name', '=', $request->get('name'))
+                        ->where('brand', '=', $request->get('brand'));
+                })
+                ->first();
+
+            //create new permission if specified queried permission in Sanity db doesn't exist
             if (!$permission) {
                 $permission = new \App\Modules\Content\Models\Permission();
             }
+            //set attributes of existing permission
             $permission->name = $request->get('name');
             $permission->brand = $request->get('brand');
-            $permission->sanity_ref = str_replace('drafts.','',$request->get('_id'));
-            $permission->save();
-            return ['railcontent_id'=> $permission->id];
+            $permission->sanity_ref = str_replace('drafts.', '', $request->get('_id'));
+            $permission->save();    //save permission as a row in Sanity db
+            return ['railcontent_id' => $permission->id];    //return railcontent_id as permission id attribute
+
         } else {
             $updatedContents = [];
             $lessonType = $this->getLessonType($request->get('_type'));
             $content = $this->findOrCreateContent($request, $lessonType);
             $assignments = $content->setAssignments($request->get('assignment'));
-            if($request->has('permission')){
+            if ($request->has('permission')) {
                 $sanityPermissionsRef = collect($request->get('permission'))->pluck('_ref')->toArray();
-                $rcPermissions = \App\Modules\Content\Models\Permission::query()->whereIn('sanity_ref',$sanityPermissionsRef)->get();
+                $rcPermissions = \App\Modules\Content\Models\Permission::query()->whereIn('sanity_ref', $sanityPermissionsRef)->get();
                 $content->setPermissions(collect($rcPermissions)->pluck('id')->toArray());
             }
 
-            if($request->has('childrenArray')){
+            if ($request->has('childrenArray')) {
                 $chilrens = $request->get('childrenArray');
-                foreach ($chilrens as $index=>$children){
+                foreach ($chilrens as $index => $children) {
                     $childId = $children['railcontent_id'];
                     $sanityId = $children['_id'];
-                    if(!$childId){
+                    if (!$childId) {
                         $child = new Content();
                         $child->type = $children['_type'];
                         $child->slug = $children['slug'];
@@ -283,7 +293,7 @@ class SanityStudioCMSController extends BaseController
                         $child->status     = $children['status'];
                         $child->save();
                         $childId = $child->id;
-                    }else{
+                    } else {
                         $childType = $this->getLessonType($children['_type']);
                         $child = Content::query()
                             ->where('id', '=', $childId)
@@ -295,11 +305,11 @@ class SanityStudioCMSController extends BaseController
                     $child->setParentId($content->id, 1);
                     $child->setParentContentData([$content]);
                     $content->setChildId($childId, ($index + 1));
-                    if($content->parent_content_data ) {
+                    if ($content->parent_content_data) {
                         $childParentContentData = json_decode($child->parent_content_data);
                         $parentContentData =  json_decode($content->parent_content_data);
 
-                        foreach($parentContentData ?? [] as $parentContentDatum) {
+                        foreach ($parentContentData ?? [] as $parentContentDatum) {
                             array_push($childParentContentData, $parentContentDatum);
                         }
                         $child->parent_content_data = json_encode($childParentContentData);
@@ -310,29 +320,29 @@ class SanityStudioCMSController extends BaseController
                     $updatedContents = $this->updateHierarchy($childChildrens, [$child,$content], $urlDecorator, $updatedContents);
 
                     $child->save();
-                    $updatedContents[] = ['railcontent_id'=> $child->id, 'web_url_path'=> $child->web_url_path, 'parent_content_data'=> $child->parent_content_data, '_id'=> $sanityId];
+                    $updatedContents[] = ['railcontent_id' => $child->id, 'web_url_path' => $child->web_url_path, 'parent_content_data' => $child->parent_content_data, '_id' => $sanityId];
                 }
             }
             $hasNullId = false;
-            if($request->has('parent_id')){
+            if ($request->has('parent_id')) {
                 $parentContentData = $request->get('parent_content_data');
                 $hasNullId = is_array($parentContentData) && collect($parentContentData)->contains(function ($item) {
-                        return $item['id'] === null;
-                    });
+                    return $item['id'] === null;
+                });
 
-                    $content->parent_content_data = json_encode($parentContentData);
-                    if($request->get('parent_id')){
-                        $content->setParentId($request->get('parent_id'), 1);
-                    }
-
+                $content->parent_content_data = json_encode($parentContentData);
+                if ($request->get('parent_id')) {
+                    $content->setParentId($request->get('parent_id'), 1);
                 }
+
+            }
 
             if (!$hasNullId) {
                 $this->decorateContent($content, $urlDecorator);
             }
             $content->save();
-            $results = ['railcontent_id'=> $content->id, 'web_url_path'=> $content->web_url_path, 'parent_content_data'=>$content->parent_content_data];
-            if($assignments) {
+            $results = ['railcontent_id' => $content->id, 'web_url_path' => $content->web_url_path, 'parent_content_data' => $content->parent_content_data];
+            if ($assignments) {
                 $results['assignments'] = $assignments;
             }
             $results['relatedDocs'] = $updatedContents;
@@ -447,7 +457,7 @@ class SanityStudioCMSController extends BaseController
         mixed $urlDecorator,
         array $updatedContents
     ): array {
-        foreach ($children as $index=>$childOfChildId) {
+        foreach ($children as $index => $childOfChildId) {
             $childOfChild = Content::find($childOfChildId['railcontent_id']);
             $childOfChild->setParentId(\Arr::last($parents)['id'], $index + 1);
             $childOfChild->setParentContentData($parents);

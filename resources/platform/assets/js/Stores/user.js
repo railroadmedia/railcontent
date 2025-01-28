@@ -30,6 +30,7 @@ export const useUserStore = defineStore({
     useStudentView: (state) => state.user?.use_student_view ? true : false,
     isFirstAccess: (state) => state.user?.first_access_at,
     isLifetimeMember: (state) => state.user?.is_lifetime_member,
+    isDrumeoLifetimeMember: (state) => state.user?.is_drumeo_lifetime_member,
     userMembershipLevel: (state) => state.user?.membership_level,
     userMembershipExpiration: (state) => state.user?.membership_expiration_date,
     userDrumPhoto: (state) => state.user?.drums_gear_photo,
@@ -108,7 +109,13 @@ export const useUserStore = defineStore({
           return true;
         }
       }
-    }
+    },
+    userHasSongAccess: (getters) => {
+      return !!(
+        getters.userMembershipLevel === "plus" ||
+        (getters.isDrumeoLifetimeMember && getters.brand === "drumeo")
+      );
+    },
   },
   actions: {
     setUser (user) {

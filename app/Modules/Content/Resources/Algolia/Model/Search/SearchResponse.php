@@ -135,7 +135,9 @@ class SearchResponse extends AlgoliaSearchResponse
         $data["quarter_published"] = $contentData['quarter_published'] instanceof Carbon ? $contentData['quarter_published']->toDateString() : $contentData['quarter_published'];
         $data["instructors"] = $contentData['*instructors'] ?? [];
         $data["user_playlists"] = $contentData['*user_playlists'] ?? [];
-        $data["published_on_in_timezone"] = $contentData['published_on_in_timezone'] instanceof Carbon ? $contentData['published_on_in_timezone']->toDateString() : $contentData['published_on_in_timezone'];
+        if (array_key_exists('published_on_in_timezone', $contentData)) {
+            $data["published_on_in_timezone"] = $contentData['published_on_in_timezone'] instanceof Carbon ? $contentData['published_on_in_timezone']->toDateString() : $contentData['published_on_in_timezone'];
+        }
         $data['data'] = $contentData['*data'] ?? [];
         $data['fields'] = $contentData['*fields'] ?? [];
 
