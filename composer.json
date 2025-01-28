@@ -45,7 +45,7 @@
         "railroad/points": "2.0.*",
         "railroad/railanalytics": "4.0.*",
         "railroad/railchat": "3.0.*",
-        "railroad/railcontent": "v3.0.*",
+        "railroad/railcontent": "^3.0",
         "railroad/railforums": "3.0.*",
         "railroad/railnotifications": "4.0.*",
         "railroad/referral": "4.0.*",
