@@ -631,6 +631,7 @@ class ChallengeUserProgress extends Model
         $this->lessons_meta_data = [];
         $this->is_locked = true;
         $this->start_date = null;
+        $this->solo_notification_to_be_processed = 0;
         $this->save();
     }
 
