@@ -364,7 +364,7 @@ export default {
     methods: {
         onPlay(){
             this.videoInterval = setInterval(() => {
-                if(this.isChallenge && !this.isCompleted && !this.hasCompleted && (this.currentTimeInSeconds >= Math.round(0.97 * this.videoLength))){
+                if(this.isChallenge && !this.isCompleted && !this.hasCompleted && (this.currentTimeInSeconds >= Math.round(0.985 * this.videoLength))){
                     this.hasCompleted = true;
                     this.$emit('completeChallenge')
                 }

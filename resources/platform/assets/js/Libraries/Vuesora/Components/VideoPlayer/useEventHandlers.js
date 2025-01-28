@@ -150,7 +150,7 @@ export default function ({
                         ninetyFivePercentTracked = true;
                         endCallback(false);
                     }
-                    if (!isCompleted && isChallenge && !hasCompleted.value && currentTime.value >= Math.round(0.97 * totalDuration.value)){
+                    if (!isCompleted && isChallenge && !hasCompleted.value && currentTime.value >= Math.round(0.985 * totalDuration.value)){
                         hasCompleted.value = true;
                         emit('completeChallenge');
                     }
