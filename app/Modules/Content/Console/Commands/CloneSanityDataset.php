@@ -46,17 +46,23 @@ class CloneSanityDataset extends Command
         if ($hasError) {
             return self::FAILURE;
         }
+        $dbEnvironment = 'staging';
+        if($destination == 'development'){
+            $dbEnvironment = 'local';
+        }
+        $scriptPath = '/commands/bash/musora-web-platform/sync-databases-with-prod.sh';
+        $command = escapeshellcmd("$scriptPath") . ' ' . escapeshellarg($dbEnvironment) ;
+        $output = [];
+        $resultCode = null;
+        exec($command, $output, $resultCode);
+        $this->info(' Command output :: ');
+        foreach ($output as $line) {
+            $this->info($line); // Output each line
+        }
+        $this->info(' Start Sanity sync');
+        return 1;
 
         $directory = 'resources/sanitystudio';
-
-//   I tried the export/import commands only for documents(no assets), but the copying process is slower
-//        $filename = "$source-sanity-export.tar.gz";
-//        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset export $source $filename --raw");
-//        if ($resultCode !== self::SUCCESS) {
-//            $this->error("Failed to copy dataset. Have you built Sanity Studio using the README instructions?");
-//            return $resultCode;
-//        }
-//        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $filename $destination --replace --allow-failing-assets --allow-assets-in-different-dataset");
 
         $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset delete $destination --force");
         if ($resultCode !== self::SUCCESS) {
