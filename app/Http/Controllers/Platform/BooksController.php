@@ -748,20 +748,13 @@ class BooksController extends Controller
             $relatedLessons[] = $related_lesson;
         }
 
-        $playAlongs = new ContentFilterResultsEntity([
-            'results' => $this->contentService->getByIds(
-                $chapter['play_along_ids']
-            ),
-        ]);
-        $playAlongs['total_results'] = count($chapter['play_along_ids']);
-
         return view('books.the-drummers-toolbox.chapter', [
             "hasAccess" => $hasAccess,
             "chapterData" => $chapter,
             "chapterNumber" => $chapterNumber,
             "isDigital" => $isDigital,
             "relatedLessons" => $relatedLessons,
-            "playAlongs" => $playAlongs->toResponseRawJson(),
+            "playAlongsToPull" => $chapter['play_along_ids'],
             "user" => $user,
         ]);
     }

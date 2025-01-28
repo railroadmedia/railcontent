@@ -226,7 +226,7 @@
                     "stacked" => true,
                     "minimalForm" => true,
                     "buttonColor" => "bg-musora text-black",
-                    "redirectUrl" => "https://www.musora.com/thank-you",
+                    "redirectURL" => "https://www.musora.com/thank-you",
                 ])
                 </div>
             </div>

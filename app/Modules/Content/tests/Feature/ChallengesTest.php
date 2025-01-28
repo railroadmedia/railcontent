@@ -31,17 +31,19 @@ class ChallengesTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    public function test_scope_brand() : void
+    public function test_scope_brand(): void
     {
         $userId = user()->id;
         $drumeoContent = Content::factory()->create(['brand' => 'drumeo']);
         $singeoContent = Content::factory()->create(['brand' => 'singeo']);
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $singeoContent->id,
             'user_id' => $userId,
         ],
         );
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $drumeoContent->id,
             'user_id' => $userId,
         ],
@@ -52,20 +54,24 @@ class ChallengesTest extends TestCase
         $this->assertCount(1, $singeoTestContent);
     }
 
-    public function test_scope_community_and_solo() : void
+    public function test_scope_community_and_solo(): void
     {
         $userId = user()->id;
         $content1 = Content::factory()->create();
         $content2 = Content::factory()->create();
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $content1->id,
             'user_id' => $userId,
-        ], ['is_solo' => false]
+        ],
+            ['is_solo' => false]
         );
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $content2->id,
             'user_id' => $userId,
-        ], ['is_solo' => true]
+        ],
+            ['is_solo' => true]
         );
         $solo = ChallengeUserProgress::query()->solo()->get();
         $this->assertCount(1, $solo);
@@ -73,17 +79,20 @@ class ChallengesTest extends TestCase
         $this->assertCount(1, $community);
     }
 
-    public function test_scope_completed() : void
+    public function test_scope_completed(): void
     {
         $userId = user()->id;
         $content1 = Content::factory()->create();
         $content2 = Content::factory()->create();
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $content1->id,
             'user_id' => $userId,
-        ], ['last_completed_date' => Carbon::now()->toISOString()]
+        ],
+            ['last_completed_date' => Carbon::now()->toISOString()]
         );
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $content2->id,
             'user_id' => $userId,
         ],
@@ -92,17 +101,20 @@ class ChallengesTest extends TestCase
         $this->assertCount(1, $completed);
     }
 
-    public function test_scope_hide_badge() : void
+    public function test_scope_hide_badge(): void
     {
         $userId = user()->id;
         $content1 = Content::factory()->create();
         $content2 = Content::factory()->create();
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $content1->id,
             'user_id' => $userId,
-        ], ['hide_completed_banner' => true]
+        ],
+            ['hide_completed_banner' => true]
         );
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $content2->id,
             'user_id' => $userId,
         ],
@@ -111,7 +123,7 @@ class ChallengesTest extends TestCase
         $this->assertCount(1, $showBadges);
     }
 
-    public function test_scope_active() : void
+    public function test_scope_active(): void
     {
         $userId = user()->id;
         $contentActiveAndPast = Content::factory()->create();
@@ -119,30 +131,38 @@ class ChallengesTest extends TestCase
         $contentInactiveAndPast = Content::factory()->create();
         $contentActiveAndFarFuture = Content::factory()->create();
 
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $contentActiveAndPast->id,
             'user_id' => $userId,
-        ], ['is_active' => true,
+        ],
+            ['is_active' => true,
                 'start_date' => Carbon::now()->subHours(10)->toISOString()]
         );
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $contentActiveAndNearFuture->id,
             'user_id' => $userId,
-        ], ['is_active' => true,
+        ],
+            ['is_active' => true,
             'start_date' => Carbon::now()->addHours(10)->toISOString()]
         );
 
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $contentInactiveAndPast->id,
             'user_id' => $userId,
-        ], ['is_active' => false,
+        ],
+            ['is_active' => false,
             'start_date' => Carbon::now()->subHours(10)->toISOString()]
         );
 
-        ChallengeUserProgress::updateOrCreate([
+        ChallengeUserProgress::updateOrCreate(
+            [
             'content_id' => $contentActiveAndFarFuture->id,
             'user_id' => $userId,
-        ], [
+        ],
+            [
             'is_active' => true,
                 'start_date' => Carbon::now()->addDays(2)->toISOString()]
         );
@@ -176,37 +196,37 @@ class ChallengesTest extends TestCase
     {
         $this->markTestSkipped('this test fails because the prep_challenge_index returns all of the challenges, not just the ones requested.');
 
-//        ChallengeUserProgress::truncate();
-//        $userId = user()->id;
-//        $this->prep_challenge_index(0);
-//        $challengesService = app()->make(ChallengesService::class);
-//
-//        $response = $this->getJson(route('challenges.user_active_challenges', ['brand' => 'drumeo']));
-//        $response->assertOk();
-//        $responseData = $response->json();
-//
-//
-//        $this->assertEmpty($responseData);
-//
-//        $challengesService->startChallenge(402199, $userId);
-//        $this->prep_challenge_index(1);
-//        $challengesService->startChallenge(402200, $userId);
-//        $response = $this->getJson(route('challenges.user_active_challenges', ['brand' => 'drumeo']));
-//        $response->assertOk();
-//        $responseData = $response->json();
-//
-//        $this->assertCount(2, $responseData);
-//
-//        $this->assertTrue($this->getChallengeDataById($responseData, 402199)['is_user_enrolled']);
-//        $this->assertTrue($this->getChallengeDataById($responseData, 402200)['is_user_enrolled']);
-//
-//        $challengesService->completeChallenge(402200, $userId);
-//        $response = $this->getJson(route('challenges.user_active_challenges', ['brand' => 'drumeo']));
-//        $response->assertOk();
-//        $responseData = $response->json();
-//
-//        $this->assertCount(1, $responseData);
-//        $this->assertTrue($this->getChallengeDataById($responseData, 402199)['is_user_enrolled']);
+        //        ChallengeUserProgress::truncate();
+        //        $userId = user()->id;
+        //        $this->prep_challenge_index(0);
+        //        $challengesService = app()->make(ChallengesService::class);
+        //
+        //        $response = $this->getJson(route('challenges.user_active_challenges', ['brand' => 'drumeo']));
+        //        $response->assertOk();
+        //        $responseData = $response->json();
+        //
+        //
+        //        $this->assertEmpty($responseData);
+        //
+        //        $challengesService->startChallenge(402199, $userId);
+        //        $this->prep_challenge_index(1);
+        //        $challengesService->startChallenge(402200, $userId);
+        //        $response = $this->getJson(route('challenges.user_active_challenges', ['brand' => 'drumeo']));
+        //        $response->assertOk();
+        //        $responseData = $response->json();
+        //
+        //        $this->assertCount(2, $responseData);
+        //
+        //        $this->assertTrue($this->getChallengeDataById($responseData, 402199)['is_user_enrolled']);
+        //        $this->assertTrue($this->getChallengeDataById($responseData, 402200)['is_user_enrolled']);
+        //
+        //        $challengesService->completeChallenge(402200, $userId);
+        //        $response = $this->getJson(route('challenges.user_active_challenges', ['brand' => 'drumeo']));
+        //        $response->assertOk();
+        //        $responseData = $response->json();
+        //
+        //        $this->assertCount(1, $responseData);
+        //        $this->assertTrue($this->getChallengeDataById($responseData, 402199)['is_user_enrolled']);
     }
 
     public function test_leave_clears_current_progress(): void
@@ -380,7 +400,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
@@ -448,7 +468,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
@@ -2310,7 +2330,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
@@ -2476,7 +2496,7 @@ class ChallengesTest extends TestCase
         // --- PREP DATA -----
         $userProgressData = $challengesService->startChallenge($challengeId, $userId, '20241101');
         $lessonMetadata = $userProgressData->lessons_meta_data;
-//        // hack to complete the lessons without extra mocking. I'm lazy, and building the json files is a lot of work
+        //        // hack to complete the lessons without extra mocking. I'm lazy, and building the json files is a lot of work
         $lessonMetadata[0]['completed'] = true;
         $lessonMetadata[1]['completed'] = true;
         $userProgressData->lessons_meta_data = $lessonMetadata;
@@ -2678,7 +2698,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
@@ -2732,7 +2752,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
@@ -2829,7 +2849,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
@@ -2962,7 +2982,7 @@ class ChallengesTest extends TestCase
             );
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
             foreach ($userProgress->lessons_meta_data as $lessonData) {
-                if($lessonData['content_id'] == $lesson_meta_datum['content_id']) {
+                if ($lessonData['content_id'] == $lesson_meta_datum['content_id']) {
                     $this->assertEquals(60, $lessonData['seconds_practiced']);
                 }
             }
@@ -3062,7 +3082,8 @@ class ChallengesTest extends TestCase
         $this->mockChallengeAndLessonDataData(
             'challenge-10-lessons.json',
             'challenge-child-10-lessons.json',
-        ['published_on' => $tomorrow]);
+            ['published_on' => $tomorrow]
+        );
         $user = user();
         $product = ProductFactory::createPackProduct();
         $orderContents = [
@@ -3103,7 +3124,8 @@ class ChallengesTest extends TestCase
         $this->mockChallengeAndLessonDataData(
             'challenge-10-lessons.json',
             'challenge-child-10-lessons.json',
-            ['is_solo' => true, 'published_on' => $yesterday]);
+            ['is_solo' => true, 'published_on' => $yesterday]
+        );
         $user = user();
         $product = ProductFactory::createPackProduct();
         $orderContents = [

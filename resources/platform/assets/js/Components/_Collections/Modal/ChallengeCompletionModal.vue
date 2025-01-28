@@ -1,6 +1,6 @@
 <template>
-    <ModalRenderer :black-background="true">
-        <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-200" :class="!showAchievement && !showAward ? 'tw-opacity-1 tw-z-10' : 'tw-opacity-0 tw-z-0'">
+    <ModalRenderer :black-background="true" :show-x-icon="true" @on-close="emit('closeModal')">
+        <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-200" :class="!showAchievement && !showAward ? 'tw-opacity-1 tw-z-[5]' : 'tw-opacity-0 tw-z-0'">
             <!-- Final Animation -->
             <Vue3Lottie v-if="isChallengeCompleted && lottieUrl" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="lottieStyles" :animation-link="lottieUrl" width="100%" height="100%" :loop="false" />
             <!-- Desktop/Tablet -->
@@ -38,30 +38,30 @@
                             </div>
                             <div class="tw-flex tw-gap-2 tw-text-[13px] tw-relative tw-z-20">
                                 <!-- Streak -->
-                                <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-pr-1 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('streak')">
+                                <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-px-1.5 2xl:tw-px-2 3xl:tw-px-2.5 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('streak')">
                                     <!-- Streak badge -->
                                     <div v-if="completionAnimations[streakDay]" class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showBadgeAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">{{ streakBadgeText }}</div>
-                                    <div v-if="streakDay === 0" class="tw-text-[26px] tw-mx-0.5">🔥</div>
-                                    <Vue3Lottie v-else class="tw-w-11 lg:tw-w-[46px] -tw-ml-1 tw-mr-0" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
-                                    <div>
+                                    <div v-if="streakDay === 0" class="tw-text-[16px] 2xl:tw-text-[18px] 3xl:tw-text-[20px] tw-mr-1">🔥</div>
+                                    <Vue3Lottie v-else class="tw-w-[32px] 3xl:tw-w-[36px] -tw-ml-1.5" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
+                                    <div class="tw-flex-grow">
                                         <div class="tw-font-extrabold">{{ streakDay }}</div>
-                                        <div class="tw-flex tw-items-center">
+                                        <div class="tw-flex tw-items-center tw-justify-between">
                                             Day Streak
-                                            <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
+                                            <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9] tw-hidden 2xl:tw-block"></musora-icon>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Rest Days -->
-                                <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-pl-2 tw-pr-1 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('rest')">
+                                <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-px-1.5 2xl:tw-px-2 3xl:tw-px-2.5 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('rest')">
                                     <!-- Rest badge -->
                                     <div v-if="isRestDayAdded" class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showBadgeAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">+1</div>
-                                    <img class="tw-mr-3 tw-w-4 lg:tw-w-5 tw-hidden dark:tw-block" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
-                                    <img class="tw-mr-3 tw-w-4 lg:tw-w-5 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
+                                    <img class="tw-mr-2 2xl:tw-mr-3 tw-w-[13px] 2xl:tw-w-[14px] 3xl:tw-w-4 tw-hidden dark:tw-block" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
+                                    <img class="tw-mr-2 2xl:tw-mr-3 tw-w-[13px] 2xl:tw-w-[14px] 3xl:tw-w-4 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
                                     <div class="tw-flex-grow">
                                         <div class="tw-font-extrabold">{{ restDay }}</div>
                                         <div class="tw-flex tw-items-center tw-justify-between">
                                             Streak Saver
-                                            <musora-icon icon-name="info" class="tw-ml-4 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
+                                            <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9] tw-hidden 2xl:tw-block"></musora-icon>
                                         </div>
                                     </div>
                                 </div>
