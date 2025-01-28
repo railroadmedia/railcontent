@@ -165,10 +165,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                             form.classList.add('hidden');
 
-                        const modalCloseIcon = document.querySelector('.modal-close');
-                        if (modalCloseIcon) {
-                            modalCloseIcon.classList.add('hidden');
-                        }
+                            const modalCloseIcon = document.querySelector('.modal-close');
+                            if (modalCloseIcon) {
+                                modalCloseIcon.classList.add('hidden');
+                            }
 
                             if (thankYouBox) {
                                 thankYouBox.innerHTML = `
@@ -207,6 +207,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
             }
         };
+
+        let isAbandoned = false;
+        window.addEventListener('beforeunload', function(event) {
+            if (!isAbandoned && formId) {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'formAbandoned',
+                    'formId': formId,
+                    'abandonmentTime': Date.now()
+                });
+                isAbandoned = true; 
+            }
+        });
     });
 });
 

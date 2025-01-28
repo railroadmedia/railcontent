@@ -208,21 +208,62 @@ class ChallengesService
             isChallengeLocked: $isLocked
         );
         $restDays = ChallengeUserProgress::calculateDefaultRestDays($challenge);
+        $data = [
+            'current_rest_days' => $restDays,
+            'start_date' => $startDate,
+            'is_locked' => $isLocked,
+            'lessons_meta_data' => $lessonMetaData,
+            'is_active' => $isLocked,
+            'is_solo' => $isSolo,
+        ];
+        // Resubscribe user for solo notifications if they were previously subscribed
+        if ($this->isUserSubscribedToNotificationsForActiveSoloChallenge($challengeId, $userId)) {
+            $data['solo_notification_to_be_processed'] = 1;
+        }
+        // unsubscribe user from notifications when they unlock a challenge
+        if ($isSolo && !$isLocked) {
+            $this->updateNotification($challengeId, User::whereId($userId), UserNotificationKeys::SOLO_NOTIFICATION_KEY, enable: false);
+            $data['solo_notification_to_be_processed'] = 0;
+        }
         $challengeUserProgress = ChallengeUserProgress::updateOrCreate(
             [
             'content_id' => $challengeId,
             'user_id' => $userId,
         ],
-            [
-                'current_rest_days' => $restDays,
-                'start_date' => $startDate,
-                'is_locked' => $isLocked,
-                'lessons_meta_data' => $lessonMetaData,
-                'is_active' => $isLocked,
-                'is_solo' => $isSolo,
-            ]
+          $data,
         );
         return $challengeUserProgress;
+    }
+
+    private function isUserSubscribedToNotificationsForActiveSoloChallenge($challengeId, $userId)
+    {
+        $existingProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+        $wasSoloAndActive = $existingProgress && ($existingProgress->is_solo && $existingProgress->is_active);
+        if ($wasSoloAndActive) {
+            $existingNotifications = $user[UserNotificationKeys::SOLO_NOTIFICATION_KEY->value] ?? [];
+            return in_array($challengeId, $existingNotifications);
+        }
+        return false;
+    }
+
+
+    /**
+     * Unenroll the user in a challenge. Returns false if user wasn't already enrolled
+     * @param int $challengeId - Challenge id
+     * @param User $userId - user id
+     * @return ChallengeUserProgress|null
+     */
+    public function leaveChallenge(int $challengeId, User $user) : bool
+    {
+        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $user->id);
+        if (is_null($userProgress)) {
+            return false;
+        }
+        $notificationKey = $userProgress->is_solo ? UserNotificationKeys::SOLO_NOTIFICATION_KEY : UserNotificationKeys::COMMUNITY_NOTIFICATION_KEY;
+        $userProgress->leaveChallenge();
+
+        $this->updateNotification($challengeId, $user, $notificationKey, enable: false);
+        return true;
     }
 
 
@@ -666,7 +707,7 @@ class ChallengesService
                 'lottie_url' => $motivationalTextConfig[brand()],
                 'milestone' => $milestone,
                 'motivational_title' => $isChallengeCompleted ? "You've completed {$challenge['title']}!" : "You're on a {$milestone} Day Streak!",
-                'motivational_subtext' => $isChallengeCompleted ? '' : "You've earned an additional freeze token!",
+                'motivational_subtext' => $isChallengeCompleted ? '' : "You've earned an additional streak saver!",
                 'badge_text' => $motivationalTextConfig['text'],
                 'styles' => $motivationalTextConfig['styles'],
                 'duration' => $motivationalTextConfig['duration'],
@@ -743,7 +784,7 @@ class ChallengesService
         );
     }
 
-    private function updateCustomerIONotifications(int $challengeId, User $user, UserNotificationKeys $notificationKey): void
+    private function updateCustomerIONotifications(int $challengeId, User $user, UserNotificationKeys $notificationKey, bool $add = true): void
     {
         $musoraWorkspace = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
         $customerIO = $this->customerIoService->getCustomerByEmail($musoraWorkspace, $user->email);
@@ -751,12 +792,14 @@ class ChallengesService
             return;
         }
         $existingNotifications = json_decode($customerIO->getExternalAttributes()[$notificationKey->value] ?? '[]');
-
-        if (!in_array($challengeId, $existingNotifications)) {
-            $existingNotifications[] = $challengeId;
+        if ($add) {
+            if (!in_array($challengeId, $existingNotifications)) {
+                $existingNotifications[] = $challengeId;
+            }
+        } else {
+            unset($existingNotifications[$challengeId]);
         }
         $data = [$notificationKey->value => $existingNotifications];
-
         $this->customerIoService->createOrUpdateCustomerByUserId(
             $user->id,
             $musoraWorkspace,
@@ -819,12 +862,16 @@ class ChallengesService
         return $ownedChallenges;
     }
 
-    private function updateChallengesNotificationForUser(int $challengeId, User $user, UserNotificationKeys $key)
+    private function updateChallengesNotificationForUser(int $challengeId, User $user, UserNotificationKeys $key, bool $enable = true)
     {
         try {
             $existingNotifications = $user[$key->value] ?? [];
-            if (!in_array($challengeId, $existingNotifications)) {
-                $existingNotifications[] = $challengeId;
+            if ($enable) {
+                if (!in_array($challengeId, $existingNotifications)) {
+                    $existingNotifications[] = $challengeId;
+                }
+            } else {
+               unset($existingNotifications[$challengeId]);
             }
             $user[$key->value] = $existingNotifications;
             $user->save();
@@ -832,10 +879,10 @@ class ChallengesService
         }
     }
 
-    public function enableNotification(int $challengeId, User $user, UserNotificationKeys $key)
+    public function updateNotification(int $challengeId, User $user, UserNotificationKeys $key, bool $enable = true)
     {
-        $this->updateChallengesNotificationForUser($challengeId, $user, $key);
-        $this->updateCustomerIONotifications($challengeId, $user, $key);
+        $this->updateChallengesNotificationForUser($challengeId, $user, $key, enable: $enable);
+        $this->updateCustomerIONotifications($challengeId, $user, $key, add: $enable   );
     }
 
     public function enableNotificationsForSoloChallengeAndClearProcessFlag(ChallengeUserProgress $userProgress): void
@@ -844,12 +891,10 @@ class ChallengesService
             return;
         }
         try {
-            $this->enableNotification($userProgress->content_id, $userProgress->user, UserNotificationKeys::SOLO_NOTIFICATION_KEY);
+            $this->updateNotification($userProgress->content_id, $userProgress->user, UserNotificationKeys::SOLO_NOTIFICATION_KEY);
             $userProgress->solo_notification_to_be_processed = 0;
             $userProgress->save();
         } catch (\Exception $ex) {
         }
     }
-
-
 }

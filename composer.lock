@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f8c4b97d4612e812221fc343a43e291",
+    "content-hash": "ebae3b26c869f607cf94d6b6f2f1937a",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -10625,16 +10625,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v3.0.20",
+            "version": "v3.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "8be32d32253fbb41aa1ff02aaf669ce00db7ffb3"
+                "reference": "8a736bd00826b1cdcb24942a583e76a066a1b4a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/8be32d32253fbb41aa1ff02aaf669ce00db7ffb3",
-                "reference": "8be32d32253fbb41aa1ff02aaf669ce00db7ffb3",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/8a736bd00826b1cdcb24942a583e76a066a1b4a8",
+                "reference": "8a736bd00826b1cdcb24942a583e76a066a1b4a8",
                 "shasum": ""
             },
             "require": {
@@ -10685,9 +10685,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v3.0.20"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v3.0.21"
             },
-            "time": "2025-01-16T21:08:34+00:00"
+            "time": "2025-01-27T16:28:27+00:00"
         },
         {
             "name": "railroad/railforums",

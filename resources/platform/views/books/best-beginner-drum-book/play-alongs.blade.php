@@ -44,8 +44,8 @@ if(!empty($user)){
                 <play-alongs
                     ref="playAlongsVueInstance"
                     content-endpoint="/railcontent/content"
-                    theme-color="{{ $brand }}"
-                    brand="{{ $brand }}"
+                    theme-color="drumeo"
+                    brand="drumeo"
                     :ids-to-pull="{{ json_encode($idsToPull) }}"
                     :show-filters="{{ json_encode(false) }}"
                     :show-pagination="{{ json_encode(false) }}"

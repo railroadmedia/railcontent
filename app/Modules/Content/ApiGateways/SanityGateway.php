@@ -428,7 +428,7 @@ class SanityGateway
         $filtered = [];
         foreach ($results as $document) {
             $this->postProcessDocument($document);
-            if (!$document['need_access']) { //filter out open enrollment challenges if they don't have access
+            if (!$document['need_access']) {
                 $filtered[] = $document;
             }
         }
@@ -645,42 +645,55 @@ class SanityGateway
         return $document;
     }
 
-    public function getOnboardingCard($brand, $access_level, $difficultyString, bool $isAdmin = false)
+    /**
+     * getOnboardingCard takes in user's information (basic/plus, and skill level) for a given brand and returns a
+     * array of the onboarding cards
+     * @param string $brand
+     * @param string $access_level
+     * @param string $difficultyString
+     * @param bool $isAdmin
+     * @return array
+     */
+    public function getOnboardingCard(string $brand, string $access_level, string $difficultyString, bool $isAdmin = false) : array
     {
         $id = strtolower("onboarding_content_card_" . $brand . '_' . $access_level . '_' . $difficultyString);
         $fieldsString = $this->getFieldsString(null);
-        $query = "*[_id == '$id' && _type == 'onboarding-content-card']{
-                    description,
-                    access_level,
-                    brand,
-                    _id,
-                    experience_level,
-                    'card': card[]{
-                        is_draft,
-                        header,
-                        subheader,
-                        'squareImg': squareImg.asset->url,
-                        'wideImg': wideImg.asset->url,
-                        'bgImg': bgImg.asset->url,
-                        'logo': logo.asset->url,
-                        'content': content->{
-                          _type,
-                          'registration_url': '/' + brand + '/enrollment/' + slug.current,
-                          $fieldsString
-                        },
-                  },
-        } [0 ... 1]";
+        $adminCheck = $isAdmin ? '' : 'is_draft != true';
+        $query = "*[_id == '$id'
+                    && _type == 'onboarding-content-card'
+                    ]{
+                        description,
+                        access_level,
+                        brand,
+                        _id,
+                        experience_level,
+
+                        'card': card[$adminCheck]
+                        {
+                            is_draft,
+                            header,
+                            subheader,
+                            'squareImg': squareImg.asset->url,
+                            'wideImg': wideImg.asset->url,
+                            'bgImg': bgImg.asset->url,
+                            'logo': logo.asset->url,
+                            'content': content->{
+                                _type,
+                                'registration_url': '/' + brand + '/enrollment/' + slug.current,
+                                $fieldsString
+                            }
+                        }
+                    } [0 ... 1]";
         $document = $this->sanity->fetch($query)[0] ?? null;
         if (is_null($document) || is_null($document['card'])) {
             return $document;
         }
         $formattedCards = [];
-        foreach ($document['card'] as $index => $content) {
-            if ($isAdmin || !$content['is_draft']) {
-                $formattedCards[] = $this->formatBannerCardParamaters($content);
-            }
+        foreach ($document['card'] as $card) {
+            $formattedCards[] = $this->formatBannerCardParamaters($card);
         }
         $document['card'] = $formattedCards;
+
         return $document;
     }
 

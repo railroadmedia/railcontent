@@ -380,7 +380,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
@@ -448,7 +448,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
@@ -1598,7 +1598,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
@@ -1966,7 +1966,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
@@ -2020,7 +2020,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
@@ -2117,7 +2117,7 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_title']
                 );
                 $this->assertEquals(
-                    "You've earned an additional freeze token!",
+                    "You've earned an additional streak saver!",
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);

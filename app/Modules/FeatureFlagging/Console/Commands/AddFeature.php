@@ -10,7 +10,7 @@ class AddFeature extends Command
     protected $signature = 'featureFlag:addFeature
                             {name : name of new Feature}
                             {--description= : description value}
-                            {--active_at= : datetime string eg: "2024-04-19 16:02:37"}
+                            {--active_at= : datetime string eg: "2024-04-19 16:02:37. This value toggles when the feature flag is "true" by default}
                             {--allow_filter= : comma separated list of filters}
                             {--block_filter= : comma separated list of filters}
                             {--userid_list= : comma separated list of user ids} ';
