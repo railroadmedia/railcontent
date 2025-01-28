@@ -34,6 +34,17 @@ export const getCardNum = (props, cardNum, toggleSeeAllCard) => {
         }
     }
 
+    //Challenge Awards
+    else if(props.catalogueType === 'challengeAward'){
+        if(xlDesktop.value){
+            cardNum.value = 6;
+        } else if(lgDesktop.value){
+            cardNum.value = 4;
+        } else {
+            cardNum.value = 20;
+        }
+    }
+
     //Pack
     else if(props.catalogueType === 'pack'){
         cardNum.value = 1;
