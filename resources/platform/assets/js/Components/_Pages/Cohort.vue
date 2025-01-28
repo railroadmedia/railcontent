@@ -212,7 +212,7 @@
     <!--  Dropdown  -->
     <section class="tw-bg-white tw-py-10">
         <div class="tw-max-w-4xl tw-mx-auto tw-pl-6 tw-pr-4">
-            <div v-if="!isSolo" class="tw-text-center">
+            <div v-if="!isSolo && !cohort['is_product']" class="tw-text-center">
                 <!--  Logo  -->
                 <img class="tw-h-20 sm:tw-h-28 lg:tw-h-28 tw-mb-4 tw-inline-block " alt="header logo" :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" />
                 <!--  Bottom title  -->
@@ -230,26 +230,29 @@
                 <!--  Bottom description  -->
                 <p class="tw-font-bold tw-mt-4 tw-mb-6">{{ cohort['bottom_description'] }}</p>
             </div>
+
             <template v-if="cohort['is_product'] && !isSolo">
+                <h1 class="tw-font-extrabold tw-text-center tw-px-4 lg:tw-px-28 tw-leading-tight">{{ cohort['product_description_header'] }} </h1>
+                <p class="tw-text-center tw-mb-7 lg:tw-mb-14 tw-px-4 lg:tw-px-10">{{ cohort['product_description_body'] }} </p>
               <div v-if="!isEnrolled && !hasEnded">
                 <div class="md:tw-flex md:tw-justify-center md:tw-gap-6 tw-px-4 md:tw-px-0 tw-mb-4">
                   <!-- Course Only Card -->
-                  <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-[#2A2F34] tw-text-center tw-mb-4 md:tw-mb-0 tw-mx-auto md:tw-mx-0 tw-flex tw-flex-col tw-relative">
+                  <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-8 tw-py-8 tw-bg-white tw-border-2 tw-border-[#2A2F34] tw-text-center tw-mb-4 md:tw-mb-0 tw-mx-auto md:tw-mx-0 tw-flex tw-flex-col tw-relative">
                     <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
                       <div class="tw-uppercase tw-bg-[#2A2F34] tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold tw-text-white">
                         Course Only
                       </div>
                     </div>
                     <div class="tw-flex-1 tw-flex tw-flex-col">
-                      <h2 class="lg:tw-text-[30px] tw-font-extrabold tw-leading-none">{{ cohort['title'] }}</h2>
-                      <p class="tw-italic tw-font-extralight tw-pt-1">w/ {{ cohort['instructor'] }}</p>
+                      <h2 class="tw-text-2xl md:text-4xl lg:tw-text-[30px] tw-font-extrabold tw-leading-none">{{ cohort['title'] }}</h2>
+                      <p v-if="cohort['instructor']" class="tw-italic tw-font-extralight tw-pt-1">w/ {{ cohort['instructor'] }}</p>
                       <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
                         <img 
-                          class="tw-h-20 sm:tw-h-28 lg:tw-h-36 tw-mb-4 tw-inline-block tw-object-contain" 
+                          class="tw-h-28 lg:tw-h-36 tw-mb-4 tw-inline-block tw-object-contain" 
                           alt="header logo" 
                           :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" 
                         />
-                        <h3 class="lg:tw-text-[26px] tw-font-extrabold tw-mb-2 tw-uppercase">
+                        <h3 class="lg:tw-text-[34px] tw-font-extrabold tw-mb-2 tw-uppercase">
                           <span><s class="tw-text-[#2A2F3480] tw-opacity-50 tw-pr-1">${{ cohort['product_original_price'] }}</s></span>
                           <span>Free</span>
                         </h3>
@@ -276,43 +279,44 @@
                   </div>
             
                   <!-- Course + Product Card -->
-                  <div :class="`tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-${brand} tw-text-center tw-relative tw-mx-auto md:tw-mx-0 tw-flex tw-flex-col`">
-                    <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
-                      <div v-if="cohort['get_product_badge']" :class="`tw-uppercase tw-bg-${brand} tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold`">
-                        {{ cohort['get_product_badge'] }}
-                      </div>
-                    </div>
-                    <div class="tw-flex-1 tw-flex tw-flex-col">
-                      <h2 class="lg:tw-text-[30px] tw-font-extrabold tw-leading-none">
-                        {{ cohort['product_name'] }}
-                      </h2>
-                      <p class="tw-italic tw-font-extralight tw-py-1 tw-text-sm">{{ cohort['course_product_description'] }}</p>
-                      <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
-                        <img 
-                          class="tw-h-20 sm:tw-h-28 lg:tw-h-36 tw-mb-4 tw-inline-block tw-object-contain" 
-                          alt="header logo" 
-                          :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['product_image'] }`" 
-                        />
-                        <h3 class="lg:tw-text-[26px] tw-mb-2">
-                          <template v-if="cohort['product_original_price'] > cohort['product_sale_price']">
-                            <s class="tw-text-[#2A2F3480] tw-opacity-50 tw-pr-1">${{ cohort['product_original_price'] }}</s>
-                            <span class="tw-font-extrabold">${{ cohort['product_sale_price'] }}</span>
-                          </template>
-                          <template v-else>
-                            <span class="tw-font-extrabold">${{ cohort['product_original_price'] }}</span>
-                          </template>
-                        </h3>
-                        <h4 
-                          v-if="cohort['product_original_price'] > cohort['product_sale_price']" 
-                          class="tw-text-md lg:tw-text-base tw-mb-2 tw-italic tw-text-[#2A2F3480] tw-opacity-80"
-                        >
-                          Save {{ Math.round(100 - (100 * (cohort['product_sale_price'] / cohort['product_original_price']))) }}%
-                        </h4>
-                      </div>
-                      <div class="tw-mt-auto">                      
-                        <a :href="cohort['product_cart_link']" target="_blank" id="getTheDeal" :class="`tw-btn-primary tw-bg-${brand} tw-my-5 tw-px-8 md:tw-px-16 tw-max-w-[350px] hover:tw-bg-${brand}-600 tw-w-full`">Get the deal</a>                        
-                      </div>
-                    </div>
+                  <div :class="`tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-8 tw-py-8 tw-bg-white tw-border-2 tw-border-${brand} tw-text-center tw-relative tw-mx-auto md:tw-mx-0 tw-flex tw-flex-col`">
+                        <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
+                        <div v-if="cohort['get_product_badge']" :class="`tw-uppercase tw-bg-${brand} tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold`">
+                            {{ cohort['get_product_badge'] }}
+                        </div>
+                        </div>
+                        <div class="tw-flex-1 tw-flex tw-flex-col">
+                        <h2 class="tw-text-2xl md:text-4xl lg:tw-text-[30px] tw-font-extrabold tw-leading-none tw-pb-1 lg:tw-pb-6">
+                            {{ cohort['product_name'] }}
+                        </h2>
+                        <!-- <p class="tw-italic tw-font-extralight tw-py-1 tw-text-sm">{{ cohort['course_product_description'] }}</p> -->
+                        <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                            <img 
+                            class="tw-h-28 lg:tw-h-36 tw-mb-4 tw-inline-block tw-object-contain" 
+                            alt="header logo" 
+                            :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['product_image'] }`" 
+                            />
+                            <h3 class="lg:tw-text-[34px] tw-mb-2">
+                            <template v-if="cohort['product_original_price'] > cohort['product_sale_price']">
+                                <s class="tw-text-[#2A2F3480] tw-opacity-50 tw-pr-1">${{ cohort['product_original_price'] }}</s>
+                                <span class="tw-font-extrabold">${{ cohort['product_sale_price'] }}</span>
+                            </template>
+                            <template v-else>
+                                <span class="tw-font-extrabold">${{ cohort['product_original_price'] }}</span>
+                            </template>
+                            </h3>
+                            <h4 
+                            v-if="cohort['product_original_price'] > cohort['product_sale_price']" 
+                            class="tw-text-md lg:tw-text-base tw-mb-2 tw-italic tw-text-[#2A2F3480] tw-opacity-80"
+                            >
+                            Save {{ Math.round(100 - (100 * (cohort['product_sale_price'] / cohort['product_original_price']))) }}%
+                            </h4>
+                        </div>
+                        <div class="tw-mt-auto">                      
+                            <a :href="cohort['product_cart_link']" id="getTheDeal" :class="`tw-btn-primary tw-bg-${brand} tw-my-5 tw-px-8 md:tw-px-16 tw-max-w-[350px] hover:tw-bg-${brand}-600 tw-w-full`">Get the deal</a>                        
+                        </div>
+                        </div>
+                        <p class="tw-text-xs tw-leading-relaxed">{{ cohort['course_product_description'] }}</p>
                   </div>
                 </div>
               </div>
@@ -340,7 +344,7 @@
                 <button id="noGuideText" @click="handleNoGuide" class="tw-text-black tw-italic tw-underline tw-font-bold tw-text-sm">I don’t want the guided experience.</button>
             </div>
 
-            <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
+            <div v-if="!cohort['is_product']" class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                 <img
                     class="tw-h-7 sm:tw-mb-1 lg:tw-mb-0 tw-mr-1 tw-transition-opacity tw-opacity-0"
                     src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
