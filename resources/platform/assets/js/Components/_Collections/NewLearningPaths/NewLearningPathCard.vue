@@ -1,6 +1,6 @@
 <template>
     <!-- DESKTOP -->
-    <div class="tw-hidden xl:tw-flex tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-h-[295px] 4xl:tw-h-[330px] tw-mr-[10px] lg:tw-mr-0">
+    <div class="tw-hidden xl:tw-flex tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-w-1/2 tw-h-[295px] 4xl:tw-h-[330px] tw-pr-[6px] 2xl:tw-pr-[10px] tw-shrink-0 catalogue-card" @mouseleave="emit('activateAutoScroll')" @mouseenter="emit('stopAutoScroll')">
         <DraftLabel v-if="isDraft" />
         <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-center tw-rounded-[18px]" :src="calculatedBgImg" :alt="`${title} background image`" />
         <div class="tw-flex tw-items-center tw-absolute tw-w-full tw-h-full tw-backdrop-blur-sm tw-p-[20px] lg:tw-p-[30px]"
@@ -38,7 +38,7 @@
     </div>
 
     <!-- MOBILE -->
-    <div class="tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-shrink-0">
+    <div class="tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-w-[336px] tw-h-[430px] lg:tw-w-1/2 tw-shrink-0 tw-pr-[6px] catalogue-card" @mouseleave="emit('activateAutoScroll')" @mouseenter="emit('stopAutoScroll')">
         <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-center tw-rounded-[18px] tw-z-[0]" :src="calculatedBgImg" :alt="`${title} background image`" />
         <div
             class="tw-flex tw-flex-col tw-items-center tw-w-full tw-h-full tw-p-[20px] tw-rounded-[10px] tw-relative tw-z-[2]"
@@ -154,6 +154,7 @@ const props = defineProps({
     }
 });
 
+const emit = defineEmits(['activateAutoScroll', 'stopAutoScroll'])
 
 const thumbnailImg = computed(() => {
     if (props.contentType === 'song') {
