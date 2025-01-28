@@ -55,7 +55,7 @@
                             <span class="hide-xs-only">Watch on&nbsp;</span>{{$relatedLesson['brand']}}
                         </a>
                     @else
-                        <button class="btn short" data-open-modal="loginModal">
+                        <button class="btn short" onclick="window.openloginmodal()">
                             <span class="text-grey-2 bg-grey-2 flat">
                                 <i class="fas fa-sign-in mr-1"></i>
                                 Login <span class="hide-xs-only">&nbsp;To {{$relatedLesson['brand']}}</span>
