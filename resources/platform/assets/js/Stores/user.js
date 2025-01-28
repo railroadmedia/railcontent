@@ -25,7 +25,7 @@ export const useUserStore = defineStore({
     userXP: (state) => state.user?.total_xp,
     userDashboardUrl: (state) => state.user?.get_dashboard_url,
     isUserAMember: (state) => state.user?.is_a_member,
-    isAdmin: (state) => state.user?.permission_level === 'administrator',
+    isAdmin: (state) => state.user?.isAdmin ? true : false,
     showAdminToggle: (state) => state.user?.show_admin_toggle,
     useStudentView: (state) => state.user?.use_student_view ? true : false,
     isFirstAccess: (state) => state.user?.first_access_at,
