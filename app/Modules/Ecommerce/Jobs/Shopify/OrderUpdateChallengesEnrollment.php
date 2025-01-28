@@ -47,7 +47,7 @@ class OrderUpdateChallengesEnrollment extends WebhookChildJob
                 $challengesService->startChallenge($challengeId, $user->id, $startDate);
                 //Send notifications it's not part of a bundle and is a community challenge
                 if (count($skus) == 1 && !$isSoloChallenge) {
-                    $challengesService->enableNotification(
+                    $challengesService->updateNotification(
                         $challengeId,
                         $user,
                         UserNotificationKeys::COMMUNITY_NOTIFICATION_KEY

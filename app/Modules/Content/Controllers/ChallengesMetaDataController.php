@@ -199,12 +199,10 @@ class ChallengesMetaDataController extends Controller
      */
     public function leaveChallenge(int $id): JsonResponse
     {
-        $userId = user()->id;
-        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, $userId);
-        if (is_null($userProgress)) {
-            return self::NotFoundErrorResponse($id, $userId);
+        $user = user();
+        if (!$this->challengesService->leaveChallenge($id, $user)) {
+            return self::NotFoundErrorResponse($id, $user->id);
         }
-        $userProgress->leaveChallenge();
         return response()->json();
     }
 
@@ -363,7 +361,7 @@ class ChallengesMetaDataController extends Controller
             return false;
         }
         $user = user();
-        $this->challengesService->enableNotification($id, $user, $key);
+        $this->challengesService->updateNotification($id, $user, $key);
         return true;
     }
 

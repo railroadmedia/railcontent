@@ -13,6 +13,7 @@ use App\Modules\Content\Services\AlgoliaSearchService;
 use App\Modules\Content\Services\ChallengesService;
 use App\Modules\Content\Services\V1\CarouselServiceV1;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Google\Exception;
