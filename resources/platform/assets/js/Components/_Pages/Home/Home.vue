@@ -21,6 +21,7 @@
                 catalogue-type="challenge-carousel"
                 page-type="home"
                 :preLoadedContent="data?.carousels"
+                :auto-scroll="true"
             />
 
             <!-- NOTE: Challenges/Sanity launch: Old carousel not needed anymore (for now), so it's commented out -->
@@ -195,7 +196,7 @@
     const platformStore = usePlatformStore();
     const { brand, userId, token, showOnboardingBanner, userHas30Days, userFirstName, userDisplayName } = storeToRefs(userStore);
     const { isLoading } = storeToRefs(platformStore);
-    const { playlists } = storeToRefs(playlistsStore); 
+    const { playlists } = storeToRefs(playlistsStore);
 
     const props = defineProps({
         // String props
