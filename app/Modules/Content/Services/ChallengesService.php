@@ -666,7 +666,7 @@ class ChallengesService
                 'lottie_url' => $motivationalTextConfig[brand()],
                 'milestone' => $milestone,
                 'motivational_title' => $isChallengeCompleted ? "You've completed {$challenge['title']}!" : "You're on a {$milestone} Day Streak!",
-                'motivational_subtext' => $isChallengeCompleted ? '' : "You've earned an additional freeze token!",
+                'motivational_subtext' => $isChallengeCompleted ? '' : "You've earned an additional streak saver!",
                 'badge_text' => $motivationalTextConfig['text'],
                 'styles' => $motivationalTextConfig['styles'],
                 'duration' => $motivationalTextConfig['duration'],
