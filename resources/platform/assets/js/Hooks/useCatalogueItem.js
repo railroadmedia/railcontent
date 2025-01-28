@@ -8,7 +8,6 @@ import {storeToRefs} from "pinia/dist/pinia";
 
 export default function useCatalogueItem(props) {
     const userStore = useUserStore();
-    const { useStudentView } = storeToRefs(userStore);
 
     const is_added = computed(() => props.item.is_added_to_primary_playlist);
 
@@ -22,7 +21,7 @@ export default function useCatalogueItem(props) {
     })
 
     const noAccess = computed(() => {
-        if (useStudentView.value) {
+        if (userStore.isAdmin) {
             return false;
         }
 
@@ -35,7 +34,7 @@ export default function useCatalogueItem(props) {
         const datePublishedOn = new Date(props.item.published_on).getTime();
         const dateQuarterPublishedOn = props.item.quarter_published ? new Date(props.item.quarter_published).getTime() : null;
 
-        if (useStudentView.value) {
+        if (userStore.isAdmin) {
             return true;
         }
 
@@ -81,7 +80,7 @@ export default function useCatalogueItem(props) {
         };
 
         //For locked challenges
-        if(props.item.is_locked && useStudentView.value){
+        if(props.item.is_locked && !userStore.isAdmin){
             return 'fa-lock';
         }
 
