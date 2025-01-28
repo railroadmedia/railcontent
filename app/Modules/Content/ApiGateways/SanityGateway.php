@@ -563,6 +563,7 @@ class SanityGateway
                 header_description,
                 'header_image_url': header_image_url.asset->url,
                 cohort_trailer,
+                'instructor': instructor[0]->name,
                 icon1_title,
                 icon1_copy,
                 icon2_title,
