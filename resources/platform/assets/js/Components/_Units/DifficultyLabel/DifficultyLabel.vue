@@ -31,7 +31,7 @@ const props = defineProps({
 const difficultyText = computed(() => {
     const number = /^\d+$/;
 
-    if(number.test(props.difficultyValue.toString())){
+    if(number.test(props.difficultyValue?.toString())){
         switch (props.difficultyValue.toString()) {
             case '1':
                 return 'introductory';
@@ -52,7 +52,7 @@ const difficultyText = computed(() => {
                 return 'all';
         }
     } else {
-        const difficulty = props.difficultyValue.toString().toLowerCase();
+        const difficulty = props.difficultyValue?.toString()?.toLowerCase();
 
         switch(difficulty){
             case 'novice':
