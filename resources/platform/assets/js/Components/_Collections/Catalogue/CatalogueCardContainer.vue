@@ -3,13 +3,14 @@
         <div
             :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[224px] tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
             <div :class="`
-                    tw-no-scrollbar
-                    ${isMiniView && willScroll ? `tw-grid tw-pb-[8px] tw-grid-flow-col lg:tw-grid-flow-row lg:tw-auto-cols-auto lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full tw-auto-rows-min ${miniViewRowStyles}` : ''}
-                    ${!isMiniView && willScroll ? 'tw-flex lg:tw-overflow-x-clip tw-flex-nowrap ' : ''}
+                    tw-no-scrollbar ${sectionTitle}-container
+                    ${isMiniView && willScroll ? `tw-flex tw-flex-nowrap tw-overflow-x-scroll` : ''}
+                    ${!isMiniView && willScroll ? `tw-flex tw-flex-nowrap -tw-mr-3` : ''}
                     ${!isMiniView && willScroll && (!isLoading && !collectionStoreLoading) ? 'tw-overflow-x-scroll' : ''}
                     ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
-                    ${!isMiniView ? 'lg:tw-grid lg:tw-grid-cols-4 2xl:tw-grid-cols-5 lg:tw-gap-3 2xl:tw-gap-4' : ''}
-                `">
+                `"
+                 @touchend="emit('handleScrollEnd')"
+            >
                 <!-- Skeleton Loader -->
                 <template v-if="isLoading || showSkeletonLoader">
                     <SkeletonLoader :count="skeletonCardCount" :type="showListElement ? 'listElement' : 'card'"
@@ -17,25 +18,28 @@
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
-                    <MiniCatalogueCard
-                        v-for="(item, index) in preLoadedContent"
-                        :key="'grid' + item.id"
-                        :item="item"
-                        :content-type="item.type"
-                        :user-id="userId"
-                        :is-admin="isAdmin"
-                        :lock-unowned="lockUnowned"
-                        :force-wide-thumbs="forceWideThumbs"
-                        :content-type-override="contentTypeOverride"
-                        :show-my-list-action="showMyListAction"
-                        :force-no-links="forceNoLinks"
-                        :show-dropdown="showDropdown"
-                        :trackingSection="trackingSection"
-                        @addToList="addToList"
-                        @progressReset="handleProgressReset"
-                        :showSeeAllCard="showSeeAllCard"
-                        :index="index"
-                    />
+                    <div v-for="(group, groupIndex) in preLoadedContent" :class="`tw-w-full tw-pb-[8px] tw-grid-flow-col lg:tw-grid-flow-row lg:tw-auto-cols-auto lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full tw-auto-rows-min ${miniViewRowStyles} ${groupIndex > 0 ? 'tw-hidden lg:tw-grid' : 'tw-grid'}`">
+                        <MiniCatalogueCard
+                            v-for="(item, index) in group"
+                            :key="'grid' + item.id"
+                            :item="item"
+                            :content-type="item.type"
+                            :user-id="userId"
+                            :is-admin="isAdmin"
+                            :lock-unowned="lockUnowned"
+                            :force-wide-thumbs="forceWideThumbs"
+                            :content-type-override="contentTypeOverride"
+                            :show-my-list-action="showMyListAction"
+                            :force-no-links="forceNoLinks"
+                            :show-dropdown="showDropdown"
+                            :trackingSection="trackingSection"
+                            @addToList="addToList"
+                            @progressReset="handleProgressReset"
+                            :showSeeAllCard="showSeeAllCard"
+                            :index="index"
+                        />
+                    </div>
+
                 </template>
                 <template v-else>
                     <CatalogueListElement v-if="showListElement" v-for="item in preLoadedContent"
@@ -44,11 +48,18 @@
                         :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
                         :force-no-links="forceNoLinks" :is-single-row="isSingleRow" @addToList="addToList"
                         @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
-                    <CatalogueCard v-else v-for="item in preLoadedContent" :key="'catalogue-grid' + item.id" :item="item"
-                        :content-type="item.type" :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
-                        :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
-                        :force-no-links="forceNoLinks" :force-list-view="displayInline" :is-single-row="isSingleRow"
-                        @addToList="addToList" @progressReset="handleProgressReset" :show-dropdown="showDropdown" :trackingSection="trackingSection" />
+                    <template v-else v-for="item in preLoadedContent">
+                        <div v-if="item?.type === 'fill'" class="lg:tw-w-1/4 2xl:tw-w-1/5 lg:tw-shrink-0"></div>
+                        <CatalogueCard
+                            v-else
+                            :key="'catalogue-grid' + item.id" :item="item"
+                            :content-type="item.type" :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
+                            :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
+                            :force-no-links="forceNoLinks" :force-list-view="displayInline" :is-single-row="isSingleRow"
+                            @addToList="addToList" @progressReset="handleProgressReset" :show-dropdown="showDropdown" :trackingSection="trackingSection"
+                        />
+                    </template>
+
                 </template>
             </div>
         </div>
@@ -171,9 +182,13 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    sectionTitle: {
+        type: String,
+        default: '',
+    },
 });
 
-const emit = defineEmits(['onProgressReset'])
+const emit = defineEmits(['onProgressReset', 'handleScrollEnd'])
 
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const smallerThanLg = breakpoints.smaller('lg') // only smaller than lg
@@ -236,6 +251,10 @@ const isCoachShow = computed(() => {
 const showSkeletonLoader = computed(() => {
     return !props.noSkeleton && collectionStoreLoading.value;
 })
+
+const showContainer = (index) => {
+
+}
 
 const handleProgressReset = (payload) => {
     emit('onProgressReset', payload.content_id);
