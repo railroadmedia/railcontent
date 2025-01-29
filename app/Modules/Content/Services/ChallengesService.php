@@ -212,7 +212,7 @@ class ChallengesService
             'current_rest_days' => $restDays,
             'start_date' => $startDate,
             'is_locked' => $isLocked,
-            'lessons_meta_data' => $lessonMetaData,
+            'lessons_meta_data' => json_encode($lessonMetaData),
             'is_active' => $isLocked,
             'is_solo' => $isSolo,
         ];
@@ -225,13 +225,15 @@ class ChallengesService
             $this->updateNotification($challengeId, User::whereId($userId), UserNotificationKeys::SOLO_NOTIFICATION_KEY, enable: false);
             $data['solo_notification_to_be_processed'] = 0;
         }
-        $challengeUserProgress = ChallengeUserProgress::updateOrCreate(
+        $count = ChallengeUserProgress::upsert(
             [
             'content_id' => $challengeId,
             'user_id' => $userId,
-        ],
-          $data,
+                ...$data
+        ], ['content_id', 'user_id'],
+          array_keys($data),
         );
+        $challengeUserProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
         return $challengeUserProgress;
     }
 
