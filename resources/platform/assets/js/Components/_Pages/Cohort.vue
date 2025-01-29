@@ -230,44 +230,45 @@
                 <!--  Bottom description  -->
                 <p class="tw-font-bold tw-mt-4 tw-mb-6">{{ cohort['bottom_description'] }}</p>
             </div>
-            
+
             <template v-if="cohort['is_product'] && !isSolo">
                     <h1 class="tw-font-extrabold tw-text-center tw-px-4 lg:tw-px-28 tw-leading-tight">
                         {{ cohort['product_description_header'] }}
                     </h1>
-                    <p class="tw-text-center tw-mb-7 lg:tw-mb-14 tw-px-4 lg:tw-px-10">
+                    <p class="tw-text-center tw-mt-3 tw-mb-7 lg:tw-mb-10 tw-px-4 lg:tw-px-10">
                         {{ cohort['product_description_body'] }}
                     </p>
 
                     <div v-if="!isEnrolled && !hasEnded">
                         <div class="md:tw-flex md:tw-justify-center md:tw-gap-4 tw-px-4 md:tw-px-0 tw-mb-4 tw-space-y-4 md:tw-space-y-0">
-                            
+
                             <!-- Course Only Card -->
-                            <div class="tw-w-full tw-max-w-[340px] tw-rounded-2xl tw-bg-white tw-border tw-border-[#2A2F34] tw-text-center tw-mx-auto md:tw-mx-0 tw-relative tw-flex tw-flex-col tw-h-full">
+                            <div class="tw-w-full tw-max-w-[340px] tw-rounded-2xl tw-bg-white tw-border-2 tw-border-[#2A2F34] tw-text-center tw-mx-auto md:tw-mx-0 tw-relative tw-flex tw-flex-col tw-h-full">
                                 <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
                                     <div class="tw-uppercase tw-bg-[#2A2F34] tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold tw-text-white">
                                         Course Only
                                     </div>
                                 </div>
-                                <div class="tw-px-4 md:tw-px-8 tw-py-6 md:tw-py-7 tw-flex tw-flex-col tw-h-full">
+                                <div class="tw-px-5 md:tw-px-6 tw-py-8 md:tw-py-10 tw-flex tw-flex-col tw-h-full">
                                     <h2 class="tw-text-2xl tw-font-extrabold tw-leading-tight tw-mb-2">
                                         {{ cohort['title'] }}
                                     </h2>
-                                    <p v-if="cohort['instructor']" class="tw-text-sm tw-mb-5 tw-italic">
-                                        w/ {{ cohort['instructor'] }}
-                                    </p>
 
-                                    <img class="tw-h-28 lg:tw-h-36 tw-mx-auto tw-mb-2" 
-                                        alt="course thumbnail" 
-                                        :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" 
+                                    <img class="tw-h-28 lg:tw-h-36 tw-mx-auto tw-mb-3"
+                                        alt="course thumbnail"
+                                        :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`"
                                     />
 
-                                    <h3 class="tw-leading-tight tw-font-extrabold tw-my-2">
-                                        <strong>FREE</strong>
+                                    <h3 class="tw-leading-tight tw-font-extrabold">
+                                            <strong>FREE</strong>
                                     </h3>
+                                    <p v-if="cohort['product_original_price'] > cohort['product_sale_price']"
+                                        class="tw-text-sm tw-italic">
+                                        Included in your membership.
+                                    </p>
 
-                                    <div class="tw-mt-auto">
-                                        <button v-if="showEnrollNow" id="cardEnrollNow" @click="enroll()" 
+                                    <div class="tw-my-3">
+                                        <button v-if="showEnrollNow" id="cardEnrollNow" @click="enroll()"
                                             class="tw-btn-primary tw-bg-[#2A2F34] tw-w-full tw-max-w-[230px] hover:tw-bg-[#2A2F34]/60 tw-transition-opacity tw-duration-300">
                                             Enroll Now
                                         </button>
@@ -275,31 +276,29 @@
                                             Enrollment Closed
                                         </span>
                                     </div>
-                                </div>
-                                <div class="tw-px-4 md:tw-px-8 tw-pb-7">
                                     <p class="tw-text-center tw-text-xs">{{ cohort['course_description'] }}</p>
                                 </div>
                             </div>
 
                             <!-- Course + Product Card -->
-                            <div :class="`tw-w-full tw-max-w-[340px] tw-rounded-2xl tw-bg-white tw-border-4 tw-border-${brand} tw-text-center tw-relative tw-mx-auto md:tw-mx-0 tw-flex tw-flex-col tw-h-full`">
+                            <div :class="`tw-w-full tw-max-w-[340px] tw-rounded-2xl tw-bg-white tw-border-2 tw-border-${brand} tw-text-center tw-relative tw-mx-auto md:tw-mx-0 tw-flex tw-flex-col tw-h-full`">
                                 <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
                                     <div v-if="cohort['get_product_badge']" :class="`tw-uppercase tw-bg-${brand} tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold tw-text-white`">
                                         {{ cohort['get_product_badge'] }}
                                     </div>
                                 </div>
 
-                                <div class="tw-px-4 md:tw-px-8 tw-py-6 md:tw-py-7 tw-flex tw-flex-col tw-h-full">
+                                <div class="tw-px-5 md:tw-px-6 tw-py-8 md:tw-py-10 tw-flex tw-flex-col tw-h-full">
                                     <h2 class="tw-text-2xl tw-font-extrabold tw-leading-tight tw-mb-2">
                                         {{ cohort['product_name'] }}
                                     </h2>
 
-                                    <img class="tw-h-28 md:tw-h-40 tw-mb-2 tw-mx-auto" 
-                                        alt="product image" 
-                                        :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['product_image'] }`" 
+                                    <img class="tw-h-28 lg:tw-h-36 tw-mx-auto tw-mb-3"
+                                        alt="product image"
+                                        :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['product_image'] }`"
                                     />
 
-                                    <h3 class="tw-leading-tight tw-my-2 tw-font-extrabold">
+                                    <h3 class="tw-leading-tight tw-font-extrabold">
                                         <template v-if="cohort['product_original_price'] > cohort['product_sale_price']">
                                             <s class="tw-text-[#2A2F3480] tw-opacity-50 tw-mr-1">
                                                 ${{ cohort['product_original_price'] }}
@@ -310,19 +309,17 @@
                                             <strong>${{ cohort['product_original_price'] }}</strong>
                                         </template>
                                     </h3>
-                                    <p v-if="cohort['product_original_price'] > cohort['product_sale_price']" 
-                                        class="tw-text-sm tw-mb-5 tw-italic">
+                                    <p v-if="cohort['product_original_price'] > cohort['product_sale_price']"
+                                        class="tw-text-sm tw-italic">
                                         Save {{ Math.round(100 - (100 * (cohort['product_sale_price'] / cohort['product_original_price']))) }}%
                                     </p>
 
-                                    <div class="tw-mt-auto">
-                                        <a :href="cohort['product_cart_link']" id="getTheDeal" 
+                                    <div class="tw-my-3">
+                                        <a :href="cohort['product_cart_link']" id="getTheDeal"
                                             :class="`tw-btn-primary tw-bg-${brand} tw-w-full tw-max-w-[230px] hover:tw-bg-${brand}-600 tw-transition-opacity tw-duration-300`">
                                             Get the deal
                                         </a>
                                     </div>
-                                </div>
-                                <div class="tw-px-4 md:tw-px-8 tw-pb-7">
                                     <p class="tw-text-center tw-text-xs">{{ cohort['course_product_description'] }}</p>
                                 </div>
                             </div>
@@ -645,7 +642,7 @@ const watchEnrollmentOpen = () => {
 
 onBeforeMount(() => {
 
-    console.log(props.cohort); // Log 
+    console.log(props.cohort); // Log
 
     const openDate = new Date(props.cohort['enrollment_start_time']);
     const closeDate = new Date(props.cohort['enrollment_end_time']);
