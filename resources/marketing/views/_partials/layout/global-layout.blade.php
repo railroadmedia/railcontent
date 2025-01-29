@@ -32,8 +32,8 @@
             };
         </script>
 
-        @if(!empty($inspectlet))
-            @include('musora._partials._inspectlet')
+        @if(!empty($hotjar))
+            @include('musora._partials._hotjar')
         @endif
     </head>
 

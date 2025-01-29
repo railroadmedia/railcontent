@@ -1,5 +1,5 @@
 @extends('musora._partials.layout', [
-    "inspectlet" => true
+    "hotjar" => true
 ])
 
 @section('head-includes')
