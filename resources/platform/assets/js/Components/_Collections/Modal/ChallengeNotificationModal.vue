@@ -21,7 +21,8 @@
 
             <!-- Step 2 (Solo) -->
             <template v-if="step === 2 && challengeType === 'solo'">
-                <h1 class="tw-mb-6 tw-text-2xl tw-font-bold">Choose Your Start Date</h1>
+                <h1 class="tw-text-2xl tw-font-bold">Choose Your Start Date</h1>
+                <p class="tw-mb-6 tw-text-sm">Solo lessons unlock at 12:00 am your local time</p>
                 <div class="tw-mx-auto">
                     <Datepicker :start-date="selectedDate" inline :enable-time-picker="false" :action-row="{ showCancel: false, showSelect: false, showPreview: false }" position="center" :min-date="new Date()" @internal-model-change="handleDateChange" />
                 </div>
@@ -33,12 +34,13 @@
             <!-- Step 2 (Community) -->
             <template v-if="step === 2 && challengeType === 'community'">
                 <h1 class="tw-mb-3 tw-text-2xl tw-font-bold">{{ challengeTitle }} starts on {{ startDate }}</h1>
+                <p class="tw-mb-6">Community lessons unlock at 12:00 am Pacific</p>
                 <div class="tw-mb-[10px] tw-flex tw-justify-center">
                     <!-- Avatars -->
                     <div v-for="(avatar, index) in challengeData.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-3' : ''" :style="`background-image: url('${avatar.profile_picture_url}')`"></div>
                     <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3 tw-transition-all tw-duration-1000" :class="slideIn ? '' : 'tw-absolute tw-opacity-0 tw-translate-x-10'" :style="`background-image: url('${userProfilePictureUrl}')`"></div>
                 </div>
-                <p class="tw-text-left">You’ve joined <span class="tw-font-bold">{{ userNames }}</span> and <span class="tw-font-bold">{{ challengeData.total }}</span> other {{ otherText }} who have already enrolled! {{ challengeTitle }} runs from {{ durationText }}</p>
+                <p class="tw-text-center">You’ve joined <span class="tw-font-bold">{{ userNames }}</span> and <span class="tw-font-bold">{{ challengeData.total }}</span> other {{ otherText }} who have already enrolled! {{ challengeTitle }} runs from {{ durationText }}</p>
                 <div class="tw-flex tw-justify-end tw-mt-[30px]">
                     <MuButton variant="secondary" is-link :href="`${challenge.course_url}`" class="tw-mr-[9px]">View Challenge</MuButton>
                     <MuButton is-link :href="`/${brand}`" >Go Home</MuButton>
