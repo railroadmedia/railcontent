@@ -31,6 +31,10 @@
                 mcsDebug: @json(config('app.mcs_debug'))
             };
         </script>
+
+        @if(!empty($inspectlet))
+            @include('musora._partials._inspectlet')
+        @endif
     </head>
 
     <body class="flex flex-col w-full min-h-screen pt-[40px] md:pt-[56px] @yield('body-class')"
