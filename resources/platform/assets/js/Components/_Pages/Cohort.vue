@@ -253,7 +253,7 @@
                           :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" 
                         />
                         <h3 class="lg:tw-text-[34px] tw-font-extrabold tw-mb-2 tw-uppercase">
-                          <span><s class="tw-text-[#2A2F3480] tw-opacity-50 tw-pr-1">${{ cohort['product_original_price'] }}</s></span>
+                          <!-- <span><s class="tw-text-[#2A2F3480] tw-opacity-50 tw-pr-1">${{ cohort['product_original_price'] }}</s></span> -->
                           <span>Free</span>
                         </h3>
                       </div>
@@ -281,7 +281,7 @@
                   <!-- Course + Product Card -->
                   <div :class="`tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-8 tw-py-8 tw-bg-white tw-border-2 tw-border-${brand} tw-text-center tw-relative tw-mx-auto md:tw-mx-0 tw-flex tw-flex-col`">
                         <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
-                        <div v-if="cohort['get_product_badge']" :class="`tw-uppercase tw-bg-${brand} tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold`">
+                        <div v-if="cohort['get_product_badge']" :class="`tw-uppercase tw-bg-${brand} tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold tw-text-white`">
                             {{ cohort['get_product_badge'] }}
                         </div>
                         </div>
@@ -305,12 +305,12 @@
                                 <span class="tw-font-extrabold">${{ cohort['product_original_price'] }}</span>
                             </template>
                             </h3>
-                            <h4 
+                            <h3 
                             v-if="cohort['product_original_price'] > cohort['product_sale_price']" 
                             class="tw-text-md lg:tw-text-base tw-mb-2 tw-italic tw-text-[#2A2F3480] tw-opacity-80"
                             >
                             Save {{ Math.round(100 - (100 * (cohort['product_sale_price'] / cohort['product_original_price']))) }}%
-                            </h4>
+                            </h3>
                         </div>
                         <div class="tw-mt-auto">                      
                             <a :href="cohort['product_cart_link']" id="getTheDeal" :class="`tw-btn-primary tw-bg-${brand} tw-my-5 tw-px-8 md:tw-px-16 tw-max-w-[350px] hover:tw-bg-${brand}-600 tw-w-full`">Get the deal</a>                        
