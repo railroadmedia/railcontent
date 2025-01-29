@@ -9,7 +9,7 @@
         :cohort="{{ json_encode($cohort) }}"
         :n-pack-owners="{{ json_encode(number_format($nPackOwners ?? 0)) }}"
         :dropdowns="{{ json_encode($cohort['dropdown']) }}"
-        :has-product="{{ $hasProduct ? 'true' : 'false' }}"
+        :has-product="{{ json_encode($hasProduct) }}"
     ></cohort>
 
     @include('partials._railanalytics-brand-tracking-iframe')
