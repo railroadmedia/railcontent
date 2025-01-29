@@ -230,97 +230,106 @@
                 <!--  Bottom description  -->
                 <p class="tw-font-bold tw-mt-4 tw-mb-6">{{ cohort['bottom_description'] }}</p>
             </div>
-
-            <template v-if="cohort['is_product'] && !isSolo">
-                <h1 class="tw-font-extrabold tw-text-center tw-px-4 lg:tw-px-28 tw-leading-tight">{{ cohort['product_description_header'] }} </h1>
-                <p class="tw-text-center tw-mb-7 lg:tw-mb-14 tw-px-4 lg:tw-px-10">{{ cohort['product_description_body'] }} </p>
-              <div v-if="!isEnrolled && !hasEnded">
-                <div class="md:tw-flex md:tw-justify-center md:tw-gap-6 tw-px-4 md:tw-px-0 tw-mb-4">
-                  <!-- Course Only Card -->
-                  <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-8 tw-py-8 tw-bg-white tw-border-2 tw-border-[#2A2F34] tw-text-center tw-mb-4 md:tw-mb-0 tw-mx-auto md:tw-mx-0 tw-flex tw-flex-col tw-relative">
-                    <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
-                      <div class="tw-uppercase tw-bg-[#2A2F34] tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold tw-text-white">
-                        Course Only
-                      </div>
-                    </div>
-                    <div class="tw-flex-1 tw-flex tw-flex-col">
-                      <h2 class="tw-text-2xl md:text-4xl lg:tw-text-[30px] tw-font-extrabold tw-leading-none">{{ cohort['title'] }}</h2>
-                      <p v-if="cohort['instructor']" class="tw-italic tw-font-extralight tw-pt-1">w/ {{ cohort['instructor'] }}</p>
-                      <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
-                        <img 
-                          class="tw-h-28 lg:tw-h-36 tw-mb-4 tw-inline-block tw-object-contain" 
-                          alt="header logo" 
-                          :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" 
-                        />
-                        <h3 class="lg:tw-text-[34px] tw-font-extrabold tw-mb-2 tw-uppercase">
-                          <!-- <span><s class="tw-text-[#2A2F3480] tw-opacity-50 tw-pr-1">${{ cohort['product_original_price'] }}</s></span> -->
-                          <span>Free</span>
-                        </h3>
-                      </div>
-                      <!-- Get Notified Button -->
-                      <button v-if="showGetNotified && !isNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full hover:tw-bg-${brand}-600`" @click="handleGetNotified">
-                        <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
-                        Get Notified
-                      </button>
-                      <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white">Notification requested!</span>
-                      <!-- Enrolled Buttons -->
-                      <div v-else-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
-                        <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
-                        <a :href="cohort['course_url']" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
-                      </div>
-                      <template v-else>
-                        <!-- Enroll now Button -->
-                        <button v-if="showEnrollNow" id="cardEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-[#2A2F34] tw-my-5 tw-max-w-[350px] hover:tw-bg-[#2A2F34]/60 tw-w-full`">Enroll Now</button>
-                        <!-- Closed Button -->
-                        <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Enrollment Closed</span>
-                      </template>
-                    </div>
-                    <p class="tw-text-xs tw-leading-relaxed">{{ cohort['course_description'] }}</p>
-                  </div>
             
-                  <!-- Course + Product Card -->
-                  <div :class="`tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-8 tw-py-8 tw-bg-white tw-border-2 tw-border-${brand} tw-text-center tw-relative tw-mx-auto md:tw-mx-0 tw-flex tw-flex-col`">
-                        <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
-                        <div v-if="cohort['get_product_badge']" :class="`tw-uppercase tw-bg-${brand} tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold tw-text-white`">
-                            {{ cohort['get_product_badge'] }}
+            <template v-if="cohort['is_product'] && !isSolo">
+                    <h1 class="tw-font-extrabold tw-text-center tw-px-4 lg:tw-px-28 tw-leading-tight">
+                        {{ cohort['product_description_header'] }}
+                    </h1>
+                    <p class="tw-text-center tw-mb-7 lg:tw-mb-14 tw-px-4 lg:tw-px-10">
+                        {{ cohort['product_description_body'] }}
+                    </p>
+
+                    <div v-if="!isEnrolled && !hasEnded">
+                        <div class="md:tw-flex md:tw-justify-center md:tw-gap-4 tw-px-4 md:tw-px-0 tw-mb-4 tw-space-y-4 md:tw-space-y-0">
+                            
+                            <!-- Course Only Card -->
+                            <div class="tw-w-full tw-max-w-[340px] tw-rounded-2xl tw-bg-white tw-border tw-border-[#2A2F34] tw-text-center tw-mx-auto md:tw-mx-0 tw-relative tw-flex tw-flex-col tw-h-full">
+                                <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
+                                    <div class="tw-uppercase tw-bg-[#2A2F34] tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold tw-text-white">
+                                        Course Only
+                                    </div>
+                                </div>
+                                <div class="tw-px-4 md:tw-px-8 tw-py-6 md:tw-py-7 tw-flex tw-flex-col tw-h-full">
+                                    <h2 class="tw-text-2xl tw-font-extrabold tw-leading-tight tw-mb-2">
+                                        {{ cohort['title'] }}
+                                    </h2>
+                                    <p v-if="cohort['instructor']" class="tw-text-sm tw-mb-5 tw-italic">
+                                        w/ {{ cohort['instructor'] }}
+                                    </p>
+
+                                    <img class="tw-h-28 lg:tw-h-36 tw-mx-auto tw-mb-2" 
+                                        alt="course thumbnail" 
+                                        :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" 
+                                    />
+
+                                    <h3 class="tw-leading-tight tw-font-extrabold tw-my-2">
+                                        <strong>FREE</strong>
+                                    </h3>
+
+                                    <div class="tw-mt-auto">
+                                        <button v-if="showEnrollNow" id="cardEnrollNow" @click="enroll()" 
+                                            class="tw-btn-primary tw-bg-[#2A2F34] tw-w-full tw-max-w-[230px] hover:tw-bg-[#2A2F34]/60 tw-transition-opacity tw-duration-300">
+                                            Enroll Now
+                                        </button>
+                                        <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-max-w-[230px] tw-text-white">
+                                            Enrollment Closed
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="tw-px-4 md:tw-px-8 tw-pb-7">
+                                    <p class="tw-text-center tw-text-xs">{{ cohort['course_description'] }}</p>
+                                </div>
+                            </div>
+
+                            <!-- Course + Product Card -->
+                            <div :class="`tw-w-full tw-max-w-[340px] tw-rounded-2xl tw-bg-white tw-border-4 tw-border-${brand} tw-text-center tw-relative tw-mx-auto md:tw-mx-0 tw-flex tw-flex-col tw-h-full`">
+                                <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
+                                    <div v-if="cohort['get_product_badge']" :class="`tw-uppercase tw-bg-${brand} tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold tw-text-white`">
+                                        {{ cohort['get_product_badge'] }}
+                                    </div>
+                                </div>
+
+                                <div class="tw-px-4 md:tw-px-8 tw-py-6 md:tw-py-7 tw-flex tw-flex-col tw-h-full">
+                                    <h2 class="tw-text-2xl tw-font-extrabold tw-leading-tight tw-mb-2">
+                                        {{ cohort['product_name'] }}
+                                    </h2>
+
+                                    <img class="tw-h-28 md:tw-h-40 tw-mb-2 tw-mx-auto" 
+                                        alt="product image" 
+                                        :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['product_image'] }`" 
+                                    />
+
+                                    <h3 class="tw-leading-tight tw-my-2 tw-font-extrabold">
+                                        <template v-if="cohort['product_original_price'] > cohort['product_sale_price']">
+                                            <s class="tw-text-[#2A2F3480] tw-opacity-50 tw-mr-1">
+                                                ${{ cohort['product_original_price'] }}
+                                            </s>
+                                            <strong>${{ cohort['product_sale_price'] }}</strong>
+                                        </template>
+                                        <template v-else>
+                                            <strong>${{ cohort['product_original_price'] }}</strong>
+                                        </template>
+                                    </h3>
+                                    <p v-if="cohort['product_original_price'] > cohort['product_sale_price']" 
+                                        class="tw-text-sm tw-mb-5 tw-italic">
+                                        Save {{ Math.round(100 - (100 * (cohort['product_sale_price'] / cohort['product_original_price']))) }}%
+                                    </p>
+
+                                    <div class="tw-mt-auto">
+                                        <a :href="cohort['product_cart_link']" id="getTheDeal" 
+                                            :class="`tw-btn-primary tw-bg-${brand} tw-w-full tw-max-w-[230px] hover:tw-bg-${brand}-600 tw-transition-opacity tw-duration-300`">
+                                            Get the deal
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="tw-px-4 md:tw-px-8 tw-pb-7">
+                                    <p class="tw-text-center tw-text-xs">{{ cohort['course_product_description'] }}</p>
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                        <div class="tw-flex-1 tw-flex tw-flex-col">
-                        <h2 class="tw-text-2xl md:text-4xl lg:tw-text-[30px] tw-font-extrabold tw-leading-none tw-pb-1 lg:tw-pb-6">
-                            {{ cohort['product_name'] }}
-                        </h2>
-                        <!-- <p class="tw-italic tw-font-extralight tw-py-1 tw-text-sm">{{ cohort['course_product_description'] }}</p> -->
-                        <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
-                            <img 
-                            class="tw-h-28 lg:tw-h-36 tw-mb-4 tw-inline-block tw-object-contain" 
-                            alt="header logo" 
-                            :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['product_image'] }`" 
-                            />
-                            <h3 class="lg:tw-text-[34px] tw-mb-2">
-                            <template v-if="cohort['product_original_price'] > cohort['product_sale_price']">
-                                <s class="tw-text-[#2A2F3480] tw-opacity-50 tw-pr-1">${{ cohort['product_original_price'] }}</s>
-                                <span class="tw-font-extrabold">${{ cohort['product_sale_price'] }}</span>
-                            </template>
-                            <template v-else>
-                                <span class="tw-font-extrabold">${{ cohort['product_original_price'] }}</span>
-                            </template>
-                            </h3>
-                            <h3 
-                            v-if="cohort['product_original_price'] > cohort['product_sale_price']" 
-                            class="tw-text-md lg:tw-text-base tw-mb-2 tw-italic tw-text-[#2A2F3480] tw-opacity-80"
-                            >
-                            Save {{ Math.round(100 - (100 * (cohort['product_sale_price'] / cohort['product_original_price']))) }}%
-                            </h3>
-                        </div>
-                        <div class="tw-mt-auto">                      
-                            <a :href="cohort['product_cart_link']" id="getTheDeal" :class="`tw-btn-primary tw-bg-${brand} tw-my-5 tw-px-8 md:tw-px-16 tw-max-w-[350px] hover:tw-bg-${brand}-600 tw-w-full`">Get the deal</a>                        
-                        </div>
-                        </div>
-                        <p class="tw-text-xs tw-leading-relaxed">{{ cohort['course_product_description'] }}</p>
-                  </div>
-                </div>
-              </div>
-            </template>
+                    </div>
+                </template>
+
 
             <div v-if="!cohort['is_product']" class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
                 <!--  Buttons-->
