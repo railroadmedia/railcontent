@@ -2,13 +2,19 @@
 
 namespace App\Modules\UserManagementSystem\Services;
 
+use App\Modules\Ecommerce\ApiGateways\RevenueCatApiGateway;
+use App\Modules\Ecommerce\Jobs\Recharge\RechargeDeleteUser;
+use App\Modules\Ecommerce\Jobs\RevenueCat\RevenuecatDeleteUser;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoDeleteUser;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\User;
 
 class UserService
 {
-    public function __construct()
+    public function __construct(private RevenueCatApiGateway $revenueCatApiGateway)
     {
     }
 
@@ -80,6 +86,7 @@ class UserService
 
     public function deleteUser($user)
     {
+        $oldUser = clone ($user);
         $user->fill([
                         'email' => 'musora+deleted_'.
                             Carbon::now()
@@ -122,6 +129,16 @@ class UserService
                 ->toDateTimeString();
 
         $user->save();
+        event(new UserUpdated($user, $oldUser));
+
+        //delete Revenuecat user
+        dispatch_sync(new RevenuecatDeleteUser($user));
+
+        //delete Customer Io user
+        dispatch_sync(new CustomerIoDeleteUser($user->id));
+
+        //delete Recharge user
+        dispatch_sync(new RechargeDeleteUser($user));
 
         return $user;
     }
