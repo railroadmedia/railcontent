@@ -646,8 +646,6 @@ const watchEnrollmentOpen = () => {
 
 onBeforeMount(() => {
 
-    console.log(props.cohort); // Log
-
     const openDate = new Date(props.cohort['enrollment_start_time']);
     const closeDate = new Date(props.cohort['enrollment_end_time']);
     const now = new Date();
