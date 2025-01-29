@@ -1,9 +1,10 @@
 <template>
-    <div class="tw-flex tw-flex-nowrap tw-overflow-x-scroll tw-no-scrollbar lg:tw-grid tw-grid-cols-2 tw-gap-[6px] 2xl:tw-gap-[10px]">
+    <div class="tw-flex tw-flex-nowrap tw-overflow-x-scroll tw-no-scrollbar challengeCarousel-container -tw-mr-[6px] 2xl:-tw-mr-[10px]" :class="`${sectionTitle}`" @touchend="emit('handleScrollEnd')">
         <SkeletonChallengeCarousel v-if="isLoading" v-for="n in 2" :key="n" />
         <template v-else v-for="card in preLoadedContent">
+            <div v-if="card.type === 'fill'" class="tw-w-[330px] lg:tw-w-1/2 tw-shrink-0"></div>
             <NewLearningPathCard
-                v-if="card.type === 'onboarding'"
+                v-else-if="card.type === 'onboarding'"
                 :key="card.id"
                 :contentType="card.content_type ?? ''"
                 :title="card.header"
@@ -15,14 +16,15 @@
                 :wideImg="card.wideImg"
                 :squareImg="card.squareImg"
                 :is-draft="card.is_draft"
+                @activate-auto-scroll="emit('activateAutoScroll')"
+                @stop-auto-scroll="emit('stopAutoScroll')"
             />
-            <EnrollmentAward v-else-if="!card.is_user_enrolled" :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" />
-            <InProgressCard v-else :challenge="card" :page-type="pageType" @on-remove-challenge="id => emit('removeChallenge', id)" @on-re-fetch-carousel="data => emit('reFetchCarousel', data)" />
+            <EnrollmentAward v-else-if="!card.is_user_enrolled" :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" @activate-auto-scroll="emit('activateAutoScroll')" @stop-auto-scroll="emit('stopAutoScroll')" />
+            <InProgressCard v-else :challenge="card" :page-type="pageType" @on-remove-challenge="id => emit('removeChallenge', id)" @on-re-fetch-carousel="data => emit('reFetchCarousel', data)" @activate-auto-scroll="emit('activateAutoScroll')" @stop-auto-scroll="emit('stopAutoScroll')" />
         </template>
     </div>
 </template>
 <script setup>
-import { computed } from "vue";
 import { useUserStore } from '@stores/user';
 import { storeToRefs } from "pinia/dist/pinia";
 import InProgressCard from '@collections/ChallengeCarousel/InProgressCard';
@@ -40,9 +42,13 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    sectionTitle: {
+        type: String,
+        default: '',
+    },
 })
 
-const emit = defineEmits(['removeChallenge', 'reFetchCarousel']);
+const emit = defineEmits(['removeChallenge', 'reFetchCarousel', 'activateAutoScroll', 'stopAutoScroll', 'handleScrollEnd']);
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);

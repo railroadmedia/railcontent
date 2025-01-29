@@ -14,19 +14,20 @@
                 <div v-if="showPagination" class="tw-flex tw-items-center">
                     <div class="tw-hidden lg:tw-flex">
                         <button class="tw-w-[30px] tw-h-[30px] tw-flex tw-justify-center tw-items-center tw-rounded-full tw-border tw-border-[#B2B2B5] dark:tw-border-[#223F57] tw-bg-white dark:tw-bg-[#081825] tw-text-[#000C17] dark:tw-text-white hover:tw-bg-[#000C17] hover:tw-border-[#000C17] hover:tw-text-white dark:hover:tw-bg-[#223F57] disabled:tw-bg-[#F4F4F5] disabled:hover:tw-border-[#B2B2B5] disabled:hover:tw-bg-white dark:disabled:hover:tw-bg-[#081825] disabled:tw-text-[#B2B2B5] dark:disabled:tw-text-[#223F57] dark:disabled:tw-border-[#223F57] tw-mr-[10px]" :disabled="isFirstPage" @click="prevPage"><ChevronLeftIcon class="tw-w-[20px] tw-h-[20px]"  /></button>
-                        <button class="tw-w-[30px] tw-h-[30px] tw-flex tw-justify-center tw-items-center tw-rounded-full tw-border tw-border-[#B2B2B5] dark:tw-border-[#223F57] tw-bg-white dark:tw-bg-[#081825] tw-text-[#000C17] dark:tw-text-white hover:tw-bg-[#000C17] hover:tw-border-[#000C17] hover:tw-text-white dark:hover:tw-bg-[#223F57] disabled:tw-bg-[#F4F4F5] disabled:hover:tw-border-[#B2B2B5] disabled:hover:tw-bg-white dark:disabled:hover:tw-bg-[#081825] disabled:tw-text-[#B2B2B5] dark:disabled:tw-text-[#223F57] dark:disabled:tw-border-[#223F57]" :disabled="isLastPage" @click="nextPage"><ChevronRightIcon class="tw-w-[20px] tw-h-[20px]"  /></button>
+                        <button class="tw-w-[30px] tw-h-[30px] tw-flex tw-justify-center tw-items-center tw-rounded-full tw-border tw-border-[#B2B2B5] dark:tw-border-[#223F57] tw-bg-white dark:tw-bg-[#081825] tw-text-[#000C17] dark:tw-text-white hover:tw-bg-[#000C17] hover:tw-border-[#000C17] hover:tw-text-white dark:hover:tw-bg-[#223F57] disabled:tw-bg-[#F4F4F5] disabled:hover:tw-border-[#B2B2B5] disabled:hover:tw-bg-white dark:disabled:hover:tw-bg-[#081825] disabled:tw-text-[#B2B2B5] dark:disabled:tw-text-[#223F57] dark:disabled:tw-border-[#223F57]" :disabled="isLastPage" @click="nextPage"><ChevronRightIcon class="tw-w-[20px] tw-h-[20px]" /></button>
                     </div>
                 </div>
             </div>
             <slot name="tabs" :resetPagination="resetPagination"></slot>
-            <div>
+            <div class="tw-overflow-hidden">
                 <transition appear name="fade">
-                    <ChallengeCarousel v-if="isChallengeCarousel" :pre-loaded-content="data" :page-type="pageType" @remove-challenge="removeItem" @re-fetch-carousel="reFetchData" />
-                    <ChallengeCardContainer v-else-if="isChallenge" :content="data" />
-                    <ChallengeAwardContainer v-else-if="isChallengeAward" :pre-loaded-content="data" />
-                    <PackCatalogue v-else-if="isPack" :content="data" />
+                    <ChallengeCarousel v-if="isChallengeCarousel" :section-title="sectionTitle" :pre-loaded-content="data" :page-type="pageType" @remove-challenge="removeItem" @re-fetch-carousel="reFetchData" @handle-scroll-end="handleScrollEnd" @activate-auto-scroll="activateAutoScroll" @stop-auto-scroll="clearAutoScroll"  />
+                    <ChallengeCardContainer v-else-if="isChallenge" :section-title="sectionTitle" :content="data" />
+                    <ChallengeAwardContainer v-else-if="isChallengeAward" :section-title="sectionTitle" :pre-loaded-content="data" />
+                    <PackCatalogue v-else-if="isPack" :section-title="sectionTitle" :content="data" />
                     <CatalogueCardContainer
                         v-else
+                        :section-title="sectionTitle"
                         :force-no-links="forceNoLinks"
                         :is-mini-view="isMiniView"
                         :pre-loaded-content="data"
@@ -36,6 +37,7 @@
                         :is-mini-catalogue="true"
                         :show-see-all-card="preLoadedContent.length > 6 && showSeeAllCard"
                         @on-progress-reset="resetProgress"
+                        @handle-scroll-end="handleScrollEnd"
                     />
                 </transition>
             </div>
@@ -69,8 +71,8 @@ const props = defineProps({
     default: '/railcontent/content'
   },
   preLoadedContent: {
-    type: Object,
-    default: ''
+    type: Array,
+    default: [],
   },
   title: {
     type: String,
@@ -116,6 +118,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  autoScroll: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const userStore = useUserStore();
@@ -143,6 +149,17 @@ const isChallengeAward = computed(() => {
     return props.catalogueType === 'challengeAward';
 })
 
+const sectionTitle = computed(() => {
+    if(isChallengeCarousel.value){
+        return 'challengeCarousel';
+    }
+    return props.title.replace(/\s/g, ' ').toLowerCase();
+})
+
+const initialData = computed(() => {
+    return props.preLoadedContent;
+})
+
 const handleSeeAllClick = (event) => {
   if (props.seeAllUrl && props.trackingSection) {
     event.preventDefault();
@@ -164,25 +181,32 @@ const toggleSeeAllCard = (val) => {
 
 const watchResize = () => {
     getCardNum(props, cardNum, toggleSeeAllCard);
-    getPageData();
+    if(props.isMiniView) data.value = reformatData(props.preLoadedContent)
+
+    toStartIndex();
 }
 
 onMounted(() => {
     watchResize();
     window.addEventListener('resize', watchResize);
+    if(props.autoScroll && data.value.length > cardNum.value){
+        activateAutoScroll();
+    }
 })
 
 onUnmounted(() => {
     window.removeEventListener('resize', watchResize);
+    if(props.autoScroll){
+        clearAutoScroll();
+    }
 })
 
-//in case preLoadedContent is an empty array on rendering and it gets updated after
 watch(
     () => props.preLoadedContent,
     (newData) => {
-        setOriginal(newData);
+        toStartIndex();
     },
 )
 
-const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, setOriginal, removeItem, reFetchData, resetPagination } = useCarouselEvents(props.preLoadedContent, data, page, cardNum);
+const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, removeItem, reFetchData, resetPagination, toStartIndex, activateAutoScroll, clearAutoScroll, handleScrollEnd, reformatData } = useCarouselEvents(initialData, data, page, cardNum, sectionTitle, props.autoScroll, props.isMiniView);
 </script>

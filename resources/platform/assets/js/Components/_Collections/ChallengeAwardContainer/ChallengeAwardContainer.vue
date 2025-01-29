@@ -1,7 +1,11 @@
 <template>
-    <div class="tw-flex tw-flex-nowrap lg:tw-grid tw-grid-cols-4 xl:tw-grid-cols-6 tw-gap-4 tw-no-scrollbar tw-overflow-x-scroll">
+    <div class="tw-flex tw-flex-nowrap tw-no-scrollbar tw-overflow-x-scroll" :class="`${sectionTitle}-container`">
         <SkeletonChallengeAwardCard v-if="isLoading" v-for="n in 4" :key="n" />
-        <ChallengeAwardCard v-else v-for="award in preLoadedContent" :award="award" />
+        <template v-else v-for="award in preLoadedContent">
+            <div v-if="award.type === 'fill'" class="tw-shrink-0 tw-w-[150px] lg:tw-w-1/4 xl:tw-w-1/6"></div>
+            <ChallengeAwardCard v-else :award="award" />
+        </template>
+
     </div>
 </template>
 <script setup>
@@ -14,6 +18,10 @@ const props = defineProps({
     preLoadedContent: {
         type: Array,
         default: () => [],
+    },
+    sectionTitle: {
+        type: String,
+        default: '',
     },
 })
 

@@ -133,7 +133,7 @@ const handleClick = (event, url) => {
 </script>
 <template>
     <div class="tw-group tw-relative"
-        :class="isListView ? 'tw-h-[92px] tw-mb-[1px] tw-px-1.5 md:tw-px-6 tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 tw-bg-white dark:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[221px] tw-min-w-[221px] lg:tw-w-auto lg:tw-min-w-0 lg:[&:nth-child(11)]:tw-hidden lg:[&:nth-child(12)]:tw-hidden 2xl:[&:nth-child(11)]:tw-grid 2xl:[&:nth-child(12)]:tw-grid' : ''}`">
+        :class="isListView ? 'tw-h-[92px] tw-mb-[1px] tw-px-1.5 md:tw-px-6 tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 tw-bg-white dark:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'catalogue-card tw-w-[227px] tw-pr-[6px] xl:tw-pr-[12px] 2xl:tw-pr-[16px] lg:tw-w-1/5 2xl:tw-w-1/6 tw-shrink-0' : ''}`">
         <!-- Playlist thumbnail -->
         <PlaylistThumbnail :listElement="listElement" :isListView="isListView" :isMiniCatalog="isMiniCatalog"
             :brand="brand" :linkUrl="listElement.playback_url" @onThumbnailClick="(e) => handleClick(e, listElement.playback_url)" :useCallback="true" />

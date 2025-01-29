@@ -1,5 +1,5 @@
 <template>
-    <a :href="urlPath" class="tw-shrink-0 tw-text-primary-2 tw-text-[11px] lg:tw-text-xs tw-mb-[14px] lg:tw-mb-0" :class="widthStyles">
+    <a :href="urlPath" class="tw-block tw-shrink-0 tw-text-primary-2 tw-text-[11px] lg:tw-text-xs tw-mb-[14px] lg:tw-mb-0 catalogue-card lg:tw-w-1/4 xl:tw-w-1/5 3xl:tw-w-1/6 tw-pr-1 lg:tw-pr-[15px]" :class="widthStyles">
         <div class="tw-rounded-[0.5px] tw-rounded-lg tw-overflow-hidden tw-border tw-border-primary-7 tw-relative tw-group">
             <!-- Card Image -->
             <img class="tw-w-full tw-aspect-[2/3] tw-object-cover tw-object-center" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${item.image}`" />
@@ -72,7 +72,9 @@ const durationText = ref('');
 
 const widthStyles = computed(() => {
     if(props.isGroupedView){
-        return 'tw-w-[168px] sm:tw-w-[230px] lg:tw-w-auto'
+        return 'tw-w-[172px] sm:tw-w-[234px]'
+    } else {
+        return 'tw-w-1/2 sm:tw-w-1/3';
     }
 })
 

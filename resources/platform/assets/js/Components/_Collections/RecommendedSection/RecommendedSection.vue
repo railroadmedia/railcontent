@@ -34,7 +34,9 @@ const activeRecommendedContent = computed(() => {
 });
 
 const handleTabClick = (tab, resetPagination) => {
-  resetPagination();
   activeTab.value = tab;
+  setTimeout(() => {
+      resetPagination();
+  }, 10)
 }
 </script>
