@@ -12,12 +12,10 @@ export const getCardNum = (props, cardNum, toggleSeeAllCard) => {
 
     //Challenge Carousel
     if(props.catalogueType === 'challenge-carousel'){
-        if(xlDesktop.value){
-            cardNum.value = 2;
-        } else if(lgDesktop.value){
-            cardNum.value = 2;
-        } else {
-            cardNum.value = 20;
+         if(window.innerWidth >= 692) {
+             cardNum.value = 2;
+        } else{
+             cardNum.value = 1;
         }
     }
 
