@@ -41,7 +41,7 @@
           v-bind="recommendedProps"
           :collection-type="lessonType"
           :title="metaData?.shortname || metaData?.name"
-          :hide-filter-icon="true"
+          :hide-filter-icon="lessonType === 'routine'"
           :hide-controls="lessonType === 'Recommendation'"
           :tab-options="tabData"
         />
@@ -130,7 +130,7 @@
       const lessons = await fetchByRailContentIds(startedIds.started);
 
       headerData.value = getHeaderData(metaData.value, brand.value, props.askQuestionRecipient, props.emailLogoLink, contentType.value, props.forYouExperiment)
-      
+
       // Set the continue section with started workouts
       continueSection.value = lessons;
 
