@@ -7,8 +7,6 @@
 
     @yield('meta')
 
-    @include('partials.third-party.inspectlet-tracking-script')
-
     <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
 
     @yield('styles')

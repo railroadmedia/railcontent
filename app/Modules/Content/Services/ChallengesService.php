@@ -227,10 +227,10 @@ class ChallengesService
         }
         $challengeUserProgress = ChallengeUserProgress::updateOrCreate(
             [
-            'content_id' => $challengeId,
-            'user_id' => $userId,
-        ],
-          $data,
+                'content_id' => $challengeId,
+                'user_id' => $userId,
+            ],
+            $data,
         );
         return $challengeUserProgress;
     }

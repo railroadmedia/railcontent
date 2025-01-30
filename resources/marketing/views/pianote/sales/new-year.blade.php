@@ -74,7 +74,7 @@
                 'secondDeal' => "New Year Bundle",
                 'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/710x0/filters:quality(95)/marketing/pianote/promos/january/ny-collage2.webp',
                 'secondImageHeight' => 'h-24 lg:h-28',
-                'secondDealSub' => "Save 20% on your first year +<br>  get 8 bonuses worth $726.",
+                'secondDealSub' => "Save 20% on your first year +<br>  get 8 bonuses worth $762.",
                 'secondDealPrice' => 192,
                 'secondDealDiscount' => 1002,
                 "secondDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-new-years-bundle]=1&promo-code=NYPHP25,new-year,ny-member-shipping&locked=true",

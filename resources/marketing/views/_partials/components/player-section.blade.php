@@ -107,7 +107,7 @@
         </div>
     </div>
 
-@if (empty($unlocked)) 
+@if (empty($unlocked))
 <div id="sign-up-modal" class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" role="dialog" aria-modal="true">
         <div class="relative min-h-screen flex items-center justify-center px-4  @if(!empty($simpleModal))bg-black bg-opacity-80 @else bg-[#404040E5] bg-opacity-90 @endif"
             style="z-index: 1006;">
@@ -186,7 +186,7 @@
             </div>
         </div>
     </div>
-@else 
+@else
     <div id="sign-up-modal" class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" role="dialog" aria-modal="true">
         <div class="relative min-h-screen flex items-center justify-center px-4 bg-black bg-opacity-80"
             style="z-index: 1006;">

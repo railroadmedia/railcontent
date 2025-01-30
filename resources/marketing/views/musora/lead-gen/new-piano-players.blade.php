@@ -1,4 +1,6 @@
-@extends('musora._partials.layout')
+@extends('musora._partials.layout', [
+    "hotjar" => true
+])
 
 @section('head-includes')
     <title>New Piano Players Start Here | Musora</title>

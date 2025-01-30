@@ -1,4 +1,6 @@
-@extends('musora._partials.layout')
+@extends('musora._partials.layout', [
+    "hotjar" => true
+])
 
 @section('head-includes')
     <title>30-Day Drummer | Musora</title>
