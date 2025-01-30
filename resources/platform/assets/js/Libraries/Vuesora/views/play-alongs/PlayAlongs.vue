@@ -343,8 +343,6 @@ export default {
                 progress: "all"
             })
 
-            console.log('data', data.entity.length)
-
             //Count Patch
             fetchPlayAlongsCount(this.brand).then(count => {
                 this.totalResults = count;
