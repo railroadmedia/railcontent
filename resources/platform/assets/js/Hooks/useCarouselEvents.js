@@ -1,10 +1,7 @@
 import { computed, ref } from "vue"
 import { contentStatusReset } from "musora-content-services";
-import { useUserStore } from "@stores/user";
 
-export default function useCarouselEvents (originalData, updatedData, page, cardNum, sectionTitle, autoScroll = false, isMiniView = false) {
-    const userStore = useUserStore();
-
+export default function useCarouselEvents (originalData, updatedData, page, cardNum, sectionTitle, autoScroll = false, isMiniView = false, isChallengeCarousel = false) {
     const original = ref([]);
     const isScrolling = ref(false);
     const startIndex = ref(0); // Index of the first visible item
@@ -43,7 +40,19 @@ export default function useCarouselEvents (originalData, updatedData, page, card
     const nextPage = () => {
         if(isScrolling.value) return;
 
-        startIndex.value = startIndex.value + cardNum.value;
+        if(isChallengeCarousel.value){
+            let updatedIndex;
+
+            updatedIndex = startIndex.value + cardNum.value;
+
+            if(updatedIndex >= updatedData.value.length){
+                updatedIndex = updatedData.value.length - 1;
+            }
+
+            startIndex.value = updatedIndex;
+        } else {
+            startIndex.value = startIndex.value + cardNum.value;
+        }
 
         page.value++;
 
@@ -100,7 +109,6 @@ export default function useCarouselEvents (originalData, updatedData, page, card
 
             startIndex.value = index - 1;
             toStartIndex();
-            console.log('page', index, page.value, updatedData.value)
         }
     }
 
@@ -166,13 +174,23 @@ export default function useCarouselEvents (originalData, updatedData, page, card
         }
 
         setTimeout(watchScroll, 10);
+
+        if(autoScroll){
+            activateAutoScroll();
+        }
     }
 
     const scrollHorizontally = (direction) => {
         const container = document.getElementsByClassName(`${sectionTitle.value}-container`)[0];
-        const distance = direction === 'left' ? container.offsetWidth : -container.offsetWidth;
-        container.scrollBy({ left: distance, behavior: "smooth" });
-        isScrolling.value = true;
+
+        let card = container.getElementsByClassName('catalogue-card')[0];
+        if(window.innerWidth < 1280) card = container.getElementsByClassName('catalogue-card')[1];
+
+        if(card){
+            const cardWidth = card.offsetWidth;
+            container.scrollTo({ left: startIndex.value * cardWidth, behavior: 'smooth' });
+            isScrolling.value = true;
+        }
 
         setTimeout(() => {
             isScrolling.value = false;
@@ -191,7 +209,7 @@ export default function useCarouselEvents (originalData, updatedData, page, card
     }
 
     const toStartIndex = () => {
-        if(!isMiniView && initialData.value){
+        if(!isMiniView && initialData.value && !isChallengeCarousel.value){
             let short = (initialData.value.length / cardNum.value) > 1;
             if(short){
                 short = cardNum.value - initialData.value.length % cardNum.value;
@@ -206,8 +224,13 @@ export default function useCarouselEvents (originalData, updatedData, page, card
             } else if(initialData.value.length !== updatedData.value.length || initialData.value[0].title !== updatedData.value[0].title){
                 updatedData.value = [...initialData.value];
             }
+        }
 
-            console.log('udpate page:', startIndex.value, cardNum.value)
+        if(isChallengeCarousel.value){
+            updatedData.value = [...initialData.value];
+        }
+
+        if(!isMiniView && initialData.value){
             page.value = Math.ceil(startIndex.value / cardNum.value) + 1;
         }
 
