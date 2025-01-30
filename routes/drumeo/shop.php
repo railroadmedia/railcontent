@@ -57,6 +57,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         Route::get('/30-day-independence/deal', [SalesController::class, 'thirtyDayIndependenceDeal']);
         Route::get('/5-for-3-bundle', [SalesController::class, 'fiveforthreeBundle']);
         Route::get('/headphones', [SalesController::class, 'headphones']);
+        Route::get('/off-the-charts', [SalesController::class, 'offTheCharts']);
         Route::get('/{productslug}', [ShopController::class, 'product']);
     });
 });

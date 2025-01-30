@@ -280,6 +280,11 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
+    public function gettingStartedAlt()
+    {
+        return view('pianote.lead-gen.getting-started-on-the-piano.getting-started-on-the-piano-with-bonus', ['recaptchaKey' => config('recaptcha.key'), 'theme' => 'pianote']);
+    }
+
     public function sightReading()
     {
         return view('pianote.lead-gen.sight-reading-made-simple', ['recaptchaKey' => config('recaptcha.key')]);

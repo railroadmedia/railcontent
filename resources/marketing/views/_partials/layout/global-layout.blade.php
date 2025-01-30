@@ -31,6 +31,10 @@
                 mcsDebug: @json(config('app.mcs_debug'))
             };
         </script>
+
+        @if(!empty($hotjar))
+            @include('musora._partials._hotjar')
+        @endif
     </head>
 
     <body class="flex flex-col w-full min-h-screen pt-[40px] md:pt-[56px] @yield('body-class')"

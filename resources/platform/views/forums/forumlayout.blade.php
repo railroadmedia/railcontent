@@ -30,7 +30,6 @@ $userData = assembleUserAttributes(user());
         {{-- Header Analytics --}}
         {!! \App\Analytics\Tracker::trackPageView() !!}
         {!! \App\Analytics\Tracker::headBottom() !!}
-        {!! inspectlet_embed_script() !!}
     </head>
 
     <body class="{{ $brand }} {{ isLive() ? 'live' : '' }} {{ $bodyClass ?? '' }} {{ !empty($_COOKIE['collapsed']) ? 'sidebar-collapsed' : '' }} {{ !empty($_COOKIE['darkmode']) ? 'dark-mode' : '' }}">
