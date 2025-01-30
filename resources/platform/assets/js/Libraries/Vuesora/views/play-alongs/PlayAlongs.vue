@@ -81,7 +81,7 @@ import InputLabel from "@units/InputLabel/InputLabel.vue";
 import { bgColor, textColor } from "@constants/brands";
 import { useFilterValues } from "@hooks/useFilterValues";
 import { useUserStore } from '@stores/user.js';
-import { fetchAll, fetchPlayAlongsCount, contentStatusCompleted, contentStatusReset, fetchByRailContentIds } from 'musora-content-services';
+import { fetchAll, fetchPlayAlongsCount, contentStatusCompleted, contentStatusReset, fetchByRailContentIds, fetchAllFilterOptions } from 'musora-content-services';
 import { usePlatformStore } from "@stores/platform";
 import { storeToRefs } from "pinia/dist/pinia";
 import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
@@ -335,49 +335,45 @@ export default {
                 limit: this.limit,
                 searchTerm: this.searchTerm,
                 sort: this.sort,
-                includedFields: [],
+                includedFields: this.selectedFilters,
                 groupBy: "",
                 progressIds: undefined,
                 useDefaultFields: true,
                 customFields: [],
                 progress: "all"
             })
+
             //Count Patch
-            fetchPlayAlongsCount(brand).then(count => {
+            fetchPlayAlongsCount(this.brand).then(count => {
                 this.totalResults = count;
-            }).catch( error=> console.log('error fetching playalong count', error ) ) 
-            
-            this.content = data.entity
+            }).catch( error=> console.log('error fetching playalong count', error ) )
+
+            this.content = data.entity;
+
+            //Get Genre
+            const genreField = this.selectedFilters.find(field => field.startsWith('genre'));
+            const genre = genreField ? genreField.split(',')[1] : null;
+
+            //Get Filter Options
+            const filterOptions = await fetchAllFilterOptions(
+                this.brand, //brand
+                [ ...this.selectedFilters ], //filters array
+                genre, //style
+                "", //artist
+                'play-along', //contentType
+                this.searchTerm, //term
+                undefined, //progressIds
+                undefined, //coachIds
+            );
+
+            this.filterOptions = getFilterValues(filterOptions.meta.filterOptions);
+
             this.$nextTick(() => {
                 this.loading = false;
                 if (resetPlaylist) {
                     this.generateRandomPlaylist();
                 }
             });
-
-            // return ContentService.getContent({
-            //     ...this.filterQueryObject,
-            //     brand: this.brand,
-            //     included_types: ['play-along'],
-            //     statuses: ['published'],
-            //     include_future: 0,
-            //     only_from_my_list: this.showFavoritesOnly,
-            //     title: this.searchTerm,
-            // })
-            //     .then((response) => {
-            //         if (response) {
-            //             this.content = response.data.data;
-            //             this.page = response.data.meta.page;
-            //             this.totalResults = response.data.meta.totalResults;
-            //             this.filterOptions = getFilterValues(response.data.meta.filterOptions);
-            //             this.$nextTick(() => {
-            //                 this.loading = false;
-            //                 if (resetPlaylist) {
-            //                     this.generateRandomPlaylist();
-            //                 }
-            //             });
-            //         }
-            //     });
         },
         updateContent(resetPlaylist = false) {
             this.trackFilters();
