@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-nowrap tw-overflow-x-scroll tw-no-scrollbar challengeCarousel-container -tw-mr-[6px] 2xl:-tw-mr-[10px]" :class="`${sectionTitle}`" @touchend="emit('handleScrollEnd')">
+    <div class="tw-flex tw-flex-nowrap tw-overflow-x-scroll tw-no-scrollbar challengeCarousel-container -tw-mr-[6px] 2xl:-tw-mr-[10px]" :class="`${sectionTitle}`" @touchend="emit('handleScrollEnd')" @scroll="emit('stopAutoScroll')">
         <SkeletonChallengeCarousel v-if="isLoading" v-for="n in 2" :key="n" />
         <template v-else v-for="card in preLoadedContent">
             <div v-if="card.type === 'fill'" class="tw-w-[330px] lg:tw-w-1/2 tw-shrink-0"></div>
