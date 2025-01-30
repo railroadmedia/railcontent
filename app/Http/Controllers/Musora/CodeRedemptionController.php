@@ -89,6 +89,16 @@ class CodeRedemptionController extends BaseController
             ->with(['success' => 'Your code has been sent to your email!']);
     }
 
+    public function roland()
+    {
+        return view('pianote.sales.roland', ['redirectUrl' => get_musora_brand_base_url() . '/pianote']);
+    }
+
+    public function sonor()
+    {
+        return view('drumeo.sales.trials.sonor', ['redirectUrl' => get_musora_brand_base_url() . '/drumeo']);
+    }
+
     public function renderNewAccountRedeemPage(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
@@ -232,74 +242,108 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function sweetwaterRedeemNewDrumeo()
+    public function sweetwaterRedeemNewDrumeo(Request $request)
     {
-        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'drumeo']);
+        return view('musora.pages.redeem.redeem-page-sweetwater', [
+            'newAccount' => true,
+            'theme' => 'drumeo',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
-    public function sweetwaterRedeemExistingDrumeo()
+    public function sweetwaterRedeemExistingDrumeo(Request $request)
     {
-        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'drumeo']);
-    }
-
-    public function sweetwaterRedeemNewPianote()
-    {
-        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'pianote']);
-    }
-    public function sweetwaterRedeemExistingPianote()
-    {
-        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'pianote']);
-    }
-
-    public function sweetwaterRedeemNewGuitareo()
-    {
-        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'guitareo']);
-    }
-    public function sweetwaterRedeemExistingGuitareo()
-    {
-        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'guitareo']);
+        return view('musora.pages.redeem.redeem-page-sweetwater', [
+            'newAccount' => false,
+            'theme' => 'drumeo',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
 
-    public function sweetwaterRedeemNewSingeo()
+    public function sweetwaterRedeemNewPianote(Request $request)
     {
-        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'singeo']);
+        return view('musora.pages.redeem.redeem-page-sweetwater', [
+            'newAccount' => true,
+            'theme' => 'pianote',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
-    public function sweetwaterRedeemExistingSingeo()
+    public function sweetwaterRedeemExistingPianote(Request $request)
     {
-        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'singeo']);
-    }
-
-    public function sweetwaterRedeemNewMusora()
-    {
-        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'musora']);
-    }
-    public function sweetwaterRedeemExistingMusora()
-    {
-        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'musora']);
-    }
-
-    public function roland()
-    {
-        return view('pianote.sales.roland', ['redirectUrl' => get_musora_brand_base_url() . '/pianote']);
+        return view('musora.pages.redeem.redeem-page-sweetwater', [
+            'newAccount' => false,
+            'theme' => 'pianote',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
 
-    public function sonor()
+    public function sweetwaterRedeemNewGuitareo(Request $request)
     {
-        return view('drumeo.sales.trials.sonor', ['redirectUrl' => get_musora_brand_base_url() . '/drumeo']);
+        return view('musora.pages.redeem.redeem-page-sweetwater', [
+            'newAccount' => true,
+            'theme' => 'guitareo',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function sweetwaterRedeemExistingGuitareo(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', [
+            'newAccount' => false,
+            'theme' => 'guitareo',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
 
-    public function showPianoteRedeemPageForNewUsers()
+    public function sweetwaterRedeemNewSingeo(Request $request)
     {
-        return view(
-            'musora.pages.redeem.redeem-page-pianote',
-            ['newAccount' => true, 'redirectUrl' => get_musora_brand_base_url() . '/pianote']
-        );
+        return view('musora.pages.redeem.redeem-page-sweetwater', [
+            'newAccount' => true,
+            'theme' => 'singeo',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function sweetwaterRedeemExistingSingeo(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', [
+            'newAccount' => false,
+            'theme' => 'singeo',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
 
-    public function showPianoteRedeemPageForExistingUsers()
+    public function sweetwaterRedeemNewMusora(Request $request)
     {
-        return view(
-            'musora.pages.redeem.redeem-page-pianote',
-            ['newAccount' => false, 'redirectUrl' => get_musora_brand_base_url() . '/pianote']
-        );
+        return view('musora.pages.redeem.redeem-page-sweetwater', [
+            'newAccount' => true,
+            'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function sweetwaterRedeemExistingMusora(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', [
+            'newAccount' => false,
+            'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function showPianoteRedeemPageForNewUsers(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page-pianote', [
+            'newAccount' => true,
+            'redirectUrl' => get_musora_brand_base_url() . '/pianote',
+            'theme' => 'pianote',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function showPianoteRedeemPageForExistingUsers(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page-pianote', [
+            'newAccount' => false,
+            'redirectUrl' => get_musora_brand_base_url() . '/pianote',
+            'theme' => 'pianote',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
 }
