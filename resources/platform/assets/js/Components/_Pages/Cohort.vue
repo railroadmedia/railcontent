@@ -181,11 +181,11 @@
     </section>
 
 
-    <section id="final" v-if="cohort['is_product'] && !isCustom" :class="`tw-bg-${brand} tw-py-20 lg:tw-py-32`">
-        <div class="tw-max-w-6xl tw-mx-auto lg:tw-px-10 tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-px-4 lg:tw-px-0">
+    <!-- <section id="final" v-if="cohort['is_product'] && !isCustom" :class="`tw-bg-${brand} tw-py-20 lg:tw-py-32`">
+        <div class="tw-max-w-6xl tw-mx-auto tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-w-full lg:tw-w-1/2 lg:tw-order-1 tw-mb-4 lg:tw-mb-0">
                 <div class="tw-w-full tw-aspect-video tw-bg-black tw-rounded-xl tw-overflow-hidden tw-relative">
-                    <img :src="`https://www.musora.com/cdn-cgi/image/width=600,quality=95/${cohort['product_image']}`" class="tw-transition-opacity tw-opacity-0 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-object-cover" onload="this.classList.remove('tw-opacity-0')" />
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=600,quality=95/${cohort['product_image']}`" class="tw-transition-opacity tw-opacity-0 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-object-cover" onload="this.classList.remove('tw-opacity-0')" alt="Promo offer"/>
                 </div>
             </div>
             <div class="lg:tw-w-1/2 lg:tw-pr-4 tw-text-white tw-text-center md:tw-text-left">
@@ -207,12 +207,11 @@
                 </template>
             </div>
         </div>
-    </section>
+    </section> -->
 
-    <!--  Dropdown  -->
     <section class="tw-bg-white tw-py-10">
         <div class="tw-max-w-4xl tw-mx-auto tw-pl-6 tw-pr-4">
-            <div v-if="!isSolo" class="tw-text-center">
+            <div v-if="!isSolo && !cohort['is_product']" class="tw-text-center">
                 <!--  Logo  -->
                 <img class="tw-h-20 sm:tw-h-28 lg:tw-h-28 tw-mb-4 tw-inline-block " alt="header logo" :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" />
                 <!--  Bottom title  -->
@@ -230,72 +229,137 @@
                 <!--  Bottom description  -->
                 <p class="tw-font-bold tw-mt-4 tw-mb-6">{{ cohort['bottom_description'] }}</p>
             </div>
+
             <template v-if="cohort['is_product'] && !isSolo">
-                <div v-if="!isEnrolled && !hasEnded" >
-                    <div class="md:tw-flex md:tw-justify-center md:tw-gap-6 tw-px-4 md:tw-px-0 tw-mb-4">
-                        <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-{{ $brand }} tw-text-center tw-mb-4 md:tw-mb-0 tw-mx-auto md:tw-mx-0">
-                            <h1 class="lg:tw-text-[34px] tw-font-extrabold">Course Only</h1>
-                            <h2 class="lg:tw-text-[26px] tw-font-extrabold">Free</h2>
-                            <i>Included in your membership.</i>
-                            <button :class="`tw-btn-primary tw-bg-${brand} tw-my-5 hover:tw-bg-${brand}-600`" @click="enroll()">Enroll Now</button>
-                            <p class="tw-text-xs tw-leading-relaxed">{{ cohort['course_description'] }}</p>
-                        </div>
-                        <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-[#FFAE00] tw-text-center tw-relative tw-mx-auto md:tw-mx-0">
-                            <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
-                                <div class="tw-uppercase tw-bg-[#FFAE00] tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold">{{ cohort['get_product_badge'] }}</div>
+                    <h1 class="tw-font-extrabold tw-text-center tw-px-4 lg:tw-px-28 tw-leading-tight">
+                        {{ cohort['product_description_header'] }}
+                    </h1>
+                    <p class="tw-text-center tw-mt-3 tw-mb-7 lg:tw-mb-10 tw-px-4 lg:tw-px-10">
+                        {{ cohort['product_description_body'] }}
+                    </p>
+
+                    <div v-if="!isEnrolled && !hasEnded">
+                        <div class="md:tw-flex md:tw-justify-center md:tw-gap-4 tw-px-4 md:tw-px-0 tw-mb-4 tw-space-y-4 md:tw-space-y-0">
+
+                            <!-- Course Only Card -->
+                            <div class="tw-w-full tw-max-w-[340px] tw-rounded-2xl tw-bg-white tw-border-2 tw-border-[#2A2F34] tw-text-center tw-mx-auto md:tw-mx-0 tw-relative tw-flex tw-flex-col tw-h-full">
+                                <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
+                                    <div class="tw-uppercase tw-bg-[#2A2F34] tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold tw-text-white">
+                                        Course Only
+                                    </div>
+                                </div>
+                                <div class="tw-px-5 md:tw-px-6 tw-py-8 md:tw-py-10 tw-flex tw-flex-col tw-h-full">
+                                    <h2 class="tw-text-2xl tw-font-extrabold tw-leading-tight tw-mb-2">
+                                        {{ cohort['title'] }}
+                                    </h2>
+
+                                    <img class="tw-h-28 lg:tw-h-36 tw-mx-auto tw-mb-3"
+                                        alt="course thumbnail"
+                                        :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`"
+                                    />
+
+                                    <h3 class="tw-leading-tight tw-font-extrabold">
+                                            <strong>FREE</strong>
+                                    </h3>
+                                    <p v-if="cohort['product_original_price'] > cohort['product_sale_price']"
+                                        class="tw-text-sm tw-italic">
+                                        Included in your membership.
+                                    </p>
+
+                                    <div class="tw-my-3">
+                                        <button v-if="showEnrollNow" id="cardEnrollNow" @click="enroll()"
+                                            class="tw-btn-primary tw-bg-[#2A2F34] tw-w-full tw-max-w-[230px] hover:tw-bg-[#2A2F34]/60 tw-transition-opacity tw-duration-300">
+                                            Enroll Now
+                                        </button>
+                                        <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-max-w-[230px] tw-text-white">
+                                            Enrollment Closed
+                                        </span>
+                                    </div>
+                                    <p class="tw-text-center tw-text-xs">{{ cohort['course_description'] }}</p>
+                                </div>
                             </div>
-                            <h1 class="lg:tw-text-[34px] tw-font-extrabold tw-leading-tight">Course + <br /> {{ cohort['product_name'] }}</h1>
-                            <h2 class="lg:tw-text-[26px]"><s class="tw-text-[rgba(0,0,0,0.6)]">${{ cohort['product_original_price'] }}</s> <span class="tw-font-extrabold">${{ cohort['product_sale_price'] }}</span></h2>
-                            <i>Complete purchase on next step.</i>
-                            <button
-                                :class="`tw-btn-primary tw-bg-${brand} tw-my-5 tw-px-8 md:tw-px-16 hover:tw-bg-${brand}-600`"
-                                @click="enroll(true)"
-                            >
-                                Enroll + Get the deal
-                            </button>
-                            <p class="tw-text-xs tw-leading-relaxed">{{ cohort['course_product_description'] }}</p>
+
+                            <!-- Course + Product Card -->
+                            <div :class="`tw-w-full tw-max-w-[340px] tw-rounded-2xl tw-bg-white tw-border-2 tw-border-${brand} tw-text-center tw-relative tw-mx-auto md:tw-mx-0 tw-flex tw-flex-col tw-h-full`">
+                                <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
+                                    <div v-if="cohort['get_product_badge']" :class="`tw-uppercase tw-bg-${brand} tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold tw-text-white`">
+                                        {{ cohort['get_product_badge'] }}
+                                    </div>
+                                </div>
+
+                                <div class="tw-px-5 md:tw-px-6 tw-py-8 md:tw-py-10 tw-flex tw-flex-col tw-h-full">
+                                    <h2 class="tw-text-2xl tw-font-extrabold tw-leading-tight tw-mb-2">
+                                        {{ cohort['product_name'] }}
+                                    </h2>
+
+                                    <img class="tw-h-28 lg:tw-h-36 tw-mx-auto tw-mb-3"
+                                        alt="product image"
+                                        :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['product_image'] }`"
+                                    />
+
+                                    <h3 class="tw-leading-tight tw-font-extrabold">
+                                        <template v-if="cohort['product_original_price'] > cohort['product_sale_price']">
+                                            <s class="tw-text-[#2A2F3480] tw-opacity-50 tw-mr-1">
+                                                ${{ cohort['product_original_price'] }}
+                                            </s>
+                                            <strong>${{ cohort['product_sale_price'] }}</strong>
+                                        </template>
+                                        <template v-else>
+                                            <strong>${{ cohort['product_original_price'] }}</strong>
+                                        </template>
+                                    </h3>
+                                    <p v-if="cohort['product_original_price'] > cohort['product_sale_price']"
+                                        class="tw-text-sm tw-italic">
+                                        Save {{ Math.round(100 - (100 * (cohort['product_sale_price'] / cohort['product_original_price']))) }}%
+                                    </p>
+
+                                    <div class="tw-my-3">
+                                        <a :href="cohort['product_cart_link']" id="getTheDeal"
+                                            :class="`tw-btn-primary tw-bg-${brand} tw-w-full tw-max-w-[230px] hover:tw-bg-${brand}-600 tw-transition-opacity tw-duration-300`">
+                                            Get the deal
+                                        </a>
+                                    </div>
+                                    <p class="tw-text-center tw-text-xs">{{ cohort['course_product_description'] }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </template>
+                </template>
 
-            <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
-                <!--  Buttons-->
-
+            <div v-if="!cohort['is_product']" class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
+                <!-- Buttons -->
                 <button v-if="showGetNotified && !isNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">
                     <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
                     Get Notified
                 </button>
                 <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">Notification requested!</span>
-                <span v-else-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
+                <span v-else-if="isEnrolled" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                 <template v-else>
                     <button v-if="showEnrollNow" id="bottomEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
                     <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
                 </template>
                 <a v-if="cohort['conversation_url'] && isEnrolled" x-cloak x-show="isEnrolled" :href="cohort['conversation_url']" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
             </div>
-
+            
             <!-- Cart link -->
-            <div v-if="cohort['is_product'] && isEnrolled && !hasEnded" class="tw-text-center tw-mb-3"><a :href="cohort['product_cart_link']" target="_blank"  class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a></div>
-
+            <div v-if="cohort['is_product'] && isEnrolled && !hasEnded" class="tw-text-center tw-mb-3">
+                <img class="tw-h-28 lg:tw-h-36 tw-mx-auto tw-mb-6" alt="course thumbnail" :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" />
+                <a :href="cohort['product_cart_link']" target="_blank" class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a>
+            </div>
+            
             <div v-if="isSolo && !isEnrolled.value" class="tw-text-center tw-mb-2">
                 <button id="noGuideText" @click="handleNoGuide" class="tw-text-black tw-italic tw-underline tw-font-bold tw-text-sm">I don’t want the guided experience.</button>
             </div>
-
-            <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
-                <img
-                    class="tw-h-7 sm:tw-mb-1 lg:tw-mb-0 tw-mr-1 tw-transition-opacity tw-opacity-0"
-                    src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
-                    alt="joined student profiles"
-                    loading="lazy"
-                    onload="this.classList.remove('tw-opacity-0')"
-                />
+            
+            <div v-if="!cohort['is_product']" class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
+                <img class="tw-h-7 sm:tw-mb-1 lg:tw-mb-0 tw-mr-1 tw-transition-opacity tw-opacity-0" src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('tw-opacity-0')" />
                 <p class="tw-text-xs tw-align-middle">
                     Join {{ nPackOwners }} {{ joinText }}
                     who have already registered.
                 </p>
             </div>
-
+    
+            <!--  Dropdown  -->
             <h3 class="tw-font-extrabold tw-text-center tw-mb-7 tw-mt-10">{{ cohort['dropdown_title'] }}</h3>
             <CohortDropdown
                 v-if="dropdowns.length > 0"
@@ -377,6 +441,7 @@ const props = defineProps({
         default: false,
     },
 })
+
 
 const token = inject('csrf_token');
 
@@ -601,4 +666,5 @@ onUnmounted(() => {
     clearInterval(countdown);
     clearInterval(watchEnrollmentOpen);
 })
+
 </script>

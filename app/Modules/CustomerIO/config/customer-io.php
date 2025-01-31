@@ -801,6 +801,21 @@ return [
                     'email' => 'Email'
                 ],
             ],
+            'Getting Started On The Piano V4' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_getting-started V3_with_bonus',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
             'Sight Reading Made Simple' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string'

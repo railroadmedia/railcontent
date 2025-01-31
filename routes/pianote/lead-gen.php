@@ -103,6 +103,7 @@ Route::domain('{pianoteDomain}')
                     ]);
             }
         );
+        Route::get('/getting-started-on-the-piano-with-bonus', [LeadGenController::class, 'gettingStartedAlt']);
         Route::get('/sight-reading-made-simple', [LeadGenController::class, 'sightReading']);
         Route::prefix('learn-songs')->group(
             function () {

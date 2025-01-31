@@ -222,17 +222,19 @@ class ChallengesService
         }
         // unsubscribe user from notifications when they unlock a challenge
         if ($isSolo && !$isLocked) {
-            $this->updateNotification($challengeId, User::whereId($userId), UserNotificationKeys::SOLO_NOTIFICATION_KEY, enable: false);
+            $this->updateNotification($challengeId, User::whereId($userId)->first(), UserNotificationKeys::SOLO_NOTIFICATION_KEY, enable: false);
             $data['solo_notification_to_be_processed'] = 0;
         }
-        $count = ChallengeUserProgress::upsert(
-            [
+        $allData = [
             'content_id' => $challengeId,
             'user_id' => $userId,
-                ...$data
-        ],
+            ... $data
+        ];
+        $keysToUpdate = array_keys($data);
+        $updated = ChallengeUserProgress::upsert(
+            $allData,
             ['content_id', 'user_id'],
-            array_keys($data),
+            $keysToUpdate
         );
         $challengeUserProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
         return $challengeUserProgress;
