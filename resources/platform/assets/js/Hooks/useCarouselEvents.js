@@ -56,10 +56,9 @@ export default function useCarouselEvents (originalData, updatedData, page, card
 
         page.value++;
 
-        scrollHorizontally('left');
+        scrollHorizontally();
 
         if(autoScroll){
-            clearAutoScroll();
             activateAutoScroll();
         }
     }
@@ -78,10 +77,9 @@ export default function useCarouselEvents (originalData, updatedData, page, card
             startIndex.value = 0;
         }
 
-        scrollHorizontally('right');
+        scrollHorizontally();
 
         if(autoScroll){
-            clearAutoScroll();
             activateAutoScroll();
         }
     }
@@ -180,7 +178,7 @@ export default function useCarouselEvents (originalData, updatedData, page, card
         }
     }
 
-    const scrollHorizontally = (direction) => {
+    const scrollHorizontally = () => {
         const container = document.getElementsByClassName(`${sectionTitle.value}-container`)[0];
 
         let card = container.getElementsByClassName('catalogue-card')[0];
