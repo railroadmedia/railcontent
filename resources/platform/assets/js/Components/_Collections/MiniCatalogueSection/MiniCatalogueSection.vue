@@ -208,5 +208,5 @@ watch(
     },
 )
 
-const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, removeItem, reFetchData, resetPagination, toStartIndex, activateAutoScroll, clearAutoScroll, handleScrollEnd, reformatData } = useCarouselEvents(initialData, data, page, cardNum, sectionTitle, props.autoScroll, props.isMiniView, isChallengeCarousel.value);
+const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, removeItem, reFetchData, resetPagination, toStartIndex, activateAutoScroll, clearAutoScroll, handleScrollEnd, reformatData } = useCarouselEvents(initialData, data, page, cardNum, sectionTitle, props.autoScroll, props.isMiniView, isChallengeCarousel);
 </script>
