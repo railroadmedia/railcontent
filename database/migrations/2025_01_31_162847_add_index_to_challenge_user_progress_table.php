@@ -13,14 +13,18 @@ return new class extends Migration
     public function up(): void
     {
         $index = self::INDEX_NAME;
-        Schema::connection(config('user_management_system.database_connection_name'))
-            ->table(
-                'challenges_user_progress',
-                function ($table) use ($index) {
-                    /** @var $table \Illuminate\Database\Schema\Blueprint */
-                    $table->dropIndex($index);
-                }
-            );
+        try {
+            Schema::connection(config('user_management_system.database_connection_name'))
+                ->table(
+                    'challenges_user_progress',
+                    function ($table) use ($index) {
+                        /** @var $table \Illuminate\Database\Schema\Blueprint */
+                        $table->dropIndex($index);
+                    }
+                );
+        } catch (Exception $ex) {
+            // index already dropped for some reason. This was happening during deployment
+        }
         Schema::table('challenges_user_progress', function (Blueprint $table) {
             $table->unique(['user_id', 'content_id'], self::INDEX_NAME);
         });
@@ -32,14 +36,18 @@ return new class extends Migration
     public function down(): void
     {
         $index = self::INDEX_NAME;
-        Schema::connection(config('user_management_system.database_connection_name'))
-            ->table(
-                'challenges_user_progress',
-                function ($table) use ($index) {
-                    /** @var $table \Illuminate\Database\Schema\Blueprint */
-                    $table->dropIndex($index);
-                }
-            );
+        try {
+            Schema::connection(config('user_management_system.database_connection_name'))
+                ->table(
+                    'challenges_user_progress',
+                    function ($table) use ($index) {
+                        /** @var $table \Illuminate\Database\Schema\Blueprint */
+                        $table->dropIndex($index);
+                    }
+                );
+        } catch (Exception $ex) {
+            // index already dropped for some reason. This was happening during deployment
+        }
         Schema::table('challenges_user_progress', function (Blueprint $table) {
             $table->index(['user_id', 'content_id'], self::INDEX_NAME);
         });
