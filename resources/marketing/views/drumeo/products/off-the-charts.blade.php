@@ -261,7 +261,7 @@
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight"><strong class="text-drumeo">Don’t just keep time.</strong></h2>
             <h3 class="leading-tight">Be the drummer everybody<br class="sm:hidden"> wants in their band.</h3>
-            <video class="w-full rounded-xl overflow-hidden max-w-3xl mx-auto my-4" type="video/mp4" autoplay="" loop="" playsinline="" muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/off-the-charts/pencil3.mp4"></video>
+            <video class="w-full rounded-xl overflow-hidden max-w-3xl mx-auto my-4" type="video/mp4" autoplay="" loop="" playsinline="" muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/off-the-charts/pencil2.mp4"></video>
             <p class="leading-normal mb-7 sm:mb-12 max-w-3xl">You don’t learn songs on the drums through chords or keys—you need kick patterns, ghost notes, fills, and the tiny cues that keep the band on track. Miss one, and everything falls apart. In Off The Charts, you’ll learn to capture these details in your own shortform charts. This one skill will help you learn thousands of songs faster and become an asset to any live band.</p>
 
             <h2 class="leading-tight"><strong>Here’s everything<br class="sm:hidden"> you’ll learn…</strong></h2>
@@ -328,7 +328,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-5xl mx-auto mb-14 lg:mb-16">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
-                <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
+                <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:mt-12 sm:-mr-8">
                     <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/coach.webp">
@@ -454,8 +454,8 @@
                 'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/card-bonus.png',
                 'secondImageHeight' => 'h-24 sm:h-40',
                 'secondDealSub' => "",
-                'secondDealPrice' => 240,
-                'secondDealDiscount' => 200,
+                'secondDealPrice' => 200,
+                'secondDealDiscount' => 240,
                 "secondDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[off-the-charts-workbook-bundle]=1&promo-code=charting-shipping,off-the-charts-bundle,special&locked=true",
                 'secondExtraBonuses' => [
                     '<i class="fa-solid fa-check pr-1"></i> <strong class="">1</strong> Year Of Unlimited Drum Lessons',
