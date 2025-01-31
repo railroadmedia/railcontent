@@ -100,7 +100,7 @@
 
                     <VideoButtons v-if="!isWorkout" :prev-lesson-url="nextPreviousLessons?.prevLesson?.web_url_path"
                         :next-lesson-url="nextLessonUrl" :brand="brand"
-                        prev-label="Previous Lesson" next-label="Next Lesson" :qaVideo="qaVideo" />
+                        prev-label="Previous Lesson" next-label="Next Lesson" />
 
                     <ContentProgress v-if="!noAccess && !isWorkout && !isChallenge" :brand="brand"
                         :is-completed="isCompleted" :progress="progress_percent" :xp-amount="videoData?.xp"
@@ -167,7 +167,14 @@
                     :additional-params="`${getBrandSpecificParams()}&layout=3`"
                     :soundslice-slug="videoData?.soundslice_slug"
                     :contentId="videoData?.id"
-                    :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
+                    :start-time="chapterStartTime"
+                    :end-time="chapterEndTime"
+                    :loop="startLooping"
+                    :is-challenge="isChallenge"
+                    :is-completed="isCompleted"
+                    @complete-lesson="completeChallengeLessonOnLoop"
+                    @on-challenge-lesson-complete="completeChallengeLesson"
+                >
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="soundsliceTitle || videoData.title" :disable-next="true"
                             :disable-prev="true" @onClose="handleCloseSoundslice" />
@@ -269,6 +276,7 @@ const isCompleted = ref(false);
 const relatedLessons = ref([]);
 const nextPreviousLessons = ref(null);
 const completionData = ref(null);
+const activateCompletion = ref(false);
 
 //Reactive
 const state = reactive({
@@ -385,6 +393,11 @@ const handleCloseSoundslice = () => {
     openSoundslice.value = false;
     startLooping.value = false;
 
+    if(isChallenge.value && isCompleted.value && activateCompletion.value){
+        completeChallengeLesson();
+        activateCompletion.value = false;
+    }
+
     document.body.classList.remove('no-scroll', 'dim-sidebar');
 
     Helpscout.showWidget();
@@ -412,8 +425,9 @@ const isChallenge = computed(() => {
     return props.lessonType === 'challenge' || props.lessonType === 'challenges';
 })
 
-const toggleCompleteContent = () => {
-    isCompleted.value = !isCompleted.value;
+const completeChallengeLessonOnLoop = () => {
+    isCompleted.value = true;
+    activateCompletion.value = true;
 }
 
 const likeContent = () => {
@@ -429,7 +443,6 @@ const likeContent = () => {
 const completeChallengeLesson = async () => {
     try{
         const complete = await postChallengesCompleteLesson(videoData.value.id);
-        console.log('complete challenge', complete)
         isCompleted.value = !isCompleted.value;
 
         if(complete.show_modal){
@@ -442,7 +455,6 @@ const completeChallengeLesson = async () => {
             text: 'Woops! Something wrong happened, please try again later.'
         })
     }
-
 }
 
 const closeChallengeCompletionModal = () => {

@@ -46,10 +46,18 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    isChallenge: {
+        type: Boolean,
+        default: false,
+    },
+    isCompleted: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 //Emits
-const emit = defineEmits(['onAudioEnd']);
+const emit = defineEmits(['onAudioEnd', 'completeLesson', 'onChallengeLessonComplete']);
 
 const scoreOrSlice = () => {
     if (/^\d+$/.test(props.soundsliceSlug)) {
@@ -70,8 +78,10 @@ const ssURL = ref(`https://www.soundslice.com/${scoreOrSlice()}/${props.soundsli
 const currentTimeRef = ref(0);
 const seekingStart = ref(false);
 const isPlayingEventDisabled = ref(false);
+const hasCompleted = ref(false);
+const trackingInterval = ref(null);
 
-//Static 
+//Static
 let progressTracker = new ProgressTracker(); //????
 let heartbeatTimer = 0;
 let syncInterval = null;
@@ -87,6 +97,10 @@ const uniqueSettings = reactive({
     audioSource: null,
 });
 
+const activateTracker = computed(() => {
+    return props.isChallenge && !props.isCompleted;
+})
+
 // computed
 
 const trackingPayload = () => {
@@ -100,7 +114,7 @@ const trackingPayload = () => {
     };
 };
 
-/**********************  
+/**********************
     Methods
 **********************/
 const handlePlay = (event) => {
@@ -211,7 +225,7 @@ const saveLayout = (val) => {
 const saveZoom = debounce(function (val) {
     //localStorage.setItem("ssZoom", val);
 }, 250);
-//SET Audio Source 
+//SET Audio Source
 const saveAudioSource = (val) => {
     //localStorage.setItem(`${ props.soundsliceSlug }_audioSource`, val);
 };
@@ -278,6 +292,20 @@ const handleSoundsliceEvent = (event) => {
                 break
             //UNIQUE SETTINGS
             case 'ssCurrentTime':
+                const currentTime = Math.floor(cmd.arg);
+
+                if(activateTracker.value){
+                    const currentTime = Math.floor(cmd.arg);
+                    if(!hasCompleted.value && currentTime >= Math.floor(0.985 * props.endTime)){
+                        hasCompleted.value = true;
+
+                        if(props.loop){
+                            emit('completeLesson');
+                        } else {
+                            emit('onChallengeLessonComplete');
+                        }
+                    }
+                }
                 saveCurrentTime(Math.floor(cmd.arg));
                 // We make sure we track the exact pause time at any speed and that the pause event is only sent once
                 if (!isPlaying.value && syncInterval !== null && Math.floor(cmd.arg) < endTime.value) {
@@ -292,10 +320,14 @@ const handleSoundsliceEvent = (event) => {
                 isPlaying.value = true;
                 saveCurrentTime(Math.floor(cmd.arg));
                 handlePlay(event);
+
+                if(activateTracker.value) startTrackingTime();
                 break;
             case 'ssPause':
                 isPlaying.value = false;
+
                 handlePause();
+                clearInterval(trackingInterval.value);
                 break;
             case 'ssAudioEnd':
                 const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
@@ -336,7 +368,13 @@ const handleVisibilityChange = () => {
     }
 };
 
-/**********************  
+const startTrackingTime = () => {
+    trackingInterval.value = setInterval(() => {
+        ssiframe.value.contentWindow.postMessage('{"method": "getCurrentTime"}', 'https://www.soundslice.com');
+    }, 1000)
+}
+
+/**********************
     Lifecycle Hooks
 **********************/
 onBeforeMount(() => {
@@ -395,6 +433,8 @@ onBeforeUnmount(() => {
     window.removeEventListener('visibilitychange', () => sendProgressTracking);
     window.removeEventListener('message', handleSoundsliceEvent);
     document.removeEventListener('keyup', spacebarToPlayPause);
+    clearInterval(trackingInterval.value);
+    clearInterval(syncInterval)
 });
 </script>
 
