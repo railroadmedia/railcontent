@@ -253,8 +253,10 @@
                 </div>
             </div>
         </div>
-{{--        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: radial-gradient(rgba(24,25,27,0.8), transparent);"></div>--}}
-        <img class="object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/header-bg.jpg">
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0,0,0,0.8);"></div>
+{{--        <img class="object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/header-bg.jpg">--}}
+         <video class="object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
+            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/off-the-charts/header.mp4"></video>
     </header>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
