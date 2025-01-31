@@ -356,14 +356,26 @@ class ContentProgressEventListener
              * NOTE: TP-623: track minutes as well as we run the migration, so users won't lose their progress
              * Once the migration is run (as many times as we want) we can safely remove this
              */
+            /*$userBrandMinutesPracticed = $user->brand_minutes_practiced;
+            $initialValue = $userBrandMinutesPracticed[$content->brand] ?? 0;
+            $min = ($initialValue + round($mediaPlaybackSession->secondsWatchedSinceLastTrack / 60, 0));
+            $userBrandMinutesPracticed[$content->brand] = $min;
+            $user->brand_minutes_practiced = $userBrandMinutesPracticed;
+
+            $userBrandSecondsPracticed = $user->brand_seconds_practiced;
+            $initialValue = $userBrandSecondsPracticed[$content->brand] ?? ($min * 60);
+            $userBrandSecondsPracticed[$content->brand] = $initialValue + $mediaPlaybackSession->secondsWatchedSinceLastTrack;
+            $user->brand_seconds_practiced = $userBrandSecondsPracticed;
+            $user->save();*/
+
             $userBrandSecondsPracticed = $user->brand_seconds_practiced;
             $userBrandMinutesPracticed = $user->brand_minutes_practiced;
 
-            $initialSecondsValue = $userBrandSecondsPracticed[$content->brand] ?? ($userBrandMinutesPracticed[$content->brand] * 60 ?? 0);
+            $initialSecondsValue = $userBrandSecondsPracticed[$content->brand] ?? 0;
             $userBrandSecondsPracticed[$content->brand] = $initialSecondsValue + $mediaPlaybackSession->secondsWatchedSinceLastTrack;
             $user->brand_seconds_practiced = $userBrandSecondsPracticed;
 
-            $min = round($userBrandSecondsPracticed[$content->brand] / 60, 0);
+            $min = round(($userBrandSecondsPracticed[$content->brand] / 60), 0);
             $userBrandMinutesPracticed[$content->brand] = $min;
             $user->brand_minutes_practiced = $userBrandMinutesPracticed;
             $user->save();
