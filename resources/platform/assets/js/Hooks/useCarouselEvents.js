@@ -59,6 +59,7 @@ export default function useCarouselEvents (originalData, updatedData, page, card
         scrollHorizontally();
 
         if(autoScroll){
+            clearAutoScroll();
             activateAutoScroll();
         }
     }
@@ -80,6 +81,7 @@ export default function useCarouselEvents (originalData, updatedData, page, card
         scrollHorizontally();
 
         if(autoScroll){
+            clearAutoScroll();
             activateAutoScroll();
         }
     }
