@@ -125,25 +125,25 @@
 {{--                <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>--}}
 {{--            </a>--}}
 {{--        @endif--}}
-        <div class="flex flex-wrap sm:flex-nowrap gap-4">
-            <div class="w-full sm:w-1/2">
-                <a href="https://www.drumeo.com/beat/giveaways" class="relative bg-cover bg-center group block rounded-2xl w-full"
-                    style="padding-bottom: 62%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaway-ssos-m.webp');">
-                    <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>
-                </a>
-            </div>
-            <div class="w-full sm:w-1/2">
-                <a href="https://www.drumeo.com/beat/giveaway" class="relative bg-cover bg-top group block rounded-2xl w-full overflow-hidden"
-                    style="padding-bottom: 62%;background-image:url('https://drumeoblog.s3.amazonaws.com/beat/wp-content/uploads/2025/01/20101735/Giveaway-graphicD.jpg');">
-                    <div class="absolute inset-0 z-0" style="background:rgba(0,0,0,0.45);"></div>
-                    <div class="absolute top-1/2 left-1/2 z-20 transform -translate-y-1/2 -translate-x-1/2 text-center">
-                        <img class="h-24 lg:h-32" src="https://www.musora.com/cdn-cgi/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png">
-                        <h2 class="font-bebas mt-2 leading-none" style="color:#fbd35e;">GIVEAWAY</h2>
-                    </div>
-                    <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>
-                </a>
-            </div>
-        </div>
+{{--        <div class="flex flex-wrap sm:flex-nowrap gap-4">--}}
+{{--            <div class="w-full sm:w-1/2">--}}
+{{--                <a href="https://www.drumeo.com/beat/giveaways" class="relative bg-cover bg-center group block rounded-2xl w-full"--}}
+{{--                    style="padding-bottom: 62%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2400x0/filters:quality(95)/marketing/musora/lead-gen/youtube/giveaway-ssos-m.webp');">--}}
+{{--                    <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--            <div class="w-full sm:w-1/2">--}}
+{{--                <a href="https://www.drumeo.com/beat/giveaway" class="relative bg-cover bg-top group block rounded-2xl w-full overflow-hidden"--}}
+{{--                    style="padding-bottom: 62%;background-image:url('https://drumeoblog.s3.amazonaws.com/beat/wp-content/uploads/2025/01/20101735/Giveaway-graphicD.jpg');">--}}
+{{--                    <div class="absolute inset-0 z-0" style="background:rgba(0,0,0,0.45);"></div>--}}
+{{--                    <div class="absolute top-1/2 left-1/2 z-20 transform -translate-y-1/2 -translate-x-1/2 text-center">--}}
+{{--                        <img class="h-24 lg:h-32" src="https://www.musora.com/cdn-cgi/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png">--}}
+{{--                        <h2 class="font-bebas mt-2 leading-none" style="color:#fbd35e;">GIVEAWAY</h2>--}}
+{{--                    </div>--}}
+{{--                    <i class="fa-regular fa-arrow-up-right absolute mx-4 sm:mx-7 my-2 sm:my-4 top-0 right-0 z-10 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2" aria-hidden="true"></i>--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
 
         <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold mt-10 md:mt-16 mb-7">Free Video Lessons</h5>
