@@ -248,7 +248,7 @@
                     <div class="sm:w-5/12 join smaller outline sm:hidden inline-block"   @click="trailerM = true;" ><i class="fas fa-play"></i> &nbsp;Watch The Trailer</div>
                     <br class="sm:hidden">
                     @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
-                        <a class="mt-3 sm:mt-0 w-5/12 join smaller blue" href="/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1">Get Started</a>
+                        <a class="mt-3 sm:mt-0 w-5/12 join smaller blue anchor-slide" href="#customize-anchor">Get Started</a>
                     @endif
                 </div>
             </div>
@@ -426,7 +426,7 @@
             </div>
         </div>
     </section>
-    <div id="final" class="anchor"></div>
+    <div id="customize-anchor" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#EFF7FF;">
         <div class="container max-w-3xl mx-auto relative z-50" style="background: #eff7ff;">
             <h2 class="leading-tight mb-4"><strong><span class="text-drumeo">Quickly learn</span><br class="sm:hidden"> any song, any time.</strong></h2>
