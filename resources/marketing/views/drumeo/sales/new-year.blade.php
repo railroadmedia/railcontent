@@ -87,7 +87,7 @@
                     '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 90-Day Guarantee',
             ],
         ])
-                <p class="text-sm mb-7">
+                <p class="text-sm my-7">
                     <em>Need drums too?
                         <a class="underline" href="/drumshop/kit">
                             Click here to grab the<br class="sm:hidden"> Drumeo Nitro Max E-Kit + 1 year of lessons.

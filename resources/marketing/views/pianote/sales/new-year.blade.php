@@ -91,7 +91,7 @@
                     '<i class="fa-solid fa-check pr-1 text-pianote"></i> 90-Day Guarantee',
             ],
         ])
-                <p class="text-sm mb-7">
+                <p class="text-sm my-7">
                     <em>Need a piano?
                         <a class="underline" href="/shop/prima">Get the Keyboard Bundle</a>
                     </em>

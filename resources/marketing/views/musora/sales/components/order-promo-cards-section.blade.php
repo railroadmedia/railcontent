@@ -1,4 +1,4 @@
-<div class="flex flex-wrap lg:flex-nowrap items-start justify-center 2-full mb-5 sm:mb-10 mx-auto">
+<div class="flex flex-wrap lg:flex-nowrap items-start justify-center 2-full mx-auto">
     <div class="w-full md:w-1/2 lg:w-full md:order-1 max-w-md lg:px-1 px-1 relative">
         @if(!empty($topBadge))
             <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-musora text-black font-black tracking-widest">{{$topBadge}}</p>
@@ -6,6 +6,9 @@
         <a href="{{$secondDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 border-musora bg-white">
             <div class="px-3 py-6 md:py-7">
                 <h4 class="leading-tight mb-2"><strong>{{$secondDeal}}</strong></h4>
+                @if(!empty($secondSubDeal))
+                    <p class="text-sm leading-tight mb-6"><em>{{$secondSubDeal}}</em></p>
+                @endif
                 <img
                     class="{{$secondImageHeight}} rounded-md transition-opacity opacity-0"
                     src="{{ $secondDealImage }}"
@@ -33,6 +36,9 @@
         <a href="{{$firstDealLink}}" class="bg-white text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif @if(!empty($topBadge)) md:mt-7 @endif">
             <div class="px-3 py-6 md:py-7" style="border-bottom: 1px solid white">
                 <h4 class="leading-tight mb-2"><strong>{{$firstDeal}}</strong></h4>
+                @if(!empty($firstSubDeal))
+                    <p class="text-sm leading-tight mb-6"><em>{{$firstSubDeal}}</em></p>
+                @endif
                 <img
                     class="{{$firstImageHeight}} rounded-md transition-opacity opacity-0"
                     src="{{ $firstDealImage }}"
@@ -50,7 +56,7 @@
                 <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] {{ $theme }}" role="button" tabindex="0" aria-label="{{ $buttonText }}">{{$buttonText}}</div>
             </div>
             @if(!empty($firstExtraBonuses))
-                <div class="px-4 sm:px-4 lg:px-6 pb-7">
+                <div class="px-4 sm:px-4 lg:px-6 pb-7 inline-block w-auto mx-auto">
                     @foreach($firstExtraBonuses as $bonus)
                         <p class="text-left text-xs mb-1.5">{!! $bonus !!}</p>
                     @endforeach
