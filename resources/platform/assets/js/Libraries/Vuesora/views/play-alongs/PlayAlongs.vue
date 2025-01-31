@@ -329,7 +329,15 @@ export default {
 
         async getContent(resetPlaylist, showLoading = true) {
             if (showLoading) this.loading = true;
-
+            let progress = 'all';
+            switch(this.progress){
+                case 'started': progress = 'in progress';
+                    break;
+                case 'not-started': progress = 'not started';
+                    break;
+                case 'completed': progress = 'completed'
+                    break;
+            }
             const data = await fetchAll(this.brand, 'play-along', {
                 page: this.page,
                 limit: this.limit,
@@ -340,11 +348,16 @@ export default {
                 progressIds: undefined,
                 useDefaultFields: true,
                 customFields: [],
-                progress: "all"
+                progress: progress
             })
 
             //Count Patch
-            fetchPlayAlongsCount(this.brand).then(count => {
+            fetchPlayAlongsCount(this.brand, {
+                searchTerm: this.searchTerm,
+                includedFields: this.selectedFilters,
+                progressIds: undefined,
+                progress: progress
+            }).then(count => {
                 this.totalResults = count;
             }).catch( error=> console.log('error fetching playalong count', error ) )
 
