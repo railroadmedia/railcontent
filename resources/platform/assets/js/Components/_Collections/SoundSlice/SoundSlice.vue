@@ -57,7 +57,7 @@ const props = defineProps({
 });
 
 //Emits
-const emit = defineEmits(['onAudioEnd', 'completeLesson', 'onChallengeLessonComplete']);
+const emit = defineEmits(['onAudioEnd', 'onChallengeLessonComplete']);
 
 const scoreOrSlice = () => {
     if (/^\d+$/.test(props.soundsliceSlug)) {
@@ -297,13 +297,7 @@ const handleSoundsliceEvent = (event) => {
                 if(activateTracker.value){
                     const currentTime = Math.floor(cmd.arg);
                     if(!hasCompleted.value && currentTime >= Math.floor(0.985 * props.endTime)){
-                        hasCompleted.value = true;
-
-                        if(props.loop){
-                            emit('completeLesson');
-                        } else {
-                            emit('onChallengeLessonComplete');
-                        }
+                        emit('onChallengeLessonComplete');
                     }
                 }
                 saveCurrentTime(Math.floor(cmd.arg));
