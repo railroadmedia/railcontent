@@ -1,6 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('redeemForm', () => ({
+            accessCode: {!! $accessCodeArray ? '"'.implode(' ', $accessCodeArray).'"' : '""' !!},
             errors: {
                 access_code: '',
                 email: '',
@@ -10,6 +11,26 @@
             loading: false,
             isValid: true,
             submitted: false,
+
+            async handlePaste(event) {
+                event.preventDefault();
+                const pastedText = await navigator.clipboard.readText().catch(() => 
+                    event.clipboardData?.getData('text') || '');
+                
+                const cleanCode = pastedText.replace(/[^A-Za-z0-9]/g, '')
+                    .match(/.{1,4}/g)?.join(' ') || '';
+                this.accessCode = cleanCode.toUpperCase();
+            },
+
+            formatAccessCode(value) {
+                const cleanCode = value.replace(/[^A-Za-z0-9\s]/g, '')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+                
+                if (cleanCode.length <= 24) {
+                    this.accessCode = cleanCode.toUpperCase();
+                }
+            },
 
             async submitRedeem(event) {
                 this.errors = {

@@ -9,9 +9,15 @@
     @endif
 >
     @php
-        if (empty($accessCodeArray)) {
-            $accessCodeArray = null;
-        }
+    if (empty($accessCodeArray)) {
+        $accessCodeArray = null;
+    }
+
+    $code = request()->query('code');
+    if ($code) {
+        $code = chunk_split($code, 4, ' ');
+        $accessCodeArray = array_filter(explode(' ', trim($code)));
+    }
     @endphp
     @if(empty($existing))
         <input type="hidden" name="credentials_type" value="new">
@@ -21,7 +27,19 @@
     @endif
     <div class="flex flex-wrap">
         <p class="w-full input-describer">Code</p>
-        <input class="default-form-field uppercase" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.access_code }" type="text" name="access_code" maxlength="29" placeholder="XXXX - XXXX - XXXX - XXXX - XXXX - XXXX" x-mask="**** **** **** **** **** ****" @if($accessCodeArray) value="{{$accessCodeArray[0]}} {{$accessCodeArray[1]}} {{$accessCodeArray[2]}} {{$accessCodeArray[3]}} {{$accessCodeArray[4]}} {{$accessCodeArray[5]}}" @else value="" @endif x-bind:disabled="loading" />
+       <input 
+            class="default-form-field uppercase"
+            x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.access_code }"
+            type="text"
+            name="access_code"
+            maxlength="29"
+            placeholder="XXXX XXXX XXXX XXXX XXXX XXXX"
+            x-model="accessCode"
+            @input="formatAccessCode($event.target.value)"
+            @paste="handlePaste($event)"
+            @paste.prevent
+            x-bind:disabled="loading"
+        />
         <span class="text-xs text-[#EF4444]" x-show="errors.access_code" x-text="errors.access_code"></span>
     </div>
     @if(empty($existing))
