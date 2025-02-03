@@ -233,8 +233,9 @@
     </div>
 </div>
     @include('pianote.sales.partials._footer')
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    
     @include('_partials.components.forms.redeem-form-script', [
         'api' => empty($existing) ? get_musora_brand_base_url().'/ecommerce/access-codes/redeem' : URL::route('access-codes.form-claim'),
         'existingMember' => !$newAccount,
