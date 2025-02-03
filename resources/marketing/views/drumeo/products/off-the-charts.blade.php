@@ -438,7 +438,7 @@
                 'buttonText' => "ORDER NOW",
 
                 // first deal
-                'firstDeal'=> "Drum Charts",
+                'firstDeal'=> "Off The Charts",
                 'firstSubDeal'=> "w/ Kenny Aronoff",
                 'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/card.png',
                 'firstImageHeight' => 'h-24 sm:h-40',
