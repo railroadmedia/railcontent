@@ -240,8 +240,8 @@
     <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="quietkick" class="h-24 sm:h-24 mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/logo-white2.png"><br>
-                <h1 class="leading-tight"><strong>Learn to write <br> pro drum charts.</strong></h1>
+                <img alt="quietkick" class="h-32 sm:h-36 lg:h-40 mb-5 sm:mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/logo-white2.png"><br>
+                <h1 class="leading-tight"><strong>Learn to write <br> pro drum charts</strong></h1>
                 <h4 class="leading-tight"><em>and nail every gig.</em></h4>
                 <div class="w-full max-w-xl mx-auto mt-7">
                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch The Trailer</div>
