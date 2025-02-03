@@ -23,6 +23,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  eventTrackingOrigin: {
+    type: String,
+    default: "",
+  },
   email: {
     type: String,
     default: "",
@@ -112,10 +116,11 @@ onMounted(() => {
         </p>
       </section>
 
-      <section class="tw-flex tw-flex-col tw-w-full tw-items-center tw-w-full tw-max-w-[400px]">
+      <section class="tw-flex tw-flex-col tw-items-center tw-w-full tw-max-w-[400px]">
         <form method="post" :action="submiturl" class="tw-flex tw-flex-col tw-py-[40px] tw-w-full">
           <slot v-if="usecsrftoken" name="csrf"></slot>
           <input type="hidden" :name="formType === 'create' ? 'verification_token' : 'token'" :value="token">
+          <input v-if="formType === 'create'" type="hidden" name="event_tracking_origin" :value="eventTrackingOrigin">
           <input type="hidden" name="email" :value="email">
           <div class="tw-flex tw-flex-col tw-mb-[20px]">
             <h2 class="tw-text-[24px] tw-leading-[36px] tw-font-bold tw-w-full tw-text-center tw-pb-[10px]">{{ constantTexts[formType].formTitle }}
