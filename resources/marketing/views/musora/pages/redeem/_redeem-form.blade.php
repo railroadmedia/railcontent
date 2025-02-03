@@ -48,7 +48,7 @@
         <span class="text-xs text-[#EF4444]" x-show="errors.email" x-text="errors.email"></span>
 
         <p class="input-describer">Password (min. 8 characters)</p>
-        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.password }" type="password" id="password" name="password" placeholder="Password (min. 8 characters)" value="" x-bind:disabled="loading">
+        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.password }" type="password" id="password" name="password" placeholder="Password (min. 8 characters)" value="" x-bind:disabled="loading" autocomplete="off">
         <span class="text-xs text-[#EF4444]" x-show="errors.password" x-text="errors.password"></span>
 
         <p class="input-describer">Confirm Password</p>
