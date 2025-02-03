@@ -781,13 +781,14 @@ class SanityGateway
         return $contentCard;
     }
 
-    public function countLessonsAndAssignments($id)
+    public function countLessonsAndAssignments($id, $lessonId = null)
     {
         $isAssignment = false;
         $fieldsString = $this->getFieldsString('playlist-item');
 
-        // Fetch only leaf nodes directly, traversing the hierarchy
-        $query = "*[railcontent_id == {$id}]{
+        if(!$lessonId) {
+            // Fetch only leaf nodes directly, traversing the hierarchy
+            $query = "*[railcontent_id == {$id}]{
         $fieldsString,
         'thumbnail': thumbnail.asset->url,
         'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id, 'title':assignment_title},
@@ -811,9 +812,10 @@ class SanityGateway
             }
         )
     }";
+            $documents = $this->sanity->fetch($query);
+        }
 
-        $documents = $this->sanity->fetch($query);
-        if (empty($documents)) {
+        if (empty($documents) || $lessonId) {
             $query = "*[defined(assignment) && count((assignment[].railcontent_id)[@ == {$id}]) > 0]{
                             'assignments':assignment[assignment_soundslice != null && railcontent_id == {$id}]{
                               'railcontent_id': railcontent_id, 'title':assignment_title, 'parent_id':^.railcontent_id, 'thumbnail': ^.thumbnail.asset->url}

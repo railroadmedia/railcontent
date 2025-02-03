@@ -601,7 +601,7 @@ class PlaylistsMetadataController extends Controller
                                          'import_high_routine',
                                          'import_low_routine'
                                      ]);
-        $flattenContent = $this->sanityGateway->countLessonsAndAssignments($request->get('content_id'));
+        $flattenContent = $this->sanityGateway->countLessonsAndAssignments($request->get('content_id'), $request->get('lessonId'));
         $itemsThatShouldBeAdd = ($flattenContent['lessons_count'] + count($extraParams)) ?? (count($extraParams));
         $importAllAssignments = $request->get('import_all_assignments', false);
         if ($importAllAssignments) {
@@ -686,9 +686,9 @@ class PlaylistsMetadataController extends Controller
      * @param mixed $id The ID of the entity to count lessons and assignments for.
      * @return array An associative array containing the count of lessons and assignments.
      */
-    public function countLessonsAndAssignments($id): array
+    public function countLessonsAndAssignments($id, Request $request): array
     {
-        return $this->sanityGateway->countLessonsAndAssignments($id);
+        return $this->sanityGateway->countLessonsAndAssignments($id, $request->get('lessonId'));
     }
 
     /**
