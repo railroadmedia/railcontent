@@ -35,7 +35,7 @@
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-text-[#191b1c] dark:tw-text-white">
                     <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase">Chapter Markers</h6>
                     <template v-for="chapter in contentChapters">
-                        <p class="body tw-text-[#191b1c] dark:tw-text-white" v-if="chapter['chapter_timecode']">
+                        <p class="body tw-text-[#191b1c] dark:tw-text-white" v-if="chapter['chapter_timecode'] !== undefined">
                             <a class="tw-font-bold font-underline"
                                :data-jump-to-time="chapter.chapter_timecode">{{ timeCodeToSeconds(chapter.chapter_timecode) }}</a> - {{ chapter.chapter_description }}
                         </p>
