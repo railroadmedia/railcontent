@@ -237,7 +237,7 @@
         'cartVersion' => true,
     ])
 
-    <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
+    <header class="text-white relative overflow-hidden z-10 h-[640px] md:h-[700px] lg:h-[880px]" style="background-color:#666;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="quietkick" class="h-32 sm:h-36 lg:h-40 mb-5 sm:mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/logo-white2.png"><br>
@@ -253,7 +253,7 @@
                 </div>
             </div>
         </div>
-        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0,0,0,0.8);"></div>
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: radial-gradient(rgba(24,25,27,0.8), transparent);"></div>
 {{--        <img class="object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/header-bg.jpg">--}}
          <video class="object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
             src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/off-the-charts/header.mp4"></video>
@@ -384,14 +384,14 @@
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
                 <div class="w-full sm:w-1/3 px-5 sm:px-2">
                     <img class="h-48 sm:h-36 lg:h-48" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/bonus-1.png">
-                    <h5 class="leading-tight mt-4 mb-1"><strong>1. Eight video series</strong></h5>
+                    <h5 class="leading-tight mt-4 mb-1"><strong>1. Eight Video Series</strong></h5>
                     <p class="leading-tight">with a combination of theory<br class="hidden lg:inline"> and daily exercises.</p>
                 </div>
                 <div class="w-full block sm:hidden my-4"><img class="h-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/120x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/plus.png"></div>
                 <div class="w-full sm:w-1/3 px-5 sm:px-2 relative">
                     <img class="h-48 sm:h-36 lg:h-48" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/bonus-2.png">
                     <h5 class="leading-tight mt-4 mb-1"><strong>2. Exclusive Workbook</strong></h5>
-                    <p class="leading-tight">with notation, example charts and<br class="hidden lg:inline"> blank staff paper (digital OR physical)</p>
+                    <p class="leading-tight">with notation, example charts and<br class="hidden lg:inline"> blank staff paper (digital OR physical).</p>
                     <div class="hidden sm:block -translate-x-1/2 absolute z-0 top-0 left-0 mt-14 lg:mt-20"><img class="h-10 lg:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/120x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/plus.png"></div>
                     <div class="hidden sm:block translate-x-1/2 absolute z-0 top-0 right-0 mt-14 lg:mt-20"><img class="h-10 lg:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/120x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/plus2.png"></div>
                 </div>
@@ -399,7 +399,7 @@
                 <div class="w-full sm:w-1/3 px-5 sm:px-2">
                     <img class="h-48 sm:h-36 lg:h-48" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/bonus-3.png">
                     <h5 class="leading-tight mt-4 mb-1"><strong>3. Extra Bonus</strong></h5>
-                    <p class="leading-tight">limited edition <strong>Blackwing charting</strong><br class="hidden lg:inline"> pencils (Membership only)</p>
+                    <p class="leading-tight">limited edition <strong>Blackwing charting</strong><br class="hidden lg:inline"> pencils (Membership only).</p>
                 </div>
             </div>
         </div>
