@@ -150,6 +150,7 @@ class SanityGateway
         ],
         'playlist-item' => [
             "'type': _type",
+            "'id': railcontent_id",
             '"instructors": instructor[]->name',
             '"instructors_details": instructor[]->{
                     "id":railcontent_id,
@@ -539,7 +540,8 @@ class SanityGateway
                     'parent' => [
                         'type' => $document['type'],
                         'title' => $document['title'],
-                        'url' => $document['url']
+                        'url' => $document['url'],
+                        'id' => $document['railcontent_id']
                     ]
                 ];
             }
