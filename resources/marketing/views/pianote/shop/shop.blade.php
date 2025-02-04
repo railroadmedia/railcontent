@@ -79,41 +79,22 @@
     @include('_partials.components.shop.index-filters')
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
-        <section x-show="filter === 'all'">
-            <div class="container mx-auto">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
-                <div class="flex flex-wrap mb-5 sm:mb-10">
-                    <a href="/new-year" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
-                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]" style="padding-bottom:71%;">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/january/new-year-bundle.webp');"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/january/new-year-bundle-m.webp');"></div>
-                        </div>
-                    </a>
-                    <a href="/shop/prima" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
-                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]" style="padding-bottom:71%;">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/january/keyboard-bundle.webp');"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/january/keyboard-bundle-m.webp');"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container" x-data="{ showAll: false }">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-globe-pointer text-{{ $brand }} mr-1"></i> Digital Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
                      :class="{ 'show-all': showAll || (!isIndexPage && filter !== 'all') || filter === 'lessons' }">
-{{--                @include('_partials.components.shop.product-card', [--}}
-{{--                    "badge" => "7-Day Free Trial",--}}
-{{--                      "price" => 240,--}}
-{{--                     "instructor" => "Unlimited Piano Lessons",--}}
-{{--                      "discounted_price" => 240,--}}
-{{--                      "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",--}}
-{{--                      "title" => "Pianote Membership",--}}
-{{--                      'soldOut' => false,--}}
-{{--                        "href" => "/",--}}
-{{--                 ])--}}
+                @include('_partials.components.shop.product-card', [
+                    "badge" => "7-Day Free Trial",
+                      "price" => 240,
+                     "instructor" => "Unlimited Piano Lessons",
+                      "discounted_price" => 240,
+                      "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
+                      "title" => "Pianote Membership",
+                      'soldOut' => false,
+                        "href" => "/",
+                 ])
                 @foreach($lessons as $key => $lesson)
                     @include('_partials.components.shop.product-card', [
                         "badge" => $lesson->badge_text,
@@ -146,41 +127,6 @@
                         class="join outline black smaller">
                         See More
                     </span>
-                </div>
-            </div>
-        </section>
-
-        <section class="grid-view category-section" data-category="gifts" x-show="filter === 'gifts' || filter === 'all'">
-            <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-gift text-{{ $brand }} mr-1"></i> Gifts</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-                    @include('_partials.components.shop.product-card', [
-                        "sku" => 'musora-gift-card-50',
-                        "discounted_price" => 50,
-                        "href" => "https://www.musora.com/electronic-gift-card?amount=50",
-                        "price" =>  50,
-                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-50.webp",
-                        "title" => "$50 Digital Gift Card",
-                        'soldOut' => false,
-                    ])
-                    @include('_partials.components.shop.product-card', [
-                        "sku" => 'musora-gift-card-100',
-                        "discounted_price" => 100,
-                        "href" => "https://www.musora.com/electronic-gift-card?amount=100",
-                        "price" =>  100,
-                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-100.webp",
-                        "title" => "$100 Digital Gift Card",
-                        'soldOut' => false,
-                    ])
-                    @include('_partials.components.shop.product-card', [
-                        "sku" => 'musora-gift-card-240',
-                        "discounted_price" => 240,
-                        "href" => "https://www.musora.com/electronic-gift-card?amount=240",
-                        "price" =>  240,
-                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-240.webp",
-                        "title" => "$240 Digital Gift Card",
-                        'soldOut' => false,
-                    ])
                 </div>
             </div>
         </section>
@@ -231,6 +177,41 @@
                         class="join outline black smaller">
                         See More
                     </span>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid-view category-section" data-category="gifts" x-show="filter === 'gifts' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-gift text-{{ $brand }} mr-1"></i> Gifts</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
+                    @include('_partials.components.shop.product-card', [
+                        "sku" => 'musora-gift-card-50',
+                        "discounted_price" => 50,
+                        "href" => "https://www.musora.com/electronic-gift-card?amount=50",
+                        "price" =>  50,
+                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-50.webp",
+                        "title" => "$50 Digital Gift Card",
+                        'soldOut' => false,
+                    ])
+                    @include('_partials.components.shop.product-card', [
+                        "sku" => 'musora-gift-card-100',
+                        "discounted_price" => 100,
+                        "href" => "https://www.musora.com/electronic-gift-card?amount=100",
+                        "price" =>  100,
+                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-100.webp",
+                        "title" => "$100 Digital Gift Card",
+                        'soldOut' => false,
+                    ])
+                    @include('_partials.components.shop.product-card', [
+                        "sku" => 'musora-gift-card-240',
+                        "discounted_price" => 240,
+                        "href" => "https://www.musora.com/electronic-gift-card?amount=240",
+                        "price" =>  240,
+                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-240.webp",
+                        "title" => "$240 Digital Gift Card",
+                        'soldOut' => false,
+                    ])
                 </div>
             </div>
         </section>

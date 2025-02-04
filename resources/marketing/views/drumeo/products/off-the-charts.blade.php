@@ -240,28 +240,30 @@
     <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="quietkick" class="h-24 sm:h-24 mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/logo-white2.png"><br>
-                <h1 class="leading-tight"><strong>Learn to write <br> pro drum charts.</strong></h1>
+                <img alt="quietkick" class="h-32 sm:h-36 lg:h-40 mb-5 sm:mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/logo-white2.png"><br>
+                <h1 class="leading-tight"><strong>Learn to write <br> pro drum charts</strong></h1>
                 <h4 class="leading-tight"><em>and nail every gig.</em></h4>
                 <div class="w-full max-w-xl mx-auto mt-7">
                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch The Trailer</div>
                     <div class="sm:w-5/12 join smaller outline sm:hidden inline-block"   @click="trailerM = true;" ><i class="fas fa-play"></i> &nbsp;Watch The Trailer</div>
                     <br class="sm:hidden">
                     @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
-                        <a class="mt-3 sm:mt-0 w-5/12 join smaller blue" href="/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1">Get Started</a>
+                        <a class="mt-3 sm:mt-0 w-5/12 join smaller blue anchor-slide" href="#customize-anchor">Get Started</a>
                     @endif
                 </div>
             </div>
         </div>
-{{--        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: radial-gradient(rgba(24,25,27,0.8), transparent);"></div>--}}
-        <img class="object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/header-bg.jpg">
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0,0,0,0.8);"></div>
+{{--        <img class="object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/header-bg.jpg">--}}
+         <video class="object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
+            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/off-the-charts/header.mp4"></video>
     </header>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight"><strong class="text-drumeo">Don’t just keep time.</strong></h2>
             <h3 class="leading-tight">Be the drummer everybody<br class="sm:hidden"> wants in their band.</h3>
-            <video class="w-full rounded-xl overflow-hidden max-w-3xl mx-auto my-4" type="video/mp4" autoplay="" loop="" playsinline="" muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/off-the-charts/pencil3.mp4"></video>
+            <video class="w-full rounded-xl overflow-hidden max-w-3xl mx-auto my-4" type="video/mp4" autoplay="" loop="" playsinline="" muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/off-the-charts/pencil2.mp4"></video>
             <p class="leading-normal mb-7 sm:mb-12 max-w-3xl">You don’t learn songs on the drums through chords or keys—you need kick patterns, ghost notes, fills, and the tiny cues that keep the band on track. Miss one, and everything falls apart. In Off The Charts, you’ll learn to capture these details in your own shortform charts. This one skill will help you learn thousands of songs faster and become an asset to any live band.</p>
 
             <h2 class="leading-tight"><strong>Here’s everything<br class="sm:hidden"> you’ll learn…</strong></h2>
@@ -328,7 +330,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-5xl mx-auto mb-14 lg:mb-16">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
-                <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
+                <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:mt-12 sm:-mr-8">
                     <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/coach.webp">
@@ -424,7 +426,7 @@
             </div>
         </div>
     </section>
-    <div id="final" class="anchor"></div>
+    <div id="customize-anchor" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#EFF7FF;">
         <div class="container max-w-3xl mx-auto relative z-50" style="background: #eff7ff;">
             <h2 class="leading-tight mb-4"><strong><span class="text-drumeo">Quickly learn</span><br class="sm:hidden"> any song, any time.</strong></h2>
@@ -436,7 +438,7 @@
                 'buttonText' => "ORDER NOW",
 
                 // first deal
-                'firstDeal'=> "Drum Charts",
+                'firstDeal'=> "Off The Charts",
                 'firstSubDeal'=> "w/ Kenny Aronoff",
                 'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/card.png',
                 'firstImageHeight' => 'h-24 sm:h-40',
@@ -454,8 +456,8 @@
                 'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/card-bonus.png',
                 'secondImageHeight' => 'h-24 sm:h-40',
                 'secondDealSub' => "",
-                'secondDealPrice' => 240,
-                'secondDealDiscount' => 200,
+                'secondDealPrice' => 200,
+                'secondDealDiscount' => 240,
                 "secondDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[off-the-charts-workbook-bundle]=1&promo-code=charting-shipping,off-the-charts-bundle,special&locked=true",
                 'secondExtraBonuses' => [
                     '<i class="fa-solid fa-check pr-1"></i> <strong class="">1</strong> Year Of Unlimited Drum Lessons',

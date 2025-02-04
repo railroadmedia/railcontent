@@ -268,16 +268,6 @@ class SalesController extends BaseController
         return view('pianote.products.the-power-of-chords-giveaway', ['theme' => 'pianote']);
     }
 
-    public function concertHeadphones()
-    {
-        return view('pianote.products.concert-headphones', ['theme' => 'pianote']);
-    }
-
-    public function concertHeadphonesMember()
-    {
-        return view('pianote.products.concert-headphones', ['memberVersion' => true]);
-    }
-
     public function foundations()
     {
         return view('pianote.products.foundation-books', ['theme' => 'pianote']);

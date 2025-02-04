@@ -41,9 +41,14 @@
                     <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3 tw-transition-all tw-duration-1000" :class="slideIn ? '' : 'tw-absolute tw-opacity-0 tw-translate-x-10'" :style="`background-image: url('${userProfilePictureUrl}')`"></div>
                 </div>
                 <p class="tw-text-center">You’ve joined <span class="tw-font-bold">{{ userNames }}</span> and <span class="tw-font-bold">{{ challengeData.total }}</span> other {{ otherText }} who have already enrolled! {{ challengeTitle }} runs from {{ durationText }}</p>
-                <div class="tw-flex tw-justify-end tw-mt-[30px]">
+                <div class="tw-flex tw-flex-col tw-gap-y-2 sm:tw-flex-row tw-justify-end tw-mt-[30px]">
                     <MuButton variant="secondary" is-link :href="`${challenge.course_url}`" class="tw-mr-[9px]">View Challenge</MuButton>
-                    <MuButton is-link :href="`/${brand}`" >Go Home</MuButton>
+                    <MuButton 
+                        is-link
+                        :href="isFromGetDeal && challenge.product_cart_link ? challenge.product_cart_link : `/${brand}`"
+                        >
+                        {{ isFromGetDeal && challenge.product_cart_link ? 'Continue to Checkout' : 'Go Home' }}
+                    </MuButton>
                 </div>
             </template>
         </div>
@@ -86,6 +91,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    isFromGetDeal: {
+        type: Boolean,
+        default: false
+  },
 });
 
 const emit = defineEmits(['modalClose', 'onReFetchData']);

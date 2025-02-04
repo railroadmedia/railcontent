@@ -267,13 +267,17 @@
                                     </p>
 
                                     <div class="tw-my-3">
-                                        <button v-if="showEnrollNow" id="cardEnrollNow" @click="enroll()"
+                                          <!-- Buttons -->
+                                        <button v-if="showGetNotified && !isNotified" :class="`tw-btn-primary tw-bg-[#2A2F34] tw-w-full tw-max-w-[230px] hover:tw-bg-[#2A2F34]/60 tw-transition-opacity tw-duration-300`" @click="handleGetNotified">
+                                            <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
+                                            Get Notified
+                                        </button>
+                                        <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0">Notification requested!</span>
+                                        <button v-else-if="showEnrollNow" id="cardEnrollNow" @click="enroll()"
                                             class="tw-btn-primary tw-bg-[#2A2F34] tw-w-full tw-max-w-[230px] hover:tw-bg-[#2A2F34]/60 tw-transition-opacity tw-duration-300">
                                             Enroll Now
-                                        </button>
-                                        <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-max-w-[230px] tw-text-white">
-                                            Enrollment Closed
-                                        </span>
+                                        </button>                                            
+                                        <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white">Enrollment Closed</span>
                                     </div>
                                     <p class="tw-text-center tw-text-xs">{{ cohort['course_description'] }}</p>
                                 </div>
@@ -312,13 +316,12 @@
                                         class="tw-text-sm tw-italic">
                                         Save {{ Math.round(100 - (100 * (cohort['product_sale_price'] / cohort['product_original_price']))) }}%
                                     </p>
-
-                                    <div class="tw-my-3">
-                                        <a :href="cohort['product_cart_link']" id="getTheDeal"
+                                        <div class="tw-my-3">
+                                            <button @click="handleGetDeal" id="getTheDeal"
                                             :class="`tw-btn-primary tw-bg-${brand} tw-w-full tw-max-w-[230px] hover:tw-bg-${brand}-600 tw-transition-opacity tw-duration-300`">
                                             Get the deal
-                                        </a>
-                                    </div>
+                                            </button>
+                                        </div>
                                     <p class="tw-text-center tw-text-xs">{{ cohort['course_product_description'] }}</p>
                                 </div>
                             </div>
@@ -385,6 +388,7 @@
         :challenge-type="challengeType"
         @modal-close="closeNotificationModal"
         :hide-x-icon="true"
+        :is-from-get-deal="isFromGetDeal"
     />
     <ChallengeActionModal v-if="challengeActionModalType && !isFromApp" :modal-type="challengeActionModalType"  @close-modal="closeActionModal"
       :challenge="{
@@ -414,6 +418,7 @@ import ChallengeGetNotifiedModal from '@collections/Modal/ChallengeGetNotifiedMo
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+const isFromGetDeal = ref(false);
 
 const props = defineProps({
     cohort: {
@@ -506,7 +511,12 @@ const showGetNotified = computed(() => {
     return false;
 })
 
-const enroll = async() => {
+const handleGetDeal = () => {
+  isFromGetDeal.value = true;
+  enroll("purchase"); 
+};
+
+const enroll = async(message = "enroll") => {
     try {
         if(props.cohort.has_completed_challenge && isSolo.value){
             openActionModal('retake');
@@ -515,7 +525,7 @@ const enroll = async() => {
             const enrollUser = await postChallengesEnroll(props.cohort.id);
             openChallengeNotificationModal.value = true;
             isEnrolled.value = true;
-            sendPostMessage('enroll');
+            sendPostMessage(message);
         }
     } catch (e){
         window.shownotification({
