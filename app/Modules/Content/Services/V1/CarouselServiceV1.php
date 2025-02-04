@@ -29,17 +29,20 @@ class CarouselServiceV1
         $user = user();
         $isAdmin = $user->isAdmin();
 
-        $onboardingCardData = $this->learningPathsService->getNewLearningPaths();
         $unfinishedOnboardingCards = [];
-        foreach ($onboardingCardData as $index => $onboardingCardDatum) {
-            $onboardingCardData[$index]['show_everywhere'] = false;
-            $onboardingCardData[$index]['type'] = 'onboarding';
-            $progress = ContentUserProgress::getState($onboardingCardDatum['id'], $user->id);
-            if ($progress->state == ProgressState::NotStarted) {
-                $unfinishedOnboardingCards[] = $onboardingCardData[$index];
+        // NOTE: Pack-only users doesn´t have membership level, and shouldn't have access to onboarding cards
+        if ($user->membership_level) {
+            $onboardingCardData = $this->learningPathsService->getNewLearningPaths();
+
+            foreach ($onboardingCardData as $index => $onboardingCardDatum) {
+                $onboardingCardData[$index]['show_everywhere'] = false;
+                $onboardingCardData[$index]['type'] = 'onboarding';
+                $progress = ContentUserProgress::getState($onboardingCardDatum['id'], $user->id);
+                if ($progress->state == ProgressState::NotStarted) {
+                    $unfinishedOnboardingCards[] = $onboardingCardData[$index];
+                }
             }
         }
-
 
         // all badges from the last day
         $badges = $user->challengeProgress()
