@@ -20,6 +20,11 @@
                 }
             },
 
+            formatCode(code) {
+            code = code.replace(/[\s-]/g, '');
+            return code.replace(/(.{4})/g, '$1 ').trim();
+            },
+
             async submitRedeem(event) {
                 this.errors = {
                     access_code: '',
