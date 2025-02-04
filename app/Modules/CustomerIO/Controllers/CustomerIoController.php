@@ -44,14 +44,9 @@ class CustomerIoController extends Controller
             return response('', 201); // Just a successfully created response
         }
 
-        if ($request->has('success_redirect')) {
-            $response = redirect()->away($request->input('success_redirect'));
-        } else {
-            $response = redirect()->back();
-        }
-
-        return $response->with(['success' => true]);
+        return redirect()->back()->with(['success' => true]);
     }
+
     public function submitEmailFormRC(CustomerIoFormRequest $request)
     {
         try {
@@ -77,12 +72,6 @@ class CustomerIoController extends Controller
             return response('', 201); // Just a successfully created response
         }
 
-        if ($request->has('success_redirect')) {
-            $response = redirect()->away($request->input('success_redirect'));
-        } else {
-            $response = redirect()->back();
-        }
-
-        return $response->with(['success' => true]);
+        return redirect()->back()->with(['success' => true]);
     }
 }
