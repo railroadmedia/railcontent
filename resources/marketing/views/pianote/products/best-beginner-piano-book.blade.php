@@ -379,13 +379,11 @@
    @php
     $offers = [
         [
-            'badge' => 'SAVE 20%',
             'color' => 'black',
-            'title' => 'Book Only',
-            'originalPrice' => 49,
-            'currentPrice' => 39,
-            'discount' => '20%',
-            'link' => '/ecommerce/add-to-cart?products[best-beginner-piano-book]=1&promo-code=ny-books-shipping',
+            'title' => ' ',
+            'originalPrice' => $productPrices['best-beginner-piano-book']->price,
+            'currentPrice' => $discountedPrice,
+            'link' => '/ecommerce/add-to-cart?products[best-beginner-piano-book]=1',
             'imageSrc' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/bundle-01.webp',
             'imageClass' => 'h-48 opacity-0',
             'buttonText' => 'GET YOUR COPY',
@@ -395,26 +393,6 @@
                     '<i class="fa fa-check text-pianote"></i> 194 Pages',
                     '<i class="fa fa-check text-pianote"></i> Full-color diagrams and explanations',
                     '<i class="fa fa-check text-pianote"></i> Simple language with examples',
-                    '<i class="fa fa-check text-pianote"></i> Free Shipping in the US & Canada'
-                ]
-        ],
-        [
-            'badge' => 'BEST DEAL',
-            'color' => 'pianote',
-            'title' => "New Year's Bundle",
-            'originalPrice' => 88,
-            'currentPrice' => 49,
-            'discount' => '44%',
-            'link' => '/ecommerce/add-to-cart?products[best-beginner-piano-book]=1&products[practice-planner]=1&promo-code=new-years-books,ny-books-shipping&locked=true',
-            'imageSrc' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/the-best-beginner-piano-book/bundle-02.webp',
-            'imageClass' => 'h-48 opacity-0',
-            'buttonText' => 'GET YOUR BOOKS',
-            'buttonClass' => 'pianote',
-            'subtext' => 'Add the NEW Pianote  <br class="block sm:hidden"> Practice Planner for just $10',
-                'features' => [
-                    '<i class="fa fa-check text-pianote"></i> Best Beginner Piano Book',
-                    '<i class="fa fa-check text-pianote"></i> <strong>NEW</strong> Pianote Practice Planner ($39 value)',
-                    '<i class="fa fa-check text-pianote"></i> Free Shipping in the US & Canada',
                 ]
         ]
     ];
@@ -432,7 +410,7 @@
             <div class="flex flex-wrap lg:flex-nowrap items-stretch justify-center w-full mb-5 sm:mb-10 mx-auto space-y-4 md:space-y-0 md:space-x-4 lg:space-x-8">
                 @foreach($offers as $offer)
                     <div class="w-full md:w-1/2 lg:w-1/2 max-w-sm lg:px-1 px-1 relative border-2 border-{{ $offer['color'] }} rounded-2xl shadow-md mb-4 lg:mb-0 bg-white flex flex-col">
-                        @if($offer['badge'])
+                        @if(!empty($offer['badge']))
                             <p class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mb-1 px-5 py-1 z-10 leading-tight text-sm rounded-full tracking-widest text-white bg-{{$offer['color']}}">
                                 {{ $offer['badge'] }}
                             </p>
@@ -452,7 +430,9 @@
                                 <h3 class="leading-tight mt-2">
                                     <span class="line-through text-gray-400">${{ $offer['originalPrice'] }}</span>
                                     <strong>${{ $offer['currentPrice'] }}</strong>
-                                    <span class="text-pianote ml-1 text-sm lg:text-base">(Save {{ $offer['discount'] }})</span>
+                                    @if(!empty($offer['discount']))
+                                        <span class="text-pianote ml-1 text-sm lg:text-base">(Save {{ $offer['discount'] }})</span>
+                                    @endif
                                 </h3>
 
                                 <p class="text-sm mb-5"><em>{!! $offer['subtext'] !!}</em></p>

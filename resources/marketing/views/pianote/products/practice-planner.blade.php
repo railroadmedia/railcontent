@@ -85,7 +85,7 @@
                                 ${{ floatval($productPrices['practice-planner']->discounted_price) }}</strong>
                         @endif
                     </h2>
-                    <a href="/ecommerce/add-to-cart?products[practice-planner]=1&promo-code=ny-books-shipping"
+                    <a href="/ecommerce/add-to-cart?products[practice-planner]=1"
                         class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
@@ -247,7 +247,7 @@
                                 ${{ floatval($productPrices['practice-planner']->discounted_price) }}</strong>
                         @endif
                     </h2>
-                    <a href="/ecommerce/add-to-cart?products[practice-planner]=1&promo-code=ny-books-shipping"
+                    <a href="/ecommerce/add-to-cart?products[practice-planner]=1"
                         class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
