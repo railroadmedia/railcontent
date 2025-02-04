@@ -237,7 +237,7 @@
         'cartVersion' => true,
     ])
 
-    <header class="text-white relative overflow-hidden z-10 h-[640px] md:h-[700px] lg:h-[880px]" style="background-color:#666;">
+    <header class="text-white relative overflow-hidden z-10 h-[560px] sm:h-[700px]" style="background-color:#666;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="quietkick" class="h-32 sm:h-36 lg:h-40 mb-5 sm:mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/logo-white2.png"><br>
