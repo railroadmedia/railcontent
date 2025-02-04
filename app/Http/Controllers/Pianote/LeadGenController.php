@@ -366,7 +366,7 @@ class LeadGenController extends BaseController
 
     public function chordsProgressionsDigitalBook()
     {
-        return view('pianote.lead-gen.chords-progressions-digital-book', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
+        return view('pianote.lead-gen.chord-progressions', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)
