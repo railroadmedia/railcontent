@@ -28,7 +28,7 @@ class Publisher extends BaseSanityModel
 
         $fields = [
             new Field(FieldType::String, 'name', validation: [new Required()]),
-            new Field(FieldType::Array, 'child', "Children", of: $childrenList, validation: [new Required()]),
+            new Field(FieldType::Array, 'child', "Children", of: $childrenList),
         ];
         $isAdmin = user()?->isAdmin() ?? false;
         $isAdmin = true;

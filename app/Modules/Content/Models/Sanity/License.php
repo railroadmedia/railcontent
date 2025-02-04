@@ -37,7 +37,7 @@ class License extends BaseSanityModel
         $publisherList = new ListObject(
             fields: [
                 new Field(FieldType::Reference, 'publisher', 'Publisher', to: 'publisher', validation: [new Required()]),
-                new Field(FieldType::Number, 'license_percent', validation: [new Required(), new Min(0.01), new Max(1), new Precision(2)])
+                new Field(FieldType::Number, 'license_percent', validation: [new Required(), new Min(0), new Max(200), new Precision(0)])
             ],
             previewItem: new ListItemPreview('publisher.name', 'license_percent')
         );
@@ -51,14 +51,14 @@ class License extends BaseSanityModel
             new Field(FieldType::Array, 'content_id', "Content", of: $contentList, group: $detailsGroup),
             new Field(FieldType::String, 'song_name', "Song Name", validation: [new Required()], group: $detailsGroup),
             new Field(FieldType::String, 'song_artist', "Artist", validation: [new Required()], group: $detailsGroup),
-            new Field(FieldType::String, 'risk', "Risk", validation: [new Required()], group: $detailsGroup, options: [
+            new Field(FieldType::String, 'risk', "Risk", group: $detailsGroup, options: [
                 'list' => ['blue', 'red'],
                 'layout' => 'dropdown'
             ]),
-            new Field(FieldType::String, 'mlc', "MLC", validation: [new Required()], group: $detailsGroup),
+            new Field(FieldType::String, 'mlc', "MLC", group: $detailsGroup),
             new Field(FieldType::String, 'iswc', 'ISWC', group: $detailsGroup),
             new Field(FieldType::String, 'isrc', 'ISRC', group: $detailsGroup),
-            new Field(FieldType::Boolean, 'public_domain', 'Is In Public Domain', validation: [new Required()], group: $detailsGroup),
+            new Field(FieldType::Boolean, 'public_domain', 'Is In Public Domain', group: $detailsGroup),
             new Field(FieldType::Array, 'license', 'Licenses', of: $publisherList, group: $publisherGroup),
         ];
         $preview = new ListItemPreview('song_name', 'song_artist');
