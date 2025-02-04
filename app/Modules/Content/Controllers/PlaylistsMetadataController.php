@@ -445,7 +445,6 @@ class PlaylistsMetadataController extends Controller
 
             if ($newPosition == 1) {
                 $sanityData = $this->sanityGateway->getByRailContentIds([$playlistItem->content_id], 'playlist-item');
-                //dd($sanityData[0]['thumbnail']);
                 $playlistItem->playlist->first_item_thumbnail_url = $sanityData[0]['thumbnail'];
                 $playlistItem->playlist->save();
             }
@@ -602,7 +601,7 @@ class PlaylistsMetadataController extends Controller
                                          'import_high_routine',
                                          'import_low_routine'
                                      ]);
-        $flattenContent = $this->sanityGateway->countLessonsAndAssignments($request->get('content_id'));
+        $flattenContent = $this->sanityGateway->countLessonsAndAssignments($request->get('content_id'), $request->get('lessonId'));
         $itemsThatShouldBeAdd = ($flattenContent['lessons_count'] + count($extraParams)) ?? (count($extraParams));
         $importAllAssignments = $request->get('import_all_assignments', false);
         if ($importAllAssignments) {
@@ -628,7 +627,7 @@ class PlaylistsMetadataController extends Controller
                 continue;
             }
             $lastPosition = UserPlaylistContent::where('user_playlist_id', $playlistId)
-                ->max('position');
+                ->max('position') ?? 0;
 
             $isExtra = false;
             $firstItemInPlaylist = null;
@@ -636,59 +635,26 @@ class PlaylistsMetadataController extends Controller
                 if (!$value) {
                     continue;
                 }
-                $lastPosition++;
-                if (!$firstItemInPlaylist) {
-                    $firstItemInPlaylist = $flattenContent['lessons'][0];
-                }
-                $playlistItemData     = [
-                    'content_id'       => $request->get('content_id'),
-                    'content_parent'   => null,
-                    'content_name'     => $flattenContent['lessons'][0]['title'],
-                    'user_playlist_id' => $playlistId,
-                    'position'         => $lastPosition,
-                    'created_at'       => Carbon::now()->toDateTimeString(),
-                    'extra_data'       => $extraData[$key],
-                ];
-                $playlistItem         = UserPlaylistContent::create($playlistItemData);
-                $added[$playlistId][] = $playlistItem->id;
+                $extraItemData = $extraData[$key];
+                $this->createPlaylistItem(['id' => $request->get('content_id'), 'parent_id' => null, 'title' => $flattenContent['lessons'][0]['title']], $lastPosition, $playlistId, $added, $firstItemInPlaylist,  $extraItemData);
                 $isExtra = true;
             }
 
             if (!$isExtra) {
-                foreach ($flattenContent['lessons'] as $item) {
-                    $lastPosition++;
-                    if (!$firstItemInPlaylist) {
-                        $firstItemInPlaylist = $item;
-                    }
+                if (!empty($flattenContent['lessons'] ?? [])) {
+                    foreach ($flattenContent['lessons'] as $item) {
+                        $this->createPlaylistItem($item, $lastPosition, $playlistId, $added, $firstItemInPlaylist);
 
-                    $playlistItemData = [
-                        'content_id'       => $item['id'],
-                        'content_parent'   => $item['parent_id'],
-                        'content_name'     => $item['title'],
-                        'user_playlist_id' => $playlistId,
-                        'position'         => $lastPosition,
-                        'created_at'       => Carbon::now()->toDateTimeString(),
-                    ];
-                    $playlistItem     = UserPlaylistContent::create($playlistItemData);
-                    $added[$playlistId][] = $playlistItem->id;
-                    if ($importAllAssignments) {
-                        foreach ($flattenContent['soundslice_assignments'][$item['id']] ?? [] as $item) {
-                            $lastPosition++;
-                            if (!$firstItemInPlaylist) {
-                                $firstItemInPlaylist = $item;
+                        if ($importAllAssignments && isset($flattenContent['soundslice_assignments'][$item['id']])) {
+
+                            foreach ($flattenContent['soundslice_assignments'][$item['id']] as $assignment) {
+                                $this->createPlaylistItem($assignment, $lastPosition, $playlistId, $added, $firstItemInPlaylist);
                             }
-
-                            $playlistItemData = [
-                                'content_id'       => $item['id'],
-                                'content_parent'   => $item['parent_id'],
-                                'content_name'     => $item['title'],
-                                'user_playlist_id' => $playlistId,
-                                'position'         => $lastPosition,
-                                'created_at'       => Carbon::now()->toDateTimeString(),
-                            ];
-                            $playlistItem = UserPlaylistContent::create($playlistItemData);
-                            $added[$playlistId][] = $playlistItem->id;
                         }
+                    }
+                } elseif (!empty($flattenContent['soundslice_assignments'] ?? [])) {
+                    foreach(array_merge(...array_values($flattenContent['soundslice_assignments'])) as $assignment){
+                        $this->createPlaylistItem($assignment, $lastPosition, $playlistId, $added, $firstItemInPlaylist);
                     }
                 }
             }
@@ -720,9 +686,9 @@ class PlaylistsMetadataController extends Controller
      * @param mixed $id The ID of the entity to count lessons and assignments for.
      * @return array An associative array containing the count of lessons and assignments.
      */
-    public function countLessonsAndAssignments($id): array
+    public function countLessonsAndAssignments($id, Request $request): array
     {
-        return $this->sanityGateway->countLessonsAndAssignments($id);
+        return $this->sanityGateway->countLessonsAndAssignments($id, $request->get('lessonId'));
     }
 
     /**
@@ -848,5 +814,25 @@ the pin icon on or off.',
         }
 
         return $this->getPlaylistItem($playbackItemId, $request);
+    }
+
+    private function createPlaylistItem(array $item, int &$lastPosition, int $playlistId, array &$added, &$firstItemInPlaylist, string $extraData = null): void
+    {
+        $lastPosition++;
+        $playlistItemData = [
+            'content_id'       => $item['id'],
+            'content_parent'   => $item['parent_id'],
+            'content_name'     => $item['title'] ,
+            'user_playlist_id' => $playlistId,
+            'position'         => $lastPosition,
+            'created_at'       => Carbon::now()->toDateTimeString(),
+            'extra_data'       => $extraData, // Add extra data if provided
+        ];
+        $playlistItem = UserPlaylistContent::create($playlistItemData);
+        $added[$playlistId][] = $playlistItem->id;
+
+        if (!$firstItemInPlaylist) {
+            $firstItemInPlaylist = $item;
+        }
     }
 }

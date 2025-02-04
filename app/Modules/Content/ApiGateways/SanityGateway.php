@@ -782,12 +782,14 @@ class SanityGateway
         return $contentCard;
     }
 
-    public function countLessonsAndAssignments($id)
+    public function countLessonsAndAssignments($id, $lessonId = null)
     {
+        $isAssignment = false;
         $fieldsString = $this->getFieldsString('playlist-item');
 
-        // Fetch only leaf nodes directly, traversing the hierarchy
-        $query = "*[railcontent_id == {$id}]{
+        if(!$lessonId) {
+            // Fetch only leaf nodes directly, traversing the hierarchy
+            $query = "*[railcontent_id == {$id}]{
         $fieldsString,
         'thumbnail': thumbnail.asset->url,
         'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id, 'title':assignment_title},
@@ -811,34 +813,46 @@ class SanityGateway
             }
         )
     }";
+            $documents = $this->sanity->fetch($query);
+        }
 
-        $documents = $this->sanity->fetch($query);
+        if (empty($documents) || $lessonId) {
+            $query = "*[defined(assignment) && count((assignment[].railcontent_id)[@ == {$id}]) > 0]{
+                            'assignments':assignment[assignment_soundslice != null && railcontent_id == {$id}]{
+                              'railcontent_id': railcontent_id, 'title':assignment_title, 'parent_id':^.railcontent_id, 'thumbnail': ^.thumbnail.asset->url}
+    }";
 
+            $documents = $this->sanity->fetch($query);
+            $isAssignment = true;
+        }
         $assignmentIds = [];
         $leafNodes = [];
         $assignmentsCount = 0;
         if (!empty($documents)) {
             // Flatten the structure to get leaf nodes only
-            if (!$documents[0]['lastChildItems']) {
+            if (!isset($documents[0]['lastChildItems'])) {
                 if (isset($documents[0]['parent_content_data'])) {
                     $parent = (last($documents[0]['parent_content_data']));
                 }
                 if (!empty($documents[0]['assignments'])) {
                     foreach ($documents[0]['assignments'] as $assignment) {
-                        $assignmentIds[$documents[0]['id']][$assignment['railcontent_id']] = [
+                        $assignmentIds[$id][$assignment['railcontent_id']] = [
                             'id' => $assignment['railcontent_id'],
-                            'parent_id' => $documents[0]['id'],
-                            'title' => $assignment['title']
+                            'parent_id' => $documents[0]['id'] ?? $assignment['parent_id'],
+                            'title' => $assignment['title'],
+                            'thumbnail' => $assignment['thumbnail'] ?? $documents[0]['thumbnail']
                         ];
                         $assignmentsCount++;
                     }
                 }
-                $leafNodes[] = [
-                    'id' => $id,
-                    'parent_id' => $parent['id'] ?? null,
-                    'title' => $documents[0]['title'],
-                    'thumbnail' => $documents[0]['thumbnail']
-                ];
+                if(isset($documents[0]['id'])){
+                    $leafNodes[] = [
+                        'id'        => $id,
+                        'parent_id' => $parent['id'] ?? null,
+                        'title'     => $documents[0]['title'],
+                        'thumbnail' => $documents[0]['thumbnail']
+                    ];
+                }
             }
             foreach ($documents[0]['lastChildItems'] ?? [] as $item) {
                 if (!empty($item['assignments'])) {
@@ -846,7 +860,8 @@ class SanityGateway
                         $assignmentIds[$item['id']][$assignment['railcontent_id']] = [
                             'id' => $assignment['railcontent_id'],
                             'parent_id' => $item['id'],
-                            'title' => $assignment['title']
+                            'title' => $assignment['title'],
+                            'thumbnail' => $assignment['thumbnail'] ?? $item['thumbnail']
                         ];
                         $assignmentsCount++;
                     }
@@ -862,10 +877,11 @@ class SanityGateway
                             ];
                             if (!empty($child['assignments'])) {
                                 foreach ($child['assignments'] as $assignment) {
-                                    $assignmentIds[$item['id']][$assignment['railcontent_id']] = [
+                                    $assignmentIds[$child['id']][$assignment['railcontent_id']] = [
                                         'id' => $assignment['railcontent_id'],
-                                        'parent_id' => $item['id'],
-                                        'title' => $assignment['title']
+                                        'parent_id' => $child['id'],
+                                        'title' => $assignment['title'],
+                                        'thumbnail' => $assignment['thumbnail'] ?? $child['thumbnail']
                                     ];
                                     $assignmentsCount++;
                                 }
@@ -892,7 +908,7 @@ class SanityGateway
                 }
             }
             //   $assignmentsCount = count($assignmentIds);
-            if ($documents[0]['type'] == 'song') {
+            if (isset($documents[0]['type']) && $documents[0]['type'] == 'song') {
                 if ($documents[0]['instrumentless']) {
                     $assignmentsCount = 2;
                 } else {
@@ -905,7 +921,7 @@ class SanityGateway
             'lessons' => $leafNodes,
             'lessons_count' => count($leafNodes),
             'soundslice_assignments' => $assignmentIds,
-            'soundslice_assignments_count' => $assignmentsCount,
+            'soundslice_assignments_count' => $isAssignment ? 0 : $assignmentsCount
         ];
     }
 
