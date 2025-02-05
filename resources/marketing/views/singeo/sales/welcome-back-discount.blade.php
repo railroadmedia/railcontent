@@ -336,34 +336,36 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    <section class="text-center  text-white  px-4 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#000;" x-data="{ plusMembershipSelected: true }">
-        <div class="container max-w-6xl mx-auto">
-            <h2 class="leading-tight mb-5"><strong>Rejoin {{ ucfirst($theme) }} and save<br> on your membership.</strong></h2>
-            <div id="plusOptions" class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto" x-bind:class="{ 'hidden': !plusMembershipSelected }">
-                <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                    <a href="/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&locked=true&promo-code=welcome-back" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{$theme}}" aria-label="Plan">
-                        <div class="bg-white px-3 py-6 md:py-9">
-                            <h2 class=""><strong>Annual</strong></h2>
-                            <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/singeo/membership/welcome-back/annually.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
-                            <h3 class="inline-block leading-tight"><s class="opacity-50">$240</s> <strong>$180</strong></h3>
-                            <p class="text-sm"><em>For your first year, then $240/yr.</em></p>
-                            <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0">GET STARTED  </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                    <a href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&locked=true&promo-code=welcomeMonth" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2  border-white " aria-label="Monthly Plan">
-                        <div class="bg-white px-3 py-5 md:py-7">
-                            <h2 class=""><strong>Monthly</strong></h2>
-                            <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/singeo/membership/welcome-back/monthly.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
-                            <h3 class="inline-block leading-tight"><s class="opacity-50">${{ Prices::$plusSubscriptionMonthly }}</s> <strong>$20</strong></h3>
-                            <p class="text-sm"><em>For your first month, then ${{ Prices::$plusSubscriptionMonthly }}/month.</em></p>
-                            <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0">GET STARTED  </div>
-                        </div>
-                    </a>
-                </div>
+
+    <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
+        style="background: linear-gradient(to bottom, #1D4689 0%, #0C1524 100%);">
+        <div class="container mx-auto relative z-50  max-w-3xl ">
+            <h1 class="leading-tight font-black mb-3 sm:mb-4">
+                Rejoin {{ ucfirst($theme) }} and save<br class="hidden sm:inline"> on your membership.</h1>
+            <img class="h-36 sm:h-56 my-4 sm:my-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/membership/ascension/order.webp">
+
+
+            <div class="promo-footer text-center">
+                <h3 class="leading-tight mb-1">
+                    <s class="opacity-50">${{ Prices::$plusSubscriptionAnnualFull }}</s>
+                    <strong>$180</strong> <span class="text-musora">
+                (Save {{ round(100 - (100 * (180 / 240))) }}%)
+            </span>
+                </h3>
+
+                <p class="text-sm mb-4 sm:mb-6"><em>
+                        For your first year, then ${{ Prices::$plusSubscriptionAnnualFull }}/yr.
+                    </em>
+                </p>
+
+                <a role="link"
+                    aria-label="Get Started"
+                    class="join singeo smaller mb-4 md:mb-5 w-full max-w-xs sm:max-w-sm"
+                    href="/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&locked=true&promo-code=welcome-back"
+                >GET Started »</a>
+
+                <p class="text-sm"><em>All prices listed in USD.</em></p>
             </div>
-            <p><em>All prices listed in USD.</em></p>
         </div>
     </section>
 
