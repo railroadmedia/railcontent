@@ -51,7 +51,7 @@
                         </div>
                         <template v-else>
                             <!-- Enroll now Button-->
-                            <button v-if="showEnrollNow" id="topEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
+                            <button v-if="showEnrollNow" id="topEnrollNow" @click="cohort['is_product'] ? scrollToBottom() : enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
                             <!--  Closed Button  -->
                             <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Enrollment Closed</span>
                         </template>
@@ -238,7 +238,7 @@
                         {{ cohort['product_description_body'] }}
                     </p>
 
-                    <div v-if="!isEnrolled && !hasEnded">
+                    <div v-if="!isEnrolled && !hasEnded" ref="bottomSection">
                         <div class="md:tw-flex md:tw-justify-center md:tw-gap-4 tw-px-4 md:tw-px-0 tw-mb-4 tw-space-y-4 md:tw-space-y-0">
 
                             <!-- Course Only Card -->
@@ -462,6 +462,7 @@ const openChallengeNotificationModal = ref(false);
 const challengeActionModalType = ref('');
 const isFromApp = ref(false);
 const isGetNotifiedModalOpen = ref(false);
+const bottomSection = ref(null);
 
 const joinText = computed(() => {
     return brand.value === 'drumeo' ? 'drummers' : brand.value === 'pianote' ? 'piano players' : brand.value === 'guitareo' ? 'guitar players' : brand.value === 'singeo' ? 'singers' : 'students'
@@ -510,6 +511,13 @@ const showGetNotified = computed(() => {
 
     return false;
 })
+
+const scrollToBottom = () => {
+  const element = bottomSection.value;
+  if (element) {
+    element.scrollIntoView();
+  }
+};
 
 const handleGetDeal = () => {
   isFromGetDeal.value = true;
