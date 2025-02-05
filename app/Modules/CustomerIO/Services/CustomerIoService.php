@@ -120,6 +120,10 @@ class CustomerIoService
         ?int $userId = null,
         ?int $createdAtTimestamp = null
     ): Customer {
+        if ($this->isDeletedUser($email)) {
+            Log::info('Customer data is deleted, not syncing to customer.io. Email: ' . $email);
+            return null;
+        }
         $accountConfigData = $this->getAccountConfigData($accountName);
         if (empty($createdAtTimestamp)) {
             $createdAtTimestamp = Carbon::now()->timestamp;
@@ -180,6 +184,10 @@ class CustomerIoService
         ?int $userId = null,
         ?int $createdAtTimestamp = null
     ): Customer {
+        if ($this->isDeletedUser($customer->email)) {
+            Log::info('Customer data is deleted, not syncing to customer.io. Email: ' . $customer->email);
+            return null;
+        }
         $accountConfigData = $this->getAccountConfigData($accountName);
         $oldCustomer = clone $customer;
 
@@ -450,28 +458,30 @@ class CustomerIoService
 
                     sleep(1);
 
-                    foreach ($formConfig['events'] as $eventName) {
-                        $eventData = [
-                            'timestamp' => Carbon::now()->timestamp,
-                            'brand' => $brand,
-                            'form_name' => $formName,
-                        ];
+                    if ($customer) {
+                        foreach ($formConfig['events'] as $eventName) {
+                            $eventData = [
+                                'timestamp' => Carbon::now()->timestamp,
+                                'brand' => $brand,
+                                'form_name' => $formName,
+                            ];
 
-                        foreach (config('customer-io.forms_events_UTM_parameters', []) as $param => $dataKey) {
-                            $eventData[$dataKey] = $requestParams[$param] ?? null;
-                        }
-
-                        $customEventAttributes = array_keys($formConfig['custom_event_attributes'] ?? []);
-                        foreach ($requestParams as $param => $value) {
-                            if (in_array($param, $customEventAttributes)) {
-                                $eventData[$param] = $value;
+                            foreach (config('customer-io.forms_events_UTM_parameters', []) as $param => $dataKey) {
+                                $eventData[$dataKey] = $requestParams[$param] ?? null;
                             }
+
+                            $customEventAttributes = array_keys($formConfig['custom_event_attributes'] ?? []);
+                            foreach ($requestParams as $param => $value) {
+                                if (in_array($param, $customEventAttributes)) {
+                                    $eventData[$param] = $value;
+                                }
+                            }
+
+                            $this->createEvent($customer->email, $accountName, $eventName, array_filter($eventData));
                         }
 
-                        $this->createEvent($customer->email, $accountName, $eventName, array_filter($eventData));
+                        $customers[] = $customer;
                     }
-
-                    $customers[] = $customer;
                 }
             }
         }
@@ -494,6 +504,10 @@ class CustomerIoService
         ?string $eventType = null,
         ?int $createdAtTimestamp = null
     ): bool {
+        if ($this->isDeletedUser($email)) {
+            Log::info('Customer data is deleted, not syncing to customer.io. Email: ' . $email);
+            return true;
+        }
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         $this->customerIoApiGateway->createEvent(
@@ -794,5 +808,14 @@ class CustomerIoService
         return $isProspectWorkspace
             ? !is_null($this->getCustomerByEmail($accountName, $email, false))
             : true;
+    }
+
+    private function isDeletedUser(string $email): bool
+    {
+        if (str_contains($email, 'musora+deleted')) {
+            return true;
+        }
+
+        return false;
     }
 }
