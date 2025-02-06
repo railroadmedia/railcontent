@@ -22,6 +22,9 @@
                 </h3>
                 <p class="text-sm mb-5"><em>{!! $secondDealSub !!}</em></p>
                 <span class="join musora smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0" aria-label="{{ $buttonText }}"> {{$buttonText}} </span>
+                @if(!empty($underButtonSocial))
+                    <p class="text-xs mt-2"><em>Join {{ number_format($nPackOwners ?? 0) }} drummers who have already registered.</em></p>
+                @endif
             </div>
             @if(!empty($secondExtraBonuses))
                 <div class="px-4 sm:px-4 lg:px-6 pb-7 lg:whitespace-nowrap inline-block w-auto mx-auto">
@@ -54,6 +57,9 @@
                 </h3>
                 <p class="text-sm mb-5"><em>{!! $firstDealSub !!}</em></p>
                 <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] {{ $theme }}" role="button" tabindex="0" aria-label="{{ $buttonText }}">{{$buttonText}}</div>
+                @if(!empty($underButtonSocial))
+                    <p class="text-xs mt-2"><em>Join {{ number_format($nPackOwners ?? 0) }} drummers who have already registered.</em></p>
+                @endif
             </div>
             @if(!empty($firstExtraBonuses))
                 <div class="px-4 sm:px-4 lg:px-6 pb-7 inline-block w-auto mx-auto">

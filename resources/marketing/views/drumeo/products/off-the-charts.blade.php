@@ -237,19 +237,27 @@
         'cartVersion' => true,
     ])
 
-    <header class="text-white relative overflow-hidden z-10 h-[560px] sm:h-[700px]" style="background-color:#666;">
+    <header class="text-white relative overflow-hidden z-10 h-[640px] sm:h-[700px]" style="background-color:#666;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="quietkick" class="h-32 sm:h-36 lg:h-40 mb-5 sm:mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/products/off-the-charts/logo-white2.png"><br>
                 <h1 class="leading-tight"><strong>Learn to write <br> pro drum charts</strong></h1>
                 <h4 class="leading-tight"><em>and nail every gig.</em></h4>
-                <div class="w-full max-w-xl mx-auto mt-7">
+                <p class="leading-tight mt-4"><strong>Save your seat in the first-ever<br class="sm:hidden"> class starting February 17.</strong></p>
+                <div class="w-full max-w-xl mx-auto mt-7 mb-4">
                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch The Trailer</div>
                     <div class="sm:w-5/12 join smaller outline sm:hidden inline-block"   @click="trailerM = true;" ><i class="fas fa-play"></i> &nbsp;Watch The Trailer</div>
                     <br class="sm:hidden">
                     @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
                         <a class="mt-3 sm:mt-0 w-5/12 join smaller blue anchor-slide" href="#customize-anchor">Get Started</a>
                     @endif
+                </div>
+                <div class="w-auto mx-auto">
+                    <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
+                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
+                        alt="Image of joined student profiles in 30-Day Double Bass With 66Samus">
+                    <p class="inline-block leading-tight text-sm align-middle"><em>Join {{ number_format($nPackOwners ?? 0) }} drummers who<br class="sm:hidden"> have already registered.</em></p>
                 </div>
             </div>
         </div>
@@ -259,8 +267,43 @@
             src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/off-the-charts/header.mp4"></video>
     </header>
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
+    <section class="text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 relative" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
+            <div class="flex flex-wrap md:flex-nowrap text-center border rounded-lg border-gray-300 -mt-6 sm:-mt-12 mb-14 lg:mb-20 relative z-10" style="background-color:#f1f7fe;">
+                <div class="w-full md:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 md:py-3 lg:py-4">
+                    <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
+                    <h4 class="px-3 lg:px-5"><strong>February 17th</strong></h4>
+                    <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
+                    <p class="text-sm px-3 lg:px-5">
+                        Enrollment closes in<br>
+                        <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
+                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                             </span>
+                    </p>
+                </div>
+                <div class="flex flex-wrap md:flex-nowrap items-center justify-evenly w-full md:w-auto md:flex-grow py-4 md:py-3 lg:py-4 text-left md:text-center">
+                    <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
+                        <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
+                        <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
+                            <span class="text-sm"> February 17th to<br> February 24th.</span></p>
+                    </div>
+                    <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
+                        <i class="far fa-fw mr-3 md:mr-0 fa-clock text-drumeo text-2xl"></i>
+                        <p class="leading-tight mx-0"><strong class="font-black">Commitment</strong><br>
+                            <span class="text-sm">20 minutes/day<br> for 8 days.</span></p>
+                    </div>
+                    <div class="flex md:block w-full md:w-auto px-4 md:px-3 justify-center">
+                        <i class="far fa-fw mr-3 md:mr-0 fa-trophy text-drumeo text-2xl"></i>
+                        <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
+                            <span class="text-sm">Write drum charts. <br> Learn songs faster.</span></p>
+                    </div>
+                </div>
+            </div>
+
             <h2 class="leading-tight"><strong class="text-drumeo">Don’t just keep time.</strong></h2>
             <h3 class="leading-tight">Be the drummer everybody<br class="sm:hidden"> wants in their band.</h3>
             <video class="w-full rounded-xl overflow-hidden max-w-3xl mx-auto my-4" type="video/mp4" autoplay="" loop="" playsinline="" muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/off-the-charts/pencil2.mp4"></video>
@@ -435,6 +478,8 @@
                 unlimited drum lessons + a charting book and pencils shipped to your door.</h5>
             @include('musora.sales.components.order-promo-cards-section', [
                 // general
+                'underButtonSocial' => true,
+                'nPackOwners' => $nPackOwners,
                 'buttonText' => "ORDER NOW",
 
                 // first deal
@@ -491,13 +536,13 @@
 
     @include('_partials.components.video-modal', [
         'name' => 'trailerM',
-        'video' => '1052103257',
+        'video' => '1053894570',
         'vimeo' => true,
         'styles' => 'pb-[177%] bg-white',
     ])
     @include('_partials.components.video-modal', [
     'name' => 'trailer',
-    'video' => '1052103301',
+    'video' => '1053894638',
     'vimeo' => true,
     ])
 
@@ -506,7 +551,7 @@
     @include('drumeo.sales.partials._footer')
 
     @include('_partials.components.countdown', [
-        'countdownDate' => '2024-10-28 00:00:00',
+        'countdownDate' => '2025-02-17 00:00:00',
         'promoVersion' => false,
     ])
 
