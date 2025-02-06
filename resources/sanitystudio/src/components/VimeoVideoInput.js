@@ -30,7 +30,7 @@ const VimeoVideoInput = React.forwardRef((props, ref) => {
                     })
                     .then(data => {
                         console.log('Vimeo video data:', data);
-                        const { length_in_seconds, hlsManifestUrl, video_playback_endpoints } = data;
+                        const { length_in_seconds, hlsManifestUrl, video_playback_endpoints, captions } = data;
 
                         let parsedVideoPlaybackEndpoints;
                         try {
@@ -40,6 +40,13 @@ const VimeoVideoInput = React.forwardRef((props, ref) => {
                             return; // Exit if there's a parsing error
                         }
 
+                        let parsedCaptions;
+                        try {
+                            parsedCaptions = JSON.parse(captions); // Parse the string to an array
+                        } catch (error) {
+                            console.error('Error parsing captions:', error);
+                        }
+
                         // Ensure that parsedVideoPlaybackEndpoints is an array before updating
                         if (Array.isArray(parsedVideoPlaybackEndpoints)) {
                             // Add a unique _key to each item using randomKey
@@ -47,13 +54,20 @@ const VimeoVideoInput = React.forwardRef((props, ref) => {
                                 _key: randomKey(), // Generate a unique key for each item
                                 ...item,
                             }));
-
+                            let captionsWithKeys = [];
+                            if (Array.isArray(parsedCaptions)) {
+                                captionsWithKeys = parsedCaptions.map((item) => ({
+                                    _key: randomKey(), // Generate a unique key for each item
+                                    ...item,
+                                }));
+                            }
                             return sanityClient
                                 .patch(docId)
                                 .set({
                                     length_in_seconds, // Assuming length_in_seconds exists in your data
                                     'video.hlsManifestUrl': hlsManifestUrl,
-                                    'video.video_playback_endpoints': itemsWithKeys // Now this is an array with unique keys
+                                    'video.video_playback_endpoints': itemsWithKeys, // Now this is an array with unique keys
+                                    'video.captions': captionsWithKeys
                                 })
                                 .commit();
                         } else {
@@ -95,7 +109,7 @@ const VimeoVideoInput = React.forwardRef((props, ref) => {
         else {
             sanityClient
                 .patch(docId)
-                .unset(['video.hlsManifestUrl', 'video.video_playback_endpoints'])
+                .unset(['video.hlsManifestUrl', 'video.video_playback_endpoints', 'video.captions'])
                 .commit()
                 .then(() => {
                     console.log('Unset video.hlsManifestUrl and video.video_playback_endpoints successfully');
