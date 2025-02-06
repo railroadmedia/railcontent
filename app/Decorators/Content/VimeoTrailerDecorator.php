@@ -51,10 +51,11 @@ class VimeoTrailerDecorator extends ModeDecoratorBase
                 [],
                 'GET'
             );
-
-            $textTractResponse = $this->vimeo->request('/videos/'.$vimeoId.'/texttracks', [], 'GET');
-
-            $response['body']['text-tracks'] = $textTractResponse['body']['data'] ?? [];
+            $response['body']['text-tracks'] = [];
+            if($response['body']['metadata']['connections']['texttracks']['total'] > 0) {
+                $textTractResponse = $this->vimeo->request($response['body']['metadata']['connections']['texttracks']['uri'], [], 'GET');
+                $response['body']['text-tracks'] = $textTractResponse['body']['data'] ?? [];
+            }
 
             $this->cache->put(
                 self::CACHE_KEY_PREFIX.$vimeoId,
@@ -108,9 +109,25 @@ class VimeoTrailerDecorator extends ModeDecoratorBase
                     $contentResults['hlsManifestUrl'] = $fileData['link'];
                 }
 
-                $contentResults['captions'] = $captions;
             }
 
+            if (!empty($response['body']['text-tracks'])) {
+                foreach ($response['body']['text-tracks'] as $textTrackData) {
+                    if($textTrackData['active']) {
+                        $captions[] = [
+                            'uri' => $textTrackData['uri'],
+                            'link' => $textTrackData['link'],
+                            'type' => $textTrackData['type'],
+                            'name' => $textTrackData['name'],
+                            'language' => $textTrackData['language'],
+                            'display_language' => $textTrackData['display_language']
+
+                        ];
+                    }
+                }
+            }
+
+            $contentResults['captions'] = $captions;
 
             $contentResults
             [$prefix.'video_playback_endpoints'] = array_values(

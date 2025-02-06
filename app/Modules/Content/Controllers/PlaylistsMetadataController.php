@@ -622,7 +622,7 @@ class PlaylistsMetadataController extends Controller
             if (!$playlist) {
                 continue;
             }
-
+            $initialItemsCount = $playlist->items->count();
             if ($playlist->items->count() + $itemsThatShouldBeAdd > config('railcontent.playlist_items_limit', 300)) {
                 $limitExcedeed[] = $playlist;
                 continue;
@@ -692,7 +692,7 @@ class PlaylistsMetadataController extends Controller
                     }
                 }
             }
-            if ($firstItemInPlaylist) {
+            if ($firstItemInPlaylist && ($initialItemsCount == 0)) {
                 $playlist->first_item_thumbnail_url = $firstItemInPlaylist['thumbnail'];
                 $playlist->save();
             }

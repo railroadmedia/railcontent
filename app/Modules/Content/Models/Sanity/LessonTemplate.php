@@ -56,6 +56,15 @@ abstract class LessonTemplate extends BaseSanityModel
                                 new Field(FieldType::Number, 'width')],
                             previewItem: new ListItemPreview('height', 'width'),
                         ), ),
+                        new Field(FieldType::Array, 'captions', title:'Captions/Subtitles', of: new ListObject(
+                            fields: [
+                                        new Field(FieldType::String, 'uri'),
+                                        new Field(FieldType::String, 'link'),
+                                        new Field(FieldType::String, 'type'),
+                                        new Field(FieldType::String, 'name'),
+                                        new Field(FieldType::String, 'language'),
+                                        new Field(FieldType::String, 'display_language')],
+                        ), ),
                     ],
         );
         $chapterList = new ListObject(
