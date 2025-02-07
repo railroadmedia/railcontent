@@ -636,7 +636,10 @@ class PlaylistsMetadataController extends Controller
                     continue;
                 }
                 $extraItemData = $extraData[$key];
-                $this->createPlaylistItem(['id' => $request->get('content_id'), 'parent_id' => null, 'title' => $flattenContent['lessons'][0]['title']], $lastPosition, $playlistId, $added, $firstItemInPlaylist,  $extraItemData);
+                $this->createPlaylistItem(['id' => $request->get('content_id'), 'parent_id' => null,
+                                           'title' => $flattenContent['lessons'][0]['title'],
+                                           'thumbnail' => $flattenContent['lessons'][0]['thumbnail']],
+                                          $lastPosition, $playlistId, $added, $firstItemInPlaylist,  $extraItemData);
                 $isExtra = true;
             }
 

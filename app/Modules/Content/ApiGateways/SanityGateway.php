@@ -901,7 +901,8 @@ class SanityGateway
                             $assignmentIds[$item['id']][$assignment['railcontent_id']] = [
                                 'id' => $assignment['railcontent_id'],
                                 'parent_id' => $item['id'],
-                                'title' => $assignment['title']
+                                'title' => $assignment['title'],
+                                'thumbnail' => $item['thumbnail']
                             ];
                             $assignmentsCount++;
                         }
