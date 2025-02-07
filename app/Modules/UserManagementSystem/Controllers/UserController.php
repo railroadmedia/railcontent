@@ -26,6 +26,7 @@ use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
 use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
+use App\Modules\EventTracking\Avo\AvoHelper;
 use Railroad\Mailora\Services\MailService;
 use App\Modules\Referral\Exceptions\NotFoundException;
 use App\Modules\Referral\Exceptions\ReferralException;
@@ -33,6 +34,7 @@ use App\Modules\Referral\Exceptions\SaasquatchException;
 use App\Modules\Referral\Exceptions\SaasquatchUserExistsException;
 use App\Modules\Referral\Models\Referrer;
 use App\Modules\Referral\Services\SaasquatchService;
+use Avo;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Session;
@@ -124,6 +126,7 @@ class UserController extends Controller
         // ensures that only a person with the special link can claim that email address.
 
         $verificationToken = $request->get('verification_token');
+        $eventTrackingOrigin = $request->get('event_tracking_origin', config('event-tracking.account_password_created_method.default'));
 
         if (strtolower($verificationToken) !== strtolower(
             md5($email . config('shopify.multipass.account_creation_secret_key'))
@@ -142,7 +145,11 @@ class UserController extends Controller
             return redirect()->route('login', ['email' => $email]);
         }
 
-        return view('pages.account-creation', ['email' => $email, 'verificationToken' => $verificationToken]);
+        return view('pages.account-creation', [
+            'email' => $email,
+            'verificationToken' => $verificationToken,
+            'eventTrackingOrigin' => $eventTrackingOrigin
+        ]);
     }
 
     public function createUserWithVerificationToken(Request $request)
@@ -208,14 +215,18 @@ class UserController extends Controller
             Log::error("Error applying referral code for user $user->id: " . $e->getMessage());
         }
 
-
         Auth::loginUsingId($user->getId());
 
-        return $request->has('redirect') ?
-            redirect()
-            ->away($request->get('redirect')) :
-            redirect()
-            ->to(config('ecommerce.post_purchase_redirect_digital_items'));
+        Avo::account_password_created(
+            AvoHelper::defaultEventProperties(
+                [ 'password_created_method' => $request->get('event_tracking_origin', config('event-tracking.account_password_created_method.default')) ],
+                $user
+            )
+        );
+
+        return $request->has('redirect')
+            ? redirect()->away($request->get('redirect'))
+            : redirect()->to(config('ecommerce.post_purchase_redirect_digital_items'));
     }
 
     public function store(Request $request)

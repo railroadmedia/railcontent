@@ -80,25 +80,6 @@
     ])
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
-        <section x-show="filter === 'all'">
-            <div class="container mx-auto">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
-                <div class="flex flex-wrap mb-5 sm:mb-10">
-                    <a href="/new-year" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
-                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]" style="padding-bottom:71%;">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/january/ny-bundle.webp');"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/january/ny-bundle-m.webp');"></div>
-                        </div>
-                    </a>
-                    <a href="/drumshop/kit" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
-                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]" style="padding-bottom:71%;">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/january/e-kit-bundle.webp');"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/january/e-kit-bundle-m.webp');"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container" x-data="{ showAll: false }">
@@ -130,6 +111,46 @@
                             'fetch' => $key < 4 ? true : null,
                         ])
                     @endforeach
+                </div>
+                <div class="-mt-3 sm:-mt-5 lg:-mt-8 mb-10 text-center" x-show="isIndexPage && filter === 'all'">
+                    <span
+                        @click="showAll = true"
+                        x-show="!showAll"
+                        class="join outline black smaller">
+                        See More
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <div id="accessories" class="anchor"></div>
+        <section class="grid-view category-section" data-category="accessories" x-show="filter === 'accessories' || filter === 'all'">
+            <div class="container" x-data="{ showAll: false }">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Physical Products</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
+                    :class="{ 'show-all': showAll || (!isIndexPage && filter !== 'all') || filter === 'accessories' }">
+                    @include('_partials.components.shop.product-card', [
+                            "href" => "/drumshop/kit",
+                             "price" => 1474,
+                             "discounted_price" => 599,
+                             "title" => "The E-KIT Bundle",
+                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
+                             'soldOut' => false,
+                        ])
+                @foreach($accessories as $item)
+                    @include('_partials.components.shop.product-card', [
+                        "badge" => $item->badge_text,
+                        "discounted_price" => $item->discounted_price,
+                        "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                        "price" => $item->price,
+                        "size_case_sensitive" => $item->size_case_sensitive,
+                        "sizes" => $item->sizes,
+                        "sku" => (str_contains($item->sku, 'member') || str_contains($item->sku, 'products')) ? '' : $item->sku,
+                        "soldOut" => isset($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
+                        "thumbnail" => $item->thumbnail,
+                        "title" => $item->name,
+                    ])
+                @endforeach
                 </div>
                 <div class="-mt-3 sm:-mt-5 lg:-mt-8 mb-10 text-center" x-show="isIndexPage && filter === 'all'">
                     <span
@@ -174,46 +195,6 @@
                         "title" => "$240 Digital Gift Card",
                         'soldOut' => false,
                     ])
-                </div>
-            </div>
-        </section>
-
-        <div id="accessories" class="anchor"></div>
-        <section class="grid-view category-section" data-category="accessories" x-show="filter === 'accessories' || filter === 'all'">
-            <div class="container" x-data="{ showAll: false }">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Physical Products</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
-                    :class="{ 'show-all': showAll || (!isIndexPage && filter !== 'all') || filter === 'accessories' }">
-                    @include('_partials.components.shop.product-card', [
-                            "href" => "/drumshop/kit",
-                             "price" => 1474,
-                             "discounted_price" => 599,
-                             "title" => "The E-KIT Bundle",
-                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
-                             'soldOut' => false,
-                        ])
-                @foreach($accessories as $item)
-                    @include('_partials.components.shop.product-card', [
-                        "badge" => $item->badge_text,
-                        "discounted_price" => $item->discounted_price,
-                        "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                        "price" => $item->price,
-                        "size_case_sensitive" => $item->size_case_sensitive,
-                        "sizes" => $item->sizes,
-                        "sku" => (str_contains($item->sku, 'member') || str_contains($item->sku, 'products')) ? '' : $item->sku,
-                        "soldOut" => isset($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                        "thumbnail" => $item->thumbnail,
-                        "title" => $item->name,
-                    ])
-                @endforeach
-                </div>
-                <div class="-mt-3 sm:-mt-5 lg:-mt-8 mb-10 text-center" x-show="isIndexPage && filter === 'all'">
-                    <span
-                        @click="showAll = true"
-                        x-show="!showAll"
-                        class="join outline black smaller">
-                        See More
-                    </span>
                 </div>
             </div>
         </section>

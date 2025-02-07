@@ -78,7 +78,7 @@ class CustomerIoController extends Controller
         }
 
         if ($request->has('success_redirect')) {
-            $response = redirect()->away($request->input('success_redirect'));
+            $response = redirect()->away('/thank-you');
         } else {
             $response = redirect()->back();
         }

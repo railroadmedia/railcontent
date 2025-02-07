@@ -33,7 +33,9 @@
         </script>
 
         @if(!empty($hotjar))
-            @include('musora._partials._hotjar')
+            @include('_partials.layout._hotjar', [
+                "hjid" => "musora"
+            ])
         @endif
     </head>
 

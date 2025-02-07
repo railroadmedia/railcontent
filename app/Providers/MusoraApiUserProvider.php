@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
+use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\UserManagementSystem\Services\UserService;
 use App\Services\CalendarService;
+use Avo;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
@@ -337,6 +339,13 @@ class MusoraApiUserProvider implements UserProviderInterface
             $user->email = $email;
             $user->setPassword($password);
             $user->save();
+
+            Avo::account_password_created(
+                AvoHelper::defaultEventProperties(
+                    [ 'password_created_method' => config('event-tracking.account_password_created_method.mobile') ],
+                    $user
+                ),
+            );
 
             return $user;
         }

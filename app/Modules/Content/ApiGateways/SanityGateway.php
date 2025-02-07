@@ -1021,6 +1021,9 @@ class SanityGateway
 
     private function postProcessDocument(&$document): void
     {
+        if (!$document) {
+            return;
+        }
         //fix parent_content_data for decorators
         if ($document['parent_content_data'] ?? false) {
             $document['parent_content_data'] = json_encode($document['parent_content_data']);

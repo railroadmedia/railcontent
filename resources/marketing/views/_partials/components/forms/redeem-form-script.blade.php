@@ -11,6 +11,20 @@
             isValid: true,
             submitted: false,
 
+            init() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            if (code) {
+                const formattedCode = code.match(/.{1,4}/g)?.join(' ') || '';
+                this.$refs.accessCodeInput.value = formattedCode;
+                }
+            },
+
+            formatCode(code) {
+            code = code.replace(/[\s-]/g, '');
+            return code.replace(/(.{4})/g, '$1 ').trim();
+            },
+
             async submitRedeem(event) {
                 this.errors = {
                     access_code: '',

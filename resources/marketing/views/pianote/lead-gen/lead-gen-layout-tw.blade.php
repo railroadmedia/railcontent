@@ -15,6 +15,10 @@
     <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}"></noscript>
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-pianote.css') }}">
 
+    @include('_partials.layout._hotjar', [
+        "hjid" => "pianote"
+    ])
+
     @yield('head')
 @stop
 

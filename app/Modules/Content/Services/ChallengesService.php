@@ -793,16 +793,20 @@ class ChallengesService
     {
         $musoraWorkspace = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
         $customerIO = $this->customerIoService->getCustomerByEmail($musoraWorkspace, $user->email);
-        if (is_null($customerIO)) {
-            return;
-        }
-        $existingNotifications = json_decode($customerIO->getExternalAttributes()[$notificationKey->value] ?? '[]');
-        if ($add) {
-            if (!in_array($challengeId, $existingNotifications)) {
-                $existingNotifications[] = $challengeId;
+        if ($customerIO) {
+            $existingNotifications = json_decode($customerIO->getExternalAttributes()[$notificationKey->value] ?? '[]');
+            if ($add) {
+                if (!in_array($challengeId, $existingNotifications)) {
+                    $existingNotifications[] = $challengeId;
+                }
+            } else {
+                unset($existingNotifications[$challengeId]);
             }
+        } elseif ($add) {
+            $existingNotifications =  [$challengeId];
         } else {
-            unset($existingNotifications[$challengeId]);
+            // If the customer doesn't already exist in c.io don't add them
+            return;
         }
         $data = [$notificationKey->value => $existingNotifications];
         $this->customerIoService->createOrUpdateCustomerByUserId(

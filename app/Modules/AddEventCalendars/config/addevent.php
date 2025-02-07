@@ -43,7 +43,6 @@ return [
             'recording' => 'Recordings',
             'student-review' => 'Student Reviews',
             'podcasts' => 'The Pianote Podcast',
-            'song' => 'Songs',
         ],
         'guitareo' => [
             'courses' => 'Courses',
@@ -61,7 +60,6 @@ return [
             'question-and-answer' => 'Q&As',
             'course' => 'Courses',
             'boot-camps' => 'Boot Camps',
-            'song' => 'Songs',
         ]
     ],
 
@@ -96,7 +94,6 @@ return [
                 'recording' => 'wq142506',
                 'student-review' => 'Mk143007',
                 'podcasts' => 'Eu292158',
-                'song' => 'Li142502',
             ],
         ],
         'guitareo' => [ // run `php artisan AddEventCommand guitareo`, select "getCalendarIdsForMusora" and paste output in this array
@@ -120,7 +117,6 @@ return [
                 'question-and-answer' => 'IT354214',
                 'course' => 'KJ354215',
                 'boot-camps' => 'Cx354282',
-                'song' => 'bD354283',
             ],
         ],
     ],
@@ -203,7 +199,6 @@ return [
                 'recording' => 'wq142506',
                 'student-review' => 'Mk143007',
                 'podcasts' => 'Eu292158',
-                'song' => 'Li142502',
             ],
             'by-coach' => [
                 'brett-ziegler' => 'ek405282',
@@ -251,7 +246,6 @@ return [
                 'question-and-answer' => 'IT354214',
                 'course' => 'KJ354215',
                 'boot-camps' => 'Cx354282',
-                'song' => 'bD354283',
             ],
             'by-coach' => [
                 'darcy-d' => 'Pa405293',

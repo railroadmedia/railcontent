@@ -35,7 +35,8 @@ class UserAuthenticationService
         $mailToStudent->with([
             'setupAccountUrl' => route('user_management_system.create-account-page', [
                 'email' => $user->email,
-                'verification_token' => $token
+                'verification_token' => $token,
+                'event_tracking_origin' => config('event-tracking.account_password_created_method.login')
             ]),
         ]);
 

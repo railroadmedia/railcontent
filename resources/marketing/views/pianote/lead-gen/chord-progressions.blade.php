@@ -4,10 +4,10 @@
 
 @section('global-head')
     @parent
-    <title>Digital Little Book of Chord Progressions | Pianote</title>
-    <meta property="og:title" content="Digital Little Book of Chord Progressions">
-    <meta name="description" content="In this little book, we have compiled the top 14 chord progressions you will find in popular music.">
-    <meta property="og:description" content="In this little book, we have compiled the top 14 chord progressions you will find in popular music.">
+    <title>Little Book of Chord Progressions (Digital) | Pianote</title>
+    <meta property="og:title" content="Little Book of Chord Progressions (Digital)">
+    <meta name="description" content="In this little E-book, we have compiled the top 14 chord progressions you will find in popular music.">
+    <meta property="og:description" content="In this little E-book, we have compiled the top 14 chord progressions you will find in popular music.">
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/chords-progressions-digital-book/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
@@ -38,11 +38,11 @@
                         </div>
                         <p class="leading-normal pt-2 md:pt-4">
                             All music is chord progressions. <br class="hidden md:block">
-                            In this little book, we’ve compiled the top 14 chord progressions <br class="hidden lg:block"> 
+                            In this little book, we’ve compiled the top 14 chord progressions <br class="hidden lg:block">
                             you’ll find in popular music.
                             <br><br>
                             You’ll get diagrams for each one as well as notated chord pathways.<br class="hidden lg:block">
-                            Use these chords to start playing your favorite songs (or write your own). 
+                            Use these chords to start playing your favorite songs (or write your own).
                         </p>
                         <p class="leading-normal my-2 lg:my-4"><strong>
                                 Enter your email address to get  <br class="lg:hidden">
@@ -80,8 +80,8 @@
                         We’re breaking down the 14 most popular chord progressions with detailed diagrams and music notation.
                     </p>
                 </div>
-                      
-                <div class="w-full sm:w-1/2 mb-5 sm:mb-0 lg:pl-16 lg:px-10 relative z-10 pt-20 sm:pt-0 bg-[url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/chords-progressions-digital-book/paper-bg-m.webp')] sm:bg-none">                    
+
+                <div class="w-full sm:w-1/2 mb-5 sm:mb-0 lg:pl-16 lg:px-10 relative z-10 pt-20 sm:pt-0 bg-[url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/chords-progressions-digital-book/paper-bg-m.webp')] sm:bg-none">
                 <h4 class="pb-4 md:pb-6 px-5 sm:px-6"><strong>You’ll get:</strong></h4>
                     <ul class="ml-6 fa-ul px-5 sm:px-6" style="column-gap: 20px;">
                         <li class="mb-3"><i class="fa-li fas fa-check text-pianote mr-1"></i> Color diagrams of all 14 progressions</li>
@@ -93,11 +93,11 @@
             </div>
         </div>
     </section>
-    
+
 
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/chords-progressions-digital-book/piano-bg.webp');">
         <h3 class="leading-tight"><strong>Take a look inside</strong></h3>
-        <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative" style="bottom:-7px"></i> <em>Click to see inside the book.</em> <i class="fa-light fa-arrow-turn-down ml-1 relative" style="bottom:-7px"></i></p>
+        <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative" style="bottom:-7px"></i> <em>Click to see inside the E-Book.</em> <i class="fa-light fa-arrow-turn-down ml-1 relative" style="bottom:-7px"></i></p>
         <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/lead-gen/chords-progressions-digital-book/little-books-chord-progressions-eBook-preview.pdf" class="relative">
             <img class="inline-block lg:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/chords-progressions-digital-book/piano-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             <img class="hidden lg:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/lead-gen/chords-progressions-digital-book/piano.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">

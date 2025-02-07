@@ -435,7 +435,8 @@ class SanityStudioCMSController extends BaseController
                         'video_poster_image_url' => $vimeo['video_poster_image_url'],
                         'video_playback_endpoints' => json_encode($vimeo['video_playback_endpoints']),
                         'hlsManifestUrl' => $vimeo['hlsManifestUrl'],
-                        'length_in_seconds' => $vimeo['length_in_seconds']
+                        'length_in_seconds' => $vimeo['length_in_seconds'],
+                        'captions' => json_encode($vimeo['captions']??[]),
                     ]
                 );
             }
