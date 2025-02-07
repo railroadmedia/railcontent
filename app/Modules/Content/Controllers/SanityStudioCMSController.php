@@ -428,6 +428,12 @@ class SanityStudioCMSController extends BaseController
             ConfigService::$brand = 'musora';
             $vimeoTrailerDecorator = app()->make(VimeoTrailerDecorator::class);
             $vimeo = $vimeoTrailerDecorator->decorate($vimeoId);
+            foreach($vimeo['captions'] as $caption){
+                $client = new Client();
+                $response = $client->get($caption['link'], ['stream' => true]);
+                Storage::disk('s3')->put($caption['name'], $response->getBody(), 'public');
+                $caption['link'] = Storage::disk('s3')->url($caption['name']);
+            }
             if ($vimeo) {
                 $video = Vimeo::create(
                     [
