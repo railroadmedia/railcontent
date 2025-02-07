@@ -541,7 +541,7 @@ class SanityGateway
                         'type' => $document['type'],
                         'title' => $document['title'],
                         'url' => $document['url'],
-                        'id' => $document['railcontent_id']
+                        'id' => $document['railcontent_id'],
                     ]
                 ];
             }
