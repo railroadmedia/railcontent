@@ -139,6 +139,7 @@ class SanityGateway
                     "title":assignment_title,
                 },
                 soundslice_slug,
+                "is_milestone": coalesce(is_milestone, false),
                 xp,
                 "resources": [
                                 ... '.self::RESOURCES_FIELD.',
