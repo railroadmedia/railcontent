@@ -215,8 +215,8 @@ export default {
                   @click.stop
                   @change="handleToggleAdminView"
                   :brand="brand"
-                  class="!tw-w-11 [&>div]:!tw-w-11 [&_label[for=is_admin_view]]:!tw-ml-0 [&>div>label:first-of-type]:!tw-bg-[#e5e7ea] [&>div>label:first-of-type]:!dark:tw-bg-[#001f3f] [&>div>label:first-of-type]:!tw-border-[#e5e7eb] [&>div>label:first-of-type]:!dark:tw-border-[#1e3b53]"
-                />
+                  class="!tw-w-11 [&>div]:!tw-w-11 [&>div>label:first-of-type]:!tw-bg-[#e5e7ea] [&>div>label:first-of-type]:!dark:tw-bg-[#001f3f] [&>div>label:first-of-type]:!tw-border-[#e5e7eb] [&>div>label:first-of-type]:!dark:tw-border-[#1e3b53] [&>label]:!tw-ml-0"
+                  />
               </div>
             </div>
           </div>
