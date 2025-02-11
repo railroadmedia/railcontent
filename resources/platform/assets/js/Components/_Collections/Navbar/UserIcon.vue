@@ -206,8 +206,7 @@ export default {
               672.2,1393.35c7,13,13.36,21.84,18.55,31.99Z"/>
             </svg>
             Admin Mode: {{ useStudentView ? 'Off' : 'On' }}
-            <div class="tw-ml-auto">
-              <div class="tw-ml-auto">
+              <div class="tw-ml-auto tw-py-1">
                 <MuToggle
                   id="is_admin_view"
                   name="is_admin_view"
@@ -217,7 +216,6 @@ export default {
                   :brand="brand"
                   class="!tw-w-11 [&>div]:!tw-w-11 [&>div>label:first-of-type]:!tw-bg-[#e5e7ea] [&>div>label:first-of-type]:!dark:tw-bg-[#001f3f] [&>div>label:first-of-type]:!tw-border-[#e5e7eb] [&>div>label:first-of-type]:!dark:tw-border-[#1e3b53] [&>label]:!tw-ml-0"
                   />
-              </div>
             </div>
           </div>
         </OptionElement>
