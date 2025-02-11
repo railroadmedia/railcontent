@@ -220,6 +220,10 @@ Route::as('api.')
         Route::get('/v1/content/carousel', [CarouselControllerV1::class, 'getHomepageCarousel'])
             ->middleware('api_version:v1')
             ->name('v1.content.carousel');
+
+        Route::get('/v2/content/carousel', [CarouselControllerV1::class, 'getHomepageCarousel'])
+            ->middleware('api_version:v2')
+            ->name('v2.content.carousel');
     });
 
 Route::prefix('playlists')
