@@ -33,6 +33,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Services\RailcontentV2DataSyncingService;
 use Railroad\Railcontent\Services\RecommendationService;
+use App\Modules\Content\Console\Commands\Data\ImportSanityPublishers;
 
 class DevEndpointController extends Controller
 {
@@ -53,6 +54,7 @@ class DevEndpointController extends Controller
         private SanityGateway $sanityGateway,
         private RailcontentV2DataSyncingService $dataSyncingService,
         private CarouselServiceV1 $carouselServiceV1,
+        private ImportSanityPublishers $importSanityPublishers,
     ) {
     }
 
@@ -62,7 +64,8 @@ class DevEndpointController extends Controller
         if ($arg1 == 'challenges') {
             return $this->handleChallengesEndpoints($request);
         }
-        $result = $this->convertTSVToArray('/home/daniel-austin/Documents/childrenTest.tsv');
+        $result = $this->convertTSVToArray(storage_path('Publisher-Information-2025.tsv'));
+        //$results = $this->importSanityPublishers->handle();
 
         return $result;
     }
@@ -75,6 +78,11 @@ class DevEndpointController extends Controller
             $line = explode("\t", trim($line));
             $child = $line[0];
             $name = $line[1];
+
+            if ($name == 'Publisher Name') {
+                continue;
+            }
+
             foreach ($array as $entries) {
                 if ($entries['name'] == $name) {
                     $entries['child'][] = $child;
@@ -86,11 +94,13 @@ class DevEndpointController extends Controller
             if ($name != null) {
                 $length = count($array);
                 $array[$length+1]['name'] = $name;
-                $array[$length+1]['child'] = $child;
+                $array[$length+1]['child'] = [];
+                $array[$length+1]['child'][] = $child;
             }
 
 
         }
+        fclose($fileTSV);
 
         return $array;
     }

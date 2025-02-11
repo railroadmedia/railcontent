@@ -38,11 +38,31 @@ class ImportSanityPublishers extends Command
         $firstRow = true;
         $filePath = storage_path($input);
         if (($handle = fopen($filePath, "r")) !== false) {
-            while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+            while (($data = fgetcsv($handle, 1000, "\t")) !== false) {
                 if ($firstRow) {
                     $firstRow = false;
                     continue;
                 }
+
+                echo $data[0];
+
+                $child = $data[0];
+                $name = $data[1];
+                foreach ($rows as $entries) {
+                    if ($entries['name'] == $name) {
+                        $entries['child'][] = $child;
+                        $name = null;
+                        $child = null;
+                    }
+                }
+
+                /*if ($name != null) {
+                    $length = count($rows);
+                    $rows[$length + 1]['name'] = $name;
+                    $rows[$length + 1]['child'] = [];
+                    $rows[$length + 1]['child'][] = $child;
+                }*/
+
                 if (!isset($rows[$data[2]])) {
                     $rows[$data[2]] = [];
                 }
@@ -78,7 +98,8 @@ class ImportSanityPublishers extends Command
             file_put_contents($ouputFilePath, $newline, FILE_APPEND);
         }
 
-        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $fileName development --replace");
+        //note: for future use, "staging" here should be $env, and fix the env check
+        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $fileName staging --replace");
         if ($resultCode !== self::SUCCESS) {
             $this->error("Failed to import $ouputFilePath. Have you built Sanity Studio using the README instructions?");
             return $resultCode;
