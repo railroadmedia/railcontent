@@ -8,7 +8,6 @@ import SearchModal from "../SearchModal/SearchModal.vue";
 import HamburguerButton from "./HamburguerButton.vue";
 import BrandSelector from "./BrandSelector.vue";
 import UserIcon from "./UserIcon.vue";
-import MuToggle from '@units/FormInputs/MuToggle.vue';
 
 const props = defineProps({
   isSidebarHidden: Boolean,
@@ -31,6 +30,7 @@ const emit = defineEmits([
   "onCollapseSidebar",
   "onBrandSelect",
   "onColorModeToggle",
+  "onAdminViewToggle",
 ]);
 const showSearchModal = ref(false);
 const toggleSearchModal = (val) => {
@@ -40,12 +40,15 @@ const userStore = useUserStore();
 const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand, showAdminToggle, useStudentView } = storeToRefs(userStore);
 
 const toggleAdminView = async () => {
- try {
-   const { status } = await userStore.updateProfile({ use_student_view: !useStudentView.value });
-   if (status === 200) location.reload();
- } catch (e) {
-   console.error(e);
- }
+  try {
+    const response = await userStore.updateProfile({ use_student_view: !useStudentView.value });
+    if (response?.status === 200) {
+      emit('onAdminViewToggle', !useStudentView.value); 
+      location.reload();
+    }
+  } catch (e) {
+    console.error(e);
+  }
 };
 </script>
 
@@ -113,11 +116,6 @@ const toggleAdminView = async () => {
         <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-[#00101D] dark:tw-text-white" />
       </button>
 
-      <div v-if="showAdminToggle" class="tw-flex tw-flex-col tw-items-center">
-          <div class="dark:tw-text-white tw-text-xs tw-mb-1">Admin</div>
-          <MuToggle id="is_admin_view" name="is_admin_view" :value="!useStudentView" @change="toggleAdminView" :brand="brand"/>
-      </div>
-
       <!-- Invite a Friend -->
       <a v-if="isUserAMember"
         :href="`/${ brand }/referral/invite-a-friend`"
@@ -139,7 +137,11 @@ const toggleAdminView = async () => {
         :has-notifications="hasNotifications"
         :isDarkModeSelected="isDarkModeSelected"
         :show-recommendation="showRecommendation"
+        :showAdminToggle="showAdminToggle"
+        :useStudentView="useStudentView"
+        :onToggleAdminView="toggleAdminView"
         @onColorModeToggle="emit('onColorModeToggle')"
+        @adminViewToggled="(value) => emit('onAdminViewToggle', value)"
       />
     </div>
 

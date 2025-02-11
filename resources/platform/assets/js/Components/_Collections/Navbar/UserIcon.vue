@@ -7,7 +7,8 @@ import MenuHeader from '@collections/AvatarMenu/MenuHeader.vue'
 import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue'
 import ModalRenderer from '@collections/Modal/ModalRenderer.vue'
 import StudentReviewModal from '@collections/IFrames/StudentReviewFormInModal.vue'
-import { XIcon } from "@heroicons/vue/solid";
+import MuToggle from '@units/FormInputs/MuToggle.vue'
+import { XIcon } from "@heroicons/vue/solid"
 
 export default {
   name: 'UserIcon',
@@ -35,8 +36,20 @@ export default {
       type: Boolean,
       default: false
     },
+    showAdminToggle: {
+      type: Boolean,
+      default: false
+    },
+    useStudentView: {
+      type: Boolean,
+      default: true
+    },
+    onToggleAdminView: {
+      type: Function,
+      required: true
+    }
   },
-  emits: ['onColorModeToggle'],
+  emits: ['onColorModeToggle', 'adminViewToggled'],
   components: {
     AvatarMenu,
     OptionGroup,
@@ -45,6 +58,7 @@ export default {
     MusoraIcon,
     ModalRenderer,
     StudentReviewModal,
+    MuToggle,
     XIcon,
   },
   setup(props, context) {
@@ -75,6 +89,11 @@ export default {
     onBeforeMount(() => {
       userNavigationDropdownLinks.value = window.userNavigationDropdownLinks;
     });
+   
+    const handleToggleAdminView = () => {
+    props.onToggleAdminView();
+    context.emit('adminViewToggled', !props.useStudentView); 
+  }
 
     return {
       handleMenuOpen,
@@ -82,7 +101,10 @@ export default {
       isUserMenuOpen,
       isReviewModalOpen,
       handleReviewOpen,
-      userNavigationDropdownLinks
+      userNavigationDropdownLinks,
+      showAdminToggle: props.showAdminToggle,
+      useStudentView: props.useStudentView,
+      handleToggleAdminView,
     }
   }
 }
@@ -162,6 +184,40 @@ export default {
           <div class="tw-ml-auto">
             <div class="tw-relative tw-w-10 tw-h-5 tw-rounded-full tw-border-2 dark:tw-bg-[#002039] tw-bg-[#e5e7ea] dark:tw-border-[#1e3b53] tw-border-[#e5e7ea] tw-box-content">
               <div class="tw-transition-all tw-w-5 tw-h-5 tw-rounded-full tw-drop-shadow-md tw-bg-white tw-absolute tw-top-0 dark:tw-right-0 dark:tw-left-auto tw-left-0 tw-right-auto"></div>
+            </div>
+          </div>
+        </OptionElement>
+        <OptionElement v-if="showAdminToggle">
+          <div @click.prevent class="tw-flex tw-items-center tw-w-full">
+            <svg 
+              id="Layer_2" 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 3391.86 2756.68" 
+              class="tw-w-[20px] tw-h-[20px] tw-mr-2"
+              :style="{ fill: isDarkModeSelected ? 'white' : '#0c1524' }">
+              <path class="cls-1" d="m2603.55,2615.66c47.1,92,152.05,141.02,274.54,141.02,78.98,0,165.24-20.37,248.01-62.75,
+              211.13-108.09,316.25-316.77,242.02-469.7-5.13-10.56-1008.13-2072.56-1008.13-2072.56,0,0-4.16-9.42-4.79-10.65C2308.1,
+              49.02,2203.15,0,2080.66,0c-78.98,0-165.24,20.37-248.01,62.75-195.28,99.98-278.65,280.92-256.35,434.69l154.25,1056.08
+              -339.5-698.44-3.06-6.41c-6-13-7.82-19.41-14.34-32.16-47.1-92-152.05-141.02-274.54-141.02-78.98,0-165.24,20.37-248.01,
+              62.75-172.91,88.52-276.89,245.6-266.31,382.69h-.08l-2.43,967.49c-21.6-3.45-44.1-5.2-67.22-5.2-78.98,0-165.24,20.37-248.01,
+              62.75-211.13,108.09-319.49,318.38-242.02,469.7,47.1,92,152.05,141.02,274.54,141.02,78.98,0,165.24-20.37,248.01-62.75,
+              168.29-86.16,271.28-237.26,266.91-371.66l1.72-685.02,438.77,915.42c16,32,28.56,51.87,34.26,62.99,47.1,92,152.05,141.02,
+              274.54,141.02,78.98,0,165.24-20.37,248.01-62.75,193.14-98.88,283.19-281.26,257.82-429.83l-9.63-67.43-147.2-1006.35,
+              672.2,1393.35c7,13,13.36,21.84,18.55,31.99Z"/>
+            </svg>
+            Admin Mode: {{ useStudentView ? 'Off' : 'On' }}
+            <div class="tw-ml-auto">
+              <div class="tw-ml-auto">
+                <MuToggle
+                  id="is_admin_view"
+                  name="is_admin_view"
+                  :value="!useStudentView"
+                  @click.stop
+                  @change="handleToggleAdminView"
+                  :brand="brand"
+                  class="!tw-w-11 [&>div]:!tw-w-11 [&_label[for=is_admin_view]]:!tw-ml-0 [&>div>label:first-of-type]:!tw-bg-[#e5e7ea] [&>div>label:first-of-type]:!dark:tw-bg-[#001f3f] [&>div>label:first-of-type]:!tw-border-[#e5e7eb] [&>div>label:first-of-type]:!dark:tw-border-[#1e3b53]"
+                />
+              </div>
             </div>
           </div>
         </OptionElement>
