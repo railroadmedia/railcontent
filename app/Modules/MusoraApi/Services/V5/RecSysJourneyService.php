@@ -21,6 +21,8 @@ class RecSysJourneyService
                     'brand' => $props['brand'] ?? null,
                     'homepage_section' => $props['section'] ?? null,
                     'content_id' => $props['contentId'] ?? null,
+                    'content_position' => $props['content_position'] ?? null,
+                    'component_title' => $props['component_title'] ?? null,
                 ],
                 user()
             )
