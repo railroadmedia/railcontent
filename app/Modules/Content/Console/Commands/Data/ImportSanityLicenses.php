@@ -38,10 +38,10 @@ class ImportSanityLicenses extends Command
         $metaDataMap = [
 
             'mlc' => 2,
-            'iswc' => 3,
-            'isrc' => 4,
-            'song_artist' => 5,
-            'song_name' => 6,
+            'isrc' => 3,
+            'iswc' => 4,
+            'song_name' => 5,
+            'song_artist' => 6,
         ];
         $publisherMap = [
             'SMP' => 7,
@@ -49,19 +49,22 @@ class ImportSanityLicenses extends Command
             'BMG' => 9,
             'KOBALT' => 10,
             'WCM' => 11,
-            'ABKCO' => 13,
-            'AUDIAM' => 14,
+            'ABKCO' => 12,
+            'AUDIAM' => 13,
+            'BELIEVE' => 14,
             'CONCORD' => 15,
             'DMG' => 16,
             'DST' => 17,
-            'HIPGNOSIS' => 18,
-            'PEER' => 19,
-            'RESERVOIR' => 20,
-            'ROUND HILL' => 21,
-            'SPIRIT' => 22,
-            'WIXEN' => 23,
+            'HAL' => 18,
+            'HIPGNOSIS' => 19,
+            'PEER' => 20,
+            'RESERVOIR' => 21,
+            'ROUND HILL' => 22,
+            'SPIRIT' => 23,
+            'WIXEN' => 24,
             'OTHER' => 25,
         ];
+        $nullMLCCount = 0;
 
         $rows = [];
         $firstRow = true;
@@ -72,7 +75,12 @@ class ImportSanityLicenses extends Command
                     $firstRow = false;
                     continue;
                 }
-                $mlc = $data[$metaDataMap['mlc']];
+                $mlc = trim($data[$metaDataMap['mlc']]);
+
+                if ($mlc === "") {
+                    $mlc = "nul$nullMLCCount";
+                    $nullMLCCount++;
+                }
                 if (!isset($rows[$mlc])) {
                     $rows[$mlc] = [
                         '_id' => 'license_' . strtolower($mlc),
@@ -117,7 +125,7 @@ class ImportSanityLicenses extends Command
             fclose($handle);
         }
 
-        $directory = 'resources/sanitystudio';
+        $directory = resource_path('sanitystudio');
         $fileName = 'licenses.ndjson';
         $ouputFilePath = "$directory/$fileName";
         file_put_contents($ouputFilePath, "");
@@ -125,7 +133,7 @@ class ImportSanityLicenses extends Command
             $newline = json_encode($result) . "\n";
             file_put_contents($ouputFilePath, $newline, FILE_APPEND);
         }
-        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $fileName development --replace");
+        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $fileName staging --replace");
         if ($resultCode !== self::SUCCESS) {
             $this->error("Failed to import $ouputFilePath. Have you built Sanity Studio using the README instructions?");
             return $resultCode;
