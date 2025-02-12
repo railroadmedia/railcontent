@@ -1,5 +1,7 @@
 <script>
 import { ref, onBeforeMount } from 'vue'
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@stores/user';
 import OptionElement from '@collections/AvatarMenu/OptionElement.vue'
 import OptionGroup from '@collections/AvatarMenu/OptionGroup.vue'
 import AvatarMenu from '@collections/AvatarMenu/AvatarMenu.vue'
@@ -36,20 +38,8 @@ export default {
       type: Boolean,
       default: false
     },
-    showAdminToggle: {
-      type: Boolean,
-      default: false
-    },
-    useStudentView: {
-      type: Boolean,
-      default: true
-    },
-    onToggleAdminView: {
-      type: Function,
-      required: true
-    }
   },
-  emits: ['onColorModeToggle', 'adminViewToggled'],
+  emits: ['onColorModeToggle'],
   components: {
     AvatarMenu,
     OptionGroup,
@@ -65,6 +55,8 @@ export default {
     const isUserMenuOpen = ref(false)
     const isReviewModalOpen = ref(false)
     const userNavigationDropdownLinks = ref([])
+    const userStore = useUserStore();
+    const { showAdminToggle, useStudentView } = storeToRefs(userStore);
 
     const handleMenuOpen = (val) => {
       if (typeof val === 'boolean') {
@@ -90,10 +82,14 @@ export default {
       userNavigationDropdownLinks.value = window.userNavigationDropdownLinks;
     });
    
-    const handleToggleAdminView = () => {
-    props.onToggleAdminView();
-    context.emit('adminViewToggled', !props.useStudentView); 
-  }
+    const toggleAdminView = async () => {
+      try {
+        const { status } = await userStore.updateProfile({ use_student_view: !useStudentView.value });
+        if (status === 200) location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+    };
 
     return {
       handleMenuOpen,
@@ -102,9 +98,9 @@ export default {
       isReviewModalOpen,
       handleReviewOpen,
       userNavigationDropdownLinks,
-      showAdminToggle: props.showAdminToggle,
-      useStudentView: props.useStudentView,
-      handleToggleAdminView,
+      showAdminToggle,
+      useStudentView,
+      toggleAdminView,
     }
   }
 }
@@ -212,7 +208,7 @@ export default {
                   name="is_admin_view"
                   :value="!useStudentView"
                   @click.stop
-                  @change="handleToggleAdminView"
+                  @change="toggleAdminView"
                   :brand="brand"
                   class="!tw-w-11 [&>div]:!tw-w-11 [&>div>label:first-of-type]:!tw-bg-[#e5e7ea] [&>div>label:first-of-type]:!dark:tw-bg-[#001f3f] [&>div>label:first-of-type]:!tw-border-[#e5e7eb] [&>div>label:first-of-type]:!dark:tw-border-[#1e3b53] [&>label]:!tw-ml-0"
                   />

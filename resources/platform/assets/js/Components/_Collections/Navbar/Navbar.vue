@@ -30,26 +30,13 @@ const emit = defineEmits([
   "onCollapseSidebar",
   "onBrandSelect",
   "onColorModeToggle",
-  "onAdminViewToggle",
 ]);
 const showSearchModal = ref(false);
 const toggleSearchModal = (val) => {
   showSearchModal.value = val;
 }
 const userStore = useUserStore();
-const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand, showAdminToggle, useStudentView } = storeToRefs(userStore);
-
-const toggleAdminView = async () => {
-  try {
-    const response = await userStore.updateProfile({ use_student_view: !useStudentView.value });
-    if (response?.status === 200) {
-      emit('onAdminViewToggle', !useStudentView.value); 
-      location.reload();
-    }
-  } catch (e) {
-    console.error(e);
-  }
-};
+const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand } = storeToRefs(userStore);
 </script>
 
 <template>
@@ -137,11 +124,7 @@ const toggleAdminView = async () => {
         :has-notifications="hasNotifications"
         :isDarkModeSelected="isDarkModeSelected"
         :show-recommendation="showRecommendation"
-        :showAdminToggle="showAdminToggle"
-        :useStudentView="useStudentView"
-        :onToggleAdminView="toggleAdminView"
         @onColorModeToggle="emit('onColorModeToggle')"
-        @adminViewToggled="(value) => emit('onAdminViewToggle', value)"
       />
     </div>
 
