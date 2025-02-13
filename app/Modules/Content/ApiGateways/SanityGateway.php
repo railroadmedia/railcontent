@@ -450,7 +450,7 @@ class SanityGateway
             $timeFilter
             $publishedOnString
             $cardStatusQuery]{
-            display_order,
+            'display_order': coalesce(display_order, 0),
             $challengeFields,
         }";
         $results = $this->sanity->fetch($query);
@@ -462,6 +462,30 @@ class SanityGateway
             }
         }
         return $filtered;
+    }
+
+    public function getCustomBannerCards(string $brand, bool $isAdmin): array
+    {
+        $cardStatusQuery = $isAdmin ? '' : '&& is_draft != true';
+        $now = now()->toISOString();
+        $timeString = $isAdmin ? '' : "&& start_time <= '$now' && '$now' <= end_time";
+        $brandString = $brand ? "&& (brand == '$brand' || !defined(brand))" : '';
+        $query = "*[_type == 'banner-card' $timeString $cardStatusQuery $brandString] {
+            is_draft,
+            header,
+            'subheader': sub_header,
+            sub_header,
+            'squareImg': squareImg.asset->url,
+            'wideImg': wideImg.asset->url,
+            'bgImg': bgImg.asset->url,
+            'logo': logo.asset->url,
+            button_text,
+            'button_url': coalesce(button_url, content->web_url_path),
+            'content_type' : content->_type,
+            'content_id' : content->railcontent_id,
+            'display_order': coalesce(display_order, 0),
+        } | order(start_time desc)";
+        return $this->sanity->fetch($query);
     }
 
     public function getAssignmentsByRailcontentIds(

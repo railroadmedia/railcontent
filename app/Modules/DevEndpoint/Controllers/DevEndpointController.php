@@ -2,32 +2,23 @@
 
 namespace App\Modules\DevEndpoint\Controllers;
 
-use Algolia\AlgoliaSearch\Api\SearchClient;
+use App\Modules\Content\DTOs\ChallengeUserProgressLessonDatum;
+use App\Modules\Content\DTOs\ChallengeUserProgressLessonDatumCollection;
 use App\Models\Cohort;
-use App\Models\CohortDropdown;
-use App\Models\CohortList;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
-use App\Modules\Content\Resources\Algolia\SearchParameters;
-use App\Modules\Content\Services\AlgoliaSearchService;
 use App\Modules\Content\Services\ChallengesService;
+use App\Modules\Content\Services\ChallengesStreakService;
 use App\Modules\Content\Services\V1\CarouselServiceV1;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
-use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Google\Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
-use Modules\Content\Console\Commands\ChallengesV2UpdateWebUrlPath;
-use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\APIEndPoint;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
@@ -37,6 +28,8 @@ use Railroad\Railcontent\Services\RecommendationService;
 class DevEndpointController extends Controller
 {
     use AuthorizesRequests;
+
+    private array $resultsToDump;
 
     /**
      * ContentRedirectController constructor.
@@ -53,6 +46,7 @@ class DevEndpointController extends Controller
         private SanityGateway $sanityGateway,
         private RailcontentV2DataSyncingService $dataSyncingService,
         private CarouselServiceV1 $carouselServiceV1,
+        private ChallengesStreakService $challengesStreakService,
     ) {
     }
 
@@ -91,9 +85,6 @@ class DevEndpointController extends Controller
             402199
         ); // https://web-staging-one.musora.com/admin/studio/publishing/structure/challenge;challenge_402199
         switch ($action) {
-            case ('prep'):
-                $this->prepChallengeData($challengeId, $request->get('start_date', null));
-                return "Prepped Challenge Data $challengeId";
             case ('complete'):
                 $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
                 $this->challengesService->completeChallenge($userProgress);
@@ -137,55 +128,28 @@ class DevEndpointController extends Controller
             case('clean'):
                 ChallengeUserProgress::truncate();
                 return "All challenge data cleared";
+            case('uncomplete'):
+                $lessonID = $request->get('lesson_id');
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+                $set = false;
+                if ($userProgress) {
+                    $lessonMetaData = $userProgress->lessons_meta_data;
+
+                    foreach ($lessonMetaData as $index => $lessonMetaDatum) {
+                        if ($lessonMetaDatum['content_id'] == $lessonID) {
+                            $lessonMetaData[$index]['completed'] = false;
+                            $lessonMetaData[$index]['completed_at'] = null;
+                            $set = true;
+                        }
+                    }
+                    $userProgress->lessons_meta_data = $lessonMetaData;
+                    $userProgress->save();
+                }
+                return $set ? "lesson {$lessonID} set to incomplete for challenge {$challengeId}" : "no lesson found for lesson {$lessonID}";
+            default:
+                return 'no action specified';
         }
         return '';
-    }
-
-    private function prepChallengeData($challengeId, $startdate = null)
-    {
-        $userIds = [
-            // "good" users
-            755987,
-            755984,
-            755976,
-            755957,
-            755953,
-            755945,
-            755932,
-            755919,
-            755916,
-            755904,
-            755886,
-            755880,
-            755877,
-            755866,
-            755848,
-            755827,
-            755824,
-            755820,
-            755808,
-            755807,
-            755799,
-            755787,
-            755786,
-            755782,
-            755764,
-            755675, // explicitly in block list
-            755745, // user with no profile picture
-            755406, // musora user
-            735658, //eli test user
-            631736, // me
-        ];
-        ChallengeUserProgress::truncate();
-        foreach ($userIds as $userId) {
-            $isUnlocked = $userId == 755976 || $userId == 755957;
-            $this->challengesService->startChallenge(
-                $challengeId,
-                $userId,
-                startDate: $startdate,
-                isLocked: !$isUnlocked
-            );
-        }
     }
 
     private function testSanity()
@@ -260,4 +224,16 @@ class DevEndpointController extends Controller
         $json = json_encode($result);
         file_put_contents($fullPath, $json);
     }
+
+   private function assertEquals($expected, $actual, $msg) : void
+    {
+        if ($expected != $actual) {
+            $msg = "we're cooked chat $msg we wanted: $expected what we got: $actual";
+            dd([$msg, $this->resultsToDump]);
+            throw new \Exception($msg);
+        }
+    }
+
 }
+
+

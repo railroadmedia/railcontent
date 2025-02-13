@@ -7,6 +7,7 @@ use App\Modules\Content\Controllers\ContentProgressController;
 use App\Modules\Content\Controllers\ContentSearchController;
 use App\Modules\Content\Controllers\UserPermissionsController;
 use App\Modules\Content\Controllers\V1\CarouselControllerV1;
+use App\Modules\Content\Controllers\V2\CarouselControllerV2;
 use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
 use App\Modules\DataVersion\Middleware\DataVersionGetMiddleware;
 use App\Modules\DataVersion\Middleware\DataVersionUpdateMiddleware;
@@ -221,7 +222,7 @@ Route::as('api.')
             ->middleware('api_version:v1')
             ->name('v1.content.carousel');
 
-        Route::get('/v2/content/carousel', [CarouselControllerV1::class, 'getHomepageCarousel'])
+        Route::get('/v2/content/carousel', [CarouselControllerV2::class, 'getHomepageCarousel'])
             ->middleware('api_version:v2')
             ->name('v2.content.carousel');
     });

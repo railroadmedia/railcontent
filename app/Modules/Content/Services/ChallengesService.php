@@ -4,9 +4,8 @@ namespace App\Modules\Content\Services;
 
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
-use App\Modules\Content\Models\ChallengeUserProgressStatus;
+use App\Modules\Content\Enums\ChallengeUserProgressStatus;
 use App\Modules\Content\Models\ContentUserProgress;
-use App\Modules\Content\Models\Sanity\Challenge;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
@@ -16,7 +15,6 @@ use Gedmo\Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 enum UserNotificationKeys: string
 {
@@ -48,7 +46,7 @@ class ChallengesService
     public function hasAccess(int $contentId): bool
     {
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($contentId, user()->id);
-        return $userProgress &&  ($userProgress->is_active || !$userProgress->is_locked);
+        return $userProgress && ($userProgress->is_active || !$userProgress->is_locked);
     }
 
     /**
@@ -107,7 +105,108 @@ class ChallengesService
     private function getFillerAccountIds(): array
     {
         //
-        return [4,5,7,8,136,145,5814,6747,6885,28224,75158,87011,96326,102905,149628,149629,149630,149632,149641,150243,150244,150245,150246,150247,150250,150259,150270,150378,150447,150458,150466,150474,150475,150478,150481,151112,151155,151917,152472,153715,154064,154138,154713,155577,155762,156169,156171,164416,164418,164681,166859,166904,166906,166907,166951,173259,245201,272444,274569,293043,298176,298348,314690,318009,321592,328363,340756,343979,344840,347345,349001,349574,350636,356084,360053,360551,361772,365658,388242,388344,389536,389914,391264,392696,393357,393449,394753,396653,397568,397822,398008,401282,402454,402486,403844,404255,406398,407824,412338,414874];
+        return [
+            4,
+            5,
+            7,
+            8,
+            136,
+            145,
+            5814,
+            6747,
+            6885,
+            28224,
+            75158,
+            87011,
+            96326,
+            102905,
+            149628,
+            149629,
+            149630,
+            149632,
+            149641,
+            150243,
+            150244,
+            150245,
+            150246,
+            150247,
+            150250,
+            150259,
+            150270,
+            150378,
+            150447,
+            150458,
+            150466,
+            150474,
+            150475,
+            150478,
+            150481,
+            151112,
+            151155,
+            151917,
+            152472,
+            153715,
+            154064,
+            154138,
+            154713,
+            155577,
+            155762,
+            156169,
+            156171,
+            164416,
+            164418,
+            164681,
+            166859,
+            166904,
+            166906,
+            166907,
+            166951,
+            173259,
+            245201,
+            272444,
+            274569,
+            293043,
+            298176,
+            298348,
+            314690,
+            318009,
+            321592,
+            328363,
+            340756,
+            343979,
+            344840,
+            347345,
+            349001,
+            349574,
+            350636,
+            356084,
+            360053,
+            360551,
+            361772,
+            365658,
+            388242,
+            388344,
+            389536,
+            389914,
+            391264,
+            392696,
+            393357,
+            393449,
+            394753,
+            396653,
+            397568,
+            397822,
+            398008,
+            401282,
+            402454,
+            402486,
+            403844,
+            404255,
+            406398,
+            407824,
+            412338,
+            414874
+        ];
     }
 
     /**
@@ -129,7 +228,7 @@ class ChallengesService
     {
         $enrolledUsersAndCount = $this->getEnrolledUsers($contentId, $count);
         $enrolledUsers = $enrolledUsersAndCount['users'];
-        $formattedUsers = $enrolledUsers->map(fn (User $user) => [
+        $formattedUsers = $enrolledUsers->map(fn(User $user) => [
             'id' => $user->id,
             'display_name' => $user->display_name,
             'profile_picture_url' => $user->profile_picture_url,
@@ -222,7 +321,12 @@ class ChallengesService
         }
         // unsubscribe user from notifications when they unlock a challenge
         if ($isSolo && !$isLocked) {
-            $this->updateNotification($challengeId, User::whereId($userId)->first(), UserNotificationKeys::SOLO_NOTIFICATION_KEY, enable: false);
+            $this->updateNotification(
+                $challengeId,
+                User::whereId($userId)->first(),
+                UserNotificationKeys::SOLO_NOTIFICATION_KEY,
+                enable: false
+            );
             $data['solo_notification_to_be_processed'] = 0;
         }
         $allData = [
@@ -258,7 +362,7 @@ class ChallengesService
      * @param User $userId - user id
      * @return ChallengeUserProgress|null
      */
-    public function leaveChallenge(int $challengeId, User $user) : bool
+    public function leaveChallenge(int $challengeId, User $user): bool
     {
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $user->id);
         if (is_null($userProgress)) {
@@ -278,8 +382,13 @@ class ChallengesService
      * @param int $userId
      * @return array
      */
-    public function getCurrentLessonData(int $contentId, int $userId, bool $isLesson = true, $lessonDocument = null, $challenge = null): ?array
-    {
+    public function getCurrentLessonData(
+        int $contentId,
+        int $userId,
+        bool $isLesson = true,
+        $lessonDocument = null,
+        $challenge = null
+    ): ?array {
         if ($isLesson) {
             if (!$lessonDocument || !$challenge) {
                 $lessonDocument = $this->sanityGateway->getChallengeChildAndParentData($contentId);
@@ -294,9 +403,10 @@ class ChallengesService
         }
 
         $progressData = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
-        $firstIncompleteLesson = null;
+
         $isUserActive = $progressData?->is_active ?? false;
         $challengeLessons = $this->combineUserLessonDataWithSanityLessonData($challengeLessons, $progressData);
+        $firstIncompleteLesson = $this->getFirstIncompleteCirriculumLesson($challengeLessons, $progressData);
         $userData = $progressData?->getCompiledMetadata() ?? ['is_active' => false];
         $userData['challenge_state'] = $this->getChallengeState($challenge, $userData['end_date'] ?? null);
         $nextPreviousLesson = ['next_lesson' => null, 'previous_lesson' => null];
@@ -310,7 +420,14 @@ class ChallengesService
                     break;
                 }
             }
-            $challengeFieldsToCopyToLesson = ['dark_mode_logo_url', 'light_mode_logo_url', 'logo_image_url', 'title', 'slug', 'instructor'];
+            $challengeFieldsToCopyToLesson = [
+                'dark_mode_logo_url',
+                'light_mode_logo_url',
+                'logo_image_url',
+                'title',
+                'slug',
+                'instructor'
+            ];
             foreach ($challengeFieldsToCopyToLesson as $toCopy) {
                 $lessonDocument["challenge_$toCopy"] = $challenge[$toCopy] ?? null;
             }
@@ -358,8 +475,6 @@ class ChallengesService
         $curriculumDay = 0;
         $previousCurriculumLesson = null;
 
-        $challengeUserProgress = ChallengeUserProgress::shiftUnlockDaysIfRestDayUsed($challengeUserProgress);
-
         foreach ($lessons as $index => $lesson) {
             $lessons[$index]['is_first_lesson'] = $index == 0;
             $isCurriculumLesson = ChallengeUserProgress::isCurriculumSanityLesson($lesson);
@@ -381,7 +496,10 @@ class ChallengesService
                 $unlockDate = Carbon::parse($lessonDatum['unlock_date']);
 
                 if ($challengeUserProgress?->is_solo ?? false) {
-                    $unlockDate = Carbon::parse($lessonDatum['unlock_date'], UserTimezoneService::getUsersCurrentTimezone());
+                    $unlockDate = Carbon::parse(
+                        $lessonDatum['unlock_date'],
+                        UserTimezoneService::getUsersCurrentTimezone()
+                    );
                 }
 
                 $isLocked = $challengeUserProgress->is_locked;
@@ -407,14 +525,22 @@ class ChallengesService
                 )->startOfDay()->addSecond();
                 // TODO Rob Adrian Caleb, do we lock the lessons if previous lessons haven't been completed
                 // this was vaguely discussed in this thread: https://musoraworkspace.slack.com/archives/C0723ESKW49/p1733173597489469
-                $shouldLessonBeLocked = $isLocked && $unlockDateForComparison->greaterThanOrEqualTo($todayForComparison);
+                $shouldLessonBeLocked = $isLocked && $unlockDateForComparison->greaterThanOrEqualTo(
+                        $todayForComparison
+                    );
             } else {
                 // For community challenges, unlock dates are stored in PST so we must convert it to UTC and check
                 // against now.
-                $shouldLessonBeLocked = Carbon::parse($unlockDate, 'America/Vancouver')->greaterThanOrEqualTo(Carbon::now());
+                $shouldLessonBeLocked = Carbon::parse($unlockDate, 'America/Vancouver')->greaterThanOrEqualTo(
+                    Carbon::now()
+                );
 
                 // now convert the unlock time to the users local timezone
-                $unlockDate = Carbon::parse(Carbon::parse($unlockDate, 'America/Vancouver')->timezone(UserTimezoneService::getUsersCurrentTimezone())->toDateTimeString());
+                $unlockDate = Carbon::parse(
+                    Carbon::parse($unlockDate, 'America/Vancouver')->timezone(
+                        UserTimezoneService::getUsersCurrentTimezone()
+                    )->toDateTimeString()
+                );
             }
 
             $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
@@ -453,7 +579,10 @@ class ChallengesService
     ): array {
         $resultPackage = [];
         $userProgresses = $userProgresses->keyBy('content_id');
-        $challenges = $allChallengeIds ? $this->getChallengeByIds($allChallengeIds, $brand) : $this->getAllChallengesByBrand($brand);
+        $challenges = $allChallengeIds ? $this->getChallengeByIds(
+            $allChallengeIds,
+            $brand
+        ) : $this->getAllChallengesByBrand($brand);
         $challenges = collect($challenges)->keyBy('id');
         foreach ($challenges as $contentId => $challenge) {
             $challengeMetaDataToReturn = null;
@@ -572,28 +701,21 @@ class ChallengesService
     }
 
     /**
-     * @param $challengeLessons
-     * @param $progressData
+     * @param array $challengeLessons
+     * @param ?ChallengeUserProgress $progressData
      * @return mixed|null
      */
-    private function getFirstIncompleteCirriculumLesson($challengeLessons, $progressData)
+    private function getFirstIncompleteCirriculumLesson($challengeLessons, ?ChallengeUserProgress $progressData)
     {
         foreach ($challengeLessons as $lesson) {
             if ($progressData?->is_active ?? false) {
-                foreach ($progressData->lessons_meta_data as $userProgressLesson) {
-                    if ($lesson['id'] == $userProgressLesson['content_id']) {
-                        $isCurriculumLesson = ChallengeUserProgress::isCurriculumMetadataLesson($userProgressLesson);
-                        $isCompleted = $userProgressLesson['completed'];
-                        if ($isCurriculumLesson && !$isCompleted) {
-                            return $lesson;
-                        }
+                foreach ($progressData->getLessonsMetaData() as $lessonDatum) {
+                    if ($lesson['id'] == $lessonDatum->contentId && $lessonDatum->isCurriculumLesson && !$lessonDatum->completed) {
+                        return $lesson;
                     }
                 }
-            } else {
-                $isCurriculumLesson = ChallengeUserProgress::isCurriculumSanityLesson($lesson);
-                if ($isCurriculumLesson) {
-                    return $lesson;
-                }
+            } elseif (ChallengeUserProgress::isCurriculumSanityLesson($lesson)) {
+                return $lesson;
             }
         }
 
@@ -626,7 +748,6 @@ class ChallengesService
     }
 
 
-
     /**
      * Get the sanity Document for this challenge
      * @param $challengeId
@@ -643,7 +764,7 @@ class ChallengesService
      * @param $brand
      * @return array | null
      */
-    public function getEnrollmentPageData($slug, $brand): array | null
+    public function getEnrollmentPageData($slug, $brand): array|null
     {
         return $this->sanityGateway->getChallengeEnrollmentPageData($slug, $brand);
     }
@@ -670,8 +791,14 @@ class ChallengesService
         return $this->sanityGateway->getAllChallengesByBrand($brand);
     }
 
-    public function completeLessonAndGetCurrentProgressResults($lessonId, $userId, $completedTime = null, $lessonDocument = null, $challenge = null, $userProgress = null): array
-    {
+    public function completeLessonAndGetCurrentProgressResults(
+        $lessonId,
+        $userId,
+        $completedTime = null,
+        $lessonDocument = null,
+        $challenge = null,
+        $userProgress = null
+    ): array {
         if (!$lessonDocument || !$challenge) {
             $lessonDocument = $this->sanityGateway->getChallengeChildAndParentData($lessonId);
             $challenge = $lessonDocument['parent'];
@@ -697,38 +824,54 @@ class ChallengesService
         );
         $isChallengeCompleted = $userProgress->areAllLessonsCompleted();
 
-        $lessonData = $this->getCurrentLessonData($lessonId, $userId, isLesson: true, lessonDocument: $lessonDocument, challenge: $challenge);
-        $active = true;
+        $lessonData = $this->getCurrentLessonData(
+            $lessonId,
+            $userId,
+            isLesson: true,
+            lessonDocument: $lessonDocument,
+            challenge: $challenge
+        );
+        $showModal = true;
         $motivationalText = [];
-
+        $isMilestone = false;
+        $currentStreak = $lessonData['user_data']['current_streak'];
         if (!$userProgress->is_locked || !ChallengeUserProgress::isCurriculumSanityLesson($lessonData['lesson'])) {
-            $active = false;
-        } elseif ($lessonsProgress['is_milestone']) {
-            $milestone = $isChallengeCompleted ? 'complete' : $lessonData['user_data']['current_streak'];
-            $motivationalTextConfig = config('challengemotivationalresponses')[$milestone] ?? config(
-                'challengemotivationalresponses'
-            )['default'];
-            $motivationalText = [
-                'lottie_url' => $motivationalTextConfig[brand()],
-                'milestone' => $milestone,
-                'motivational_title' => $isChallengeCompleted ? "You've completed {$challenge['title']}!" : "You're on a {$milestone} Day Streak!",
-                'motivational_subtext' => $isChallengeCompleted ? '' : "You've earned an additional streak saver!",
-                'badge_text' => $motivationalTextConfig['text'],
-                'styles' => $motivationalTextConfig['styles'],
-                'duration' => $motivationalTextConfig['duration'],
-            ];
-        } else {
+            $showModal = false;
+        } elseif ($lessonsProgress['added_to_streak']) {
+            $subHeaderText = $this->getSubHeaderModalText(
+                $userProgress,
+                $challenge,
+                $lessonData['first_incomplete_lesson']
+            );
             $missingLessons = $lessonData['user_data']['missed_lessons'];
-            $noMissingLessons = $missingLessons == 0;
-            $motivationalText = [
-                'lottie_url' => null,
-                'milestone' => null,
-                'motivational_title' => $noMissingLessons ? "You're done for the day!" : "You're almost caught up!",
-                'motivational_subtext' => $noMissingLessons ? "Return tomorrow to maintain your streak!" : "Complete {$missingLessons} more lesson(s) to catch up",
-                'badge_text' => null,
-                'styles' => null,
-                'duration' => null,
-            ];
+            $hasMissedLessons = $missingLessons > 0;
+            if ($currentStreak % 5 == 0 || $isChallengeCompleted) {
+                $milestone = $isChallengeCompleted ? 'complete' : $currentStreak;
+                $motivationalTextConfig = config('challengemotivationalresponses')[$milestone] ?? config(
+                    'challengemotivationalresponses'
+                )['default'];
+                $motivationalText = [
+                    'lottie_url' => $motivationalTextConfig[brand()],
+                    'milestone' => $milestone,
+                    'motivational_title' => $isChallengeCompleted ? "You've completed {$challenge['title']}!" : "You're on a {$currentStreak} Day Streak!",
+                    'motivational_subtext' => $subHeaderText,
+                    'badge_text' => $motivationalTextConfig['text'],
+                    'styles' => $motivationalTextConfig['styles'],
+                    'duration' => $motivationalTextConfig['duration'],
+                ];
+            } else {
+                $motivationalText = [
+                    'lottie_url' => null,
+                    'milestone' => null,
+                    'motivational_title' => !$hasMissedLessons ? "You're done for the day!" : "You're almost caught up!",
+                    'motivational_subtext' => !$hasMissedLessons ? $subHeaderText : "Complete {$missingLessons} more lessons to catch up.",
+                    'badge_text' => null,
+                    'styles' => null,
+                    'duration' => null,
+                ];
+            }
+        } else {
+            $showModal = false;
         }
         $userProgress->refresh();
         $userData = $userProgress->getCompiledMetadata();
@@ -751,13 +894,34 @@ class ChallengesService
         return [
             'challenge_id' => $challenge['id'],
             'current_lesson_thumbnail' => $lessonDocument['thumbnail'],
-            'show_modal' => $active,
+            'show_modal' => $showModal,
             ...$lessonsProgress,
             ...$motivationalText,
             ...$challengeData,
             'user_data' => $userData,
-            'next_lesson' => $lessonData['next_lesson']
+            'next_lesson' => $lessonData['first_incomplete_lesson'] ?? [],
+            'is_milestone' => $lessonData['lesson']['is_milestone'] ?? false,
         ];
+    }
+
+
+    private function getSubHeaderModalText(
+        ChallengeUserProgress $userProgress,
+        array $challenge,
+        ?array $firstIncompleteLesson
+    ): string {
+        if (is_null($firstIncompleteLesson)) {
+            return '';
+        }
+        $tomorrow = Carbon::now()->addDay();
+        $unlockDate = Carbon::parse($firstIncompleteLesson['unlock_date']);
+        $text = '';
+        if ($firstIncompleteLesson['is_milestone']) {
+            $text = "You're one lesson from a milestone! ";
+        }
+        $dayString = $tomorrow->isSameDay($unlockDate) ? 'tomorrow' : $unlockDate->format('l F jS');
+        $text .= "Return {$dayString} to maintain your streak";
+        return $text;
     }
 
     /**
@@ -789,8 +953,12 @@ class ChallengesService
         );
     }
 
-    private function updateCustomerIONotifications(int $challengeId, User $user, UserNotificationKeys $notificationKey, bool $add = true): void
-    {
+    private function updateCustomerIONotifications(
+        int $challengeId,
+        User $user,
+        UserNotificationKeys $notificationKey,
+        bool $add = true
+    ): void {
         $musoraWorkspace = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
         $customerIO = $this->customerIoService->getCustomerByEmail($musoraWorkspace, $user->email);
         if ($customerIO) {
@@ -803,7 +971,7 @@ class ChallengesService
                 unset($existingNotifications[$challengeId]);
             }
         } elseif ($add) {
-            $existingNotifications =  [$challengeId];
+            $existingNotifications = [$challengeId];
         } else {
             // If the customer doesn't already exist in c.io don't add them
             return;
@@ -818,8 +986,11 @@ class ChallengesService
         );
     }
 
-    public function isUserNotifiedForChallenge(int $challengeId, ?User $user, UserNotificationKeys $notificationKey): bool
-    {
+    public function isUserNotifiedForChallenge(
+        int $challengeId,
+        ?User $user,
+        UserNotificationKeys $notificationKey
+    ): bool {
         if (!$user) {
             return false;
         }
@@ -871,8 +1042,12 @@ class ChallengesService
         return $ownedChallenges;
     }
 
-    private function updateChallengesNotificationForUser(int $challengeId, User $user, UserNotificationKeys $key, bool $enable = true)
-    {
+    private function updateChallengesNotificationForUser(
+        int $challengeId,
+        User $user,
+        UserNotificationKeys $key,
+        bool $enable = true
+    ) {
         try {
             $existingNotifications = $user[$key->value] ?? [];
             if ($enable) {
@@ -880,7 +1055,7 @@ class ChallengesService
                     $existingNotifications[] = $challengeId;
                 }
             } else {
-               unset($existingNotifications[$challengeId]);
+                unset($existingNotifications[$challengeId]);
             }
             $user[$key->value] = $existingNotifications;
             $user->save();
@@ -891,7 +1066,7 @@ class ChallengesService
     public function updateNotification(int $challengeId, User $user, UserNotificationKeys $key, bool $enable = true)
     {
         $this->updateChallengesNotificationForUser($challengeId, $user, $key, enable: $enable);
-        $this->updateCustomerIONotifications($challengeId, $user, $key, add: $enable   );
+        $this->updateCustomerIONotifications($challengeId, $user, $key, add: $enable);
     }
 
     public function enableNotificationsForSoloChallengeAndClearProcessFlag(ChallengeUserProgress $userProgress): void
@@ -900,7 +1075,11 @@ class ChallengesService
             return;
         }
         try {
-            $this->updateNotification($userProgress->content_id, $userProgress->user, UserNotificationKeys::SOLO_NOTIFICATION_KEY);
+            $this->updateNotification(
+                $userProgress->content_id,
+                $userProgress->user,
+                UserNotificationKeys::SOLO_NOTIFICATION_KEY
+            );
             $userProgress->solo_notification_to_be_processed = 0;
             $userProgress->save();
         } catch (\Exception $ex) {

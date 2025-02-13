@@ -1,6 +1,6 @@
 <template>
     <!-- DESKTOP -->
-    <component :is="!isAward && ctaObj.url ? 'a' : 'div'" :href="ctaObj.url"  class="tw-hidden xl:tw-block tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-h-[295px] 4xl:tw-h-[330px] tw-py-[37.5px] 2xl:tw-py-[27.5px] 3xl:tw-py-9 tw-px-[30px] 2xl:tw-px-[35px] 3xl:tw-px-7" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
+    <component :is="!isAward && ctaObj.url ? 'a' : 'div'" :href="ctaObj.url"  class="tw-hidden xl:tw-block tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-h-[295px] 4xl:tw-h-[330px] tw-py-[37.5px] 2xl:tw-py-[27.5px] 3xl:tw-py-9 tw-px-5 2xl:tw-px-[35px] 3xl:tw-px-7" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
         <DraftLabel v-if="isDraft" />
         <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-top tw-rounded-[16px]" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${desktopBGImage}`" :alt="`${challenge.title}`">
         <!-- Background Overlay -->
@@ -22,7 +22,7 @@
             <!-- Left -->
             <div class="tw-flex tw-flex-col tw-justify-between tw-items-start tw-h-full" :class="!isAward ? 'tw-flex-1 3xl:tw-self-stretch' : ''">
                 <!-- Challenge Type Label -->
-                <div v-if="!isAward" class="tw-bg-[#374151] tw-rounded-[6px] tw-px-2 tw-py-1 tw-flex tw-text-[11px] tw-uppercase tw-font-bold tw-items-center">
+                <div v-if="!isAward && !isCustom" class="tw-bg-[#374151] tw-rounded-[6px] tw-px-2 tw-py-1 tw-flex tw-text-[11px] tw-uppercase tw-font-bold tw-items-center">
                     <svg v-if="isCommunityChallenge" class="tw-w-4 tw-h-4 tw-mr-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.8031 5.38681C11.8031 6.78052 10.6733 7.91034 9.27957 7.91034C7.88587 7.91034 6.75604 6.78052 6.75604 5.38681C6.75604 3.9931 7.88587 2.86328 9.27957 2.86328C10.6733 2.86328 11.8031 3.9931 11.8031 5.38681Z" fill="#D1D5DB"/>
                         <path d="M16.009 7.06916C16.009 7.9983 15.2558 8.75152 14.3266 8.75152C13.3975 8.75152 12.6443 7.9983 12.6443 7.06916C12.6443 6.14003 13.3975 5.38681 14.3266 5.38681C15.2558 5.38681 16.009 6.14003 16.009 7.06916Z" fill="#D1D5DB"/>
@@ -34,30 +34,34 @@
                     <div :class="isCommunityChallenge ? 'tw-mt-0.5' : ''">{{ labelText }}</div>
                 </div>
                 <!-- Logo -->
-                <div>
-                    <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-max-h-[86px] 2xl:tw-max-h-[99px] 3xl:tw-max-h-[105px] 4xl:tw-max-h-[110px] tw-max-w-[180px] 2xl:tw-max-w-[240px] 3xl:tw-max-w-none tw-w-full tw-h-full tw-object-contain tw-object-left' : 'tw-mb-1 tw-h-[65px]'" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} logo`" />
-                    <template v-if="isAward">
-                        <div class="tw-text-xs 2xl:tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white tw-mt-2">
-                            You practiced for a total of <b>{{ minutesPracticed }} minutes</b> and achieved a <b>{{ streak }}-day streak</b> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
-                        </div>
-                        <div class="tw-text-[#3F3F46] dark:tw-text-[#888888] tw-mb-3">
-                            Earned on {{ earnedDate }}
-                        </div>
-                    </template>
+                <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-max-h-[86px] 2xl:tw-max-h-[99px] 3xl:tw-max-h-[105px] 4xl:tw-max-h-[110px] tw-max-w-[180px] 2xl:tw-max-w-[240px] 3xl:tw-max-w-none tw-w-full tw-h-full tw-object-contain tw-object-left' : 'tw-mb-1 tw-h-[55px]'" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} logo`" />
 
-                    <template v-else-if="isCommunityChallenge">
-                        <div class="tw-my-2 tw-flex xl:tw-hidden">
-                            <!-- Avatars -->
-                            <div v-for="(user, index) in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-2' : ''" :style="`background-image: url('${user.profile_picture_url}')`"></div>
-                        </div>
-                        <p class="tw-text-xs 2xl:tw-text-sm tw-line-clamp-2 tw-mb-2">
-                            Join <span class="tw-font-bold">{{ userNames }},</span> and <span class="tw-font-bold">{{ totalEnrolled }}</span> other {{ otherText }} who have already enrolled! Runs {{ durationText }}.
-                        </p>
-                    </template>
+                <template v-if="isAward">
+                    <div class="tw-text-xs 2xl:tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white tw-mt-2">
+                        You practiced for a total of <b>{{ minutesPracticed }} minutes</b> and achieved a <b>{{ streak }}-day streak</b> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
+                    </div>
+                    <div class="tw-text-[#3F3F46] dark:tw-text-[#888888] tw-mb-3">
+                        Earned on {{ earnedDate }}
+                    </div>
+                </template>
 
-                    <div v-else class="tw-text-xs 2xl:tw-text-sm tw-font-bold tw-mb-3 3xl:tw-mb-0 tw-flex tw-items-center tw-w-[200px]">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> <DifficultyLabel :difficulty-value="difficulty" /></div>
+                <template v-else-if="isCommunityChallenge">
+                    <div class="tw-my-2 tw-flex xl:tw-hidden">
+                        <!-- Avatars -->
+                        <div v-for="(user, index) in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-2' : ''" :style="`background-image: url('${user.profile_picture_url}')`"></div>
+                    </div>
+                    <p class="tw-text-xs 2xl:tw-text-sm tw-line-clamp-2 tw-mb-2">
+                        Join <span class="tw-font-bold">{{ userNames }},</span> and <span class="tw-font-bold">{{ totalEnrolled }}</span> other {{ otherText }} who have already enrolled! Runs {{ durationText }}.
+                    </p>
+                </template>
 
+                <div v-else-if="isSoloChallenge" class="tw-text-xs 2xl:tw-text-sm tw-font-bold tw-mb-3 3xl:tw-mb-0 tw-flex tw-items-center tw-w-[200px]">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> <DifficultyLabel :difficulty-value="difficulty" /></div>
+
+                <div v-else-if="isCustom">
+                    <div class="tw-font-bold tw-text-lg 2xl:tw-text-xl">{{ challenge.header }}</div>
+                    <div v-if="challenge.subheader" class="tw-mt-1 tw-text-xs 2xl:tw-text-sm">{{ challenge.subheader }}</div>
                 </div>
+
                 <!-- CTA -->
                 <p v-if="ctaObj.type === 'text'" class="tw-text-sm">{{ ctaObj.text }}</p>
                 <MuButton v-else :variant="ctaObj.type" :class="`${ctaObj.style} tw-text-sm 2xl:tw-text-base`" :is-link="ctaObj.url !== undefined" :href="ctaObj.url || ''" @click="ctaObj.action">
@@ -83,7 +87,7 @@
         <!-- Background Overlay -->
         <div v-if="!isAward" class="tw-absolute tw-inset-0 tw-bg-[linear-gradient(180deg,_rgba(0,0,0,0)_46.12%,_rgba(0,0,0,0.7)_65.36%,_#000000_100%)] tw-z-[1]"></div>
         <!-- Challenge Type Label -->
-        <div v-if="!isAward" class="tw-absolute tw-top-[18px] tw-left-[18px] tw-z-[2]">
+        <div v-if="!isAward && !isCustom" class="tw-absolute tw-top-[18px] tw-left-[18px] tw-z-[2]">
             <div class="tw-bg-[#374151] tw-rounded-[6px] tw-px-2 tw-py-1 tw-flex tw-text-[11px] tw-uppercase tw-font-bold tw-items-center">
                 <svg v-if="isCommunityChallenge" class="tw-w-4 tw-h-4 tw-mr-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.8031 5.38681C11.8031 6.78052 10.6733 7.91034 9.27957 7.91034C7.88587 7.91034 6.75604 6.78052 6.75604 5.38681C6.75604 3.9931 7.88587 2.86328 9.27957 2.86328C10.6733 2.86328 11.8031 3.9931 11.8031 5.38681Z" fill="#D1D5DB"/>
@@ -131,7 +135,12 @@
                         Join <span class="tw-font-bold">{{ userNames }},</span> and <span class="tw-font-bold">{{ totalEnrolled }}</span> other {{ otherText }} who have already enrolled! Runs {{ durationText }}.
                     </p>
                 </template>
-                <div v-else class="tw-text-sm tw-font-bold tw-mb-5 tw-flex tw-items-center">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> <DifficultyLabel :difficulty-value="difficulty" /> </div>
+                <div v-else-if="isSoloChallenge" class="tw-text-sm tw-font-bold tw-mb-5 tw-flex tw-items-center">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> <DifficultyLabel :difficulty-value="difficulty" />
+                </div>
+                <div v-else-if="isCustom" class="tw-text-center tw-mb-5">
+                    <div class="tw-font-bold tw-text-lg">{{ challenge.header }}</div>
+                    <div v-if="challenge.subheader" class="tw-mt-1 tw-text-sm">{{ challenge.subheader }}</div>
+                </div>
                 <!-- CTA -->
                 <p v-if="ctaObj.type === 'text'" class="tw-text-sm tw-text-center">{{ ctaObj.text }}</p>
                 <MuButton v-else :variant="ctaObj.type" :class="`${ctaObj.style} tw-w-full tw-text-sm`" :is-link="ctaObj.url !== undefined" :href="ctaObj.url || ''" @click="ctaObj.action">
@@ -198,8 +207,12 @@ const isSoloChallenge = computed(() => {
 });
 
 const isCommunityChallenge = computed(() => {
-    return !props.challenge.is_solo;
+    return !props.challenge.is_solo && !isCustom.value;
 });
+
+const isCustom = computed(() => {
+    return props.challenge.type === 'custom';
+})
 
 const isAward = computed(() => {
     return props.challenge.type === 'challenge-award';
@@ -258,10 +271,10 @@ const mobileBGImage = computed(() => {
 
 const logo = computed(() => {
     if(isAward.value && !isDarkMode.value){
-        return props.challenge.light_mode_logo_url;
+        return props.challenge.light_mode_logo_url || props.challenge.logo;
     }
 
-    return props.challenge.dark_mode_logo_url;
+    return props.challenge.dark_mode_logo_url || props.challenge.logo;
 })
 
 const tier = computed(() => {
@@ -332,29 +345,43 @@ const otherText = computed(() => {
 const ctaObj = computed(() => {
     const obj = {};
 
+    //Award cards
     if(isAward.value){
         obj.text = 'See awards';
         obj.url = `${userDashboardUrl.value}/#myawards`;
         obj.type = 'primary';
-    } else if(isRecommendation.value){
-        obj.type = 'custom';
-        obj.style = 'tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white';
 
-        //When enrollment is not opened
-        if(!isEnrollmentOpened.value && !isUserNotified.value){
-            obj.text = 'Get Notified';
-            obj.icon = "fa-sharp fa-light fa-bell";
-            obj.action = registerNotification;
-        } else if(!isEnrollmentOpened.value && isUserNotified.value){
-            obj.type = 'text';
-            obj.text = `You’ll receive a notification when the enrollment for ${challengeTitle.value} opens!`;
-        }
+        return obj;
+    }
 
-        //When enrollment is opened and user is not enrolled
-        else if(isEnrollmentOpened.value && !isUserEnrolled.value){
-            obj.text = 'Enroll now';
-            obj.url = props.challenge.registration_url;
-        }
+    //Custom cards
+    if(isCustom.value){
+        obj.text = props.challenge.button_text;
+        obj.url = props.challenge.button_url;
+
+        return obj;
+    }
+
+    //Recommendation cards
+    obj.type = 'custom';
+    obj.style = 'tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white';
+
+    //When enrollment is not opened
+    if(!isEnrollmentOpened.value && !isUserNotified.value){
+        obj.text = 'Get Notified';
+        obj.icon = "fa-sharp fa-light fa-bell";
+        obj.action = registerNotification;
+    }
+
+    else if(!isEnrollmentOpened.value && isUserNotified.value){
+        obj.type = 'text';
+        obj.text = `You’ll receive a notification when the enrollment for ${challengeTitle.value} opens!`;
+    }
+
+    //When enrollment is opened and user is not enrolled
+    else if(isEnrollmentOpened.value && !isUserEnrolled.value){
+        obj.text = 'Enroll now';
+        obj.url = props.challenge.registration_url;
     }
 
     return obj;

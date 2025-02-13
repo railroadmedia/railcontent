@@ -20,7 +20,7 @@
         <div class="2xl:tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
             <!-- Challenge Logo -->
             <img class="lg:tw-max-w-[200px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
-            <img class="lg:tw-max-w-[240px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
+            <img class="lg:tw-max-w-[200px] 4xl:tw-max-w-[300px] lg:tw-max-h-[80px] 4xl:tw-max-h-[110px] tw-mb-3 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
             <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5">{{ actionText }}</div>
             <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url" class="tw-shrink-0">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
@@ -34,9 +34,12 @@
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
             <div class="tw-relative">
                 <div class="tw-rounded-[10px] tw-overflow-hidden tw-mb-5 tw-relative tw-aspect-video tw-w-[220px] 2xl:tw-w-[270px] 3xl:tw-w-[300px] 4xl:tw-w-[360px]">
+                    <!-- Milestone Icon -->
+                    <div v-if="isMilestone" class="tw-bg-[rgba(0,12,23,0.70)] tw-rounded-full tw-py-[5px] tw-px-1 tw-absolute tw-top-[6px] tw-right-[4px] tw-flex tw-justify-center tw-items-center">
+                        <musora-icon icon-name="challenge-milestone" class="tw-text-white tw-w-[14px] 2xl:tw-w-[16px] tw-h-[13px] 2xl:tw-h-[15px]" ></musora-icon>
+                    </div>
                     <!-- Thumbnail (Video ratio) -->
                     <img class="tw-object-cover tw-object-top" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challengeThumbnail}`" />
-                    <!-- Thumbnail (Square ratio) -->
                     <!-- Lock Overlay -->
                     <div v-if="hasChallengeStarted && isNextLessonLocked" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
                         <i class="fa-solid fa-lock tw-mb-2 tw-text-3xl tw-text-white"></i>
@@ -44,26 +47,32 @@
                 </div>
                 <div class="tw-flex tw-gap-2 tw-text-[11px] 3xl:tw-text-[13px] tw-relative tw-z-20 tw-shrink-0">
                     <!-- Streak -->
-                    <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-px-1.5 2xl:tw-px-2 3xl:tw-px-2.5 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('streak')">
+                    <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-px-1.5 2xl:tw-px-2 3xl:tw-px-2 4xl:tw-px-2.5 tw-flex tw-items-center tw-relative tw-cursor-pointer" @click="updateInfoModalType('streak')">
                         <div v-if="streak === 0" class="tw-text-[16px] 2xl:tw-text-[18px] 3xl:tw-text-[20px] 3xl:tw-my-[5px] tw-mr-1">🔥</div>
                         <Vue3Lottie v-else class="tw-w-[32px] 3xl:tw-w-[36px] -tw-ml-1.5 " animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
                         <div class="tw-flex-grow">
                             <div class="tw-font-extrabold">{{ streak }}</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
                                 Day Streak
-                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC] tw-hidden 2xl:tw-block"></musora-icon>
+                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-text-[#65656B] dark:tw-text-[#9EC0DC] tw-hidden 2xl:tw-block"></musora-icon>
                             </div>
                         </div>
                     </div>
                     <!-- Rest Days -->
-                    <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-px-1.5 2xl:tw-px-2 3xl:tw-px-2.5 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('rest')">
-                        <img class="tw-mr-2 2xl:tw-mr-3 tw-w-[13px] 2xl:tw-w-[14px] 3xl:tw-w-4 tw-hidden dark:tw-block" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
-                        <img class="tw-mr-2 2xl:tw-mr-3 tw-w-[13px] 2xl:tw-w-[14px] 3xl:tw-w-4 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
+                    <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-px-1.5 2xl:tw-px-2 3xl:tw-px-2 4xl:tw-px-2.5 tw-flex tw-items-center tw-relative tw-cursor-pointer" @click="updateInfoModalType('rest')">
+                        <template v-if="showActiveStreakSaver">
+                            <musora-icon icon-name="streak-saver-active-dark" class="tw-w-[21px] 2xl:tw-w-6 3xl:tw-w-7 tw-mr-1 tw-hidden dark:tw-block"></musora-icon>
+                            <musora-icon icon-name="streak-saver-active-light" class="tw-w-[21px] 2xl:tw-w-6 3xl:tw-w-7 tw-mr-1 dark:tw-hidden"></musora-icon>
+                        </template>
+                        <template v-else>
+                            <musora-icon icon-name="streak-saver-dark" class="tw-w-[21px] 2xl:tw-w-6 3xl:tw-w-7 tw-mr-1 tw-hidden dark:tw-block"></musora-icon>
+                            <musora-icon icon-name="streak-saver-light" class="tw-w-[21px] 2xl:tw-w-6 3xl:tw-w-7 tw-mr-1 dark:tw-hidden"></musora-icon>
+                        </template>
                         <div class="tw-flex-grow">
                             <div class="tw-font-extrabold">{{ restDays }}</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
                                 Streak Saver
-                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC] tw-hidden 2xl:tw-block"></musora-icon>
+                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-text-[#65656B] dark:tw-text-[#9EC0DC] tw-hidden 2xl:tw-block"></musora-icon>
                             </div>
                         </div>
                     </div>
@@ -133,8 +142,14 @@
             <!-- Rest Days -->
             <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-px-2 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('rest')">
                 <!-- Rest Icon -->
-                <img class="tw-mr-2 tw-w-4 tw-hidden dark:tw-block" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
-                <img class="tw-mr-2 tw-w-4 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
+                <template v-if="showActiveStreakSaver">
+                    <musora-icon icon-name="streak-saver-active-dark" class="tw-w-7 tw-ml-1 tw-mr-2 tw-hidden dark:tw-block"></musora-icon>
+                    <musora-icon icon-name="streak-saver-active-light" class="tw-w-7 tw-ml-1 tw-mr-2 dark:tw-hidden"></musora-icon>
+                </template>
+                <template v-else>
+                    <musora-icon icon-name="streak-saver-dark" class="tw-w-7 tw-ml-1 tw-mr-2 tw-hidden dark:tw-block"></musora-icon>
+                    <musora-icon icon-name="streak-saver-light" class="tw-w-7 tw-ml-1 tw-mr-2 dark:tw-hidden"></musora-icon>
+                </template>
                 <!-- Rest Text -->
                 <div class="tw-grow">
                     <div class="tw-font-extrabold">{{ restDays }}</div>
@@ -155,7 +170,7 @@
 
     <ChallengeNotificationModal v-if="isNotificationModalOpen" challenge-type="solo" :default-step="2" @modal-close="closeNotificationModal" :challenge="challenge" :is-from-carousel="true" @on-re-fetch-data="reFetchData" />
     <ChallengeActionModal v-if="isLeaveModalOpen" modal-type="leave" @close-modal="closeLeaveModal" :challenge="challenge" @on-leave-challenge="id => emit('onRemoveChallenge', id)" />
-    <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" @close-modal="updateInfoModalType('')" />
+    <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" :is-saver-active="showActiveStreakSaver" @close-modal="updateInfoModalType('')" />
 </template>
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from "vue";
@@ -198,6 +213,14 @@ const countdownString = ref('');
 const radius = 118;
 const circumference = 2 * Math.PI * radius;
 
+const isMilestone = computed(() => {
+    if(hasChallengeStarted.value){
+        return props.challenge?.next_lesson?.is_milestone;
+    }
+
+    return false;
+})
+
 const isSoloChallenge = computed(() => {
     return props.challenge.is_solo;
 })
@@ -205,6 +228,10 @@ const isSoloChallenge = computed(() => {
 const hasChallengeStarted = computed(() => {
     const now = new Date();
     return new Date(props.challenge.start_date) <= now;
+})
+
+const showActiveStreakSaver = computed(() => {
+    return props.challenge?.show_active_streak_saver;
 })
 
 const challengeTitle = computed(() => {
@@ -221,13 +248,17 @@ const actionText = computed(() => {
     }
 
     if(hasMissedLessons.value){
-        const lessonText = missedLessons.value > 1 ? 'lessons' : 'lesson';
-        const streakText = restDays.value > 0 ? 'maintain your' : 'start a new';
-        return `Complete ${missedLessons.value} ${lessonText} to ${streakText} streak!`;
+        const lessonText = `${missedLessons.value} lesson${missedLessons.value > 1 ? 's' : ''}`;
+        const streakText = showActiveStreakSaver.value ? 'maintain your' : 'start a new';
+        return `You missed ${lessonText}. Complete one to ${streakText} streak!`;
     }
 
     if(isNextLessonLocked.value){
         return `${nextLessonFullName.value} unlocks in ${countdownString.value}`;
+    }
+
+    if(isMilestone.value){
+        return 'Today’s lesson is a milestone! Complete it for an extra Streak Saver!';
     }
 
     return `${nextLessonFullName.value} Unlocked!`;
@@ -286,7 +317,6 @@ const ctaObj = computed(() => {
             icon: 'fas fa-play tw-mt-0.5',
             iconLocation: 'left',
         }
-
     }
 
     if(isNextLessonLocked.value){

@@ -395,9 +395,9 @@ class ChallengesTest extends TestCase
             }
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
             $currentStreakData = $userProgress->getStreakCurrentData();
-            $this->assertEquals($lessonNumber, $currentStreakData['current']);
-            $this->assertEquals($lessonNumber, $currentStreakData['best']);
-            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->assertEquals($lessonNumber, $currentStreakData->current);
+            $this->assertEquals($lessonNumber, $currentStreakData->best);
+            $this->assertEquals(0, $currentStreakData->missedLessons);
             $this->travel(1)->days();
         }
     }
@@ -464,10 +464,10 @@ class ChallengesTest extends TestCase
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
             $currentStreakData = $userProgress->getStreakCurrentData();
 
-            $this->assertEquals($completedLessons, $currentStreakData['current']);
-            $this->assertEquals($completedLessons, $currentStreakData['best']);
+            $this->assertEquals($completedLessons, $currentStreakData->current);
+            $this->assertEquals($completedLessons, $currentStreakData->best);
 
-            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->assertEquals(0, $currentStreakData->missedLessons);
             if (!$lesson_meta_datum['is_always_unlocked']) {
                 $this->travel(1)->days();
             }
@@ -516,10 +516,10 @@ class ChallengesTest extends TestCase
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
                 // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+                $this->assertEquals(1, $currentStreakData->best);
+                $this->assertEquals(1, $currentStreakData->current);
+                $this->assertEquals(0, $currentStreakData->missedLessons);
+                $this->assertEquals(1, $currentStreakData->totalStreakSavers);
             }
 
             // They miss the second day, should use up a rest_dat and push the unlock days of all future lessons 1 day
@@ -534,10 +534,10 @@ class ChallengesTest extends TestCase
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
                 // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+                $this->assertEquals(1, $currentStreakData->best);
+                $this->assertEquals(1, $currentStreakData->current);
+                $this->assertEquals(0, $currentStreakData->missedLessons);
+                $this->assertEquals(1, $currentStreakData->totalStreakSavers);
             }
 
             // now the following day, on Dec 3rd, rest day is consumed and unlock schedule should shift forward 1 day
@@ -573,7 +573,7 @@ class ChallengesTest extends TestCase
                     'current' => 1,
                     'missed' => 0,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // if they don't complete lesson 2 and it's the following day, their streak should break, they missed a day
@@ -595,7 +595,7 @@ class ChallengesTest extends TestCase
                     'current' => 0,
                     'missed' => 1,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // now if the day after, they complete the current unlocked day, their streak should start again
@@ -621,7 +621,7 @@ class ChallengesTest extends TestCase
                     'current' => 1,
                     'missed' => 2,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they complete the challenge on schedule
@@ -640,7 +640,7 @@ class ChallengesTest extends TestCase
                     'current' => $currentLessonNumberToBeCompleted-3,
                     'missed' => 2,
                     'remaining_rest_days' => $currentLessonNumberToBeCompleted >= 8 ? 1 : 0, // they earned another rest day after a 5-day streak
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             $currentDay->addDay();
@@ -686,10 +686,10 @@ class ChallengesTest extends TestCase
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
                 // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+                $this->assertEquals(1, $currentStreakData->best);
+                $this->assertEquals(1, $currentStreakData->current);
+                $this->assertEquals(0, $currentStreakData->missedLessons);
+                $this->assertEquals(1, $currentStreakData->totalStreakSavers);
             }
 
             // They miss the second day, should use up a rest_dat and push the unlock days of all future lessons 1 day
@@ -704,10 +704,10 @@ class ChallengesTest extends TestCase
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
                 // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+                $this->assertEquals(1, $currentStreakData->best);
+                $this->assertEquals(1, $currentStreakData->current);
+                $this->assertEquals(0, $currentStreakData->missedLessons);
+                $this->assertEquals(1, $currentStreakData->totalStreakSavers);
             }
 
             // now the following day, on Dec 3rd, rest day is consumed and unlock schedule should shift forward 1 day
@@ -744,7 +744,7 @@ class ChallengesTest extends TestCase
                     'current' => 1,
                     'missed' => 0,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // if they don't complete lesson 2 and it's the following day, their streak should break, they missed a day
@@ -766,7 +766,7 @@ class ChallengesTest extends TestCase
                     'current' => 0,
                     'missed' => 1,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // now if the day after, they complete the current unlocked day, their streak should start again
@@ -792,7 +792,7 @@ class ChallengesTest extends TestCase
                     'current' => 1,
                     'missed' => 2,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they complete the challenge on schedule
@@ -811,7 +811,7 @@ class ChallengesTest extends TestCase
                     'current' => $currentLessonNumberToBeCompleted-3,
                     'missed' => 2,
                     'remaining_rest_days' => $currentLessonNumberToBeCompleted >= 8 ? 1 : 0, // they earned another rest day after a 5-day streak
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // They miss lesson 9, which should use up their last rest day
@@ -832,7 +832,7 @@ class ChallengesTest extends TestCase
                     'current' => $currentLessonNumberToBeCompleted-3,
                     'missed' => 2,
                     'remaining_rest_days' => 1, // they earned another rest day after a 5-day streak
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // now the following day, on Dec 3rd, rest day is consumed and unlock schedule should shift forward 1 day
@@ -866,7 +866,7 @@ class ChallengesTest extends TestCase
                     'current' => 6,
                     'missed' => 2,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // students completes the last day on time, maintaining streak
@@ -888,7 +888,7 @@ class ChallengesTest extends TestCase
                     'current' => 7,
                     'missed' => 2,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             $currentDay->addDay();
@@ -934,10 +934,10 @@ class ChallengesTest extends TestCase
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
                 // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+                $this->assertEquals(1, $currentStreakData->best);
+                $this->assertEquals(1, $currentStreakData->current);
+                $this->assertEquals(0, $currentStreakData->missedLessons);
+                $this->assertEquals(1, $currentStreakData->totalStreakSavers);
             }
 
             // They miss the second day, should use up a rest_dat and push the unlock days of all future lessons 1 day
@@ -952,10 +952,10 @@ class ChallengesTest extends TestCase
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
                 // Assertions for streak behavior
-                $this->assertEquals(1, $currentStreakData['best']);
-                $this->assertEquals(1, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+                $this->assertEquals(1, $currentStreakData->best);
+                $this->assertEquals(1, $currentStreakData->current);
+                $this->assertEquals(0, $currentStreakData->missedLessons);
+                $this->assertEquals(1, $currentStreakData->totalStreakSavers);
             }
 
             // now the following day, on Dec 3rd, rest day is consumed and unlock schedule should shift forward 1 day
@@ -991,7 +991,7 @@ class ChallengesTest extends TestCase
                     'current' => 1,
                     'missed' => 0,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // if they don't complete lesson 2 and it's the following day, their streak should break, they missed a day
@@ -1013,7 +1013,7 @@ class ChallengesTest extends TestCase
                     'current' => 0,
                     'missed' => 1,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // now if the day after, they complete the current unlocked day, their streak should start again
@@ -1039,7 +1039,7 @@ class ChallengesTest extends TestCase
                     'current' => 1,
                     'missed' => 2,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they complete the challenge on schedule
@@ -1058,7 +1058,7 @@ class ChallengesTest extends TestCase
                     'current' => $currentLessonNumberToBeCompleted-3,
                     'missed' => 2,
                     'remaining_rest_days' => $currentLessonNumberToBeCompleted >= 8 ? 1 : 0, // they earned another rest day after a 5-day streak
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // They miss lesson 9, which should use up their last rest day
@@ -1079,7 +1079,7 @@ class ChallengesTest extends TestCase
                     'current' => $currentLessonNumberToBeCompleted-3,
                     'missed' => 2,
                     'remaining_rest_days' => 1, // they earned another rest day after a 5-day streak
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // now the following day, on Dec 3rd, rest day is consumed and unlock schedule should shift forward 1 day
@@ -1113,7 +1113,7 @@ class ChallengesTest extends TestCase
                     'current' => 6,
                     'missed' => 2,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // students completes the last day on time, maintaining streak
@@ -1135,7 +1135,7 @@ class ChallengesTest extends TestCase
                     'current' => 7,
                     'missed' => 2,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             $currentDay->addDay();
@@ -1182,10 +1182,10 @@ class ChallengesTest extends TestCase
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
                 // Assertions for streak behavior
-                $this->assertEquals(0, $currentStreakData['best']);
-                $this->assertEquals(0, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+                $this->assertEquals(0, $currentStreakData->best);
+                $this->assertEquals(0, $currentStreakData->current);
+                $this->assertEquals(0, $currentStreakData->missedLessons);
+                $this->assertEquals(1, $currentStreakData->totalStreakSavers);
 
                 // don't add a day to the counter
                 continue;
@@ -1203,10 +1203,10 @@ class ChallengesTest extends TestCase
                 $currentStreakData = $userProgress->getStreakCurrentData();
 
                 // Assertions for streak behavior
-                $this->assertEquals(0, $currentStreakData['best']);
-                $this->assertEquals(0, $currentStreakData['current']);
-                $this->assertEquals(0, $currentStreakData['missed']);
-                $this->assertEquals(1, $currentStreakData['remaining_rest_days']);
+                $this->assertEquals(0, $currentStreakData->best);
+                $this->assertEquals(0, $currentStreakData->current);
+                $this->assertEquals(0, $currentStreakData->missedLessons);
+                $this->assertEquals(1, $currentStreakData->totalStreakSavers);
 
                 // don't add a day to the counter
                 continue;
@@ -1228,7 +1228,7 @@ class ChallengesTest extends TestCase
                     'current' => 1,
                     'missed' => 0,
                     'remaining_rest_days' => 1,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they complete the next (2) actual lesson day on the day it unlocks, streak increases
@@ -1246,7 +1246,7 @@ class ChallengesTest extends TestCase
                     'current' => 2,
                     'missed' => 0,
                     'remaining_rest_days' => 1,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they miss the 5th lesson schedule for Dec 3rd, and use up a rest day, streak data unchanged
@@ -1261,7 +1261,7 @@ class ChallengesTest extends TestCase
                     'current' => 2,
                     'missed' => 0,
                     'remaining_rest_days' => 1,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
 
                 // Make sure we loop back to this lesson tomorrow in this test
                 $currentLessonNumberToBeCompleted--;
@@ -1280,7 +1280,7 @@ class ChallengesTest extends TestCase
                     'current' => 2,
                     'missed' => 0,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
 
                 // Assert this lessons unlock date has been pushed forward a day
                 $this->assertEquals(
@@ -1308,7 +1308,7 @@ class ChallengesTest extends TestCase
                     'current' => 3,
                     'missed' => 0,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they complete the 6th lesson on time (4th regular lesson)
@@ -1326,7 +1326,7 @@ class ChallengesTest extends TestCase
                     'current' => 4,
                     'missed' => 0,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they complete the 7th lesson on time (5th regular lesson), they earn another rest day (5 day-streak)
@@ -1344,7 +1344,7 @@ class ChallengesTest extends TestCase
                     'current' => 5,
                     'missed' => 0,
                     'remaining_rest_days' => 1,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they complete the 8th lesson on time, but its a bonus lesson so they dont get anything
@@ -1362,7 +1362,7 @@ class ChallengesTest extends TestCase
                     'current' => 5,
                     'missed' => 0,
                     'remaining_rest_days' => 1,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they complete the 9th lesson on time, but its a bonus lesson so they dont get anything
@@ -1380,7 +1380,7 @@ class ChallengesTest extends TestCase
                     'current' => 5,
                     'missed' => 0,
                     'remaining_rest_days' => 1,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they complete the 10th lesson on time (6th regular lesson)
@@ -1398,7 +1398,7 @@ class ChallengesTest extends TestCase
                     'current' => 6,
                     'missed' => 0,
                     'remaining_rest_days' => 1,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they miss the 11th lesson (7th regular lesson), and use up their last rest day
@@ -1412,7 +1412,7 @@ class ChallengesTest extends TestCase
                     'current' => 6,
                     'missed' => 0,
                     'remaining_rest_days' => 1,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
 
                 // Make sure we loop back to this lesson tomorrow in this test
                 $currentLessonNumberToBeCompleted--;
@@ -1431,7 +1431,7 @@ class ChallengesTest extends TestCase
                     'current' => 6,
                     'missed' => 0,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
 
                 // Assert this lessons unlock date has been pushed forward a day
                 $this->assertEquals(
@@ -1459,7 +1459,7 @@ class ChallengesTest extends TestCase
                     'current' => 7,
                     'missed' => 0,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they miss the 12th lesson (8th regular lesson), and they have no rest days left, its a missed day
@@ -1473,7 +1473,7 @@ class ChallengesTest extends TestCase
                     'current' => 7,
                     'missed' => 0,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // they return the following day and it triggers a missed day and streak reset
@@ -1487,7 +1487,7 @@ class ChallengesTest extends TestCase
                     'current' => 0,
                     'missed' => 1,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
 
                 // They complete the current lesson today, previous one says missed
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
@@ -1503,7 +1503,7 @@ class ChallengesTest extends TestCase
                     'current' => 1,
                     'missed' => 1,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             // on the last day, they complete that day on time and go back and complete their missed lesson
@@ -1517,7 +1517,7 @@ class ChallengesTest extends TestCase
                     'current' => 1,
                     'missed' => 1,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
 
                 // They complete the current lesson today
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
@@ -1533,7 +1533,7 @@ class ChallengesTest extends TestCase
                     'current' => 2,
                     'missed' => 1,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
 
                 // They complete the lesson they missed 2 days ago, decrease their missed lesson count, do not add a streak
                 $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
@@ -1549,7 +1549,7 @@ class ChallengesTest extends TestCase
                     'current' => 2,
                     'missed' => 0,
                     'remaining_rest_days' => 0,
-                ], $currentStreakData);
+                ], $currentStreakData->toArray());
             }
 
             $currentDay->addDay();
@@ -1621,9 +1621,9 @@ class ChallengesTest extends TestCase
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
             $currentStreakData = $userProgress->getStreakCurrentData();
 
-            $this->assertEquals($lessonNumber, $currentStreakData['current']);
-            $this->assertEquals($lessonNumber, $currentStreakData['best']);
-            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->assertEquals($lessonNumber, $currentStreakData->current);
+            $this->assertEquals($lessonNumber, $currentStreakData->best);
+            $this->assertEquals(0, $currentStreakData->missedLessons);
 
             // Travel to the next day in the user's timezone
             // move ahead days ahead
@@ -1981,9 +1981,9 @@ class ChallengesTest extends TestCase
             }
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
             $currentStreakData = $userProgress->getStreakCurrentData();
-            $this->assertEquals($lessonNumber, $currentStreakData['current']);
-            $this->assertEquals($lessonNumber, $currentStreakData['best']);
-            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->assertEquals($lessonNumber, $currentStreakData->current);
+            $this->assertEquals($lessonNumber, $currentStreakData->best);
+            $this->assertEquals(0, $currentStreakData->missedLessons);
             $this->travel(1)->days();
         }
     }
@@ -2035,9 +2035,9 @@ class ChallengesTest extends TestCase
             }
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
             $currentStreakData = $userProgress->getStreakCurrentData();
-            $this->assertEquals($lessonNumber, $currentStreakData['current']);
-            $this->assertEquals($lessonNumber, $currentStreakData['best']);
-            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->assertEquals($lessonNumber, $currentStreakData->current);
+            $this->assertEquals($lessonNumber, $currentStreakData->best);
+            $this->assertEquals(0, $currentStreakData->missedLessons);
             $this->travel(1)->days();
         }
     }
@@ -2078,9 +2078,9 @@ class ChallengesTest extends TestCase
             }
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
             $currentStreakData = $userProgress->getStreakCurrentData();
-            $this->assertEquals($lessonNumber, $currentStreakData['current']);
-            $this->assertEquals($lessonNumber, $currentStreakData['best']);
-            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->assertEquals($lessonNumber, $currentStreakData->current);
+            $this->assertEquals($lessonNumber, $currentStreakData->best);
+            $this->assertEquals(0, $currentStreakData->missedLessons);
             $this->travel(1)->days();
         }
     }
@@ -2132,9 +2132,9 @@ class ChallengesTest extends TestCase
             }
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
             $currentStreakData = $userProgress->getStreakCurrentData();
-            $this->assertEquals($lessonNumber, $currentStreakData['current']);
-            $this->assertEquals($lessonNumber, $currentStreakData['best']);
-            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->assertEquals($lessonNumber, $currentStreakData->current);
+            $this->assertEquals($lessonNumber, $currentStreakData->best);
+            $this->assertEquals(0, $currentStreakData->missedLessons);
             $this->travel(1)->days();
         }
     }
@@ -2161,9 +2161,9 @@ class ChallengesTest extends TestCase
             $this->assertFalse($lessonCompletedProgress['show_modal']);
             $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
             $currentStreakData = $userProgress->getStreakCurrentData();
-            $this->assertEquals($lessonNumber, $currentStreakData['current']);
-            $this->assertEquals($lessonNumber, $currentStreakData['best']);
-            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->assertEquals($lessonNumber, $currentStreakData->current);
+            $this->assertEquals($lessonNumber, $currentStreakData->best);
+            $this->assertEquals(0, $currentStreakData->missedLessons);
         }
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
         $this->assertTrue($userProgress->areAllLessonsCompleted());

@@ -103,7 +103,7 @@ const userStore = useUserStore();
 const { userProfilePictureUrl, brand } = storeToRefs(userStore);
 
 const selectedFrequency = ref(true);
-const step = ref(props.defaultStep !== 0 ? props.defaultStep : 1);
+const step = ref(props.defaultStep !== 0 ? props.defaultStep : props.challengeType === 'solo' ? 2 : 1);
 const selectedDate = ref(new Date(Date.now()));
 const slideIn = ref(false);
 const challengeData = ref({

@@ -2,12 +2,28 @@
     <InfoModal
         v-if="info[type]"
         :selfContained="true"
-        :title="info[type].title"
         class-override="tw-max-w-[600px] tw-w-full"
         :container-stay-on-close="containerStayOnClose"
         @onClose="() => emit('closeModal')"
     >
-        <p class="dark:tw-text-white tw-mb-5">{{ info[type].description }}</p>
+        <div v-if="type === 'streak'" class="-tw-mt-[52px]">
+            <h3 class="tw-w-full tw-text-black dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-5 tw-mb-5">🔥 Introducing Streaks!</h3>
+            <p class="dark:tw-text-white tw-mb-5">Streaks make it easy to track how many days in a row you've completed a lesson for a specific Challenge. Bonus days won't affect your streak. Higher streaks will unlock special achievements!</p>
+        </div>
+        <div v-else class="-tw-mt-[55px]">
+            <h3 class="tw-flex tw-w-full tw-text-black dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-5">
+                <template v-if="isSaverActive">
+                    <musora-icon icon-name="streak-saver-active-dark" class="tw-mr-2 tw-hidden dark:tw-block"></musora-icon>
+                    <musora-icon icon-name="streak-saver-active-light" class="tw-mr-2 dark:tw-hidden"></musora-icon>
+                </template>
+                <template v-else>
+                    <musora-icon icon-name="streak-saver-dark" class="tw-mr-2 tw-hidden dark:tw-block"></musora-icon>
+                    <musora-icon icon-name="streak-saver-light" class="tw-mr-2 dark:tw-hidden"></musora-icon>
+                </template>
+                Introducing Streak Savers!
+            </h3>
+            <p class="dark:tw-text-white tw-mb-5">Streak Savers allow you to miss a few days of a Challenge without restarting your streak. You have a limited number of Streak Savers, and can gain more as you progress through a Challenge. A Streak Saver is used automatically when you miss a day.</p>
+        </div>
         <div class="tw-flex tw-justify-end">
             <MuButton @click="emit('closeModal')">Okay!</MuButton>
         </div>
@@ -16,11 +32,16 @@
 <script setup>
 import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
+import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
 
 const props = defineProps({
     type: {
         type: String,
         default: 'streak',
+    },
+    isSaverActive: {
+        type: Boolean,
+        default: false,
     },
     containerStayOnClose: {
         type: Boolean,
@@ -36,8 +57,8 @@ const info = {
         description: `Streaks make it easy to track how many days in a row you've completed a lesson for a specific Challenge. Bonus days won't affect your streak. Higher streaks will unlock special achievements!`
     },
     rest: {
-        title: '<img class="tw-mr-2 tw-w-6 tw-hidden dark:tw-inline-block" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" /> <img class="tw-mr-2 tw-w-6 tw-inline-block dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" /> Introducing Streak Savers!',
-        description: 'Streak Savers allow you to miss a few days of a Challenge without restarting your streak. You have a limited number of Streak Savers, and can gain more as you progress through a Challenge. A Streak Saver is used automatically when you complete a missed day.'
+        title: '',
+        description: '<musora-icon icon-name="streak-saver-active-dark"></musora-icon> '
     }
 }
 </script>

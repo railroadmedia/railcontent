@@ -65,7 +65,7 @@
           tw-shrink-0
         "
       >
-        <a class="tw-cursor-pointer tw-z-10" :href="instructor.web_url_path">
+        <a class="tw-cursor-pointer tw-z-10" :class="`tw-text-${brand}`" :href="instructor.web_url_path">
           <span class="tw-text-xs sm:tw-text-base tw-font-normal tw-mr-1">
             {{ instructor.name.split(" ")[0] }}
           </span>

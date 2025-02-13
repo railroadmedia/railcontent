@@ -35,6 +35,7 @@
             "status": "published",
             "is_always_unlocked_for_challenge": null,
             "is_bonus_content_for_challenge": null,
+            "is_milestone": false,
             "thumbnail": "https://cdn.sanity.io/images/4032r8py/staging/590ae25f0258d3d5b627ba7161cb57406bb009ec-1920x1080.jpg",
             "difficulty": 1
         },

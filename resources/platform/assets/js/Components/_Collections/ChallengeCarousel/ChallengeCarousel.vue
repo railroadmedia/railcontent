@@ -16,13 +16,12 @@
                 :squareImg="card.squareImg"
                 :is-draft="card.is_draft"
             />
-            <EnrollmentAward v-else-if="!card.is_user_enrolled" :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" />
+            <EnrollmentAward v-else-if="card.type === 'custom' || !card.is_user_enrolled" :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" />
             <InProgressCard v-else :challenge="card" :page-type="pageType" @on-remove-challenge="id => emit('removeChallenge', id)" @on-re-fetch-carousel="data => emit('reFetchCarousel', data)" />
         </template>
     </div>
 </template>
 <script setup>
-import { computed } from "vue";
 import { useUserStore } from '@stores/user';
 import { storeToRefs } from "pinia/dist/pinia";
 import InProgressCard from '@collections/ChallengeCarousel/InProgressCard';
