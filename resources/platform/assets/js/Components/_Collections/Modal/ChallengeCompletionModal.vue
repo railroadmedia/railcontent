@@ -178,7 +178,7 @@
     </ModalRenderer>
 
     <!-- Info Modal -->
-    <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" :container-stay-on-close="true" :is-saver-active="restDay > 0" @close-modal="updateInfoModalType('')" />
+    <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" :container-stay-on-close="true" :is-saver-active="restDay > 0" @close-modal="updateInfoModalType('')"  />
 
 </template>
 <script setup>
@@ -274,11 +274,11 @@ const nextLessonTitle = computed(() => {
 })
 
 const isNextLessonLocked = computed(() => {
-    return props.completionData?.next_lesson?.is_locked ?? true;
+    return props.completionData?.next_lesson?.is_locked;
 })
 
 const isLastLesson = computed(() => {
-    return !props.completionData?.next_lesson;
+    return !props.completionData?.next_lesson || props.completionData?.next_lesson?.length === 0;
 })
 
 const isChallengeCompleted = computed(() => {
