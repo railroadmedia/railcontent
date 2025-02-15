@@ -446,12 +446,14 @@ class ChallengeUserProgress extends Model
     /**
      * Set lesson progress (completed and seconds_practiced) for a given lesson
      * @param int $lessonId
+     * @param array $lessons - challenge lessons from sanity
      * @param bool $isCompleted
      * @param int|null $totalSecondsPracticed - if null, will not update the existing value
      * @return array -
      */
     public function updateLessonsProgress(
         int $lessonId,
+        array $lessons,
         bool $isCompleted = true,
         ?int $totalSecondsPracticed = null,
         Carbon $completedTime = null
@@ -464,6 +466,9 @@ class ChallengeUserProgress extends Model
         ];
         $lessonMetaData = $this->lessons_meta_data;
         foreach ($lessonMetaData as $index => $lessonMetaDatum) {
+            // hack for V2 content Updates so we don't have to manually update everything in the db.
+            // This can be removed in March 2025
+            $lessonMetaData[$index]['is_milestone'] = $lessons[$index]['is_milestone'] ?? false;
             if ($lessonMetaDatum['content_id'] == $lessonId && !$lessonMetaDatum['completed']) {
                 $lessonMetaData[$index]['completed'] = $isCompleted;
                 $lessonMetaData[$index]['completed_at'] = ($completedTime ??
@@ -472,6 +477,7 @@ class ChallengeUserProgress extends Model
                 if (!is_null($totalSecondsPracticed)) {
                     $lessonMetaData[$index]['seconds_practiced'] = $totalSecondsPracticed;
                 }
+                // remove March 2025
                 break;
             }
         }

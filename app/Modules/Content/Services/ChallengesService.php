@@ -818,6 +818,7 @@ class ChallengesService
         );
         $lessonsProgress = $userProgress->updateLessonsProgress(
             $lessonId,
+            $challenge['lessons'],
             isCompleted: true,
             totalSecondsPracticed: $secondsPracticed,
             completedTime: $completedTime
