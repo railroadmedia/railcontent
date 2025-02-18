@@ -183,7 +183,7 @@ import { storeToRefs } from "pinia/dist/pinia";
 import { Vue3Lottie } from 'vue3-lottie';
 import { countdown } from "@collections/ChallengeCarousel/countdown";
 import { fetchCarouselCardData, fetchChallengeUserActiveChallenges } from 'musora-content-services';
-import { getDateFromIso } from '../../../utils';
+import { getDate } from '../../../utils';
 
 import MuButton from '@units/Button/MuButton';
 import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
@@ -243,7 +243,7 @@ const challengeTitle = computed(() => {
 })
 
 const startDate = computed(() => {
-    return getDateFromIso(props.challenge.start_date);
+    return getDate(props.challenge.start_date);
 })
 
 const actionText = computed(() => {
