@@ -1,10 +1,11 @@
 <template>
     <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
-        <div :class="`tw-block tw-no-scrollbar ${isGroupedView ? 'tw-overflow-x-scroll tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
+        <div :class="`tw-block tw-no-scrollbar ${isGroupedView ? ' tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
             <div
                 :class="`
+                    ${sectionTitle}-container
                     tw-no-scrollbar tw-flex
-                    ${isGroupedView ? 'tw-flex-row tw-flex-nowrap tw-w-auto lg:tw-grid lg:tw-gap-3 lg:tw-grid-cols-5 2xl:tw-grid-cols-7' : 'tw-flex-wrap sm:tw-grid sm:tw-grid-cols-4 lg:tw-grid-cols-5 2xl:tw-grid-cols-7 sm:tw-gap-3'}
+                    ${isGroupedView ? 'tw-flex-row tw-flex-nowrap tw-overflow-x-scroll lg:-tw-mr-3' : 'tw-flex-wrap sm:tw-grid sm:tw-grid-cols-4 lg:tw-grid-cols-5 2xl:tw-grid-cols-7 sm:tw-gap-3'}
                 `">
                 <!-- Skeleton Loader -->
                 <template v-if="showSkeletonLoader">
@@ -12,15 +13,19 @@
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else>
-                    <SongCard
-                        v-for="item in data"
-                        :key="'grid' + item.id"
-                        :item="item"
-                        :isGroupedView="isGroupedView"
-                        :add-margin-bottom="addMarginBottom"
-                        @addToList="addToList"
-                        @progressReset="resetProgressEventHandler"
-                    />
+                    <template  v-for="item in data">
+                        <div v-if="item.type === 'fill'" class="tw-shrink-0 tw-w-[145px] sm:tw-w-[170px] lg:tw-pr-3 lg:tw-w-1/5 2xl:tw-w-[calc(14.2857%)]"></div>
+                        <SongCard
+                            v-else
+                            :key="'grid' + item.id"
+                            :item="item"
+                            :isGroupedView="isGroupedView"
+                            :add-margin-bottom="addMarginBottom"
+                            @addToList="addToList"
+                            @progressReset="resetProgressEventHandler"
+                        />
+                    </template>
+
                 </template>
             </div>
         </div>
@@ -52,6 +57,10 @@ const props = defineProps({
     addMarginBottom: {
         type: Boolean,
         default: () => true,
+    },
+    sectionTitle: {
+        type: String,
+        default: '',
     },
 });
 

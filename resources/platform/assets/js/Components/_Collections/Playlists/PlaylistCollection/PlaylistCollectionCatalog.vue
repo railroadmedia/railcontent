@@ -62,14 +62,23 @@
                 <playlist-collection-card v-for="(listElement, i) in playlistsStore.playlists" :key="listElement.id"
                     :listElement="listElement" :isListView="state.isListView" :token="token" :brand="brand" :index="i" />
             </section>
-            <section v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView" class="tw-w-full tw-block tw-no-scrollbar tw-pt-4 tw--mt-4 tw-overflow-x-auto lg:tw-overflow-x-visible">
-                <div class="PlaylistMiniCatalogContainer tw-w-full tw-gap-[6px] tw-relative tw-grid tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-6 lg:tw-grid-cols-5 2xl:tw-grid-cols-6 xl:tw-gap-[12px] 2xl:tw-gap-[16px] tw-min-w-max lg:tw-min-w-full tw-pt-4 tw--mt-4 tw-overflow-x-auto lg:tw-overflow-x-visible">
-                    <!-- Mini Catalog -->
-                    <playlist-collection-card v-for="(listElement, i) in playlists" :key="listElement.id"
-                        :listElement="listElement" :isListView="false" :isMiniCatalog="true" :token="token" :index="i"
-                        :brand="brand" :trackingSection="trackingSection" />
-                </div>
-            </section>
+            <div v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView" class="playlist-container tw-relative tw-flex tw-flex-nowrap tw-pt-4 -tw-mt-4 -tw-mr-[6px] xl:-tw-mr-[12px] 2xl:-tw-mr-[16px] tw-no-scrollbar tw-overflow-x-scroll" @touchend="emit('handleScrollEnd')">
+                <!-- Mini Catalog -->
+                <template v-for="(listElement, i) in playlists">
+                    <div v-if="listElement.type === 'fill'" class="tw-w-[227px] lg:tw-w-1/5 2xl:tw-w-1/6 tw-shrink-0"></div>
+                    <playlist-collection-card
+                        v-else
+                        :key="listElement.id"
+                        :listElement="listElement"
+                        :isListView="false"
+                        :isMiniCatalog="true"
+                        :token="token"
+                        :index="i"
+                        :brand="brand"
+                        :trackingSection="trackingSection"
+                    />
+                </template>
+            </div>
 
             <!-- Pagination -->
             <Pagination v-if="!miniCatalog && !playlistsStore.loadingPlaylists && playlistsStore.playlistsQuantity > 10"
@@ -151,6 +160,8 @@ const props = defineProps({
         default: 1
     }
 })
+
+const emit = defineEmits(['handleScrollEnd'])
 
 //---------Computed Props---------//
 const hasPlaylists = computed(() => {

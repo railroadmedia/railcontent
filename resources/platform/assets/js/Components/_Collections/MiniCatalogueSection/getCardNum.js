@@ -12,12 +12,10 @@ export const getCardNum = (props, cardNum, toggleSeeAllCard) => {
 
     //Challenge Carousel
     if(props.catalogueType === 'challenge-carousel'){
-        if(xlDesktop.value){
-            cardNum.value = 2;
-        } else if(lgDesktop.value){
-            cardNum.value = 2;
-        } else {
-            cardNum.value = 20;
+         if(window.innerWidth >= 692){
+             cardNum.value = 2;
+        } else{
+             cardNum.value = 1;
         }
     }
 
@@ -27,6 +25,17 @@ export const getCardNum = (props, cardNum, toggleSeeAllCard) => {
             cardNum.value = 6;
         } else if(xlDesktop.value){
             cardNum.value = 5;
+        } else if(lgDesktop.value){
+            cardNum.value = 4;
+        } else {
+            cardNum.value = 20;
+        }
+    }
+
+    //Challenge Awards
+    else if(props.catalogueType === 'challengeAward'){
+        if(xlDesktop.value){
+            cardNum.value = 6;
         } else if(lgDesktop.value){
             cardNum.value = 4;
         } else {

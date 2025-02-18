@@ -679,7 +679,7 @@ class SanityGateway
      * @param bool $isAdmin
      * @return array
      */
-    public function getOnboardingCard(string $brand, string $access_level, string $difficultyString, bool $isAdmin = false) : array
+    public function getOnboardingCard(string $brand, string $access_level, string $difficultyString, bool $isAdmin = false): array
     {
         $id = strtolower("onboarding_content_card_" . $brand . '_' . $access_level . '_' . $difficultyString);
         $fieldsString = $this->getFieldsString(null);

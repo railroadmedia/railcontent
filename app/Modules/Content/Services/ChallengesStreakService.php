@@ -267,13 +267,13 @@ class ChallengesStreakService
                 // Missed lessons is adjusted, this made sense in my head and now I can't explain it
                 // If we added a lesson today, don't count that lesson
                 // If we have previous missed lessons, we include it unless it's a bonus day? Something like that
-//                $streak->missedLessons -= $streak->lessonAdded ? 1 : 0;
+                //                $streak->missedLessons -= $streak->lessonAdded ? 1 : 0;
                 $previousMissedLessons = $streaks[$previousIndex]->missedLessons ?? 0;
                 $isCatchup = $previousMissedLessons > 0;
                 if ($isCatchup) {
                     if ($streak->lessonAdded) {
                         if ($lessonsCompleted > 0) {
-                            $streak->missedLessons = max(0,$previousMissedLessons - $lessonsCompleted + 1);
+                            $streak->missedLessons = max(0, $previousMissedLessons - $lessonsCompleted + 1);
                         } else {
                             $streak->missedLessons = $previousMissedLessons;
                         }

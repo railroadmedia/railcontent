@@ -163,7 +163,7 @@ class CarouselServiceV1
         return $enrollmentCards;
     }
 
-    private function sortBannerCards($immutableCards, $mutableCards) : array
+    private function sortBannerCards($immutableCards, $mutableCards): array
     {
         $cardsWithDisplayOrder = [];
         $cardsWithoutDisplayOrder = [];

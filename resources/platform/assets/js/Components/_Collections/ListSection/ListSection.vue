@@ -17,7 +17,7 @@
                 </div>
             </div>
             <PlaylistCollectionCatalog
-                :mini-catalog="true" :playlist-count="usersList.length" :playlists="data" trackingSection="playlists" :mini-view-page="page" :mini-view-card-num="cardNum"
+                :mini-catalog="true" :playlist-count="usersList.length" :playlists="data" trackingSection="playlists" :mini-view-page="page" :mini-view-card-num="cardNum" @handle-scroll-end="handleScrollEnd"
             />
 
         </div>
@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref, watch } from "vue";
+import { onMounted, onUnmounted, ref, watch, computed } from "vue";
 import { useUserStore } from '@stores/user';
 import userJourney from '@services/userJourney';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
@@ -54,6 +54,10 @@ const data = ref([]);
 const page = ref(1);
 const cardNum = ref(5);
 
+const initialData = computed(() => {
+    return props.usersList;
+})
+
 const handleSeeAllClick = (event) => {
   if (props.myListUrl) {
     event.preventDefault();
@@ -79,8 +83,7 @@ const watchResize = () => {
         cardNum.value = 12;
     }
 
-
-    getPageData();
+    toStartIndex();
 }
 
 onMounted(() => {
@@ -92,12 +95,5 @@ onUnmounted(() => {
     window.removeEventListener('resize', watchResize);
 })
 
-watch(
-    () => props.usersList,
-    (newList) => {
-        setOriginal(newList);
-    },
-)
-
-const { getPageData, setOriginal, nextPage, prevPage, showPagination, isFirstPage, isLastPage } = useCarouselEvents(props.usersList, data, page, cardNum);
+const { nextPage, prevPage, showPagination, isFirstPage, isLastPage, toStartIndex, handleScrollEnd } = useCarouselEvents(initialData, data, page, cardNum, { value: 'playlist'});
 </script>

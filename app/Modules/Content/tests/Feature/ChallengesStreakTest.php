@@ -57,7 +57,7 @@ class ChallengesStreakTest extends TestCase
         $this->assertEquals(1, $streak->totalStreakSavers, 'Expected Total StreakSavers');
         $this->assertEquals(0, $streak->mileStonesAdded, 'Expected milestones added');
         $this->assertEquals(0, $streak->streakSaverUsed, 'Expected streak savers used');
-        $this->assertEquals(0, $streak->missedLessons,"Expected missed lessons");
+        $this->assertEquals(0, $streak->missedLessons, "Expected missed lessons");
         $this->assertEquals(0, $streak->best, "Expected max streak");
 
         $this->collection[1]->completedAt = $firstCurriculumDay->copy();
@@ -68,7 +68,7 @@ class ChallengesStreakTest extends TestCase
         $this->assertEquals(1, $streak->totalStreakSavers, 'Expected Total StreakSavers');
         $this->assertEquals(0, $streak->mileStonesAdded, 'Expected milestones added');
         $this->assertEquals(0, $streak->streakSaverUsed, 'Expected streak savers used');
-        $this->assertEquals(0, $streak->missedLessons,"Expected missed lessons");
+        $this->assertEquals(0, $streak->missedLessons, "Expected missed lessons");
         $this->assertEquals(1, $streak->best, "Expected max streak");
 
 
@@ -78,7 +78,7 @@ class ChallengesStreakTest extends TestCase
         $this->assertEquals(0, $streak->totalStreakSavers, 'Expected Total StreakSavers');
         $this->assertEquals(0, $streak->mileStonesAdded, 'Expected milestones added');
         $this->assertEquals(0, $streak->streakSaverUsed, 'Expected streak savers used');
-        $this->assertEquals(3, $streak->missedLessons,"Expected missed lessons");
+        $this->assertEquals(3, $streak->missedLessons, "Expected missed lessons");
         $this->assertEquals(1, $streak->best, "Expected max streak");
 
         for ($i = 2; $i <= 5; $i++) {
@@ -90,10 +90,10 @@ class ChallengesStreakTest extends TestCase
 
             $streak = $this->challengesStreakService->generateStreaks($this->collection, $fourthDay->copy(), 1);
             $this->assertEquals($i - 1, $streak->current, 'Expected Streak');
-            $this->assertEquals($i == 5 ? 1 :0, $streak->totalStreakSavers, 'Expected Total StreakSavers');
+            $this->assertEquals($i == 5 ? 1 : 0, $streak->totalStreakSavers, 'Expected Total StreakSavers');
             $this->assertEquals($i == 5 ? 1 : 0, $streak->mileStonesAdded, 'Expected milestones added');
             $this->assertEquals(0, $streak->streakSaverUsed, 'Expected streak savers used');
-            $this->assertEquals(5 - $i, $streak->missedLessons,"Expected missed lessons");
+            $this->assertEquals(5 - $i, $streak->missedLessons, "Expected missed lessons");
             $this->assertEquals($i - 1, $streak->best, "Expected max streak");
         }
     }
@@ -117,7 +117,7 @@ class ChallengesStreakTest extends TestCase
         $this->assertEquals(1, $streak->totalStreakSavers, 'Expected Total StreakSavers');
         $this->assertEquals(0, $streak->mileStonesAdded, 'Expected milestones added');
         $this->assertEquals(0, $streak->streakSaverUsed, 'Expected streak savers used');
-        $this->assertEquals(0, $streak->missedLessons,"Expected missed lessons");
+        $this->assertEquals(0, $streak->missedLessons, "Expected missed lessons");
         $this->assertEquals(4, $streak->best, "Expected max streak");
 
         // metaData is offset 7 days of from the Day values
@@ -129,7 +129,7 @@ class ChallengesStreakTest extends TestCase
         $this->assertEquals(2, $streak->totalStreakSavers, 'Expected Total StreakSavers');
         $this->assertEquals(1, $streak->mileStonesAdded, 'Expected milestones added');
         $this->assertEquals(0, $streak->streakSaverUsed, 'Expected streak savers used');
-        $this->assertEquals(0, $streak->missedLessons,"Expected missed lessons");
+        $this->assertEquals(0, $streak->missedLessons, "Expected missed lessons");
         $this->assertEquals(5, $streak->best, "Expected max streak");
     }
 
@@ -324,7 +324,14 @@ class ChallengesStreakTest extends TestCase
             new ExpectedDayData($rollingDay->addDay()->copy(), [self::D12], 8, 1, 8, 0),
             new ExpectedDayData($rollingDay->addDay()->copy(), [self::D13], 9, 1, 9, 0),
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 9, 1, 9, 0),
-            new ExpectedDayData($rollingDay->addDay()->copy(), [self::D14], 10, 0, 10, 1, streakSaverUsedYesterday: true
+            new ExpectedDayData(
+                $rollingDay->addDay()->copy(),
+                [self::D14],
+                10,
+                0,
+                10,
+                1,
+                streakSaverUsedYesterday: true
             ),
             new ExpectedDayData($rollingDay->addDay()->copy(), [self::D15], 11, 1, 11, 0, milestonesAdded: 1), // bonus day
             new ExpectedDayData($rollingDay->addDay()->copy(), [self::D15 + 1, self::D15 + 2], 11, 1, 11, 0), // bonus day
@@ -358,8 +365,8 @@ class ChallengesStreakTest extends TestCase
             new ExpectedDayData($rollingDay->addDay()->copy(), [self::D6], 3, 1, 3, 3),
             new ExpectedDayData($rollingDay->addDay()->copy(), [self::D7], 4, 1, 4, 3),
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 4, 1, 4, 3), // bonus day
-            new ExpectedDayData($rollingDay->addDay()->copy(), [self::D8], 5, 0,  5, 2, streakSaverUsedYesterday: true), // bonus day
-            new ExpectedDayData($rollingDay->addDay()->copy(), [self::D9], 6, 0, 6, 2,),
+            new ExpectedDayData($rollingDay->addDay()->copy(), [self::D8], 5, 0, 5, 2, streakSaverUsedYesterday: true), // bonus day
+            new ExpectedDayData($rollingDay->addDay()->copy(), [self::D9], 6, 0, 6, 2, ),
             new ExpectedDayData($rollingDay->addDay()->copy(), [self::D10], 7, 1, 7, 2, milestonesAdded: 1),
             new ExpectedDayData($rollingDay->addDay()->copy(), [self::D11], 8, 1, 8, 2),
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 8, 1, 8, 2),
@@ -386,7 +393,7 @@ class ChallengesStreakTest extends TestCase
         $rollingDay = end($this->leadingDaysBeforeCurriculum)->day->copy();
         $dayIndexToLessonsCompletedMap = [
             ... $this->leadingDaysBeforeCurriculum,
-            new ExpectedDayData($rollingDay->addDay()->copy(), [self::D1], 1, 1, 1, 0 ),
+            new ExpectedDayData($rollingDay->addDay()->copy(), [self::D1], 1, 1, 1, 0),
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 1, 1, 1, 0),
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 1, 0, 1, 1, streakSaverUsedYesterday: true),
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 0, 0, 1, 2),
@@ -408,7 +415,7 @@ class ChallengesStreakTest extends TestCase
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 0, 0, 1, 14),
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 0, 0, 1, 14),
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 0, 0, 1, 14),
-            new ExpectedDayData($rollingDay->addDay()->copy(), [], 0, 0, 1,15),
+            new ExpectedDayData($rollingDay->addDay()->copy(), [], 0, 0, 1, 15),
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 0, 0, 1, 16),
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 0, 0, 1, 17),
             new ExpectedDayData($rollingDay->addDay()->copy(), [], 0, 0, 1, 18),
@@ -493,7 +500,7 @@ class ChallengesStreakTest extends TestCase
                 self::D18,
                 self::D19,
                 self::D20,
-            ], 20, 4, 20, 0, milestonesAdded: 3 ),
+            ], 20, 4, 20, 0, milestonesAdded: 3),
         ];
 
         $metaData = $this->mapCompletedLessonsToMetaData($dayIndexToLessonsCompletedMap, $this->collection);

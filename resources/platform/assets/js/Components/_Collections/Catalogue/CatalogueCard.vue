@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-snap-center tw-group" :class="[
+    <div class="catalogue-card tw-snap-center tw-group" :class="[
         wrapperClasses,
     ]">
         <div class="tw-flex tw-flex-col">
@@ -356,7 +356,7 @@ const itemUrl = computed( ()=> {
 })
 
 const wrapperClasses = computed(() => {
-    const defaultWrapperClasses = 'tw-flex tw-flex-col tw-mr-3 lg:tw-mr-0 lg:tw-w-auto tw-shrink-0 tw-w-[267px]';
+    const defaultWrapperClasses = 'tw-flex tw-flex-col tw-shrink-0 tw-w-[279px] lg:tw-w-1/4 2xl:tw-w-1/5 tw-pr-3';
     return ({
         [defaultWrapperClasses]: defaultWrapperClasses && !props.wrapperClassOverride,
         'no-access': noAccess.value,

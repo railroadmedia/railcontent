@@ -1,7 +1,11 @@
 <template>
-    <div class="lg:tw-grid-cols-4 xl:tw-grid-cols-5 3xl:tw-grid-cols-6 tw-gap-1 lg:tw-gap-[15px]" :class="rowStyles">
+    <div class="tw-flex tw-no-scrollbar tw-overflow-x-scroll -tw-mr-1 lg:-tw-mr-[15px]" :class="`${rowStyles} ${sectionTitle}-container`">
         <SkeletonChallengeCard v-if="isLoading || loading" v-for="i in skeletonNum" :key="`skeleton-challenge-card-${i}`" :is-grouped-view="isGroupedView" />
-        <ChallengeCard v-else v-for="(item, i) in content" :item="item" :key="`challenge-card-${i}`" :is-grouped-view="isGroupedView" />
+        <template v-else v-for="(item, i) in content">
+            <div v-if="isGroupedView && item.type === 'fill'" class="lg:tw-w-1/4 xl:tw-w-1/5 3xl:tw-w-1/6 tw-shrink-0"></div>
+            <ChallengeCard v-else :item="item" :key="`challenge-card-${i}`" :is-grouped-view="isGroupedView" />
+        </template>
+
     </div>
 </template>
 <script setup>
@@ -21,13 +25,17 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    sectionTitle: {
+        type: String,
+        default: () => '',
+    },
 });
 
 const rowStyles = computed(() => {
     if(props.isGroupedView) {
-        return 'tw-flex tw-flex-no-wrap tw-overflow-x-scroll lg:tw-overflow-x-clip lg:tw-grid';
+        return 'tw-flex-nowrap';
     } else {
-        return 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3'
+        return 'tw-flex-wrap';
     }
 })
 

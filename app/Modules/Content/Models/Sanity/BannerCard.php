@@ -30,7 +30,7 @@ class BannerCard extends BaseSanityModel
     {
         $allowedTypes = ['course', 'challenge', 'workout', 'quick-tips', 'pack', 'song', 'learning-path-level'];
         $formattedAllowedTypes = [];
-        foreach($allowedTypes as $allowedType) {
+        foreach ($allowedTypes as $allowedType) {
             $formattedAllowedTypes[] = ['type' => $allowedType];
         }
         $brandField = new BrandField();

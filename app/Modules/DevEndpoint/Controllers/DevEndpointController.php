@@ -89,7 +89,7 @@ class DevEndpointController extends Controller
                 $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
                 $this->challengesService->completeChallenge($userProgress);
                 return "Completed Challenge $challengeId for user $userId";
-            case('move_days'):
+            case ('move_days'):
                 $numDays = $request->get('num_days', 1);
                 $progress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
                 if (!$progress) {
@@ -115,20 +115,20 @@ class DevEndpointController extends Controller
                 $progress->save();
                 $challengeName = $challenge['title'];
                 return "Start date for $challengeName for user: $userId moved to {$newStartDate->toISOString()}. Completed lessons and practice time maintained";
-            case('cohort'):
+            case ('cohort'):
                 $cohortId = $request->get('cohort_id');
                 $cohort = Cohort::query()->where('id', $cohortId)->first();
                 $cohort->content_id = $challengeId;
                 $cohort->enrollment_end_date = Carbon::parse('20251111 23:00')->toISOString();
                 $cohort->save();
                 return "Cohort {$cohort->cohort_title} updated to point to $challengeId";
-            case('enroll'):
+            case ('enroll'):
                 $this->challengesService->startChallenge($challengeId, $userId);
                 return "User $userId Enrolled in $challengeId";
-            case('clean'):
+            case ('clean'):
                 ChallengeUserProgress::truncate();
                 return "All challenge data cleared";
-            case('uncomplete'):
+            case ('uncomplete'):
                 $lessonID = $request->get('lesson_id');
                 $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
                 $set = false;
@@ -225,7 +225,7 @@ class DevEndpointController extends Controller
         file_put_contents($fullPath, $json);
     }
 
-   private function assertEquals($expected, $actual, $msg) : void
+    private function assertEquals($expected, $actual, $msg): void
     {
         if ($expected != $actual) {
             $msg = "we're cooked chat $msg we wanted: $expected what we got: $actual";
@@ -235,5 +235,3 @@ class DevEndpointController extends Controller
     }
 
 }
-
-

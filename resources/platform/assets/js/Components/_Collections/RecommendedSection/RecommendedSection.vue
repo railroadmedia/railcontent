@@ -30,11 +30,13 @@ const tabsData = computed(() => {
 });
 
 const activeRecommendedContent = computed(() => {
-  return props.recommendedContent?.data[activeTab.value.key] || [];
+  return props.recommendedContent?.data && props.recommendedContent?.data[activeTab.value.key] || [];
 });
 
 const handleTabClick = (tab, resetPagination) => {
-  resetPagination();
   activeTab.value = tab;
+  setTimeout(() => {
+      resetPagination();
+  }, 10)
 }
 </script>

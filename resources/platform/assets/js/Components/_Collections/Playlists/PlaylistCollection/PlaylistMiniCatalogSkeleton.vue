@@ -12,11 +12,13 @@
                 </div>
             </div>
             <!-- Cards -->
-            <div class="tw-w-full tw-gap-[6px] tw-relative tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-6 lg:tw-grid-cols-5 2xl:tw-grid-cols-6 xl:tw-gap-[12px] 2xl:tw-gap-[16px] tw-min-w-max lg:tw-min-w-full tw-pt-4 tw--mt-4 tw-overflow-x-auto lg:tw-overflow-x-visible">
-                <playlist-card-skeleton  v-for="n in 12" :key="n"></playlist-card-skeleton>
+            <div class="tw-overflow-hidden">
+                <div class="tw-w-full tw-relative tw-flex tw-flex-nowrap tw-pt-4 tw-overflow-x-auto lg:tw-overflow-x-visible">
+                    <playlist-card-skeleton  v-for="n in 6" :key="n"></playlist-card-skeleton>
+                </div>
             </div>
         </div>
-    </section>    
+    </section>
 </template>
 <script setup>
     import PlaylistCardSkeleton from "@collections/Cards/Grid/PlaylistCard/PlaylistCardSkeleton.vue";

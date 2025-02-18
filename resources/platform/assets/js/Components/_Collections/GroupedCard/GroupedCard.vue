@@ -24,9 +24,9 @@
     </div>
     <div class="tw-mb-5">
         <transition appear name="fade">
-            <SongCardContainer v-if="isSong" :preLoadedContent="data" :isGroupedView="true" :add-margin-bottom="false" />
-            <ChallengeCardContainer v-else-if="isChallenge" :is-grouped-view="true" :content="data" />
-            <CatalogueCardContainer v-else :pre-loaded-content="data" :content-type-override="contentTypeOverride" :group-by-cards="true" :is-single-row="true" :no-results-message="noResultsMessage" />
+            <SongCardContainer v-if="isSong" :preLoadedContent="data" :isGroupedView="true" :add-margin-bottom="false" :section-title="sectionTitle" />
+            <ChallengeCardContainer v-else-if="isChallenge" :is-grouped-view="true" :content="data" :section-title="sectionTitle" />
+            <CatalogueCardContainer v-else :pre-loaded-content="data" :content-type-override="contentTypeOverride" :group-by-cards="true" :no-results-message="noResultsMessage" :section-title="sectionTitle" @handle-scroll-end="handleScrollEnd" />
         </transition>
     </div>
 </template>
@@ -121,6 +121,16 @@ const groupUrl = computed(() => {
     }
 })
 
+const sectionTitle = computed(() => {
+    if(name.value){
+        return name.value.replace(/\s/g, '').replace('/', '').toLowerCase();
+    }
+})
+
+const initialData = computed(() => {
+    return props.item.lessons;
+})
+
 const watchResize = () => {
     if(isSong.value){
         if(window.innerWidth > 1536){
@@ -146,7 +156,7 @@ const watchResize = () => {
         cardNum.value = 20;
     }
 
-    getPageData();
+    toStartIndex();
 }
 
 onMounted(() => {
@@ -160,10 +170,12 @@ onUnmounted(() => {
 
 watch(
     () => props.item.lessons,
-    (newList) => {
-        setOriginal(newList);
+    (newData) => {
+        setTimeout(() => {
+            toStartIndex()
+        }, 100)
     },
 )
 
-const { getPageData, resetProgress, setOriginal, nextPage, prevPage, showPagination, isLastPage, isFirstPage } = useCarouselEvents(props.item.lessons, data, page, cardNum);
+const { resetProgress, nextPage, prevPage, showPagination, isLastPage, isFirstPage, toStartIndex, handleScrollEnd, resetPagination } = useCarouselEvents(initialData, data, page, cardNum, sectionTitle);
 </script>
