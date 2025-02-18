@@ -7,6 +7,10 @@ export default function useCarouselEvents (originalData, updatedData, page, card
     const startIndex = ref(0); // Index of the first visible item
     const scrollInterval = ref(null);
 
+    const isContinue = computed(() => {
+        return sectionTitle.value === 'continue';
+    })
+
     const showPagination = computed(() => {
         if(isMiniView){
             return updatedData.value.length > 1;
@@ -189,6 +193,11 @@ export default function useCarouselEvents (originalData, updatedData, page, card
 
         let card = container.getElementsByClassName('catalogue-card')[0];
         if(window.innerWidth < 1280) card = container.getElementsByClassName('catalogue-card')[1];
+
+        if(isContinue.value){
+            container.scrollTo({ left: container.getBoundingClientRect().width * (page.value - 1), behavior: 'smooth'});
+            return;
+        }
 
         if(card){
             const cardWidth = card.getBoundingClientRect().width;
