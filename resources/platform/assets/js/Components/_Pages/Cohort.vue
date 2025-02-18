@@ -418,7 +418,6 @@
         }"
         :challenge-type="challengeType"
         @modal-close="closeNotificationModal"
-        :hide-x-icon="true"
         :is-from-get-deal="isFromGetDeal"
     />
     <ChallengeActionModal v-if="challengeActionModalType && !isFromApp" :modal-type="challengeActionModalType"  @close-modal="closeActionModal"
