@@ -127,7 +127,7 @@ export default function useCarouselEvents (originalData, updatedData, page, card
     }
 
     const activateAutoScroll = () => {
-        if(autoScroll){
+        if(autoScroll && !scrollInterval.value){
             scrollInterval.value = setInterval(() => {
                 if(isLastPage.value){
                     page.value = 1;
@@ -149,6 +149,7 @@ export default function useCarouselEvents (originalData, updatedData, page, card
 
     const clearAutoScroll = () => {
         clearInterval(scrollInterval.value);
+        scrollInterval.value = null;
     }
 
     const handleScrollEnd = () => {
