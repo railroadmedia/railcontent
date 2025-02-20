@@ -65,15 +65,15 @@ class ImportSanityPublishers extends Command
         }
 
         $publishers = [];
-        foreach ($rows as $entry => $data) {
-            $name =  preg_replace('/[^a-zA-Z0-9_.]/', '', $data['name']);
+        foreach ($rows as $parent => $child) {
+            $name =  preg_replace('/[^a-zA-Z0-9_.]/', '', $child['name']);
 
             $id = 'publisher_' . strtolower($name);
             $publishers[$id] = [
                 '_id' => $id,
-                'name' => $data['name'],
+                'name' => $child['name'],
                 '_type' => 'publisher',
-                'child' => collect($data['child'])->map(function ($child) {
+                'child' => collect($child['child'])->map(function ($child) {
                     return [
                         '_key' => uniqid(),
                         'name' => $child
