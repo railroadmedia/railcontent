@@ -6,6 +6,7 @@ use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
+use App\Modules\Content\Models\Sanity\Structure\Reference;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Max;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Precision;
@@ -34,21 +35,30 @@ class License extends BaseSanityModel
             $contentGroup
         ];
 
+
+
+        $allowedTypes = ['course', 'challenge', 'workout', 'quick-tips', 'pack', 'song', 'learning-path-level', 'coach-stream', 'performance', 'student-focus', 'pack-bundle-lesson', 'live'];
+        $formattedAllowedTypes = [];
+        foreach($allowedTypes as $allowedType) {
+            $formattedAllowedTypes[] = ['type' => $allowedType];
+        }
+
+        $childReference = new Reference($formattedAllowedTypes);
+
+        $contentFields = new ListObject( fields:[
+            new Field(FieldType::Reference, 'content', 'Content', to: $formattedAllowedTypes, validation: [new Required()]),
+        ],);
+
         $publisherList = new ListObject(
             fields: [
                 new Field(FieldType::Reference, 'publisher', 'Publisher', to: 'publisher', validation: [new Required()]),
-                new Field(FieldType::Number, 'license_percent', validation: [new Required(), new Min(0), new Max(200), new Precision(0)])
+                new Field(FieldType::Number, 'license_percent', validation: [new Required(), new Min(0.01), new Max(200), new Precision(2)])
             ],
             previewItem: new ListItemPreview('publisher.name', 'license_percent')
         );
 
-        $contentList = new ListObject(
-            fields: [new Field(FieldType::String, 'content_id')],
-            previewItem: new ListItemPreview('content_id')
-        );
-
         $fields = [
-            new Field(FieldType::Array, 'content_id', "Content", of: $contentList, group: $detailsGroup),
+            new Field(FieldType::Array, 'content', "Content", of: $childReference, group: $detailsGroup),
             new Field(FieldType::String, 'song_name', "Song Name", validation: [new Required()], group: $detailsGroup),
             new Field(FieldType::String, 'song_artist', "Artist", validation: [new Required()], group: $detailsGroup),
             new Field(FieldType::String, 'risk', "Risk", group: $detailsGroup, options: [

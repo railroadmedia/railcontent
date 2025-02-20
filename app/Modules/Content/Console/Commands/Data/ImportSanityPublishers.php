@@ -92,7 +92,7 @@ class ImportSanityPublishers extends Command
         }
 
         //note: for future use, "staging" here should be $env, and fix the env check
-        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $fileName staging --replace");
+        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $fileName $env --replace");
         if ($resultCode !== self::SUCCESS) {
             $this->error("Failed to import $outputFilePath. Have you built Sanity Studio using the README instructions?");
             return $resultCode;

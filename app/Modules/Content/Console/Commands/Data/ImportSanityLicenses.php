@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Console\Commands\Data;
 
+use App\Modules\Content\ApiGateways\SanityGateway;
 use Illuminate\Console\Command;
 
 /**
@@ -34,6 +35,7 @@ class ImportSanityLicenses extends Command
             return self::FAILURE;
         }
 
+        $publicOwnedIndex = 0;
         $contentIdIndex = 1;
         $metaDataMap = [
 
@@ -64,46 +66,100 @@ class ImportSanityLicenses extends Command
             'WIXEN' => 24,
             'OTHER' => 25,
         ];
+        $riskIndex = 26;
         $nullMLCCount = 0;
 
-        $rows = [];
+        $rows = []; //storage variable for creating licence json obj
         $firstRow = true;
         $filePath = storage_path($input);
         if (($handle = fopen($filePath, "r")) !== false) {
+            //first, run through whole file to grab all content ids
+            $idsArray = [];
             while (($data = fgetcsv($handle, 1000, "\t")) !== false) {
                 if ($firstRow) {
                     $firstRow = false;
                     continue;
                 }
-                $mlc = trim($data[$metaDataMap['mlc']]);
+                if ($data[$contentIdIndex] != ""){ $idsArray[] = $data[$contentIdIndex]; } //get all content id's
+            }
+            //AFTER running through all file ids, create string and query
+            //make batch
+            $uniqArray = array_unique($idsArray);
+            $idQueryLength = count($uniqArray);
+            $batchSize = 1000;
+            $batches = ceil($idQueryLength/$batchSize);
+            $sanityGateway = app()->make(SanityGateway::class);
+            $documents = [];
+            for ($i = 0; $i < $batches; $i++) {
+                $idsString = implode(',', array_slice($uniqArray, $i * $batchSize, $batchSize));
+                $query = "*[railcontent_id in [$idsString] ]{
+                    _id,
+                    railcontent_id,
+                    }"; //the query comes out as 4130... this could be because of duplicated contentId. YUP
+                $response = $sanityGateway->sanity->fetch($query);
+                $documents = array_merge($documents, $response);
+            }
 
+
+            /*$query = "*[railcontent_id in [$idsString] ]{
+                _id,
+                railcontent_id,
+                }";
+            //run query
+            $sanityGateway = app()->make(SanityGateway::class);
+            $documents = $sanityGateway->sanity->fetch($query);*/
+
+            //now run through tsv again, line by line, sorting line-info into object for import into sanity
+            rewind($handle);
+            $firstRow = true;
+            while (($data = fgetcsv($handle, 1000, "\t")) !== false) {
+                if ($firstRow) {
+                    $firstRow = false;
+                    continue;
+                }
+                $mlc = trim($data[$metaDataMap['mlc']]);    //trim removes accidental whitespaces
+
+
+                /* BEH-204 (Feb 2 2025)
+                 * this is for licences that have a content attached but no MLC, since the logic here sorts by mlc.
+                 * With the current licence import, there are 54 of such licences
+                 * i guess let's include em
+                 * ¯\_(ツ)_/¯ */
                 if ($mlc === "") {
                     $mlc = "nul$nullMLCCount";
                     $nullMLCCount++;
                 }
+                //if there's no existing entry with this mlc, create all the sub-information for it, except licence
                 if (!isset($rows[$mlc])) {
                     $rows[$mlc] = [
                         '_id' => 'license_' . strtolower($mlc),
                         '_type' => 'license',
-                        'public_domain' => false,
-                        'risk' => 'red',
+                        'public_domain' => ($data[$publicOwnedIndex] != "" ? filter_var($data[$publicOwnedIndex], FILTER_VALIDATE_BOOLEAN) : null),
+                        'risk' => ($data[$riskIndex] != "" ? strtolower($data[$riskIndex]) : null),
                     ];
-
-                    $rows[$mlc]['content_id'][] = [
-                        '_key' => uniqid(),
-                        'content_id' => $data[$contentIdIndex]
-                    ];
-
+                    //go through all queried song ids, comparing to current-line id, and set reference
+                    foreach ($documents as $document) {
+                        if ($document['railcontent_id'] == $data[$contentIdIndex]) {
+                            $rows[$mlc]['content'][] = [
+                                '_ref' => $document['_id'],
+                                '_type' => 'reference',
+                                '_weak' => false,
+                            ];
+                            break;
+                        }
+                    }
+                    //add all metadata like mlc etc
                     foreach ($metaDataMap as $key => $csvIndex) {
                         $rows[$mlc][$key] = $data[$csvIndex];
                     }
+                    //add licence references
                     $rows[$mlc]['license'] = [];
                     foreach ($publisherMap as $publisherName => $CSVIndex) {
-                        $publisherPercentage = $data[$CSVIndex] ?? 0;
+                        $publisherPercentage = $data[$CSVIndex] ?? 0;   //run through for each publisher, and add their licence and percentage if exists
                         if ($publisherPercentage) {
                             $rows[$mlc]['license'][] = [
                                 '_key' => uniqid(),
-                                'license_percent' => $publisherPercentage / 100,
+                                'license_percent' => floatval($publisherPercentage),
                                 'publisher' => [
                                     '_ref' => 'publisher_' . preg_replace(
                                             '/[^a-zA-Z0-9_.]/',
@@ -115,11 +171,19 @@ class ImportSanityLicenses extends Command
                             ];
                         }
                     }
-                } else {
-                    $rows[$mlc]['content_id'][] = [
-                        '_key' => uniqid(),
-                        'content_id' => $data[$contentIdIndex]
-                    ];
+                } else {    //if there already exists an element with matching mlc:
+                    //add the extra contentId
+                    foreach ($documents as $document) {
+                        if ($document['railcontent_id'] == $data[$contentIdIndex]) {
+                            $rows[$mlc]['content'][] = [
+                                '_ref' => $document['_id'],
+                                '_type' => 'reference',
+                                '_weak' => false,
+
+                            ];
+                            break;
+                        }
+                    }
                 }
             }
             fclose($handle);
@@ -133,7 +197,7 @@ class ImportSanityLicenses extends Command
             $newline = json_encode($result) . "\n";
             file_put_contents($ouputFilePath, $newline, FILE_APPEND);
         }
-        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $fileName staging --replace");
+        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $fileName $env --replace");
         if ($resultCode !== self::SUCCESS) {
             $this->error("Failed to import $ouputFilePath. Have you built Sanity Studio using the README instructions?");
             return $resultCode;
