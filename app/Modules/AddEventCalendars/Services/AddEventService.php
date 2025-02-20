@@ -144,38 +144,11 @@ class AddEventService
      */
     private function getTimeFromEvent($event, bool $getEnd = false): Carbon
     {
-        if ($event->date_format !== 'MM/DD/YYYY') {
-            throw new Exception(
-                'Unexpected data_format in event. "' . $event->date_format . '" (event id: "' . $event->id . '")'
-            );
-        }
-
-        $date = $event->date_start;
-        $time = $event->date_start_time;
-        if ($getEnd) {
-            $date = $event->date_end;
-            $time = $event->date_end_time;
-        }
-
-        $year = substr($date, 6, 4);
-        $month = substr($date, 0, 2);
-        $day = substr($date, 3, 2);
-
-        $hour = substr($time, 0, 2);
-        $minute = substr($time, 3, 2);
-        $second = substr($time, 5, 2);
-
-        $year = (int)$year;
-        $month = (int)$month;
-        $day = (int)$day;
-
-        $hour = (int)$hour;
-        $minute = (int)$minute;
-        $second = (int)$second;
-
         $tz = empty($event->timezone) ? 'UTC' : $event->timezone;
-
-        return Carbon::create($year, $month, $day, $hour, $minute, $second, $tz);
+        if ($getEnd) {
+            return Carbon::parse($event->datetime_end, $tz);
+        }
+        return Carbon::parse($event->datetime_start, $tz);
     }
 
 
@@ -204,18 +177,35 @@ class AddEventService
         curl_setopt($curl_handle, CURLOPT_URL, $url);
         curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
         curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+        // Set the Authorization Bearer token
+        $headers = [
+            'Authorization: Bearer ' . config('addevent.api-token'),
+        ];
+        curl_setopt($curl_handle, CURLOPT_HTTPHEADER, $headers);
         $buffer = curl_exec($curl_handle);
+
+        // Check for curl errors
+        if ($error = curl_error($curl_handle)) {
+            curl_close($curl_handle);
+            throw new Exception('CURL error: ' . $error);
+        }
+
+        // Get the HTTP status code
+        $status = curl_getinfo($curl_handle, CURLINFO_HTTP_CODE);
+
         curl_close($curl_handle);
+
+        // If the response is empty, return false
         if (empty($buffer)) {
             return false;
         }
+
+        // Decode the JSON response
         $result = json_decode($buffer);
 
-        $status = $result->meta->code;
-
-        if ($status !== '200' && $status !== 200) {
+        if ($status !== 200 && $status !== 204 && $status !== 201) {
             throw new Exception(
-                'AddEventService CURL request response status *not* 200: ' . var_export($result, true)
+                'AddEvent API request failed with status ' . $status . ': ' . var_export($result, true)
             );
         }
 
@@ -369,26 +359,36 @@ class AddEventService
     {
         $calendars = [];
         $allRetrieved = false;
+        $pagingNext = null;
 
         while (!$allRetrieved) {
             $params = [
-                'token' => config(
-                    'addevent.api-token'
-                ),
-            ]; // addevent.com/api/subscription-calendar#anchor-calendar-list
-            $url = 'https://www.addevent.com/api/v1/me/calendars/list/?' . $this->arrayToQueryString($params);
+                'token' => config('addevent.api-token'),
+            ];
 
+            $url = 'https://api.addevent.com/calevent/v2/calendars?' . $this->arrayToQueryString($params);
+
+            // If paging is available, update the URL
             if (!empty($pagingNext)) {
                 $url = $pagingNext;
             }
 
+            // Fetch the result using the updated curl method
             $result = $this->curl($url);
-            $this->ensureProperty($result, 'calendars');
 
-            $pagingNext = $result->paging->next;
-            if (empty($pagingNext)) {
-                $allRetrieved = true;
+            $this->ensureProperty($result, 'calendars');  // Ensure 'calendars' exists in the response
+
+            // Handle pagination
+            if (isset($result->pagination->next_page)) {
+                $pagingNext = $result->links->next_page_url;
+                if($result->pagination->current_page == $result->pagination->total_pages){
+                    $allRetrieved = true;
+                }
+            } else {
+                $allRetrieved = true;  // No paging info, exit the loop
             }
+
+            // Merge new calendars into the existing list
             $calendars = array_merge($calendars, $result->calendars);
         }
 
@@ -411,13 +411,11 @@ class AddEventService
 
         $queryString = $this->arrayToQueryString($params);
 
-        $url = 'https://www.addevent.com/api/v1/me/calendars/create/?' . $queryString;
+        $url = 'https://api.addevent.com/calevent/v2/calendars?' . $queryString;
 
         $result = $this->curl($url);
 
-        $this->ensureProperty($result, 'calendar');
-
-        return $result->calendar;
+        return $result;
     }
 
     /**
@@ -439,13 +437,11 @@ class AddEventService
 
         $queryString = $this->arrayToQueryString($params);
 
-        $url = 'https://www.addevent.com/api/v1/me/calendars/save/?' . $queryString;
+        $url = 'https://api.addevent.com/calevent/v2/calendars/'.$calendarId.'?' . $queryString;
 
         $result = $this->curl($url);
 
-        $this->ensureProperty($result, 'calendar');
-
-        return $result->calendar;
+        return $result;
     }
 
     /**
@@ -461,16 +457,11 @@ class AddEventService
 
         $queryString = $this->arrayToQueryString($params);
 
-        $url = 'https://www.addevent.com/api/v1/me/calendars/delete/?' . $queryString;
+        $url = 'https://api.addevent.com/calevent/v2/calendars/'.$calendarId.'?' . $queryString;
 
         $result = $this->curl($url);
 
-        if (!property_exists($result, 'calendar')) {
-            throw new Exception('deleteCalendar CURL response data missing "calendar" property');
-        }
-
-        $deleted = $result->calendar->status === 'deleted';
-
+        $deleted = true;
         if ($ensureDeletedWithSecondRequest) {
             foreach ($this->getCalendars() as $calendar) {
                 $existentCalendarId = (int)$calendar->id;
@@ -517,14 +508,14 @@ class AddEventService
             $page++;
             $params = [ // https://www.addevent.com/api/subscription-calendar#anchor-calendar-events
                 'token' => config('addevent.api-token'), // required
-                'calendar_id' => $calendarId, // required
+                'calendar_ids' => $calendarId, // required
                 'order_by' => $orderBy,
                 'month' => $month,
                 'year' => $year,
-                'upcoming' => $upcoming,
+                'datetime_min' => $upcoming,
                 'page' => $page,
             ];
-            $url = 'https://www.addevent.com/api/v1/me/calendars/events/list/?' . $this->arrayToQueryString($params);
+            $url = 'https://api.addevent.com/calevent/v2/events?' . $this->arrayToQueryString($params);
 
             $result = $this->curl($url);
             $this->ensureProperty($result, 'events');
@@ -532,8 +523,8 @@ class AddEventService
                 throw new Exception('listEventsInCalendar CURL response data "events" is not an array as expected.');
             }
 
-            $pagingNext = $result->paging->next;
-            if (empty($pagingNext)) {
+            $pagingNext = $result->pagination->next_page;
+            if (empty($pagingNext) || $result->pagination->next_page == $result->pagination->current_page) {
                 $allRetrieved = true;
             }
             $results = array_merge($results, $result->events);
@@ -579,10 +570,10 @@ class AddEventService
             'calendar_id' => $calendar->id,   // required
             'title' => $title,              // required
             'timezone' => $timezone,        // required
-            'start_date' => $startDate,     // required
+            'datetime_start' => $startDate,     // required
             'description' => $description,
-            'end_date' => $endDate,
-            'organizer' => $organizer,
+            'datetime_end' => $endDate,
+            'organizer_name' => $organizer,
             'organizer_email' => $organizerEmail,
             'location' => $location,
             'reminder' => $reminder,
@@ -591,15 +582,9 @@ class AddEventService
         ];
 
         $queryString = $this->arrayToQueryString($params);
-
-        $url = 'https://www.addevent.com/api/v1/me/calendars/events/create/?' . $queryString;
-
+        $url = 'https://api.addevent.com/calevent/v2/events?' . $queryString;
         $result = $this->curl($url);
-
-        $this->ensureProperty($result, 'event');
-
-        $event = $result->event;
-
+        $event = $result;
         if ($throwExceptionOnFailure) {
             $calendarIdsMatch = $event->calendar == $calendar->id;
             $descriptionsMatch = $this->stringsSameIfFormattingRemoved($description, $event->description);
@@ -661,25 +646,23 @@ class AddEventService
             'title' => $title, // required
             'description' => $description,
             'location' => $location,
-            'organizer' => $organizer,
+            'organizer_name' => $organizer,
             'organizer_email' => $organizerEmail,
             'timezone' => $timezone, // required
             'reminder' => $reminder,
-            'start_date' => $startDate, // required
-            'end_date' => $endDate,
+            'datetime_start' => $startDate, // required
+            'datetime_end' => $endDate,
             'all_day_event' => $allDayEvent,
             'custom_data' => json_encode($customData)
         ];
 
         $queryString = $this->arrayToQueryString($params);
 
-        $url = 'https://www.addevent.com/api/v1/me/calendars/events/save/?' . $queryString;
+        $url = 'https://api.addevent.com/calevent/v2/events/'.$eventId.'?' . $queryString;
 
         $result = $this->curl($url);
 
-        $this->ensureProperty($result, 'event');
-
-        $event = $result->event;
+        $event = $result;
 
         $resultAllDayEvent = $event->all_day_event === 'true';
 
@@ -721,18 +704,9 @@ class AddEventService
 
         $queryString = $this->arrayToQueryString($params);
 
-        $url = 'https://www.addevent.com/api/v1/me/calendars/events/delete/?' . $queryString;
+        $url = 'https://api.addevent.com/calevent/v2/events/'.$eventId.'?' . $queryString;
 
         $result = $this->curl($url);
-
-        $this->ensureProperty($result, 'event');
-        $this->ensureProperty($result->event, 'status');
-        if ($result->event->status !== 'deleted') {
-            throw new Exception(
-                'Delete CURL request did not return expected \'status\' value of "deleted"' .
-                ' so delete may have failed'
-            );
-        }
 
         return $result;
     }
@@ -745,7 +719,7 @@ class AddEventService
      */
     public function listOfTimeZones()
     {
-        $queryString = 'https://www.addevent.com/api/v1/timezones';
+        $queryString = 'https://api.addevent.com/calevent/v2/timezones';
 
         $result = $this->curl($queryString);
 
