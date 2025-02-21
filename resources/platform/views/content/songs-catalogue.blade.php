@@ -8,8 +8,7 @@
     <songs
         :started-content="{{ $startedLessons }}"
         :list-lessons="{{ $listLessons }}"
-        :sort="{{ json_encode($sort) }}"
-        :show-upgrade-modal="{{ json_encode($showUpgradeModal) }}"
+        :sort="{{ json_encode($sort) }}"a
     >
     </songs>
 @endsection

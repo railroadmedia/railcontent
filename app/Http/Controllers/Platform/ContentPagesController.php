@@ -255,7 +255,6 @@ class ContentPagesController extends BaseController
                 "statuses" => ContentRepository::$availableContentStatues,
                 "futureScheduledContentOnly" => $futureScheduledContentOnly,
                 "allArtistUrl" => url()->route('platform.content.artists.show'),
-                'showUpgradeModal' => !user()->hasSongsAccess($brand),
             ]);
         } else {
             $breadcrumbs = [

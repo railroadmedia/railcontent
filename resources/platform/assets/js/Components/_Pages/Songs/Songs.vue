@@ -67,10 +67,6 @@ const props = defineProps({
       type: String,
       default: '-published_on'
     },
-    showUpgradeModal: {
-        type: Boolean,
-        default: false
-    }
 });
 
 const collectionStore = useCollectionStore();
@@ -121,18 +117,13 @@ onBeforeMount(async() => {
             queryType: 'song',
         });
 
-        if (props.showUpgradeModal) {
-            platformStore.openMembershipUpgradeModal();
-            platformStore.disableCloseMembershipUpgradeModal();
-        } else {
-            // Fetch started content (in-progress lessons)
-            const startedIds = await fetchContentInProgress('song', brand.value);
-            const lessons = await fetchByRailContentIds(startedIds.started);
-            const startedLessons = lessons.filter(lesson => startedIds.started.includes(lesson.id));
+        // Fetch started content (in-progress lessons)
+        const startedIds = await fetchContentInProgress('song', brand.value);
+        const lessons = await fetchByRailContentIds(startedIds.started);
+        const startedLessons = lessons.filter(lesson => startedIds.started.includes(lesson.id));
 
-            // Set the continue section with started lessons
-            continueSection.value = startedLessons;
-        }
+        // Set the continue section with started lessons
+        continueSection.value = startedLessons;
     } catch (error) {
         console.error('Error in onBeforeMount:', error);
     } finally {
