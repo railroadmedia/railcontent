@@ -101,13 +101,6 @@ class ImportSanityLicenses extends Command
             }
 
 
-            /*$query = "*[railcontent_id in [$idsString] ]{
-                _id,
-                railcontent_id,
-                }";
-            //run query
-            $sanityGateway = app()->make(SanityGateway::class);
-            $documents = $sanityGateway->sanity->fetch($query);*/
 
             //now run through tsv again, line by line, sorting line-info into object for import into sanity
             rewind($handle);
