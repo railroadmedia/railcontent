@@ -91,7 +91,6 @@ class ImportSanityPublishers extends Command
             file_put_contents($outputFilePath, $newline, FILE_APPEND);
         }
 
-        //note: for future use, "staging" here should be $env, and fix the env check
         $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $fileName $env --replace");
         if ($resultCode !== self::SUCCESS) {
             $this->error("Failed to import $outputFilePath. Have you built Sanity Studio using the README instructions?");

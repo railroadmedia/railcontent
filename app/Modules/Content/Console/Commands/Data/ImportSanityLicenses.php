@@ -69,7 +69,7 @@ class ImportSanityLicenses extends Command
         $riskIndex = 26;
         $nullMLCCount = 0;
 
-        $rows = []; //storage variable for creating licence json obj
+        $rows = []; //storage variable for creating licence json array
         $firstRow = true;
         $filePath = storage_path($input);
         if (($handle = fopen($filePath, "r")) !== false) {
@@ -82,8 +82,7 @@ class ImportSanityLicenses extends Command
                 }
                 if ($data[$contentIdIndex] != ""){ $idsArray[] = $data[$contentIdIndex]; } //get all content id's
             }
-            //AFTER running through all file ids, create string and query
-            //make batch
+            //AFTER running through all file ids, create string and query sanity for all matching ids. have to batch query
             $uniqArray = array_unique($idsArray);
             $idQueryLength = count($uniqArray);
             $batchSize = 1000;
@@ -95,14 +94,11 @@ class ImportSanityLicenses extends Command
                 $query = "*[railcontent_id in [$idsString] ]{
                     _id,
                     railcontent_id,
-                    }"; //the query comes out as 4130... this could be because of duplicated contentId. YUP
+                    }";
                 $response = $sanityGateway->sanity->fetch($query);
                 $documents = array_merge($documents, $response);
             }
-
-
-
-            //now run through tsv again, line by line, sorting line-info into object for import into sanity
+            //now run through tsv again, line by line, sorting licence info into json array, for import into sanity
             rewind($handle);
             $firstRow = true;
             while (($data = fgetcsv($handle, 1000, "\t")) !== false) {
@@ -130,7 +126,7 @@ class ImportSanityLicenses extends Command
                         'public_domain' => ($data[$publicOwnedIndex] != "" ? filter_var($data[$publicOwnedIndex], FILTER_VALIDATE_BOOLEAN) : null),
                         'risk' => ($data[$riskIndex] != "" ? strtolower($data[$riskIndex]) : null),
                     ];
-                    //go through all queried song ids, comparing to current-line id, and set reference
+                    //compare current content_id with all queried song ids. set reference if found.
                     foreach ($documents as $document) {
                         if ($document['railcontent_id'] == $data[$contentIdIndex]) {
                             $rows[$mlc]['content'][] = [
@@ -164,8 +160,7 @@ class ImportSanityLicenses extends Command
                             ];
                         }
                     }
-                } else {    //if there already exists an element with matching mlc:
-                    //add the extra contentId
+                } else {    //if there already exists an entry with matching mlc, jus set additional content ref
                     foreach ($documents as $document) {
                         if ($document['railcontent_id'] == $data[$contentIdIndex]) {
                             $rows[$mlc]['content'][] = [
