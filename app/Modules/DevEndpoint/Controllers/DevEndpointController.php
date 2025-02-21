@@ -64,45 +64,7 @@ class DevEndpointController extends Controller
         if ($arg1 == 'challenges') {
             return $this->handleChallengesEndpoints($request);
         }
-        $result = $this->convertTSVToArray(storage_path('Publisher-Information-2025.tsv'));
-        //$results = $this->importSanityPublishers->handle();
-
-        return $result;
-    }
-
-    private function convertTSVToArray($filePath): array
-    {
-        $array = [];
-        $fileTSV = fopen($filePath, 'r');
-        while ($line = fgets($fileTSV)) {
-            $line = explode("\t", trim($line));
-            $child = $line[0];
-            $name = $line[1];
-
-            if ($name == 'Publisher Name') {
-                continue;
-            }
-
-            foreach ($array as $entries) {
-                if ($entries['name'] == $name) {
-                    $entries['child'][] = $child;
-                    $name = null;
-                    $child = null;
-                }
-            }
-
-            if ($name != null) {
-                $length = count($array);
-                $array[$length+1]['name'] = $name;
-                $array[$length+1]['child'] = [];
-                $array[$length+1]['child'][] = $child;
-            }
-
-
-        }
-        fclose($fileTSV);
-
-        return $array;
+        return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
     }
 
     private function deleteThingsFromSanity($queryString)
