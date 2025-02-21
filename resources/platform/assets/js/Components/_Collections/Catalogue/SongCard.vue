@@ -5,14 +5,14 @@
             { 'tw-mb-4 sm:tw-mb-2': addMarginBottom },
             `${isGroupedView ? 'tw-w-[145px] sm:tw-w-[170px] lg:tw-pr-3 lg:tw-w-1/5 2xl:tw-w-[calc(14.2857%)] tw-mr-3 lg:tw-mr-0 ' : 'tw-w-full'}`,
         ]">
-        <div class="tw-flex tw-items-center" :class="`${isGroupedView ? 'tw-flex-col' : 'tw-flex-row sm:tw-flex-col'}`">
+        <div class="tw-flex tw-items-center " :class="`${isGroupedView ? 'tw-flex-col' : 'tw-flex-row sm:tw-flex-col'}`">
             <!-- Thumbnail Section -->
-            <component :is="isReleased ? 'a' : 'div' " :href="item.web_url_path" class="tw-no-underline tw-flex tw-flex-col tw-aspect-square tw-mr-[10px] sm:tw-mr-0" :class="[
+            <div class="tw-cursor-pointer tw-no-underline tw-flex tw-flex-col tw-aspect-square tw-mr-[10px] sm:tw-mr-0" :class="[
                 { 'tw-w-full': isGroupedView },
                 { 'tw-w-[90px] sm:tw-w-full tw-flex-shrink-0': !isGroupedView },
-            ]">
+            ]" @click="handleClick">
                 <div
-                    :class="`tw-relative tw-overflow-hidden ${isGroupedView ? 'tw-rounded-[9px]' : 'tw-rounded-[5px] sm:tw-rounded-[9px]'} tw-bg-white dark:tw-bg-[#0E2031] tw-aspect-square`">
+                    :class="`tw-relative tw-overflow-hidden tw-relative ${isGroupedView ? 'tw-rounded-[9px]' : 'tw-rounded-[5px] sm:tw-rounded-[9px]'} tw-bg-white dark:tw-bg-[#0E2031] tw-aspect-square`">
                     <!-- Thumbnail -->
                     <img :src="`https://www.musora.com/cdn-cgi/image/width=500/${mappedData.thumbnail} `"
                         class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0 tw-aspect-square" loading="lazy"
@@ -22,7 +22,10 @@
                     <div class="lesson-progress overflow">
                         <span class="progress" :class="`tw-bg-${brand}`" :style="'width:' + progress_percent + '%'"></span>
                     </div>
-                    <div
+                    <div v-if="noAccess" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center">
+                        <musora-icon class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
+                    </div>
+                    <div v-else
                         class="tw-absolute tw-flex tw-flex-col tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center">
                         <i class="fas tw-text-xl" :class="thumbnailIcon"></i>
                         <p v-if="!isReleased" class="tw-mt-1 tw-text-sm text-white font-bold">
@@ -30,12 +33,11 @@
                         </p>
                     </div>
                 </div>
-            </component>
+            </div>
             <!-- Description Section -->
             <div class="tw-flex tw-w-full tw-justify-between tw-break-all">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block tw-grow-0 tw-shrink">
-                    <component :is="isReleased ? 'a' : 'div' " :href="item.web_url_path"
-                        class="tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2 tw-flex">
+                    <div class="tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2 tw-flex tw-cursor-pointer" @click="handleClick">
                         <div class="tw-flex tw-flex-col">
                             <!-- Song Title -->
                             <h4 class="tw-text-[13px] sm:tw-text-sm tw-leading-[18px] tw-text-[#00101D] tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2 tw-break-words">
@@ -56,7 +58,7 @@
                                     textCase="capitalize" />
                             </span>
                         </p>
-                    </component>
+                    </div>
                 </div>
                 <!-- Add to Playlist -->
                 <div class="tw-inline-flex tw-pt-1 lg:tw-pt-2 tw-items-start tw-relative sm:tw-justify-end tw-shrink-0">
@@ -82,10 +84,12 @@ import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@stores/user';
+import { usePlatformStore } from "@stores/platform";
 
 //Pinia Stores
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+const platformStore = usePlatformStore();
 
 const props = defineProps({
     item: {
@@ -140,6 +144,14 @@ const closeDropdownOnScroll = () => {
         state.dropdownOpen = false;
     }
 };
+
+const handleClick = () => {
+    if(isReleased.value && !noAccess.value){
+        window.location.href = props.item.web_url_path
+    } else if(noAccess.value){
+        platformStore.openMembershipUpgradeModal();
+    }
+}
 
 const emit = defineEmits(['addToList']);
 

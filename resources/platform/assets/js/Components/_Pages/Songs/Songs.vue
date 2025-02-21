@@ -29,7 +29,7 @@
             <!-- Song Results -->
             <div :class="`dark:tw-text-white songs-catalogue-container ${startedContent?.data?.length ? 'tw-mt-[14px] lg:tw-mt-[6px]' : 'tw-mt-[30px]'}`">
                 <transition appear name="fade">
-                    <CollectionWrapper collectionType="song" :tab-options="tabData" :infinite-scroll="!membershipUpgradeModal.disableClose" />
+                    <CollectionWrapper collectionType="song" :tab-options="tabData" />
                 </transition>
             </div>
         </div>
@@ -70,10 +70,8 @@ const props = defineProps({
 });
 
 const collectionStore = useCollectionStore();
-const platformStore = usePlatformStore();
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
-const { membershipUpgradeModal } = storeToRefs(platformStore);
 
 const artistCount = ref(0);
 const isLoading = ref(false);

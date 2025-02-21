@@ -186,11 +186,6 @@ export const useCollectionStore = defineStore({
             if (this.tabOptions.length === 0) {
                 //Set Tab Options
                 this.tabOptions = formatTabData(data.tabs, data.name ?? '');
-                if (!userStore.userHasSongAccess) {
-                    this.tabOptions = this.tabOptions.filter(
-                        (tab) => tab.value != "Songs"
-                    );
-                }
             }
         },
 
