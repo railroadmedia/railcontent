@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\ContentLikesDecorator;
@@ -51,49 +52,22 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ContentPagesController extends BaseController
 {
-    private ContentService $contentService;
-    private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
-    private LessonAssignmentDecorator $lessonAssignmentDecorator;
-    private RailcontentURLProvider $railcontentURLProvider;
-    private FullTextSearchService $fullTextSearchService;
-    private CalendarService $calendarService;
-    private ContentFollowsService $contentFollowsService;
-    private ResourceDecorator $resourceDecorator;
-    private MethodService $methodService;
-    private UserContentProgressService $userContentProgressService;
-    private ArtistService $artistService;
-    private GenreService $genreService;
-
-    private ChallengesService $challengesService;
-
     public function __construct(
-        ContentService $contentService,
-        VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
-        LessonAssignmentDecorator $lessonAssignmentDecorator,
-        RailcontentURLProvider $railcontentURLProvider,
-        FullTextSearchService $fullTextSearchService,
-        CalendarService $calendarService,
-        ContentFollowsService $contentFollowsService,
-        ResourceDecorator $resourceDecorator,
-        MethodService $methodService,
-        UserContentProgressService $userContentProgressService,
-        ArtistService $artistService,
-        GenreService $genreService,
-        ChallengesService $challengesService,
+        private ContentService $contentService,
+        private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
+        private LessonAssignmentDecorator $lessonAssignmentDecorator,
+        private RailcontentURLProvider $railcontentURLProvider,
+        private FullTextSearchService $fullTextSearchService,
+        private CalendarService $calendarService,
+        private ContentFollowsService $contentFollowsService,
+        private ResourceDecorator $resourceDecorator,
+        private MethodService $methodService,
+        private UserContentProgressService $userContentProgressService,
+        private ArtistService $artistService,
+        private GenreService $genreService,
+        private ChallengesService $challengesService,
+        private SanityGateway $sanityGateway,
     ) {
-        $this->contentService = $contentService;
-        $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
-        $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
-        $this->railcontentURLProvider = $railcontentURLProvider;
-        $this->fullTextSearchService = $fullTextSearchService;
-        $this->calendarService = $calendarService;
-        $this->contentFollowsService = $contentFollowsService;
-        $this->resourceDecorator = $resourceDecorator;
-        $this->methodService = $methodService;
-        $this->userContentProgressService = $userContentProgressService;
-        $this->artistService = $artistService;
-        $this->genreService = $genreService;
-        $this->challengesService = $challengesService;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -1255,7 +1229,7 @@ class ContentPagesController extends BaseController
         Request $request,
         $domain,
         $contentId
-    ): RedirectResponse {
+    ) {
         $contentRow =
             DB::connection(config('railcontent.database_connection_name'))
                 ->table('railcontent_content')
@@ -1351,18 +1325,11 @@ class ContentPagesController extends BaseController
         if (empty($nextContent)) {
             throw new NotFoundHttpException();
         }
-
-        $urls = $this->railcontentURLProvider->getContentURLs(
-            $nextContent['id'],
-            $nextContent['slug'],
-            $nextContent['type'],
-            $nextContent
-        );
-
-        if (!empty($urls) && !empty($urls->getWebURLPath())) {
-            return redirect()->to($urls->getWebURLPath());
+        $document = $this->sanityGateway->getByRailContentId($nextContent['id']);
+        $webUrlPath = $document['web_url_path'] ?? '';
+        if ($webUrlPath) {
+            return redirect()->to($webUrlPath);
         }
-
         throw new NotFoundHttpException();
     }
 
