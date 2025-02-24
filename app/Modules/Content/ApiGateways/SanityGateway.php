@@ -1064,6 +1064,7 @@ class SanityGateway
         $userPermissionIds = $this->getPermissionIds();
         if ($document['type'] == 'challenge' && ($document['lessons'] ?? false)) {
             $this->processNeedsAccessForChildren($document['lessons'], $userPermissionIds, $isAdmin);
+            $this->processChapterThumbnailForChildren($document['lessons']);
         } elseif ($document['type'] == 'challenge-part' && ($document['parent'] ?? false)) {
             $document['parent']['need_access'] = $this->doesUserNeedAccessToContent(
                 $document['parent'],
@@ -1071,6 +1072,7 @@ class SanityGateway
                 $isAdmin
             );
             $this->processNeedsAccessForChildren($document['parent']['lessons'], $userPermissionIds, $isAdmin);
+            $this->processChapterThumbnailForChildren($document['parent']['lessons']);
         }
         $document['need_access'] = $this->doesUserNeedAccessToContent($document, $userPermissionIds, $isAdmin);
     }
@@ -1201,6 +1203,14 @@ class SanityGateway
             $this->userPermissionsCached = \Arr::pluck($userPermissions, 'permission_id');
         }
         return $this->userPermissionsCached;
+    }
+
+    private function processChapterThumbnailForChildren(&$lessons)    {
+        foreach ($lessons as $index => $lesson) {
+            foreach ($lesson['chapters']??[] as $indexC => $chapter) {
+                $lessons[$index]['chapters'][$indexC]['chapter_thumbnail_url'] = "https://musora-web-platform.s3.amazonaws.com/chapters/{$lesson['brand']}/Chapter" . ($indexC + 1) . ".jpg";
+            }
+        }
     }
 
 
