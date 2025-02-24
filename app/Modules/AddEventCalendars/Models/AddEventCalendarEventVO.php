@@ -189,7 +189,7 @@ class AddEventCalendarEventVO
 
     public function getExternalCustomDataArray()
     {
-        return json_decode($this->externalCustomData, true);
+        return json_decode(json_encode($this->externalCustomData), true);
     }
 
     public function getExternalSyncId()
@@ -333,7 +333,7 @@ class AddEventCalendarEventVO
     public function apiUpdateRequiredByStart($verbose = false)
     {
         $internalStartTimeObj = Carbon::parse($this->getStartTimeToSync());
-        $externalStartTimeObj = Carbon::createFromTimestamp($this->externalDateStartUnix);
+        $externalStartTimeObj = Carbon::parse($this->externalDateStart);
         $startTimeSame = $internalStartTimeObj->eq($externalStartTimeObj);
 
         $updateRequired = !$startTimeSame;
@@ -352,7 +352,7 @@ class AddEventCalendarEventVO
     public function apiUpdateRequiredByEnd($verbose = false)
     {
         $internalEndTimeObj = Carbon::parse($this->getEndTimeToSync());
-        $externalEndTimeObj = Carbon::createFromTimestamp($this->externalDateEndUnix);
+        $externalEndTimeObj = Carbon::parse($this->externalDateEnd);
         $endTimeSame = $internalEndTimeObj->eq($externalEndTimeObj);
 
         $updateRequired = !$endTimeSame;

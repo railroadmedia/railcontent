@@ -63,35 +63,35 @@ class CalendarSyncService
 
     private function setExternalDataIfAvailable($existingEvent, AddEventCalendarEventVO &$eventVO)
     {
-        $customData = json_decode($existingEvent->custom_data, true);
+        $customData = json_decode(json_encode($existingEvent->custom_data), true);
 
         if ($eventVO->getInternalSyncId() == ($customData[AddEventService::SYNC_ID_KEY] ?? null)) {
             $eventVO->setExternalData(
                 $existingEvent->id,
                 null,
-                $existingEvent->unique,
+                $existingEvent->unique_key,
                 $existingEvent->title,
                 null,
                 $existingEvent->description,
                 $existingEvent->location,
-                $existingEvent->organizer,
+                $existingEvent->organizer_name,
                 $existingEvent->organizer_email,
-                $existingEvent->date_start,
-                $existingEvent->date_start_time,
-                $existingEvent->date_start_ampm,
-                $existingEvent->date_start_unix,
-                $existingEvent->date_end,
-                $existingEvent->date_end_time,
-                $existingEvent->date_end_ampm,
-                $existingEvent->date_end_unix,
+                $existingEvent->datetime_start,
+                $existingEvent->datetime_start,
+                null,
+                null,
+                $existingEvent->datetime_end,
+                $existingEvent->datetime_end,
+                null,
+                null,
                 $existingEvent->all_day_event ?? null,
-                $existingEvent->date_format,
+                null,
                 $existingEvent->timezone,
                 $existingEvent->reminder,
-                $existingEvent->rrule,
-                $existingEvent->template_id,
+                null,
+                null,
                 $existingEvent->color,
-                $existingEvent->updated_times,
+                $existingEvent->updated_times ?? null,
                 null,
                 null,
                 null,
@@ -106,8 +106,8 @@ class CalendarSyncService
                 $existingEvent->custom_data,
                 $existingEvent->link_short,
                 $existingEvent->link_long,
-                $existingEvent->date_create,
-                $existingEvent->date_modified
+                $existingEvent->created,
+                $existingEvent->modified
             );
         }
     }
@@ -172,7 +172,7 @@ class CalendarSyncService
         if ($calendarHasMoreEventsThanReturned) {
             foreach ($events as $key => $event) {
                 // if event is past, it is not a candidate for deletion, thus disregard it
-                if (Carbon::createFromTimestamp($event->date_start_unix)->lt(Carbon::now())) {
+                if (Carbon::create($event->datetime_start)->lt(Carbon::now())) {
                     unset($events[$key]);
                 }
 
@@ -182,8 +182,8 @@ class CalendarSyncService
                 foreach ($allScheduledContent as $scheduledContent) {
                     $brand = $scheduledContent['brand'];
                     $internalSyncId = $scheduledContent['id'] . '_' . $brand . '_' . $scheduledContent['type'];
-                    $externalSyncId = json_decode(
-                        $event->custom_data,
+                    $externalSyncId = json_decode(json_encode(
+                        $event->custom_data),
                         true
                     )[AddEventService::SYNC_ID_KEY] ?? null;
                     if ($internalSyncId === $externalSyncId) {
@@ -194,8 +194,8 @@ class CalendarSyncService
 
             foreach ($events as $eventToDelete) {
                 try {
-                    $syncId = json_decode(
-                        $eventToDelete->custom_data,
+                    $syncId = json_decode(json_encode(
+                        $eventToDelete->custom_data),
                         true
                     )[AddEventService::SYNC_ID_KEY] ?? null;
                     $this->addEventService->deleteEvent($eventToDelete->id);
@@ -221,7 +221,7 @@ class CalendarSyncService
         foreach ($calendars as $calendar) {
             $data = new AddEventCalendar();
             $data->id = $calendar->id;
-            $data->uniquekey = $calendar->uniquekey;
+            $data->uniquekey = $calendar->unique_key;
             $data->title = $calendar->title;
             $data->save();
         }
