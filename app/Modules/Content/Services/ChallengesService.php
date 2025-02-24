@@ -3,6 +3,7 @@
 namespace App\Modules\Content\Services;
 
 use App\Modules\Content\ApiGateways\SanityGateway;
+use App\Modules\Content\ApiResources\Challenges\UserProgressDataForMusoraCenter;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Enums\ChallengeUserProgressStatus;
 use App\Modules\Content\Models\ContentUserProgress;
@@ -11,7 +12,6 @@ use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
 use App\Services\UserTimezoneService;
 use Carbon\Carbon;
-use Gedmo\Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
@@ -314,6 +314,7 @@ class ChallengesService
             'lessons_meta_data' => json_encode($lessonMetaData),
             'is_active' => $isLocked,
             'is_solo' => $isSolo,
+            'enroll_date' => Carbon::now(),
         ];
         // Resubscribe user for solo notifications if they were previously subscribed
         if ($this->isUserSubscribedToNotificationsForActiveSoloChallenge($challengeId, $userId)) {
@@ -374,6 +375,45 @@ class ChallengesService
         $this->updateNotification($challengeId, $user, $notificationKey, enable: false);
         return true;
     }
+
+
+    /**
+     * Unenroll the user in a challenge. Returns false if user wasn't already enrolled
+
+     * @param int $userId - user id
+     * @return array - array of challengeUserProgress
+     */
+    public function getAllProgressDataForUser(int $userId) : array
+    {
+        $userProgresses = ChallengeUserProgress::whereUserId($userId, limit: 50);
+        $challengeIds = $userProgresses->pluck('content_id')->toArray();
+        $challenges = $this->getChallengeByIds($challengeIds);
+        $challenges = collect($challenges)->keyBy('railcontent_id');
+        $response = [];
+        foreach($userProgresses as $userProgress) {
+            // TODO BEH-239 add owned logic
+//            $productInformation = $this->sanityGateway->getProductInformationForAllChallenges();
+//            $productInformation = collect($productInformation)->keyBy('id');
+//
+//            $product = $productInformation[$userProgress->content_id] ?? null;
+//            $owned = false;
+//            if ($product) {
+//                $product = Product::whereId($product['product_id'])
+//                    ->where('digital_access_type', 'challenge content access')
+//                    ->first();
+//                $permissions = $product?->getDigitalAccessPermissionNames() ?? [];
+//                foreach($permissions as $permission) {
+//                    $permissionModel =
+//                }
+//            }
+            $challenge = $challenges[$userProgress->content_id];
+            $resource = UserProgressDataForMusoraCenter::fromUserAndChallenge($userProgress, $challenge);
+            $response[] = (array)$resource;
+        }
+        return $response;
+    }
+
+
 
 
     /**

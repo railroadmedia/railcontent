@@ -2,11 +2,11 @@
     <v-container :key="userId">
         <v-row align="center">
             <v-col
-                    class="column"
-                    cols="12"
+                class="column"
+                cols="12"
             >
                 <v-custom-breadcrumbs
-                        :breadcrumbs="breadcrumbs"
+                    :breadcrumbs="breadcrumbs"
                 ></v-custom-breadcrumbs>
             </v-col>
 
@@ -17,7 +17,7 @@
         </v-row>
 
         <v-row
-                class="align-top"
+            class="align-top"
         >
 
             <v-col
@@ -90,6 +90,19 @@
                     :user-access-permissions="userAccessPermissions"
                     @userProductEdit="loadUserData"
                 ></user-products>
+            </v-col>
+        </v-row>
+
+        <v-row class="align-top">
+            <v-col
+                cols="12"
+                class="mb-4 text-center px-4 column"
+            >
+                <user-challenge-progress-form
+                    :user-id="userId"
+                    :challenge-progress="userChallengeProgress"
+                    @getUserChallengeProgress="getUserChallengeProgress"
+                ></user-challenge-progress-form>
             </v-col>
         </v-row>
 
@@ -180,6 +193,7 @@ import UserProducts from './forms/UserProducts';
 import CustomBreadcrumbs from '../../components/CustomBreadcrumbs';
 import LastVisistedUsers from '../../components/LastVisistedUsers';
 import CustomTreeview from '../../components/CustomTreeview';
+import UserChallengeProgressForm from './forms/UserChallengeProgress';
 import axios from "axios";
 
 export default {
@@ -192,6 +206,7 @@ export default {
         'user-mentor-form': UserMentorForm,
         'user-password-form': UserPasswordForm,
         'user-products': UserProducts,
+        'user-challenge-progress-form': UserChallengeProgressForm,
         'v-custom-breadcrumbs': CustomBreadcrumbs,
         'v-custom-treeview': CustomTreeview,
         'last-visited-users': LastVisistedUsers,
@@ -219,6 +234,7 @@ export default {
             userAccessPermissions: [],
             userRoles: [],
             userNotes: '',
+            userChallengeProgress: [],
         };
     },
     computed: {
@@ -298,7 +314,8 @@ export default {
             'setUsers',
             'editUserRole',
             'getProducts',
-            'getPermissions'
+            'getPermissions',
+            'getUserChallengeProgressById',
         ]),
 
         resetUserAvatar() {
@@ -333,11 +350,21 @@ export default {
                 });
         },
 
-        loadUserData() {
+        getUserChallengeProgress(){
+            api.getUserChallengeProgressById(this.userId)
+                .then((response) => {
+                    if (response) {
+                        this.userChallengeProgress = response.data;
+                    }
+                });
+        },
 
+        loadUserData() {
             this.getUserAccessPermissions();
 
             this.getUserRoles();
+
+            this.getUserChallengeProgress();
         },
 
         updateUserRoles({ roles }) {

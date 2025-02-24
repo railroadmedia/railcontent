@@ -31,6 +31,7 @@ use App\Modules\Content\Enums\AwardTier;
  * @property integer $current_rest_days
  * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, seconds_practiced, unlock_date, completed_at
  * @property Carbon $start_date
+ * @property Carbon $enroll_date
  * @property Carbon $last_completed_date
  * @property integer $completed_time_practiced
  * @property integer $completed_best_streak
@@ -47,6 +48,7 @@ class ChallengeUserProgress extends Model
             //'lessons_meta_data' => AsCollection::using(ChallengeUserProgressLessonDatumCollection::class),
             'lessons_meta_data' => 'array',
             'start_date' => 'datetime',
+            'enroll_date' => 'datetime',
             'last_completed_date' => 'datetime',
         ];
     }

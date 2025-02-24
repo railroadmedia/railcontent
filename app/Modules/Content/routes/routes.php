@@ -142,6 +142,11 @@ Route::prefix('challenges')
         )->name('challenges.user_progress');
 
         Route::get(
+            'all_user_progress_data/{id}',
+            [ChallengesMetaDataController::class, 'getAllProgressDataForUser']
+        )->name('challenges.all_user_progress_data');
+
+        Route::get(
             'download_award/{id}',
             [ChallengesMetaDataController::class, 'getUserAward']
         )->name('challenges.user_award');
@@ -171,6 +176,11 @@ Route::prefix('challenges')
             'enroll/{id}',
             [ChallengesMetaDataController::class, 'enrollUser']
         )->name('challenges.enroll');
+
+        Route::post(
+            'enroll_user/{user_id}/{challenge_id}',
+            [ChallengesMetaDataController::class, 'enrollUserAdmin']
+        )->name('challenges.enroll_user');
 
         Route::post(
             'set_start_date/{id}',
