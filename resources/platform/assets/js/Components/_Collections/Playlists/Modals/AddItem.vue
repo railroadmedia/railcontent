@@ -154,6 +154,7 @@ const saveData = (playlistId) => {
             import_full_soundslice_assignment: addFullSongToggle.value,
             import_instrumentless_soundslice_assignment: addInstrumentlessToggle.value,
             token,
+            lesson_id: props.content.lessonId ?? null
         }).then(function(response) {
                 //Check if limit has exceeded.....
                 if (response.limit_excedeed) {
@@ -287,7 +288,7 @@ onMounted(() => {
 
     if (props.content.type !== 'Assignments') {
         isLoadingAssignments.value = true;
-        countAssignmentsAndLessons(props.content.content_id).then((r) => {
+        countAssignmentsAndLessons(props.content.content_id, props.content.lessonId).then((r) => {
             const {  soundslice_assignments_count, lessons_count  } = r;
             additionalItems.value = soundslice_assignments_count;
             totalItems.value = lessons_count ? soundslice_assignments_count + lessons_count : soundslice_assignments_count;

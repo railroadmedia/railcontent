@@ -28,7 +28,7 @@
                     </div>
                     <button v-if="soundsliceSlug" title="Add To Playlist"
                         class="dark:tw-text-white tw-text-[#00101D] md:tw-hidden"
-                        @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'General', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail })">
+                        @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'General', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail, lessonId: lessonId })">
                         <musora-icon icon-name="plus" class="tw-h-8 tw-w-8 font-bold" />
                     </button>
                 </div>
@@ -54,7 +54,7 @@
                     <!-- New Add To Playlist Button -->
                     <button v-if="soundsliceSlug" title="Add To Playlist"
                         class="dark:tw-text-white tw-text-[#00101D] tw-hidden md:tw-block"
-                        @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'General', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail })">
+                        @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'General', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail, lessonId: lessonId })">
                         <musora-icon icon-name="plus" class="tw-h-10 tw-w-10 font-bold" />
                     </button>
                 </div>
@@ -338,6 +338,7 @@ export default {
     },
     methods: {
         addToPlaylist(data) {
+            console.log('rox add item to playlist :::::   contentAssignment.vue ::::: ', data)
             window.openplaylistmodal({ modalType: 'addItem', brand: this.brand, content: data });
         },
 
