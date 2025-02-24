@@ -86,11 +86,11 @@ const { isLoading } = storeToRefs(platformStore);
 
 // Refs
 const data = ref(null);
+const noAccess = ref(false);
 
 // Props
 const props = defineProps({
     contentId: Number,
-    noAccess: Boolean,
     isAdded: Boolean,
     reportLogo: String,
 });
@@ -102,6 +102,7 @@ const showDraft = computed(() => {
 onBeforeMount( async () => {
     const { data: songData, error: songError, isLoading: songLoading } = await useSongPageData(props.contentId, brand.value, userId.value, token.value);
     data.value = songData.value;
+    noAccess.value = songData.value?.need_access;
 
     platformStore.setLoadingState(songLoading.value);
 });
