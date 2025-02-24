@@ -561,9 +561,16 @@ const enroll = async(message = "enroll") => {
             sendPostMessage('retake');
         } else {
             const enrollUser = await postChallengesEnroll(props.cohort.id);
-            openChallengeNotificationModal.value = true;
-            isEnrolled.value = true;
-            sendPostMessage(message);
+            if(enrollUser){
+                openChallengeNotificationModal.value = true;
+                isEnrolled.value = true;
+                sendPostMessage(message);
+            } else {
+                window.shownotification({
+                    icon: 'error',
+                    text: 'Woops! Something wrong happened, please try again later.'
+                })
+            }
         }
     } catch (e){
         window.shownotification({
