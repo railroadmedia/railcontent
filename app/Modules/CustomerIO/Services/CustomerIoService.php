@@ -119,7 +119,7 @@ class CustomerIoService
         ?array $customAttributes = [],
         ?int $userId = null,
         ?int $createdAtTimestamp = null
-    ): Customer {
+    ): ?Customer {
         if ($this->isDeletedUser($email)) {
             Log::info('Customer data is deleted, not syncing to customer.io. Email: ' . $email);
             return null;
