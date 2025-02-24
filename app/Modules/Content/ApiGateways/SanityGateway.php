@@ -1092,12 +1092,12 @@ class SanityGateway
             ContentService::STATUS_ARCHIVED,
             ContentService::STATUS_SCHEDULED
         ];
-        $lessons = array_filter(
+        $lessons = array_values(array_filter(
             $lessons,
             function ($lesson) use ($isAdmin, $userPermissionIds, $allowedStatuses) {
                 return $isAdmin || (!($lesson['status'] ?? false) || in_array($lesson['status'], $allowedStatuses));
             }
-        );
+        ));
 
         foreach ($lessons as $index => $lesson) {
             $lessons[$index]['need_access'] = $this->doesUserNeedAccessToContent($lesson, $userPermissionIds, $isAdmin);

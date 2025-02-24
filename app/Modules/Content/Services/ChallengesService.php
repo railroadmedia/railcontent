@@ -228,7 +228,7 @@ class ChallengesService
     {
         $enrolledUsersAndCount = $this->getEnrolledUsers($contentId, $count);
         $enrolledUsers = $enrolledUsersAndCount['users'];
-        $formattedUsers = $enrolledUsers->map(fn (User $user) => [
+        $formattedUsers = $enrolledUsers->map(fn(User $user) => [
             'id' => $user->id,
             'display_name' => $user->display_name,
             'profile_picture_url' => $user->profile_picture_url,
@@ -526,8 +526,8 @@ class ChallengesService
                 // TODO Rob Adrian Caleb, do we lock the lessons if previous lessons haven't been completed
                 // this was vaguely discussed in this thread: https://musoraworkspace.slack.com/archives/C0723ESKW49/p1733173597489469
                 $shouldLessonBeLocked = $isLocked && $unlockDateForComparison->greaterThanOrEqualTo(
-                    $todayForComparison
-                );
+                        $todayForComparison
+                    );
             } else {
                 // For community challenges, unlock dates are stored in PST so we must convert it to UTC and check
                 // against now.
