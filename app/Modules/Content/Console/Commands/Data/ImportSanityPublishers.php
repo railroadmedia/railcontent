@@ -38,29 +38,42 @@ class ImportSanityPublishers extends Command
         $firstRow = true;
         $filePath = storage_path($input);
         if (($handle = fopen($filePath, "r")) !== false) {
-            while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+            while (($data = fgetcsv($handle, 1000, "\t")) !== false) {
                 if ($firstRow) {
                     $firstRow = false;
                     continue;
                 }
-                if (!isset($rows[$data[2]])) {
-                    $rows[$data[2]] = [];
+
+                $child = $data[0];
+                $name = $data[1];
+                foreach ($rows as &$entries) {
+                    if ($entries['name'] == $name) {
+                        $entries['child'][] = $child;
+                        $name = null;
+                        $child = null;
+                    }
                 }
-                $rows[$data[2]][] = $data[0];
+
+                if ($name != null) {
+                    $length = count($rows);
+                    $rows[$length + 1]['name'] = $name;
+                    $rows[$length + 1]['child'] = [];
+                    $rows[$length + 1]['child'][] = $child;
+                }
             }
             fclose($handle);
         }
 
         $publishers = [];
-        foreach ($rows as $parent => $children) {
-            $name =  preg_replace('/[^a-zA-Z0-9_.]/', '', $parent);
+        foreach ($rows as $parent => $child) {
+            $name =  preg_replace('/[^a-zA-Z0-9_.]/', '', $child['name']);
 
             $id = 'publisher_' . strtolower($name);
             $publishers[$id] = [
                 '_id' => $id,
-                'name' => $parent,
+                'name' => $child['name'],
                 '_type' => 'publisher',
-                'child' => collect($children)->map(function ($child) {
+                'child' => collect($child['child'])->map(function ($child) {
                     return [
                         '_key' => uniqid(),
                         'name' => $child
@@ -69,18 +82,18 @@ class ImportSanityPublishers extends Command
             ];
         }
 
-        $directory = 'resources/sanitystudio';
+        $directory = resource_path('sanitystudio');
         $fileName = 'publishers.ndjson';
-        $ouputFilePath = "$directory/$fileName";
-        file_put_contents($ouputFilePath, "");
+        $outputFilePath = "$directory/$fileName";
+        file_put_contents($outputFilePath, "");
         foreach ($publishers as $publisher) {
             $newline = json_encode($publisher) . "\n";
-            file_put_contents($ouputFilePath, $newline, FILE_APPEND);
+            file_put_contents($outputFilePath, $newline, FILE_APPEND);
         }
 
-        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $fileName development --replace");
+        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $fileName $env --replace");
         if ($resultCode !== self::SUCCESS) {
-            $this->error("Failed to import $ouputFilePath. Have you built Sanity Studio using the README instructions?");
+            $this->error("Failed to import $outputFilePath. Have you built Sanity Studio using the README instructions?");
             return $resultCode;
         }
         $this->info('import completed.');
@@ -88,7 +101,7 @@ class ImportSanityPublishers extends Command
         // clean up the export file
         $resultCode = $this->runCliCommand("rm $filePath");
         if ($resultCode !== self::SUCCESS) {
-            $this->error("Failed to delete $ouputFilePath");
+            $this->error("Failed to delete $outputFilePath");
             return $resultCode;
         }
         $this->info('Export file deleted from local storage.');
