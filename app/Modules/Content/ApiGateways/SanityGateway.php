@@ -3,8 +3,8 @@
 namespace App\Modules\Content\ApiGateways;
 
 use Illuminate\Support\Carbon;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserPermissionsService;
 use Sanity\Client as SanityClient;
 
 class SanityGateway
@@ -198,7 +198,7 @@ class SanityGateway
         ]
     ];
 
-    private UserPermissionsRepository $userPermissionsRepository;
+    private UserPermissionsService $userPermissionsService;
     private ?array $userPermissionsCached = null;
 
     public SanityClient $sanity;
@@ -211,7 +211,7 @@ class SanityGateway
     public function __construct(SanityClient $sanity)
     {
         $this->sanity = $sanity;
-        $this->userPermissionsRepository = app()->make(UserPermissionsRepository::class);
+        $this->userPermissionsService = app()->make(UserPermissionsService::class);
     }
 
     /**
@@ -1177,12 +1177,7 @@ class SanityGateway
         if (!user()) {
             return [];
         }
-        if (!$this->userPermissionsCached) {
-            $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
-            $this->userPermissionsCached = \Arr::pluck($userPermissions, 'permission_id');
-        }
+        $this->userPermissionsCached = $this->userPermissionsCached ?? $this->userPermissionsService->getUserPermissionsIds(user()->id, true);
         return $this->userPermissionsCached;
     }
-
-
 }

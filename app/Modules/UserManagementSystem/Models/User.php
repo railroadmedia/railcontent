@@ -1047,13 +1047,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return 'password';
     }
 
-    public function getActivePermissionsIds()
-    {
-        $userAccessPermissions = $this->userAccessPermissions()->getResults();
-        $userAccessPermissionsCollection = new UserAccessPermissionsCollection($this, $userAccessPermissions);
-        return array_values($userAccessPermissionsCollection->getActivePermissionIds());
-    }
-
     public function isFirstAccess(): bool
     {
         if ($this->first_access_at) {

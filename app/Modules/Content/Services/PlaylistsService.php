@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Mailora\Services\MailService;
+use Railroad\Railcontent\Services\UserPermissionsService;
 
 class PlaylistsService
 {
@@ -25,7 +26,8 @@ class PlaylistsService
         private SanityGateway $sanityGateway,
         private MailService $mailService,
         private ContentLastEngagedService $contentLastEngagedService,
-        private ContentProgressDataContext $contentProgressDataContext
+        private ContentProgressDataContext $contentProgressDataContext,
+        private UserPermissionsService $userPermissionsService,
     ) {
     }
 
@@ -123,7 +125,7 @@ class PlaylistsService
 
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
         $assignmentDataAssoc = collect($assignmentsData)->keyBy('railcontent_id');
-        $userPermissions = user()->getActivePermissionsIds();
+        $userPermissions = $this->userPermissionsService->getUserPermissionsIds(user()->id);
 
         $mergedData = $items->map(
             function ($item) use ($sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions) {

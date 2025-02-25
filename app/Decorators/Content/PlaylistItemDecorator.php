@@ -109,8 +109,8 @@ class PlaylistItemDecorator extends TypeDecoratorBase
             )
         );
         $groupedPermissions = $contentPermissionRows->groupBy('content_id');
-        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
-        $userPermissionIds = \Arr::pluck($userPermissions, 'permission_id');
+        $userPermissionIds= $this->userPermissionsRepository->getUserPermissionsIds(user()->id, true);
+
         foreach ($contentsOfType as $contentIndex => $content) {
             $resources = [];
             foreach ($content['resources'] ?? [] as $resource) {
