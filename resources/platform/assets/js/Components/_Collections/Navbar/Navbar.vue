@@ -1,13 +1,13 @@
 <script setup>
-import {ref} from "vue"
+import { ref } from "vue"
 import { SearchIcon } from "@heroicons/vue/solid";
-import { bgColor } from "@constants/brands"
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@stores/user';
+
+import SearchModal from "../SearchModal/SearchModal.vue";
 import HamburguerButton from "./HamburguerButton.vue";
 import BrandSelector from "./BrandSelector.vue";
 import UserIcon from "./UserIcon.vue";
-import SearchModal from "../SearchModal/SearchModal.vue"
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@stores/user';
 
 const props = defineProps({
   isSidebarHidden: Boolean,
@@ -36,8 +36,7 @@ const toggleSearchModal = (val) => {
   showSearchModal.value = val;
 }
 const userStore = useUserStore();
-const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand } = storeToRefs(userStore)
-
+const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl, brand } = storeToRefs(userStore);
 </script>
 
 <template>

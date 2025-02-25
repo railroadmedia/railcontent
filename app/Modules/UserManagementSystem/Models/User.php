@@ -63,6 +63,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $timezone
  * @property bool $is_coach
  * @property string|null $permission_level
+ * @property bool $use_student_view
  * @property int|null $legacy_drumeo_id
  * @property int|null $legacy_pianote_id
  * @property int|null $legacy_guitareo_id
@@ -338,7 +339,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'password',
         'email',
         'revenuecat_origin_app_user_id',
-        'recharge_interval'
+        'recharge_interval',
+        'use_student_view',
     ];
 
 
@@ -569,6 +571,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
     public function isAdmin(): bool
+    {
+        return $this->permission_level == self::PERMISSION_LEVEL_ADMIN && !$this->use_student_view;
+    }
+
+    public function showAdminToggle(): bool
     {
         return $this->permission_level == self::PERMISSION_LEVEL_ADMIN;
     }
