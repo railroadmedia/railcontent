@@ -41,6 +41,7 @@ abstract class LessonTemplate extends BaseSanityModel
     ) {
         $instructorReference = new Reference([['type' => 'instructor']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
+        $licenseReference = new Reference([['type' => 'license']], options: ['disableNew' => false]);
         $blockList = new Block();
         $video               = new ListObject(
             fields: [
@@ -172,6 +173,7 @@ abstract class LessonTemplate extends BaseSanityModel
             new Field(FieldType::Date, 'quarter_published', initialValue:null, group: $detailsGroup),
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::Array, 'license', 'License Information', of: $licenseReference, group:$detailsGroup),
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', group: $detailsGroup),
         ]);
