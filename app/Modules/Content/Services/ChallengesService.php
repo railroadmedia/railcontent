@@ -551,37 +551,7 @@ class ChallengesService
                 $isCompleted = $this->contentUserProgress::isCompletedByUser($lesson['id'], $userId);
             }
 
-            // For solo challenges, always assume unlock dates are stored in the users local timezone, even if it changes over time.
-            if ($challengeUserProgress?->is_solo ?? false) {
-                $unlockDate = Carbon::parse($unlockDate)->startOfDay();
-
-                // we must compare based on day without letting Carbon account for timezones
-                $unlockDateForComparison = Carbon::createFromFormat('Y-m-d', $unlockDate->toDateString())
-                    ->startOfDay();
-                // comparing 00:00:00 dates does weird things
-                $todayForComparison = Carbon::createFromFormat(
-                    'Y-m-d',
-                    Carbon::today(UserTimezoneService::getUsersCurrentTimezone())->toDateString()
-                )->startOfDay()->addSecond();
-                // TODO Rob Adrian Caleb, do we lock the lessons if previous lessons haven't been completed
-                // this was vaguely discussed in this thread: https://musoraworkspace.slack.com/archives/C0723ESKW49/p1733173597489469
-                $shouldLessonBeLocked = $isLocked && $unlockDateForComparison->greaterThanOrEqualTo(
-                        $todayForComparison
-                    );
-            } else {
-                // For community challenges, unlock dates are stored in PST so we must convert it to UTC and check
-                // against now.
-                $shouldLessonBeLocked = Carbon::parse($unlockDate, 'America/Vancouver')->greaterThanOrEqualTo(
-                    Carbon::now()
-                );
-
-                // now convert the unlock time to the users local timezone
-                $unlockDate = Carbon::parse(
-                    Carbon::parse($unlockDate, 'America/Vancouver')->timezone(
-                        UserTimezoneService::getUsersCurrentTimezone()
-                    )->toDateTimeString()
-                );
-            }
+            $shouldLessonBeLocked = $this->getLessonLockedStateAndUpdateUnlockDate($challengeUserProgress, $unlockDate, $isLocked);
 
             $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
             $lessons[$index]['unlock_date'] = $unlockDate->toISOString();
@@ -593,9 +563,56 @@ class ChallengesService
                 $previousCurriculumLesson = $lessons[$index];
             }
         }
-
         return $lessons;
     }
+
+    /**
+     * @param ChallengeUserProgress|null $challengeUserProgress
+     * @param mixed $unlockDate
+     * @param bool $hasAccess
+     * @return bool
+     */
+    public function getLessonLockedStateAndUpdateUnlockDate(
+        ?ChallengeUserProgress $challengeUserProgress,
+        mixed &$unlockDate,
+        bool $hasAccess,
+    ): bool
+    {
+        // For solo challenges, always assume unlock dates are stored in the users local timezone, even if it changes over time.
+        if ($challengeUserProgress?->is_solo ?? false) {
+            $unlockDate = Carbon::parse($unlockDate)->startOfDay();
+
+            // we must compare based on day without letting Carbon account for timezones
+            $unlockDateForComparison = Carbon::createFromFormat('Y-m-d', $unlockDate->toDateString())
+                ->startOfDay();
+            // comparing 00:00:00 dates does weird things
+            $todayForComparison = Carbon::createFromFormat(
+                'Y-m-d',
+                Carbon::today(UserTimezoneService::getUsersCurrentTimezone())->toDateString()
+            )->startOfDay()->addSecond();
+            // TODO Rob Adrian Caleb, do we lock the lessons if previous lessons haven't been completed
+            // this was vaguely discussed in this thread: https://musoraworkspace.slack.com/archives/C0723ESKW49/p1733173597489469
+            $shouldLessonBeLocked = $hasAccess && $unlockDateForComparison->greaterThanOrEqualTo(
+                    $todayForComparison
+                );
+        } else {
+            // For community challenges, unlock dates are stored in PST so we must convert it to UTC and check
+            // against now.
+            $shouldLessonBeLocked = Carbon::parse($unlockDate, 'America/Vancouver')->greaterThanOrEqualTo(
+                Carbon::now()
+            );
+
+            // now convert the unlock time to the users local timezone
+            $unlockDate = Carbon::parse(
+                Carbon::parse($unlockDate, 'America/Vancouver')->timezone(
+                    UserTimezoneService::getUsersCurrentTimezone()
+                )
+            );
+        }
+
+        return $shouldLessonBeLocked;
+    }
+
 
     private function getChallengeState($challenge, $userEndDate = null): string
     {
