@@ -22,13 +22,22 @@ class ChallengesFixSevenDaySlideGuitare extends Command
             ->where('is_active', true)
             ->get();
         $count = 0;
-        $correctId = 415820;
-        $incorrectId = 415136;
+        $correctIdFirst = 415820;
+        $incorrectIdFirst = 415136;
+        $correctIdLast = 416560;
+        $incorrectIdLast = 415137;
         foreach ($allChallengesActive as $index => $challenge) {
             $metaData = $challenge->lessons_meta_data;
             $lessonId = $metaData[0]['content_id'];
-            if ($lessonId == $incorrectId) {
-                $metaData[0]['content_id'] = $correctId;
+            if ($lessonId == $incorrectIdFirst) {
+                $metaData[0]['content_id'] = $correctIdFirst;
+                $challenge->lessons_meta_data = $metaData;
+                $challenge->save();
+                $count++;
+            }
+            $lessonId = $metaData[8]['content_id'];
+            if ($lessonId == $incorrectIdLast) {
+                $metaData[8]['content_id'] = $correctIdLast;
                 $challenge->lessons_meta_data = $metaData;
                 $challenge->save();
                 $count++;
