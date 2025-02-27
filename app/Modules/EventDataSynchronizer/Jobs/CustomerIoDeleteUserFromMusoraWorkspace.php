@@ -34,7 +34,7 @@ class CustomerIoDeleteUserFromMusoraWorkspace extends BatchQueryJob
 
     public function getQuery(): Builder
     {
-        return User::query()->orWhere('email', 'like', 'musora+deleted%@musora.com');
+        return User::query()->where('email', 'like', '%musora+deleted%');
     }
 
     public function handleItem(
