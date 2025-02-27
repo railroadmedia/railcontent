@@ -83,6 +83,37 @@ class CustomerIoService
             ->firstOrFail();
     }
 
+    public function getCustomerEmailByIdFromCustomerIo(int $usedId, string $userEmail, string $accountName): array
+    {
+        $accountConfigData = $this->getAccountConfigData($accountName);
+
+        $identifiers = $this->customerIoApiGateway->searchCustomers(
+            $accountConfigData['app_api_key'],
+            [
+                'filter' => [
+                    'or' => [
+                        [
+                            'attribute' => [
+                                'field' => 'musora_user_id',
+                                'operator' => 'eq',
+                                'value' => $usedId,
+                            ],
+                        ],
+                        [
+                            'attribute' => [
+                                'field' => 'email',
+                                'operator' => 'eq',
+                                'value' => $userEmail,
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        return $identifiers ?? [];
+    }
+
     /**
      * @throws Exception
      */
@@ -377,6 +408,20 @@ class CustomerIoService
             $customAttributes,
             $userId,
             $createdAtTimestamp
+        );
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function deleteCustomerByEmail(string $email, string $accountName): void
+    {
+        $accountConfigData = $this->getAccountConfigData($accountName);
+
+        $this->customerIoApiGateway->deleteCustomer(
+            $accountConfigData['site_id'],
+            $accountConfigData['track_api_key'],
+            $email
         );
     }
 
