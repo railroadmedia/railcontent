@@ -5,7 +5,6 @@ namespace App\Modules\EventDataSynchronizer\Jobs;
 use App\Console\Commands\Infrastructure\BatchQueryJob;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 
 class CustomerIoDeleteUserFromMusoraWorkspace extends BatchQueryJob
@@ -34,7 +33,7 @@ class CustomerIoDeleteUserFromMusoraWorkspace extends BatchQueryJob
 
     public function getQuery(): Builder
     {
-        return User::query()->orWhere('email', 'like', 'musora+deleted%@musora.com');
+        return User::query()->where('email', 'like', '%musora+deleted%');
     }
 
     public function handleItem(
