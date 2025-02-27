@@ -10738,16 +10738,16 @@
         },
         {
             "name": "railroad/railnotifications",
-            "version": "v4.0.2",
+            "version": "v4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "5de73708c516387bf537a1380fb47853a6805a07"
+                "reference": "de753910e91af7bb112ea9bae506b26eb76ba74d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/5de73708c516387bf537a1380fb47853a6805a07",
-                "reference": "5de73708c516387bf537a1380fb47853a6805a07",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/de753910e91af7bb112ea9bae506b26eb76ba74d",
+                "reference": "de753910e91af7bb112ea9bae506b26eb76ba74d",
                 "shasum": ""
             },
             "require": {
@@ -10782,9 +10782,9 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/v4.0.2"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/v4.0.3"
             },
-            "time": "2024-09-05T19:35:39+00:00"
+            "time": "2025-02-27T13:18:51+00:00"
         },
         {
             "name": "railroad/referral",
