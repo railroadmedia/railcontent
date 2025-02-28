@@ -81,6 +81,12 @@ class UserPermissionsService
         return $this->userPermissionsRepository->getUserPermissions($userId, $onlyActive);
     }
 
+    public function getUserPermissionsIds(int $userId, bool $onlyActive): array
+    {
+        $userPermissions = $this->getUserPermissions($userId, $onlyActive);
+        return array_column($userPermissions, 'permission_id');
+    }
+
     /**
      * @param int $userId
      * @param int $permissionId
