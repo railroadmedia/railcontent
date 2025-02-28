@@ -15,6 +15,7 @@ use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
+use Railroad\Railcontent\Services\UserPermissionsService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
@@ -35,6 +36,7 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
     protected ProductService $productService;
     protected CohortService $cohortService;
     protected UserAccessPermissionsService $userAccessPermissionsService;
+    protected UserPermissionsService $userPermissionsService;
 
     public function __construct(
         ContentService $contentService,
@@ -50,7 +52,8 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
         ContentPermissionsService $contentPermissionsService,
         ProductService $productService,
         CohortService $cohortService,
-        UserAccessPermissionsService $userAccessPermissionsService
+        UserAccessPermissionsService $userAccessPermissionsService,
+        UserPermissionsService $userPermissionsService,
     ) {
         $this->contentService = $contentService;
         $this->userContentProgressService = $userContentProgressService;
@@ -66,6 +69,7 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
         $this->productService = $productService;
         $this->cohortService = $cohortService;
         $this->userAccessPermissionsService = $userAccessPermissionsService;
+        $this->userPermissionsService = $userPermissionsService;
     }
 
     /**

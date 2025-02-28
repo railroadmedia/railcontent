@@ -7,11 +7,15 @@ export default function useCarouselEvents (originalData, updatedData, page, card
     const startIndex = ref(0); // Index of the first visible item
     const scrollInterval = ref(null);
 
+    const isContinue = computed(() => {
+        return sectionTitle.value === 'continue';
+    })
+
     const showPagination = computed(() => {
         if(isMiniView){
             return updatedData.value.length > 1;
         }
-        return initialData.value?.length > cardNum.value && window.innerWidth > 1024;
+        return initialData.value?.length > cardNum.value;
     });
 
     const isFirstPage = computed(() => page.value === 1);
@@ -52,6 +56,10 @@ export default function useCarouselEvents (originalData, updatedData, page, card
             startIndex.value = updatedIndex;
         } else {
             startIndex.value = startIndex.value + cardNum.value;
+
+            if(startIndex.value > updatedData.value.length - cardNum.value){
+                startIndex.value = updatedData.value.length - cardNum.value;
+            }
         }
 
         page.value++;
@@ -119,7 +127,7 @@ export default function useCarouselEvents (originalData, updatedData, page, card
     }
 
     const activateAutoScroll = () => {
-        if(autoScroll){
+        if(autoScroll && !scrollInterval.value){
             scrollInterval.value = setInterval(() => {
                 if(isLastPage.value){
                     page.value = 1;
@@ -141,6 +149,7 @@ export default function useCarouselEvents (originalData, updatedData, page, card
 
     const clearAutoScroll = () => {
         clearInterval(scrollInterval.value);
+        scrollInterval.value = null;
     }
 
     const handleScrollEnd = () => {
@@ -186,8 +195,13 @@ export default function useCarouselEvents (originalData, updatedData, page, card
         let card = container.getElementsByClassName('catalogue-card')[0];
         if(window.innerWidth < 1280) card = container.getElementsByClassName('catalogue-card')[1];
 
+        if(isContinue.value){
+            container.scrollTo({ left: container.getBoundingClientRect().width * (page.value - 1), behavior: 'smooth'});
+            return;
+        }
+
         if(card){
-            const cardWidth = card.offsetWidth;
+            const cardWidth = card.getBoundingClientRect().width;
             container.scrollTo({ left: startIndex.value * cardWidth, behavior: 'smooth' });
             isScrolling.value = true;
         }
@@ -231,7 +245,11 @@ export default function useCarouselEvents (originalData, updatedData, page, card
         }
 
         if(!isMiniView && initialData.value){
-            page.value = Math.ceil(startIndex.value / cardNum.value) + 1;
+            if(startIndex.value < cardNum.value){
+                page.value = Math.ceil(startIndex.value / cardNum.value) + 1;
+            } else {
+                page.value = Math.floor(startIndex.value / cardNum.value) + 1;
+            }
         }
 
         const container = document.getElementsByClassName(`${sectionTitle.value}-container`)[0];

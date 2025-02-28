@@ -7,6 +7,7 @@ use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentUserProgress;
+use App\Modules\Content\Models\UserPermission;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\MembershipLevel;
@@ -1004,6 +1005,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(UserAccessPermission::class, 'user_id');
     }
 
+    public function contentUserPermissions(): HasMany
+    {
+        return $this->hasMany(UserPermission::class, 'user_id');
+    }
+
     public function hasCompletedOnboarding(): bool
     {
         $hasExperience = $this->onboardingExperience->contains(
@@ -1054,13 +1060,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return 'password';
     }
 
-    public function getActivePermissionsIds()
-    {
-        $userAccessPermissions = $this->userAccessPermissions()->getResults();
-        $userAccessPermissionsCollection = new UserAccessPermissionsCollection($this, $userAccessPermissions);
-        return array_values($userAccessPermissionsCollection->getActivePermissionIds());
-    }
-
     public function isFirstAccess(): bool
     {
         if ($this->first_access_at) {
@@ -1079,5 +1078,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function scopeWithoutDeleted(Builder $query): void
     {
         $query->whereNot('email', 'like', 'musora+deleted_%@musora.com');
+    }
+
+    public function scopeWithoutPermissions(Builder $query): void
+    {
+        $query->whereDoesntHave('userAccessPermissions')
+            ->whereDoesntHave('contentUserPermissions');
     }
 }

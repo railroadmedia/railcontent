@@ -67,10 +67,6 @@ const props = defineProps({
       type: String,
       default: '-published_on'
     },
-    showUpgradeModal: {
-        type: Boolean,
-        default: false
-    }
 });
 
 const collectionStore = useCollectionStore();
@@ -126,7 +122,6 @@ onBeforeMount(async() => {
 
         // Set the continue section with started lessons
         continueSection.value = startedLessons;
-
     } catch (error) {
         console.error('Error in onBeforeMount:', error);
     } finally {

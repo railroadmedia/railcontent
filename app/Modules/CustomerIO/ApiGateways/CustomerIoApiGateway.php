@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Log;
 
 class CustomerIoApiGateway
 {
+    private const string TRACK_API_URL = 'https://track.customer.io/api/v1';
+    private const string APP_API_URL = 'https://beta-api.customer.io/v1/api';
+
     /**
      * If the email is passed, the customers with the given ID will have their email updated to the passed value.
      * Attributes are set and unset using a value or empty value. If you pass an empty array no attributes will be added
@@ -23,7 +26,7 @@ class CustomerIoApiGateway
         ?array $attributes = [],
         ?int $createdAtTimestamp = null
     ): void {
-        $url = 'https://track.customer.io/api/v1/customers/' . $email;
+        $url = self::TRACK_API_URL . '/customers/' . $email;
         $method = 'PUT';
 
         $dataArray = $attributes;
@@ -44,6 +47,29 @@ class CustomerIoApiGateway
         }
     }
 
+
+    /**
+     * @throws Exception
+     */
+    public function searchCustomers(
+        string $customerIoAppApiKey,
+        array $filterData
+    ): ?array {
+        $url = self::APP_API_URL . '/customers';
+        $method = 'POST';
+
+        try {
+            $result = $this->executeRequest($url, $method, $customerIoAppApiKey, 'Bearer', [], $filterData);
+            if (!empty($result['errors']) || !isset($result['identifiers'])) {
+                return null;
+            }
+            return $result['identifiers'];
+        } catch (Exception $e) {
+            Log::error('CustomerIoApiGateway::getCustomer() failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
     /**
      * @throws Exception
      */
@@ -51,7 +77,7 @@ class CustomerIoApiGateway
         string $customerIoAppApiKey,
         string $customerEmail
     ): array {
-        $url = 'https://beta-api.customer.io/v1/api/customers/' . $customerEmail . '/attributes?id_type=email';
+        $url = self::APP_API_URL . '/customers/' . $customerEmail . '/attributes?id_type=email';
         $method = 'GET';
 
         try {
@@ -78,7 +104,7 @@ class CustomerIoApiGateway
         ?string $eventType = null,
         ?int $createdAtTimestamp = null
     ): bool {
-        $url = 'https://track.customer.io/api/v1/customers/' . $customerEmail . '/events';
+        $url = self::TRACK_API_URL . '/customers/' . $customerEmail . '/events';
         $method = 'POST';
 
         $dataArray = [
@@ -128,7 +154,7 @@ class CustomerIoApiGateway
 
         $paramsString = http_build_query($params);
 
-        $url = 'https://beta-api.customer.io/v1/api/customers/' . $customerEmail . '/activities?' . $paramsString;
+        $url = self::APP_API_URL . '/customers/' . $customerEmail . '/activities?' . $paramsString;
         $method = 'GET';
 
         $result = $this->executeRequest($url, $method, $customerIoAppApiKey, 'Bearer', []);
@@ -189,7 +215,7 @@ class CustomerIoApiGateway
         array $deviceData,
         ?int $createdAtTimestamp = null
     ): void {
-        $url = 'https://track.customer.io/api/v1/customers/' . $customerEmail . '/devices';
+        $url = self::TRACK_API_URL . '/customers/' . $customerEmail . '/devices';
         $method = 'PUT';
 
         $dataArray['device'] = $deviceData;
@@ -222,7 +248,7 @@ class CustomerIoApiGateway
         string $primaryCustomerEmail,
         string $secondaryCustomerEmail
     ): bool {
-        $url = 'https://track.customer.io/api/v1/merge_customers';
+        $url = self::TRACK_API_URL . '/merge_customers';
         $method = 'POST';
 
         $dataArray = [
@@ -250,7 +276,7 @@ class CustomerIoApiGateway
         string $customerIoTrackApiKey,
         string $customerEmail
     ): void {
-        $url = 'https://track.customer.io/api/v1/customers/' . $customerEmail;
+        $url = self::TRACK_API_URL . '/customers/' . $customerEmail;
         $method = 'DELETE';
 
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
@@ -280,7 +306,7 @@ class CustomerIoApiGateway
 
         $paramsString = http_build_query($params);
 
-        $url = 'https://beta-api.customer.io/v1/api/activities?' . $paramsString;
+        $url = self::APP_API_URL . '/activities?' . $paramsString;
         $method = 'GET';
 
         $result = $this->executeRequest($url, $method, $customerIoAppApiKey, 'Bearer', []);
@@ -304,7 +330,7 @@ class CustomerIoApiGateway
         int $segmentId,
         array $customerEmails,
     ): void {
-        $url = 'https://track.customer.io/api/v1/segments/' . $segmentId . '/add_customers?id_type=email';
+        $url = self::APP_API_URL . '/segments/' . $segmentId . '/add_customers?id_type=email';
         $method = 'POST';
 
         $dataArray = [
@@ -332,7 +358,7 @@ class CustomerIoApiGateway
         ?array $attributes = [],
         ?int $createdAtTimestamp = null
     ): void {
-        $url = 'https://track.customer.io/api/v1/customers/cio_' . $cioId;
+        $url = self::TRACK_API_URL . '/customers/cio_' . $cioId;
         $method = 'PUT';
 
         $dataArray = $attributes;
@@ -359,7 +385,7 @@ class CustomerIoApiGateway
         string $customerIoTrackApiKey,
         string $email
     ): void {
-        $url = 'https://track.customer.io/api/v1/customers/' . $email . '/unsuppress';
+        $url = self::TRACK_API_URL . '/customers/' . $email . '/unsuppress';
         $method = 'POST';
 
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);

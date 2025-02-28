@@ -30,34 +30,21 @@ class BannerCard extends BaseSanityModel
     {
         $allowedTypes = ['course', 'challenge', 'workout', 'quick-tips', 'pack', 'song', 'learning-path-level'];
         $formattedAllowedTypes = [];
-        foreach($allowedTypes as $allowedType) {
+        foreach ($allowedTypes as $allowedType) {
             $formattedAllowedTypes[] = ['type' => $allowedType];
         }
-
+        $brandField = new BrandField();
+        $brandField->validation = null;
         $fields = [
             new Field(FieldType::Boolean, 'is_draft', 'Is Draft'),
-            new BrandField(),
-            new Field(FieldType::String, 'name', 'Name', validation: [new Required()]),
+            $brandField,
             new Field(FieldType::Datetime, 'start_time', 'Start Time'),
             new Field(FieldType::Datetime, 'end_time', 'End Time'),
-            new Field(
-                FieldType::Number,
-                'difficulty',
-                validation:     [new Min(0), new Max(10)],
-                inputComponent: 'DifficultyInput',
-            ),
-            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true"),
-            new Field(FieldType::Boolean, 'visible_on_desktop', 'Visible On Desktop'),
-            new Field(FieldType::Boolean, 'visible_on_mobile', 'Visible On Mobile'),
-            new Field(FieldType::Boolean, 'all_but_latest_version', 'All But Latest Version'),
 
-            new Field(FieldType::Number, 'display_order', 'Display Order', validation: [new Min(0), new Required()]),
-            new Field(FieldType::String, 'super_title', "Super Title"),
-            new Field(FieldType::String, 'super_title_colour', "Super title Colour"),
-            new Field(FieldType::String, 'title', "Title", validation:  [new Required()]),
-            new Field(FieldType::String, 'title_colour', "Title Colour"),
-            new Field(FieldType::String, 'description', "Description"),
-            new Field(FieldType::String, 'description_colour', "Description Colour"),
+
+            new Field(FieldType::Number, 'display_order', 'Display Order', validation: [new Min(0)]),
+            new Field(FieldType::String, 'header', "Header", validation:  [new Required()]),
+            new Field(FieldType::String, 'sub_header', "Sub Header"),
 
             new Field(FieldType::String, 'button_text', "Button Text"),
             new Field(FieldType::String, 'button_url', "Button URL"),
@@ -69,7 +56,7 @@ class BannerCard extends BaseSanityModel
             new Field(FieldType::Image, 'logo', 'Logo'),
             new Field(FieldType::Reference, 'content', 'Content', to: $formattedAllowedTypes),
         ];
-        $preview = new ListItemPreview('description');
+        $preview = new ListItemPreview('header');
         parent::__construct(self::getName(), 'Banner Card', $fields, preview: $preview);
     }
 

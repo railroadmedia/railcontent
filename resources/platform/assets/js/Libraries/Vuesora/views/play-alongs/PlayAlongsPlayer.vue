@@ -72,7 +72,7 @@
                     {{ $_title }}
                 </h4>
                 <h6 class="body text-center text-grey-4 mb-2">
-                    <span class="capitalize">{{ $_style }}</span> @ {{ $_bpm }} BPM {{ noSidebar }}
+                    <span class="capitalize">{{ $_style }}</span> @ {{ $_bpm }} BPM
                 </h6>
                 <h6 class="body dense text-grey-4 text-center">
                     {{ parseTime(currentTime) }} / {{ parseTime(totalDuration) }}

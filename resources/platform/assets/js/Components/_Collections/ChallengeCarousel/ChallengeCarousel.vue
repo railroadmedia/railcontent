@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-nowrap tw-overflow-x-scroll tw-no-scrollbar challengeCarousel-container -tw-mr-[6px] 2xl:-tw-mr-[10px]" :class="`${sectionTitle}`" @touchend="emit('handleScrollEnd')" @scroll="emit('stopAutoScroll')" @scrollend="emit('activateAutoScroll')">
+    <div class="tw-flex tw-flex-nowrap tw-overflow-x-scroll tw-no-scrollbar challengeCarousel-container -tw-mr-[6px] 2xl:-tw-mr-[10px]" :class="`${sectionTitle}`" @touchend="handleTouchEnd" @scroll="handleScroll" @scrollend="handleScrollEnd" @wheel="emit('handleScrollEnd')">
         <SkeletonChallengeCarousel v-if="isLoading" v-for="n in 2" :key="n" />
         <template v-else v-for="card in preLoadedContent">
             <div v-if="card.type === 'fill'" class="tw-w-[330px] lg:tw-w-1/2 tw-shrink-0"></div>
@@ -19,7 +19,7 @@
                 @activate-auto-scroll="emit('activateAutoScroll')"
                 @stop-auto-scroll="emit('stopAutoScroll')"
             />
-            <EnrollmentAward v-else-if="!card.is_user_enrolled" :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" @activate-auto-scroll="emit('activateAutoScroll')" @stop-auto-scroll="emit('stopAutoScroll')" />
+            <EnrollmentAward v-else-if="card.type === 'custom' || !card.is_user_enrolled" :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" @activate-auto-scroll="emit('activateAutoScroll')" @stop-auto-scroll="emit('stopAutoScroll')" />
             <InProgressCard v-else :challenge="card" :page-type="pageType" @on-remove-challenge="id => emit('removeChallenge', id)" @on-re-fetch-carousel="data => emit('reFetchCarousel', data)" @activate-auto-scroll="emit('activateAutoScroll')" @stop-auto-scroll="emit('stopAutoScroll')" />
         </template>
     </div>
@@ -58,4 +58,21 @@ const { isLoading } = storeToRefs(platformStore);
 const showEnrollmentAward = (card) => {
     return card.type === 'challenge-award' && !card.is_user_enrolled;
 }
+
+const isMobileScreen = () => {
+    return window.innerWidth < 1024;
+}
+
+const handleTouchEnd = () => {
+    if(isMobileScreen()) emit('handleScrollEnd');
+}
+
+const handleScroll = () => {
+    if(isMobileScreen()) emit('stopAutoScroll');
+}
+
+const handleScrollEnd = () => {
+    if(isMobileScreen()) emit('activateAutoScroll');
+}
+
 </script>

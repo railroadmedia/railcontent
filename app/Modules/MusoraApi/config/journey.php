@@ -40,7 +40,9 @@ return [
             'homepage-content-clicked' => [
                 'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
-                'contentId' => ['sometimes', 'nullable', 'int']
+                'contentId' => ['sometimes', 'nullable', 'int'],
+                'content_position' => ['nullable', 'int'],
+                'component_title' => ['nullable', 'string', "regex:/^[a-zA-Z0-9'-]+$/"],
             ],
             'homepage-section-see-all-clicked' => [
                 'brand' => ['required', 'string'],

@@ -153,7 +153,7 @@ class RevenueCatService
                 User::onWriteConnection()
                 ->where('email', $value)
                 ->first();
-            event(new UserCreated($user));
+            event(new UserCreated($user, originOfCreation: 'musora-app'));
         } elseif ($user) {
             $user->revenuecat_origin_app_user_id = $appUserId;
             $user->save();

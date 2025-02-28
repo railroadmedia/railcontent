@@ -103,7 +103,7 @@ const textSpanClass = computed(() => {
                 }
             }
         }
-        classes.push(iconPositionOverride.value === 'left' ? 'ml-1' : 'mr-1');
+        classes.push(iconPositionOverride.value === 'left' ? 'tw-ml-1' : 'tw-mr-1');
     }
     return classes
 });
@@ -124,8 +124,8 @@ const buttonConditionalClasses = computed(() => {
                 classes.push('tw-px-6 tw-py-1')
             }
             classes.push('tw-w-auto tw-h-[35px] md:tw-h-[40px]');
-
         }
+        classes.push('tw-inline-flex tw-items-center'); 
     }
     else if (hasIcon.value) {
         classes.push('tw-p-0 tw-w-[32px] tw-h-[32px] tw-w-[40px] md:tw-h-[40px]')

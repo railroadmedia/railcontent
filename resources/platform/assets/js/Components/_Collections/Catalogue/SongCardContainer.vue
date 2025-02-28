@@ -14,7 +14,7 @@
                 <!-- Catalogue Cards -->
                 <template v-else>
                     <template  v-for="item in data">
-                        <div v-if="item.type === 'fill'" class="tw-w-[145px] sm:tw-w-[170px] lg:tw-pr-3 lg:tw-w-1/5 2xl:tw-w-[calc(14.2857%)]"></div>
+                        <div v-if="item.type === 'fill'" class="tw-shrink-0 tw-w-[145px] sm:tw-w-[170px] lg:tw-pr-3 lg:tw-w-1/5 2xl:tw-w-[calc(14.2857%)]"></div>
                         <SongCard
                             v-else
                             :key="'grid' + item.id"

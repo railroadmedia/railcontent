@@ -7,6 +7,7 @@ use App\Modules\Content\Controllers\ContentProgressController;
 use App\Modules\Content\Controllers\ContentSearchController;
 use App\Modules\Content\Controllers\UserPermissionsController;
 use App\Modules\Content\Controllers\V1\CarouselControllerV1;
+use App\Modules\Content\Controllers\V2\CarouselControllerV2;
 use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
 use App\Modules\DataVersion\Middleware\DataVersionGetMiddleware;
 use App\Modules\DataVersion\Middleware\DataVersionUpdateMiddleware;
@@ -141,6 +142,11 @@ Route::prefix('challenges')
         )->name('challenges.user_progress');
 
         Route::get(
+            'all_user_progress_data/{id}',
+            [ChallengesMetaDataController::class, 'getAllProgressDataForUser']
+        )->name('challenges.all_user_progress_data');
+
+        Route::get(
             'download_award/{id}',
             [ChallengesMetaDataController::class, 'getUserAward']
         )->name('challenges.user_award');
@@ -165,10 +171,16 @@ Route::prefix('challenges')
             [ChallengesMetaDataController::class, 'getActiveChallengesForUser']
         )->name('challenges.user_active_challenges');
 
-        Route::match(['get', 'post'],
+        Route::match(
+            ['get', 'post'],
             'enroll/{id}',
             [ChallengesMetaDataController::class, 'enrollUser']
         )->name('challenges.enroll');
+
+        Route::post(
+            'enroll_user/{user_id}/{challenge_id}',
+            [ChallengesMetaDataController::class, 'enrollUserAdmin']
+        )->name('challenges.enroll_user');
 
         Route::post(
             'set_start_date/{id}',
@@ -220,6 +232,10 @@ Route::as('api.')
         Route::get('/v1/content/carousel', [CarouselControllerV1::class, 'getHomepageCarousel'])
             ->middleware('api_version:v1')
             ->name('v1.content.carousel');
+
+        Route::get('/v2/content/carousel', [CarouselControllerV2::class, 'getHomepageCarousel'])
+            ->middleware('api_version:v2')
+            ->name('v2.content.carousel');
     });
 
 Route::prefix('playlists')

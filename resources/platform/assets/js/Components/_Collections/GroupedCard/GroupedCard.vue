@@ -171,7 +171,6 @@ onUnmounted(() => {
 watch(
     () => props.item.lessons,
     (newData) => {
-        reset();
         setTimeout(() => {
             toStartIndex()
         }, 100)

@@ -114,8 +114,9 @@
                 <!-- Difficulty Label -->
                 <DifficultyLabel v-if="mappedData.difficulty" class="xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
             </p>
-            <div v-if="isBonus" class="tw-flex tw-justify-start tw-mt-1">
-                <div :class="`tw-bg-${brand} tw-text-[11px] tw-text-white tw-px-2 tw-py-0.5 tw-rounded-full`">Bonus</div>
+            <div v-if="isBonus || isMilestone" class="tw-flex tw-justify-start tw-mt-1">
+                <div v-if="isBonus" :class="`tw-bg-${brand} tw-text-[11px] tw-text-white tw-px-2 tw-py-0.5 tw-rounded-full`">Bonus</div>
+                <musora-icon v-else-if="isMilestone" class="tw-w-[16px] lg:tw-w-[18px] tw-h-[15px] lg:tw-h-[17px] tw-text-[#000C17] dark:tw-text-white" icon-name="challenge-milestone"></musora-icon>
             </div>
         </div>
 
@@ -260,6 +261,7 @@ import useThemeClasses from "@hooks/useThemeClasses";
 import useUserCatalogueEvents from "@hooks/useUserCatalogueEvents";
 import { useResetProgress } from "@hooks/useResetProgress";
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
+import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
 
 const props = defineProps({
     isCoach: {
@@ -455,6 +457,10 @@ const isChallenge = computed(() => {
 
 const isBonus = computed(() => {
     return props.item?.is_bonus_content_for_challenge;
+})
+
+const isMilestone = computed(() => {
+    return props.item?.is_milestone;
 })
 
 const handleReset = () => {

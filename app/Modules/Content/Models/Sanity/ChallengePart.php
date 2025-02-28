@@ -18,7 +18,8 @@ class ChallengePart extends LessonTemplate
         // Add the reference to the parent course
         $detailsGroup = new Group('editorFields', 'Details', true);
         $this->addFields([
-                             new Field(FieldType::String, 'soundslice_slug', group: $detailsGroup),
+                        new Field(FieldType::String, 'soundslice_slug', group: $detailsGroup),
+                        new Field(FieldType::Boolean, 'is_milestone', group: $detailsGroup),
                          ]);
     }
 

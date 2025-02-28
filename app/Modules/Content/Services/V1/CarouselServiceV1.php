@@ -13,6 +13,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Carbon;
 use App\Modules\Content\Services\ChallengesAwardService;
 use App\Modules\Content\Services\ChallengesService;
+use Modules\UserManagementSystem\Models\User;
 
 class CarouselServiceV1
 {
@@ -24,23 +25,21 @@ class CarouselServiceV1
     ) {
     }
 
-    public function getCarouselCards(string $brand): array
+    public function getCarouselCards(string $brand, bool $includeCustom = false): array
     {
         $user = user();
         $isAdmin = $user->isAdmin();
 
         $unfinishedOnboardingCards = [];
         // NOTE: Pack-only users doesn´t have membership level, and shouldn't have access to onboarding cards
-        if ($user->membership_level) {
-            $onboardingCardData = $this->learningPathsService->getNewLearningPaths();
+        $onboardingCardData = $this->learningPathsService->getNewLearningPaths($user, $brand);
 
-            foreach ($onboardingCardData as $index => $onboardingCardDatum) {
-                $onboardingCardData[$index]['show_everywhere'] = false;
-                $onboardingCardData[$index]['type'] = 'onboarding';
-                $progress = ContentUserProgress::getState($onboardingCardDatum['id'], $user->id);
-                if ($progress->state == ProgressState::NotStarted) {
-                    $unfinishedOnboardingCards[] = $onboardingCardData[$index];
-                }
+        foreach ($onboardingCardData as $index => $onboardingCardDatum) {
+            $onboardingCardData[$index]['show_everywhere'] = false;
+            $onboardingCardData[$index]['type'] = 'onboarding';
+            $progress = ContentUserProgress::getState($onboardingCardDatum['id'], $user->id);
+            if ($progress->state == ProgressState::NotStarted) {
+                $unfinishedOnboardingCards[] = $onboardingCardData[$index];
             }
         }
 
@@ -103,16 +102,44 @@ class CarouselServiceV1
         $allChallengeMetaData = collect($allChallengeMetaData)->keyby('content_id');
 
         $challengeRecommendationCards = $this->formatBannerCardFromChallenge($challengeRecommendations, $user, $allChallengeMetaData);
-
+        $bannerCards = $includeCustom ? $this->getBannerCards($brand, $user, $isAdmin) : [];
         $compiledCardData = [
             ... $this->formatChallengeAwardData($badges, $allChallengeMetaData),
             ... $this->formatChallengeData($communityProgresses, $allChallengeMetaData, 'active-community-challenge'),
             ... $this->formatChallengeData($soloProgresses, $allChallengeMetaData, 'active-solo-challenge'),
             ... $unfinishedOnboardingCards,
         ];
-        // When custom cards are enabled, they should be added to the $challengeRecommendationCards for sorting.
-        $compiledCardData = $this->sortBannerCards($compiledCardData, $challengeRecommendationCards); //2024-12-13T22:40:44.507073Z
-        return $compiledCardData;
+        $sortableCards = [
+            ...$challengeRecommendationCards,
+            ...$bannerCards,
+        ];
+
+        return $this->sortBannerCards($compiledCardData, $sortableCards);
+    }
+
+    private function getBannerCards(string $brand, User $user, bool $isAdmin): array
+    {
+        $cards = $this->sanity->getCustomBannerCards($brand, $isAdmin);
+        $enrolledChallengeIds = $user->challengeProgress()
+            ->active()
+            ->get()
+            ->pluck('content_id')
+            ->toArray();
+        $cardsToDisplay = [];
+        foreach ($cards as $card) {
+            $card['show_everywhere'] = false;
+            $card['type'] = 'custom';
+            // filter out any custom challenge cards that the user is not enrolled in
+            if (!$isAdmin && $card['content_type'] == 'challenge' && $card['content_id']) {
+                if (in_array($card['content_id'], $enrolledChallengeIds)) {
+                    $cardsToDisplay[] = $card;
+                }
+            } else {
+                $cardsToDisplay[] = $card;
+            }
+        }
+
+        return $cardsToDisplay;
     }
 
     private function formatBannerCardFromChallenge($recommendations, $user, $allChallengeMetaData)
@@ -134,7 +161,7 @@ class CarouselServiceV1
         return $enrollmentCards;
     }
 
-    private function sortBannerCards($immutableCards, $mutableCards)
+    private function sortBannerCards($immutableCards, $mutableCards): array
     {
         $cardsWithDisplayOrder = [];
         $cardsWithoutDisplayOrder = [];
@@ -146,23 +173,13 @@ class CarouselServiceV1
             }
         }
         usort($cardsWithDisplayOrder, function ($a, $b) {
-            return $a['display_order'] <=> $b['display_order'];
+            return $b['display_order'] <=> $a['display_order'];
         });
         return [
             ... $cardsWithDisplayOrder,
             ... $immutableCards,
             ... $cardsWithoutDisplayOrder,
         ];
-    }
-
-    private function getCustomCards(string $brand, bool $isAdmin)
-    {
-        // Custom Cards
-        //$promotionalCards = $this->sanity->getActiveBannerCards($brand, $showDrafts);
-        // challenge banner cards
-
-        // sort based on type, then display order
-        // format for presentation
     }
 
     private function formatChallengeData(mixed $userProgresses, Collection $challengeMetaData, string $type): array
@@ -175,6 +192,7 @@ class CarouselServiceV1
                     ...$challengeMetaDatum,
                     'type' => $type, // this is set after metadatum to override the existing type field
                     'show_everywhere' => true,
+                    'is_milestone' => $challengeMetaDatum['next_lesson']['is_milestone'] ?? false,
                 ];
             }
         }

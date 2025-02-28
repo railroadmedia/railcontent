@@ -528,6 +528,10 @@ const fetchLessonData = async () => {
         });
     }
 
+    if(relatedLessons.value.length === 0){
+        isRelatedSectionOpen.value = false;
+    }
+
     platformStore.setLoadingState(false);
 }
 

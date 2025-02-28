@@ -12,7 +12,7 @@ export const getCardNum = (props, cardNum, toggleSeeAllCard) => {
 
     //Challenge Carousel
     if(props.catalogueType === 'challenge-carousel'){
-         if(window.innerWidth >= 692) {
+         if(window.innerWidth >= 692){
              cardNum.value = 2;
         } else{
              cardNum.value = 1;

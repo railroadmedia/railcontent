@@ -52,7 +52,7 @@ class VimeoTrailerDecorator extends ModeDecoratorBase
                 'GET'
             );
             $response['body']['text-tracks'] = [];
-            if($response['body']['metadata']['connections']['texttracks']['total'] > 0) {
+            if ($response['body']['metadata']['connections']['texttracks']['total'] > 0) {
                 $textTractResponse = $this->vimeo->request($response['body']['metadata']['connections']['texttracks']['uri'], [], 'GET');
                 $response['body']['text-tracks'] = $textTractResponse['body']['data'] ?? [];
             }
@@ -113,7 +113,7 @@ class VimeoTrailerDecorator extends ModeDecoratorBase
 
             if (!empty($response['body']['text-tracks'])) {
                 foreach ($response['body']['text-tracks'] as $textTrackData) {
-                    if($textTrackData['active']) {
+                    if ($textTrackData['active']) {
                         $captions[] = [
                             'uri' => $textTrackData['uri'],
                             'link' => $textTrackData['link'],

@@ -14,12 +14,14 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Content\Services\PlaylistsService;
 use Railroad\Railcontent\Events\PlaylistItemLoaded;
+use Railroad\Railcontent\Services\UserPermissionsService;
 
 class PlaylistsMetadataController extends Controller
 {
     public function __construct(
         private PlaylistsService $playlistsService,
-        private SanityGateway $sanityGateway
+        private SanityGateway $sanityGateway,
+        private UserPermissionsService $userPermissionsService,
     ) {
     }
 
@@ -572,7 +574,7 @@ class PlaylistsMetadataController extends Controller
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
         $assignmentDataAssoc = collect($assignmentsData)->keyBy('railcontent_id');
 
-        $userPermissions = user()->getActivePermissionsIds();
+        $userPermissions = $this->userPermissionsService->getUserPermissions(user()->id());
 
         $item = $this->playlistsService->formatPlaylistItemData($playlistItem, $sanityDataAssoc, $assignmentDataAssoc, $playlistItem->user_playlist_id, $userPermissions);
         event(new PlaylistItemLoaded($playlistItem->playlist->id, $playlistItemId, $playlistItem->position));

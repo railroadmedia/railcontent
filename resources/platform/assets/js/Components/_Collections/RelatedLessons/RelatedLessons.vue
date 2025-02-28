@@ -1,5 +1,6 @@
 <template>
     <aside
+      v-if="isLoading || relatedLessons.length"
       class="tw-w-full tw-col-span-3 xl:tw-row-span-4 tw-flex tw-flex-col xl:tw-mb-4 xl:tw-mt-0 xl:tw-col-span-1"
       :class="{ 'xl:tw-hidden': !isRelatedSectionOpen }">
 

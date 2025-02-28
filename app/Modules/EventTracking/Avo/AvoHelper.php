@@ -44,7 +44,7 @@ class AvoHelper
         $userAgent = request()?->userAgent();
         $defaultProperties = [
             'user_id_' => $user ? strval($user->id) : userIdString(),
-            'platform' => self::getRequestPlatform($userAgent),
+            'platform' => isset($properties['platform']) ? $properties['platform'] : self::getRequestPlatform($userAgent),
             'os' => self::getRequestOS($userAgent)
         ];
 

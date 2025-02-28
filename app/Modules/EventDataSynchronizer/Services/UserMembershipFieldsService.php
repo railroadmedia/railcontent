@@ -61,7 +61,7 @@ class UserMembershipFieldsService
         $isAMember = $membershipExpirationDate > Carbon::now();
 
         $accessLevel = $this->getAccessLevelName(
-            $userId,
+            $user,
             $isLifetimeMember,
             $isAMember,
             $membershipExpirationDate,
@@ -143,7 +143,7 @@ class UserMembershipFieldsService
      * @param $userId
      */
     public function getAccessLevelName(
-        $userId,
+        $user,
         bool $isLifetime,
         bool $isAMember,
         ?Carbon $membershipExpirationDate,
@@ -151,6 +151,7 @@ class UserMembershipFieldsService
         bool $ownsChallenges,
         array $associatedCoaches = null
     ): string {
+        $userId = $user?->id ?? '';
         if (empty($userId)) {
             return '';
         }
@@ -163,7 +164,7 @@ class UserMembershipFieldsService
             return 'coach';
         }
 
-        if ($this->userProvider->isAdministrator($userId)) {
+        if ($this->isTeamMember($user)) {
             return 'team';
         }
 
@@ -215,6 +216,14 @@ class UserMembershipFieldsService
         }
 
         return !empty($associatedCoaches) && array_key_exists($userId, $associatedCoaches);
+    }
+
+    /**
+     * @param User $user
+     */
+    public function isTeamMember(User $user): bool
+    {
+        return $user->showAdminToggle();
     }
 
     public function getCoaches(): array

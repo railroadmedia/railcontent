@@ -46,6 +46,7 @@ if (!empty($user)) {
                     content-endpoint="/railcontent/content"
                     theme-color="drumeo"
                     brand="drumeo"
+                    :no-sidebar="{{ json_encode(empty($user)) }}"
                     :ids-to-pull="{{ json_encode($idsToPull) }}"
                     :show-filters="{{ json_encode(false) }}"
                     :show-pagination="{{ json_encode(false) }}"

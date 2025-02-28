@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     private const INDEX_NAME = 'challenges_user_progress_user_id_content_id_index';
     /**
      * Run the migrations.

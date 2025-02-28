@@ -24,7 +24,9 @@
                         <div class="md:tw-flex sm:tw-mr-4 md:tw-mr-2 tw-px-2 sm:tw-px-0">
                             <i :class="`fas fa-check tw-text-${brand} tw-mt-1 tw-mr-1`" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm">{{ cohort['benefit_2'] }}</span>
                         </div>
-                        <div class="md:tw-flex"><i :class="`fas fa-check tw-text-${brand} tw-mt-1 tw-mr-1`" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm">{{ cohort['benefit_3'] }}</span></div>
+                        <div class="md:tw-flex">
+                            <i :class="`fas fa-check tw-text-${brand} tw-mt-1 tw-mr-1`" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm">{{ cohort['benefit_3'] }}</span>
+                        </div>
                     </div>
                     <!--  Mobile Header Image -->
                     <div class="tw-relative md:tw-hidden">
@@ -37,25 +39,46 @@
                             <i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div>
                         </div>
                     </div>
-                    <div :class="`md:tw-flex ${isEnrolled ? 'md:tw-items-start' : 'md:tw-items-center'}`">
-                        <!-- Get Notified Button -->
-                        <button v-if="showGetNotified && !isNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">
-                            <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
-                            Get Notified
-                        </button>
-                        <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Notification requested!</span>
-                        <!--  Enrolled Buttons  -->
-                        <div v-else-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
-                            <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
-                            <a :href="cohort['course_url']" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
-                        </div>
-                        <template v-else>
-                            <!-- Enroll now Button-->
-                            <button v-if="showEnrollNow" id="topEnrollNow" @click="cohort['is_product'] ? scrollToBottom() : enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
-                            <!--  Closed Button  -->
-                            <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Enrollment Closed</span>
-                        </template>
+                    <div class="tw-flex tw-flex-col md:tw-flex-row" :class="isEnrolled ? 'md:tw-items-start' : 'md:tw-items-center'">
+                        <!-- Button Section -->
+                        <div class="tw-w-full md:tw-w-1/2 tw-mb-5 md:tw-mb-0">
+                            <button v-if="showGetNotified && !isNotified"
+                                    :class="`tw-btn-primary tw-bg-${brand} tw-w-full hover:tw-bg-${brand}-600 sm:tw-max-w-[350px] tw-text-center`" @click="handleGetNotified">
+                                <i class="fa-solid fa-calendar tw-mr-2"></i>
+                                Get Notified
+                            </button>
+                            <span v-else-if="showGetNotified && isNotified"
+                                  class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-block tw-text-center">
+                                Notification requested!
+                            </span>
 
+                            <div v-else-if="isEnrolled" class="tw-text-center">
+                                <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-block tw-mb-2 tw-text-white tw-cursor-default sm:tw-max-w-[350px]">
+                                    YOU'RE ENROLLED!
+                                </span>
+                                <a :href="cohort['course_url']"
+                                   class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">
+                                    View the course now!
+                                </a>
+                            </div>
+
+                            <div v-else class="tw-flex tw-flex-col tw-w-full tw-items-center">
+                                <button v-if="showEnrollNow"
+                                        :class="`tw-btn-primary tw-bg-${brand} tw-text-center tw-w-full sm:tw-max-w-[350px] tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`"
+                                        @click="cohort['is_product'] ? scrollToBottom() : enroll()">
+                                    Enroll Now
+                                </button>
+                                <p v-if="isSolo && !isEnrolled && !cohort['is_product'] && showEnrollNow"
+                                   @click="handleNoGuide"
+                                   class="tw-text-black tw-italic tw-uppercase tw-font-black tw-text-[14px] tw-underline tw-pt-2 tw-cursor-pointer">
+                                    UNLOCK ALL LESSONS
+                                </p>
+                                <span v-else-if="showClosed"
+                                      class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-block sm:tw-max-w-[350px] tw-text-center">
+                                    Enrollment Closed
+                                </span>
+                            </div>
+                        </div>
                         <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start" :class="{ 'md:tw-mt-2': isEnrolled}">
                             <img
                                 class="tw-h-8 md:tw-h-6 tw-mr-1"
@@ -76,7 +99,9 @@
                         :src="`https://www.musora.com/cdn-cgi/image/width=850,quality=95/${cohort['header_image_url']}`"
                         alt="header thumb"
                     />
-                    <div v-if="cohort['cohort_trailer']" class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" @click="openTrailer = true"><i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div></div>
+                    <div v-if="cohort['cohort_trailer']" class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" @click="openTrailer = true">
+                        <i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div>
+                    </div>
                 </div>
             </div>
             <div v-if="!isSolo" class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-text-center tw-border tw-rounded-lg tw-border-gray-300 tw-mb-2 lg:tw-mb-4">
@@ -108,8 +133,10 @@
                             <!--                                loading="lazy"-->
                             <!--                                onload="this.classList.remove('tw-opacity-0')"-->
                             <!--                            />-->
-                            <p class="tw-leading-tight tw-mx-0"><strong class="tw-font-black">{{ cohort['icon1_title'] }}</strong><br>
-                                <span class="tw-text-sm">{{ cohort['icon1_copy'] }}</span></p>
+                            <p class="tw-leading-tight tw-mx-0">
+                                <strong class="tw-font-black">{{ cohort['icon1_title'] }}</strong><br>
+                                <span class="tw-text-sm">{{ cohort['icon1_copy'] }}</span>
+                            </p>
                         </div>
                         <div class="tw-flex sm:tw-flex-col sm:tw-flex-1 tw-w-full sm:tw-w-1/3 tw-px-4 sm:tw-px-3 tw-mb-4 sm:tw-mb-0">
                             <div class="tw-text-center">
@@ -122,8 +149,10 @@
                             <!--                                loading="lazy"-->
                             <!--                                onload="this.classList.remove('tw-opacity-0')"-->
                             <!--                            />-->
-                            <p class="tw-leading-tight tw-mx-0"><strong class="tw-font-black">{{ cohort['icon2_title'] }}</strong><br>
-                                <span class="tw-text-sm">{{ cohort['icon2_copy'] }}</span></p>
+                            <p class="tw-leading-tight tw-mx-0"><strong class="tw-font-black">
+                                {{ cohort['icon2_title'] }}</strong><br>
+                                <span class="tw-text-sm">{{ cohort['icon2_copy'] }}</span>
+                            </p>
                         </div>
                         <div class="tw-flex sm:tw-flex-col sm:tw-flex-1 tw-w-full sm:tw-w-1/3 tw-px-4 sm:tw-px-3">
                             <div class="tw-text-center">
@@ -136,8 +165,10 @@
                             <!--                                loading="lazy"-->
                             <!--                                onload="this.classList.remove('tw-opacity-0')"-->
                             <!--                            />-->
-                            <p class="tw-leading-tight tw-mx-0"><strong class="tw-font-black">{{ cohort['icon3_title'] }}</strong><br>
-                                <span class="tw-text-sm">{{ cohort['icon3_copy'] }}</span></p>
+                            <p class="tw-leading-tight tw-mx-0">
+                                <strong class="tw-font-black">{{ cohort['icon3_title'] }}</strong><br>
+                                <span class="tw-text-sm">{{ cohort['icon3_copy'] }}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -272,11 +303,11 @@
                                             <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
                                             Get Notified
                                         </button>
-                                        <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0">Notification requested!</span>
+                                        <span v-else-if="showGetNotified && isNotified" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-max-w-[230px] tw-mb-2 md:tw-mb-0">Notification requested!</span>
                                         <button v-else-if="showEnrollNow" id="cardEnrollNow" @click="enroll()"
                                             class="tw-btn-primary tw-bg-[#2A2F34] tw-w-full tw-max-w-[230px] hover:tw-bg-[#2A2F34]/60 tw-transition-opacity tw-duration-300">
                                             Enroll Now
-                                        </button>                                            
+                                        </button>
                                         <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white">Enrollment Closed</span>
                                     </div>
                                     <p class="tw-text-center tw-text-xs">{{ cohort['course_description'] }}</p>
@@ -343,17 +374,17 @@
                 </template>
                 <a v-if="cohort['conversation_url'] && isEnrolled" x-cloak x-show="isEnrolled" :href="cohort['conversation_url']" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
             </div>
-            
+
             <!-- Cart link -->
             <div v-if="cohort['is_product'] && isEnrolled && !hasEnded" class="tw-text-center tw-mb-3">
                 <img class="tw-h-28 lg:tw-h-36 tw-mx-auto tw-mb-6" alt="course thumbnail" :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" />
                 <a :href="cohort['product_cart_link']" target="_blank" class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a>
             </div>
-            
+
             <div v-if="isSolo && !isEnrolled.value" class="tw-text-center tw-mb-2">
-                <button id="noGuideText" @click="handleNoGuide" class="tw-text-black tw-italic tw-underline tw-font-bold tw-text-sm">I don’t want the guided experience.</button>
+                <button id="noGuideText" @click="handleNoGuide" class="tw-text-black tw-italic tw-underline tw-font-bold tw-text-sm">UNLOCK ALL LESSONS</button>
             </div>
-            
+
             <div v-if="!cohort['is_product']" class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                 <img class="tw-h-7 sm:tw-mb-1 lg:tw-mb-0 tw-mr-1 tw-transition-opacity tw-opacity-0" src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('tw-opacity-0')" />
                 <p class="tw-text-xs tw-align-middle">
@@ -361,7 +392,7 @@
                     who have already registered.
                 </p>
             </div>
-    
+
             <!--  Dropdown  -->
             <h3 class="tw-font-extrabold tw-text-center tw-mb-7 tw-mt-10">{{ cohort['dropdown_title'] }}</h3>
             <CohortDropdown
@@ -387,7 +418,6 @@
         }"
         :challenge-type="challengeType"
         @modal-close="closeNotificationModal"
-        :hide-x-icon="true"
         :is-from-get-deal="isFromGetDeal"
     />
     <ChallengeActionModal v-if="challengeActionModalType && !isFromApp" :modal-type="challengeActionModalType"  @close-modal="closeActionModal"
@@ -521,7 +551,7 @@ const scrollToBottom = () => {
 
 const handleGetDeal = () => {
   isFromGetDeal.value = true;
-  enroll("purchase"); 
+  enroll("purchase");
 };
 
 const enroll = async(message = "enroll") => {
@@ -531,9 +561,16 @@ const enroll = async(message = "enroll") => {
             sendPostMessage('retake');
         } else {
             const enrollUser = await postChallengesEnroll(props.cohort.id);
-            openChallengeNotificationModal.value = true;
-            isEnrolled.value = true;
-            sendPostMessage(message);
+            if(enrollUser){
+                openChallengeNotificationModal.value = true;
+                isEnrolled.value = true;
+                sendPostMessage(message);
+            } else {
+                window.shownotification({
+                    icon: 'error',
+                    text: 'Woops! Something wrong happened, please try again later.'
+                })
+            }
         }
     } catch (e){
         window.shownotification({

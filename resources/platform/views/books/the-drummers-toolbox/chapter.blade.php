@@ -110,7 +110,7 @@ if (!empty($user)) {
             <div class="tw-w-full flex flex-row">
                 <play-alongs content-endpoint="/railcontent/content" theme-color="drumeo" brand="drumeo"
                     :ids-to-pull="{{ json_encode($playAlongsToPull) }}" user-id="{{ auth()->id() }}"
-                    :no-sidebar="true" :show-filters="false" :use-url-params="false" :show-user-actions="false"
+                    :no-sidebar="{{ json_encode(empty($user)) }}" :show-filters="false" :use-url-params="false" :show-user-actions="false"
                     :track-progress="false" :show-pagination="false"></play-alongs>
             </div>
         </div>

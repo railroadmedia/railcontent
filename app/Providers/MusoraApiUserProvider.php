@@ -20,6 +20,7 @@ use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserPermissionsService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -34,7 +35,8 @@ class MusoraApiUserProvider implements UserProviderInterface
         private CommentService $commentService,
         private PostRepository $postRepository,
         private LearningPathsService $learningPathsService,
-        private ExploreTasksService $exploreTasksService
+        private ExploreTasksService $exploreTasksService,
+        private UserPermissionsService $userPermissionsService,
     ) {
     }
 
@@ -92,7 +94,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'is_enrolled_into_cohort' => $user->isEnrolledIntoCohort(),
             'subcription_date' => Carbon::parse($user->created_at)->format('Y/m/d H:i:s'),
             'last_used_brand' => $user->last_used_brand,
-            'active_permissions_ids' => $user->getActivePermissionsIds(),
+            'active_permissions_ids' => $this->userPermissionsService->getUserPermissionsIds($user->id),
             'show_learning_paths_on_homepage' => $this->learningPathsService->showLearningPaths(brand()),
             'show_new_learning_paths' => $this->learningPathsService->showNewLearningPaths(),
             'homepage_v2' => $homepageV2,
@@ -172,7 +174,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'completed_workouts' => $completedWorkouts,
             'branches' => $this->getAllBranchInformation(),
             'features' => $this->getAccessibleFeatures(),
-            'active_permissions_ids' => $user->getActivePermissionsIds(),
+            'active_permissions_ids' => $this->userPermissionsService->getUserPermissionsIds($user->id),
             'primary_brand' => $user->primary_brand,
             'show_admin_toggle' => $user->showAdminToggle(),
             'use_student_view' => $user->use_student_view,

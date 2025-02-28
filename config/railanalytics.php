@@ -60,10 +60,10 @@ return [
                         'base_link' => '',
                         'nid' => '',
                         'verification_token' => '',
-                        'conversion_event_id' => '', // This comes from Brands/X/Events
+                        'conversion_event_id' => '', // This comes from advertisers/X?tab=events
                         'brand_id' => '',
                         'sign-up-action-tracker-id' => ''
-                    ]
+                    ],
             ]
         ],
         'beta-testing' => [
@@ -147,12 +147,13 @@ return [
                     ],
                 'everflow' =>
                     [
-                        'base_link' => '',
-                        'nid' => '',
-                        'verification_token' => '',
-                        'conversion_event_id' => '',
-                        'brand_id' => '',
-                        'sign-up-action-tracker-id' => ''
+                        'base_link' => 'https://www.mcqn3fgtrk.com',
+                        'nid' => '2809',
+                        'verification_token' => 'gxIRmdks0iuh17iD8BygRdqVq58lsW',
+                        'conversion_event_id' => 15, // This comes from advertisers/X?tab=events
+                        'brand_id' => 5,
+                        'sign-up-action-tracker-id' => 14,
+                        'purchase_event_id' => 13,
                     ]
             ],
         ],
@@ -203,7 +204,7 @@ return [
                         'base_link' => '',
                         'nid' => '',
                         'verification_token' => '',
-                        'conversion_event_id' => '', // This comes from Brands/X/Events
+                        'conversion_event_id' => '', // This comes from advertisers/X?tab=events
                         'brand_id' => '',
                         'sign-up-action-tracker-id' => ''
                     ],
@@ -335,7 +336,7 @@ return [
                         'base_link' => 'https://www.mcqn3fgtrk.com',
                         'nid' => '2809',
                         'verification_token' => 'Wd6qt9rAYSpV9Fm3QYUtBdnra9p4D0',
-                        'conversion_event_id' => 1, // This comes from Brands/X/Events
+                        'conversion_event_id' => 1, // This comes from advertisers/X?tab=events
                         'brand_id' => 1,
                         'sign-up-action-tracker-id' => 2,
                         'purchase_event_id' => 9
@@ -469,7 +470,7 @@ return [
                         'base_link' => 'https://www.mcqn3fgtrk.com',
                         'nid' => '2809',
                         'verification_token' => 'ESebdMzhYRuj9e81RThwqbp6SQ8s1W',
-                        'conversion_event_id' => 4, // This comes from Brands/X/Events
+                        'conversion_event_id' => 4, // This comes from advertisers/X?tab=events
                         'brand_id' => 2,
                         'sign-up-action-tracker-id' => 3,
                         'purchase_event_id' => 10
@@ -594,7 +595,7 @@ return [
                         'base_link' => 'https://www.mcqn3fgtrk.com',
                         'nid' => '2809',
                         'verification_token' => 'teNV6vx5a0OfPlf9MuXheR5PJMNURf',
-                        'conversion_event_id' => 6, // This comes from Brands/X/Events
+                        'conversion_event_id' => 6, // This comes from advertisers/X?tab=events
                         'brand_id' => 3,
                         'sign-up-action-tracker-id' => 5,
                         'purchase_event_id' => 11
@@ -671,7 +672,7 @@ return [
                         'base_link' => 'https://www.mcqn3fgtrk.com',
                         'nid' => '2809',
                         'verification_token' => 'LvxhwYIlQ32s7j1r2vMZTtJ0afohJz',
-                        'conversion_event_id' => 8, // This comes from Brands/X/Events
+                        'conversion_event_id' => 8, // This comes from advertisers/X?tab=events
                         'brand_id' => 4,
                         'sign-up-action-tracker-id' => 7,
                         'purchase_event_id' => 12

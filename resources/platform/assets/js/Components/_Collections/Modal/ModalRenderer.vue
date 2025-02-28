@@ -61,7 +61,7 @@ export default {
         <div id="slot-wrapper" @click="onWrapperClick"
             class="tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center"
         >
-            <button v-if="showXIcon" class="tw-absolute tw-top-4 tw-right-4 tw-text-white tw-z-10" @click="onClose">
+            <button v-if="showXIcon" class="tw-absolute tw-top-4 tw-right-4 tw-text-white tw-z-20" @click="onClose">
                 <XIcon class="tw-h-[28px] md:tw-h-[36px] tw-w-[28px] md:tw-w-[36px]" />
             </button>
             <slot></slot>

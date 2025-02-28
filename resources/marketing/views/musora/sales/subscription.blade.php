@@ -654,7 +654,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
-
+    @include("_partials.layout.everflow-product-tracker", ['advertiserId' => config('railanalytics.musora.production.providers.everflow.brand_id')])
     @if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
     {{--    end of BF weekend--}}
     @include('_partials.components.countdown',[

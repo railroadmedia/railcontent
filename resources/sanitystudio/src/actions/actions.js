@@ -70,6 +70,11 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
             onHandle: async () => {
                 let draftCopy = { ...props.draft };
                 let childrenArray = [];
+                let nonSyncedTypes = ['banner-card', 'onboarding-card', 'license', 'publisher', 's3-files.storedFile'];
+                if (nonSyncedTypes.includes(draftCopy._type)) {
+                    originalResult.onHandle();
+                    return;
+                }
 
                 if (draftCopy.child) {
                     draftCopy.child_count = draftCopy.child.length;

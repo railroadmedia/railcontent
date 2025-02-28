@@ -85,7 +85,7 @@ const lastCompletionDate = computed(() => {
 
 const descriptionText = computed(() => {
     if(isUnlockModal.value){
-        return `Unlocking the ${props.challenge?.title} will reset your current streak and streak saver information. This action is irreversible.`;
+        return `Unlocking ${props.challenge?.title} will reset your current streak and streak saver information. You will not receive streaks or awards. This action is irreversible.`;
     } else if(isRetakeModal.value){
         return `You completed ${props.challenge?.title} on ${lastCompletionDate.value}. You can retake the challenge to improve your streak and earn a new certificate. Your previously earned badges will remain unaffected.`;
     } else if(isLeaveModal.value){

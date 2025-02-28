@@ -10625,16 +10625,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v3.0.21",
+            "version": "v3.0.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "8a736bd00826b1cdcb24942a583e76a066a1b4a8"
+                "reference": "dbf5e36315c8b77d6374ee36329f43012c2e0c4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/8a736bd00826b1cdcb24942a583e76a066a1b4a8",
-                "reference": "8a736bd00826b1cdcb24942a583e76a066a1b4a8",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/dbf5e36315c8b77d6374ee36329f43012c2e0c4c",
+                "reference": "dbf5e36315c8b77d6374ee36329f43012c2e0c4c",
                 "shasum": ""
             },
             "require": {
@@ -10685,9 +10685,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v3.0.21"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v3.0.23"
             },
-            "time": "2025-01-27T16:28:27+00:00"
+            "time": "2025-02-28T19:49:49+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -10738,16 +10738,16 @@
         },
         {
             "name": "railroad/railnotifications",
-            "version": "v4.0.2",
+            "version": "v4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "5de73708c516387bf537a1380fb47853a6805a07"
+                "reference": "de753910e91af7bb112ea9bae506b26eb76ba74d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/5de73708c516387bf537a1380fb47853a6805a07",
-                "reference": "5de73708c516387bf537a1380fb47853a6805a07",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/de753910e91af7bb112ea9bae506b26eb76ba74d",
+                "reference": "de753910e91af7bb112ea9bae506b26eb76ba74d",
                 "shasum": ""
             },
             "require": {
@@ -10782,9 +10782,9 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/v4.0.2"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/v4.0.3"
             },
-            "time": "2024-09-05T19:35:39+00:00"
+            "time": "2025-02-27T13:18:51+00:00"
         },
         {
             "name": "railroad/referral",

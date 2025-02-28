@@ -2,21 +2,16 @@
 
 namespace Modules\UserManagementSystem\Events\User;
 
+use InvalidArgumentException;
 use Modules\UserManagementSystem\Models\User;
 
 class UserCreated
 {
-    /**
-     * @var User
-     */
-    private $user;
-
-    /**
-     * Create a new event instance.
-     */
-    public function __construct(User $user)
+    public function __construct(public User $user, public ?string $originOfCreation = null)
     {
-        $this->user = $user;
+        if ($originOfCreation !== null && !in_array($originOfCreation, ['web', 'musora-app'])) {
+            throw new InvalidArgumentException('Invalid origin of creation');
+        }
     }
 
     public function getUser(): User

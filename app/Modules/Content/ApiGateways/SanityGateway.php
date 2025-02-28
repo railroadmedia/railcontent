@@ -3,8 +3,8 @@
 namespace App\Modules\Content\ApiGateways;
 
 use Illuminate\Support\Carbon;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserPermissionsService;
 use Sanity\Client as SanityClient;
 
 class SanityGateway
@@ -23,7 +23,7 @@ class SanityGateway
 
     private const AWS_URL = 'https://s3.us-east-1.amazonaws.com/musora-web-platform';
     private const CLOUDFRONT_URL = 'https://d3fzm1tzeyr5n3.cloudfront.net';
-    private const RESOURCES_FIELD = 'resource[]{resource_name, _key, "resource_url": coalesce("'.self::CLOUDFRONT_URL.'"+string::split(resource_aws.asset->fileURL, "'.self::AWS_URL.'")[1], resource_url)}';
+    private const RESOURCES_FIELD = 'resource[]{resource_name, _key, "resource_url": coalesce("' . self::CLOUDFRONT_URL . '"+string::split(resource_aws.asset->fileURL, "' . self::AWS_URL . '")[1], resource_url)}';
 
 
     private array $defaultFields = [
@@ -133,16 +133,17 @@ class SanityGateway
                     "id": railcontent_id,
                     "soundslice_slug": assignment_soundslice,
                     "title": assignment_title,
-                    "sheet_music_image_url": '.self::SHEET_MUSIC_QUERY.',
+                    "sheet_music_image_url": ' . self::SHEET_MUSIC_QUERY . ',
                     "timecode": assignment_timecode,
                     "description": assignment_description,
                     "title":assignment_title,
                 },
                 soundslice_slug,
+                "is_milestone": coalesce(is_milestone, false),
                 xp,
                 "resources": [
-                                ... '.self::RESOURCES_FIELD.',
-                                ... *[railcontent_id == ^.parent_content_data[0].id] [0].'.self::RESOURCES_FIELD.',
+                                ... ' . self::RESOURCES_FIELD . ',
+                                ... *[railcontent_id == ^.parent_content_data[0].id] [0].' . self::RESOURCES_FIELD . ',
                             ],
             }',
             'product_id',
@@ -165,8 +166,8 @@ class SanityGateway
             'video',
             "'soundslice_slug': coalesce(soundslice_slug, soundslice[0]['soundslice_slug'])",
             '"resources": [
-                            ... '.self::RESOURCES_FIELD.',
-                            ... *[railcontent_id == ^.parent_content_data[0].id] [0].'.self::RESOURCES_FIELD.',
+                            ... ' . self::RESOURCES_FIELD . ',
+                            ... *[railcontent_id == ^.parent_content_data[0].id] [0].' . self::RESOURCES_FIELD . ',
                         ]',
             "instrumentless",
             "high_soundslice_slug",
@@ -181,7 +182,7 @@ class SanityGateway
                 'id': railcontent_id,
                 'soundslice_slug': assignment_soundslice,
                 'title': assignment_title,
-                'sheet_music_image_url': ".self::SHEET_MUSIC_QUERY.",
+                'sheet_music_image_url': " . self::SHEET_MUSIC_QUERY . ",
                 'timecode': assignment_timecode,
                 'description': assignment_description,
                 'title':assignment_title,
@@ -198,7 +199,7 @@ class SanityGateway
         ]
     ];
 
-    private UserPermissionsRepository $userPermissionsRepository;
+    private UserPermissionsService $userPermissionsService;
     private ?array $userPermissionsCached = null;
 
     public SanityClient $sanity;
@@ -211,7 +212,7 @@ class SanityGateway
     public function __construct(SanityClient $sanity)
     {
         $this->sanity = $sanity;
-        $this->userPermissionsRepository = app()->make(UserPermissionsRepository::class);
+        $this->userPermissionsService = app()->make(UserPermissionsService::class);
     }
 
     /**
@@ -415,7 +416,7 @@ class SanityGateway
         $cardStatusQuery = $isAdmin ? '' : '&& is_banner_draft != true';
         $challengeFields = $this->getFieldsString('challenge');
         $publishedOnString = $this->getPublishedFilter(false);
-        $now = now()->toISOString();
+        $now = $this->getRoundedTime()->toISOString();
         $enrollmentDateString = " && enrollment_start_time <= '$now' && '$now' <= enrollment_end_time";
         $query = "*[_type == 'challenge'
             && brand == '$brand'
@@ -441,7 +442,7 @@ class SanityGateway
         $cardStatusQuery = $isAdmin ? '' : '&& is_banner_draft != true';
         $challengeFields = $this->getFieldsString('challenge');
         $publishedOnString = $this->getPublishedFilter(false);
-        $now = now()->toISOString();
+        $now = $this->getRoundedTime()->toISOString();
         $startDateString = "(is_solo && is_custom_banner && start_time <= '$now' && '$now' <= end_time)";
         $enrollmentDateString = "(enrollment_start_time <= '$now' && '$now' <= enrollment_end_time)";
         $timeFilter = "&& ($startDateString || $enrollmentDateString)";
@@ -450,7 +451,7 @@ class SanityGateway
             $timeFilter
             $publishedOnString
             $cardStatusQuery]{
-            display_order,
+            'display_order': coalesce(display_order, 0),
             $challengeFields,
         }";
         $results = $this->sanity->fetch($query);
@@ -462,6 +463,30 @@ class SanityGateway
             }
         }
         return $filtered;
+    }
+
+    public function getCustomBannerCards(string $brand, bool $isAdmin): array
+    {
+        $cardStatusQuery = $isAdmin ? '' : '&& is_draft != true';
+        $now = $this->getRoundedTime()->toISOString();
+        $timeString = $isAdmin ? '' : "&& start_time <= '$now' && '$now' <= end_time";
+        $brandString = $brand ? "&& (brand == '$brand' || !defined(brand))" : '';
+        $query = "*[_type == 'banner-card' $timeString $cardStatusQuery $brandString] {
+            is_draft,
+            header,
+            'subheader': sub_header,
+            sub_header,
+            'squareImg': squareImg.asset->url,
+            'wideImg': wideImg.asset->url,
+            'bgImg': bgImg.asset->url,
+            'logo': logo.asset->url,
+            button_text,
+            'button_url': coalesce(button_url, content->web_url_path),
+            'content_type' : content->_type,
+            'content_id' : content->railcontent_id,
+            'display_order': coalesce(display_order, 0),
+        } | order(start_time desc)";
+        return $this->sanity->fetch($query);
     }
 
     public function getAssignmentsByRailcontentIds(
@@ -493,7 +518,7 @@ class SanityGateway
                 },
   assignment[railcontent_id in  [{$idsString}]]{assignment_soundslice,
          assignment_title,
-         'sheet_music_image_url': ".self::SHEET_MUSIC_QUERY.",
+         'sheet_music_image_url': " . self::SHEET_MUSIC_QUERY . ",
          assignment_timecode,
          assignment_description,
          railcontent_id}
@@ -511,8 +536,8 @@ class SanityGateway
                                 return 'Method';
                             case 'learning-path-level':
                                 return 'L' . collect($document['parent_content_data'])->keyBy(
-                                    'id'
-                                )[$parent['id']]['position'];
+                                        'id'
+                                    )[$parent['id']]['position'];
                             default:
                                 return $parent['title'];
                         }
@@ -541,7 +566,7 @@ class SanityGateway
                         'type' => $document['type'],
                         'title' => $document['title'],
                         'url' => $document['url'],
-                        'id' => $document['railcontent_id']
+                        'id' => $document['railcontent_id'],
                     ]
                 ];
             }
@@ -656,8 +681,12 @@ class SanityGateway
      * @param bool $isAdmin
      * @return array
      */
-    public function getOnboardingCard(string $brand, string $access_level, string $difficultyString, bool $isAdmin = false): array
-    {
+    public function getOnboardingCard(
+        string $brand,
+        string $access_level,
+        string $difficultyString,
+        bool $isAdmin = false
+    ): array {
         $id = strtolower("onboarding_content_card_" . $brand . '_' . $access_level . '_' . $difficultyString);
         $fieldsString = $this->getFieldsString(null);
         $adminCheck = $isAdmin ? '' : 'is_draft != true';
@@ -702,7 +731,7 @@ class SanityGateway
     public function getActiveBannerCards($brand, $isAdmin)
     {
         $statusString = $isAdmin ? '' : '&& is_draft != true';
-        $now = Carbon::now()->toISOString();
+        $now = $this->getRoundedTime()->toISOString();
         $timeRangeString = "&& start_time <= '$now' && end_time >= '$now'";
         $query = "*[_type == 'banner-card' && brand == '$brand' $statusString $timeRangeString]{
                       brand,
@@ -789,7 +818,7 @@ class SanityGateway
         $isAssignment = false;
         $fieldsString = $this->getFieldsString('playlist-item');
 
-        if(!$lessonId) {
+        if (!$lessonId) {
             // Fetch only leaf nodes directly, traversing the hierarchy
             $query = "*[railcontent_id == {$id}]{
         $fieldsString,
@@ -847,11 +876,11 @@ class SanityGateway
                         $assignmentsCount++;
                     }
                 }
-                if(isset($documents[0]['id'])){
+                if (isset($documents[0]['id'])) {
                     $leafNodes[] = [
-                        'id'        => $id,
+                        'id' => $id,
                         'parent_id' => $parent['id'] ?? null,
-                        'title'     => $documents[0]['title'],
+                        'title' => $documents[0]['title'],
                         'thumbnail' => $documents[0]['thumbnail']
                     ];
                 }
@@ -998,7 +1027,7 @@ class SanityGateway
 
     public function getScheduledContent(string $brand, array $types)
     {
-        $now = Carbon::now()->toISOString();
+        $now = $this->getRoundedTime()->toISOString();
         $typesString = implode(
             ',',
             collect($types)->map(function ($type) {
@@ -1035,6 +1064,7 @@ class SanityGateway
         $userPermissionIds = $this->getPermissionIds();
         if ($document['type'] == 'challenge' && ($document['lessons'] ?? false)) {
             $this->processNeedsAccessForChildren($document['lessons'], $userPermissionIds, $isAdmin);
+            $this->processChapterThumbnailForChildren($document['lessons']);
         } elseif ($document['type'] == 'challenge-part' && ($document['parent'] ?? false)) {
             $document['parent']['need_access'] = $this->doesUserNeedAccessToContent(
                 $document['parent'],
@@ -1042,6 +1072,7 @@ class SanityGateway
                 $isAdmin
             );
             $this->processNeedsAccessForChildren($document['parent']['lessons'], $userPermissionIds, $isAdmin);
+            $this->processChapterThumbnailForChildren($document['parent']['lessons']);
         }
         $document['need_access'] = $this->doesUserNeedAccessToContent($document, $userPermissionIds, $isAdmin);
     }
@@ -1061,11 +1092,13 @@ class SanityGateway
             ContentService::STATUS_ARCHIVED,
             ContentService::STATUS_SCHEDULED
         ];
-        $lessons = array_filter(
-            $lessons,
-            function ($lesson) use ($isAdmin, $userPermissionIds, $allowedStatuses) {
-                return $isAdmin || (!($lesson['status'] ?? false) || in_array($lesson['status'], $allowedStatuses));
-            }
+        $lessons = array_values(
+            array_filter(
+                $lessons,
+                function ($lesson) use ($isAdmin, $userPermissionIds, $allowedStatuses) {
+                    return $isAdmin || (!($lesson['status'] ?? false) || in_array($lesson['status'], $allowedStatuses));
+                }
+            )
         );
 
         foreach ($lessons as $index => $lesson) {
@@ -1092,12 +1125,27 @@ class SanityGateway
     }
 
     /**
+     *  We need to set the published on filter date to be a round time so that it doesn't bypass the query cache
+     *  with every request by changing the filter date every second. I've set it to one minute past the current hour
+     *  because publishing usually publishes content on the hour exactly which means it should still skip the cache
+     *  when the new content is available.
+     * @return Carbon
+     */
+    private function getRoundedTime(): Carbon
+    {
+        /** @var Carbon $now */
+        $now = Carbon::now();
+        $roundedNow = Carbon::create($now->year, $now->month, $now->day, $now->hour, 1);
+        return $roundedNow;
+    }
+
+    /**
      * @param $isSingle
      * @return void
      */
     public function getPublishedFilter($isSingle, $pullFutureContent = false): string
     {
-        $now = Carbon::now()->toISOString();
+        $now = $this->getRoundedTime()->toISOString();
 
         if (user()?->isAdmin() ?? false) {
             $statuses = [
@@ -1142,9 +1190,12 @@ class SanityGateway
 
     private function getStatusesString(array $statuses): string
     {
-        return implode(',', array_map(function ($status) {
-            return "'$status'";
-        }, $statuses));
+        return implode(
+            ',',
+            array_map(function ($status) {
+                return "'$status'";
+            }, $statuses)
+        );
     }
 
     private function getPermissionIds(): array
@@ -1152,11 +1203,20 @@ class SanityGateway
         if (!user()) {
             return [];
         }
-        if (!$this->userPermissionsCached) {
-            $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
-            $this->userPermissionsCached = \Arr::pluck($userPermissions, 'permission_id');
-        }
+        $this->userPermissionsCached = $this->userPermissionsCached ?? $this->userPermissionsService->getUserPermissionsIds(
+            user()->id,
+            true
+        );
         return $this->userPermissionsCached;
+    }
+
+    private function processChapterThumbnailForChildren(&$lessons)
+    {
+        foreach ($lessons as $index => $lesson) {
+            foreach ($lesson['chapters'] ?? [] as $indexC => $chapter) {
+                $lessons[$index]['chapters'][$indexC]['chapter_thumbnail_url'] = "https://musora-web-platform.s3.amazonaws.com/chapters/{$lesson['brand']}/Chapter" . ($indexC + 1) . ".jpg";
+            }
+        }
     }
 
 

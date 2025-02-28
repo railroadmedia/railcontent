@@ -88,5 +88,5 @@
     @endif
 
     @include('musora._partials._faq')
-
+    @include("_partials.layout.everflow-product-tracker", ['advertiserId' => config('railanalytics.musora.production.providers.everflow.brand_id')])
 @stop
