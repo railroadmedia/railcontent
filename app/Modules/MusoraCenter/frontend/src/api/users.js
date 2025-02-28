@@ -41,6 +41,33 @@ export default {
     },
 
     /**
+     * Get all challenge progress data for specific user
+     *
+     * @param {number} id - the id of the user
+     * @returns {Promise} - resolved promise with the response object
+     */
+    getUserChallengeProgressById(id) {
+        return axios
+            .get(`/challenges/all_user_progress_data/${id}`)
+            .then(response => response)
+            .catch(ErrorHandler.push);
+    },
+
+    /**
+     * Enroll User In Challenge
+     *
+     * @param {number} challenge_id - the id of the challenge
+     * @param {number} user_id - the id of the user
+     * @returns {Promise} - resolved promise with the response object
+     */
+    enrollUser(challenge_id, user_id) {
+        return axios
+            .post(`/challenges/enroll_user/${user_id}/${challenge_id}`)
+            .then(response => response)
+            .catch(ErrorHandler.push);
+    },
+
+    /**
      * Add a new user with attributes
      *
      * @param {object} attributes

@@ -171,18 +171,10 @@ class PlaylistsService
             $route = collect($sanityInfo['parents'])->map(function ($parent) use ($sanityInfo) {
                 switch ($parent['type']) {
                     case 'user-playlist':
-                        return null;
+                    case 'learning-path-level':
                     case 'edge-pack':
                         return null;
                     case 'learning-path':
-                        return 'Method';
-                    case 'learning-path-level':
-                        $level = '';
-                        if ($sanityInfo['parent_content_data']) {
-                            $parentContentData = json_decode($sanityInfo['parent_content_data']);
-                            $level = collect($parentContentData)->keyBy('id')[$parent['id']]->position;
-                        }
-                        return 'L' . $level;
                     case 'foundation':
                         return 'Method';
                     default:

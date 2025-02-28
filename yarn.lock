@@ -14741,16 +14741,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"musora-content-services@railroadmedia/musora-content-services#feature/amcneill20250220_BE-214_show_songs_catalogue2":
-  version: 1.3.7
-  resolution: "musora-content-services@https://github.com/railroadmedia/musora-content-services.git#commit=f85314d19dfbfcf9c16b5ec82a6939f74a1e2cea"
+"musora-content-services@npm:^1.3.10":
+  version: 1.3.10
+  resolution: "musora-content-services@npm:1.3.10"
   dependencies:
     "@babel/preset-env": "npm:^7.25.3"
     "@sanity/client": "npm:^5.4.2"
     babel-jest: "npm:^29.7.0"
     docdash: "npm:^2.0.2"
     groqd: "npm:^0.15.12"
-  checksum: 10c0/43ab12fef891c82fb46e886807cb0b843118f8cc008989456a32f414b4ab80a80182d99cb25f400235f40efa4c81ec949c0c80289f24d5d647aa96d04f5db8af
+  checksum: 10c0/c696470ef942614221475b35ea8adc45222fe086a4f15c9bd93b368e85abfdd0f85867633add498ab245492fca7c0945061e986c1a68e72388f889e9c9266af6
   languageName: node
   linkType: hard
 
@@ -17605,7 +17605,7 @@ __metadata:
     mitt: "npm:^3.0.0"
     moment: "npm:^2.30.1"
     moment-timezone: "npm:^0.5.46"
-    musora-content-services: "railroadmedia/musora-content-services#feature/amcneill20250220_BE-214_show_songs_catalogue2"
+    musora-content-services: "npm:^1.3.10"
     mux.js: "npm:^5.5.1"
     normalize.css: "npm:^8.0.1"
     noty: "npm:^3.2.0-beta-deprecated"

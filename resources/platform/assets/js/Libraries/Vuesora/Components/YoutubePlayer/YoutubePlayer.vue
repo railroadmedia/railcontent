@@ -298,7 +298,7 @@ export default {
                                         vm.ninetyFivePercentTracked = true; // Ensure this is only tracked once
                                     }
 
-                                    if(this.completed && this.isChallenge && !vm.hasCompleted && vm.currentTime >= Math.floor(0.985 * videoDuration)){
+                                    if(vm.isCompleted && vm.isChallenge && !vm.hasCompleted && vm.currentTime >= Math.floor(0.985 * videoDuration)){
                                         vm.hasCompleted = true;
                                         vm.$emit('completeChallenge');
                                     }

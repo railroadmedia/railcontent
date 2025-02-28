@@ -1,9 +1,10 @@
-import {ref, computed} from 'vue';
+import { ref, computed } from 'vue';
 import ContentHelpers from "@vuesora/assets/js/helper-functions/content.js";
 import ContentModel from '@vuesora/assets/js/models/_model.js';
-import {useUserStore} from "@stores/user.js";
-import {getProgressPercentage} from 'musora-content-services';
+import { useUserStore } from "@stores/user.js";
+import { getProgressPercentage } from 'musora-content-services';
 import { getDate, getDateFromIso } from "../utils";
+import {storeToRefs} from "pinia/dist/pinia";
 
 export default function useCatalogueItem(props) {
     const userStore = useUserStore();

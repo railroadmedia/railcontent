@@ -37,7 +37,7 @@ class MusoraCenterAdmin
     {
         $user = auth()->user();
         if (!empty($user) &&
-            ($this->permissionService->is(auth()->id(), 'administrator') ||
+            (user()->isAdmin() ||
                 $this->permissionService->is(auth()->id(), 'super_administrator') ||
                 $this->permissionService->is(auth()->id(), 'shipping_fulfillment') ||
                 $this->permissionService->is(auth()->id(), 'payment_recovery') ||

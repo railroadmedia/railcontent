@@ -25,7 +25,9 @@ export const useUserStore = defineStore({
     userXP: (state) => state.user?.total_xp,
     userDashboardUrl: (state) => state.user?.get_dashboard_url,
     isUserAMember: (state) => state.user?.is_a_member,
-    isAdmin: (state) => state.user?.permission_level === 'administrator',
+    isAdmin: (state) => state.user?.is_admin ? true : false,
+    showAdminToggle: (state) => state.user?.show_admin_toggle,
+    useStudentView: (state) => state.user?.use_student_view ? true : false,
     isFirstAccess: (state) => state.user?.first_access_at,
     isLifetimeMember: (state) => state.user?.is_lifetime_member,
     isDrumeoLifetimeMember: (state) => state.user?.is_drumeo_lifetime_member,
@@ -202,6 +204,8 @@ export const useUserStore = defineStore({
             data.hasOwnProperty('singing_gear_mic_brands') && (this.user.singing_gear_mic_brands = data.singing_gear_mic_brands);
             // Video Settings
             data.hasOwnProperty('use_legacy_video_player') && (this.user.use_legacy_video_player = data.use_legacy_video_player);
+            // Student View
+            data.hasOwnProperty('use_student_view') && (this.user.use_student_view = data.use_student_view);
 
             window.shownotification({
                 icon: 'check',

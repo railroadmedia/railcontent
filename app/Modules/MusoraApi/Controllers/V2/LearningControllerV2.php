@@ -3,7 +3,6 @@
 namespace App\Modules\MusoraApi\Controllers\V2;
 
 use App\Modules\Content\Services\LearningPathsService;
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use Illuminate\Routing\Controller;
 
 class LearningControllerV2 extends Controller
@@ -14,6 +13,6 @@ class LearningControllerV2 extends Controller
 
     public function getLearningPaths()
     {
-        return $this->learningPathsService->getNewLearningPaths();
+        return $this->learningPathsService->getNewLearningPaths(user(), brand());
     }
 }

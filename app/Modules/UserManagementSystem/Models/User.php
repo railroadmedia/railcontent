@@ -7,6 +7,7 @@ use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentUserProgress;
+use App\Modules\Content\Models\UserPermission;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\MembershipLevel;
@@ -63,6 +64,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $timezone
  * @property bool $is_coach
  * @property string|null $permission_level
+ * @property bool $use_student_view
  * @property int|null $legacy_drumeo_id
  * @property int|null $legacy_pianote_id
  * @property int|null $legacy_guitareo_id
@@ -338,7 +340,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'password',
         'email',
         'revenuecat_origin_app_user_id',
-        'recharge_interval'
+        'recharge_interval',
+        'use_student_view',
     ];
 
 
@@ -569,6 +572,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
     public function isAdmin(): bool
+    {
+        return $this->permission_level == self::PERMISSION_LEVEL_ADMIN && !$this->use_student_view;
+    }
+
+    public function showAdminToggle(): bool
     {
         return $this->permission_level == self::PERMISSION_LEVEL_ADMIN;
     }
@@ -997,6 +1005,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(UserAccessPermission::class, 'user_id');
     }
 
+    public function contentUserPermissions(): HasMany
+    {
+        return $this->hasMany(UserPermission::class, 'user_id');
+    }
+
     public function hasCompletedOnboarding(): bool
     {
         $hasExperience = $this->onboardingExperience->contains(
@@ -1065,5 +1078,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function scopeWithoutDeleted(Builder $query): void
     {
         $query->whereNot('email', 'like', 'musora+deleted_%@musora.com');
+    }
+
+    public function scopeWithoutPermissions(Builder $query): void
+    {
+        $query->whereDoesntHave('userAccessPermissions')
+            ->whereDoesntHave('contentUserPermissions');
     }
 }

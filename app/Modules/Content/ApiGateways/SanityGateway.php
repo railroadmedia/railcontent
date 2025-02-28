@@ -151,6 +151,7 @@ class SanityGateway
         ],
         'playlist-item' => [
             "'type': _type",
+            "'id': railcontent_id",
             '"instructors": instructor[]->name',
             '"instructors_details": instructor[]->{
                     "id":railcontent_id,
@@ -564,7 +565,8 @@ class SanityGateway
                     'parent' => [
                         'type' => $document['type'],
                         'title' => $document['title'],
-                        'url' => $document['url']
+                        'url' => $document['url'],
+                        'id' => $document['railcontent_id'],
                     ]
                 ];
             }
@@ -811,12 +813,14 @@ class SanityGateway
         return $contentCard;
     }
 
-    public function countLessonsAndAssignments($id)
+    public function countLessonsAndAssignments($id, $lessonId = null)
     {
+        $isAssignment = false;
         $fieldsString = $this->getFieldsString('playlist-item');
 
-        // Fetch only leaf nodes directly, traversing the hierarchy
-        $query = "*[railcontent_id == {$id}]{
+        if (!$lessonId) {
+            // Fetch only leaf nodes directly, traversing the hierarchy
+            $query = "*[railcontent_id == {$id}]{
         $fieldsString,
         'thumbnail': thumbnail.asset->url,
         'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id, 'title':assignment_title},
@@ -840,34 +844,46 @@ class SanityGateway
             }
         )
     }";
+            $documents = $this->sanity->fetch($query);
+        }
 
-        $documents = $this->sanity->fetch($query);
+        if (empty($documents) || $lessonId) {
+            $query = "*[defined(assignment) && count((assignment[].railcontent_id)[@ == {$id}]) > 0]{
+                            'assignments':assignment[assignment_soundslice != null && railcontent_id == {$id}]{
+                              'railcontent_id': railcontent_id, 'title':assignment_title, 'parent_id':^.railcontent_id, 'thumbnail': ^.thumbnail.asset->url}
+    }";
 
+            $documents = $this->sanity->fetch($query);
+            $isAssignment = true;
+        }
         $assignmentIds = [];
         $leafNodes = [];
         $assignmentsCount = 0;
         if (!empty($documents)) {
             // Flatten the structure to get leaf nodes only
-            if (!$documents[0]['lastChildItems']) {
+            if (!isset($documents[0]['lastChildItems'])) {
                 if (isset($documents[0]['parent_content_data'])) {
                     $parent = (last($documents[0]['parent_content_data']));
                 }
                 if (!empty($documents[0]['assignments'])) {
                     foreach ($documents[0]['assignments'] as $assignment) {
-                        $assignmentIds[$documents[0]['id']][$assignment['railcontent_id']] = [
+                        $assignmentIds[$id][$assignment['railcontent_id']] = [
                             'id' => $assignment['railcontent_id'],
-                            'parent_id' => $documents[0]['id'],
-                            'title' => $assignment['title']
+                            'parent_id' => $documents[0]['id'] ?? $assignment['parent_id'],
+                            'title' => $assignment['title'],
+                            'thumbnail' => $assignment['thumbnail'] ?? $documents[0]['thumbnail']
                         ];
                         $assignmentsCount++;
                     }
                 }
-                $leafNodes[] = [
-                    'id' => $id,
-                    'parent_id' => $parent['id'] ?? null,
-                    'title' => $documents[0]['title'],
-                    'thumbnail' => $documents[0]['thumbnail']
-                ];
+                if (isset($documents[0]['id'])) {
+                    $leafNodes[] = [
+                        'id' => $id,
+                        'parent_id' => $parent['id'] ?? null,
+                        'title' => $documents[0]['title'],
+                        'thumbnail' => $documents[0]['thumbnail']
+                    ];
+                }
             }
             foreach ($documents[0]['lastChildItems'] ?? [] as $item) {
                 if (!empty($item['assignments'])) {
@@ -875,7 +891,8 @@ class SanityGateway
                         $assignmentIds[$item['id']][$assignment['railcontent_id']] = [
                             'id' => $assignment['railcontent_id'],
                             'parent_id' => $item['id'],
-                            'title' => $assignment['title']
+                            'title' => $assignment['title'],
+                            'thumbnail' => $assignment['thumbnail'] ?? $item['thumbnail']
                         ];
                         $assignmentsCount++;
                     }
@@ -891,10 +908,11 @@ class SanityGateway
                             ];
                             if (!empty($child['assignments'])) {
                                 foreach ($child['assignments'] as $assignment) {
-                                    $assignmentIds[$item['id']][$assignment['railcontent_id']] = [
+                                    $assignmentIds[$child['id']][$assignment['railcontent_id']] = [
                                         'id' => $assignment['railcontent_id'],
-                                        'parent_id' => $item['id'],
-                                        'title' => $assignment['title']
+                                        'parent_id' => $child['id'],
+                                        'title' => $assignment['title'],
+                                        'thumbnail' => $assignment['thumbnail'] ?? $child['thumbnail']
                                     ];
                                     $assignmentsCount++;
                                 }
@@ -913,7 +931,8 @@ class SanityGateway
                             $assignmentIds[$item['id']][$assignment['railcontent_id']] = [
                                 'id' => $assignment['railcontent_id'],
                                 'parent_id' => $item['id'],
-                                'title' => $assignment['title']
+                                'title' => $assignment['title'],
+                                'thumbnail' => $item['thumbnail']
                             ];
                             $assignmentsCount++;
                         }
@@ -921,7 +940,7 @@ class SanityGateway
                 }
             }
             //   $assignmentsCount = count($assignmentIds);
-            if ($documents[0]['type'] == 'song') {
+            if (isset($documents[0]['type']) && $documents[0]['type'] == 'song') {
                 if ($documents[0]['instrumentless']) {
                     $assignmentsCount = 2;
                 } else {
@@ -934,7 +953,7 @@ class SanityGateway
             'lessons' => $leafNodes,
             'lessons_count' => count($leafNodes),
             'soundslice_assignments' => $assignmentIds,
-            'soundslice_assignments_count' => $assignmentsCount,
+            'soundslice_assignments_count' => $isAssignment ? 0 : $assignmentsCount
         ];
     }
 
@@ -1045,6 +1064,7 @@ class SanityGateway
         $userPermissionIds = $this->getPermissionIds();
         if ($document['type'] == 'challenge' && ($document['lessons'] ?? false)) {
             $this->processNeedsAccessForChildren($document['lessons'], $userPermissionIds, $isAdmin);
+            $this->processChapterThumbnailForChildren($document['lessons']);
         } elseif ($document['type'] == 'challenge-part' && ($document['parent'] ?? false)) {
             $document['parent']['need_access'] = $this->doesUserNeedAccessToContent(
                 $document['parent'],
@@ -1052,6 +1072,7 @@ class SanityGateway
                 $isAdmin
             );
             $this->processNeedsAccessForChildren($document['parent']['lessons'], $userPermissionIds, $isAdmin);
+            $this->processChapterThumbnailForChildren($document['parent']['lessons']);
         }
         $document['need_access'] = $this->doesUserNeedAccessToContent($document, $userPermissionIds, $isAdmin);
     }
@@ -1071,11 +1092,13 @@ class SanityGateway
             ContentService::STATUS_ARCHIVED,
             ContentService::STATUS_SCHEDULED
         ];
-        $lessons = array_filter(
-            $lessons,
-            function ($lesson) use ($isAdmin, $userPermissionIds, $allowedStatuses) {
-                return $isAdmin || (!($lesson['status'] ?? false) || in_array($lesson['status'], $allowedStatuses));
-            }
+        $lessons = array_values(
+            array_filter(
+                $lessons,
+                function ($lesson) use ($isAdmin, $userPermissionIds, $allowedStatuses) {
+                    return $isAdmin || (!($lesson['status'] ?? false) || in_array($lesson['status'], $allowedStatuses));
+                }
+            )
         );
 
         foreach ($lessons as $index => $lesson) {
@@ -1167,9 +1190,12 @@ class SanityGateway
 
     private function getStatusesString(array $statuses): string
     {
-        return implode(',', array_map(function ($status) {
-            return "'$status'";
-        }, $statuses));
+        return implode(
+            ',',
+            array_map(function ($status) {
+                return "'$status'";
+            }, $statuses)
+        );
     }
 
     private function getPermissionIds(): array
@@ -1177,7 +1203,21 @@ class SanityGateway
         if (!user()) {
             return [];
         }
-        $this->userPermissionsCached = $this->userPermissionsCached ?? $this->userPermissionsService->getUserPermissionsIds(user()->id, true);
+        $this->userPermissionsCached = $this->userPermissionsCached ?? $this->userPermissionsService->getUserPermissionsIds(
+            user()->id,
+            true
+        );
         return $this->userPermissionsCached;
     }
+
+    private function processChapterThumbnailForChildren(&$lessons)
+    {
+        foreach ($lessons as $index => $lesson) {
+            foreach ($lesson['chapters'] ?? [] as $indexC => $chapter) {
+                $lessons[$index]['chapters'][$indexC]['chapter_thumbnail_url'] = "https://musora-web-platform.s3.amazonaws.com/chapters/{$lesson['brand']}/Chapter" . ($indexC + 1) . ".jpg";
+            }
+        }
+    }
+
+
 }

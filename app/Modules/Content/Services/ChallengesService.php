@@ -3,6 +3,7 @@
 namespace App\Modules\Content\Services;
 
 use App\Modules\Content\ApiGateways\SanityGateway;
+use App\Modules\Content\ApiResources\Challenges\UserProgressDataForMusoraCenter;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Enums\ChallengeUserProgressStatus;
 use App\Modules\Content\Models\ContentUserProgress;
@@ -11,7 +12,6 @@ use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
 use App\Services\UserTimezoneService;
 use Carbon\Carbon;
-use Gedmo\Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
@@ -228,7 +228,7 @@ class ChallengesService
     {
         $enrolledUsersAndCount = $this->getEnrolledUsers($contentId, $count);
         $enrolledUsers = $enrolledUsersAndCount['users'];
-        $formattedUsers = $enrolledUsers->map(fn (User $user) => [
+        $formattedUsers = $enrolledUsers->map(fn(User $user) => [
             'id' => $user->id,
             'display_name' => $user->display_name,
             'profile_picture_url' => $user->profile_picture_url,
@@ -314,6 +314,7 @@ class ChallengesService
             'lessons_meta_data' => json_encode($lessonMetaData),
             'is_active' => $isLocked,
             'is_solo' => $isSolo,
+            'enroll_date' => Carbon::now(),
         ];
         // Resubscribe user for solo notifications if they were previously subscribed
         if ($this->isUserSubscribedToNotificationsForActiveSoloChallenge($challengeId, $userId)) {
@@ -374,6 +375,45 @@ class ChallengesService
         $this->updateNotification($challengeId, $user, $notificationKey, enable: false);
         return true;
     }
+
+
+    /**
+     * Unenroll the user in a challenge. Returns false if user wasn't already enrolled
+
+     * @param int $userId - user id
+     * @return array - array of challengeUserProgress
+     */
+    public function getAllProgressDataForUser(int $userId) : array
+    {
+        $userProgresses = ChallengeUserProgress::whereUserId($userId, limit: 50);
+        $challengeIds = $userProgresses->pluck('content_id')->toArray();
+        $challenges = $this->getChallengeByIds($challengeIds);
+        $challenges = collect($challenges)->keyBy('railcontent_id');
+        $response = [];
+        foreach($userProgresses as $userProgress) {
+            // TODO BEH-239 add owned logic
+//            $productInformation = $this->sanityGateway->getProductInformationForAllChallenges();
+//            $productInformation = collect($productInformation)->keyBy('id');
+//
+//            $product = $productInformation[$userProgress->content_id] ?? null;
+//            $owned = false;
+//            if ($product) {
+//                $product = Product::whereId($product['product_id'])
+//                    ->where('digital_access_type', 'challenge content access')
+//                    ->first();
+//                $permissions = $product?->getDigitalAccessPermissionNames() ?? [];
+//                foreach($permissions as $permission) {
+//                    $permissionModel =
+//                }
+//            }
+            $challenge = $challenges[$userProgress->content_id];
+            $resource = UserProgressDataForMusoraCenter::fromUserAndChallenge($userProgress, $challenge);
+            $response[] = (array)$resource;
+        }
+        return $response;
+    }
+
+
 
 
     /**
@@ -511,37 +551,7 @@ class ChallengesService
                 $isCompleted = $this->contentUserProgress::isCompletedByUser($lesson['id'], $userId);
             }
 
-            // For solo challenges, always assume unlock dates are stored in the users local timezone, even if it changes over time.
-            if ($challengeUserProgress?->is_solo ?? false) {
-                $unlockDate = Carbon::parse($unlockDate)->startOfDay();
-
-                // we must compare based on day without letting Carbon account for timezones
-                $unlockDateForComparison = Carbon::createFromFormat('Y-m-d', $unlockDate->toDateString())
-                    ->startOfDay();
-                // comparing 00:00:00 dates does weird things
-                $todayForComparison = Carbon::createFromFormat(
-                    'Y-m-d',
-                    Carbon::today(UserTimezoneService::getUsersCurrentTimezone())->toDateString()
-                )->startOfDay()->addSecond();
-                // TODO Rob Adrian Caleb, do we lock the lessons if previous lessons haven't been completed
-                // this was vaguely discussed in this thread: https://musoraworkspace.slack.com/archives/C0723ESKW49/p1733173597489469
-                $shouldLessonBeLocked = $isLocked && $unlockDateForComparison->greaterThanOrEqualTo(
-                    $todayForComparison
-                );
-            } else {
-                // For community challenges, unlock dates are stored in PST so we must convert it to UTC and check
-                // against now.
-                $shouldLessonBeLocked = Carbon::parse($unlockDate, 'America/Vancouver')->greaterThanOrEqualTo(
-                    Carbon::now()
-                );
-
-                // now convert the unlock time to the users local timezone
-                $unlockDate = Carbon::parse(
-                    Carbon::parse($unlockDate, 'America/Vancouver')->timezone(
-                        UserTimezoneService::getUsersCurrentTimezone()
-                    )->toDateTimeString()
-                );
-            }
+            $shouldLessonBeLocked = $this->getLessonLockedStateAndUpdateUnlockDate($challengeUserProgress, $unlockDate, $isLocked);
 
             $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
             $lessons[$index]['unlock_date'] = $unlockDate->toISOString();
@@ -553,9 +563,56 @@ class ChallengesService
                 $previousCurriculumLesson = $lessons[$index];
             }
         }
-
         return $lessons;
     }
+
+    /**
+     * @param ChallengeUserProgress|null $challengeUserProgress
+     * @param mixed $unlockDate
+     * @param bool $hasAccess
+     * @return bool
+     */
+    public function getLessonLockedStateAndUpdateUnlockDate(
+        ?ChallengeUserProgress $challengeUserProgress,
+        mixed &$unlockDate,
+        bool $hasAccess,
+    ): bool
+    {
+        // For solo challenges, always assume unlock dates are stored in the users local timezone, even if it changes over time.
+        if ($challengeUserProgress?->is_solo ?? false) {
+            $unlockDate = Carbon::parse($unlockDate)->startOfDay();
+
+            // we must compare based on day without letting Carbon account for timezones
+            $unlockDateForComparison = Carbon::createFromFormat('Y-m-d', $unlockDate->toDateString())
+                ->startOfDay();
+            // comparing 00:00:00 dates does weird things
+            $todayForComparison = Carbon::createFromFormat(
+                'Y-m-d',
+                Carbon::today(UserTimezoneService::getUsersCurrentTimezone())->toDateString()
+            )->startOfDay()->addSecond();
+            // TODO Rob Adrian Caleb, do we lock the lessons if previous lessons haven't been completed
+            // this was vaguely discussed in this thread: https://musoraworkspace.slack.com/archives/C0723ESKW49/p1733173597489469
+            $shouldLessonBeLocked = $hasAccess && $unlockDateForComparison->greaterThanOrEqualTo(
+                    $todayForComparison
+                );
+        } else {
+            // For community challenges, unlock dates are stored in PST so we must convert it to UTC and check
+            // against now.
+            $shouldLessonBeLocked = Carbon::parse($unlockDate, 'America/Vancouver')->greaterThanOrEqualTo(
+                Carbon::now()
+            );
+
+            // now convert the unlock time to the users local timezone
+            $unlockDate = Carbon::parse(
+                Carbon::parse($unlockDate, 'America/Vancouver')->timezone(
+                    UserTimezoneService::getUsersCurrentTimezone()
+                )
+            );
+        }
+
+        return $shouldLessonBeLocked;
+    }
+
 
     private function getChallengeState($challenge, $userEndDate = null): string
     {

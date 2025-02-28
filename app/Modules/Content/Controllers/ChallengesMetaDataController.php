@@ -154,6 +154,16 @@ class ChallengesMetaDataController extends Controller
     }
 
     /**
+     * @param $id - Challenge railcontent id
+     * @return JsonResponse
+     */
+    public function getAllProgressDataForUser(int $id)
+    {
+        return response()->json($this->challengesService->getAllProgressDataForUser($id));
+    }
+
+
+    /**
      * @param $id - Lesson railcontent id
      * @return JsonResponse
      */
@@ -169,12 +179,35 @@ class ChallengesMetaDataController extends Controller
      */
     public function enrollUser(int $id)
     {
-        $userId = user()->id;
-        $challenge = $this->challengesService->getChallengeById($id);
+        return $this->enrollUserById(user()->id, $id);
+    }
+
+    /**
+     * @param $user_id - user id
+     * @param $challenge_id - Challenge railcontent id
+     * @return JsonResponse
+     */
+    public function enrollUserAdmin(int $user_id, int $challenge_id)
+    {
+        if (!user()->isAdmin()) {
+            return response()->json(['error' => "user must be an administrator to enroll other users"], status: 403);
+        }
+        return $this->enrollUserById($user_id, $challenge_id);
+    }
+
+    /**
+     * Enroll user in challenge and fire c.io event
+     * @param int $userId - user to enroll
+     * @param int $challengeId - challenge to enroll in
+     * @return JsonResponse
+     */
+    private function enrollUserById(int $userId, int $challengeId) : JsonResponse
+    {
+        $challenge = $this->challengesService->getChallengeById($challengeId);
         $startDate = ($challenge['is_solo'] ?? false) ? Carbon::now() : null;
-        $result = $this->challengesService->startChallenge($id, $userId, $startDate);
+        $result = $this->challengesService->startChallenge($challengeId, $userId, $startDate);
         if (is_null($result)) {
-            return response()->json("Challenge $id not found", status: 404);
+            return response()->json("Challenge $challengeId not found", status: 404);
         }
 
         CustomerIoCreateEventByUserId::dispatchAfterResponse(
@@ -182,7 +215,7 @@ class ChallengesMetaDataController extends Controller
             accountName: config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
             eventName: 'challenge_enrolled',
             eventData: [
-                'challenge_id' => $id,
+                'challenge_id' => $challengeId,
                 'brand' => $challenge['brand'] ?? 'musora',
             ],
             eventTimestamp: Carbon::now()->timestamp

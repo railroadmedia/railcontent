@@ -131,7 +131,8 @@ class CustomerIoSyncEventListener
             }
 
 
-            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
+            /** @var User $user */
+            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds) && !$user->isDeleted()) {
                 if ($newEmail !== $oldEmail) {
                     /**
                      * NOTE: As page views are tracked in Customer.io, this event needs to be handled synchronously to avoid conflicts

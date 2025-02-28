@@ -32,16 +32,14 @@ class CarouselServiceV1
 
         $unfinishedOnboardingCards = [];
         // NOTE: Pack-only users doesn´t have membership level, and shouldn't have access to onboarding cards
-        if ($user->membership_level) {
-            $onboardingCardData = $this->learningPathsService->getNewLearningPaths();
+        $onboardingCardData = $this->learningPathsService->getNewLearningPaths($user, $brand);
 
-            foreach ($onboardingCardData as $index => $onboardingCardDatum) {
-                $onboardingCardData[$index]['show_everywhere'] = false;
-                $onboardingCardData[$index]['type'] = 'onboarding';
-                $progress = ContentUserProgress::getState($onboardingCardDatum['id'], $user->id);
-                if ($progress->state == ProgressState::NotStarted) {
-                    $unfinishedOnboardingCards[] = $onboardingCardData[$index];
-                }
+        foreach ($onboardingCardData as $index => $onboardingCardDatum) {
+            $onboardingCardData[$index]['show_everywhere'] = false;
+            $onboardingCardData[$index]['type'] = 'onboarding';
+            $progress = ContentUserProgress::getState($onboardingCardDatum['id'], $user->id);
+            if ($progress->state == ProgressState::NotStarted) {
+                $unfinishedOnboardingCards[] = $onboardingCardData[$index];
             }
         }
 

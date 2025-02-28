@@ -84,61 +84,52 @@ class UserService
         return $user ?? null;
     }
 
-    public function deleteUser($user)
+    public function deleteUser(User $user)
     {
+        /* NOTE: deleting from external services is critical and should be done before updating user on DB */
+        dispatch_sync(new RevenuecatDeleteUser($user));
+        dispatch_sync(new CustomerIoDeleteUser($user->id));
+        dispatch_sync(new RechargeDeleteUser($user));
+
         $oldUser = clone ($user);
         $user->fill([
-                        'email' => 'musora+deleted_'.
-                            Carbon::now()
-                                ->getTimestamp().
-                            '@musora.com',
-                        'first_name' => null,
-                        'last_name' => null,
-                        'display_name' => '',
-                        'gender' => null,
-                        'country' => null,
-                        'region' => null,
-                        'city' => null,
-                        'birthday' => null,
-                        'phone_number' => null,
-                        'profile_picture_url' => null,
-                        'timezone' => null,
-                        'permission_level' => null,
-                        'drums_gear_photo' => null,
-                        'biography' => null,
-                        'piano_gear_photo' => null,
-                        'drums_gear_set_brands' => null,
-                        'drums_gear_hardware_brands' => null,
-                        'drums_gear_stick_brands' => null,
-                        'drums_gear_cymbal_brands' => null,
-                        'drums_playing_since_year' => null,
-                        'piano_gear_piano_brands' => null,
-                        'piano_gear_keyboard_brands' => null,
-                        'piano_playing_since_year' => null,
-                        'guitar_gear_string_brands' => null,
-                        'guitar_gear_pedal_brands' => null,
-                        'guitar_gear_amp_brands' => null,
-                        'guitar_gear_guitar_brands' => null,
-                        'guitar_gear_photo' => null,
-                        'singing_gear_mic_brands' => null,
-                        'singing_gear_photo' => null,
+            'email' => 'musora+deleted_' . Carbon::now()->getTimestamp() . '@musora.com',
+            'first_name' => null,
+            'last_name' => null,
+            'display_name' => '',
+            'gender' => null,
+            'country' => null,
+            'region' => null,
+            'city' => null,
+            'birthday' => null,
+            'phone_number' => null,
+            'profile_picture_url' => null,
+            'timezone' => null,
+            'permission_level' => null,
+            'drums_gear_photo' => null,
+            'biography' => null,
+            'piano_gear_photo' => null,
+            'drums_gear_set_brands' => null,
+            'drums_gear_hardware_brands' => null,
+            'drums_gear_stick_brands' => null,
+            'drums_gear_cymbal_brands' => null,
+            'drums_playing_since_year' => null,
+            'piano_gear_piano_brands' => null,
+            'piano_gear_keyboard_brands' => null,
+            'piano_playing_since_year' => null,
+            'guitar_gear_string_brands' => null,
+            'guitar_gear_pedal_brands' => null,
+            'guitar_gear_amp_brands' => null,
+            'guitar_gear_guitar_brands' => null,
+            'guitar_gear_photo' => null,
+            'singing_gear_mic_brands' => null,
+            'singing_gear_photo' => null,
+        ]);
 
-                    ]);
-        $user->updated_at =
-            Carbon::now()
-                ->toDateTimeString();
-
+        $user->updated_at = Carbon::now()->toDateTimeString();
         $user->save();
+
         event(new UserUpdated($user, $oldUser));
-
-        //delete Revenuecat user
-        dispatch_sync(new RevenuecatDeleteUser($user));
-
-        //delete Customer Io user
-        dispatch_sync(new CustomerIoDeleteUser($user->id));
-
-        //delete Recharge user
-        dispatch_sync(new RechargeDeleteUser($user));
 
         return $user;
     }

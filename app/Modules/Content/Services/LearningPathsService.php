@@ -8,6 +8,7 @@ use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Services\ContentService;
 
 class LearningPathsService
@@ -74,14 +75,12 @@ class LearningPathsService
         return Carbon::parse($user->created_at)->greaterThanOrEqualTo(Carbon::now()->subDays(30));
     }
 
-    public function getNewLearningPaths(): array
+    public function getNewLearningPaths(User $user, string $brand): array
     {
-        $brand = brand();
-        if (!$this->showNewLearningPaths()) {
+        if (!$this->showNewLearningPaths() || is_null($user->membership_level)) {
             return [];
         }
 
-        $user = user();
         $experienceLevel = intval(
             $user
                 ->onboardingExperience

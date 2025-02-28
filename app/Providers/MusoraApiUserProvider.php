@@ -176,6 +176,8 @@ class MusoraApiUserProvider implements UserProviderInterface
             'features' => $this->getAccessibleFeatures(),
             'active_permissions_ids' => $this->userPermissionsService->getUserPermissionsIds($user->id),
             'primary_brand' => $user->primary_brand,
+            'show_admin_toggle' => $user->showAdminToggle(),
+            'use_student_view' => $user->use_student_view,
         ], $extraData);
     }
 
