@@ -119,4 +119,11 @@ class UserPermissionsRepository extends RepositoryBase
             ->where('name', $permissionName)
             ->exists();
     }
+
+    public function getUserPermissionsIds(int $userId, bool $onlyActive): array
+    {
+        $userPermissions = $this->getUserPermissions($userId, $onlyActive);
+        return array_column($userPermissions, 'permission_id');
+    }
 }
+
