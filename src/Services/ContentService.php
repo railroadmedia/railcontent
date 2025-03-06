@@ -262,6 +262,10 @@ class ContentService
         if ($removeSeen) {
             $recommendations = $this->removePreviousSeenRecommendations($recommendations, $userId);
         }
+
+        //remove content that doesnt match permissions
+        $recommendations = $this->removeNeedsAccessRecommendations($recommendations);
+
         if ($groupByForLessonsPage) {
             $groupedByRecommendations = [];
             $totalCount = 0;
@@ -325,6 +329,25 @@ class ContentService
             $previouslySeenContent->contains(fn($value, $key) =>
                 $contentID != $value
             )));
+        }
+        return $filteredContent;
+    }
+
+    private function removeNeedsAccessRecommendations($recommendations)
+    {
+        $allIds = zipperMerge($recommendations);
+        $documents = $this->sanityGateway->getByRailContentIds($allIds);
+        $filteredContent = [];
+        foreach ($recommendations as $sectionName => $section) {
+            $document = array_values(array_filter($documents, function ($doc) use ($section) {
+                return in_array($doc['id'], $section);
+            }));
+            //check if document doesnt need access
+            foreach ($document as $doc) {
+                if ($doc['need_access'] === false) {
+                    $filteredContent[$sectionName][] = $doc['railcontent_id'];
+                }
+            }
         }
         return $filteredContent;
     }
