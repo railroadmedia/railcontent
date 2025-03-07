@@ -263,7 +263,6 @@ class ContentService
             $recommendations = $this->removePreviousSeenRecommendations($recommendations, $userId);
         }
 
-        //remove content that doesnt match permissions
         $recommendations = $this->removeNeedsAccessRecommendations($recommendations);
 
         if ($groupByForLessonsPage) {
