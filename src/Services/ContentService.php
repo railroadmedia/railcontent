@@ -333,7 +333,7 @@ class ContentService
         return $filteredContent;
     }
 
-    private function removeNeedsAccessRecommendations($recommendations)
+    private function removeNeedsAccessRecommendations(array $recommendations) : array
     {
         $allIds = zipperMerge($recommendations);
         $documents = $this->sanityGateway->getByRailContentIds($allIds);
