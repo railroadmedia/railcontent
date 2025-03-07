@@ -263,7 +263,7 @@ class ContentService
             $recommendations = $this->removePreviousSeenRecommendations($recommendations, $userId);
         }
 
-        $recommendations = $this->removeNeedsAccessRecommendations($recommendations);
+        $recommendations = $this->removeNeedsAccessRecommendationsAndGetDocuments($recommendations);
 
         if ($groupByForLessonsPage) {
             $groupedByRecommendations = [];
@@ -279,9 +279,13 @@ class ContentService
                 $numGroups += 1;
                 $totalCount += count($zippered);
                 $zippered = $this->paginateRecommendations($zippered, $pageSize, $page);
+                $zipperedRailcontentIds = [];
+                foreach ($zippered as $recommendation) {
+                    $zipperedRailcontentIds[] = $recommendation["railcontent_id"];
+                }
                 $groupedByRecommendations[] = [
                     'grouped_by_field' => $index,
-                    'lessons_grouped_by_field' => implode(',', $zippered), // exploded values,
+                    'lessons_grouped_by_field' => implode(',', $zipperedRailcontentIds), // exploded values,
                     'type' => 'recommended',
                     'recommended' => $index,
                     'id' => $index,
@@ -332,7 +336,12 @@ class ContentService
         return $filteredContent;
     }
 
-    private function removeNeedsAccessRecommendations(array $recommendations) : array
+    /**
+     * intakes an array of railcontent_id's, and returns an array of full content documents (arrays)
+     * @param array $recommendations
+     * @return array
+     */
+    private function removeNeedsAccessRecommendationsAndGetDocuments(array $recommendations) : array
     {
         $allIds = zipperMerge($recommendations);
         $documents = $this->sanityGateway->getByRailContentIds($allIds);
@@ -341,10 +350,9 @@ class ContentService
             $document = array_values(array_filter($documents, function ($doc) use ($section) {
                 return in_array($doc['id'], $section);
             }));
-            //check if document doesnt need access
             foreach ($document as $doc) {
                 if ($doc['need_access'] === false) {
-                    $filteredContent[$sectionName][] = $doc['railcontent_id'];
+                    $filteredContent[$sectionName][] = $doc;
                 }
             }
         }
@@ -354,13 +362,10 @@ class ContentService
     private function getContentFilterResultsFromRecommendations($recommendations, $isGroupedBy)
     {
         if ($isGroupedBy) {
-            foreach($recommendations['recommendations'] as $index => $groupedBy) {
-                $recommendations['recommendations'][$index]['lessons'] = $this->sanityGateway->getByRailContentIds($groupedBy['lessons']);
-            }
             $content = $recommendations['recommendations'];
             $content = Decorator::decorate($content, 'group');
         } else {
-            $content = $this->sanityGateway->getByRailContentIds($recommendations['recommendations']);
+            $content = $recommendations['recommendations'];
         }
         $filterOptions = [
             "type" => ["Recommendation"],
