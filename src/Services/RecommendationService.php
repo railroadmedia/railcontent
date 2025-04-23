@@ -110,11 +110,13 @@ class RecommendationService
     private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit = 20)
     {
         $tableName = $this->getTableName($brand, $section);
-        $recommendations = $this->addContentTypeFilter(DB::table($tableName)
+        $contentType =  strtolower(str_replace('_', '-', $section));
+        $recommendations = DB::table($tableName)
             ->select('content_id')
-            ->where('user_id', $userID)
-            ->orderBy('recommendation_rank'),
-            $section)
+            ->join('railcontent_content', 'railcontent_content.id', '=', 'content_id')
+            ->where($tableName.'.user_id', $userID)
+            ->where('railcontent_content.type', $contentType)
+            ->orderBy('recommendation_rank')
             ->limit($limit)
             ->get()
             ->pluck('content_id');
@@ -122,10 +124,11 @@ class RecommendationService
             $user = $this->userService->getByIdOrNull($userID);
             if ($user && ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value))) {
                 $coldStartTableName = $this->getTableName($brand, $section, true);
-                $recommendations = $this->addContentTypeFilter(DB::table($coldStartTableName)
+                $recommendations = DB::table($coldStartTableName)
                     ->select('content_id')
-                    ->orderBy('rank'),
-                    $section)
+                    ->orderBy('rank')
+                    ->join('railcontent_content', 'railcontent_content.id', '=', 'content_id')
+                    ->where('railcontent_content.type', $contentType)
                     ->limit(20)
                     ->get()
                     ->pluck('content_id');
@@ -181,23 +184,21 @@ class RecommendationService
 
         $table = $this->getTableName($brand, $type);
         $beginnerTable = $this->getTableName($brand, $type, true);
-        
-        $recommendation = $this->addContentTypeFilter(
-                DB::table($table)
+
+        $recommendation =
+            DB::table($table)
                 ->where('user_id', $userID)
-                ->where('content_id', $content->id),
-            $type)
-            ->first();
-            
+                ->where('content_id', $content->id)
+                ->first();
+
 
         if ($recommendation) {
             $moduleSource = json_decode($recommendation->module_source, associative: true)['module_source'];
         } else {
-            $beginnerRecommendation = $this->addContentTypeFilter(
-                    DB::table($beginnerTable)
-                    ->where('content_id', $content->id),
-                $type)
-                ->exists();
+            $beginnerRecommendation =
+                DB::table($beginnerTable)
+                    ->where('content_id', $content->id)
+                    ->exists();
 
             if (!$beginnerRecommendation) {
                 Log::error(self::class . ': Content not found in beginner tables', ['content_id' => $content->id]);
@@ -220,7 +221,7 @@ class RecommendationService
     {
         if ($section != RecommenderSection::Song->value) {
             $contentType = str_replace('_', '-', strtolower($section));
-            $builder->where('content_type', $contentType);
+            $builder->join('railcontent_content', 'content_type', $contentType);
         }
         return $builder;
     }
