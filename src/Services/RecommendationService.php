@@ -110,12 +110,21 @@ class RecommendationService
     private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit = 20)
     {
         $tableName = $this->getTableName($brand, $section);
-        $contentType =  strtolower(str_replace('_', '-', $section));
         $recommendations = DB::table($tableName)
             ->select('content_id')
             ->join('railcontent_content', 'railcontent_content.id', '=', 'content_id')
             ->where($tableName.'.user_id', $userID)
-            ->where('railcontent_content.type', $contentType)
+            // We did an update for the content types for recsysV3 that doesn't match the UI all that well.
+            // So this is a quick workaround to avoid refactoring contentServices or MusoraAPI to handle filtering differently
+            // Songs Tab: Songs
+            // Workouts Tab: Workouts
+            // Lessons Tab: all others
+            ->when($section == RecommenderSection::Workout->value, function($query) {
+                return $query->where('railcontent_content.type', 'workout');
+            })
+            ->when($section == RecommenderSection::Lesson->value, function($query) {
+                return $query->whereNot('railcontent_content.type', 'workout');
+            })
             ->orderBy('recommendation_rank')
             ->limit($limit)
             ->get()
@@ -128,7 +137,12 @@ class RecommendationService
                     ->select('content_id')
                     ->orderBy('rank')
                     ->join('railcontent_content', 'railcontent_content.id', '=', 'content_id')
-                    ->where('railcontent_content.type', $contentType)
+                    ->when($section == RecommenderSection::Workout->value, function($query) {
+                        return $query->where('railcontent_content.type', 'workout');
+                    })
+                    ->when($section == RecommenderSection::Lesson->value, function($query) {
+                        return $query->whereNot('railcontent_content.type', 'workout');
+                    })
                     ->limit(20)
                     ->get()
                     ->pluck('content_id');
@@ -215,15 +229,6 @@ class RecommendationService
         $tableSuffix = $section == RecommenderSection::Song->value ? 'song' : 'lesson';
         $baseName = strtolower('recsys_v3_' . $brand . '_' . $tableSuffix);
         return $isBeginner ? $baseName . '_beginner_items' : $baseName;
-    }
-
-    private function addContentTypeFilter(Builder $builder, string $section)
-    {
-        if ($section != RecommenderSection::Song->value) {
-            $contentType = str_replace('_', '-', strtolower($section));
-            $builder->join('railcontent_content', 'content_type', $contentType);
-        }
-        return $builder;
     }
 
     // The following code includes functionality using a direct PDO connection to the snowflake db instead of through a web api.

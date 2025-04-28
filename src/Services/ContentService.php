@@ -127,15 +127,15 @@ class ContentService
         $userId = $user->id;
         $sections = match(strtolower($filter)) {
             'songs', 'song' => [RecommenderSection::Song],
-            'lessons', 'lesson' => [RecommenderSection::QuickTip, RecommenderSection::Course],
+            'lessons', 'lesson' => [RecommenderSection::Lesson],
             'workouts', 'workout' => [RecommenderSection::Workout],
-            'quick_tips', 'quick_tip', 'quick-tips', 'quick-tip' => [RecommenderSection::QuickTip],
+            'quick_tips', 'quick_tip', 'quick-tips', 'quick-tip' => [RecommenderSection::Lesson],
             default => [],
         };
         if (!$sections && $groupByForLessonsPage) {
             $groupBySections = [
                 'Songs You Might Like' => [RecommenderSection::Song],
-                'Lessons You Might Like' => [RecommenderSection::QuickTip, RecommenderSection::Course],
+                'Lessons You Might Like' => [RecommenderSection::Lesson],
                 'Workouts You Might Like' => [RecommenderSection::Workout],
             ];
         } else {
@@ -469,11 +469,11 @@ class ContentService
      */
     public function getWhereTypeInAndStatusAndField(
         array $types,
-        $status,
-        $fieldKey,
-        $fieldValue,
-        $fieldType,
-        $fieldComparisonOperator = '='
+              $status,
+              $fieldKey,
+              $fieldValue,
+              $fieldType,
+              $fieldComparisonOperator = '='
     ) {
         $hash = 'contents_by_types_field_and_status_'.CacheHelper::getKey(
                 $types,
@@ -517,13 +517,13 @@ class ContentService
      */
     public function getWhereTypeInAndStatusAndPublishedOnOrdered(
         array $types,
-        $status,
-        $publishedOnValue,
-        $publishedOnComparisonOperator = '=',
-        $orderByColumn = 'published_on',
-        $orderByDirection = 'desc',
-        $requiredField = [],
-        $limit = null
+              $status,
+              $publishedOnValue,
+              $publishedOnComparisonOperator = '=',
+              $orderByColumn = 'published_on',
+              $orderByDirection = 'desc',
+              $requiredField = [],
+              $limit = null
     ) {
         return Decorator::decorate(
             $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -885,10 +885,10 @@ class ContentService
      */
     public function getPaginatedByTypesUserProgressState(
         array $types,
-        $userId,
-        $state,
-        $limit = 25,
-        $skip = 0
+              $userId,
+              $state,
+              $limit = 25,
+              $skip = 0
     ) {
         $hash = 'contents_paginated_by_types_and_user_progress_'.$userId.'_'.CacheHelper::getKey(
                 $types,
@@ -927,10 +927,10 @@ class ContentService
      */
     public function getPaginatedByTypesRecentUserProgressState(
         array $types,
-        $userId,
-        $state,
-        $limit = 25,
-        $skip = 0
+              $userId,
+              $state,
+              $limit = 25,
+              $skip = 0
     ) {
         $hash = 'contents_paginated_by_types_and_user_progress_'.$userId.'_'.CacheHelper::getKey(
                 $types,
@@ -969,8 +969,8 @@ class ContentService
      */
     public function countByTypesRecentUserProgressState(
         array $types,
-        $userId,
-        $state
+              $userId,
+              $state
     ) {
         return $this->contentRepository->countByTypesUserProgressState(
             $types,
@@ -1632,7 +1632,7 @@ class ContentService
      */
     public function getByContentFieldValuesForTypes(
         array $contentTypes,
-        $contentFieldKey,
+              $contentFieldKey,
         array $contentFieldValues = []
     ) {
         $hash = 'contents_by_types_and_field_value_'.CacheHelper::getKey(
@@ -2810,14 +2810,14 @@ class ContentService
      */
     public function getWhereTypeInAndStatusInAndPublishedOnOrderedAndPaginated(
         array $types,
-        $status,
-        $publishedOnValue,
-        $publishedOnComparisonOperator = '=',
-        $orderByColumn = 'published_on',
-        $orderByDirection = 'desc',
-        $requiredField = [],
-        $limit = null,
-        $page = 1
+              $status,
+              $publishedOnValue,
+              $publishedOnComparisonOperator = '=',
+              $orderByColumn = 'published_on',
+              $orderByDirection = 'desc',
+              $requiredField = [],
+              $limit = null,
+              $page = 1
     ) {
         $scheduleEvents = Decorator::decorate(
             $this->contentRepository->getWhereTypeInAndStatusInAndPublishedOnOrderedAndPaginated(
