@@ -344,14 +344,16 @@ class ContentService
     private function removeNeedsAccessRecommendationsAndGetDocuments(array $recommendations) : array
     {
         $allIds = zipperMerge($recommendations);
-        $documents = $this->sanityGateway->getByRailContentIds($allIds);
+        $allDocuments = $this->sanityGateway->getByRailContentIds($allIds);
         $filteredContent = [];
+
         foreach ($recommendations as $sectionName => $section) {
-            $document = array_values(array_filter($documents, function ($doc) use ($section) {
+            $sectionDocuments = collect(array_values(array_filter($allDocuments, function ($doc) use ($section) {
                 return in_array($doc['id'], $section);
-            }));
-            foreach ($document as $doc) {
-                if ($doc['need_access'] === false) {
+            })))->keyBy('id');
+            foreach ($section as $id) {
+                $doc = $sectionDocuments[$id];
+                if ($doc && $doc['need_access'] === false) {
                     $filteredContent[$sectionName][] = $doc;
                 }
             }
