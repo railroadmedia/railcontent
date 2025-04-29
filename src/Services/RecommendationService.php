@@ -112,19 +112,7 @@ class RecommendationService
         $tableName = $this->getTableName($brand, $section);
         $recommendations = DB::table($tableName)
             ->select('content_id')
-            ->join('railcontent_content', 'railcontent_content.id', '=', 'content_id')
             ->where($tableName.'.user_id', $userID)
-            // We did an update for the content types for recsysV3 that doesn't match the UI all that well.
-            // So this is a quick workaround to avoid refactoring contentServices or MusoraAPI to handle filtering differently
-            // Songs Tab: Songs
-            // Workouts Tab: Workouts
-            // Lessons Tab: all others
-            ->when($section == RecommenderSection::Workout->value, function($query) {
-                return $query->where('railcontent_content.type', 'workout');
-            })
-            ->when($section == RecommenderSection::Lesson->value, function($query) {
-                return $query->whereNot('railcontent_content.type', 'workout');
-            })
             ->orderBy('recommendation_rank')
             ->limit($limit)
             ->get()
@@ -136,13 +124,6 @@ class RecommendationService
                 $recommendations = DB::table($coldStartTableName)
                     ->select('content_id')
                     ->orderBy('rank')
-                    ->join('railcontent_content', 'railcontent_content.id', '=', 'content_id')
-                    ->when($section == RecommenderSection::Workout->value, function($query) {
-                        return $query->where('railcontent_content.type', 'workout');
-                    })
-                    ->when($section == RecommenderSection::Lesson->value, function($query) {
-                        return $query->whereNot('railcontent_content.type', 'workout');
-                    })
                     ->limit(20)
                     ->get()
                     ->pluck('content_id');
@@ -226,8 +207,8 @@ class RecommendationService
 
     private function getTableName(string $brand, string $section, bool $isBeginner = false)
     {
-        $tableSuffix = $section == RecommenderSection::Song->value ? 'song' : 'lesson';
-        $baseName = strtolower('recsys_v3_' . $brand . '_' . $tableSuffix);
+        $section = strtolower($section);
+        $baseName = strtolower('recsys_v3_' . $brand . '_' . $section);
         return $isBeginner ? $baseName . '_beginner_items' : $baseName;
     }
 
