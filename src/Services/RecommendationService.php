@@ -107,7 +107,7 @@ class RecommendationService
         return $recommendations;
     }
 
-    private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit = 20)
+    private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit = 100)
     {
         $tableName = $this->getTableName($brand, $section);
         $recommendations = DB::table($tableName)
