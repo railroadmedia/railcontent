@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use App\Modules\UserManagementSystem\Services\UserService;
 use http\Exception\InvalidArgumentException;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -22,16 +23,12 @@ class RecommendationService
 {
 
     public AccessMethod $defaultAccessMethod;
-
-    private array $invalidConfigurations;
     private array $RETRY_ERROR_CODES = [503];
 
     public function __construct(
         private UserService $userService,
     ) {
         $this->defaultAccessMethod = AccessMethod::from(env('RECSYS_ACCESS_METHOD', 'DB'));
-        $this->invalidConfigurations = [
-        ];
     }
 
     public function getFilteredRecommendations($userID, $brand, array $sections = [], bool $useFastImplementation = false): array
@@ -39,9 +36,6 @@ class RecommendationService
         // Single section state where we call the faster implementation
         if ($useFastImplementation && count($sections) == 1) {
             $section = $sections[0];
-            if ($this->hasNoResults($brand, $section)) {
-                return [];
-            }
             return [
                 strtolower($section->value) => $this->getFilteredRecommendationsBySection($userID, $brand, $section)
             ];
@@ -108,22 +102,31 @@ class RecommendationService
         $userID = $data['user_ids'][0];
         $recommendations = [$userID => []];
         foreach ($data['section'] as $section) {
-            if (!$this->hasNoResults($data['brand'], $section)) {
-                $recommendations[$userID][$section] = $this->getUserRecommendationsOrColdStartFromDB($userID, $data['brand'], $section);
-            }
+            $recommendations[$userID][$section] = $this->getUserRecommendationsOrColdStartFromDB($userID, $data['brand'], $section);
         }
         return $recommendations;
     }
 
-    private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit = 20)
+    private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit = 100)
     {
         $tableName = $this->getTableName($brand, $section);
-        $recommendations = DB::table($tableName)->select('content_id')->where('user_id', $userID)->orderBy('recommendation_rank')->limit($limit)->get()->pluck('content_id');
+        $recommendations = DB::table($tableName)
+            ->select('content_id')
+            ->where($tableName.'.user_id', $userID)
+            ->orderBy('recommendation_rank')
+            ->limit($limit)
+            ->get()
+            ->pluck('content_id');
         if ($recommendations->isEmpty()) {
             $user = $this->userService->getByIdOrNull($userID);
             if ($user && ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value))) {
                 $coldStartTableName = $this->getTableName($brand, $section, true);
-                $recommendations = DB::table($coldStartTableName)->select('content_id')->orderBy('rank')->limit(20)->get()->pluck('content_id');
+                $recommendations = DB::table($coldStartTableName)
+                    ->select('content_id')
+                    ->orderBy('rank')
+                    ->limit(20)
+                    ->get()
+                    ->pluck('content_id');
             }
         }
         return $recommendations->toArray();
@@ -168,7 +171,7 @@ class RecommendationService
             return [];
         }
         $type = str_replace('-', '_', $content->type);
-        if (is_null(RecommenderSection::tryFrom(strtoupper($type))) || $this->hasNoResults($content->brand, strtoupper($type))) {
+        if (is_null(RecommenderSection::tryFrom(strtoupper($type)))) {
             return [];
         }
         $brand = $content->brand;
@@ -177,17 +180,20 @@ class RecommendationService
         $table = $this->getTableName($brand, $type);
         $beginnerTable = $this->getTableName($brand, $type, true);
 
-        $recommendation = DB::table($table)
-            ->where('user_id', $userID)
-            ->where('content_id', $content->id)
-            ->first();
+        $recommendation =
+            DB::table($table)
+                ->where('user_id', $userID)
+                ->where('content_id', $content->id)
+                ->first();
+
 
         if ($recommendation) {
             $moduleSource = json_decode($recommendation->module_source, associative: true)['module_source'];
         } else {
-            $beginnerRecommendation = DB::table($beginnerTable)
-                ->where('content_id', $content->id)
-                ->exists();
+            $beginnerRecommendation =
+                DB::table($beginnerTable)
+                    ->where('content_id', $content->id)
+                    ->exists();
 
             if (!$beginnerRecommendation) {
                 Log::error(self::class . ': Content not found in beginner tables', ['content_id' => $content->id]);
@@ -201,7 +207,8 @@ class RecommendationService
 
     private function getTableName(string $brand, string $section, bool $isBeginner = false)
     {
-        $baseName = strtolower('recommendations_' . $brand . '_' . $section);
+        $section = strtolower($section);
+        $baseName = strtolower('recsys_v3_' . $brand . '_' . $section);
         return $isBeginner ? $baseName . '_beginner_items' : $baseName;
     }
 
