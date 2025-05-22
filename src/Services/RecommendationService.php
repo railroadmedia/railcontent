@@ -170,15 +170,16 @@ class RecommendationService
         if ($this->defaultAccessMethod != AccessMethod::DB) {
             return [];
         }
-        $type = str_replace('-', '_', $content->type);
-        if (is_null(RecommenderSection::tryFrom(strtoupper($type)))) {
-            return [];
-        }
+        $section = match($content->type) {
+            'song' => RecommenderSection::Song->value,
+            'workout' => RecommenderSection::Workout->value,
+            default => RecommenderSection::Lesson->value,
+        };
         $brand = $content->brand;
         $moduleSource = [];
 
-        $table = $this->getTableName($brand, $type);
-        $beginnerTable = $this->getTableName($brand, $type, true);
+        $table = $this->getTableName($brand, $section);
+        $beginnerTable = $this->getTableName($brand, $section, true);
 
         $recommendation =
             DB::table($table)
