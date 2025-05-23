@@ -352,9 +352,11 @@ class ContentService
                 return in_array($doc['id'], $section);
             })))->keyBy('id');
             foreach ($section as $id) {
-                $doc = $sectionDocuments[$id];
+                $doc = $sectionDocuments[$id] ?? null;
                 if ($doc && $doc['need_access'] === false) {
                     $filteredContent[$sectionName][] = $doc;
+                } else {
+                    Log::error("RecSys - Missing Sanity document for contentid $id");
                 }
             }
         }
