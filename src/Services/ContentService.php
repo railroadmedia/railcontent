@@ -125,6 +125,17 @@ class ContentService
     {
         $user = user();
         $userId = $user->id;
+        if (!$user->hasSongsAccess($brand) && ($filter == 'song' || $filter == 'songs')) {
+            $filterOptions = [
+                "type" => ["Recommendation"],
+            ];
+            return (new ContentFilterResultsEntity([
+                'results' => [],
+                'filter_options' => $filterOptions,
+                'total_results' => 0,
+                'total_lessons' => 0,
+            ]));
+        }
         $sections = match(strtolower($filter)) {
             'songs', 'song' => [RecommenderSection::Song],
             'lessons', 'lesson' => [RecommenderSection::Lesson],
@@ -134,10 +145,15 @@ class ContentService
         };
         if (!$sections && $groupByForLessonsPage) {
             $groupBySections = [
-                'Songs You Might Like' => [RecommenderSection::Song],
                 'Lessons You Might Like' => [RecommenderSection::Lesson],
                 'Workouts You Might Like' => [RecommenderSection::Workout],
             ];
+            if ($user->hasSongsAccess($brand)) {
+                $groupBySections = [
+                    'Songs You Might Like' => [RecommenderSection::Song],
+                    ...$groupBySections,
+                ];
+            }
         } else {
             $groupBySections = [];
         }
