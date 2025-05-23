@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Services;
 
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ContentUserProgress;
-use App\Modules\UserManagementSystem\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
