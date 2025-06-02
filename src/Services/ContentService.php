@@ -372,7 +372,7 @@ class ContentService
                 if ($doc && $doc['need_access'] === false) {
                     $filteredContent[$sectionName][] = $doc;
                 } else {
-                    Log::error("RecSys - Missing Sanity document for contentid $id");
+                    Log::warning("RecSys - Missing Sanity document for contentid $id");
                 }
             }
         }
